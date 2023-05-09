@@ -1,0 +1,4778 @@
+fully_qualified_name: "io"
+classes {
+  name: "BlockingIOError"
+  fully_qualified_name: "_io.BlockingIOError"
+  super_classes: "builtins.IOError"
+  valid_for: "27"
+  attributes {
+    name: "characters_written"
+    fully_qualified_name: "_io.BlockingIOError.characters_written"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "BufferedRandom"
+  fully_qualified_name: "_io.BufferedRandom"
+  super_classes: "_io._BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.BufferedRandom.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedRandom"
+        fully_qualified_name: "_io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io._IOBase"
+        fully_qualified_name: "_io._IOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "max_buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "_io.BufferedRandom.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedRandom"
+        fully_qualified_name: "_io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "mode"
+    fully_qualified_name: "_io.BufferedRandom.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.BufferedRandom.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "raw"
+    fully_qualified_name: "_io.BufferedRandom.raw"
+    type_annotation {
+      pretty_printed_name: "_io._IOBase"
+      fully_qualified_name: "_io._IOBase"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "BufferedReader"
+  fully_qualified_name: "_io.BufferedReader"
+  super_classes: "_io._BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.BufferedReader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedReader"
+        fully_qualified_name: "_io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io._IOBase"
+        fully_qualified_name: "_io._IOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "_io.BufferedReader.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedReader"
+        fully_qualified_name: "_io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "mode"
+    fully_qualified_name: "_io.BufferedReader.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.BufferedReader.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "raw"
+    fully_qualified_name: "_io.BufferedReader.raw"
+    type_annotation {
+      pretty_printed_name: "_io._IOBase"
+      fully_qualified_name: "_io._IOBase"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "BufferedRWPair"
+  fully_qualified_name: "_io.BufferedRWPair"
+  super_classes: "_io._BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.BufferedRWPair.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedRWPair"
+        fully_qualified_name: "_io.BufferedRWPair"
+      }
+    }
+    parameters {
+      name: "reader"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io._RawIOBase"
+        fully_qualified_name: "_io._RawIOBase"
+      }
+    }
+    parameters {
+      name: "writer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io._RawIOBase"
+        fully_qualified_name: "_io._RawIOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "max_buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "_io.BufferedRWPair.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedRWPair"
+        fully_qualified_name: "_io.BufferedRWPair"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "_io.BufferedRWPair.__enter__"
+    return_annotation {
+      pretty_printed_name: "_typeshed.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_typeshed.Self"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "BufferedWriter"
+  fully_qualified_name: "_io.BufferedWriter"
+  super_classes: "_io._BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.BufferedWriter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BufferedWriter"
+        fully_qualified_name: "_io.BufferedWriter"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io._IOBase"
+        fully_qualified_name: "_io._IOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "max_buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.BufferedWriter.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "raw"
+    fully_qualified_name: "_io.BufferedWriter.raw"
+    type_annotation {
+      pretty_printed_name: "_io._IOBase"
+      fully_qualified_name: "_io._IOBase"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "_io.BufferedWriter.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "BytesIO"
+  fully_qualified_name: "_io.BytesIO"
+  super_classes: "_io._BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.BytesIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    parameters {
+      name: "initial_bytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__setstate__"
+    fully_qualified_name: "_io.BytesIO.__setstate__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__getstate__"
+    fully_qualified_name: "_io.BytesIO.__getstate__"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "_io.BytesIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "_io.BytesIO.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "_io.BytesIO.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    parameters {
+      name: "lines"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "_io.BytesIO.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "_io.BytesIO.next"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.BytesIO"
+        fully_qualified_name: "_io.BytesIO"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.BytesIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "FileIO"
+  fully_qualified_name: "_io.FileIO"
+  super_classes: "_io._RawIOBase"
+  super_classes: "_io.BytesIO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.FileIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.FileIO"
+        fully_qualified_name: "_io.FileIO"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readinto"
+    fully_qualified_name: "_io.FileIO.readinto"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.FileIO"
+        fully_qualified_name: "_io.FileIO"
+      }
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytearray,mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_io._bytearray_like"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "_io.FileIO.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.FileIO"
+        fully_qualified_name: "_io.FileIO"
+      }
+    }
+    parameters {
+      name: "pbuf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "mode"
+    fully_qualified_name: "_io.FileIO.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "closefd"
+    fully_qualified_name: "_io.FileIO.closefd"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "IncrementalNewlineDecoder"
+  fully_qualified_name: "_io.IncrementalNewlineDecoder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.IncrementalNewlineDecoder"
+        fully_qualified_name: "_io.IncrementalNewlineDecoder"
+      }
+    }
+    parameters {
+      name: "decoder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "translate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "z"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "decode"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.decode"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.IncrementalNewlineDecoder"
+        fully_qualified_name: "_io.IncrementalNewlineDecoder"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.getstate"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.IncrementalNewlineDecoder"
+        fully_qualified_name: "_io.IncrementalNewlineDecoder"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.IncrementalNewlineDecoder"
+        fully_qualified_name: "_io.IncrementalNewlineDecoder"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.IncrementalNewlineDecoder"
+        fully_qualified_name: "_io.IncrementalNewlineDecoder"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "newlines"
+    fully_qualified_name: "_io.IncrementalNewlineDecoder.newlines"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "StringIO"
+  fully_qualified_name: "_io.StringIO"
+  super_classes: "_io._TextIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.StringIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.StringIO"
+        fully_qualified_name: "_io.StringIO"
+      }
+    }
+    parameters {
+      name: "initial_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__setstate__"
+    fully_qualified_name: "_io.StringIO.__setstate__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.StringIO"
+        fully_qualified_name: "_io.StringIO"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__getstate__"
+    fully_qualified_name: "_io.StringIO.__getstate__"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.StringIO"
+        fully_qualified_name: "_io.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "_io.StringIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.StringIO"
+        fully_qualified_name: "_io.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "line_buffering"
+    fully_qualified_name: "_io.StringIO.line_buffering"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.StringIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "TextIOWrapper"
+  fully_qualified_name: "_io.TextIOWrapper"
+  super_classes: "_io._TextIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_io.TextIOWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_io.TextIOWrapper"
+        fully_qualified_name: "_io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "line_buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "write_through"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "name"
+    fully_qualified_name: "_io.TextIOWrapper.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "line_buffering"
+    fully_qualified_name: "_io.TextIOWrapper.line_buffering"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "buffer"
+    fully_qualified_name: "_io.TextIOWrapper.buffer"
+    type_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_CHUNK_SIZE"
+    fully_qualified_name: "_io.TextIOWrapper._CHUNK_SIZE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "UnsupportedOperation"
+  fully_qualified_name: "_io.UnsupportedOperation"
+  super_classes: "builtins.ValueError"
+  super_classes: "builtins.IOError"
+  valid_for: "27"
+}
+classes {
+  name: "IOBase"
+  fully_qualified_name: "io.IOBase"
+  super_classes: "_io._IOBase"
+  valid_for: "27"
+}
+classes {
+  name: "IOBase"
+  fully_qualified_name: "io.IOBase"
+  super_classes: "builtins.object"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "io.IOBase.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "io.IOBase.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.IOBase.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "io.IOBase.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "io.IOBase.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "io.IOBase.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "flush"
+    fully_qualified_name: "io.IOBase.flush"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isatty"
+    fully_qualified_name: "io.IOBase.isatty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readable"
+    fully_qualified_name: "io.IOBase.readable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "io.IOBase.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "__hint"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "io.IOBase.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "__offset"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__whence"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seekable"
+    fully_qualified_name: "io.IOBase.seekable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "io.IOBase.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "truncate"
+    fully_qualified_name: "io.IOBase.truncate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writable"
+    fully_qualified_name: "io.IOBase.writable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "io.IOBase.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "__lines"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]]"
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "builtins.bytearray"
+              fully_qualified_name: "builtins.bytearray"
+            }
+            args {
+              pretty_printed_name: "builtins.memoryview"
+              fully_qualified_name: "builtins.memoryview"
+            }
+            args {
+              pretty_printed_name: "array.array[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "array.array"
+            }
+            args {
+              pretty_printed_name: "mmap.mmap"
+              fully_qualified_name: "mmap.mmap"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "io.IOBase.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "io.IOBase.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "closed"
+    fully_qualified_name: "io.IOBase.closed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_checkClosed"
+    fully_qualified_name: "io.IOBase._checkClosed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "read"
+    fully_qualified_name: "io.IOBase.read"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "write"
+    fully_qualified_name: "io.IOBase.write"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RawIOBase"
+  fully_qualified_name: "io.RawIOBase"
+  super_classes: "_io._RawIOBase"
+  super_classes: "io.IOBase"
+  valid_for: "27"
+}
+classes {
+  name: "RawIOBase"
+  fully_qualified_name: "io.RawIOBase"
+  super_classes: "io.IOBase"
+  methods {
+    name: "readall"
+    fully_qualified_name: "io.RawIOBase.readall"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readinto"
+    fully_qualified_name: "io.RawIOBase.readinto"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "__buffer"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.WriteableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "io.RawIOBase.write"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "__b"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "io.RawIOBase.read"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BufferedIOBase"
+  fully_qualified_name: "io.BufferedIOBase"
+  super_classes: "_io._BufferedIOBase"
+  super_classes: "io.IOBase"
+  valid_for: "27"
+}
+classes {
+  name: "BufferedIOBase"
+  fully_qualified_name: "io.BufferedIOBase"
+  super_classes: "io.IOBase"
+  methods {
+    name: "detach"
+    fully_qualified_name: "io.BufferedIOBase.detach"
+    return_annotation {
+      pretty_printed_name: "io.RawIOBase"
+      fully_qualified_name: "io.RawIOBase"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readinto"
+    fully_qualified_name: "io.BufferedIOBase.readinto"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    parameters {
+      name: "__buffer"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.WriteableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "io.BufferedIOBase.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    parameters {
+      name: "__buffer"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readinto1"
+    fully_qualified_name: "io.BufferedIOBase.readinto1"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    parameters {
+      name: "__buffer"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.WriteableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "io.BufferedIOBase.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BufferedIOBase.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedIOBase"
+        fully_qualified_name: "io.BufferedIOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "raw"
+    fully_qualified_name: "io.BufferedIOBase.raw"
+    type_annotation {
+      pretty_printed_name: "io.RawIOBase"
+      fully_qualified_name: "io.RawIOBase"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TextIOBase"
+  fully_qualified_name: "io.TextIOBase"
+  super_classes: "_io._TextIOBase"
+  valid_for: "27"
+}
+classes {
+  name: "TextIOBase"
+  fully_qualified_name: "io.TextIOBase"
+  super_classes: "io.IOBase"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "io.TextIOBase.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "io.TextIOBase.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "detach"
+    fully_qualified_name: "io.TextIOBase.detach"
+    return_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "io.TextIOBase.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    parameters {
+      name: "__s"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "io.TextIOBase.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    parameters {
+      name: "__lines"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "io.TextIOBase.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "io.TextIOBase.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    parameters {
+      name: "__hint"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "io.TextIOBase.read"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "io.TextIOBase.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOBase"
+        fully_qualified_name: "io.TextIOBase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "encoding"
+    fully_qualified_name: "io.TextIOBase.encoding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "errors"
+    fully_qualified_name: "io.TextIOBase.errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "newlines"
+    fully_qualified_name: "io.TextIOBase.newlines"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnsupportedOperation"
+  fully_qualified_name: "io.UnsupportedOperation"
+  super_classes: "builtins.OSError"
+  super_classes: "builtins.ValueError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FileIO"
+  fully_qualified_name: "io.FileIO"
+  super_classes: "io.RawIOBase"
+  super_classes: "typing.BinaryIO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.FileIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.FileIO"
+        fully_qualified_name: "io.FileIO"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "closefd"
+    fully_qualified_name: "io.FileIO.closefd"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.FileIO"
+        fully_qualified_name: "io.FileIO"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "io.FileIO.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.FileIO"
+        fully_qualified_name: "io.FileIO"
+      }
+    }
+    parameters {
+      name: "__b"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "io.FileIO.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.FileIO"
+        fully_qualified_name: "io.FileIO"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.FileIO.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "mode"
+    fully_qualified_name: "io.FileIO.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "io.FileIO.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BytesIO"
+  fully_qualified_name: "io.BytesIO"
+  super_classes: "io.BufferedIOBase"
+  super_classes: "typing.BinaryIO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BytesIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "initial_bytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.BytesIO.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "io.BytesIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getbuffer"
+    fully_qualified_name: "io.BytesIO.getbuffer"
+    return_annotation {
+      pretty_printed_name: "builtins.memoryview"
+      fully_qualified_name: "builtins.memoryview"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BytesIO.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BytesIO.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "io.BytesIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BufferedReader"
+  fully_qualified_name: "io.BufferedReader"
+  super_classes: "io.BufferedIOBase"
+  super_classes: "typing.BinaryIO"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.BufferedReader.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BufferedReader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedReader"
+        fully_qualified_name: "io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "io.BufferedReader.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedReader"
+        fully_qualified_name: "io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BufferedReader.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedReader"
+        fully_qualified_name: "io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BufferedReader.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedReader"
+        fully_qualified_name: "io.BufferedReader"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BufferedWriter"
+  fully_qualified_name: "io.BufferedWriter"
+  super_classes: "io.BufferedIOBase"
+  super_classes: "typing.BinaryIO"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.BufferedWriter.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BufferedWriter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedWriter"
+        fully_qualified_name: "io.BufferedWriter"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "io.BufferedWriter.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedWriter"
+        fully_qualified_name: "io.BufferedWriter"
+      }
+    }
+    parameters {
+      name: "__buffer"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BufferedRandom"
+  fully_qualified_name: "io.BufferedRandom"
+  super_classes: "io.BufferedReader"
+  super_classes: "io.BufferedWriter"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.BufferedRandom.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BufferedRandom.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRandom"
+        fully_qualified_name: "io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "raw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "io.BufferedRandom.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRandom"
+        fully_qualified_name: "io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "__target"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__whence"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BufferedRandom.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRandom"
+        fully_qualified_name: "io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BufferedRandom.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRandom"
+        fully_qualified_name: "io.BufferedRandom"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BufferedRWPair"
+  fully_qualified_name: "io.BufferedRWPair"
+  super_classes: "io.BufferedIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BufferedRWPair.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRWPair"
+        fully_qualified_name: "io.BufferedRWPair"
+      }
+    }
+    parameters {
+      name: "reader"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "writer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.RawIOBase"
+        fully_qualified_name: "io.RawIOBase"
+      }
+    }
+    parameters {
+      name: "buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "io.BufferedRWPair.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BufferedRWPair"
+        fully_qualified_name: "io.BufferedRWPair"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "TextIOWrapper"
+  fully_qualified_name: "io.TextIOWrapper"
+  super_classes: "io.TextIOBase"
+  super_classes: "typing.TextIO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.TextIOWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "line_buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "write_through"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "buffer"
+    fully_qualified_name: "io.TextIOWrapper.buffer"
+    return_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "closed"
+    fully_qualified_name: "io.TextIOWrapper.closed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "line_buffering"
+    fully_qualified_name: "io.TextIOWrapper.line_buffering"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.TextIOWrapper.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "io.TextIOWrapper.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "io.TextIOWrapper.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "io.TextIOWrapper.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "__lines"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "io.TextIOWrapper.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "io.TextIOWrapper.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "__hint"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "io.TextIOWrapper.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "__cookie"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__whence"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write_through"
+    fully_qualified_name: "io.TextIOWrapper.write_through"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "reconfigure"
+    fully_qualified_name: "io.TextIOWrapper.reconfigure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "line_buffering"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "write_through"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StringIO"
+  fully_qualified_name: "io.StringIO"
+  super_classes: "io.TextIOWrapper"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.StringIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.StringIO"
+        fully_qualified_name: "io.StringIO"
+      }
+    }
+    parameters {
+      name: "initial_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "io.StringIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.StringIO"
+        fully_qualified_name: "io.StringIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "io.StringIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "IncrementalNewlineDecoder"
+  fully_qualified_name: "io.IncrementalNewlineDecoder"
+  super_classes: "codecs.IncrementalDecoder"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.IncrementalNewlineDecoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IncrementalNewlineDecoder"
+        fully_qualified_name: "io.IncrementalNewlineDecoder"
+      }
+    }
+    parameters {
+      name: "decoder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[codecs.IncrementalDecoder,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "codecs.IncrementalDecoder"
+          fully_qualified_name: "codecs.IncrementalDecoder"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "translate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "decode"
+    fully_qualified_name: "io.IncrementalNewlineDecoder.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IncrementalNewlineDecoder"
+        fully_qualified_name: "io.IncrementalNewlineDecoder"
+      }
+    }
+    parameters {
+      name: "input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "newlines"
+    fully_qualified_name: "io.IncrementalNewlineDecoder.newlines"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.IncrementalNewlineDecoder"
+        fully_qualified_name: "io.IncrementalNewlineDecoder"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "open"
+  fully_qualified_name: "_io.open"
+  return_annotation {
+    pretty_printed_name: "typing.IO[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "buffering"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.unicode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.unicode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "newline"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.unicode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "closefd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "_OpenWrapper"
+  fully_qualified_name: "io._OpenWrapper"
+  return_annotation {
+    pretty_printed_name: "typing.IO[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "buffering"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "newline"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "closefd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "open_code"
+  fully_qualified_name: "io.open_code"
+  return_annotation {
+    pretty_printed_name: "typing.IO[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEFAULT_BUFFER_SIZE"
+  fully_qualified_name: "_io.DEFAULT_BUFFER_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SEEK_SET"
+  fully_qualified_name: "io.SEEK_SET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SEEK_CUR"
+  fully_qualified_name: "io.SEEK_CUR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SEEK_END"
+  fully_qualified_name: "io.SEEK_END"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEFAULT_BUFFER_SIZE"
+  fully_qualified_name: "io.DEFAULT_BUFFER_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "open"
+  fully_qualified_name: "io.open"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+    fully_qualified_name: "builtins.function"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -90,8 +90,8 @@ classes {
     name: "continent"
     fully_qualified_name: "geoip2.models.Country.continent"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Continent"
+      fully_qualified_name: "geoip2.records.Continent"
     }
     valid_for: "35"
     valid_for: "36"
@@ -104,8 +104,8 @@ classes {
     name: "country"
     fully_qualified_name: "geoip2.models.Country.country"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Country"
+      fully_qualified_name: "geoip2.records.Country"
     }
     valid_for: "35"
     valid_for: "36"
@@ -118,8 +118,8 @@ classes {
     name: "registered_country"
     fully_qualified_name: "geoip2.models.Country.registered_country"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Country"
+      fully_qualified_name: "geoip2.records.Country"
     }
     valid_for: "35"
     valid_for: "36"
@@ -132,8 +132,8 @@ classes {
     name: "represented_country"
     fully_qualified_name: "geoip2.models.Country.represented_country"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.RepresentedCountry"
+      fully_qualified_name: "geoip2.records.RepresentedCountry"
     }
     valid_for: "35"
     valid_for: "36"
@@ -146,8 +146,8 @@ classes {
     name: "maxmind"
     fully_qualified_name: "geoip2.models.Country.maxmind"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.MaxMind"
+      fully_qualified_name: "geoip2.records.MaxMind"
     }
     valid_for: "35"
     valid_for: "36"
@@ -160,8 +160,8 @@ classes {
     name: "traits"
     fully_qualified_name: "geoip2.models.Country.traits"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Traits"
+      fully_qualified_name: "geoip2.records.Traits"
     }
     valid_for: "35"
     valid_for: "36"
@@ -297,8 +297,8 @@ classes {
     name: "city"
     fully_qualified_name: "geoip2.models.City.city"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.City"
+      fully_qualified_name: "geoip2.records.City"
     }
     valid_for: "35"
     valid_for: "36"
@@ -311,8 +311,8 @@ classes {
     name: "location"
     fully_qualified_name: "geoip2.models.City.location"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Location"
+      fully_qualified_name: "geoip2.records.Location"
     }
     valid_for: "35"
     valid_for: "36"
@@ -325,8 +325,8 @@ classes {
     name: "postal"
     fully_qualified_name: "geoip2.models.City.postal"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "geoip2.records.Postal"
+      fully_qualified_name: "geoip2.records.Postal"
     }
     valid_for: "35"
     valid_for: "36"
@@ -339,8 +339,12 @@ classes {
     name: "subdivisions"
     fully_qualified_name: "geoip2.models.City.subdivisions"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Tuple[geoip2.records.Subdivision]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "geoip2.records.Subdivision"
+        fully_qualified_name: "geoip2.records.Subdivision"
+      }
     }
     valid_for: "35"
     valid_for: "36"

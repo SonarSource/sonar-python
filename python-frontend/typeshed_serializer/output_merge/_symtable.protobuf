@@ -1,0 +1,340 @@
+fully_qualified_name: "_symtable"
+classes {
+  name: "_symtable_entry"
+  fully_qualified_name: "_symtable._symtable_entry"
+  super_classes: "builtins.object"
+  valid_for: "27"
+}
+classes {
+  name: "symtable"
+  fully_qualified_name: "_symtable.symtable"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_symtable.symtable.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_symtable.symtable"
+        fully_qualified_name: "_symtable.symtable"
+      }
+    }
+    parameters {
+      name: "src"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "startstr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "children"
+    fully_qualified_name: "_symtable.symtable.children"
+    type_annotation {
+      pretty_printed_name: "builtins.list[_symtable._symtable_entry]"
+      args {
+        pretty_printed_name: "_symtable._symtable_entry"
+        fully_qualified_name: "_symtable._symtable_entry"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "id"
+    fully_qualified_name: "_symtable.symtable.id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "_symtable.symtable.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "_symtable.symtable.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "nested"
+    fully_qualified_name: "_symtable.symtable.nested"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "optimized"
+    fully_qualified_name: "_symtable.symtable.optimized"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "symbols"
+    fully_qualified_name: "_symtable.symtable.symbols"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "_symtable.symtable.type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "varnames"
+    fully_qualified_name: "_symtable.symtable.varnames"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "27"
+  }
+}
+vars {
+  name: "CELL"
+  fully_qualified_name: "_symtable.CELL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_BOUND"
+  fully_qualified_name: "_symtable.DEF_BOUND"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_FREE"
+  fully_qualified_name: "_symtable.DEF_FREE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_FREE_CLASS"
+  fully_qualified_name: "_symtable.DEF_FREE_CLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_GLOBAL"
+  fully_qualified_name: "_symtable.DEF_GLOBAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_IMPORT"
+  fully_qualified_name: "_symtable.DEF_IMPORT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_LOCAL"
+  fully_qualified_name: "_symtable.DEF_LOCAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DEF_PARAM"
+  fully_qualified_name: "_symtable.DEF_PARAM"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "FREE"
+  fully_qualified_name: "_symtable.FREE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "GLOBAL_EXPLICIT"
+  fully_qualified_name: "_symtable.GLOBAL_EXPLICIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "GLOBAL_IMPLICIT"
+  fully_qualified_name: "_symtable.GLOBAL_IMPLICIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOCAL"
+  fully_qualified_name: "_symtable.LOCAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OPT_BARE_EXEC"
+  fully_qualified_name: "_symtable.OPT_BARE_EXEC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OPT_EXEC"
+  fully_qualified_name: "_symtable.OPT_EXEC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OPT_IMPORT_STAR"
+  fully_qualified_name: "_symtable.OPT_IMPORT_STAR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SCOPE_MASK"
+  fully_qualified_name: "_symtable.SCOPE_MASK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SCOPE_OFF"
+  fully_qualified_name: "_symtable.SCOPE_OFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TYPE_CLASS"
+  fully_qualified_name: "_symtable.TYPE_CLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TYPE_FUNCTION"
+  fully_qualified_name: "_symtable.TYPE_FUNCTION"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TYPE_MODULE"
+  fully_qualified_name: "_symtable.TYPE_MODULE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "USE"
+  fully_qualified_name: "_symtable.USE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}

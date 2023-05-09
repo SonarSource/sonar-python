@@ -1,0 +1,2837 @@
+fully_qualified_name: "telnetlib"
+classes {
+  name: "Telnet"
+  fully_qualified_name: "telnetlib.Telnet"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "telnetlib.Telnet.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "open"
+    fully_qualified_name: "telnetlib.Telnet.open"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "msg"
+    fully_qualified_name: "telnetlib.Telnet.msg"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_debuglevel"
+    fully_qualified_name: "telnetlib.Telnet.set_debuglevel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "debuglevel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "telnetlib.Telnet.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_socket"
+    fully_qualified_name: "telnetlib.Telnet.get_socket"
+    return_annotation {
+      pretty_printed_name: "socket.socket"
+      fully_qualified_name: "socket.socket"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "telnetlib.Telnet.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "telnetlib.Telnet.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "telnetlib.Telnet.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_until"
+    fully_qualified_name: "telnetlib.Telnet.read_until"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "match"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_until"
+    fully_qualified_name: "telnetlib.Telnet.read_until"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "match"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_all"
+    fully_qualified_name: "telnetlib.Telnet.read_all"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_all"
+    fully_qualified_name: "telnetlib.Telnet.read_all"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_some"
+    fully_qualified_name: "telnetlib.Telnet.read_some"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_some"
+    fully_qualified_name: "telnetlib.Telnet.read_some"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_very_eager"
+    fully_qualified_name: "telnetlib.Telnet.read_very_eager"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_very_eager"
+    fully_qualified_name: "telnetlib.Telnet.read_very_eager"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_eager"
+    fully_qualified_name: "telnetlib.Telnet.read_eager"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_eager"
+    fully_qualified_name: "telnetlib.Telnet.read_eager"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_lazy"
+    fully_qualified_name: "telnetlib.Telnet.read_lazy"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_lazy"
+    fully_qualified_name: "telnetlib.Telnet.read_lazy"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_very_lazy"
+    fully_qualified_name: "telnetlib.Telnet.read_very_lazy"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_very_lazy"
+    fully_qualified_name: "telnetlib.Telnet.read_very_lazy"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read_sb_data"
+    fully_qualified_name: "telnetlib.Telnet.read_sb_data"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read_sb_data"
+    fully_qualified_name: "telnetlib.Telnet.read_sb_data"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_option_negotiation_callback"
+    fully_qualified_name: "telnetlib.Telnet.set_option_negotiation_callback"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "process_rawq"
+    fully_qualified_name: "telnetlib.Telnet.process_rawq"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rawq_getchar"
+    fully_qualified_name: "telnetlib.Telnet.rawq_getchar"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "rawq_getchar"
+    fully_qualified_name: "telnetlib.Telnet.rawq_getchar"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fill_rawq"
+    fully_qualified_name: "telnetlib.Telnet.fill_rawq"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sock_avail"
+    fully_qualified_name: "telnetlib.Telnet.sock_avail"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "interact"
+    fully_qualified_name: "telnetlib.Telnet.interact"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "mt_interact"
+    fully_qualified_name: "telnetlib.Telnet.mt_interact"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "listener"
+    fully_qualified_name: "telnetlib.Telnet.listener"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "expect"
+    fully_qualified_name: "telnetlib.Telnet.expect"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,Union[typing.Match[builtins.str],None],builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Union[typing.Match[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Match[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Match"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Union[typing.Pattern[builtins.str],builtins.str]]"
+        args {
+          pretty_printed_name: "Union[typing.Pattern[builtins.str],builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Pattern[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Pattern"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "expect"
+    fully_qualified_name: "telnetlib.Telnet.expect"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,Union[typing.Match[builtins.bytes],None],builtins.bytes]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Union[typing.Match[builtins.bytes],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Match[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.Match"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Union[typing.Pattern[builtins.bytes],builtins.bytes]]"
+        args {
+          pretty_printed_name: "Union[typing.Pattern[builtins.bytes],builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Pattern[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "typing.Pattern"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "telnetlib.Telnet.__enter__"
+    return_annotation {
+      pretty_printed_name: "telnetlib.Telnet"
+      fully_qualified_name: "telnetlib.Telnet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "telnetlib.Telnet.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "telnetlib.Telnet"
+        fully_qualified_name: "telnetlib.Telnet"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "host"
+    fully_qualified_name: "telnetlib.Telnet.host"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "DEBUGLEVEL"
+  fully_qualified_name: "telnetlib.DEBUGLEVEL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TELNET_PORT"
+  fully_qualified_name: "telnetlib.TELNET_PORT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IAC"
+  fully_qualified_name: "telnetlib.IAC"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "IAC"
+  fully_qualified_name: "telnetlib.IAC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DONT"
+  fully_qualified_name: "telnetlib.DONT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DONT"
+  fully_qualified_name: "telnetlib.DONT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DO"
+  fully_qualified_name: "telnetlib.DO"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DO"
+  fully_qualified_name: "telnetlib.DO"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WONT"
+  fully_qualified_name: "telnetlib.WONT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "WONT"
+  fully_qualified_name: "telnetlib.WONT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WILL"
+  fully_qualified_name: "telnetlib.WILL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "WILL"
+  fully_qualified_name: "telnetlib.WILL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "theNULL"
+  fully_qualified_name: "telnetlib.theNULL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "theNULL"
+  fully_qualified_name: "telnetlib.theNULL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SE"
+  fully_qualified_name: "telnetlib.SE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SE"
+  fully_qualified_name: "telnetlib.SE"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NOP"
+  fully_qualified_name: "telnetlib.NOP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NOP"
+  fully_qualified_name: "telnetlib.NOP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DM"
+  fully_qualified_name: "telnetlib.DM"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DM"
+  fully_qualified_name: "telnetlib.DM"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BRK"
+  fully_qualified_name: "telnetlib.BRK"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "BRK"
+  fully_qualified_name: "telnetlib.BRK"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IP"
+  fully_qualified_name: "telnetlib.IP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "IP"
+  fully_qualified_name: "telnetlib.IP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AO"
+  fully_qualified_name: "telnetlib.AO"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "AO"
+  fully_qualified_name: "telnetlib.AO"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AYT"
+  fully_qualified_name: "telnetlib.AYT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "AYT"
+  fully_qualified_name: "telnetlib.AYT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EC"
+  fully_qualified_name: "telnetlib.EC"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "EC"
+  fully_qualified_name: "telnetlib.EC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EL"
+  fully_qualified_name: "telnetlib.EL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "EL"
+  fully_qualified_name: "telnetlib.EL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "GA"
+  fully_qualified_name: "telnetlib.GA"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "GA"
+  fully_qualified_name: "telnetlib.GA"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SB"
+  fully_qualified_name: "telnetlib.SB"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SB"
+  fully_qualified_name: "telnetlib.SB"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BINARY"
+  fully_qualified_name: "telnetlib.BINARY"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "BINARY"
+  fully_qualified_name: "telnetlib.BINARY"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ECHO"
+  fully_qualified_name: "telnetlib.ECHO"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ECHO"
+  fully_qualified_name: "telnetlib.ECHO"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RCP"
+  fully_qualified_name: "telnetlib.RCP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "RCP"
+  fully_qualified_name: "telnetlib.RCP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SGA"
+  fully_qualified_name: "telnetlib.SGA"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SGA"
+  fully_qualified_name: "telnetlib.SGA"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAMS"
+  fully_qualified_name: "telnetlib.NAMS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAMS"
+  fully_qualified_name: "telnetlib.NAMS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STATUS"
+  fully_qualified_name: "telnetlib.STATUS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "STATUS"
+  fully_qualified_name: "telnetlib.STATUS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TM"
+  fully_qualified_name: "telnetlib.TM"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TM"
+  fully_qualified_name: "telnetlib.TM"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RCTE"
+  fully_qualified_name: "telnetlib.RCTE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "RCTE"
+  fully_qualified_name: "telnetlib.RCTE"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOL"
+  fully_qualified_name: "telnetlib.NAOL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOL"
+  fully_qualified_name: "telnetlib.NAOL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOP"
+  fully_qualified_name: "telnetlib.NAOP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOP"
+  fully_qualified_name: "telnetlib.NAOP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOCRD"
+  fully_qualified_name: "telnetlib.NAOCRD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOCRD"
+  fully_qualified_name: "telnetlib.NAOCRD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOHTS"
+  fully_qualified_name: "telnetlib.NAOHTS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOHTS"
+  fully_qualified_name: "telnetlib.NAOHTS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOHTD"
+  fully_qualified_name: "telnetlib.NAOHTD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOHTD"
+  fully_qualified_name: "telnetlib.NAOHTD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOFFD"
+  fully_qualified_name: "telnetlib.NAOFFD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOFFD"
+  fully_qualified_name: "telnetlib.NAOFFD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOVTS"
+  fully_qualified_name: "telnetlib.NAOVTS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOVTS"
+  fully_qualified_name: "telnetlib.NAOVTS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOVTD"
+  fully_qualified_name: "telnetlib.NAOVTD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOVTD"
+  fully_qualified_name: "telnetlib.NAOVTD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAOLFD"
+  fully_qualified_name: "telnetlib.NAOLFD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAOLFD"
+  fully_qualified_name: "telnetlib.NAOLFD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "XASCII"
+  fully_qualified_name: "telnetlib.XASCII"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "XASCII"
+  fully_qualified_name: "telnetlib.XASCII"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOGOUT"
+  fully_qualified_name: "telnetlib.LOGOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOGOUT"
+  fully_qualified_name: "telnetlib.LOGOUT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BM"
+  fully_qualified_name: "telnetlib.BM"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "BM"
+  fully_qualified_name: "telnetlib.BM"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DET"
+  fully_qualified_name: "telnetlib.DET"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DET"
+  fully_qualified_name: "telnetlib.DET"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SUPDUP"
+  fully_qualified_name: "telnetlib.SUPDUP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SUPDUP"
+  fully_qualified_name: "telnetlib.SUPDUP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SUPDUPOUTPUT"
+  fully_qualified_name: "telnetlib.SUPDUPOUTPUT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SUPDUPOUTPUT"
+  fully_qualified_name: "telnetlib.SUPDUPOUTPUT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SNDLOC"
+  fully_qualified_name: "telnetlib.SNDLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SNDLOC"
+  fully_qualified_name: "telnetlib.SNDLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TTYPE"
+  fully_qualified_name: "telnetlib.TTYPE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TTYPE"
+  fully_qualified_name: "telnetlib.TTYPE"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EOR"
+  fully_qualified_name: "telnetlib.EOR"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "EOR"
+  fully_qualified_name: "telnetlib.EOR"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TUID"
+  fully_qualified_name: "telnetlib.TUID"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TUID"
+  fully_qualified_name: "telnetlib.TUID"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "OUTMRK"
+  fully_qualified_name: "telnetlib.OUTMRK"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OUTMRK"
+  fully_qualified_name: "telnetlib.OUTMRK"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TTYLOC"
+  fully_qualified_name: "telnetlib.TTYLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TTYLOC"
+  fully_qualified_name: "telnetlib.TTYLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "VT3270REGIME"
+  fully_qualified_name: "telnetlib.VT3270REGIME"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "VT3270REGIME"
+  fully_qualified_name: "telnetlib.VT3270REGIME"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "X3PAD"
+  fully_qualified_name: "telnetlib.X3PAD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "X3PAD"
+  fully_qualified_name: "telnetlib.X3PAD"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NAWS"
+  fully_qualified_name: "telnetlib.NAWS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NAWS"
+  fully_qualified_name: "telnetlib.NAWS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TSPEED"
+  fully_qualified_name: "telnetlib.TSPEED"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TSPEED"
+  fully_qualified_name: "telnetlib.TSPEED"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LFLOW"
+  fully_qualified_name: "telnetlib.LFLOW"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LFLOW"
+  fully_qualified_name: "telnetlib.LFLOW"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LINEMODE"
+  fully_qualified_name: "telnetlib.LINEMODE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LINEMODE"
+  fully_qualified_name: "telnetlib.LINEMODE"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "XDISPLOC"
+  fully_qualified_name: "telnetlib.XDISPLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "XDISPLOC"
+  fully_qualified_name: "telnetlib.XDISPLOC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "OLD_ENVIRON"
+  fully_qualified_name: "telnetlib.OLD_ENVIRON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OLD_ENVIRON"
+  fully_qualified_name: "telnetlib.OLD_ENVIRON"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUTHENTICATION"
+  fully_qualified_name: "telnetlib.AUTHENTICATION"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "AUTHENTICATION"
+  fully_qualified_name: "telnetlib.AUTHENTICATION"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ENCRYPT"
+  fully_qualified_name: "telnetlib.ENCRYPT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ENCRYPT"
+  fully_qualified_name: "telnetlib.ENCRYPT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NEW_ENVIRON"
+  fully_qualified_name: "telnetlib.NEW_ENVIRON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NEW_ENVIRON"
+  fully_qualified_name: "telnetlib.NEW_ENVIRON"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TN3270E"
+  fully_qualified_name: "telnetlib.TN3270E"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TN3270E"
+  fully_qualified_name: "telnetlib.TN3270E"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "XAUTH"
+  fully_qualified_name: "telnetlib.XAUTH"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "XAUTH"
+  fully_qualified_name: "telnetlib.XAUTH"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CHARSET"
+  fully_qualified_name: "telnetlib.CHARSET"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "CHARSET"
+  fully_qualified_name: "telnetlib.CHARSET"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RSP"
+  fully_qualified_name: "telnetlib.RSP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "RSP"
+  fully_qualified_name: "telnetlib.RSP"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "COM_PORT_OPTION"
+  fully_qualified_name: "telnetlib.COM_PORT_OPTION"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "COM_PORT_OPTION"
+  fully_qualified_name: "telnetlib.COM_PORT_OPTION"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SUPPRESS_LOCAL_ECHO"
+  fully_qualified_name: "telnetlib.SUPPRESS_LOCAL_ECHO"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SUPPRESS_LOCAL_ECHO"
+  fully_qualified_name: "telnetlib.SUPPRESS_LOCAL_ECHO"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TLS"
+  fully_qualified_name: "telnetlib.TLS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TLS"
+  fully_qualified_name: "telnetlib.TLS"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KERMIT"
+  fully_qualified_name: "telnetlib.KERMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "KERMIT"
+  fully_qualified_name: "telnetlib.KERMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SEND_URL"
+  fully_qualified_name: "telnetlib.SEND_URL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SEND_URL"
+  fully_qualified_name: "telnetlib.SEND_URL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FORWARD_X"
+  fully_qualified_name: "telnetlib.FORWARD_X"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "FORWARD_X"
+  fully_qualified_name: "telnetlib.FORWARD_X"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PRAGMA_LOGON"
+  fully_qualified_name: "telnetlib.PRAGMA_LOGON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "PRAGMA_LOGON"
+  fully_qualified_name: "telnetlib.PRAGMA_LOGON"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SSPI_LOGON"
+  fully_qualified_name: "telnetlib.SSPI_LOGON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SSPI_LOGON"
+  fully_qualified_name: "telnetlib.SSPI_LOGON"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PRAGMA_HEARTBEAT"
+  fully_qualified_name: "telnetlib.PRAGMA_HEARTBEAT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "PRAGMA_HEARTBEAT"
+  fully_qualified_name: "telnetlib.PRAGMA_HEARTBEAT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EXOPL"
+  fully_qualified_name: "telnetlib.EXOPL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "EXOPL"
+  fully_qualified_name: "telnetlib.EXOPL"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NOOPT"
+  fully_qualified_name: "telnetlib.NOOPT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NOOPT"
+  fully_qualified_name: "telnetlib.NOOPT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

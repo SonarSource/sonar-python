@@ -1,0 +1,388 @@
+fully_qualified_name: "Queue"
+classes {
+  name: "Empty"
+  fully_qualified_name: "Queue.Empty"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+classes {
+  name: "Full"
+  fully_qualified_name: "Queue.Full"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+classes {
+  name: "Queue"
+  fully_qualified_name: "Queue.Queue"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "Queue.Queue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "task_done"
+    fully_qualified_name: "Queue.Queue.task_done"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "Queue.Queue.join"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "qsize"
+    fully_qualified_name: "Queue.Queue.qsize"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "empty"
+    fully_qualified_name: "Queue.Queue.empty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "full"
+    fully_qualified_name: "Queue.Queue.full"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "put"
+    fully_qualified_name: "Queue.Queue.put"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "block"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "put_nowait"
+    fully_qualified_name: "Queue.Queue.put_nowait"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "Queue.Queue.get"
+    return_annotation {
+      pretty_printed_name: "Queue._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    parameters {
+      name: "block"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_nowait"
+    fully_qualified_name: "Queue.Queue.get_nowait"
+    return_annotation {
+      pretty_printed_name: "Queue._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Queue.Queue[Queue._T]"
+        args {
+          pretty_printed_name: "Queue._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "Queue.Queue"
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+  attributes {
+    name: "maxsize"
+    fully_qualified_name: "Queue.Queue.maxsize"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "mutex"
+    fully_qualified_name: "Queue.Queue.mutex"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "not_empty"
+    fully_qualified_name: "Queue.Queue.not_empty"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "not_full"
+    fully_qualified_name: "Queue.Queue.not_full"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "all_tasks_done"
+    fully_qualified_name: "Queue.Queue.all_tasks_done"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "unfinished_tasks"
+    fully_qualified_name: "Queue.Queue.unfinished_tasks"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "queue"
+    fully_qualified_name: "Queue.Queue.queue"
+    type_annotation {
+      pretty_printed_name: "collections.deque[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "collections.deque"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "PriorityQueue"
+  fully_qualified_name: "Queue.PriorityQueue"
+  super_classes: "Queue.Queue"
+  is_generic: true
+  valid_for: "27"
+}
+classes {
+  name: "LifoQueue"
+  fully_qualified_name: "Queue.LifoQueue"
+  super_classes: "Queue.Queue"
+  is_generic: true
+  valid_for: "27"
+}

@@ -1,0 +1,293 @@
+fully_qualified_name: "graphlib"
+classes {
+  name: "TopologicalSorter"
+  fully_qualified_name: "graphlib.TopologicalSorter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "graphlib.TopologicalSorter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    parameters {
+      name: "graph"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_typeshed.SupportsItems[graphlib._T,typing.Iterable[graphlib._T]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_typeshed.SupportsItems[graphlib._T,typing.Iterable[graphlib._T]]"
+          args {
+            pretty_printed_name: "graphlib._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[graphlib._T]"
+            args {
+              pretty_printed_name: "graphlib._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          fully_qualified_name: "_typeshed.SupportsItems"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "graphlib.TopologicalSorter.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "predecessors"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "graphlib._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "prepare"
+    fully_qualified_name: "graphlib.TopologicalSorter.prepare"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_active"
+    fully_qualified_name: "graphlib.TopologicalSorter.is_active"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "graphlib.TopologicalSorter.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "done"
+    fully_qualified_name: "graphlib.TopologicalSorter.done"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    parameters {
+      name: "nodes"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "graphlib._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_ready"
+    fully_qualified_name: "graphlib.TopologicalSorter.get_ready"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[graphlib._T]"
+      args {
+        pretty_printed_name: "graphlib._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "static_order"
+    fully_qualified_name: "graphlib.TopologicalSorter.static_order"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[graphlib._T]"
+      args {
+        pretty_printed_name: "graphlib._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "graphlib.TopologicalSorter[graphlib._T]"
+        args {
+          pretty_printed_name: "graphlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "graphlib.TopologicalSorter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CycleError"
+  fully_qualified_name: "graphlib.CycleError"
+  super_classes: "builtins.ValueError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,2312 @@
+fully_qualified_name: "sunau"
+classes {
+  name: "Error"
+  fully_qualified_name: "sunau.Error"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Au_read"
+  fully_qualified_name: "sunau.Au_read"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sunau.Au_read.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.unicode,typing.IO[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.unicode,typing.IO[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+          args {
+            pretty_printed_name: "typing.IO[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.IO"
+          }
+        }
+        fully_qualified_name: "sunau._File"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sunau.Au_read.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,typing.IO[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,typing.IO[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "typing.IO[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "typing.IO"
+          }
+        }
+        fully_qualified_name: "sunau._File"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getfp"
+    fully_qualified_name: "sunau.Au_read.getfp"
+    return_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getfp"
+    fully_qualified_name: "sunau.Au_read.getfp"
+    return_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.bytes],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rewind"
+    fully_qualified_name: "sunau.Au_read.rewind"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "sunau.Au_read.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "sunau.Au_read.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getnchannels"
+    fully_qualified_name: "sunau.Au_read.getnchannels"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getnframes"
+    fully_qualified_name: "sunau.Au_read.getnframes"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getsampwidth"
+    fully_qualified_name: "sunau.Au_read.getsampwidth"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getframerate"
+    fully_qualified_name: "sunau.Au_read.getframerate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getcomptype"
+    fully_qualified_name: "sunau.Au_read.getcomptype"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getcompname"
+    fully_qualified_name: "sunau.Au_read.getcompname"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getparams"
+    fully_qualified_name: "sunau.Au_read.getparams"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "sunau._sunau_params"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getparams"
+    fully_qualified_name: "sunau.Au_read.getparams"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getmarkers"
+    fully_qualified_name: "sunau.Au_read.getmarkers"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getmark"
+    fully_qualified_name: "sunau.Au_read.getmark"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setpos"
+    fully_qualified_name: "sunau.Au_read.setpos"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readframes"
+    fully_qualified_name: "sunau.Au_read.readframes"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "nframes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readframes"
+    fully_qualified_name: "sunau.Au_read.readframes"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "nframes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "sunau.Au_read.__enter__"
+    return_annotation {
+      pretty_printed_name: "sunau.Au_read"
+      fully_qualified_name: "sunau.Au_read"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "sunau.Au_read.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sunau.Au_read"
+        fully_qualified_name: "sunau.Au_read"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Au_write"
+  fully_qualified_name: "sunau.Au_write"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sunau.Au_write.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.unicode,typing.IO[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.unicode,typing.IO[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+          args {
+            pretty_printed_name: "typing.IO[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.IO"
+          }
+        }
+        fully_qualified_name: "sunau._File"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sunau.Au_write.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,typing.IO[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,typing.IO[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "typing.IO[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "typing.IO"
+          }
+        }
+        fully_qualified_name: "sunau._File"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setnchannels"
+    fully_qualified_name: "sunau.Au_write.setnchannels"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "nchannels"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getnchannels"
+    fully_qualified_name: "sunau.Au_write.getnchannels"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setsampwidth"
+    fully_qualified_name: "sunau.Au_write.setsampwidth"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "sampwidth"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getsampwidth"
+    fully_qualified_name: "sunau.Au_write.getsampwidth"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setframerate"
+    fully_qualified_name: "sunau.Au_write.setframerate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "framerate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getframerate"
+    fully_qualified_name: "sunau.Au_write.getframerate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setnframes"
+    fully_qualified_name: "sunau.Au_write.setnframes"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "nframes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getnframes"
+    fully_qualified_name: "sunau.Au_write.getnframes"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setcomptype"
+    fully_qualified_name: "sunau.Au_write.setcomptype"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getcomptype"
+    fully_qualified_name: "sunau.Au_write.getcomptype"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getcompname"
+    fully_qualified_name: "sunau.Au_write.getcompname"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setparams"
+    fully_qualified_name: "sunau.Au_write.setparams"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "sunau._sunau_params"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "setparams"
+    fully_qualified_name: "sunau.Au_write.setparams"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getparams"
+    fully_qualified_name: "sunau.Au_write.getparams"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "sunau._sunau_params"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getparams"
+    fully_qualified_name: "sunau.Au_write.getparams"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "sunau.Au_write.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writeframesraw"
+    fully_qualified_name: "sunau.Au_write.writeframesraw"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writeframesraw"
+    fully_qualified_name: "sunau.Au_write.writeframesraw"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writeframes"
+    fully_qualified_name: "sunau.Au_write.writeframes"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writeframes"
+    fully_qualified_name: "sunau.Au_write.writeframes"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "sunau.Au_write.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "sunau.Au_write.__enter__"
+    return_annotation {
+      pretty_printed_name: "sunau.Au_write"
+      fully_qualified_name: "sunau.Au_write"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "sunau.Au_write.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "sunau.Au_write"
+        fully_qualified_name: "sunau.Au_write"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_sunau_params"
+  fully_qualified_name: "sunau._sunau_params"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "sunau._sunau_params._replace"
+    return_annotation {
+      pretty_printed_name: "sunau._sunau_params._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau._sunau_params._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "nchannels"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "sampwidth"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "framerate"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "nframes"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "comptype"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "compname"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "sunau._sunau_params.__new__"
+    return_annotation {
+      pretty_printed_name: "sunau._sunau_params._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[sunau._sunau_params._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "sunau._sunau_params._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "nchannels"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "sampwidth"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "framerate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "nframes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "comptype"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "compname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "sunau._sunau_params._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sunau._sunau_params._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "sunau._sunau_params._make"
+    return_annotation {
+      pretty_printed_name: "sunau._sunau_params._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[sunau._sunau_params._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "sunau._sunau_params._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "nchannels"
+    fully_qualified_name: "sunau._sunau_params.nchannels"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "sampwidth"
+    fully_qualified_name: "sunau._sunau_params.sampwidth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "framerate"
+    fully_qualified_name: "sunau._sunau_params.framerate"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nframes"
+    fully_qualified_name: "sunau._sunau_params.nframes"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "comptype"
+    fully_qualified_name: "sunau._sunau_params.comptype"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "compname"
+    fully_qualified_name: "sunau._sunau_params.compname"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "sunau._sunau_params._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "sunau._sunau_params._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "sunau._sunau_params._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "sunau._sunau_params._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "sunau._sunau_params.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "open"
+  fully_qualified_name: "sunau.open"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.unicode,typing.IO[builtins.str]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.unicode,typing.IO[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "typing.IO[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+      fully_qualified_name: "sunau._File"
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "open"
+  fully_qualified_name: "sunau.open"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,typing.IO[builtins.bytes]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,typing.IO[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.IO[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+      fully_qualified_name: "sunau._File"
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_MAGIC"
+  fully_qualified_name: "sunau.AUDIO_FILE_MAGIC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_MULAW_8"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_MULAW_8"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_LINEAR_8"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_LINEAR_8"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_LINEAR_16"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_LINEAR_16"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_LINEAR_24"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_LINEAR_24"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_LINEAR_32"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_LINEAR_32"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_FLOAT"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_FLOAT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_DOUBLE"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_DOUBLE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_ADPCM_G721"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_ADPCM_G721"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_ADPCM_G722"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_ADPCM_G722"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_ADPCM_G723_3"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_ADPCM_G723_3"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_ADPCM_G723_5"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_ADPCM_G723_5"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_FILE_ENCODING_ALAW_8"
+  fully_qualified_name: "sunau.AUDIO_FILE_ENCODING_ALAW_8"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUDIO_UNKNOWN_SIZE"
+  fully_qualified_name: "sunau.AUDIO_UNKNOWN_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "openfp"
+  fully_qualified_name: "sunau.openfp"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}

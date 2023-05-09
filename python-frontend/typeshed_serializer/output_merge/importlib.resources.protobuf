@@ -1,0 +1,462 @@
+fully_qualified_name: "importlib.resources"
+functions {
+  name: "open_binary"
+  fully_qualified_name: "importlib.resources.open_binary"
+  return_annotation {
+    pretty_printed_name: "typing.BinaryIO"
+    fully_qualified_name: "typing.BinaryIO"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "open_text"
+  fully_qualified_name: "importlib.resources.open_text"
+  return_annotation {
+    pretty_printed_name: "typing.TextIO"
+    fully_qualified_name: "typing.TextIO"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_binary"
+  fully_qualified_name: "importlib.resources.read_binary"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_text"
+  fully_qualified_name: "importlib.resources.read_text"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "path"
+  fully_qualified_name: "importlib.resources.path"
+  return_annotation {
+    pretty_printed_name: "typing.ContextManager[pathlib.Path]"
+    args {
+      pretty_printed_name: "pathlib.Path"
+      fully_qualified_name: "pathlib.Path"
+    }
+    fully_qualified_name: "typing.ContextManager"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_resource"
+  fully_qualified_name: "importlib.resources.is_resource"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "contents"
+  fully_qualified_name: "importlib.resources.contents"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "files"
+  fully_qualified_name: "importlib.resources.files"
+  return_annotation {
+    pretty_printed_name: "importlib.abc.Traversable"
+    fully_qualified_name: "importlib.abc.Traversable"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "as_file"
+  fully_qualified_name: "importlib.resources.as_file"
+  return_annotation {
+    pretty_printed_name: "typing.ContextManager[pathlib.Path]"
+    args {
+      pretty_printed_name: "pathlib.Path"
+      fully_qualified_name: "pathlib.Path"
+    }
+    fully_qualified_name: "typing.ContextManager"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "importlib.abc.Traversable"
+      fully_qualified_name: "importlib.abc.Traversable"
+    }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}

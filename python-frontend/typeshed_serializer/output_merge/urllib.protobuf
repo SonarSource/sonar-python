@@ -1,0 +1,2013 @@
+fully_qualified_name: "urllib"
+classes {
+  name: "ContentTooShortError"
+  fully_qualified_name: "urllib.ContentTooShortError"
+  super_classes: "builtins.IOError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.ContentTooShortError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.ContentTooShortError"
+        fully_qualified_name: "urllib.ContentTooShortError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "content"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "content"
+    fully_qualified_name: "urllib.ContentTooShortError.content"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "URLopener"
+  fully_qualified_name: "urllib.URLopener"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.URLopener.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.URLopener"
+        fully_qualified_name: "urllib.URLopener"
+      }
+    }
+    parameters {
+      name: "proxies"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "x509"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "urllib.URLopener.__del__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "urllib.URLopener.close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cleanup"
+    fully_qualified_name: "urllib.URLopener.cleanup"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "addheader"
+    fully_qualified_name: "urllib.URLopener.addheader"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open"
+    fully_qualified_name: "urllib.URLopener.open"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.URLopener"
+        fully_qualified_name: "urllib.URLopener"
+      }
+    }
+    parameters {
+      name: "fullurl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_unknown"
+    fully_qualified_name: "urllib.URLopener.open_unknown"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fullurl"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_unknown_proxy"
+    fully_qualified_name: "urllib.URLopener.open_unknown_proxy"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "proxy"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fullurl"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retrieve"
+    fully_qualified_name: "urllib.URLopener.retrieve"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "reporthook"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_http"
+    fully_qualified_name: "urllib.URLopener.open_http"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error"
+    fully_qualified_name: "urllib.URLopener.http_error"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_default"
+    fully_qualified_name: "urllib.URLopener.http_error_default"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_https"
+    fully_qualified_name: "urllib.URLopener.open_https"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_file"
+    fully_qualified_name: "urllib.URLopener.open_file"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_local_file"
+    fully_qualified_name: "urllib.URLopener.open_local_file"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_ftp"
+    fully_qualified_name: "urllib.URLopener.open_ftp"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "open_data"
+    fully_qualified_name: "urllib.URLopener.open_data"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "version"
+    fully_qualified_name: "urllib.URLopener.version"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "proxies"
+    fully_qualified_name: "urllib.URLopener.proxies"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "key_file"
+    fully_qualified_name: "urllib.URLopener.key_file"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "cert_file"
+    fully_qualified_name: "urllib.URLopener.cert_file"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "context"
+    fully_qualified_name: "urllib.URLopener.context"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "addheaders"
+    fully_qualified_name: "urllib.URLopener.addheaders"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "tempcache"
+    fully_qualified_name: "urllib.URLopener.tempcache"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "ftpcache"
+    fully_qualified_name: "urllib.URLopener.ftpcache"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "urllib.URLopener.type"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "FancyURLopener"
+  fully_qualified_name: "urllib.FancyURLopener"
+  super_classes: "urllib.URLopener"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.FancyURLopener.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.FancyURLopener"
+        fully_qualified_name: "urllib.FancyURLopener"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_default"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_default"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_302"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_302"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "redirect_internal"
+    fully_qualified_name: "urllib.FancyURLopener.redirect_internal"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_301"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_301"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_303"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_303"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_307"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_307"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_401"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_401"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "http_error_407"
+    fully_qualified_name: "urllib.FancyURLopener.http_error_407"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errcode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errmsg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retry_proxy_http_basic_auth"
+    fully_qualified_name: "urllib.FancyURLopener.retry_proxy_http_basic_auth"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retry_proxy_https_basic_auth"
+    fully_qualified_name: "urllib.FancyURLopener.retry_proxy_https_basic_auth"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retry_http_basic_auth"
+    fully_qualified_name: "urllib.FancyURLopener.retry_http_basic_auth"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retry_https_basic_auth"
+    fully_qualified_name: "urllib.FancyURLopener.retry_https_basic_auth"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_user_passwd"
+    fully_qualified_name: "urllib.FancyURLopener.get_user_passwd"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "clear_cache"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "prompt_user_passwd"
+    fully_qualified_name: "urllib.FancyURLopener.prompt_user_passwd"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "auth_cache"
+    fully_qualified_name: "urllib.FancyURLopener.auth_cache"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "tries"
+    fully_qualified_name: "urllib.FancyURLopener.tries"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "maxtries"
+    fully_qualified_name: "urllib.FancyURLopener.maxtries"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "ftpwrapper"
+  fully_qualified_name: "urllib.ftpwrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.ftpwrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.ftpwrapper"
+        fully_qualified_name: "urllib.ftpwrapper"
+      }
+    }
+    parameters {
+      name: "user"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "passwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "dirs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "persistent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "init"
+    fully_qualified_name: "urllib.ftpwrapper.init"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "retrfile"
+    fully_qualified_name: "urllib.ftpwrapper.retrfile"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "endtransfer"
+    fully_qualified_name: "urllib.ftpwrapper.endtransfer"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "urllib.ftpwrapper.close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "file_close"
+    fully_qualified_name: "urllib.ftpwrapper.file_close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "real_close"
+    fully_qualified_name: "urllib.ftpwrapper.real_close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "user"
+    fully_qualified_name: "urllib.ftpwrapper.user"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "passwd"
+    fully_qualified_name: "urllib.ftpwrapper.passwd"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "host"
+    fully_qualified_name: "urllib.ftpwrapper.host"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "port"
+    fully_qualified_name: "urllib.ftpwrapper.port"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "dirs"
+    fully_qualified_name: "urllib.ftpwrapper.dirs"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "urllib.ftpwrapper.timeout"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "refcount"
+    fully_qualified_name: "urllib.ftpwrapper.refcount"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "keepalive"
+    fully_qualified_name: "urllib.ftpwrapper.keepalive"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "busy"
+    fully_qualified_name: "urllib.ftpwrapper.busy"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "ftp"
+    fully_qualified_name: "urllib.ftpwrapper.ftp"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "addbase"
+  fully_qualified_name: "urllib.addbase"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "urllib.addbase.read"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "urllib.addbase.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "urllib.addbase.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    parameters {
+      name: "hint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "urllib.addbase.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "urllib.addbase.__iter__"
+    return_annotation {
+      pretty_printed_name: "urllib._AIUT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "urllib._AIUT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "urllib.addbase.next"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.addbase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "urllib.addbase.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addbase"
+        fully_qualified_name: "urllib.addbase"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "fp"
+    fully_qualified_name: "urllib.addbase.fp"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "addclosehook"
+  fully_qualified_name: "urllib.addclosehook"
+  super_classes: "urllib.addbase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.addclosehook.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addclosehook"
+        fully_qualified_name: "urllib.addclosehook"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "closehook"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "hookargs"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "urllib.addclosehook.close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "closehook"
+    fully_qualified_name: "urllib.addclosehook.closehook"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "hookargs"
+    fully_qualified_name: "urllib.addclosehook.hookargs"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "addinfo"
+  fully_qualified_name: "urllib.addinfo"
+  super_classes: "urllib.addbase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.addinfo.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addinfo"
+        fully_qualified_name: "urllib.addinfo"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "info"
+    fully_qualified_name: "urllib.addinfo.info"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "headers"
+    fully_qualified_name: "urllib.addinfo.headers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "addinfourl"
+  fully_qualified_name: "urllib.addinfourl"
+  super_classes: "urllib.addbase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "urllib.addinfourl.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.addinfourl"
+        fully_qualified_name: "urllib.addinfourl"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "info"
+    fully_qualified_name: "urllib.addinfourl.info"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getcode"
+    fully_qualified_name: "urllib.addinfourl.getcode"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "geturl"
+    fully_qualified_name: "urllib.addinfourl.geturl"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "headers"
+    fully_qualified_name: "urllib.addinfourl.headers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "url"
+    fully_qualified_name: "urllib.addinfourl.url"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "code"
+    fully_qualified_name: "urllib.addinfourl.code"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+functions {
+  name: "url2pathname"
+  fully_qualified_name: "urllib.url2pathname"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "pathname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "pathname2url"
+  fully_qualified_name: "urllib.pathname2url"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "pathname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlopen"
+  fully_qualified_name: "urllib.urlopen"
+  return_annotation {
+    pretty_printed_name: "typing.IO[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    has_default: true
+  }
+  parameters {
+    name: "proxies"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlretrieve"
+  fully_qualified_name: "urllib.urlretrieve"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "reporthook"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlcleanup"
+  fully_qualified_name: "urllib.urlcleanup"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unwrap"
+  fully_qualified_name: "urllib.unwrap"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splittype"
+  fully_qualified_name: "urllib.splittype"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splithost"
+  fully_qualified_name: "urllib.splithost"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splituser"
+  fully_qualified_name: "urllib.splituser"
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitpasswd"
+  fully_qualified_name: "urllib.splitpasswd"
+  parameters {
+    name: "user"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitport"
+  fully_qualified_name: "urllib.splitport"
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitnport"
+  fully_qualified_name: "urllib.splitnport"
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "defport"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitquery"
+  fully_qualified_name: "urllib.splitquery"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splittag"
+  fully_qualified_name: "urllib.splittag"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitattr"
+  fully_qualified_name: "urllib.splitattr"
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitvalue"
+  fully_qualified_name: "urllib.splitvalue"
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unquote"
+  fully_qualified_name: "urllib.unquote"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unquote_plus"
+  fully_qualified_name: "urllib.unquote_plus"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "quote"
+  fully_qualified_name: "urllib.quote"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "safe"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "quote_plus"
+  fully_qualified_name: "urllib.quote_plus"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "safe"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlencode"
+  fully_qualified_name: "urllib.urlencode"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "query"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Sequence[Tuple[Any,Any]],typing.Mapping[Any,Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[Tuple[Any,Any]]"
+        args {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "typing.Mapping[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  parameters {
+    name: "doseq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getproxies"
+  fully_qualified_name: "urllib.getproxies"
+  return_annotation {
+    pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Mapping"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "proxy_bypass"
+  fully_qualified_name: "urllib.proxy_bypass"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}

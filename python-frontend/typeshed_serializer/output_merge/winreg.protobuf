@@ -1,0 +1,1981 @@
+fully_qualified_name: "winreg"
+classes {
+  name: "HKEYType"
+  fully_qualified_name: "winreg.HKEYType"
+  super_classes: "builtins.object"
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "winreg.HKEYType.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__int__"
+    fully_qualified_name: "winreg.HKEYType.__int__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "winreg.HKEYType.__enter__"
+    return_annotation {
+      pretty_printed_name: "winreg.HKEYType"
+      fully_qualified_name: "winreg.HKEYType"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "winreg.HKEYType.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Close"
+    fully_qualified_name: "winreg.HKEYType.Close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Detach"
+    fully_qualified_name: "winreg.HKEYType.Detach"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "winreg.HKEYType"
+        fully_qualified_name: "winreg.HKEYType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "CloseKey"
+  fully_qualified_name: "winreg.CloseKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__hkey"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ConnectRegistry"
+  fully_qualified_name: "winreg.ConnectRegistry"
+  return_annotation {
+    pretty_printed_name: "winreg.HKEYType"
+    fully_qualified_name: "winreg.HKEYType"
+  }
+  parameters {
+    name: "__computer_name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "CreateKey"
+  fully_qualified_name: "winreg.CreateKey"
+  return_annotation {
+    pretty_printed_name: "winreg.HKEYType"
+    fully_qualified_name: "winreg.HKEYType"
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__sub_key"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "CreateKeyEx"
+  fully_qualified_name: "winreg.CreateKeyEx"
+  return_annotation {
+    pretty_printed_name: "winreg.HKEYType"
+    fully_qualified_name: "winreg.HKEYType"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "sub_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "reserved"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "access"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DeleteKey"
+  fully_qualified_name: "winreg.DeleteKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__sub_key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DeleteKeyEx"
+  fully_qualified_name: "winreg.DeleteKeyEx"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "sub_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "access"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "reserved"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DeleteValue"
+  fully_qualified_name: "winreg.DeleteValue"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "EnumKey"
+  fully_qualified_name: "winreg.EnumKey"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__index"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "EnumValue"
+  fully_qualified_name: "winreg.EnumValue"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,Any,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__index"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ExpandEnvironmentStrings"
+  fully_qualified_name: "winreg.ExpandEnvironmentStrings"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "FlushKey"
+  fully_qualified_name: "winreg.FlushKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "LoadKey"
+  fully_qualified_name: "winreg.LoadKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__sub_key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__file_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "OpenKey"
+  fully_qualified_name: "winreg.OpenKey"
+  return_annotation {
+    pretty_printed_name: "winreg.HKEYType"
+    fully_qualified_name: "winreg.HKEYType"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "sub_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "reserved"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "access"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "OpenKeyEx"
+  fully_qualified_name: "winreg.OpenKeyEx"
+  return_annotation {
+    pretty_printed_name: "winreg.HKEYType"
+    fully_qualified_name: "winreg.HKEYType"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "sub_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "reserved"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "access"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "QueryInfoKey"
+  fully_qualified_name: "winreg.QueryInfoKey"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "QueryValue"
+  fully_qualified_name: "winreg.QueryValue"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__sub_key"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "QueryValueEx"
+  fully_qualified_name: "winreg.QueryValueEx"
+  return_annotation {
+    pretty_printed_name: "Tuple[Any,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SaveKey"
+  fully_qualified_name: "winreg.SaveKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__file_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SetValue"
+  fully_qualified_name: "winreg.SetValue"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__sub_key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SetValueEx"
+  fully_qualified_name: "winreg.SetValueEx"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  parameters {
+    name: "__value_name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__reserved"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "__type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__value"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DisableReflectionKey"
+  fully_qualified_name: "winreg.DisableReflectionKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "EnableReflectionKey"
+  fully_qualified_name: "winreg.EnableReflectionKey"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "QueryReflectionKey"
+  fully_qualified_name: "winreg.QueryReflectionKey"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "__key"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[winreg.HKEYType,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[winreg.HKEYType,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "winreg.HKEYType"
+          fully_qualified_name: "winreg.HKEYType"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "winreg._KeyType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_CLASSES_ROOT"
+  fully_qualified_name: "winreg.HKEY_CLASSES_ROOT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_CURRENT_USER"
+  fully_qualified_name: "winreg.HKEY_CURRENT_USER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_LOCAL_MACHINE"
+  fully_qualified_name: "winreg.HKEY_LOCAL_MACHINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_USERS"
+  fully_qualified_name: "winreg.HKEY_USERS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_PERFORMANCE_DATA"
+  fully_qualified_name: "winreg.HKEY_PERFORMANCE_DATA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_CURRENT_CONFIG"
+  fully_qualified_name: "winreg.HKEY_CURRENT_CONFIG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HKEY_DYN_DATA"
+  fully_qualified_name: "winreg.HKEY_DYN_DATA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_ALL_ACCESS"
+  fully_qualified_name: "winreg.KEY_ALL_ACCESS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_WRITE"
+  fully_qualified_name: "winreg.KEY_WRITE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_READ"
+  fully_qualified_name: "winreg.KEY_READ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_EXECUTE"
+  fully_qualified_name: "winreg.KEY_EXECUTE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_QUERY_VALUE"
+  fully_qualified_name: "winreg.KEY_QUERY_VALUE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_SET_VALUE"
+  fully_qualified_name: "winreg.KEY_SET_VALUE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_CREATE_SUB_KEY"
+  fully_qualified_name: "winreg.KEY_CREATE_SUB_KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_ENUMERATE_SUB_KEYS"
+  fully_qualified_name: "winreg.KEY_ENUMERATE_SUB_KEYS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_NOTIFY"
+  fully_qualified_name: "winreg.KEY_NOTIFY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_CREATE_LINK"
+  fully_qualified_name: "winreg.KEY_CREATE_LINK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_WOW64_64KEY"
+  fully_qualified_name: "winreg.KEY_WOW64_64KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "KEY_WOW64_32KEY"
+  fully_qualified_name: "winreg.KEY_WOW64_32KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_BINARY"
+  fully_qualified_name: "winreg.REG_BINARY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_DWORD"
+  fully_qualified_name: "winreg.REG_DWORD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_DWORD_LITTLE_ENDIAN"
+  fully_qualified_name: "winreg.REG_DWORD_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_DWORD_BIG_ENDIAN"
+  fully_qualified_name: "winreg.REG_DWORD_BIG_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_EXPAND_SZ"
+  fully_qualified_name: "winreg.REG_EXPAND_SZ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_LINK"
+  fully_qualified_name: "winreg.REG_LINK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_MULTI_SZ"
+  fully_qualified_name: "winreg.REG_MULTI_SZ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NONE"
+  fully_qualified_name: "winreg.REG_NONE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_QWORD"
+  fully_qualified_name: "winreg.REG_QWORD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_QWORD_LITTLE_ENDIAN"
+  fully_qualified_name: "winreg.REG_QWORD_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_RESOURCE_LIST"
+  fully_qualified_name: "winreg.REG_RESOURCE_LIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_FULL_RESOURCE_DESCRIPTOR"
+  fully_qualified_name: "winreg.REG_FULL_RESOURCE_DESCRIPTOR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_RESOURCE_REQUIREMENTS_LIST"
+  fully_qualified_name: "winreg.REG_RESOURCE_REQUIREMENTS_LIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_SZ"
+  fully_qualified_name: "winreg.REG_SZ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_CREATED_NEW_KEY"
+  fully_qualified_name: "winreg.REG_CREATED_NEW_KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_LEGAL_CHANGE_FILTER"
+  fully_qualified_name: "winreg.REG_LEGAL_CHANGE_FILTER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_LEGAL_OPTION"
+  fully_qualified_name: "winreg.REG_LEGAL_OPTION"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NOTIFY_CHANGE_ATTRIBUTES"
+  fully_qualified_name: "winreg.REG_NOTIFY_CHANGE_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NOTIFY_CHANGE_LAST_SET"
+  fully_qualified_name: "winreg.REG_NOTIFY_CHANGE_LAST_SET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NOTIFY_CHANGE_NAME"
+  fully_qualified_name: "winreg.REG_NOTIFY_CHANGE_NAME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NOTIFY_CHANGE_SECURITY"
+  fully_qualified_name: "winreg.REG_NOTIFY_CHANGE_SECURITY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_NO_LAZY_FLUSH"
+  fully_qualified_name: "winreg.REG_NO_LAZY_FLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPENED_EXISTING_KEY"
+  fully_qualified_name: "winreg.REG_OPENED_EXISTING_KEY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_BACKUP_RESTORE"
+  fully_qualified_name: "winreg.REG_OPTION_BACKUP_RESTORE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_CREATE_LINK"
+  fully_qualified_name: "winreg.REG_OPTION_CREATE_LINK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_NON_VOLATILE"
+  fully_qualified_name: "winreg.REG_OPTION_NON_VOLATILE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_OPEN_LINK"
+  fully_qualified_name: "winreg.REG_OPTION_OPEN_LINK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_RESERVED"
+  fully_qualified_name: "winreg.REG_OPTION_RESERVED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_OPTION_VOLATILE"
+  fully_qualified_name: "winreg.REG_OPTION_VOLATILE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_REFRESH_HIVE"
+  fully_qualified_name: "winreg.REG_REFRESH_HIVE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REG_WHOLE_HIVE_VOLATILE"
+  fully_qualified_name: "winreg.REG_WHOLE_HIVE_VOLATILE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

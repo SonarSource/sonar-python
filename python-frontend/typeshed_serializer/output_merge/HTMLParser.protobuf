@@ -1,0 +1,490 @@
+fully_qualified_name: "HTMLParser"
+classes {
+  name: "HTMLParser"
+  fully_qualified_name: "HTMLParser.HTMLParser"
+  super_classes: "markupbase.ParserBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "HTMLParser.HTMLParser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "feed"
+    fully_qualified_name: "HTMLParser.HTMLParser.feed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "feed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "HTMLParser.HTMLParser.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "HTMLParser.HTMLParser.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_starttag_text"
+    fully_qualified_name: "HTMLParser.HTMLParser.get_starttag_text"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_cdata_mode"
+    fully_qualified_name: "HTMLParser.HTMLParser.set_cdata_mode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "AnyStr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "clear_cdata_mode"
+    fully_qualified_name: "HTMLParser.HTMLParser.clear_cdata_mode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_startendtag"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_startendtag"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[typing.AnyStr,typing.AnyStr]]"
+        args {
+          pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_starttag"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_starttag"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[typing.AnyStr,typing.AnyStr]]"
+        args {
+          pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_endtag"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_endtag"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_charref"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_charref"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_entityref"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_entityref"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_data"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_data"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_comment"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_comment"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_decl"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_decl"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "decl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_pi"
+    fully_qualified_name: "HTMLParser.HTMLParser.handle_pi"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "unknown_decl"
+    fully_qualified_name: "HTMLParser.HTMLParser.unknown_decl"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "unescape"
+    fully_qualified_name: "HTMLParser.HTMLParser.unescape"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "HTMLParser.HTMLParser"
+        fully_qualified_name: "HTMLParser.HTMLParser"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "HTMLParseError"
+  fully_qualified_name: "HTMLParser.HTMLParseError"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+  attributes {
+    name: "msg"
+    fully_qualified_name: "HTMLParser.HTMLParseError.msg"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "HTMLParser.HTMLParseError.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "offset"
+    fully_qualified_name: "HTMLParser.HTMLParseError.offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+}

@@ -1,0 +1,168 @@
+fully_qualified_name: "asyncio.exceptions"
+classes {
+  name: "CancelledError"
+  fully_qualified_name: "asyncio.exceptions.CancelledError"
+  super_classes: "builtins.BaseException"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "TimeoutError"
+  fully_qualified_name: "asyncio.exceptions.TimeoutError"
+  super_classes: "builtins.Exception"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InvalidStateError"
+  fully_qualified_name: "asyncio.exceptions.InvalidStateError"
+  super_classes: "builtins.Exception"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SendfileNotAvailableError"
+  fully_qualified_name: "asyncio.exceptions.SendfileNotAvailableError"
+  super_classes: "builtins.RuntimeError"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IncompleteReadError"
+  fully_qualified_name: "asyncio.exceptions.IncompleteReadError"
+  super_classes: "builtins.EOFError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.exceptions.IncompleteReadError"
+        fully_qualified_name: "asyncio.exceptions.IncompleteReadError"
+      }
+    }
+    parameters {
+      name: "partial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "expected"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "expected"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.expected"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "partial"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.partial"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "LimitOverrunError"
+  fully_qualified_name: "asyncio.exceptions.LimitOverrunError"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.exceptions.LimitOverrunError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.exceptions.LimitOverrunError"
+        fully_qualified_name: "asyncio.exceptions.LimitOverrunError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "consumed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "consumed"
+    fully_qualified_name: "asyncio.exceptions.LimitOverrunError.consumed"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}

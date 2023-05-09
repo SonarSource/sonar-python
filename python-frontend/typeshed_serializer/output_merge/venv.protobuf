@@ -1,0 +1,1055 @@
+fully_qualified_name: "venv"
+classes {
+  name: "EnvBuilder"
+  fully_qualified_name: "venv.EnvBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "venv.EnvBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "system_site_packages"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "clear"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "symlinks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "upgrade"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "with_pip"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "prompt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "venv.EnvBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "system_site_packages"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "clear"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "symlinks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "upgrade"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "with_pip"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "prompt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "upgrade_deps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create"
+    fully_qualified_name: "venv.EnvBuilder.create"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "env_dir"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clear_directory"
+    fully_qualified_name: "venv.EnvBuilder.clear_directory"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ensure_directories"
+    fully_qualified_name: "venv.EnvBuilder.ensure_directories"
+    return_annotation {
+      pretty_printed_name: "types.SimpleNamespace"
+      fully_qualified_name: "types.SimpleNamespace"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "env_dir"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_configuration"
+    fully_qualified_name: "venv.EnvBuilder.create_configuration"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "symlink_or_copy"
+    fully_qualified_name: "venv.EnvBuilder.symlink_or_copy"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "src"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+    parameters {
+      name: "dst"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+    parameters {
+      name: "relative_symlinks_ok"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setup_python"
+    fully_qualified_name: "venv.EnvBuilder.setup_python"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_setup_pip"
+    fully_qualified_name: "venv.EnvBuilder._setup_pip"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setup_scripts"
+    fully_qualified_name: "venv.EnvBuilder.setup_scripts"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "post_setup"
+    fully_qualified_name: "venv.EnvBuilder.post_setup"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "replace_variables"
+    fully_qualified_name: "venv.EnvBuilder.replace_variables"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "install_scripts"
+    fully_qualified_name: "venv.EnvBuilder.install_scripts"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "upgrade_dependencies"
+    fully_qualified_name: "venv.EnvBuilder.upgrade_dependencies"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "venv.EnvBuilder"
+        fully_qualified_name: "venv.EnvBuilder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.SimpleNamespace"
+        fully_qualified_name: "types.SimpleNamespace"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "system_site_packages"
+    fully_qualified_name: "venv.EnvBuilder.system_site_packages"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "clear"
+    fully_qualified_name: "venv.EnvBuilder.clear"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "symlinks"
+    fully_qualified_name: "venv.EnvBuilder.symlinks"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "upgrade"
+    fully_qualified_name: "venv.EnvBuilder.upgrade"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "with_pip"
+    fully_qualified_name: "venv.EnvBuilder.with_pip"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "prompt"
+    fully_qualified_name: "venv.EnvBuilder.prompt"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "create"
+  fully_qualified_name: "venv.create"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "env_dir"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "_typeshed.StrOrBytesPath"
+    }
+  }
+  parameters {
+    name: "system_site_packages"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "clear"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "symlinks"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "with_pip"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "prompt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "create"
+  fully_qualified_name: "venv.create"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "env_dir"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "_typeshed.StrOrBytesPath"
+    }
+  }
+  parameters {
+    name: "system_site_packages"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "clear"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "symlinks"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "with_pip"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "prompt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "upgrade_deps"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "main"
+  fully_qualified_name: "venv.main"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

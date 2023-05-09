@@ -1,0 +1,555 @@
+fully_qualified_name: "logging.config"
+functions {
+  name: "dictConfig"
+  fully_qualified_name: "logging.config.dictConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "config"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]],typing.IO[builtins.str],configparser.RawConfigParser]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        fully_qualified_name: "logging.config._Path"
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "configparser.RawConfigParser"
+        fully_qualified_name: "configparser.RawConfigParser"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.IO[builtins.str],configparser.RawConfigParser]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.bytes]"
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrOrBytesPath"
+        }
+        fully_qualified_name: "logging.config._Path"
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "configparser.RawConfigParser"
+        fully_qualified_name: "configparser.RawConfigParser"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.IO[builtins.str],configparser.RawConfigParser]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.bytes]"
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrOrBytesPath"
+        }
+        fully_qualified_name: "logging.config._Path"
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "configparser.RawConfigParser"
+        fully_qualified_name: "configparser.RawConfigParser"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "310"
+}
+functions {
+  name: "listen"
+  fully_qualified_name: "logging.config.listen"
+  return_annotation {
+    pretty_printed_name: "threading.Thread"
+    fully_qualified_name: "threading.Thread"
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "listen"
+  fully_qualified_name: "logging.config.listen"
+  return_annotation {
+    pretty_printed_name: "threading.Thread"
+    fully_qualified_name: "threading.Thread"
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "verify"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "stopListening"
+  fully_qualified_name: "logging.config.stopListening"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "valid_ident"
+  fully_qualified_name: "logging.config.valid_ident"
+  return_annotation {
+    pretty_printed_name: "Literal[builtins.bool]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEFAULT_LOGGING_CONFIG_PORT"
+  fully_qualified_name: "logging.config.DEFAULT_LOGGING_CONFIG_PORT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RESET_ERROR"
+  fully_qualified_name: "logging.config.RESET_ERROR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IDENTIFIER"
+  fully_qualified_name: "logging.config.IDENTIFIER"
+  type_annotation {
+    pretty_printed_name: "typing.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

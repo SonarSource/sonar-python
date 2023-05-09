@@ -1,0 +1,75 @@
+fully_qualified_name: "md5"
+functions {
+  name: "md5"
+  fully_qualified_name: "hashlib.md5"
+  return_annotation {
+    pretty_printed_name: "hashlib._hash"
+    fully_qualified_name: "hashlib._hash"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,builtins.bytearray,builtins.buffer,builtins.memoryview]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "builtins.buffer"
+          fully_qualified_name: "builtins.buffer"
+        }
+        args {
+          pretty_printed_name: "builtins.memoryview"
+          fully_qualified_name: "builtins.memoryview"
+        }
+      }
+      fully_qualified_name: "hashlib._DataType"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+vars {
+  name: "new"
+  fully_qualified_name: "md5.new"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "blocksize"
+  fully_qualified_name: "md5.blocksize"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "digest_size"
+  fully_qualified_name: "md5.digest_size"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}

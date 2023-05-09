@@ -1,0 +1,1491 @@
+fully_qualified_name: "tkinter.font"
+classes {
+  name: "_FontDict"
+  fully_qualified_name: "tkinter.font._FontDict"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_MetricsDict"
+  fully_qualified_name: "tkinter.font._MetricsDict"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Font"
+  fully_qualified_name: "tkinter.font.Font"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tkinter.font.Font.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.font.Font"
+        fully_qualified_name: "tkinter.font.Font"
+      }
+    }
+    parameters {
+      name: "root"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[tkinter.Misc,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "tkinter.Misc"
+          fully_qualified_name: "tkinter.Misc"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "font"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,tkinter.font.Font,builtins.list[Any],builtins.tuple[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exists"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "family"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "size"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "weight"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "slant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "underline"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "overstrike"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "tkinter.font.Font.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "tkinter.font.Font"
+        fully_qualified_name: "tkinter.font.Font"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "config"
+    fully_qualified_name: "tkinter.font.Font.config"
+    return_annotation {
+      pretty_printed_name: "Union[TypedDict,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.font.Font"
+        fully_qualified_name: "tkinter.font.Font"
+      }
+    }
+    parameters {
+      name: "family"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "size"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "weight"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "slant"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "underline"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "overstrike"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "tkinter.font.Font.copy"
+    return_annotation {
+      pretty_printed_name: "tkinter.font.Font"
+      fully_qualified_name: "tkinter.font.Font"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.font.Font"
+        fully_qualified_name: "tkinter.font.Font"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "measure"
+    fully_qualified_name: "tkinter.font.Font.measure"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tkinter.font.Font"
+        fully_qualified_name: "tkinter.font.Font"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "displayof"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[tkinter.Misc,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "tkinter.Misc"
+          fully_qualified_name: "tkinter.Misc"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "cget"
+    fullname: "tkinter.font.Font.cget"
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "cget"
+      fully_qualified_name: "tkinter.font.Font.cget"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "actual"
+    fullname: "tkinter.font.Font.actual"
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "option"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "actual"
+      fully_qualified_name: "tkinter.font.Font.actual"
+      return_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "metrics"
+    fullname: "tkinter.font.Font.metrics"
+    definitions {
+      name: "metrics"
+      fully_qualified_name: "tkinter.font.Font.metrics"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "__option"
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "metrics"
+      fully_qualified_name: "tkinter.font.Font.metrics"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "__option"
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "metrics"
+      fully_qualified_name: "tkinter.font.Font.metrics"
+      return_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "tkinter.font.Font"
+          fully_qualified_name: "tkinter.font.Font"
+        }
+      }
+      parameters {
+        name: "displayof"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Union[tkinter.Misc,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "tkinter.Misc"
+            fully_qualified_name: "tkinter.Misc"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "tkinter.font.Font.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "delete_font"
+    fully_qualified_name: "tkinter.font.Font.delete_font"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__getitem__"
+    fully_qualified_name: "tkinter.font.Font.__getitem__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+      fully_qualified_name: "builtins.function"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "configure"
+    fully_qualified_name: "tkinter.font.Font.configure"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "families"
+  fully_qualified_name: "tkinter.font.families"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  parameters {
+    name: "root"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "displayof"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "names"
+  fully_qualified_name: "tkinter.font.names"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  parameters {
+    name: "root"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "nametofont"
+  fully_qualified_name: "tkinter.font.nametofont"
+  return_annotation {
+    pretty_printed_name: "tkinter.font.Font"
+    fully_qualified_name: "tkinter.font.Font"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "nametofont"
+  fully_qualified_name: "tkinter.font.nametofont"
+  return_annotation {
+    pretty_printed_name: "tkinter.font.Font"
+    fully_qualified_name: "tkinter.font.Font"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "root"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[tkinter.Misc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "tkinter.Misc"
+        fully_qualified_name: "tkinter.Misc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "310"
+}
+vars {
+  name: "NORMAL"
+  fully_qualified_name: "tkinter.font.NORMAL"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROMAN"
+  fully_qualified_name: "tkinter.font.ROMAN"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BOLD"
+  fully_qualified_name: "tkinter.font.BOLD"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ITALIC"
+  fully_qualified_name: "tkinter.font.ITALIC"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

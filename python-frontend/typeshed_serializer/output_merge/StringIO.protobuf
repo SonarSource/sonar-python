@@ -1,0 +1,601 @@
+fully_qualified_name: "StringIO"
+classes {
+  name: "StringIO"
+  fully_qualified_name: "StringIO.StringIO"
+  super_classes: "typing.IO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "StringIO.StringIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "StringIO.StringIO.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "StringIO.StringIO.next"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "StringIO.StringIO.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "isatty"
+    fully_qualified_name: "StringIO.StringIO.isatty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "StringIO.StringIO.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "StringIO.StringIO.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "StringIO.StringIO.read"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "StringIO.StringIO.readline"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "StringIO.StringIO.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "sizehint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "truncate"
+    fully_qualified_name: "StringIO.StringIO.truncate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "StringIO.StringIO.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "StringIO.StringIO.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "flush"
+    fully_qualified_name: "StringIO.StringIO.flush"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "StringIO.StringIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "StringIO.StringIO.__enter__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "StringIO.StringIO.__exit__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "StringIO.StringIO.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readable"
+    fully_qualified_name: "StringIO.StringIO.readable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seekable"
+    fully_qualified_name: "StringIO.StringIO.seekable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writable"
+    fully_qualified_name: "StringIO.StringIO.writable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+  attributes {
+    name: "closed"
+    fully_qualified_name: "StringIO.StringIO.closed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "softspace"
+    fully_qualified_name: "StringIO.StringIO.softspace"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "len"
+    fully_qualified_name: "StringIO.StringIO.len"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "StringIO.StringIO.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+}

@@ -971,8 +971,8 @@ classes {
     name: "request"
     fully_qualified_name: "tornado.web.RequestHandler.request"
     type_annotation {
-      pretty_printed_name: "tornado.httputil.HTTPServerRequest"
-      fully_qualified_name: "tornado.httputil.HTTPServerRequest"
+      pretty_printed_name: "Any"
+      kind: ANY
     }
     valid_for: "27"
   }
@@ -1158,7 +1158,7 @@ classes {
 classes {
   name: "Application"
   fully_qualified_name: "tornado.web.Application"
-  super_classes: "tornado.httputil.HTTPServerConnectionDelegate"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "tornado.web.Application.__init__"
@@ -1391,7 +1391,7 @@ classes {
 classes {
   name: "_RequestDispatcher"
   fully_qualified_name: "tornado.web._RequestDispatcher"
-  super_classes: "tornado.httputil.HTTPMessageDelegate"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "tornado.web._RequestDispatcher.__init__"

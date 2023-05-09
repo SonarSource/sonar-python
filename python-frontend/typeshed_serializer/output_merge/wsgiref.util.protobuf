@@ -1,0 +1,653 @@
+fully_qualified_name: "wsgiref.util"
+classes {
+  name: "FileWrapper"
+  fully_qualified_name: "wsgiref.util.FileWrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    parameters {
+      name: "filelike"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "blksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    parameters {
+      name: "filelike"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "blksize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__iter__"
+    return_annotation {
+      pretty_printed_name: "wsgiref.util.FileWrapper"
+      fully_qualified_name: "wsgiref.util.FileWrapper"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "wsgiref.util.FileWrapper.next"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "wsgiref.util.FileWrapper.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "wsgiref.util.FileWrapper"
+        fully_qualified_name: "wsgiref.util.FileWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "filelike"
+    fully_qualified_name: "wsgiref.util.FileWrapper.filelike"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "filelike"
+    fully_qualified_name: "wsgiref.util.FileWrapper.filelike"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "blksize"
+    fully_qualified_name: "wsgiref.util.FileWrapper.blksize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "close"
+    fully_qualified_name: "wsgiref.util.FileWrapper.close"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "guess_scheme"
+  fully_qualified_name: "wsgiref.util.guess_scheme"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "guess_scheme"
+  fully_qualified_name: "wsgiref.util.guess_scheme"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "application_uri"
+  fully_qualified_name: "wsgiref.util.application_uri"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "application_uri"
+  fully_qualified_name: "wsgiref.util.application_uri"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "request_uri"
+  fully_qualified_name: "wsgiref.util.request_uri"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  parameters {
+    name: "include_query"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "request_uri"
+  fully_qualified_name: "wsgiref.util.request_uri"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  parameters {
+    name: "include_query"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "shift_path_info"
+  fully_qualified_name: "wsgiref.util.shift_path_info"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "shift_path_info"
+  fully_qualified_name: "wsgiref.util.shift_path_info"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "setup_testing_defaults"
+  fully_qualified_name: "wsgiref.util.setup_testing_defaults"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.unicode,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,Any]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "setup_testing_defaults"
+  fully_qualified_name: "wsgiref.util.setup_testing_defaults"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_hop_by_hop"
+  fully_qualified_name: "wsgiref.util.is_hop_by_hop"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "header_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

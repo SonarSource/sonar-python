@@ -1,0 +1,1806 @@
+fully_qualified_name: "asyncio.streams"
+classes {
+  name: "IncompleteReadError"
+  fully_qualified_name: "asyncio.streams.IncompleteReadError"
+  super_classes: "builtins.EOFError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.IncompleteReadError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.IncompleteReadError"
+        fully_qualified_name: "asyncio.streams.IncompleteReadError"
+      }
+    }
+    parameters {
+      name: "partial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "expected"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  attributes {
+    name: "expected"
+    fully_qualified_name: "asyncio.streams.IncompleteReadError.expected"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  attributes {
+    name: "partial"
+    fully_qualified_name: "asyncio.streams.IncompleteReadError.partial"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+}
+classes {
+  name: "LimitOverrunError"
+  fully_qualified_name: "asyncio.streams.LimitOverrunError"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.LimitOverrunError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.LimitOverrunError"
+        fully_qualified_name: "asyncio.streams.LimitOverrunError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "consumed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  attributes {
+    name: "consumed"
+    fully_qualified_name: "asyncio.streams.LimitOverrunError.consumed"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+  }
+}
+classes {
+  name: "FlowControlMixin"
+  fully_qualified_name: "asyncio.streams.FlowControlMixin"
+  super_classes: "asyncio.protocols.Protocol"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.FlowControlMixin.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.FlowControlMixin"
+        fully_qualified_name: "asyncio.streams.FlowControlMixin"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StreamReaderProtocol"
+  fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+  super_classes: "asyncio.streams.FlowControlMixin"
+  super_classes: "asyncio.protocols.Protocol"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.StreamReaderProtocol.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReaderProtocol"
+        fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+      }
+    }
+    parameters {
+      name: "stream_reader"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "client_connected_cb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connection_made"
+    fully_qualified_name: "asyncio.streams.StreamReaderProtocol.connection_made"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReaderProtocol"
+        fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connection_lost"
+    fully_qualified_name: "asyncio.streams.StreamReaderProtocol.connection_lost"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReaderProtocol"
+        fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "data_received"
+    fully_qualified_name: "asyncio.streams.StreamReaderProtocol.data_received"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReaderProtocol"
+        fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "eof_received"
+    fully_qualified_name: "asyncio.streams.StreamReaderProtocol.eof_received"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReaderProtocol"
+        fully_qualified_name: "asyncio.streams.StreamReaderProtocol"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StreamWriter"
+  fully_qualified_name: "asyncio.streams.StreamWriter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.StreamWriter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
+      }
+    }
+    parameters {
+      name: "protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+    parameters {
+      name: "reader"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.streams.StreamReader,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.streams.StreamReader"
+          fully_qualified_name: "asyncio.streams.StreamReader"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "transport"
+    fully_qualified_name: "asyncio.streams.StreamWriter.transport"
+    return_annotation {
+      pretty_printed_name: "asyncio.transports.BaseTransport"
+      fully_qualified_name: "asyncio.transports.BaseTransport"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "asyncio.streams.StreamWriter.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "asyncio.streams.StreamWriter.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write_eof"
+    fully_qualified_name: "asyncio.streams.StreamWriter.write_eof"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "can_write_eof"
+    fully_qualified_name: "asyncio.streams.StreamWriter.can_write_eof"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.streams.StreamWriter.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_extra_info"
+    fully_qualified_name: "asyncio.streams.StreamWriter.get_extra_info"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "drain"
+    fully_qualified_name: "asyncio.streams.StreamWriter.drain"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_closing"
+    fully_qualified_name: "asyncio.streams.StreamWriter.is_closing"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "wait_closed"
+    fully_qualified_name: "asyncio.streams.StreamWriter.wait_closed"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StreamReader"
+  fully_qualified_name: "asyncio.streams.StreamReader"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.streams.StreamReader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exception"
+    fully_qualified_name: "asyncio.streams.StreamReader.exception"
+    return_annotation {
+      pretty_printed_name: "builtins.Exception"
+      fully_qualified_name: "builtins.Exception"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_exception"
+    fully_qualified_name: "asyncio.streams.StreamReader.set_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_transport"
+    fully_qualified_name: "asyncio.streams.StreamReader.set_transport"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "feed_eof"
+    fully_qualified_name: "asyncio.streams.StreamReader.feed_eof"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "at_eof"
+    fully_qualified_name: "asyncio.streams.StreamReader.at_eof"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "feed_data"
+    fully_qualified_name: "asyncio.streams.StreamReader.feed_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "asyncio.streams.StreamReader.readline"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readuntil"
+    fully_qualified_name: "asyncio.streams.StreamReader.readuntil"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "separator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      has_default: true
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "asyncio.streams.StreamReader.read"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readexactly"
+    fully_qualified_name: "asyncio.streams.StreamReader.readexactly"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__aiter__"
+    fully_qualified_name: "asyncio.streams.StreamReader.__aiter__"
+    return_annotation {
+      pretty_printed_name: "typing.AsyncIterator[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.AsyncIterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__anext__"
+    fully_qualified_name: "asyncio.streams.StreamReader.__anext__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "open_connection"
+  fully_qualified_name: "asyncio.streams.open_connection"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+      args {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "ssl_handshake_timeout"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "start_server"
+  fully_qualified_name: "asyncio.streams.start_server"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "asyncio.base_events.Server"
+      fully_qualified_name: "asyncio.base_events.Server"
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "client_connected_cb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "asyncio.streams._ClientConnectedCallback"
+    }
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "ssl_handshake_timeout"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "open_unix_connection"
+  fully_qualified_name: "asyncio.streams.open_unix_connection"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+      args {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "35"
+  valid_for: "36"
+}
+functions {
+  name: "open_unix_connection"
+  fully_qualified_name: "asyncio.streams.open_unix_connection"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Tuple[asyncio.streams.StreamReader,asyncio.streams.StreamWriter]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "asyncio.streams.StreamReader"
+        fully_qualified_name: "asyncio.streams.StreamReader"
+      }
+      args {
+        pretty_printed_name: "asyncio.streams.StreamWriter"
+        fully_qualified_name: "asyncio.streams.StreamWriter"
+      }
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "os.PathLike[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "start_unix_server"
+  fully_qualified_name: "asyncio.streams.start_unix_server"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "asyncio.base_events.Server"
+      fully_qualified_name: "asyncio.base_events.Server"
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "client_connected_cb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "asyncio.streams._ClientConnectedCallback"
+    }
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "35"
+  valid_for: "36"
+}
+functions {
+  name: "start_unix_server"
+  fully_qualified_name: "asyncio.streams.start_unix_server"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "asyncio.base_events.Server"
+      fully_qualified_name: "asyncio.base_events.Server"
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "client_connected_cb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "asyncio.streams._ClientConnectedCallback"
+    }
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "os.PathLike[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "limit"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "kwds"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
