@@ -1,0 +1,1819 @@
+fully_qualified_name: "lib2to3.pgen2.pgen"
+classes {
+  name: "PgenGrammar"
+  fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+  super_classes: "lib2to3.pgen2.grammar.Grammar"
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ParserGenerator"
+  fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.IO[builtins.unicode],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.IO[builtins.unicode]"
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.IO[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "make_grammar"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_grammar"
+    return_annotation {
+      pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+      fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "make_first"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_first"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "c"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+        fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "make_first"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_first"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "c"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+        fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "make_label"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_label"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "c"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+        fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "make_label"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_label"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "c"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+        fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addfirstsets"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.addfirstsets"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "calcfirst"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.calcfirst"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "calcfirst"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.calcfirst"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.dict[builtins.unicode,builtins.list[lib2to3.pgen2.pgen.DFAState]],builtins.unicode]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,builtins.list[lib2to3.pgen2.pgen.DFAState]]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+          args {
+            pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+            fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.dict[builtins.str,builtins.list[lib2to3.pgen2.pgen.DFAState]],builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.list[lib2to3.pgen2.pgen.DFAState]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+          args {
+            pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+            fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "make_dfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.make_dfa"
+    return_annotation {
+      pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "finish"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dump_nfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.dump_nfa"
+    return_annotation {
+      pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "finish"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "dump_nfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.dump_nfa"
+    return_annotation {
+      pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "finish"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dump_dfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.dump_dfa"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "dfa"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[lib2to3.pgen2.pgen.DFAState]"
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "dump_dfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.dump_dfa"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "dfa"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[lib2to3.pgen2.pgen.DFAState]"
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "simplify_dfa"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.simplify_dfa"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "dfa"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[lib2to3.pgen2.pgen.DFAState]"
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_rhs"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse_rhs"
+    return_annotation {
+      pretty_printed_name: "Tuple[lib2to3.pgen2.pgen.NFAState,lib2to3.pgen2.pgen.NFAState]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_alt"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse_alt"
+    return_annotation {
+      pretty_printed_name: "Tuple[lib2to3.pgen2.pgen.NFAState,lib2to3.pgen2.pgen.NFAState]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_item"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse_item"
+    return_annotation {
+      pretty_printed_name: "Tuple[lib2to3.pgen2.pgen.NFAState,lib2to3.pgen2.pgen.NFAState]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_atom"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.parse_atom"
+    return_annotation {
+      pretty_printed_name: "Tuple[lib2to3.pgen2.pgen.NFAState,lib2to3.pgen2.pgen.NFAState]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "expect"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.expect"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "expect"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.expect"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "gettoken"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.gettoken"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "raise_error"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.raise_error"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  overloaded_methods {
+    name: "raise_error"
+    fullname: "lib2to3.pgen2.pgen.ParserGenerator.raise_error"
+    definitions {
+      name: "raise_error"
+      fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.raise_error"
+      return_annotation {
+        pretty_printed_name: "NoReturn"
+        kind: UNINHABITED
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+          fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "raise_error"
+      fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.raise_error"
+      return_annotation {
+        pretty_printed_name: "NoReturn"
+        kind: UNINHABITED
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "lib2to3.pgen2.pgen.ParserGenerator"
+          fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator"
+        }
+      }
+      parameters {
+        name: "msg"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: VAR_POSITIONAL
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "filename"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.filename"
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.filename"
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stream"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.stream"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.unicode]"
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "stream"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.stream"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "generator"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.generator"
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.unicode,TypeAlias[Tuple[builtins.int,builtins.int]],TypeAlias[Tuple[builtins.int,builtins.int]],builtins.unicode]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "lib2to3.pgen2.tokenize._Coord"
+          }
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+        }
+        fully_qualified_name: "lib2to3.pgen2.tokenize._TokenInfo"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "generator"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.generator"
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[UnboundType[_TokenInfo]]"
+      args {
+        pretty_printed_name: "UnboundType[_TokenInfo]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "first"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.first"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.unicode,builtins.dict[builtins.unicode,builtins.int]]"
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.unicode,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "first"
+    fully_qualified_name: "lib2to3.pgen2.pgen.ParserGenerator.first"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.int]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NFAState"
+  fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.NFAState.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "addarc"
+    fully_qualified_name: "lib2to3.pgen2.pgen.NFAState.addarc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "next"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "addarc"
+    fully_qualified_name: "lib2to3.pgen2.pgen.NFAState.addarc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "next"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "arcs"
+    fully_qualified_name: "lib2to3.pgen2.pgen.NFAState.arcs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[Union[builtins.unicode,None],lib2to3.pgen2.pgen.NFAState]]"
+      args {
+        pretty_printed_name: "Tuple[Union[builtins.unicode,None],lib2to3.pgen2.pgen.NFAState]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.unicode,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.unicode"
+            fully_qualified_name: "builtins.unicode"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "arcs"
+    fully_qualified_name: "lib2to3.pgen2.pgen.NFAState.arcs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[Union[builtins.str,None],lib2to3.pgen2.pgen.NFAState]]"
+      args {
+        pretty_printed_name: "Tuple[Union[builtins.str,None],lib2to3.pgen2.pgen.NFAState]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DFAState"
+  fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "nfaset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[lib2to3.pgen2.pgen.NFAState,Any]"
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "nfaset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[lib2to3.pgen2.pgen.NFAState,UnboundType[Incomplete]]"
+        args {
+          pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+          fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+        }
+        args {
+          pretty_printed_name: "UnboundType[Incomplete]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addarc"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.addarc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "next"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "addarc"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.addarc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "next"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unifystate"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.unifystate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "old"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "nfaset"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.nfaset"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[lib2to3.pgen2.pgen.NFAState,Any]"
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "nfaset"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.nfaset"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[lib2to3.pgen2.pgen.NFAState,UnboundType[Incomplete]]"
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.NFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.NFAState"
+      }
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "isfinal"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.isfinal"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "arcs"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.arcs"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.unicode,lib2to3.pgen2.pgen.DFAState]"
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "arcs"
+    fully_qualified_name: "lib2to3.pgen2.pgen.DFAState.arcs"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,lib2to3.pgen2.pgen.DFAState]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "lib2to3.pgen2.pgen.DFAState"
+        fully_qualified_name: "lib2to3.pgen2.pgen.DFAState"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "generate_grammar"
+  fully_qualified_name: "lib2to3.pgen2.pgen.generate_grammar"
+  return_annotation {
+    pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+    fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "generate_grammar"
+  fully_qualified_name: "lib2to3.pgen2.pgen.generate_grammar"
+  return_annotation {
+    pretty_printed_name: "lib2to3.pgen2.pgen.PgenGrammar"
+    fully_qualified_name: "lib2to3.pgen2.pgen.PgenGrammar"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

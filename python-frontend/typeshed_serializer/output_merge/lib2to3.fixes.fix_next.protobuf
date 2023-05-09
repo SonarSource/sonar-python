@@ -1,0 +1,212 @@
+fully_qualified_name: "lib2to3.fixes.fix_next"
+classes {
+  name: "FixNext"
+  fully_qualified_name: "lib2to3.fixes.fix_next.FixNext"
+  super_classes: "lib2to3.fixer_base.BaseFix"
+  methods {
+    name: "start_tree"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.start_tree"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.fixes.fix_next.FixNext"
+        fully_qualified_name: "lib2to3.fixes.fix_next.FixNext"
+      }
+    }
+    parameters {
+      name: "tree"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.pytree.Node"
+        fully_qualified_name: "lib2to3.pytree.Node"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "transform"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.transform"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.fixes.fix_next.FixNext"
+        fully_qualified_name: "lib2to3.fixes.fix_next.FixNext"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "results"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "BM_compatible"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.BM_compatible"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "PATTERN"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.PATTERN"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "order"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.order"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "shadowed_next"
+    fully_qualified_name: "lib2to3.fixes.fix_next.FixNext.shadowed_next"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "is_assign_target"
+  fully_qualified_name: "lib2to3.fixes.fix_next.is_assign_target"
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "find_assign"
+  fully_qualified_name: "lib2to3.fixes.fix_next.find_assign"
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_subtree"
+  fully_qualified_name: "lib2to3.fixes.fix_next.is_subtree"
+  parameters {
+    name: "root"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "bind_warning"
+  fully_qualified_name: "lib2to3.fixes.fix_next.bind_warning"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

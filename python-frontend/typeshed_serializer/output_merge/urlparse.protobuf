@@ -1,0 +1,1528 @@
+fully_qualified_name: "urlparse"
+classes {
+  name: "ResultMixin"
+  fully_qualified_name: "urlparse.ResultMixin"
+  super_classes: "builtins.object"
+  methods {
+    name: "username"
+    fully_qualified_name: "urlparse.ResultMixin.username"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse.ResultMixin"
+        fully_qualified_name: "urlparse.ResultMixin"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "password"
+    fully_qualified_name: "urlparse.ResultMixin.password"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse.ResultMixin"
+        fully_qualified_name: "urlparse.ResultMixin"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "hostname"
+    fully_qualified_name: "urlparse.ResultMixin.hostname"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse.ResultMixin"
+        fully_qualified_name: "urlparse.ResultMixin"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "port"
+    fully_qualified_name: "urlparse.ResultMixin.port"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse.ResultMixin"
+        fully_qualified_name: "urlparse.ResultMixin"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "_SplitResult"
+  fully_qualified_name: "urlparse._SplitResult"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "urlparse._SplitResult._replace"
+    return_annotation {
+      pretty_printed_name: "urlparse._SplitResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse._SplitResult._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "scheme"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "netloc"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "path"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "query"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fragment"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "urlparse._SplitResult.__new__"
+    return_annotation {
+      pretty_printed_name: "urlparse._SplitResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[urlparse._SplitResult._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "urlparse._SplitResult._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "scheme"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "netloc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "query"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "fragment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "urlparse._SplitResult._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse._SplitResult._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "urlparse._SplitResult._make"
+    return_annotation {
+      pretty_printed_name: "urlparse._SplitResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[urlparse._SplitResult._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "urlparse._SplitResult._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "scheme"
+    fully_qualified_name: "urlparse._SplitResult.scheme"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "netloc"
+    fully_qualified_name: "urlparse._SplitResult.netloc"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "urlparse._SplitResult.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "query"
+    fully_qualified_name: "urlparse._SplitResult.query"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "fragment"
+    fully_qualified_name: "urlparse._SplitResult.fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "urlparse._SplitResult._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "urlparse._SplitResult._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "urlparse._SplitResult._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "urlparse._SplitResult._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "urlparse._SplitResult.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "SplitResult"
+  fully_qualified_name: "urlparse.SplitResult"
+  super_classes: "urlparse._SplitResult"
+  super_classes: "urlparse.ResultMixin"
+  methods {
+    name: "geturl"
+    fully_qualified_name: "urlparse.SplitResult.geturl"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "_ParseResult"
+  fully_qualified_name: "urlparse._ParseResult"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "urlparse._ParseResult._replace"
+    return_annotation {
+      pretty_printed_name: "urlparse._ParseResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse._ParseResult._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "scheme"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "netloc"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "path"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "params"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "query"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fragment"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "urlparse._ParseResult.__new__"
+    return_annotation {
+      pretty_printed_name: "urlparse._ParseResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[urlparse._ParseResult._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "urlparse._ParseResult._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "scheme"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "netloc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "query"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "fragment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "urlparse._ParseResult._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urlparse._ParseResult._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "urlparse._ParseResult._make"
+    return_annotation {
+      pretty_printed_name: "urlparse._ParseResult._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[urlparse._ParseResult._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "urlparse._ParseResult._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "scheme"
+    fully_qualified_name: "urlparse._ParseResult.scheme"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "netloc"
+    fully_qualified_name: "urlparse._ParseResult.netloc"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "urlparse._ParseResult.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "params"
+    fully_qualified_name: "urlparse._ParseResult.params"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "query"
+    fully_qualified_name: "urlparse._ParseResult.query"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "fragment"
+    fully_qualified_name: "urlparse._ParseResult.fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "27"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "urlparse._ParseResult._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "urlparse._ParseResult._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "urlparse._ParseResult._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "urlparse._ParseResult._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "urlparse._ParseResult.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "ParseResult"
+  fully_qualified_name: "urlparse.ParseResult"
+  super_classes: "urlparse._ParseResult"
+  super_classes: "urlparse.ResultMixin"
+  methods {
+    name: "geturl"
+    fully_qualified_name: "urlparse.ParseResult.geturl"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "urlparse._String"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "clear_cache"
+  fully_qualified_name: "urlparse.clear_cache"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlparse"
+  fully_qualified_name: "urlparse.urlparse"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "urlparse._String"
+    }
+  }
+  parameters {
+    name: "scheme"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "urlparse._String"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "allow_fragments"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urlsplit"
+  fully_qualified_name: "urlparse.urlsplit"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "urlparse._String"
+    }
+  }
+  parameters {
+    name: "scheme"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "urlparse._String"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "allow_fragments"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urljoin"
+  fully_qualified_name: "urlparse.urljoin"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "base"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "allow_fragments"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "urldefrag"
+  fully_qualified_name: "urlparse.urldefrag"
+  return_annotation {
+    pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unquote"
+  fully_qualified_name: "urlparse.unquote"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "parse_qs"
+  fully_qualified_name: "urlparse.parse_qs"
+  return_annotation {
+    pretty_printed_name: "builtins.dict[typing.AnyStr,builtins.list[typing.AnyStr]]"
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "builtins.list[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  parameters {
+    name: "qs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "keep_blank_values"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "strict_parsing"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "parse_qsl"
+  fully_qualified_name: "urlparse.parse_qsl"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[typing.AnyStr,typing.AnyStr]]"
+    args {
+      pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "qs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "keep_blank_values"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "strict_parsing"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "urlunparse"
+  fullname: "urlparse.urlunparse"
+  definitions {
+    name: "urlunparse"
+    fully_qualified_name: "urlparse.urlunparse"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr,typing.AnyStr,typing.AnyStr,typing.AnyStr,typing.AnyStr]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "urlunparse"
+    fully_qualified_name: "urlparse.urlunparse"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "urlunsplit"
+  fullname: "urlparse.urlunsplit"
+  definitions {
+    name: "urlunsplit"
+    fully_qualified_name: "urlparse.urlunsplit"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr,typing.AnyStr,typing.AnyStr,typing.AnyStr]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "urlunsplit"
+    fully_qualified_name: "urlparse.urlunsplit"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uses_relative"
+  fully_qualified_name: "urlparse.uses_relative"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uses_netloc"
+  fully_qualified_name: "urlparse.uses_netloc"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uses_params"
+  fully_qualified_name: "urlparse.uses_params"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "non_hierarchical"
+  fully_qualified_name: "urlparse.non_hierarchical"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uses_query"
+  fully_qualified_name: "urlparse.uses_query"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uses_fragment"
+  fully_qualified_name: "urlparse.uses_fragment"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "scheme_chars"
+  fully_qualified_name: "urlparse.scheme_chars"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "MAX_CACHE_SIZE"
+  fully_qualified_name: "urlparse.MAX_CACHE_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}

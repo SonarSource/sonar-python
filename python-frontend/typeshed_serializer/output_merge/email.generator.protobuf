@@ -1,0 +1,733 @@
+fully_qualified_name: "email.generator"
+classes {
+  name: "Generator"
+  fully_qualified_name: "email.generator.Generator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.generator.Generator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "outfp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "mangle_from_"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxheaderlen"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.generator.Generator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "outfp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    parameters {
+      name: "mangle_from_"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxheaderlen"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "policy"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[email.policy.Policy,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "email.generator.Generator.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "email.generator.Generator.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "flatten"
+    fully_qualified_name: "email.generator.Generator.flatten"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "unixfrom"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "flatten"
+    fully_qualified_name: "email.generator.Generator.flatten"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+    parameters {
+      name: "unixfrom"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "linesep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clone"
+    fully_qualified_name: "email.generator.Generator.clone"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "clone"
+    fully_qualified_name: "email.generator.Generator.clone"
+    return_annotation {
+      pretty_printed_name: "email.generator.Generator"
+      fully_qualified_name: "email.generator.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.Generator"
+        fully_qualified_name: "email.generator.Generator"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DecodedGenerator"
+  fully_qualified_name: "email.generator.DecodedGenerator"
+  super_classes: "email.generator.Generator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.generator.DecodedGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.DecodedGenerator"
+        fully_qualified_name: "email.generator.DecodedGenerator"
+      }
+    }
+    parameters {
+      name: "outfp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "mangle_from_"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxheaderlen"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fmt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.generator.DecodedGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.DecodedGenerator"
+        fully_qualified_name: "email.generator.DecodedGenerator"
+      }
+    }
+    parameters {
+      name: "outfp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    parameters {
+      name: "mangle_from_"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxheaderlen"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fmt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "policy"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[email.policy.Policy,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BytesGenerator"
+  fully_qualified_name: "email.generator.BytesGenerator"
+  super_classes: "builtins.object"
+  methods {
+    name: "clone"
+    fully_qualified_name: "email.generator.BytesGenerator.clone"
+    return_annotation {
+      pretty_printed_name: "email.generator.BytesGenerator"
+      fully_qualified_name: "email.generator.BytesGenerator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.BytesGenerator"
+        fully_qualified_name: "email.generator.BytesGenerator"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "email.generator.BytesGenerator.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.BytesGenerator"
+        fully_qualified_name: "email.generator.BytesGenerator"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.generator.BytesGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.BytesGenerator"
+        fully_qualified_name: "email.generator.BytesGenerator"
+      }
+    }
+    parameters {
+      name: "outfp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    parameters {
+      name: "mangle_from_"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "maxheaderlen"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "policy"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[email.policy.Policy,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "flatten"
+    fully_qualified_name: "email.generator.BytesGenerator.flatten"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.generator.BytesGenerator"
+        fully_qualified_name: "email.generator.BytesGenerator"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+    parameters {
+      name: "unixfrom"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "linesep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "email.generator.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

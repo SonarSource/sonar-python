@@ -1,0 +1,4958 @@
+fully_qualified_name: "_codecs"
+classes {
+  name: "_EncodingMap"
+  fully_qualified_name: "_codecs._EncodingMap"
+  super_classes: "builtins.object"
+  methods {
+    name: "size"
+    fully_qualified_name: "_codecs._EncodingMap.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_codecs._EncodingMap"
+        fully_qualified_name: "_codecs._EncodingMap"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register"
+  fully_qualified_name: "_codecs.register"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__search_function"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "register"
+  fully_qualified_name: "_codecs.register"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__search_function"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SearchFunction]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register_error"
+  fully_qualified_name: "_codecs.register_error"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  parameters {
+    name: "__handler"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_codecs._Handler"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "register_error"
+  fully_qualified_name: "_codecs.register_error"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__handler"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_Handler]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lookup"
+  fully_qualified_name: "_codecs.lookup"
+  return_annotation {
+    pretty_printed_name: "Tuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "codecs._Encoder"
+      fully_qualified_name: "codecs._Encoder"
+    }
+    args {
+      pretty_printed_name: "codecs._Decoder"
+      fully_qualified_name: "codecs._Decoder"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamReader"
+      fully_qualified_name: "codecs._StreamReader"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamWriter"
+      fully_qualified_name: "codecs._StreamWriter"
+    }
+  }
+  parameters {
+    name: "__encoding"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lookup"
+  fully_qualified_name: "_codecs.lookup"
+  return_annotation {
+    pretty_printed_name: "Tuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "codecs._Encoder"
+      fully_qualified_name: "codecs._Encoder"
+    }
+    args {
+      pretty_printed_name: "codecs._Decoder"
+      fully_qualified_name: "codecs._Decoder"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamReader"
+      fully_qualified_name: "codecs._StreamReader"
+    }
+    args {
+      pretty_printed_name: "codecs._StreamWriter"
+      fully_qualified_name: "codecs._StreamWriter"
+    }
+  }
+  parameters {
+    name: "__encoding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lookup_error"
+  fully_qualified_name: "_codecs.lookup_error"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    fully_qualified_name: "_codecs._Handler"
+  }
+  parameters {
+    name: "__name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lookup_error"
+  fully_qualified_name: "_codecs.lookup_error"
+  return_annotation {
+    pretty_printed_name: "UnboundType[_Handler]"
+    kind: UNBOUND
+  }
+  parameters {
+    name: "__name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "decode"
+  fully_qualified_name: "_codecs.decode"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "encode"
+  fully_qualified_name: "_codecs.encode"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "charmap_build"
+  fully_qualified_name: "_codecs.charmap_build"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[builtins.dict[builtins.int,builtins.int],_codecs._EncodingMap]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[builtins.dict[builtins.int,builtins.int],_codecs._EncodingMap]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "_codecs._EncodingMap"
+        fully_qualified_name: "_codecs._EncodingMap"
+      }
+    }
+    fully_qualified_name: "_codecs._MapT"
+  }
+  parameters {
+    name: "__map"
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "charmap_build"
+  fully_qualified_name: "_codecs.charmap_build"
+  return_annotation {
+    pretty_printed_name: "UnboundType[_CharMap]"
+    kind: UNBOUND
+  }
+  parameters {
+    name: "__map"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ascii_decode"
+  fully_qualified_name: "_codecs.ascii_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ascii_decode"
+  fully_qualified_name: "_codecs.ascii_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ascii_encode"
+  fully_qualified_name: "_codecs.ascii_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ascii_encode"
+  fully_qualified_name: "_codecs.ascii_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "charbuffer_encode"
+  fully_qualified_name: "_codecs.charbuffer_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "charmap_decode"
+  fully_qualified_name: "_codecs.charmap_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__mapping"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.int,builtins.int],_codecs._EncodingMap,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "_codecs._EncodingMap"
+        fully_qualified_name: "_codecs._EncodingMap"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "charmap_decode"
+  fully_qualified_name: "_codecs.charmap_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__mapping"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[_CharMap],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_CharMap]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "charmap_encode"
+  fully_qualified_name: "_codecs.charmap_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__mapping"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.int,builtins.int],_codecs._EncodingMap,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "_codecs._EncodingMap"
+        fully_qualified_name: "_codecs._EncodingMap"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "charmap_encode"
+  fully_qualified_name: "_codecs.charmap_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__mapping"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[_CharMap],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_CharMap]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "escape_decode"
+  fully_qualified_name: "_codecs.escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "escape_decode"
+  fully_qualified_name: "_codecs.escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "escape_encode"
+  fully_qualified_name: "_codecs.escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "escape_encode"
+  fully_qualified_name: "_codecs.escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "latin_1_decode"
+  fully_qualified_name: "_codecs.latin_1_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "latin_1_decode"
+  fully_qualified_name: "_codecs.latin_1_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "latin_1_encode"
+  fully_qualified_name: "_codecs.latin_1_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "latin_1_encode"
+  fully_qualified_name: "_codecs.latin_1_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "raw_unicode_escape_decode"
+  fully_qualified_name: "_codecs.raw_unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "raw_unicode_escape_decode"
+  fully_qualified_name: "_codecs.raw_unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "raw_unicode_escape_decode"
+  fully_qualified_name: "_codecs.raw_unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "raw_unicode_escape_encode"
+  fully_qualified_name: "_codecs.raw_unicode_escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "raw_unicode_escape_encode"
+  fully_qualified_name: "_codecs.raw_unicode_escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "readbuffer_encode"
+  fully_qualified_name: "_codecs.readbuffer_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "readbuffer_encode"
+  fully_qualified_name: "_codecs.readbuffer_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unicode_escape_decode"
+  fully_qualified_name: "_codecs.unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unicode_escape_decode"
+  fully_qualified_name: "_codecs.unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+functions {
+  name: "unicode_escape_decode"
+  fully_qualified_name: "_codecs.unicode_escape_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unicode_escape_encode"
+  fully_qualified_name: "_codecs.unicode_escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unicode_escape_encode"
+  fully_qualified_name: "_codecs.unicode_escape_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unicode_internal_decode"
+  fully_qualified_name: "_codecs.unicode_internal_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unicode_internal_decode"
+  fully_qualified_name: "_codecs.unicode_internal_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+functions {
+  name: "unicode_internal_encode"
+  fully_qualified_name: "_codecs.unicode_internal_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "_codecs._String"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unicode_internal_encode"
+  fully_qualified_name: "_codecs.unicode_internal_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__obj"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,UnboundType[ReadableBuffer]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+functions {
+  name: "utf_16_be_decode"
+  fully_qualified_name: "_codecs.utf_16_be_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_be_decode"
+  fully_qualified_name: "_codecs.utf_16_be_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_be_encode"
+  fully_qualified_name: "_codecs.utf_16_be_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_be_encode"
+  fully_qualified_name: "_codecs.utf_16_be_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_decode"
+  fully_qualified_name: "_codecs.utf_16_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_decode"
+  fully_qualified_name: "_codecs.utf_16_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_encode"
+  fully_qualified_name: "_codecs.utf_16_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_encode"
+  fully_qualified_name: "_codecs.utf_16_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_ex_decode"
+  fully_qualified_name: "_codecs.utf_16_ex_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_ex_decode"
+  fully_qualified_name: "_codecs.utf_16_ex_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_le_decode"
+  fully_qualified_name: "_codecs.utf_16_le_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_le_decode"
+  fully_qualified_name: "_codecs.utf_16_le_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_16_le_encode"
+  fully_qualified_name: "_codecs.utf_16_le_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_16_le_encode"
+  fully_qualified_name: "_codecs.utf_16_le_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_be_decode"
+  fully_qualified_name: "_codecs.utf_32_be_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_be_decode"
+  fully_qualified_name: "_codecs.utf_32_be_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_be_encode"
+  fully_qualified_name: "_codecs.utf_32_be_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_be_encode"
+  fully_qualified_name: "_codecs.utf_32_be_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_decode"
+  fully_qualified_name: "_codecs.utf_32_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_decode"
+  fully_qualified_name: "_codecs.utf_32_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_encode"
+  fully_qualified_name: "_codecs.utf_32_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_encode"
+  fully_qualified_name: "_codecs.utf_32_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_ex_decode"
+  fully_qualified_name: "_codecs.utf_32_ex_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_ex_decode"
+  fully_qualified_name: "_codecs.utf_32_ex_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__byteorder"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_le_decode"
+  fully_qualified_name: "_codecs.utf_32_le_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_le_decode"
+  fully_qualified_name: "_codecs.utf_32_le_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_32_le_encode"
+  fully_qualified_name: "_codecs.utf_32_le_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_32_le_encode"
+  fully_qualified_name: "_codecs.utf_32_le_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_7_decode"
+  fully_qualified_name: "_codecs.utf_7_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_7_decode"
+  fully_qualified_name: "_codecs.utf_7_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_7_encode"
+  fully_qualified_name: "_codecs.utf_7_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_7_encode"
+  fully_qualified_name: "_codecs.utf_7_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_8_decode"
+  fully_qualified_name: "_codecs.utf_8_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.unicode,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Decodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_8_decode"
+  fully_qualified_name: "_codecs.utf_8_decode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__data"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ReadableBuffer]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "utf_8_encode"
+  fully_qualified_name: "_codecs.utf_8_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+      }
+      fully_qualified_name: "_codecs._Encodable"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.unicode,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "_codecs._Errors"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "utf_8_encode"
+  fully_qualified_name: "_codecs.utf_8_encode"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__str"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__errors"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unregister"
+  fully_qualified_name: "_codecs.unregister"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__search_function"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_SearchFunction]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "encode"
+  fullname: "_codecs.encode"
+  definitions {
+    name: "encode"
+    fully_qualified_name: "_codecs.encode"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_BytesToBytesEncoding]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "encode"
+    fully_qualified_name: "_codecs.encode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_StrToStrEncoding]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "encode"
+    fully_qualified_name: "_codecs.encode"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "decode"
+  fullname: "_codecs.decode"
+  definitions {
+    name: "decode"
+    fully_qualified_name: "_codecs.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_BytesToBytesEncoding]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "decode"
+    fully_qualified_name: "_codecs.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_StrToStrEncoding]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "decode"
+    fully_qualified_name: "_codecs.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "decode"
+    fully_qualified_name: "_codecs.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "decode"
+    fully_qualified_name: "_codecs.decode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CharMap"
+  fully_qualified_name: "_codecs._CharMap"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Handler"
+  fully_qualified_name: "_codecs._Handler"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_SearchFunction"
+  fully_qualified_name: "_codecs._SearchFunction"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_BytesToBytesEncoding"
+  fully_qualified_name: "_codecs._BytesToBytesEncoding"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_StrToStrEncoding"
+  fully_qualified_name: "_codecs._StrToStrEncoding"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

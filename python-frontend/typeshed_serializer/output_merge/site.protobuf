@@ -1,0 +1,644 @@
+fully_qualified_name: "site"
+functions {
+  name: "main"
+  fully_qualified_name: "site.main"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "addsitedir"
+  fully_qualified_name: "site.addsitedir"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "sitedir"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "addsitedir"
+  fully_qualified_name: "site.addsitedir"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "sitedir"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getsitepackages"
+  fully_qualified_name: "site.getsitepackages"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "prefixes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getuserbase"
+  fully_qualified_name: "site.getuserbase"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getusersitepackages"
+  fully_qualified_name: "site.getusersitepackages"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "abs_paths"
+  fully_qualified_name: "site.abs_paths"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "addpackage"
+  fully_qualified_name: "site.addpackage"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "sitedir"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "addsitepackages"
+  fully_qualified_name: "site.addsitepackages"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "prefixes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "addusersitepackages"
+  fully_qualified_name: "site.addusersitepackages"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "check_enableusersite"
+  fully_qualified_name: "site.check_enableusersite"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "enablerlcompleter"
+  fully_qualified_name: "site.enablerlcompleter"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "execsitecustomize"
+  fully_qualified_name: "site.execsitecustomize"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "execusercustomize"
+  fully_qualified_name: "site.execusercustomize"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "makepath"
+  fully_qualified_name: "site.makepath"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "paths"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "removeduppaths"
+  fully_qualified_name: "site.removeduppaths"
+  return_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "setcopyright"
+  fully_qualified_name: "site.setcopyright"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sethelper"
+  fully_qualified_name: "site.sethelper"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "setquit"
+  fully_qualified_name: "site.setquit"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "venv"
+  fully_qualified_name: "site.venv"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "known_paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PREFIXES"
+  fully_qualified_name: "site.PREFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ENABLE_USER_SITE"
+  fully_qualified_name: "site.ENABLE_USER_SITE"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "USER_SITE"
+  fully_qualified_name: "site.USER_SITE"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "USER_BASE"
+  fully_qualified_name: "site.USER_BASE"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

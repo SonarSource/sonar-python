@@ -4,7 +4,6 @@ classes {
   fully_qualified_name: "tornado.httpserver.HTTPServer"
   super_classes: "tornado.tcpserver.TCPServer"
   super_classes: "tornado.util.Configurable"
-  super_classes: "tornado.httputil.HTTPServerConnectionDelegate"
   methods {
     name: "__init__"
     fully_qualified_name: "tornado.httpserver.HTTPServer.__init__"
@@ -324,7 +323,7 @@ classes {
 classes {
   name: "_ServerRequestAdapter"
   fully_qualified_name: "tornado.httpserver._ServerRequestAdapter"
-  super_classes: "tornado.httputil.HTTPMessageDelegate"
+  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.__init__"

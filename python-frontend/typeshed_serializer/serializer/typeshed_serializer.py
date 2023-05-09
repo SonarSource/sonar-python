@@ -164,10 +164,10 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 
 def main():
-    # save_merged_symbols()
+    save_merged_symbols(is_debug=True)
     save_merged_symbols(is_third_parties=True, is_debug=True)
-    # serialize_custom_stubs()
-    # serialize_typeshed_stdlib(is_debug=True)
+    serialize_custom_stubs(is_debug=True)
+    serialize_typeshed_stdlib(is_debug=True)
     serialize_stubgen_generated(is_debug=True)
 
 

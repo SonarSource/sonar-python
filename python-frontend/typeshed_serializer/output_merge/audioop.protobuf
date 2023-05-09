@@ -1,0 +1,1824 @@
+fully_qualified_name: "audioop"
+classes {
+  name: "error"
+  fully_qualified_name: "audioop.error"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "add"
+  fully_qualified_name: "audioop.add"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment1"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__fragment2"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "add"
+  fully_qualified_name: "audioop.add"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment1"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__fragment2"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "adpcm2lin"
+  fully_qualified_name: "audioop.adpcm2lin"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,TypeAlias[Tuple[builtins.int,builtins.int]]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "audioop.AdpcmState"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "adpcm2lin"
+  fully_qualified_name: "audioop.adpcm2lin"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,UnboundType[_AdpcmState]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "UnboundType[_AdpcmState]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[_AdpcmState],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_AdpcmState]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "alaw2lin"
+  fully_qualified_name: "audioop.alaw2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "alaw2lin"
+  fully_qualified_name: "audioop.alaw2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "avg"
+  fully_qualified_name: "audioop.avg"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "avg"
+  fully_qualified_name: "audioop.avg"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "avgpp"
+  fully_qualified_name: "audioop.avgpp"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "avgpp"
+  fully_qualified_name: "audioop.avgpp"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "bias"
+  fully_qualified_name: "audioop.bias"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__bias"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "bias"
+  fully_qualified_name: "audioop.bias"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__bias"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "byteswap"
+  fully_qualified_name: "audioop.byteswap"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "byteswap"
+  fully_qualified_name: "audioop.byteswap"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "cross"
+  fully_qualified_name: "audioop.cross"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "cross"
+  fully_qualified_name: "audioop.cross"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "findfactor"
+  fully_qualified_name: "audioop.findfactor"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__reference"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "findfactor"
+  fully_qualified_name: "audioop.findfactor"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__reference"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "findfit"
+  fully_qualified_name: "audioop.findfit"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.float]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__reference"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "findfit"
+  fully_qualified_name: "audioop.findfit"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.float]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__reference"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "findmax"
+  fully_qualified_name: "audioop.findmax"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__length"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "findmax"
+  fully_qualified_name: "audioop.findmax"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__length"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getsample"
+  fully_qualified_name: "audioop.getsample"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__index"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getsample"
+  fully_qualified_name: "audioop.getsample"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__index"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lin2adpcm"
+  fully_qualified_name: "audioop.lin2adpcm"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,TypeAlias[Tuple[builtins.int,builtins.int]]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "audioop.AdpcmState"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lin2adpcm"
+  fully_qualified_name: "audioop.lin2adpcm"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,UnboundType[_AdpcmState]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "UnboundType[_AdpcmState]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[_AdpcmState],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_AdpcmState]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lin2alaw"
+  fully_qualified_name: "audioop.lin2alaw"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lin2alaw"
+  fully_qualified_name: "audioop.lin2alaw"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lin2lin"
+  fully_qualified_name: "audioop.lin2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__newwidth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lin2lin"
+  fully_qualified_name: "audioop.lin2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__newwidth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lin2ulaw"
+  fully_qualified_name: "audioop.lin2ulaw"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lin2ulaw"
+  fully_qualified_name: "audioop.lin2ulaw"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "max"
+  fully_qualified_name: "audioop.max"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "max"
+  fully_qualified_name: "audioop.max"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "maxpp"
+  fully_qualified_name: "audioop.maxpp"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "maxpp"
+  fully_qualified_name: "audioop.maxpp"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "minmax"
+  fully_qualified_name: "audioop.minmax"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "minmax"
+  fully_qualified_name: "audioop.minmax"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "mul"
+  fully_qualified_name: "audioop.mul"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__factor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "mul"
+  fully_qualified_name: "audioop.mul"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__factor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ratecv"
+  fully_qualified_name: "audioop.ratecv"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,TypeAlias[Tuple[builtins.int,builtins.tuple[Tuple[builtins.int,builtins.int]]]]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.tuple[Tuple[builtins.int,builtins.int]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.tuple[Tuple[builtins.int,builtins.int]]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Tuple[builtins.int,builtins.int]]"
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+      fully_qualified_name: "audioop.RatecvState"
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__nchannels"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__inrate"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__outrate"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.tuple[Tuple[builtins.int,builtins.int]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.tuple[Tuple[builtins.int,builtins.int]]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Tuple[builtins.int,builtins.int]]"
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__weightA"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__weightB"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ratecv"
+  fully_qualified_name: "audioop.ratecv"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,UnboundType[_RatecvState]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "UnboundType[_RatecvState]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__nchannels"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__inrate"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__outrate"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__state"
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[_RatecvState],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_RatecvState]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "__weightA"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "__weightB"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "reverse"
+  fully_qualified_name: "audioop.reverse"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "reverse"
+  fully_qualified_name: "audioop.reverse"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "rms"
+  fully_qualified_name: "audioop.rms"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "rms"
+  fully_qualified_name: "audioop.rms"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "tomono"
+  fully_qualified_name: "audioop.tomono"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__lfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__rfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "tomono"
+  fully_qualified_name: "audioop.tomono"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__lfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__rfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "tostereo"
+  fully_qualified_name: "audioop.tostereo"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__lfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__rfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "tostereo"
+  fully_qualified_name: "audioop.tostereo"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__lfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "__rfactor"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ulaw2lin"
+  fully_qualified_name: "audioop.ulaw2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ulaw2lin"
+  fully_qualified_name: "audioop.ulaw2lin"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__fragment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "__width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_AdpcmState"
+  fully_qualified_name: "audioop._AdpcmState"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_RatecvState"
+  fully_qualified_name: "audioop._RatecvState"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

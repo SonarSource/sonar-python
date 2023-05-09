@@ -1,0 +1,2607 @@
+fully_qualified_name: "ntpath"
+functions {
+  name: "exists"
+  fully_qualified_name: "genericpath.exists"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "exists"
+  fully_qualified_name: "genericpath.exists"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "abspath"
+  fully_qualified_name: "ntpath.abspath"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "basename"
+  fully_qualified_name: "ntpath.basename"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "dirname"
+  fully_qualified_name: "ntpath.dirname"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "expanduser"
+  fully_qualified_name: "ntpath.expanduser"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "expandvars"
+  fully_qualified_name: "ntpath.expandvars"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "normcase"
+  fully_qualified_name: "ntpath.normcase"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "normpath"
+  fully_qualified_name: "ntpath.normpath"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "realpath"
+  fully_qualified_name: "ntpath.realpath"
+  return_annotation {
+    pretty_printed_name: "typing.AnyStr"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "commonprefix"
+  fully_qualified_name: "ntpath.commonprefix"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "m"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.unicode]"
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lexists"
+  fully_qualified_name: "ntpath.lexists"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getatime"
+  fully_qualified_name: "ntpath.getatime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getmtime"
+  fully_qualified_name: "ntpath.getmtime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getctime"
+  fully_qualified_name: "ntpath.getctime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getsize"
+  fully_qualified_name: "ntpath.getsize"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "isabs"
+  fully_qualified_name: "ntpath.isabs"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "isfile"
+  fully_qualified_name: "ntpath.isfile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "isdir"
+  fully_qualified_name: "ntpath.isdir"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "islink"
+  fully_qualified_name: "ntpath.islink"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ismount"
+  fully_qualified_name: "ntpath.ismount"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "samefile"
+  fully_qualified_name: "ntpath.samefile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "f1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  parameters {
+    name: "f2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "sameopenfile"
+  fully_qualified_name: "ntpath.sameopenfile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "fp1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "fp2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "samestat"
+  fully_qualified_name: "ntpath.samestat"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "posix.stat_result"
+      fully_qualified_name: "posix.stat_result"
+    }
+  }
+  parameters {
+    name: "s2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "posix.stat_result"
+      fully_qualified_name: "posix.stat_result"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "split"
+  fully_qualified_name: "ntpath.split"
+  return_annotation {
+    pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitdrive"
+  fully_qualified_name: "ntpath.splitdrive"
+  return_annotation {
+    pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "splitext"
+  fully_qualified_name: "ntpath.splitext"
+  return_annotation {
+    pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "walk"
+  fully_qualified_name: "ntpath.walk"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "visit"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "arg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "ntpath._T"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getatime"
+  fully_qualified_name: "genericpath.getatime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getctime"
+  fully_qualified_name: "genericpath.getctime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getmtime"
+  fully_qualified_name: "genericpath.getmtime"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getsize"
+  fully_qualified_name: "genericpath.getsize"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isdir"
+  fully_qualified_name: "genericpath.isdir"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isfile"
+  fully_qualified_name: "genericpath.isfile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "samefile"
+  fully_qualified_name: "genericpath.samefile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "f1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "f2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "sameopenfile"
+  fully_qualified_name: "genericpath.sameopenfile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "fp1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "fp2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "samestat"
+  fully_qualified_name: "genericpath.samestat"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  parameters {
+    name: "s2"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.float,builtins.float,builtins.float]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isabs"
+  fully_qualified_name: "posixpath.isabs"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[StrOrBytesPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "islink"
+  fully_qualified_name: "posixpath.islink"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ismount"
+  fully_qualified_name: "posixpath.ismount"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "lexists"
+  fully_qualified_name: "posixpath.lexists"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[FileDescriptorOrPath]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "join"
+  fullname: "ntpath.join"
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__p1"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "__p1"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p2"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p3"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p4"
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "__p1"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p2"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p3"
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "__p1"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__p2"
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "__p1"
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "join"
+  fullname: "ntpath.join"
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "__path"
+      type_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "paths"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__path"
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "paths"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "join"
+    fully_qualified_name: "ntpath.join"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "__path"
+      type_annotation {
+        pretty_printed_name: "UnboundType[BytesPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "paths"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[BytesPath]"
+        kind: UNBOUND
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "relpath"
+  fullname: "ntpath.relpath"
+  definitions {
+    name: "relpath"
+    fully_qualified_name: "ntpath.relpath"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "relpath"
+    fully_qualified_name: "ntpath.relpath"
+    return_annotation {
+      pretty_printed_name: "builtins.unicode"
+      fully_qualified_name: "builtins.unicode"
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.unicode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.unicode"
+          fully_qualified_name: "builtins.unicode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "commonprefix"
+  fullname: "genericpath.commonprefix"
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[StrPath]]"
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bytes,Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[BytesPath]]"
+        args {
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsRichComparisonT]]"
+        args {
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Tuple[_typeshed.SupportsRichComparisonT,Any]]"
+        args {
+          pretty_printed_name: "Tuple[_typeshed.SupportsRichComparisonT,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+}
+overloaded_functions {
+  name: "commonprefix"
+  fullname: "genericpath.commonprefix"
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[StrPath]]"
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bytes,Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[BytesPath]]"
+        args {
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.list[_typeshed.SupportsRichComparisonT]]"
+        args {
+          pretty_printed_name: "builtins.list[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonprefix"
+    fully_qualified_name: "genericpath.commonprefix"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[_typeshed.SupportsRichComparisonT]"
+      args {
+        pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.tuple[_typeshed.SupportsRichComparisonT]]"
+        args {
+          pretty_printed_name: "builtins.tuple[_typeshed.SupportsRichComparisonT]"
+          args {
+            pretty_printed_name: "_typeshed.SupportsRichComparisonT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "abspath"
+  fullname: "posixpath.abspath"
+  definitions {
+    name: "abspath"
+    fully_qualified_name: "posixpath.abspath"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "abspath"
+    fully_qualified_name: "posixpath.abspath"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "basename"
+  fullname: "posixpath.basename"
+  definitions {
+    name: "basename"
+    fully_qualified_name: "posixpath.basename"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "basename"
+    fully_qualified_name: "posixpath.basename"
+    return_annotation {
+      pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "commonpath"
+  fullname: "posixpath.commonpath"
+  definitions {
+    name: "commonpath"
+    fully_qualified_name: "posixpath.commonpath"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "paths"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[LiteralString]]"
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonpath"
+    fully_qualified_name: "posixpath.commonpath"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "paths"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[StrPath]]"
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "commonpath"
+    fully_qualified_name: "posixpath.commonpath"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "paths"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[UnboundType[BytesPath]]"
+        args {
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "dirname"
+  fullname: "posixpath.dirname"
+  definitions {
+    name: "dirname"
+    fully_qualified_name: "posixpath.dirname"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "dirname"
+    fully_qualified_name: "posixpath.dirname"
+    return_annotation {
+      pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "expanduser"
+  fullname: "posixpath.expanduser"
+  definitions {
+    name: "expanduser"
+    fully_qualified_name: "posixpath.expanduser"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "expanduser"
+    fully_qualified_name: "posixpath.expanduser"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "expandvars"
+  fullname: "posixpath.expandvars"
+  definitions {
+    name: "expandvars"
+    fully_qualified_name: "posixpath.expandvars"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "expandvars"
+    fully_qualified_name: "posixpath.expandvars"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "normcase"
+  fullname: "posixpath.normcase"
+  definitions {
+    name: "normcase"
+    fully_qualified_name: "posixpath.normcase"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "normcase"
+    fully_qualified_name: "posixpath.normcase"
+    return_annotation {
+      pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "normpath"
+  fullname: "posixpath.normpath"
+  definitions {
+    name: "normpath"
+    fully_qualified_name: "posixpath.normpath"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "normpath"
+    fully_qualified_name: "posixpath.normpath"
+    return_annotation {
+      pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "relpath"
+  fullname: "posixpath.relpath"
+  definitions {
+    name: "relpath"
+    fully_qualified_name: "posixpath.relpath"
+    return_annotation {
+      pretty_printed_name: "UnboundType[LiteralString]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[LiteralString]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[LiteralString],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[LiteralString]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "relpath"
+    fully_qualified_name: "posixpath.relpath"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[BytesPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[BytesPath],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[BytesPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "relpath"
+    fully_qualified_name: "posixpath.relpath"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[StrPath]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[StrPath],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[StrPath]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "split"
+  fullname: "posixpath.split"
+  definitions {
+    name: "split"
+    fully_qualified_name: "posixpath.split"
+    return_annotation {
+      pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "split"
+    fully_qualified_name: "posixpath.split"
+    return_annotation {
+      pretty_printed_name: "Tuple[_typeshed.AnyOrLiteralStr,_typeshed.AnyOrLiteralStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "splitdrive"
+  fullname: "posixpath.splitdrive"
+  definitions {
+    name: "splitdrive"
+    fully_qualified_name: "posixpath.splitdrive"
+    return_annotation {
+      pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "splitdrive"
+    fully_qualified_name: "posixpath.splitdrive"
+    return_annotation {
+      pretty_printed_name: "Tuple[_typeshed.AnyOrLiteralStr,_typeshed.AnyOrLiteralStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "splitext"
+  fullname: "posixpath.splitext"
+  definitions {
+    name: "splitext"
+    fully_qualified_name: "posixpath.splitext"
+    return_annotation {
+      pretty_printed_name: "Tuple[typing.AnyStr,typing.AnyStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "os.PathLike[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "splitext"
+    fully_qualified_name: "posixpath.splitext"
+    return_annotation {
+      pretty_printed_name: "Tuple[_typeshed.AnyOrLiteralStr,_typeshed.AnyOrLiteralStr]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.AnyOrLiteralStr"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "supports_unicode_filenames"
+  fully_qualified_name: "ntpath.supports_unicode_filenames"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "curdir"
+  fully_qualified_name: "ntpath.curdir"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "pardir"
+  fully_qualified_name: "ntpath.pardir"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "sep"
+  fully_qualified_name: "ntpath.sep"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "altsep"
+  fully_qualified_name: "ntpath.altsep"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "altsep"
+  fully_qualified_name: "ntpath.altsep"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "extsep"
+  fully_qualified_name: "ntpath.extsep"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "pathsep"
+  fully_qualified_name: "ntpath.pathsep"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "defpath"
+  fully_qualified_name: "ntpath.defpath"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "devnull"
+  fully_qualified_name: "ntpath.devnull"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "curdir"
+  fully_qualified_name: "posixpath.curdir"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "defpath"
+  fully_qualified_name: "posixpath.defpath"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "devnull"
+  fully_qualified_name: "posixpath.devnull"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "extsep"
+  fully_qualified_name: "posixpath.extsep"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pardir"
+  fully_qualified_name: "posixpath.pardir"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "pathsep"
+  fully_qualified_name: "posixpath.pathsep"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "sep"
+  fully_qualified_name: "posixpath.sep"
+  type_annotation {
+    pretty_printed_name: "UnboundType[LiteralString]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "supports_unicode_filenames"
+  fully_qualified_name: "posixpath.supports_unicode_filenames"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "ntpath.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "realpath"
+  fully_qualified_name: "ntpath.realpath"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+    fully_qualified_name: "builtins.function"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

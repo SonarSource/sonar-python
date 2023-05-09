@@ -1,0 +1,1765 @@
+fully_qualified_name: "logging.config"
+classes {
+  name: "_RootLoggerConfiguration"
+  fully_qualified_name: "logging.config._RootLoggerConfiguration"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_LoggerConfiguration"
+  fully_qualified_name: "logging.config._LoggerConfiguration"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_FormatterConfigurationTypedDict"
+  fully_qualified_name: "logging.config._FormatterConfigurationTypedDict"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_FilterConfigurationTypedDict"
+  fully_qualified_name: "logging.config._FilterConfigurationTypedDict"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_OptionalDictConfigArgs"
+  fully_qualified_name: "logging.config._OptionalDictConfigArgs"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_DictConfigArgs"
+  fully_qualified_name: "logging.config._DictConfigArgs"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConvertingMixin"
+  fully_qualified_name: "logging.config.ConvertingMixin"
+  super_classes: "builtins.object"
+  methods {
+    name: "convert_with_key"
+    fully_qualified_name: "logging.config.ConvertingMixin.convert_with_key"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingMixin"
+        fully_qualified_name: "logging.config.ConvertingMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "replace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "convert"
+    fully_qualified_name: "logging.config.ConvertingMixin.convert"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingMixin"
+        fully_qualified_name: "logging.config.ConvertingMixin"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConvertingDict"
+  fully_qualified_name: "logging.config.ConvertingDict"
+  super_classes: "builtins.dict"
+  super_classes: "logging.config.ConvertingMixin"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "logging.config.ConvertingDict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingDict"
+        fully_qualified_name: "logging.config.ConvertingDict"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "logging.config.ConvertingDict.get"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingDict"
+        fully_qualified_name: "logging.config.ConvertingDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "logging.config.ConvertingDict.pop"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingDict"
+        fully_qualified_name: "logging.config.ConvertingDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConvertingList"
+  fully_qualified_name: "logging.config.ConvertingList"
+  super_classes: "builtins.list"
+  super_classes: "logging.config.ConvertingMixin"
+  methods {
+    name: "pop"
+    fully_qualified_name: "logging.config.ConvertingList.pop"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.ConvertingList"
+        fully_qualified_name: "logging.config.ConvertingList"
+      }
+    }
+    parameters {
+      name: "idx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "logging.config.ConvertingList.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingList.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "logging.config.ConvertingList"
+          fully_qualified_name: "logging.config.ConvertingList"
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingList.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "logging.config.ConvertingList"
+          fully_qualified_name: "logging.config.ConvertingList"
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConvertingTuple"
+  fully_qualified_name: "logging.config.ConvertingTuple"
+  super_classes: "builtins.tuple"
+  super_classes: "logging.config.ConvertingMixin"
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "logging.config.ConvertingTuple.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingTuple.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingTuple.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "Tuple[Any,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "logging.config.ConvertingTuple.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingTuple.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "logging.config.ConvertingTuple"
+          fully_qualified_name: "logging.config.ConvertingTuple"
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "logging.config.ConvertingTuple.__getitem__"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        type_annotation {
+          pretty_printed_name: "logging.config.ConvertingTuple"
+          fully_qualified_name: "logging.config.ConvertingTuple"
+        }
+      }
+      parameters {
+        name: "key"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BaseConfigurator"
+  fully_qualified_name: "logging.config.BaseConfigurator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "logging.config.BaseConfigurator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypedDict,builtins.dict[builtins.str,Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypedDict"
+          kind: TYPED_DICT
+        }
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resolve"
+    fully_qualified_name: "logging.config.BaseConfigurator.resolve"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ext_convert"
+    fully_qualified_name: "logging.config.BaseConfigurator.ext_convert"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cfg_convert"
+    fully_qualified_name: "logging.config.BaseConfigurator.cfg_convert"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "convert"
+    fully_qualified_name: "logging.config.BaseConfigurator.convert"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_custom"
+    fully_qualified_name: "logging.config.BaseConfigurator.configure_custom"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "as_tuple"
+    fully_qualified_name: "logging.config.BaseConfigurator.as_tuple"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.BaseConfigurator"
+        fully_qualified_name: "logging.config.BaseConfigurator"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[Any],Tuple[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "Tuple[Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "CONVERT_PATTERN"
+    fully_qualified_name: "logging.config.BaseConfigurator.CONVERT_PATTERN"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "WORD_PATTERN"
+    fully_qualified_name: "logging.config.BaseConfigurator.WORD_PATTERN"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "DOT_PATTERN"
+    fully_qualified_name: "logging.config.BaseConfigurator.DOT_PATTERN"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "INDEX_PATTERN"
+    fully_qualified_name: "logging.config.BaseConfigurator.INDEX_PATTERN"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "DIGIT_PATTERN"
+    fully_qualified_name: "logging.config.BaseConfigurator.DIGIT_PATTERN"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value_converters"
+    fully_qualified_name: "logging.config.BaseConfigurator.value_converters"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "importer"
+    fully_qualified_name: "logging.config.BaseConfigurator.importer"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DictConfigurator"
+  fully_qualified_name: "logging.config.DictConfigurator"
+  super_classes: "logging.config.BaseConfigurator"
+  methods {
+    name: "configure"
+    fully_qualified_name: "logging.config.DictConfigurator.configure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_formatter"
+    fully_qualified_name: "logging.config.DictConfigurator.configure_formatter"
+    return_annotation {
+      pretty_printed_name: "Union[logging.Formatter,Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "logging.Formatter"
+        fully_qualified_name: "logging.Formatter"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_FormatterConfiguration]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_filter"
+    fully_qualified_name: "logging.config.DictConfigurator.configure_filter"
+    return_annotation {
+      pretty_printed_name: "Union[logging.Filter,Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "logging.Filter"
+        fully_qualified_name: "logging.Filter"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_FilterConfiguration]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_filters"
+    fully_qualified_name: "logging.config.DictConfigurator.add_filters"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "filterer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.Filterer"
+        fully_qualified_name: "logging.Filterer"
+      }
+    }
+    parameters {
+      name: "filters"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[UnboundType[_FilterType]]"
+        args {
+          pretty_printed_name: "UnboundType[_FilterType]"
+          kind: UNBOUND
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_handler"
+    fully_qualified_name: "logging.config.DictConfigurator.configure_handler"
+    return_annotation {
+      pretty_printed_name: "Union[logging.Handler,Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "logging.Handler"
+        fully_qualified_name: "logging.Handler"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_HandlerConfiguration]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_handlers"
+    fully_qualified_name: "logging.config.DictConfigurator.add_handlers"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "logger"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.Logger"
+        fully_qualified_name: "logging.Logger"
+      }
+    }
+    parameters {
+      name: "handlers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "common_logger_config"
+    fully_qualified_name: "logging.config.DictConfigurator.common_logger_config"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "logger"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.Logger"
+        fully_qualified_name: "logging.Logger"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+    }
+    parameters {
+      name: "incremental"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_logger"
+    fully_qualified_name: "logging.config.DictConfigurator.configure_logger"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+    }
+    parameters {
+      name: "incremental"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "configure_root"
+    fully_qualified_name: "logging.config.DictConfigurator.configure_root"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "logging.config.DictConfigurator"
+        fully_qualified_name: "logging.config.DictConfigurator"
+      }
+    }
+    parameters {
+      name: "config"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+    }
+    parameters {
+      name: "incremental"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dictConfig"
+  fully_qualified_name: "logging.config.dictConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "config"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "dictConfig"
+  fully_qualified_name: "logging.config.dictConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "config"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypedDict,builtins.dict[builtins.str,Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypedDict"
+        kind: TYPED_DICT
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.IO[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.IO[builtins.str],configparser.RawConfigParser]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "configparser.RawConfigParser"
+        fully_qualified_name: "configparser.RawConfigParser"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "fileConfig"
+  fully_qualified_name: "logging.config.fileConfig"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[StrOrBytesPath],typing.IO[builtins.str],configparser.RawConfigParser]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[StrOrBytesPath]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "configparser.RawConfigParser"
+        fully_qualified_name: "configparser.RawConfigParser"
+      }
+    }
+  }
+  parameters {
+    name: "defaults"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "disable_existing_loggers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "310"
+}
+functions {
+  name: "listen"
+  fully_qualified_name: "logging.config.listen"
+  return_annotation {
+    pretty_printed_name: "threading.Thread"
+    fully_qualified_name: "threading.Thread"
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "listen"
+  fully_qualified_name: "logging.config.listen"
+  return_annotation {
+    pretty_printed_name: "threading.Thread"
+    fully_qualified_name: "threading.Thread"
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "verify"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "stopListening"
+  fully_qualified_name: "logging.config.stopListening"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "valid_ident"
+  fully_qualified_name: "logging.config.valid_ident"
+  return_annotation {
+    pretty_printed_name: "Literal[builtins.bool]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEFAULT_LOGGING_CONFIG_PORT"
+  fully_qualified_name: "logging.config.DEFAULT_LOGGING_CONFIG_PORT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "RESET_ERROR"
+  fully_qualified_name: "logging.config.RESET_ERROR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IDENTIFIER"
+  fully_qualified_name: "logging.config.IDENTIFIER"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FormatterConfiguration"
+  fully_qualified_name: "logging.config._FormatterConfiguration"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_FilterConfiguration"
+  fully_qualified_name: "logging.config._FilterConfiguration"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_HandlerConfiguration"
+  fully_qualified_name: "logging.config._HandlerConfiguration"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

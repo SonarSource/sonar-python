@@ -1,0 +1,1057 @@
+fully_qualified_name: "syslog"
+functions {
+  name: "LOG_MASK"
+  fully_qualified_name: "syslog.LOG_MASK"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "LOG_UPTO"
+  fully_qualified_name: "syslog.LOG_UPTO"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "closelog"
+  fully_qualified_name: "syslog.closelog"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "openlog"
+  fully_qualified_name: "syslog.openlog"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "ident"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "logoption"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "facility"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "setlogmask"
+  fully_qualified_name: "syslog.setlogmask"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "syslog"
+  fullname: "syslog.syslog"
+  definitions {
+    name: "syslog"
+    fully_qualified_name: "syslog.syslog"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "priority"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "syslog"
+    fully_qualified_name: "syslog.syslog"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_ALERT"
+  fully_qualified_name: "syslog.LOG_ALERT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_ALERT"
+  fully_qualified_name: "syslog.LOG_ALERT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_AUTH"
+  fully_qualified_name: "syslog.LOG_AUTH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_AUTH"
+  fully_qualified_name: "syslog.LOG_AUTH"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_CONS"
+  fully_qualified_name: "syslog.LOG_CONS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_CONS"
+  fully_qualified_name: "syslog.LOG_CONS"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_CRIT"
+  fully_qualified_name: "syslog.LOG_CRIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_CRIT"
+  fully_qualified_name: "syslog.LOG_CRIT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_CRON"
+  fully_qualified_name: "syslog.LOG_CRON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_CRON"
+  fully_qualified_name: "syslog.LOG_CRON"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_DAEMON"
+  fully_qualified_name: "syslog.LOG_DAEMON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_DAEMON"
+  fully_qualified_name: "syslog.LOG_DAEMON"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_DEBUG"
+  fully_qualified_name: "syslog.LOG_DEBUG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_DEBUG"
+  fully_qualified_name: "syslog.LOG_DEBUG"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_EMERG"
+  fully_qualified_name: "syslog.LOG_EMERG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_EMERG"
+  fully_qualified_name: "syslog.LOG_EMERG"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_ERR"
+  fully_qualified_name: "syslog.LOG_ERR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_ERR"
+  fully_qualified_name: "syslog.LOG_ERR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_INFO"
+  fully_qualified_name: "syslog.LOG_INFO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_INFO"
+  fully_qualified_name: "syslog.LOG_INFO"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_KERN"
+  fully_qualified_name: "syslog.LOG_KERN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_KERN"
+  fully_qualified_name: "syslog.LOG_KERN"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL0"
+  fully_qualified_name: "syslog.LOG_LOCAL0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL0"
+  fully_qualified_name: "syslog.LOG_LOCAL0"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL1"
+  fully_qualified_name: "syslog.LOG_LOCAL1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL1"
+  fully_qualified_name: "syslog.LOG_LOCAL1"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL2"
+  fully_qualified_name: "syslog.LOG_LOCAL2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL2"
+  fully_qualified_name: "syslog.LOG_LOCAL2"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL3"
+  fully_qualified_name: "syslog.LOG_LOCAL3"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL3"
+  fully_qualified_name: "syslog.LOG_LOCAL3"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL4"
+  fully_qualified_name: "syslog.LOG_LOCAL4"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL4"
+  fully_qualified_name: "syslog.LOG_LOCAL4"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL5"
+  fully_qualified_name: "syslog.LOG_LOCAL5"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL5"
+  fully_qualified_name: "syslog.LOG_LOCAL5"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL6"
+  fully_qualified_name: "syslog.LOG_LOCAL6"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL6"
+  fully_qualified_name: "syslog.LOG_LOCAL6"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LOCAL7"
+  fully_qualified_name: "syslog.LOG_LOCAL7"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LOCAL7"
+  fully_qualified_name: "syslog.LOG_LOCAL7"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_LPR"
+  fully_qualified_name: "syslog.LOG_LPR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_LPR"
+  fully_qualified_name: "syslog.LOG_LPR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_MAIL"
+  fully_qualified_name: "syslog.LOG_MAIL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_MAIL"
+  fully_qualified_name: "syslog.LOG_MAIL"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_NDELAY"
+  fully_qualified_name: "syslog.LOG_NDELAY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_NDELAY"
+  fully_qualified_name: "syslog.LOG_NDELAY"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_NEWS"
+  fully_qualified_name: "syslog.LOG_NEWS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_NEWS"
+  fully_qualified_name: "syslog.LOG_NEWS"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_NOTICE"
+  fully_qualified_name: "syslog.LOG_NOTICE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_NOTICE"
+  fully_qualified_name: "syslog.LOG_NOTICE"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_NOWAIT"
+  fully_qualified_name: "syslog.LOG_NOWAIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_NOWAIT"
+  fully_qualified_name: "syslog.LOG_NOWAIT"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_PERROR"
+  fully_qualified_name: "syslog.LOG_PERROR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_PERROR"
+  fully_qualified_name: "syslog.LOG_PERROR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_PID"
+  fully_qualified_name: "syslog.LOG_PID"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_PID"
+  fully_qualified_name: "syslog.LOG_PID"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_SYSLOG"
+  fully_qualified_name: "syslog.LOG_SYSLOG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_SYSLOG"
+  fully_qualified_name: "syslog.LOG_SYSLOG"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_USER"
+  fully_qualified_name: "syslog.LOG_USER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_USER"
+  fully_qualified_name: "syslog.LOG_USER"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_UUCP"
+  fully_qualified_name: "syslog.LOG_UUCP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_UUCP"
+  fully_qualified_name: "syslog.LOG_UUCP"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_WARNING"
+  fully_qualified_name: "syslog.LOG_WARNING"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOG_WARNING"
+  fully_qualified_name: "syslog.LOG_WARNING"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_AUTHPRIV"
+  fully_qualified_name: "syslog.LOG_AUTHPRIV"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LOG_ODELAY"
+  fully_qualified_name: "syslog.LOG_ODELAY"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

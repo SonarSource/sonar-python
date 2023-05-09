@@ -1,0 +1,208 @@
+fully_qualified_name: "lib2to3.fixes.fix_tuple_params"
+classes {
+  name: "FixTupleParams"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams"
+  super_classes: "builtins.object"
+  methods {
+    name: "transform"
+    fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams.transform"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "results"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "transform_lambda"
+    fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams.transform_lambda"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams"
+        fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "results"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "BM_compatible"
+    fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams.BM_compatible"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "PATTERN"
+    fully_qualified_name: "lib2to3.fixes.fix_tuple_params.FixTupleParams.PATTERN"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "is_docstring"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.is_docstring"
+  parameters {
+    name: "stmt"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "simplify_args"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.simplify_args"
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "find_params"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.find_params"
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "map_to_index"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.map_to_index"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "param_list"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "prefix"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    has_default: true
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[UnboundType[Incomplete],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[Incomplete]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "tuple_name"
+  fully_qualified_name: "lib2to3.fixes.fix_tuple_params.tuple_name"
+  parameters {
+    name: "param_list"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

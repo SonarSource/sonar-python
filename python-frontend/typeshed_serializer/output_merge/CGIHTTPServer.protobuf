@@ -1,0 +1,37 @@
+fully_qualified_name: "CGIHTTPServer"
+classes {
+  name: "CGIHTTPRequestHandler"
+  fully_qualified_name: "CGIHTTPServer.CGIHTTPRequestHandler"
+  super_classes: "SimpleHTTPServer.SimpleHTTPRequestHandler"
+  methods {
+    name: "do_POST"
+    fully_qualified_name: "CGIHTTPServer.CGIHTTPRequestHandler.do_POST"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CGIHTTPServer.CGIHTTPRequestHandler"
+        fully_qualified_name: "CGIHTTPServer.CGIHTTPRequestHandler"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "cgi_directories"
+    fully_qualified_name: "CGIHTTPServer.CGIHTTPRequestHandler.cgi_directories"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "27"
+  }
+}

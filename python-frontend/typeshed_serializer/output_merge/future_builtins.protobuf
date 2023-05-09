@@ -1,0 +1,93 @@
+fully_qualified_name: "future_builtins"
+functions {
+  name: "ascii"
+  fully_qualified_name: "future_builtins.ascii"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "hex"
+  fully_qualified_name: "future_builtins.hex"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "oct"
+  fully_qualified_name: "future_builtins.oct"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "filter"
+  fully_qualified_name: "future_builtins.filter"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "map"
+  fully_qualified_name: "future_builtins.map"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+    fully_qualified_name: "builtins.function"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "zip"
+  fully_qualified_name: "future_builtins.zip"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+    fully_qualified_name: "builtins.function"
+  }
+  valid_for: "27"
+}

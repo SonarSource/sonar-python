@@ -1,0 +1,4586 @@
+fully_qualified_name: "doctest"
+classes {
+  name: "TestResults"
+  fully_qualified_name: "doctest.TestResults"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "doctest.TestResults._replace"
+    return_annotation {
+      pretty_printed_name: "doctest.TestResults._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.TestResults._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "failed"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "attempted"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "doctest.TestResults.__new__"
+    return_annotation {
+      pretty_printed_name: "doctest.TestResults._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[doctest.TestResults._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "doctest.TestResults._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "failed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "attempted"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "doctest.TestResults._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.TestResults._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "doctest.TestResults._make"
+    return_annotation {
+      pretty_printed_name: "doctest.TestResults._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[doctest.TestResults._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "doctest.TestResults._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "failed"
+    fully_qualified_name: "doctest.TestResults.failed"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "attempted"
+    fully_qualified_name: "doctest.TestResults.attempted"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "doctest.TestResults._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "doctest.TestResults._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "doctest.TestResults._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "doctest.TestResults._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "doctest.TestResults.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Example"
+  fully_qualified_name: "doctest.Example"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.Example.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "want"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "exc_msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "indent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.int,builtins.bool],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.int,builtins.bool]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "doctest.Example.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "doctest.Example.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "source"
+    fully_qualified_name: "doctest.Example.source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "want"
+    fully_qualified_name: "doctest.Example.want"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "exc_msg"
+    fully_qualified_name: "doctest.Example.exc_msg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "doctest.Example.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "indent"
+    fully_qualified_name: "doctest.Example.indent"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "options"
+    fully_qualified_name: "doctest.Example.options"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,builtins.bool]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DocTest"
+  fully_qualified_name: "doctest.DocTest"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTest.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "examples"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[doctest.Example]"
+        args {
+          pretty_printed_name: "doctest.Example"
+          fully_qualified_name: "doctest.Example"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "globs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "docstring"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "doctest.DocTest.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "doctest.DocTest.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "doctest.DocTest.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "examples"
+    fully_qualified_name: "doctest.DocTest.examples"
+    type_annotation {
+      pretty_printed_name: "builtins.list[doctest.Example]"
+      args {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "globs"
+    fully_qualified_name: "doctest.DocTest.globs"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "doctest.DocTest.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "doctest.DocTest.filename"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "doctest.DocTest.lineno"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "docstring"
+    fully_qualified_name: "doctest.DocTest.docstring"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DocTestParser"
+  fully_qualified_name: "doctest.DocTestParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "parse"
+    fully_qualified_name: "doctest.DocTestParser.parse"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Union[builtins.str,doctest.Example]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,doctest.Example]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "doctest.Example"
+          fully_qualified_name: "doctest.Example"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestParser"
+        fully_qualified_name: "doctest.DocTestParser"
+      }
+    }
+    parameters {
+      name: "string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_doctest"
+    fully_qualified_name: "doctest.DocTestParser.get_doctest"
+    return_annotation {
+      pretty_printed_name: "doctest.DocTest"
+      fully_qualified_name: "doctest.DocTest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestParser"
+        fully_qualified_name: "doctest.DocTestParser"
+      }
+    }
+    parameters {
+      name: "string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "globs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_examples"
+    fully_qualified_name: "doctest.DocTestParser.get_examples"
+    return_annotation {
+      pretty_printed_name: "builtins.list[doctest.Example]"
+      args {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestParser"
+        fully_qualified_name: "doctest.DocTestParser"
+      }
+    }
+    parameters {
+      name: "string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DocTestFinder"
+  fully_qualified_name: "doctest.DocTestFinder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTestFinder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestFinder"
+        fully_qualified_name: "doctest.DocTestFinder"
+      }
+    }
+    parameters {
+      name: "verbose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestParser"
+        fully_qualified_name: "doctest.DocTestParser"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "recurse"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exclude_empty"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "doctest.DocTestFinder.find"
+    return_annotation {
+      pretty_printed_name: "builtins.list[doctest.DocTest]"
+      args {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestFinder"
+        fully_qualified_name: "doctest.DocTestFinder"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.bool,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "globs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "extraglobs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DocTestRunner"
+  fully_qualified_name: "doctest.DocTestRunner"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTestRunner.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "checker"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[doctest.OutputChecker,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "doctest.OutputChecker"
+          fully_qualified_name: "doctest.OutputChecker"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "verbose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "optionflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report_start"
+    fully_qualified_name: "doctest.DocTestRunner.report_start"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "doctest._Out"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "report_start"
+    fully_qualified_name: "doctest.DocTestRunner.report_start"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Out]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report_success"
+    fully_qualified_name: "doctest.DocTestRunner.report_success"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "doctest._Out"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "report_success"
+    fully_qualified_name: "doctest.DocTestRunner.report_success"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Out]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report_failure"
+    fully_qualified_name: "doctest.DocTestRunner.report_failure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "doctest._Out"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "report_failure"
+    fully_qualified_name: "doctest.DocTestRunner.report_failure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Out]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report_unexpected_exception"
+    fully_qualified_name: "doctest.DocTestRunner.report_unexpected_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "doctest._Out"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Type[builtins.BaseException]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+        }
+        fully_qualified_name: "doctest._ExcInfo"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "report_unexpected_exception"
+    fully_qualified_name: "doctest.DocTestRunner.report_unexpected_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Out]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ExcInfo]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "doctest.DocTestRunner.run"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "compileflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "clear_globs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "doctest.DocTestRunner.run"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "compileflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "out"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_Out],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_Out]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "clear_globs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "summarize"
+    fully_qualified_name: "doctest.DocTestRunner.summarize"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "verbose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "merge"
+    fully_qualified_name: "doctest.DocTestRunner.merge"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestRunner"
+        fully_qualified_name: "doctest.DocTestRunner"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DIVIDER"
+    fully_qualified_name: "doctest.DocTestRunner.DIVIDER"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "optionflags"
+    fully_qualified_name: "doctest.DocTestRunner.optionflags"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "original_optionflags"
+    fully_qualified_name: "doctest.DocTestRunner.original_optionflags"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tries"
+    fully_qualified_name: "doctest.DocTestRunner.tries"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failures"
+    fully_qualified_name: "doctest.DocTestRunner.failures"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "test"
+    fully_qualified_name: "doctest.DocTestRunner.test"
+    type_annotation {
+      pretty_printed_name: "doctest.DocTest"
+      fully_qualified_name: "doctest.DocTest"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "OutputChecker"
+  fully_qualified_name: "doctest.OutputChecker"
+  super_classes: "builtins.object"
+  methods {
+    name: "check_output"
+    fully_qualified_name: "doctest.OutputChecker.check_output"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.OutputChecker"
+        fully_qualified_name: "doctest.OutputChecker"
+      }
+    }
+    parameters {
+      name: "want"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "optionflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "output_difference"
+    fully_qualified_name: "doctest.OutputChecker.output_difference"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.OutputChecker"
+        fully_qualified_name: "doctest.OutputChecker"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "optionflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DocTestFailure"
+  fully_qualified_name: "doctest.DocTestFailure"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTestFailure.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestFailure"
+        fully_qualified_name: "doctest.DocTestFailure"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "got"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "doctest.DocTestFailure.test"
+    type_annotation {
+      pretty_printed_name: "doctest.DocTest"
+      fully_qualified_name: "doctest.DocTest"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "example"
+    fully_qualified_name: "doctest.DocTestFailure.example"
+    type_annotation {
+      pretty_printed_name: "doctest.Example"
+      fully_qualified_name: "doctest.Example"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "got"
+    fully_qualified_name: "doctest.DocTestFailure.got"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnexpectedException"
+  fully_qualified_name: "doctest.UnexpectedException"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.UnexpectedException.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.UnexpectedException"
+        fully_qualified_name: "doctest.UnexpectedException"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Type[builtins.BaseException]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+        }
+        fully_qualified_name: "doctest._ExcInfo"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.UnexpectedException.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.UnexpectedException"
+        fully_qualified_name: "doctest.UnexpectedException"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "example"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.Example"
+        fully_qualified_name: "doctest.Example"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ExcInfo]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "doctest.UnexpectedException.test"
+    type_annotation {
+      pretty_printed_name: "doctest.DocTest"
+      fully_qualified_name: "doctest.DocTest"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "example"
+    fully_qualified_name: "doctest.UnexpectedException.example"
+    type_annotation {
+      pretty_printed_name: "doctest.Example"
+      fully_qualified_name: "doctest.Example"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "exc_info"
+    fully_qualified_name: "doctest.UnexpectedException.exc_info"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+      }
+      fully_qualified_name: "doctest._ExcInfo"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "exc_info"
+    fully_qualified_name: "doctest.UnexpectedException.exc_info"
+    type_annotation {
+      pretty_printed_name: "UnboundType[ExcInfo]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DebugRunner"
+  fully_qualified_name: "doctest.DebugRunner"
+  super_classes: "doctest.DocTestRunner"
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DocTestCase"
+  fully_qualified_name: "doctest.DocTestCase"
+  super_classes: "unittest.TestCase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTestCase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "optionflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "setUp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "tearDown"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "checker"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[doctest.OutputChecker,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "doctest.OutputChecker"
+          fully_qualified_name: "doctest.OutputChecker"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "setUp"
+    fully_qualified_name: "doctest.DocTestCase.setUp"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "tearDown"
+    fully_qualified_name: "doctest.DocTestCase.tearDown"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "runTest"
+    fully_qualified_name: "doctest.DocTestCase.runTest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "format_failure"
+    fully_qualified_name: "doctest.DocTestCase.format_failure"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "debug"
+    fully_qualified_name: "doctest.DocTestCase.debug"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "id"
+    fully_qualified_name: "doctest.DocTestCase.id"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "doctest.DocTestCase.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "shortDescription"
+    fully_qualified_name: "doctest.DocTestCase.shortDescription"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "DocTestCase"
+  fully_qualified_name: "doctest.DocTestCase"
+  super_classes: "unittest.case.TestCase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.DocTestCase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTest"
+        fully_qualified_name: "doctest.DocTest"
+      }
+    }
+    parameters {
+      name: "optionflags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "setUp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "tearDown"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "checker"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[doctest.OutputChecker,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "doctest.OutputChecker"
+          fully_qualified_name: "doctest.OutputChecker"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "runTest"
+    fully_qualified_name: "doctest.DocTestCase.runTest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "format_failure"
+    fully_qualified_name: "doctest.DocTestCase.format_failure"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "doctest.DocTestCase.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "doctest.DocTestCase"
+        fully_qualified_name: "doctest.DocTestCase"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SkipDocTestCase"
+  fully_qualified_name: "doctest.SkipDocTestCase"
+  super_classes: "doctest.DocTestCase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "doctest.SkipDocTestCase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.SkipDocTestCase"
+        fully_qualified_name: "doctest.SkipDocTestCase"
+      }
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setUp"
+    fully_qualified_name: "doctest.SkipDocTestCase.setUp"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.SkipDocTestCase"
+        fully_qualified_name: "doctest.SkipDocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "test_skip"
+    fully_qualified_name: "doctest.SkipDocTestCase.test_skip"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.SkipDocTestCase"
+        fully_qualified_name: "doctest.SkipDocTestCase"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "shortDescription"
+    fully_qualified_name: "doctest.SkipDocTestCase.shortDescription"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.SkipDocTestCase"
+        fully_qualified_name: "doctest.SkipDocTestCase"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DocFileCase"
+  fully_qualified_name: "doctest.DocFileCase"
+  super_classes: "doctest.DocTestCase"
+  methods {
+    name: "id"
+    fully_qualified_name: "doctest.DocFileCase.id"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocFileCase"
+        fully_qualified_name: "doctest.DocFileCase"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "format_failure"
+    fully_qualified_name: "doctest.DocFileCase.format_failure"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "doctest.DocFileCase"
+        fully_qualified_name: "doctest.DocFileCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_DocTestSuite"
+  fully_qualified_name: "doctest._DocTestSuite"
+  super_classes: "unittest.suite.TestSuite"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register_optionflag"
+  fully_qualified_name: "doctest.register_optionflag"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "testmod"
+  fully_qualified_name: "doctest.testmod"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "m"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[types.ModuleType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "verbose"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "report"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "optionflags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extraglobs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "raise_on_error"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "exclude_empty"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "testfile"
+  fully_qualified_name: "doctest.testfile"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "module_relative"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "verbose"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "report"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "optionflags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extraglobs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "raise_on_error"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parser"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "doctest.DocTestParser"
+      fully_qualified_name: "doctest.DocTestParser"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "run_docstring_examples"
+  fully_qualified_name: "doctest.run_docstring_examples"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "verbose"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "compileflags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "optionflags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_unittest_reportflags"
+  fully_qualified_name: "doctest.set_unittest_reportflags"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "flags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DocTestSuite"
+  fully_qualified_name: "doctest.DocTestSuite"
+  return_annotation {
+    pretty_printed_name: "unittest.TestSuite"
+    fully_qualified_name: "unittest.TestSuite"
+  }
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extraglobs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "test_finder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[doctest.DocTestFinder,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "doctest.DocTestFinder"
+        fully_qualified_name: "doctest.DocTestFinder"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "options"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "DocTestSuite"
+  fully_qualified_name: "doctest.DocTestSuite"
+  return_annotation {
+    pretty_printed_name: "doctest._DocTestSuite"
+    fully_qualified_name: "doctest._DocTestSuite"
+  }
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "extraglobs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "test_finder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[doctest.DocTestFinder,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "doctest.DocTestFinder"
+        fully_qualified_name: "doctest.DocTestFinder"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "options"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DocFileTest"
+  fully_qualified_name: "doctest.DocFileTest"
+  return_annotation {
+    pretty_printed_name: "doctest.DocFileCase"
+    fully_qualified_name: "doctest.DocFileCase"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "module_relative"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "parser"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "doctest.DocTestParser"
+      fully_qualified_name: "doctest.DocTestParser"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "options"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DocFileSuite"
+  fully_qualified_name: "doctest.DocFileSuite"
+  return_annotation {
+    pretty_printed_name: "unittest.TestSuite"
+    fully_qualified_name: "unittest.TestSuite"
+  }
+  parameters {
+    name: "paths"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "kw"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "DocFileSuite"
+  fully_qualified_name: "doctest.DocFileSuite"
+  return_annotation {
+    pretty_printed_name: "doctest._DocTestSuite"
+    fully_qualified_name: "doctest._DocTestSuite"
+  }
+  parameters {
+    name: "paths"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "kw"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "script_from_examples"
+  fully_qualified_name: "doctest.script_from_examples"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "testsource"
+  fully_qualified_name: "doctest.testsource"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "debug_src"
+  fully_qualified_name: "doctest.debug_src"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "src"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "debug_script"
+  fully_qualified_name: "doctest.debug_script"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "src"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "globs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "debug"
+  fully_qualified_name: "doctest.debug"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.str,types.ModuleType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "OPTIONFLAGS_BY_NAME"
+  fully_qualified_name: "doctest.OPTIONFLAGS_BY_NAME"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DONT_ACCEPT_TRUE_FOR_1"
+  fully_qualified_name: "doctest.DONT_ACCEPT_TRUE_FOR_1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DONT_ACCEPT_BLANKLINE"
+  fully_qualified_name: "doctest.DONT_ACCEPT_BLANKLINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NORMALIZE_WHITESPACE"
+  fully_qualified_name: "doctest.NORMALIZE_WHITESPACE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ELLIPSIS"
+  fully_qualified_name: "doctest.ELLIPSIS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SKIP"
+  fully_qualified_name: "doctest.SKIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IGNORE_EXCEPTION_DETAIL"
+  fully_qualified_name: "doctest.IGNORE_EXCEPTION_DETAIL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "COMPARISON_FLAGS"
+  fully_qualified_name: "doctest.COMPARISON_FLAGS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REPORT_UDIFF"
+  fully_qualified_name: "doctest.REPORT_UDIFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REPORT_CDIFF"
+  fully_qualified_name: "doctest.REPORT_CDIFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REPORT_NDIFF"
+  fully_qualified_name: "doctest.REPORT_NDIFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REPORT_ONLY_FIRST_FAILURE"
+  fully_qualified_name: "doctest.REPORT_ONLY_FIRST_FAILURE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REPORTING_FLAGS"
+  fully_qualified_name: "doctest.REPORTING_FLAGS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BLANKLINE_MARKER"
+  fully_qualified_name: "doctest.BLANKLINE_MARKER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ELLIPSIS_MARKER"
+  fully_qualified_name: "doctest.ELLIPSIS_MARKER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "master"
+  fully_qualified_name: "doctest.master"
+  type_annotation {
+    pretty_printed_name: "Union[doctest.DocTestRunner,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "doctest.DocTestRunner"
+      fully_qualified_name: "doctest.DocTestRunner"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "doctest.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FAIL_FAST"
+  fully_qualified_name: "doctest.FAIL_FAST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_Out"
+  fully_qualified_name: "doctest._Out"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

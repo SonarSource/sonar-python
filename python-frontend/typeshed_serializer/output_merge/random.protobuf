@@ -1,0 +1,3149 @@
+fully_qualified_name: "random"
+classes {
+  name: "_Sampleable"
+  fully_qualified_name: "random._Sampleable"
+  super_classes: "builtins.object"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "random._Sampleable.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[random._T_co]"
+      args {
+        pretty_printed_name: "random._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "random._Sampleable[random._T_co]"
+        args {
+          pretty_printed_name: "random._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "random._Sampleable"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "random._Sampleable.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "random._Sampleable[random._T_co]"
+        args {
+          pretty_printed_name: "random._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "random._Sampleable"
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  is_protocol: true
+  valid_for: "27"
+}
+classes {
+  name: "Random"
+  fully_qualified_name: "random.Random"
+  super_classes: "_random.Random"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "random.Random.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "random.Random.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seed"
+    fully_qualified_name: "random.Random.seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seed"
+    fully_qualified_name: "random.Random.seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "seed"
+    fully_qualified_name: "random.Random.seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.float,builtins.str,builtins.bytes,builtins.bytearray,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "random.Random.getstate"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      fully_qualified_name: "_random._State"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "random.Random.getstate"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "random.Random.getstate"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "random.Random.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "_random._State"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "random.Random.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "random.Random.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "jumpahead"
+    fully_qualified_name: "random.Random.jumpahead"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getrandbits"
+    fully_qualified_name: "random.Random.getrandbits"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "randint"
+    fully_qualified_name: "random.Random.randint"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "b"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "choice"
+    fully_qualified_name: "random.Random.choice"
+    return_annotation {
+      pretty_printed_name: "random._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[random._T]"
+        args {
+          pretty_printed_name: "random._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "choice"
+    fully_qualified_name: "random.Random.choice"
+    return_annotation {
+      pretty_printed_name: "random._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsLenAndGetItem[random._T]"
+        args {
+          pretty_printed_name: "random._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsLenAndGetItem"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "shuffle"
+    fully_qualified_name: "random.Random.shuffle"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.MutableSequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.MutableSequence"
+      }
+    }
+    parameters {
+      name: "random"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "shuffle"
+    fully_qualified_name: "random.Random.shuffle"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.MutableSequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.MutableSequence"
+      }
+    }
+    parameters {
+      name: "random"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sample"
+    fully_qualified_name: "random.Random.sample"
+    return_annotation {
+      pretty_printed_name: "builtins.list[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "population"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random._Sampleable[random._T]"
+        args {
+          pretty_printed_name: "random._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "random._Sampleable"
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "sample"
+    fully_qualified_name: "random.Random.sample"
+    return_annotation {
+      pretty_printed_name: "builtins.list[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "population"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[random._T],typing.AbstractSet[random._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[random._T]"
+          args {
+            pretty_printed_name: "random._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "typing.AbstractSet[random._T]"
+          args {
+            pretty_printed_name: "random._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.AbstractSet"
+        }
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "sample"
+    fully_qualified_name: "random.Random.sample"
+    return_annotation {
+      pretty_printed_name: "builtins.list[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "population"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[random._T],typing.AbstractSet[random._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[random._T]"
+          args {
+            pretty_printed_name: "random._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "typing.AbstractSet[random._T]"
+          args {
+            pretty_printed_name: "random._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.AbstractSet"
+        }
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "counts"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.int],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "random"
+    fully_qualified_name: "random.Random.random"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "uniform"
+    fully_qualified_name: "random.Random.uniform"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "b"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "triangular"
+    fully_qualified_name: "random.Random.triangular"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "low"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "high"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "triangular"
+    fully_qualified_name: "random.Random.triangular"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "low"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "high"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "betavariate"
+    fully_qualified_name: "random.Random.betavariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "alpha"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "beta"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "expovariate"
+    fully_qualified_name: "random.Random.expovariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "lambd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "gammavariate"
+    fully_qualified_name: "random.Random.gammavariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "alpha"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "beta"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "gauss"
+    fully_qualified_name: "random.Random.gauss"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "mu"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "sigma"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "lognormvariate"
+    fully_qualified_name: "random.Random.lognormvariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "mu"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "sigma"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "normalvariate"
+    fully_qualified_name: "random.Random.normalvariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "mu"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "sigma"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "vonmisesvariate"
+    fully_qualified_name: "random.Random.vonmisesvariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "mu"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "kappa"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "paretovariate"
+    fully_qualified_name: "random.Random.paretovariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "alpha"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "weibullvariate"
+    fully_qualified_name: "random.Random.weibullvariate"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "alpha"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "beta"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "randrange"
+    fully_qualified_name: "random.Random.randrange"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "stop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "step"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "choices"
+    fully_qualified_name: "random.Random.choices"
+    return_annotation {
+      pretty_printed_name: "builtins.list[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "population"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsLenAndGetItem[random._T]"
+        args {
+          pretty_printed_name: "random._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsLenAndGetItem"
+      }
+    }
+    parameters {
+      name: "weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[Union[builtins.float,fractions.Fraction]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[Union[builtins.float,fractions.Fraction]]"
+          args {
+            pretty_printed_name: "Union[builtins.float,fractions.Fraction]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.float"
+              fully_qualified_name: "builtins.float"
+            }
+            args {
+              pretty_printed_name: "fractions.Fraction"
+              fully_qualified_name: "fractions.Fraction"
+            }
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "cum_weights"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[Union[builtins.float,fractions.Fraction]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[Union[builtins.float,fractions.Fraction]]"
+          args {
+            pretty_printed_name: "Union[builtins.float,fractions.Fraction]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.float"
+              fully_qualified_name: "builtins.float"
+            }
+            args {
+              pretty_printed_name: "fractions.Fraction"
+              fully_qualified_name: "fractions.Fraction"
+            }
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "k"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "randbytes"
+    fully_qualified_name: "random.Random.randbytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.Random"
+        fully_qualified_name: "random.Random"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "randrange"
+    fullname: "random.Random.randrange"
+    definitions {
+      name: "randrange"
+      fully_qualified_name: "random.Random.randrange"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "random.Random"
+          fully_qualified_name: "random.Random"
+        }
+      }
+      parameters {
+        name: "stop"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "randrange"
+      fully_qualified_name: "random.Random.randrange"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "random.Random"
+          fully_qualified_name: "random.Random"
+        }
+      }
+      parameters {
+        name: "start"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "stop"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "step"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "VERSION"
+    fully_qualified_name: "random.Random.VERSION"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SystemRandom"
+  fully_qualified_name: "random.SystemRandom"
+  super_classes: "random.Random"
+  methods {
+    name: "getrandbits"
+    fully_qualified_name: "random.SystemRandom.getrandbits"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.SystemRandom"
+        fully_qualified_name: "random.SystemRandom"
+      }
+    }
+    parameters {
+      name: "k"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "random.SystemRandom.getstate"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.SystemRandom"
+        fully_qualified_name: "random.SystemRandom"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "random.SystemRandom.setstate"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "random.SystemRandom"
+        fully_qualified_name: "random.SystemRandom"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AbstractSet"
+  fully_qualified_name: "typing.AbstractSet"
+  super_classes: "typing.Collection"
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "typing.AbstractSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "x"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_hash"
+    fully_qualified_name: "typing.AbstractSet._hash"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "typing.AbstractSet.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "typing.AbstractSet.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "typing.AbstractSet.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "typing.AbstractSet.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "typing.AbstractSet.__and__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing.AbstractSet.__or__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "typing.AbstractSet.__sub__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "typing.AbstractSet.__xor__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "typing.AbstractSet.isdisjoint"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "seed"
+  fully_qualified_name: "random.seed"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getstate"
+  fully_qualified_name: "random.getstate"
+  return_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "setstate"
+  fully_qualified_name: "random.setstate"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "state"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "jumpahead"
+  fully_qualified_name: "random.jumpahead"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "n"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getrandbits"
+  fully_qualified_name: "random.getrandbits"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "k"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "randint"
+  fully_qualified_name: "random.randint"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "choice"
+  fully_qualified_name: "random.choice"
+  return_annotation {
+    pretty_printed_name: "random._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "seq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "shuffle"
+  fully_qualified_name: "random.shuffle"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.MutableSequence[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.MutableSequence"
+    }
+  }
+  parameters {
+    name: "random"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "sample"
+  fully_qualified_name: "random.sample"
+  return_annotation {
+    pretty_printed_name: "builtins.list[random._T]"
+    args {
+      pretty_printed_name: "random._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "population"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "random._Sampleable[random._T]"
+      args {
+        pretty_printed_name: "random._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "random._Sampleable"
+    }
+  }
+  parameters {
+    name: "k"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "random"
+  fully_qualified_name: "random.random"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "uniform"
+  fully_qualified_name: "random.uniform"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "triangular"
+  fully_qualified_name: "random.triangular"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "low"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "high"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "betavariate"
+  fully_qualified_name: "random.betavariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "alpha"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "beta"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "expovariate"
+  fully_qualified_name: "random.expovariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "lambd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "gammavariate"
+  fully_qualified_name: "random.gammavariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "alpha"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "beta"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "gauss"
+  fully_qualified_name: "random.gauss"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "mu"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "sigma"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "lognormvariate"
+  fully_qualified_name: "random.lognormvariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "mu"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "sigma"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "normalvariate"
+  fully_qualified_name: "random.normalvariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "mu"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "sigma"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "vonmisesvariate"
+  fully_qualified_name: "random.vonmisesvariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "mu"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "kappa"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "paretovariate"
+  fully_qualified_name: "random.paretovariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "alpha"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "weibullvariate"
+  fully_qualified_name: "random.weibullvariate"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "alpha"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "beta"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "randrange"
+  fullname: "random.randrange"
+  definitions {
+    name: "randrange"
+    fully_qualified_name: "random.randrange"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "stop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "randrange"
+    fully_qualified_name: "random.randrange"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "stop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "step"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "random.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_inst"
+  fully_qualified_name: "random._inst"
+  type_annotation {
+    pretty_printed_name: "random.Random"
+    fully_qualified_name: "random.Random"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "seed"
+  fully_qualified_name: "random.seed"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "random"
+  fully_qualified_name: "random.random"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "uniform"
+  fully_qualified_name: "random.uniform"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "triangular"
+  fully_qualified_name: "random.triangular"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "randint"
+  fully_qualified_name: "random.randint"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "choice"
+  fully_qualified_name: "random.choice"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "randrange"
+  fully_qualified_name: "random.randrange"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "sample"
+  fully_qualified_name: "random.sample"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "shuffle"
+  fully_qualified_name: "random.shuffle"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "choices"
+  fully_qualified_name: "random.choices"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "normalvariate"
+  fully_qualified_name: "random.normalvariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "lognormvariate"
+  fully_qualified_name: "random.lognormvariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "expovariate"
+  fully_qualified_name: "random.expovariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "vonmisesvariate"
+  fully_qualified_name: "random.vonmisesvariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "gammavariate"
+  fully_qualified_name: "random.gammavariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "gauss"
+  fully_qualified_name: "random.gauss"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "betavariate"
+  fully_qualified_name: "random.betavariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "paretovariate"
+  fully_qualified_name: "random.paretovariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "weibullvariate"
+  fully_qualified_name: "random.weibullvariate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "getstate"
+  fully_qualified_name: "random.getstate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "setstate"
+  fully_qualified_name: "random.setstate"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "getrandbits"
+  fully_qualified_name: "random.getrandbits"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "randbytes"
+  fully_qualified_name: "random.randbytes"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "39"
+  valid_for: "310"
+}

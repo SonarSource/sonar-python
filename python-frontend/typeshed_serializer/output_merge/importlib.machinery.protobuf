@@ -1,0 +1,2273 @@
+fully_qualified_name: "importlib.machinery"
+classes {
+  name: "ModuleSpec"
+  fully_qualified_name: "importlib.machinery.ModuleSpec"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "loader"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[importlib.abc.Loader,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "importlib.abc.Loader"
+          fully_qualified_name: "importlib.abc.Loader"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "origin"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loader_state"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "is_package"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parent"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.parent"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "loader"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.loader"
+    type_annotation {
+      pretty_printed_name: "Union[importlib.abc.Loader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.Loader"
+        fully_qualified_name: "importlib.abc.Loader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "origin"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.origin"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "submodule_search_locations"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.submodule_search_locations"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "loader_state"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.loader_state"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "cached"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.cached"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "has_location"
+    fully_qualified_name: "importlib.machinery.ModuleSpec.has_location"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BuiltinImporter"
+  fully_qualified_name: "importlib.machinery.BuiltinImporter"
+  super_classes: "importlib.abc.MetaPathFinder"
+  super_classes: "importlib.abc.InspectLoader"
+  methods {
+    name: "find_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.abc.Loader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.Loader"
+        fully_qualified_name: "importlib.abc.Loader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_spec"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.find_spec"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.machinery.ModuleSpec,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.ModuleType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_package"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.is_package"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.load_module"
+    return_annotation {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_code"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.get_code"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.get_source"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "module_repr"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.module_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.create_module"
+    return_annotation {
+      pretty_printed_name: "Union[types.ModuleType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "create_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.create_module"
+    return_annotation {
+      pretty_printed_name: "Union[types.ModuleType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "310"
+  }
+  methods {
+    name: "exec_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.exec_module"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.BuiltinImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.BuiltinImporter"
+          fully_qualified_name: "importlib.machinery.BuiltinImporter"
+        }
+      }
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "exec_module"
+    fully_qualified_name: "importlib.machinery.BuiltinImporter.exec_module"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FrozenImporter"
+  fully_qualified_name: "importlib.machinery.FrozenImporter"
+  super_classes: "importlib.abc.MetaPathFinder"
+  super_classes: "importlib.abc.InspectLoader"
+  methods {
+    name: "find_module"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.abc.Loader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.Loader"
+        fully_qualified_name: "importlib.abc.Loader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_spec"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.find_spec"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.machinery.ModuleSpec,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.ModuleType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_package"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.is_package"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_module"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.load_module"
+    return_annotation {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_code"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.get_code"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.get_source"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "module_repr"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.module_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_module"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.create_module"
+    return_annotation {
+      pretty_printed_name: "Union[types.ModuleType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FrozenImporter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FrozenImporter"
+          fully_qualified_name: "importlib.machinery.FrozenImporter"
+        }
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "create_module"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.create_module"
+    return_annotation {
+      pretty_printed_name: "Union[types.ModuleType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "310"
+  }
+  methods {
+    name: "exec_module"
+    fully_qualified_name: "importlib.machinery.FrozenImporter.exec_module"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "WindowsRegistryFinder"
+  fully_qualified_name: "importlib.machinery.WindowsRegistryFinder"
+  super_classes: "importlib.abc.MetaPathFinder"
+  methods {
+    name: "find_module"
+    fully_qualified_name: "importlib.machinery.WindowsRegistryFinder.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.abc.Loader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.Loader"
+        fully_qualified_name: "importlib.abc.Loader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.WindowsRegistryFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.WindowsRegistryFinder"
+          fully_qualified_name: "importlib.machinery.WindowsRegistryFinder"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_spec"
+    fully_qualified_name: "importlib.machinery.WindowsRegistryFinder.find_spec"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.machinery.ModuleSpec,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.WindowsRegistryFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.WindowsRegistryFinder"
+          fully_qualified_name: "importlib.machinery.WindowsRegistryFinder"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.ModuleType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PathFinder"
+  fully_qualified_name: "importlib.machinery.PathFinder"
+  super_classes: "builtins.object"
+  methods {
+    name: "invalidate_caches"
+    fully_qualified_name: "importlib.machinery.PathFinder.invalidate_caches"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.PathFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.PathFinder"
+          fully_qualified_name: "importlib.machinery.PathFinder"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "invalidate_caches"
+    fully_qualified_name: "importlib.machinery.PathFinder.invalidate_caches"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "310"
+  }
+  methods {
+    name: "find_spec"
+    fully_qualified_name: "importlib.machinery.PathFinder.find_spec"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.machinery.ModuleSpec,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.PathFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.PathFinder"
+          fully_qualified_name: "importlib.machinery.PathFinder"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.ModuleType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_module"
+    fully_qualified_name: "importlib.machinery.PathFinder.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.abc.Loader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.Loader"
+        fully_qualified_name: "importlib.abc.Loader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.PathFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.PathFinder"
+          fully_qualified_name: "importlib.machinery.PathFinder"
+        }
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_distributions"
+    fully_qualified_name: "importlib.machinery.PathFinder.find_distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.PathDistribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.PathFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.PathFinder"
+          fully_qualified_name: "importlib.machinery.PathFinder"
+        }
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+        fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "find_distributions"
+    fully_qualified_name: "importlib.machinery.PathFinder.find_distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.PathDistribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+        fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FileFinder"
+  fully_qualified_name: "importlib.machinery.FileFinder"
+  super_classes: "importlib.abc.PathEntryFinder"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.machinery.FileFinder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.FileFinder"
+        fully_qualified_name: "importlib.machinery.FileFinder"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "loader_details"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.type,builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.machinery.FileFinder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.FileFinder"
+        fully_qualified_name: "importlib.machinery.FileFinder"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "loader_details"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[importlib.abc.Loader],builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[importlib.abc.Loader]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "importlib.abc.Loader"
+            fully_qualified_name: "importlib.abc.Loader"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "path_hook"
+    fully_qualified_name: "importlib.machinery.FileFinder.path_hook"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FileFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FileFinder"
+          fully_qualified_name: "importlib.machinery.FileFinder"
+        }
+      }
+    }
+    parameters {
+      name: "loader_details"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.type,builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "path_hook"
+    fully_qualified_name: "importlib.machinery.FileFinder.path_hook"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.machinery.FileFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.machinery.FileFinder"
+          fully_qualified_name: "importlib.machinery.FileFinder"
+        }
+      }
+    }
+    parameters {
+      name: "loader_details"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[importlib.abc.Loader],builtins.list[builtins.str]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[importlib.abc.Loader]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "importlib.abc.Loader"
+            fully_qualified_name: "importlib.abc.Loader"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "path"
+    fully_qualified_name: "importlib.machinery.FileFinder.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SourceFileLoader"
+  fully_qualified_name: "importlib.machinery.SourceFileLoader"
+  super_classes: "importlib.abc.FileLoader"
+  super_classes: "importlib.abc.SourceLoader"
+  methods {
+    name: "set_data"
+    fully_qualified_name: "importlib.machinery.SourceFileLoader.set_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.SourceFileLoader"
+        fully_qualified_name: "importlib.machinery.SourceFileLoader"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[ReadableBuffer]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "_mode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SourcelessFileLoader"
+  fully_qualified_name: "importlib.machinery.SourcelessFileLoader"
+  super_classes: "importlib.abc.FileLoader"
+  super_classes: "importlib.abc.SourceLoader"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ExtensionFileLoader"
+  fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+  super_classes: "importlib.abc.ExecutionLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_filename"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.get_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_module"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.create_module"
+    return_annotation {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ModuleSpec"
+        fully_qualified_name: "importlib.machinery.ModuleSpec"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exec_module"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.exec_module"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.ModuleType"
+        fully_qualified_name: "types.ModuleType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_code"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.get_code"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "importlib.machinery.ExtensionFileLoader.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "importlib.machinery.ExtensionFileLoader"
+        fully_qualified_name: "importlib.machinery.ExtensionFileLoader"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "all_suffixes"
+  fully_qualified_name: "importlib.machinery.all_suffixes"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "importlib"
+  fully_qualified_name: "importlib"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOURCE_SUFFIXES"
+  fully_qualified_name: "importlib.machinery.SOURCE_SUFFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEBUG_BYTECODE_SUFFIXES"
+  fully_qualified_name: "importlib.machinery.DEBUG_BYTECODE_SUFFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "OPTIMIZED_BYTECODE_SUFFIXES"
+  fully_qualified_name: "importlib.machinery.OPTIMIZED_BYTECODE_SUFFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BYTECODE_SUFFIXES"
+  fully_qualified_name: "importlib.machinery.BYTECODE_SUFFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EXTENSION_SUFFIXES"
+  fully_qualified_name: "importlib.machinery.EXTENSION_SUFFIXES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,1082 @@
+fully_qualified_name: "email.parser"
+classes {
+  name: "FeedParser"
+  fully_qualified_name: "email.feedparser.FeedParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.feedparser.FeedParser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.FeedParser"
+        fully_qualified_name: "email.feedparser.FeedParser"
+      }
+    }
+    parameters {
+      name: "_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "feed"
+    fully_qualified_name: "email.feedparser.FeedParser.feed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.FeedParser"
+        fully_qualified_name: "email.feedparser.FeedParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "email.feedparser.FeedParser.close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "FeedParser"
+  fully_qualified_name: "email.feedparser.FeedParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "feed"
+    fully_qualified_name: "email.feedparser.FeedParser.feed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
+        args {
+          pretty_printed_name: "email.feedparser._MessageT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "email.feedparser.FeedParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "email.feedparser.FeedParser.close"
+    return_annotation {
+      pretty_printed_name: "email.feedparser._MessageT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
+        args {
+          pretty_printed_name: "email.feedparser._MessageT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "email.feedparser.FeedParser"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "email.feedparser.FeedParser.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "email.feedparser.FeedParser.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "email.feedparser.FeedParser[email.message.Message]"
+          args {
+            pretty_printed_name: "email.message.Message"
+            fully_qualified_name: "email.message.Message"
+          }
+          fully_qualified_name: "email.feedparser.FeedParser"
+        }
+      }
+      parameters {
+        name: "_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "policy"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "email.feedparser.FeedParser.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "email.feedparser.FeedParser[email.feedparser._MessageT]"
+          args {
+            pretty_printed_name: "email.feedparser._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "email.feedparser.FeedParser"
+        }
+      }
+      parameters {
+        name: "_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "policy"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Parser"
+  fully_qualified_name: "email.parser.Parser"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.parser.Parser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kws"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.parser.Parser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "policy"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email.policy.Policy"
+        fully_qualified_name: "email.policy.Policy"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.Parser.parse"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.Parser.parse"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parsestr"
+    fully_qualified_name: "email.parser.Parser.parsestr"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "parsestr"
+    fully_qualified_name: "email.parser.Parser.parsestr"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.Parser"
+        fully_qualified_name: "email.parser.Parser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HeaderParser"
+  fully_qualified_name: "email.parser.HeaderParser"
+  super_classes: "email.parser.Parser"
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.HeaderParser.parse"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.HeaderParser"
+        fully_qualified_name: "email.parser.HeaderParser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.HeaderParser.parse"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.HeaderParser"
+        fully_qualified_name: "email.parser.HeaderParser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parsestr"
+    fully_qualified_name: "email.parser.HeaderParser.parsestr"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.HeaderParser"
+        fully_qualified_name: "email.parser.HeaderParser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "parsestr"
+    fully_qualified_name: "email.parser.HeaderParser.parsestr"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.HeaderParser"
+        fully_qualified_name: "email.parser.HeaderParser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BytesFeedParser"
+  fully_qualified_name: "email.feedparser.BytesFeedParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "feed"
+    fully_qualified_name: "email.feedparser.BytesFeedParser.feed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
+        args {
+          pretty_printed_name: "email.feedparser._MessageT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "email.feedparser.BytesFeedParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "email.feedparser.BytesFeedParser.close"
+    return_annotation {
+      pretty_printed_name: "email.feedparser._MessageT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
+        args {
+          pretty_printed_name: "email.feedparser._MessageT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "email.feedparser.BytesFeedParser"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "email.feedparser.BytesFeedParser.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "email.feedparser.BytesFeedParser.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "email.feedparser.BytesFeedParser[email.message.Message]"
+          args {
+            pretty_printed_name: "email.message.Message"
+            fully_qualified_name: "email.message.Message"
+          }
+          fully_qualified_name: "email.feedparser.BytesFeedParser"
+        }
+      }
+      parameters {
+        name: "_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      parameters {
+        name: "policy"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "email.feedparser.BytesFeedParser.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "email.feedparser.BytesFeedParser[email.feedparser._MessageT]"
+          args {
+            pretty_printed_name: "email.feedparser._MessageT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "email.feedparser.BytesFeedParser"
+        }
+      }
+      parameters {
+        name: "_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "policy"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "email.policy.Policy"
+          fully_qualified_name: "email.policy.Policy"
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BytesParser"
+  fully_qualified_name: "email.parser.BytesParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email.parser.BytesParser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.BytesParser"
+        fully_qualified_name: "email.parser.BytesParser"
+      }
+    }
+    parameters {
+      name: "_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "policy"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "email.policy.Policy"
+        fully_qualified_name: "email.policy.Policy"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.BytesParser.parse"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.BytesParser"
+        fully_qualified_name: "email.parser.BytesParser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parsebytes"
+    fully_qualified_name: "email.parser.BytesParser.parsebytes"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.BytesParser"
+        fully_qualified_name: "email.parser.BytesParser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BytesHeaderParser"
+  fully_qualified_name: "email.parser.BytesHeaderParser"
+  super_classes: "email.parser.BytesParser"
+  methods {
+    name: "parse"
+    fully_qualified_name: "email.parser.BytesHeaderParser.parse"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.BytesHeaderParser"
+        fully_qualified_name: "email.parser.BytesHeaderParser"
+      }
+    }
+    parameters {
+      name: "fp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parsebytes"
+    fully_qualified_name: "email.parser.BytesHeaderParser.parsebytes"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.parser.BytesHeaderParser"
+        fully_qualified_name: "email.parser.BytesHeaderParser"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.bytearray"
+          fully_qualified_name: "builtins.bytearray"
+        }
+      }
+    }
+    parameters {
+      name: "headersonly"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "email.parser.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

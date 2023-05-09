@@ -1,0 +1,310 @@
+fully_qualified_name: "_hotshot"
+classes {
+  name: "LogReaderType"
+  fully_qualified_name: "_hotshot.LogReaderType"
+  super_classes: "builtins.object"
+  methods {
+    name: "close"
+    fully_qualified_name: "_hotshot.LogReaderType.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.LogReaderType"
+        fully_qualified_name: "_hotshot.LogReaderType"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "_hotshot.LogReaderType.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.LogReaderType"
+        fully_qualified_name: "_hotshot.LogReaderType"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "ProfilerType"
+  fully_qualified_name: "_hotshot.ProfilerType"
+  super_classes: "builtins.object"
+  methods {
+    name: "addinfo"
+    fully_qualified_name: "_hotshot.ProfilerType.addinfo"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "b"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "_hotshot.ProfilerType.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "_hotshot.ProfilerType.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "runcall"
+    fully_qualified_name: "_hotshot.ProfilerType.runcall"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "runcode"
+    fully_qualified_name: "_hotshot.ProfilerType.runcode"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "b"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "start"
+    fully_qualified_name: "_hotshot.ProfilerType.start"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "stop"
+    fully_qualified_name: "_hotshot.ProfilerType.stop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_hotshot.ProfilerType"
+        fully_qualified_name: "_hotshot.ProfilerType"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "coverage"
+  fully_qualified_name: "_hotshot.coverage"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "logreader"
+  fully_qualified_name: "_hotshot.logreader"
+  return_annotation {
+    pretty_printed_name: "_hotshot.LogReaderType"
+    fully_qualified_name: "_hotshot.LogReaderType"
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "profiler"
+  fully_qualified_name: "_hotshot.profiler"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "resolution"
+  fully_qualified_name: "_hotshot.resolution"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  valid_for: "27"
+}

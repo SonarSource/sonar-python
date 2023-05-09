@@ -1,0 +1,126 @@
+fully_qualified_name: "copy"
+classes {
+  name: "Error"
+  fully_qualified_name: "copy.Error"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "deepcopy"
+  fully_qualified_name: "copy.deepcopy"
+  return_annotation {
+    pretty_printed_name: "copy._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "copy._T"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "memo"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.int,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,Any]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "_nil"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "copy"
+  fully_qualified_name: "copy.copy"
+  return_annotation {
+    pretty_printed_name: "copy._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "copy._T"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PyStringMap"
+  fully_qualified_name: "copy.PyStringMap"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "copy.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

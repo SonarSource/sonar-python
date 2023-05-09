@@ -1,0 +1,210 @@
+fully_qualified_name: "email.contentmanager"
+classes {
+  name: "ContentManager"
+  fully_qualified_name: "email.contentmanager.ContentManager"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_content"
+    fully_qualified_name: "email.contentmanager.ContentManager.get_content"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.contentmanager.ContentManager"
+        fully_qualified_name: "email.contentmanager.ContentManager"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_content"
+    fully_qualified_name: "email.contentmanager.ContentManager.set_content"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.contentmanager.ContentManager"
+        fully_qualified_name: "email.contentmanager.ContentManager"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_get_handler"
+    fully_qualified_name: "email.contentmanager.ContentManager.add_get_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.contentmanager.ContentManager"
+        fully_qualified_name: "email.contentmanager.ContentManager"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_set_handler"
+    fully_qualified_name: "email.contentmanager.ContentManager.add_set_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.contentmanager.ContentManager"
+        fully_qualified_name: "email.contentmanager.ContentManager"
+      }
+    }
+    parameters {
+      name: "typekey"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "raw_data_manager"
+  fully_qualified_name: "email.contentmanager.raw_data_manager"
+  type_annotation {
+    pretty_printed_name: "email.contentmanager.ContentManager"
+    fully_qualified_name: "email.contentmanager.ContentManager"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

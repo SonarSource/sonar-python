@@ -1,0 +1,1319 @@
+fully_qualified_name: "asyncio.futures"
+classes {
+  name: "_ConcurrentFuture"
+  fully_qualified_name: "concurrent.futures._base.Future"
+  super_classes: "builtins.object"
+  methods {
+    name: "cancel"
+    fully_qualified_name: "concurrent.futures._base.Future.cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cancelled"
+    fully_qualified_name: "concurrent.futures._base.Future.cancelled"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "running"
+    fully_qualified_name: "concurrent.futures._base.Future.running"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "done"
+    fully_qualified_name: "concurrent.futures._base.Future.done"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_done_callback"
+    fully_qualified_name: "concurrent.futures._base.Future.add_done_callback"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "result"
+    fully_qualified_name: "concurrent.futures._base.Future.result"
+    return_annotation {
+      pretty_printed_name: "concurrent.futures._base._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_running_or_notify_cancel"
+    fully_qualified_name: "concurrent.futures._base.Future.set_running_or_notify_cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_result"
+    fully_qualified_name: "concurrent.futures._base.Future.set_result"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exception"
+    fully_qualified_name: "concurrent.futures._base.Future.exception"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_exception"
+    fully_qualified_name: "concurrent.futures._base.Future.set_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "concurrent.futures._base.Future.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+          args {
+            pretty_printed_name: "concurrent.futures._base._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "concurrent.futures._base.Future"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CancelledError"
+  fully_qualified_name: "concurrent.futures._base.CancelledError"
+  super_classes: "concurrent.futures._base.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+classes {
+  name: "TimeoutError"
+  fully_qualified_name: "concurrent.futures._base.TimeoutError"
+  super_classes: "concurrent.futures._base.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+classes {
+  name: "InvalidStateError"
+  fully_qualified_name: "asyncio.futures.InvalidStateError"
+  super_classes: "concurrent.futures._base.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+classes {
+  name: "Future"
+  fully_qualified_name: "asyncio.futures.Future"
+  super_classes: "typing.Awaitable"
+  super_classes: "typing.Iterable"
+  methods {
+    name: "_exception"
+    fully_qualified_name: "asyncio.futures.Future._exception"
+    return_annotation {
+      pretty_printed_name: "builtins.BaseException"
+      fully_qualified_name: "builtins.BaseException"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.futures.Future.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "asyncio.futures.Future.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_loop"
+    fully_qualified_name: "asyncio.futures.Future.get_loop"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_callbacks"
+    fully_qualified_name: "asyncio.futures.Future._callbacks"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[CallableType[builtins.function],contextvars.Context]]"
+      args {
+        pretty_printed_name: "Tuple[CallableType[builtins.function],contextvars.Context]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_done_callback"
+    fully_qualified_name: "asyncio.futures.Future.add_done_callback"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "__fn"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "context"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "asyncio.futures.Future.cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "asyncio.futures.Future.cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cancelled"
+    fully_qualified_name: "asyncio.futures.Future.cancelled"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "done"
+    fully_qualified_name: "asyncio.futures.Future.done"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "result"
+    fully_qualified_name: "asyncio.futures.Future.result"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exception"
+    fully_qualified_name: "asyncio.futures.Future.exception"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove_done_callback"
+    fully_qualified_name: "asyncio.futures.Future.remove_done_callback"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "__fn"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_result"
+    fully_qualified_name: "asyncio.futures.Future.set_result"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "__result"
+      type_annotation {
+        pretty_printed_name: "asyncio.futures._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_exception"
+    fully_qualified_name: "asyncio.futures.Future.set_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    parameters {
+      name: "__exception"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,builtins.BaseException]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "asyncio.futures.Future.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[Any,None,asyncio.futures._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "asyncio.futures._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__await__"
+    fully_qualified_name: "asyncio.futures.Future.__await__"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[Any,None,asyncio.futures._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "asyncio.futures._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_loop"
+    fully_qualified_name: "asyncio.futures.Future._loop"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "asyncio.futures.Future.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[asyncio.futures.Future[asyncio.futures._T]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+          args {
+            pretty_printed_name: "asyncio.futures._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "_log_traceback"
+    fullname: "asyncio.futures.Future._log_traceback"
+    definitions {
+      name: "_log_traceback"
+      fully_qualified_name: "asyncio.futures.Future._log_traceback"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+          args {
+            pretty_printed_name: "asyncio.futures._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "_log_traceback"
+      fully_qualified_name: "asyncio.futures.Future._log_traceback"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+          args {
+            pretty_printed_name: "asyncio.futures._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+      }
+      parameters {
+        name: "val"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "_log_traceback.setter"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_state"
+    fully_qualified_name: "asyncio.futures.Future._state"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_blocking"
+    fully_qualified_name: "asyncio.futures.Future._blocking"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_asyncio_future_blocking"
+    fully_qualified_name: "asyncio.futures.Future._asyncio_future_blocking"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "isfuture"
+  fully_qualified_name: "asyncio.futures.isfuture"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "wrap_future"
+  fully_qualified_name: "asyncio.futures.wrap_future"
+  return_annotation {
+    pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+    args {
+      pretty_printed_name: "asyncio.futures._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "asyncio.futures.Future"
+  }
+  parameters {
+    name: "future"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[concurrent.futures._base.Future[asyncio.futures._T],asyncio.futures.Future[asyncio.futures._T]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      args {
+        pretty_printed_name: "asyncio.futures.Future[asyncio.futures._T]"
+        args {
+          pretty_printed_name: "asyncio.futures._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.futures.Future"
+      }
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.futures.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.futures.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

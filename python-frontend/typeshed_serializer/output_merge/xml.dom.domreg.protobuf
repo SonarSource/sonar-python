@@ -1,0 +1,155 @@
+fully_qualified_name: "xml.dom.domreg"
+functions {
+  name: "registerDOMImplementation"
+  fully_qualified_name: "xml.dom.domreg.registerDOMImplementation"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "factory"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getDOMImplementation"
+  fully_qualified_name: "xml.dom.domreg.getDOMImplementation"
+  return_annotation {
+    pretty_printed_name: "_typeshed.xml.DOMImplementation"
+    fully_qualified_name: "_typeshed.xml.DOMImplementation"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "features"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "well_known_implementations"
+  fully_qualified_name: "xml.dom.domreg.well_known_implementations"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "registered"
+  fully_qualified_name: "xml.dom.domreg.registered"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

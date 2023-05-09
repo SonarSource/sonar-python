@@ -1,0 +1,310 @@
+fully_qualified_name: "_random"
+classes {
+  name: "Random"
+  fully_qualified_name: "_random.Random"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_random.Random.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "seed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "seed"
+    fully_qualified_name: "_random.Random.seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "__n"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seed"
+    fully_qualified_name: "_random.Random.seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "__n"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.object,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "_random.Random.getstate"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      fully_qualified_name: "_random._State"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getstate"
+    fully_qualified_name: "_random.Random.getstate"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_State]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "_random.Random.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "__state"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.tuple[builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "_random._State"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "setstate"
+    fully_qualified_name: "_random.Random.setstate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "__state"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_State]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "random"
+    fully_qualified_name: "_random.Random.random"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getrandbits"
+    fully_qualified_name: "_random.Random.getrandbits"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "__k"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "jumpahead"
+    fully_qualified_name: "_random.Random.jumpahead"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_random.Random"
+        fully_qualified_name: "_random.Random"
+      }
+    }
+    parameters {
+      name: "i"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_State"
+  fully_qualified_name: "_random._State"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

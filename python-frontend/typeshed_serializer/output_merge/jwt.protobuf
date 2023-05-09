@@ -166,7 +166,7 @@ functions {
     name: "key"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+      pretty_printed_name: "Union[builtins.str,builtins.bytes,Any,Any]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.str"
@@ -177,12 +177,12 @@ functions {
         fully_qualified_name: "builtins.bytes"
       }
       args {
-        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
-        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        pretty_printed_name: "Any"
+        kind: ANY
       }
       args {
-        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
-        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
     has_default: true
@@ -280,7 +280,7 @@ functions {
     name: "key"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+      pretty_printed_name: "Union[builtins.str,builtins.bytes,Any,Any]"
       kind: UNION
       args {
         pretty_printed_name: "builtins.str"
@@ -291,12 +291,12 @@ functions {
         fully_qualified_name: "builtins.bytes"
       }
       args {
-        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
-        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        pretty_printed_name: "Any"
+        kind: ANY
       }
       args {
-        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
-        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        pretty_printed_name: "Any"
+        kind: ANY
       }
     }
   }
@@ -377,12 +377,8 @@ functions {
     name: "alg_obj"
     kind: POSITIONAL_OR_KEYWORD
     type_annotation {
-      pretty_printed_name: "jwt.algorithms.Algorithm[Any]"
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "jwt.algorithms.Algorithm"
+      pretty_printed_name: "Any"
+      kind: ANY
     }
   }
   valid_for: "35"

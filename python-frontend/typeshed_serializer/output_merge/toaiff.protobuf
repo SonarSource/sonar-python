@@ -1,0 +1,88 @@
+fully_qualified_name: "toaiff"
+classes {
+  name: "error"
+  fully_qualified_name: "toaiff.error"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+functions {
+  name: "toaiff"
+  fully_qualified_name: "toaiff.toaiff"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "_toaiff"
+  fully_qualified_name: "toaiff._toaiff"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "temps"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "table"
+  fully_qualified_name: "toaiff.table"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,pipes.Template]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "pipes.Template"
+      fully_qualified_name: "pipes.Template"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "t"
+  fully_qualified_name: "toaiff.t"
+  type_annotation {
+    pretty_printed_name: "pipes.Template"
+    fully_qualified_name: "pipes.Template"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "uncompress"
+  fully_qualified_name: "toaiff.uncompress"
+  type_annotation {
+    pretty_printed_name: "pipes.Template"
+    fully_qualified_name: "pipes.Template"
+  }
+  valid_for: "27"
+}

@@ -1,0 +1,1169 @@
+fully_qualified_name: "email.utils"
+classes {
+  name: "_AddressList"
+  fully_qualified_name: "email._parseaddr.AddressList"
+  super_classes: "email._parseaddr.AddrlistClass"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "email._parseaddr.AddressList.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "field"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "email._parseaddr.AddressList.__len__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "email._parseaddr.AddressList.__add__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "email._parseaddr.AddressList.__iadd__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "email._parseaddr.AddressList.__sub__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__isub__"
+    fully_qualified_name: "email._parseaddr.AddressList.__isub__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "email._parseaddr.AddressList.__getitem__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "addresslist"
+    fully_qualified_name: "email._parseaddr.AddressList.addresslist"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+functions {
+  name: "mktime_tz"
+  fully_qualified_name: "email._parseaddr.mktime_tz"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "_parsedate"
+  fully_qualified_name: "email._parseaddr.parsedate"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "_parsedate_tz"
+  fully_qualified_name: "email._parseaddr.parsedate_tz"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "_qdecode"
+  fully_qualified_name: "quopri.decodestring"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "header"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "formataddr"
+  fully_qualified_name: "email.utils.formataddr"
+  parameters {
+    name: "pair"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "formataddr"
+  fully_qualified_name: "email.utils.formataddr"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "pair"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,email.charset.Charset]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "email.charset.Charset"
+        fully_qualified_name: "email.charset.Charset"
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getaddresses"
+  fully_qualified_name: "email.utils.getaddresses"
+  parameters {
+    name: "fieldvalues"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "getaddresses"
+  fully_qualified_name: "email.utils.getaddresses"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "fieldvalues"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "formatdate"
+  fully_qualified_name: "email.utils.formatdate"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "timeval"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "localtime"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "usegmt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "formatdate"
+  fully_qualified_name: "email.utils.formatdate"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "timeval"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "localtime"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "usegmt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "make_msgid"
+  fully_qualified_name: "email.utils.make_msgid"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "idstring"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "make_msgid"
+  fully_qualified_name: "email.utils.make_msgid"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "idstring"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "domain"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "parsedate"
+  fully_qualified_name: "email.utils.parsedate"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "parsedate_tz"
+  fully_qualified_name: "email.utils.parsedate_tz"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "parseaddr"
+  fully_qualified_name: "email.utils.parseaddr"
+  parameters {
+    name: "addr"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "parseaddr"
+  fully_qualified_name: "email.utils.parseaddr"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "addr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unquote"
+  fully_qualified_name: "email.utils.unquote"
+  parameters {
+    name: "str"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "unquote"
+  fully_qualified_name: "email.utils.unquote"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "str"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "decode_rfc2231"
+  fully_qualified_name: "email.utils.decode_rfc2231"
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "decode_rfc2231"
+  fully_qualified_name: "email.utils.decode_rfc2231"
+  return_annotation {
+    pretty_printed_name: "Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "encode_rfc2231"
+  fully_qualified_name: "email.utils.encode_rfc2231"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "language"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "encode_rfc2231"
+  fully_qualified_name: "email.utils.encode_rfc2231"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "language"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "decode_params"
+  fully_qualified_name: "email.utils.decode_params"
+  parameters {
+    name: "params"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "decode_params"
+  fully_qualified_name: "email.utils.decode_params"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,UnboundType[_ParamType]]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,UnboundType[_ParamType]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "UnboundType[_ParamType]"
+        kind: UNBOUND
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "params"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "collapse_rfc2231_value"
+  fully_qualified_name: "email.utils.collapse_rfc2231_value"
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "fallback_charset"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "collapse_rfc2231_value"
+  fully_qualified_name: "email.utils.collapse_rfc2231_value"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[_ParamType]"
+      kind: UNBOUND
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "fallback_charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "quote"
+  fully_qualified_name: "email.utils.quote"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "str"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "parsedate_to_datetime"
+  fully_qualified_name: "email.utils.parsedate_to_datetime"
+  return_annotation {
+    pretty_printed_name: "datetime.datetime"
+    fully_qualified_name: "datetime.datetime"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+}
+functions {
+  name: "mktime_tz"
+  fully_qualified_name: "email.utils.mktime_tz"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "UnboundType[_PDTZ]"
+      kind: UNBOUND
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "format_datetime"
+  fully_qualified_name: "email.utils.format_datetime"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "dt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+  parameters {
+    name: "usegmt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "localtime"
+  fully_qualified_name: "email.utils.localtime"
+  return_annotation {
+    pretty_printed_name: "datetime.datetime"
+    fully_qualified_name: "datetime.datetime"
+  }
+  parameters {
+    name: "dt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "isdst"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "parsedate"
+  fullname: "email.utils.parsedate"
+  definitions {
+    name: "parsedate"
+    fully_qualified_name: "email.utils.parsedate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parsedate"
+    fully_qualified_name: "email.utils.parsedate"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "parsedate_tz"
+  fullname: "email.utils.parsedate_tz"
+  definitions {
+    name: "parsedate_tz"
+    fully_qualified_name: "email.utils.parsedate_tz"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parsedate_tz"
+    fully_qualified_name: "email.utils.parsedate_tz"
+    return_annotation {
+      pretty_printed_name: "Union[UnboundType[_PDTZ],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "UnboundType[_PDTZ]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "parsedate_to_datetime"
+  fullname: "email.utils.parsedate_to_datetime"
+  definitions {
+    name: "parsedate_to_datetime"
+    fully_qualified_name: "email.utils.parsedate_to_datetime"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "parsedate_to_datetime"
+    fully_qualified_name: "email.utils.parsedate_to_datetime"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "email.utils.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_PDTZ"
+  fully_qualified_name: "email.utils._PDTZ"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

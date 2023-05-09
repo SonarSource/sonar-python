@@ -1,0 +1,566 @@
+fully_qualified_name: "unittest.runner"
+classes {
+  name: "TextTestResult"
+  fully_qualified_name: "unittest.runner.TextTestResult"
+  super_classes: "unittest.result.TestResult"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.runner.TextTestResult.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestResult"
+        fully_qualified_name: "unittest.runner.TextTestResult"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.TextIO"
+        fully_qualified_name: "typing.TextIO"
+      }
+    }
+    parameters {
+      name: "descriptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "verbosity"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getDescription"
+    fully_qualified_name: "unittest.runner.TextTestResult.getDescription"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestResult"
+        fully_qualified_name: "unittest.runner.TextTestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "printErrorList"
+    fully_qualified_name: "unittest.runner.TextTestResult.printErrorList"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestResult"
+        fully_qualified_name: "unittest.runner.TextTestResult"
+      }
+    }
+    parameters {
+      name: "flavour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Tuple[unittest.case.TestCase,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "unittest.case.TestCase"
+            fully_qualified_name: "unittest.case.TestCase"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "descriptions"
+    fully_qualified_name: "unittest.runner.TextTestResult.descriptions"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "dots"
+    fully_qualified_name: "unittest.runner.TextTestResult.dots"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "separator1"
+    fully_qualified_name: "unittest.runner.TextTestResult.separator1"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "separator2"
+    fully_qualified_name: "unittest.runner.TextTestResult.separator2"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "showAll"
+    fully_qualified_name: "unittest.runner.TextTestResult.showAll"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stream"
+    fully_qualified_name: "unittest.runner.TextTestResult.stream"
+    type_annotation {
+      pretty_printed_name: "typing.TextIO"
+      fully_qualified_name: "typing.TextIO"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TextTestRunner"
+  fully_qualified_name: "unittest.runner.TextTestRunner"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.runner.TextTestRunner.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestRunner"
+        fully_qualified_name: "unittest.runner.TextTestRunner"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "descriptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "verbosity"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "failfast"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "resultclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_ResultClassType],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_ResultClassType]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "warnings"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "tb_locals"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.runner.TextTestRunner.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestRunner"
+        fully_qualified_name: "unittest.runner.TextTestRunner"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "descriptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "verbosity"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "failfast"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "resultclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_ResultClassType],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_ResultClassType]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "warnings"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.Warning],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.Warning]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.Warning"
+            fully_qualified_name: "builtins.Warning"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "tb_locals"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_makeResult"
+    fully_qualified_name: "unittest.runner.TextTestRunner._makeResult"
+    return_annotation {
+      pretty_printed_name: "unittest.result.TestResult"
+      fully_qualified_name: "unittest.result.TestResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestRunner"
+        fully_qualified_name: "unittest.runner.TextTestRunner"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "unittest.runner.TextTestRunner.run"
+    return_annotation {
+      pretty_printed_name: "unittest.result.TestResult"
+      fully_qualified_name: "unittest.result.TestResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.runner.TextTestRunner"
+        fully_qualified_name: "unittest.runner.TextTestRunner"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[unittest.suite.TestSuite,unittest.case.TestCase]"
+        kind: UNION
+        args {
+          pretty_printed_name: "unittest.suite.TestSuite"
+          fully_qualified_name: "unittest.suite.TestSuite"
+        }
+        args {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "resultclass"
+    fully_qualified_name: "unittest.runner.TextTestRunner.resultclass"
+    type_annotation {
+      pretty_printed_name: "UnboundType[_ResultClassType]"
+      kind: UNBOUND
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "unittest"
+  fully_qualified_name: "unittest"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ResultClassType"
+  fully_qualified_name: "unittest.runner._ResultClassType"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

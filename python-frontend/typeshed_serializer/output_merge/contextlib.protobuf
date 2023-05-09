@@ -1,0 +1,3623 @@
+fully_qualified_name: "contextlib"
+classes {
+  name: "GeneratorContextManager"
+  fully_qualified_name: "contextlib.GeneratorContextManager"
+  super_classes: "typing.ContextManager"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "contextlib.GeneratorContextManager.__call__"
+    return_annotation {
+      pretty_printed_name: "contextlib._F"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.GeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.GeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._F"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+}
+classes {
+  name: "_SupportsClose"
+  fully_qualified_name: "contextlib._SupportsClose"
+  super_classes: "builtins.object"
+  methods {
+    name: "close"
+    fully_qualified_name: "contextlib._SupportsClose.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsClose"
+        fully_qualified_name: "contextlib._SupportsClose"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "contextlib._SupportsClose.close"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsClose"
+        fully_qualified_name: "contextlib._SupportsClose"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "closing"
+  fully_qualified_name: "contextlib.closing"
+  super_classes: "typing.ContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib.closing.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.closing[contextlib._SupportsCloseT]"
+        args {
+          pretty_printed_name: "contextlib._SupportsCloseT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.closing"
+      }
+    }
+    parameters {
+      name: "thing"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsCloseT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+}
+classes {
+  name: "closing"
+  fully_qualified_name: "contextlib.closing"
+  super_classes: "contextlib.AbstractContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib.closing.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.closing[contextlib._SupportsCloseT]"
+        args {
+          pretty_printed_name: "contextlib._SupportsCloseT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.closing"
+      }
+    }
+    parameters {
+      name: "thing"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsCloseT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.closing.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.closing[contextlib._SupportsCloseT]"
+        args {
+          pretty_printed_name: "contextlib._SupportsCloseT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.closing"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AbstractContextManager"
+  fully_qualified_name: "contextlib.AbstractContextManager"
+  super_classes: "builtins.object"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "contextlib.AbstractContextManager.__enter__"
+    return_annotation {
+      pretty_printed_name: "contextlib._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.AbstractContextManager.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.AbstractContextManager.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AbstractAsyncContextManager"
+  fully_qualified_name: "contextlib.AbstractAsyncContextManager"
+  super_classes: "builtins.object"
+  methods {
+    name: "__aenter__"
+    fully_qualified_name: "contextlib.AbstractAsyncContextManager.__aenter__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,contextlib._T_co]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "contextlib._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractAsyncContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractAsyncContextManager"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.AbstractAsyncContextManager.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[builtins.bool,None]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractAsyncContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractAsyncContextManager"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.AbstractAsyncContextManager.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[builtins.bool,None]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractAsyncContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractAsyncContextManager"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_asynchronous: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ContextDecorator"
+  fully_qualified_name: "contextlib.ContextDecorator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "contextlib.ContextDecorator.__call__"
+    return_annotation {
+      pretty_printed_name: "contextlib._F"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ContextDecorator"
+        fully_qualified_name: "contextlib.ContextDecorator"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._F"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_GeneratorContextManager"
+  fully_qualified_name: "contextlib._GeneratorContextManager"
+  super_classes: "contextlib.AbstractContextManager"
+  super_classes: "contextlib.ContextDecorator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._GeneratorContextManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._GeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._GeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._GeneratorContextManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._GeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._GeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib._GeneratorContextManager.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib._GeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._GeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib._GeneratorContextManager.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib._GeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._GeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "typ"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "gen"
+    fully_qualified_name: "contextlib._GeneratorContextManager.gen"
+    type_annotation {
+      pretty_printed_name: "typing.Generator[contextlib._T_co,Any,Any]"
+      args {
+        pretty_printed_name: "contextlib._T_co"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "func"
+    fully_qualified_name: "contextlib._GeneratorContextManager.func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "contextlib._GeneratorContextManager.args"
+    type_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "contextlib._GeneratorContextManager.args"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "kwds"
+    fully_qualified_name: "contextlib._GeneratorContextManager.kwds"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_AsyncGeneratorContextManager"
+  fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+  super_classes: "contextlib.AbstractAsyncContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "39"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[builtins.bool,None]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[builtins.bool,None]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "39"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  attributes {
+    name: "gen"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.gen"
+    type_annotation {
+      pretty_printed_name: "typing.AsyncGenerator[contextlib._T_co,Any]"
+      args {
+        pretty_printed_name: "contextlib._T_co"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.AsyncGenerator"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  attributes {
+    name: "func"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.args"
+    type_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.args"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "39"
+  }
+  attributes {
+    name: "kwds"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.kwds"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+}
+classes {
+  name: "_AsyncGeneratorContextManager"
+  fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+  super_classes: "contextlib.AbstractAsyncContextManager"
+  super_classes: "contextlib.AsyncContextDecorator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[builtins.bool,None]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AsyncGeneratorContextManager[contextlib._T_co]"
+        args {
+          pretty_printed_name: "contextlib._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib._AsyncGeneratorContextManager"
+      }
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "traceback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "310"
+  attributes {
+    name: "gen"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.gen"
+    type_annotation {
+      pretty_printed_name: "typing.AsyncGenerator[contextlib._T_co,Any]"
+      args {
+        pretty_printed_name: "contextlib._T_co"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.AsyncGenerator"
+    }
+    valid_for: "310"
+  }
+  attributes {
+    name: "func"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    valid_for: "310"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.args"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "310"
+  }
+  attributes {
+    name: "kwds"
+    fully_qualified_name: "contextlib._AsyncGeneratorContextManager.kwds"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "310"
+  }
+}
+classes {
+  name: "suppress"
+  fully_qualified_name: "contextlib.suppress"
+  super_classes: "contextlib.AbstractContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib.suppress.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.suppress"
+        fully_qualified_name: "contextlib.suppress"
+      }
+    }
+    parameters {
+      name: "exceptions"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib.suppress.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.suppress"
+        fully_qualified_name: "contextlib.suppress"
+      }
+    }
+    parameters {
+      name: "exceptions"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Type[builtins.BaseException]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.suppress.__exit__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.suppress"
+        fully_qualified_name: "contextlib.suppress"
+      }
+    }
+    parameters {
+      name: "exctype"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "excinst"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exctb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.suppress.__exit__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.suppress"
+        fully_qualified_name: "contextlib.suppress"
+      }
+    }
+    parameters {
+      name: "exctype"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "excinst"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exctb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_RedirectStream"
+  fully_qualified_name: "contextlib._RedirectStream"
+  super_classes: "contextlib.AbstractContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib._RedirectStream.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._RedirectStream"
+        fully_qualified_name: "contextlib._RedirectStream"
+      }
+    }
+    parameters {
+      name: "new_target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_T_io]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib._RedirectStream.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib._RedirectStream"
+        fully_qualified_name: "contextlib._RedirectStream"
+      }
+    }
+    parameters {
+      name: "exctype"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "excinst"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exctb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib._RedirectStream.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib._RedirectStream"
+        fully_qualified_name: "contextlib._RedirectStream"
+      }
+    }
+    parameters {
+      name: "exctype"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "excinst"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exctb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "redirect_stdout"
+  fully_qualified_name: "contextlib.redirect_stdout"
+  super_classes: "contextlib._RedirectStream"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "redirect_stderr"
+  fully_qualified_name: "contextlib.redirect_stderr"
+  super_classes: "contextlib._RedirectStream"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ExitStack"
+  fully_qualified_name: "contextlib.ExitStack"
+  super_classes: "builtins.object"
+  methods {
+    name: "enter_context"
+    fully_qualified_name: "contextlib.ExitStack.enter_context"
+    return_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    parameters {
+      name: "cm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "contextlib.ExitStack.push"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_CM_EF]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    parameters {
+      name: "exit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_CM_EF]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "callback"
+    fully_qualified_name: "contextlib.ExitStack.callback"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    parameters {
+      name: "__callback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop_all"
+    fully_qualified_name: "contextlib.ExitStack.pop_all"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "contextlib.ExitStack.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "contextlib.ExitStack.__enter__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.ExitStack.__exit__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.ExitStack.__exit__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.ExitStack"
+        fully_qualified_name: "contextlib.ExitStack"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AsyncExitStack"
+  fully_qualified_name: "contextlib.AsyncExitStack"
+  super_classes: "builtins.object"
+  methods {
+    name: "enter_context"
+    fully_qualified_name: "contextlib.AsyncExitStack.enter_context"
+    return_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "cm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "enter_async_context"
+    fully_qualified_name: "contextlib.AsyncExitStack.enter_async_context"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,contextlib._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "contextlib._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "cm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractAsyncContextManager[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractAsyncContextManager"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "contextlib.AsyncExitStack.push"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_CM_EF]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "exit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_CM_EF]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "push_async_exit"
+    fully_qualified_name: "contextlib.AsyncExitStack.push_async_exit"
+    return_annotation {
+      pretty_printed_name: "UnboundType[_ACM_EF]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "exit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_ACM_EF]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "callback"
+    fully_qualified_name: "contextlib.AsyncExitStack.callback"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "__callback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "push_async_callback"
+    fully_qualified_name: "contextlib.AsyncExitStack.push_async_callback"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "__callback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwds"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop_all"
+    fully_qualified_name: "contextlib.AsyncExitStack.pop_all"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "aclose"
+    fully_qualified_name: "contextlib.AsyncExitStack.aclose"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__aenter__"
+    fully_qualified_name: "contextlib.AsyncExitStack.__aenter__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,UnboundType[Self]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "UnboundType[Self]"
+        kind: UNBOUND
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.AsyncExitStack.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.AsyncExitStack.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncExitStack"
+        fully_qualified_name: "contextlib.AsyncExitStack"
+      }
+    }
+    parameters {
+      name: "__exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__exc_value"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__traceback"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "nullcontext"
+  fully_qualified_name: "contextlib.nullcontext"
+  super_classes: "contextlib.AbstractContextManager"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "contextlib.nullcontext.__enter__"
+    return_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.nullcontext.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    parameters {
+      name: "exctype"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "contextlib.nullcontext.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextlib.nullcontext.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib.nullcontext[None]"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          fully_qualified_name: "contextlib.nullcontext"
+        }
+      }
+      parameters {
+        name: "enter_result"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextlib.nullcontext.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+          args {
+            pretty_printed_name: "contextlib._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextlib.nullcontext"
+        }
+      }
+      parameters {
+        name: "enter_result"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  attributes {
+    name: "enter_result"
+    fully_qualified_name: "contextlib.nullcontext.enter_result"
+    type_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+  }
+}
+classes {
+  name: "nullcontext"
+  fully_qualified_name: "contextlib.nullcontext"
+  super_classes: "contextlib.AbstractContextManager"
+  super_classes: "contextlib.AbstractAsyncContextManager"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "contextlib.nullcontext.__enter__"
+    return_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "contextlib.nullcontext.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    parameters {
+      name: "exctype"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "__aenter__"
+    fully_qualified_name: "contextlib.nullcontext.__aenter__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,contextlib._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "contextlib._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    is_asynchronous: true
+    valid_for: "310"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.nullcontext.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+        args {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.nullcontext"
+      }
+    }
+    parameters {
+      name: "exctype"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    is_asynchronous: true
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "contextlib.nullcontext.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextlib.nullcontext.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib.nullcontext[None]"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          fully_qualified_name: "contextlib.nullcontext"
+        }
+      }
+      parameters {
+        name: "enter_result"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextlib.nullcontext.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib.nullcontext[contextlib._T]"
+          args {
+            pretty_printed_name: "contextlib._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextlib.nullcontext"
+        }
+      }
+      parameters {
+        name: "enter_result"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextlib._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "310"
+  attributes {
+    name: "enter_result"
+    fully_qualified_name: "contextlib.nullcontext.enter_result"
+    type_annotation {
+      pretty_printed_name: "contextlib._T"
+      kind: TYPE_VAR
+    }
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AsyncContextDecorator"
+  fully_qualified_name: "contextlib.AsyncContextDecorator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "contextlib.AsyncContextDecorator.__call__"
+    return_annotation {
+      pretty_printed_name: "contextlib._AF"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AsyncContextDecorator"
+        fully_qualified_name: "contextlib.AsyncContextDecorator"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._AF"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "310"
+  }
+  valid_for: "310"
+}
+classes {
+  name: "_SupportsAclose"
+  fully_qualified_name: "contextlib._SupportsAclose"
+  super_classes: "builtins.object"
+  methods {
+    name: "aclose"
+    fully_qualified_name: "contextlib._SupportsAclose.aclose"
+    return_annotation {
+      pretty_printed_name: "typing.Awaitable[builtins.object]"
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "typing.Awaitable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsAclose"
+        fully_qualified_name: "contextlib._SupportsAclose"
+      }
+    }
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "310"
+}
+classes {
+  name: "aclosing"
+  fully_qualified_name: "contextlib.aclosing"
+  super_classes: "contextlib.AbstractAsyncContextManager"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextlib.aclosing.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.aclosing[contextlib._SupportsAcloseT]"
+        args {
+          pretty_printed_name: "contextlib._SupportsAcloseT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.aclosing"
+      }
+    }
+    parameters {
+      name: "thing"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib._SupportsAcloseT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "310"
+  }
+  methods {
+    name: "__aexit__"
+    fully_qualified_name: "contextlib.aclosing.__aexit__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.aclosing[contextlib._SupportsAcloseT]"
+        args {
+          pretty_printed_name: "contextlib._SupportsAcloseT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.aclosing"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "UnboundType[Unused]"
+        kind: UNBOUND
+      }
+    }
+    is_asynchronous: true
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "310"
+}
+functions {
+  name: "contextmanager"
+  fully_qualified_name: "contextlib.contextmanager"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "contextmanager"
+  fully_qualified_name: "contextlib.contextmanager"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "nested"
+  fully_qualified_name: "contextlib.nested"
+  return_annotation {
+    pretty_printed_name: "typing.ContextManager[typing.Iterable[Any]]"
+    args {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    fully_qualified_name: "typing.ContextManager"
+  }
+  parameters {
+    name: "mgr"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "typing.ContextManager[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.ContextManager"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "asynccontextmanager"
+  fully_qualified_name: "contextlib.asynccontextmanager"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "contextlib.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_T_io"
+  fully_qualified_name: "contextlib._T_io"
+  type_annotation {
+    pretty_printed_name: "typing.TypeVar"
+    fully_qualified_name: "typing.TypeVar"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_P"
+  fully_qualified_name: "contextlib._P"
+  type_annotation {
+    pretty_printed_name: "typing_extensions.ParamSpec"
+    fully_qualified_name: "typing_extensions.ParamSpec"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ExitFunc"
+  fully_qualified_name: "contextlib._ExitFunc"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_CM_EF"
+  fully_qualified_name: "contextlib._CM_EF"
+  type_annotation {
+    pretty_printed_name: "typing.TypeVar"
+    fully_qualified_name: "typing.TypeVar"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ExitCoroFunc"
+  fully_qualified_name: "contextlib._ExitCoroFunc"
+  type_annotation {
+    pretty_printed_name: "UnboundType[TypeAlias]"
+    kind: UNBOUND
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "_ACM_EF"
+  fully_qualified_name: "contextlib._ACM_EF"
+  type_annotation {
+    pretty_printed_name: "typing.TypeVar"
+    fully_qualified_name: "typing.TypeVar"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

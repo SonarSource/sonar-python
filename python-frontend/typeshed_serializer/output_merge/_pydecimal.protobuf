@@ -1,0 +1,7061 @@
+fully_qualified_name: "_pydecimal"
+classes {
+  name: "DecimalTuple"
+  fully_qualified_name: "_decimal.DecimalTuple"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "_decimal.DecimalTuple._replace"
+    return_annotation {
+      pretty_printed_name: "_decimal.DecimalTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.DecimalTuple._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "sign"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "digits"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exponent"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "_replace"
+    fully_qualified_name: "_decimal.DecimalTuple._replace"
+    return_annotation {
+      pretty_printed_name: "_decimal.DecimalTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.DecimalTuple._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "sign"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "digits"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exponent"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_default: true
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "_decimal.DecimalTuple.__new__"
+    return_annotation {
+      pretty_printed_name: "_decimal.DecimalTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_decimal.DecimalTuple._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_decimal.DecimalTuple._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "sign"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "digits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "exponent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "_decimal.DecimalTuple.__new__"
+    return_annotation {
+      pretty_printed_name: "_decimal.DecimalTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_decimal.DecimalTuple._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_decimal.DecimalTuple._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "sign"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "digits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "exponent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "_decimal.DecimalTuple._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.DecimalTuple._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "_decimal.DecimalTuple._make"
+    return_annotation {
+      pretty_printed_name: "_decimal.DecimalTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_decimal.DecimalTuple._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_decimal.DecimalTuple._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "sign"
+    fully_qualified_name: "_decimal.DecimalTuple.sign"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "digits"
+    fully_qualified_name: "_decimal.DecimalTuple.digits"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.int,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+  }
+  attributes {
+    name: "digits"
+    fully_qualified_name: "_decimal.DecimalTuple.digits"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "exponent"
+    fully_qualified_name: "_decimal.DecimalTuple.exponent"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "_decimal.DecimalTuple._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "_decimal.DecimalTuple._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "_decimal.DecimalTuple._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "_decimal.DecimalTuple._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "_decimal.DecimalTuple.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DecimalException"
+  fully_qualified_name: "_decimal.DecimalException"
+  super_classes: "builtins.ArithmeticError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Clamped"
+  fully_qualified_name: "_decimal.Clamped"
+  super_classes: "_decimal.DecimalException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InvalidOperation"
+  fully_qualified_name: "_decimal.InvalidOperation"
+  super_classes: "_decimal.DecimalException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConversionSyntax"
+  fully_qualified_name: "_decimal.ConversionSyntax"
+  super_classes: "_decimal.InvalidOperation"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DivisionByZero"
+  fully_qualified_name: "_decimal.DivisionByZero"
+  super_classes: "_decimal.DecimalException"
+  super_classes: "builtins.ZeroDivisionError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DivisionImpossible"
+  fully_qualified_name: "_decimal.DivisionImpossible"
+  super_classes: "_decimal.InvalidOperation"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DivisionUndefined"
+  fully_qualified_name: "_decimal.DivisionUndefined"
+  super_classes: "_decimal.InvalidOperation"
+  super_classes: "builtins.ZeroDivisionError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Inexact"
+  fully_qualified_name: "_decimal.Inexact"
+  super_classes: "_decimal.DecimalException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InvalidContext"
+  fully_qualified_name: "_decimal.InvalidContext"
+  super_classes: "_decimal.InvalidOperation"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Rounded"
+  fully_qualified_name: "_decimal.Rounded"
+  super_classes: "_decimal.DecimalException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Subnormal"
+  fully_qualified_name: "_decimal.Subnormal"
+  super_classes: "_decimal.DecimalException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Overflow"
+  fully_qualified_name: "_decimal.Overflow"
+  super_classes: "_decimal.Inexact"
+  super_classes: "_decimal.Rounded"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Underflow"
+  fully_qualified_name: "_decimal.Underflow"
+  super_classes: "_decimal.Inexact"
+  super_classes: "_decimal.Rounded"
+  super_classes: "_decimal.Subnormal"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FloatOperation"
+  fully_qualified_name: "_decimal.FloatOperation"
+  super_classes: "_decimal.DecimalException"
+  super_classes: "builtins.TypeError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Decimal"
+  fully_qualified_name: "_decimal.Decimal"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "_decimal.Decimal.__new__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_decimal.Decimal]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_decimal.Decimal"
+          fully_qualified_name: "_decimal.Decimal"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_DecimalNew]"
+        kind: UNBOUND
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_float"
+    fully_qualified_name: "_decimal.Decimal.from_float"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_decimal.Decimal]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_decimal.Decimal"
+          fully_qualified_name: "_decimal.Decimal"
+        }
+      }
+    }
+    parameters {
+      name: "__f"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "_decimal.Decimal.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare"
+    fully_qualified_name: "_decimal.Decimal.compare"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "as_tuple"
+    fully_qualified_name: "_decimal.Decimal.as_tuple"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,Tuple[builtins.int,Any],Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "as_tuple"
+    fully_qualified_name: "_decimal.Decimal.as_tuple"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.tuple[builtins.int],Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "as_integer_ratio"
+    fully_qualified_name: "_decimal.Decimal.as_integer_ratio"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_eng_string"
+    fully_qualified_name: "_decimal.Decimal.to_eng_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__abs__"
+    fully_qualified_name: "_decimal.Decimal.__abs__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "_decimal.Decimal.__add__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "_decimal.Decimal.__divmod__"
+    return_annotation {
+      pretty_printed_name: "Tuple[_decimal.Decimal,_decimal.Decimal]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "_decimal.Decimal.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__floordiv__"
+    fully_qualified_name: "_decimal.Decimal.__floordiv__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "_decimal.Decimal.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "_decimal.Decimal.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "_decimal.Decimal.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "_decimal.Decimal.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_ComparableNum]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "_decimal.Decimal.__mod__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "_decimal.Decimal.__mul__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "_decimal.Decimal.__neg__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "_decimal.Decimal.__pos__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__pow__"
+    fully_qualified_name: "_decimal.Decimal.__pow__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__mod"
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_Decimal],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_Decimal]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "_decimal.Decimal.__radd__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rdivmod__"
+    fully_qualified_name: "_decimal.Decimal.__rdivmod__"
+    return_annotation {
+      pretty_printed_name: "Tuple[_decimal.Decimal,_decimal.Decimal]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rfloordiv__"
+    fully_qualified_name: "_decimal.Decimal.__rfloordiv__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmod__"
+    fully_qualified_name: "_decimal.Decimal.__rmod__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "_decimal.Decimal.__rmul__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "_decimal.Decimal.__rsub__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rtruediv__"
+    fully_qualified_name: "_decimal.Decimal.__rtruediv__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "_decimal.Decimal.__sub__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "_decimal.Decimal.__truediv__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remainder_near"
+    fully_qualified_name: "_decimal.Decimal.remainder_near"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__float__"
+    fully_qualified_name: "_decimal.Decimal.__float__"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__int__"
+    fully_qualified_name: "_decimal.Decimal.__int__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "_decimal.Decimal.__trunc__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "real"
+    fully_qualified_name: "_decimal.Decimal.real"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "imag"
+    fully_qualified_name: "_decimal.Decimal.imag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "conjugate"
+    fully_qualified_name: "_decimal.Decimal.conjugate"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__complex__"
+    fully_qualified_name: "_decimal.Decimal.__complex__"
+    return_annotation {
+      pretty_printed_name: "builtins.complex"
+      fully_qualified_name: "builtins.complex"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__floor__"
+    fully_qualified_name: "_decimal.Decimal.__floor__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ceil__"
+    fully_qualified_name: "_decimal.Decimal.__ceil__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fma"
+    fully_qualified_name: "_decimal.Decimal.fma"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "third"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__rpow__"
+    fully_qualified_name: "_decimal.Decimal.__rpow__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__value"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__mod"
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "normalize"
+    fully_qualified_name: "_decimal.Decimal.normalize"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "quantize"
+    fully_qualified_name: "_decimal.Decimal.quantize"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "exp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "rounding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "same_quantum"
+    fully_qualified_name: "_decimal.Decimal.same_quantum"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral_exact"
+    fully_qualified_name: "_decimal.Decimal.to_integral_exact"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "rounding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral_value"
+    fully_qualified_name: "_decimal.Decimal.to_integral_value"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "rounding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral"
+    fully_qualified_name: "_decimal.Decimal.to_integral"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "rounding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sqrt"
+    fully_qualified_name: "_decimal.Decimal.sqrt"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max"
+    fully_qualified_name: "_decimal.Decimal.max"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "min"
+    fully_qualified_name: "_decimal.Decimal.min"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "adjusted"
+    fully_qualified_name: "_decimal.Decimal.adjusted"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "canonical"
+    fully_qualified_name: "_decimal.Decimal.canonical"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_signal"
+    fully_qualified_name: "_decimal.Decimal.compare_signal"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_total"
+    fully_qualified_name: "_decimal.Decimal.compare_total"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_total_mag"
+    fully_qualified_name: "_decimal.Decimal.compare_total_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_abs"
+    fully_qualified_name: "_decimal.Decimal.copy_abs"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_negate"
+    fully_qualified_name: "_decimal.Decimal.copy_negate"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_sign"
+    fully_qualified_name: "_decimal.Decimal.copy_sign"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exp"
+    fully_qualified_name: "_decimal.Decimal.exp"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_canonical"
+    fully_qualified_name: "_decimal.Decimal.is_canonical"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_finite"
+    fully_qualified_name: "_decimal.Decimal.is_finite"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_infinite"
+    fully_qualified_name: "_decimal.Decimal.is_infinite"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_nan"
+    fully_qualified_name: "_decimal.Decimal.is_nan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_normal"
+    fully_qualified_name: "_decimal.Decimal.is_normal"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_qnan"
+    fully_qualified_name: "_decimal.Decimal.is_qnan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_signed"
+    fully_qualified_name: "_decimal.Decimal.is_signed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_snan"
+    fully_qualified_name: "_decimal.Decimal.is_snan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_subnormal"
+    fully_qualified_name: "_decimal.Decimal.is_subnormal"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_zero"
+    fully_qualified_name: "_decimal.Decimal.is_zero"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ln"
+    fully_qualified_name: "_decimal.Decimal.ln"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "log10"
+    fully_qualified_name: "_decimal.Decimal.log10"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logb"
+    fully_qualified_name: "_decimal.Decimal.logb"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_and"
+    fully_qualified_name: "_decimal.Decimal.logical_and"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_invert"
+    fully_qualified_name: "_decimal.Decimal.logical_invert"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_or"
+    fully_qualified_name: "_decimal.Decimal.logical_or"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_xor"
+    fully_qualified_name: "_decimal.Decimal.logical_xor"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max_mag"
+    fully_qualified_name: "_decimal.Decimal.max_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "min_mag"
+    fully_qualified_name: "_decimal.Decimal.min_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_minus"
+    fully_qualified_name: "_decimal.Decimal.next_minus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_plus"
+    fully_qualified_name: "_decimal.Decimal.next_plus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_toward"
+    fully_qualified_name: "_decimal.Decimal.next_toward"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "number_class"
+    fully_qualified_name: "_decimal.Decimal.number_class"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "radix"
+    fully_qualified_name: "_decimal.Decimal.radix"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rotate"
+    fully_qualified_name: "_decimal.Decimal.rotate"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scaleb"
+    fully_qualified_name: "_decimal.Decimal.scaleb"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "shift"
+    fully_qualified_name: "_decimal.Decimal.shift"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "_decimal.Decimal.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.type,Tuple[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "_decimal.Decimal.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[Type[UnboundType[Self]],Tuple[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Type[UnboundType[Self]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
+        }
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "_decimal.Decimal.__copy__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "_decimal.Decimal.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "UnboundType[Self]"
+      kind: UNBOUND
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__memo"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__format__"
+    fully_qualified_name: "_decimal.Decimal.__format__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "__specifier"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__context"
+      type_annotation {
+        pretty_printed_name: "Union[_decimal.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_decimal.Context"
+          fully_qualified_name: "_decimal.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "__round__"
+    fullname: "_decimal.Decimal.__round__"
+    definitions {
+      name: "__round__"
+      fully_qualified_name: "_decimal.Decimal.__round__"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_decimal.Decimal"
+          fully_qualified_name: "_decimal.Decimal"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__round__"
+      fully_qualified_name: "_decimal.Decimal.__round__"
+      return_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "_decimal.Decimal"
+          fully_qualified_name: "_decimal.Decimal"
+        }
+      }
+      parameters {
+        name: "__ndigits"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Context"
+  fully_qualified_name: "_decimal.Context"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "_decimal.Context.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "prec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "rounding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "Emin"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "Emax"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "capitals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "clamp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "flags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.dict[UnboundType[_TrapType],builtins.bool],typing.Container[UnboundType[_TrapType]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.dict[UnboundType[_TrapType],builtins.bool]"
+          args {
+            pretty_printed_name: "UnboundType[_TrapType]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "typing.Container[UnboundType[_TrapType]]"
+          args {
+            pretty_printed_name: "UnboundType[_TrapType]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Container"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "traps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.dict[UnboundType[_TrapType],builtins.bool],typing.Container[UnboundType[_TrapType]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.dict[UnboundType[_TrapType],builtins.bool]"
+          args {
+            pretty_printed_name: "UnboundType[_TrapType]"
+            kind: UNBOUND
+          }
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "typing.Container[UnboundType[_TrapType]]"
+          args {
+            pretty_printed_name: "UnboundType[_TrapType]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "typing.Container"
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "_ignored_flags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[UnboundType[_TrapType]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[UnboundType[_TrapType]]"
+          args {
+            pretty_printed_name: "UnboundType[_TrapType]"
+            kind: UNBOUND
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "_decimal.Context.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.type,Tuple[Any,Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "Tuple[Any,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "_decimal.Context.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[Type[UnboundType[Self]],builtins.tuple[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Type[UnboundType[Self]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "UnboundType[Self]"
+          kind: UNBOUND
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clear_flags"
+    fully_qualified_name: "_decimal.Context.clear_flags"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clear_traps"
+    fully_qualified_name: "_decimal.Context.clear_traps"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "_decimal.Context.copy"
+    return_annotation {
+      pretty_printed_name: "_decimal.Context"
+      fully_qualified_name: "_decimal.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "_decimal.Context.__copy__"
+    return_annotation {
+      pretty_printed_name: "_decimal.Context"
+      fully_qualified_name: "_decimal.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Etiny"
+    fully_qualified_name: "_decimal.Context.Etiny"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Etop"
+    fully_qualified_name: "_decimal.Context.Etop"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_decimal"
+    fully_qualified_name: "_decimal.Context.create_decimal"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__num"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_DecimalNew]"
+        kind: UNBOUND
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_decimal_from_float"
+    fully_qualified_name: "_decimal.Context.create_decimal_from_float"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__f"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "abs"
+    fully_qualified_name: "_decimal.Context.abs"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "_decimal.Context.add"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "canonical"
+    fully_qualified_name: "_decimal.Context.canonical"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare"
+    fully_qualified_name: "_decimal.Context.compare"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_signal"
+    fully_qualified_name: "_decimal.Context.compare_signal"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_total"
+    fully_qualified_name: "_decimal.Context.compare_total"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compare_total_mag"
+    fully_qualified_name: "_decimal.Context.compare_total_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_abs"
+    fully_qualified_name: "_decimal.Context.copy_abs"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_decimal"
+    fully_qualified_name: "_decimal.Context.copy_decimal"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_negate"
+    fully_qualified_name: "_decimal.Context.copy_negate"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "copy_sign"
+    fully_qualified_name: "_decimal.Context.copy_sign"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "divide"
+    fully_qualified_name: "_decimal.Context.divide"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "divide_int"
+    fully_qualified_name: "_decimal.Context.divide_int"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "divmod"
+    fully_qualified_name: "_decimal.Context.divmod"
+    return_annotation {
+      pretty_printed_name: "Tuple[_decimal.Decimal,_decimal.Decimal]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+      args {
+        pretty_printed_name: "_decimal.Decimal"
+        fully_qualified_name: "_decimal.Decimal"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "exp"
+    fully_qualified_name: "_decimal.Context.exp"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "fma"
+    fully_qualified_name: "_decimal.Context.fma"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__z"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_canonical"
+    fully_qualified_name: "_decimal.Context.is_canonical"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_finite"
+    fully_qualified_name: "_decimal.Context.is_finite"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_infinite"
+    fully_qualified_name: "_decimal.Context.is_infinite"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_nan"
+    fully_qualified_name: "_decimal.Context.is_nan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_normal"
+    fully_qualified_name: "_decimal.Context.is_normal"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_qnan"
+    fully_qualified_name: "_decimal.Context.is_qnan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_signed"
+    fully_qualified_name: "_decimal.Context.is_signed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_snan"
+    fully_qualified_name: "_decimal.Context.is_snan"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_subnormal"
+    fully_qualified_name: "_decimal.Context.is_subnormal"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_zero"
+    fully_qualified_name: "_decimal.Context.is_zero"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ln"
+    fully_qualified_name: "_decimal.Context.ln"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "log10"
+    fully_qualified_name: "_decimal.Context.log10"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logb"
+    fully_qualified_name: "_decimal.Context.logb"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_and"
+    fully_qualified_name: "_decimal.Context.logical_and"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_invert"
+    fully_qualified_name: "_decimal.Context.logical_invert"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_or"
+    fully_qualified_name: "_decimal.Context.logical_or"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "logical_xor"
+    fully_qualified_name: "_decimal.Context.logical_xor"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max"
+    fully_qualified_name: "_decimal.Context.max"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "max_mag"
+    fully_qualified_name: "_decimal.Context.max_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "min"
+    fully_qualified_name: "_decimal.Context.min"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "min_mag"
+    fully_qualified_name: "_decimal.Context.min_mag"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "minus"
+    fully_qualified_name: "_decimal.Context.minus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "multiply"
+    fully_qualified_name: "_decimal.Context.multiply"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_minus"
+    fully_qualified_name: "_decimal.Context.next_minus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_plus"
+    fully_qualified_name: "_decimal.Context.next_plus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "next_toward"
+    fully_qualified_name: "_decimal.Context.next_toward"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "normalize"
+    fully_qualified_name: "_decimal.Context.normalize"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "number_class"
+    fully_qualified_name: "_decimal.Context.number_class"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "plus"
+    fully_qualified_name: "_decimal.Context.plus"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "power"
+    fully_qualified_name: "_decimal.Context.power"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "a"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "b"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "modulo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[UnboundType[_Decimal],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "UnboundType[_Decimal]"
+          kind: UNBOUND
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "quantize"
+    fully_qualified_name: "_decimal.Context.quantize"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "radix"
+    fully_qualified_name: "_decimal.Context.radix"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remainder"
+    fully_qualified_name: "_decimal.Context.remainder"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remainder_near"
+    fully_qualified_name: "_decimal.Context.remainder_near"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rotate"
+    fully_qualified_name: "_decimal.Context.rotate"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "same_quantum"
+    fully_qualified_name: "_decimal.Context.same_quantum"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scaleb"
+    fully_qualified_name: "_decimal.Context.scaleb"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "shift"
+    fully_qualified_name: "_decimal.Context.shift"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sqrt"
+    fully_qualified_name: "_decimal.Context.sqrt"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "subtract"
+    fully_qualified_name: "_decimal.Context.subtract"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    parameters {
+      name: "__y"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_eng_string"
+    fully_qualified_name: "_decimal.Context.to_eng_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_sci_string"
+    fully_qualified_name: "_decimal.Context.to_sci_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral_exact"
+    fully_qualified_name: "_decimal.Context.to_integral_exact"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral_value"
+    fully_qualified_name: "_decimal.Context.to_integral_value"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "to_integral"
+    fully_qualified_name: "_decimal.Context.to_integral"
+    return_annotation {
+      pretty_printed_name: "_decimal.Decimal"
+      fully_qualified_name: "_decimal.Decimal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+    }
+    parameters {
+      name: "__x"
+      type_annotation {
+        pretty_printed_name: "UnboundType[_Decimal]"
+        kind: UNBOUND
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "prec"
+    fully_qualified_name: "_decimal.Context.prec"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "rounding"
+    fully_qualified_name: "_decimal.Context.rounding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Emin"
+    fully_qualified_name: "_decimal.Context.Emin"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Emax"
+    fully_qualified_name: "_decimal.Context.Emax"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "capitals"
+    fully_qualified_name: "_decimal.Context.capitals"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "clamp"
+    fully_qualified_name: "_decimal.Context.clamp"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "traps"
+    fully_qualified_name: "_decimal.Context.traps"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[UnboundType[_TrapType],builtins.bool]"
+      args {
+        pretty_printed_name: "UnboundType[_TrapType]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "flags"
+    fully_qualified_name: "_decimal.Context.flags"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[UnboundType[_TrapType],builtins.bool]"
+      args {
+        pretty_printed_name: "UnboundType[_TrapType]"
+        kind: UNBOUND
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "_decimal.Context.__hash__"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "setcontext"
+  fully_qualified_name: "_decimal.setcontext"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__context"
+    type_annotation {
+      pretty_printed_name: "_decimal.Context"
+      fully_qualified_name: "_decimal.Context"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "getcontext"
+  fully_qualified_name: "_decimal.getcontext"
+  return_annotation {
+    pretty_printed_name: "_decimal.Context"
+    fully_qualified_name: "_decimal.Context"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "localcontext"
+  fully_qualified_name: "_decimal.localcontext"
+  return_annotation {
+    pretty_printed_name: "_decimal._ContextManager"
+    fully_qualified_name: "_decimal._ContextManager"
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[_decimal.Context,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "_decimal.Context"
+        fully_qualified_name: "_decimal.Context"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_DOWN"
+  fully_qualified_name: "_decimal.ROUND_DOWN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_HALF_UP"
+  fully_qualified_name: "_decimal.ROUND_HALF_UP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_HALF_EVEN"
+  fully_qualified_name: "_decimal.ROUND_HALF_EVEN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_CEILING"
+  fully_qualified_name: "_decimal.ROUND_CEILING"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_FLOOR"
+  fully_qualified_name: "_decimal.ROUND_FLOOR"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_UP"
+  fully_qualified_name: "_decimal.ROUND_UP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_HALF_DOWN"
+  fully_qualified_name: "_decimal.ROUND_HALF_DOWN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ROUND_05UP"
+  fully_qualified_name: "_decimal.ROUND_05UP"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HAVE_CONTEXTVAR"
+  fully_qualified_name: "_decimal.HAVE_CONTEXTVAR"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HAVE_THREADS"
+  fully_qualified_name: "_decimal.HAVE_THREADS"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MAX_EMAX"
+  fully_qualified_name: "_decimal.MAX_EMAX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MAX_PREC"
+  fully_qualified_name: "_decimal.MAX_PREC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MIN_EMIN"
+  fully_qualified_name: "_decimal.MIN_EMIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MIN_ETINY"
+  fully_qualified_name: "_decimal.MIN_ETINY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DefaultContext"
+  fully_qualified_name: "_decimal.DefaultContext"
+  type_annotation {
+    pretty_printed_name: "_decimal.Context"
+    fully_qualified_name: "_decimal.Context"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BasicContext"
+  fully_qualified_name: "_decimal.BasicContext"
+  type_annotation {
+    pretty_printed_name: "_decimal.Context"
+    fully_qualified_name: "_decimal.Context"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ExtendedContext"
+  fully_qualified_name: "_decimal.ExtendedContext"
+  type_annotation {
+    pretty_printed_name: "_decimal.Context"
+    fully_qualified_name: "_decimal.Context"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "_pydecimal.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

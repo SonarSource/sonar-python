@@ -1,0 +1,216 @@
+fully_qualified_name: "crypt"
+classes {
+  name: "_Method"
+  fully_qualified_name: "crypt._Method"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "crypt"
+  fully_qualified_name: "crypt.crypt"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "word"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "salt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "crypt"
+  fully_qualified_name: "crypt.crypt"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "word"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "salt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,crypt._Method,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "crypt._Method"
+        fully_qualified_name: "crypt._Method"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "mksalt"
+  fully_qualified_name: "crypt.mksalt"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "method"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[crypt._Method,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "crypt._Method"
+        fully_qualified_name: "crypt._Method"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "rounds"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "METHOD_CRYPT"
+  fully_qualified_name: "crypt.METHOD_CRYPT"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "METHOD_MD5"
+  fully_qualified_name: "crypt.METHOD_MD5"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "METHOD_SHA256"
+  fully_qualified_name: "crypt.METHOD_SHA256"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "METHOD_SHA512"
+  fully_qualified_name: "crypt.METHOD_SHA512"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "METHOD_BLOWFISH"
+  fully_qualified_name: "crypt.METHOD_BLOWFISH"
+  type_annotation {
+    pretty_printed_name: "crypt._Method"
+    fully_qualified_name: "crypt._Method"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "methods"
+  fully_qualified_name: "crypt.methods"
+  type_annotation {
+    pretty_printed_name: "builtins.list[crypt._Method]"
+    args {
+      pretty_printed_name: "crypt._Method"
+      fully_qualified_name: "crypt._Method"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
