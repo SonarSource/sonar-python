@@ -1,0 +1,3 @@
+from markupsafe import Markup as Markup, escape as escape
+
+def __getattr__(name): ...

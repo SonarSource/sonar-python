@@ -1,0 +1,1160 @@
+fully_qualified_name: "geoip2.records"
+classes {
+  name: "Record"
+  fully_qualified_name: "geoip2.records.Record"
+  super_classes: "geoip2.mixins.SimpleEquality"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.records.Record.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Record"
+        fully_qualified_name: "geoip2.records.Record"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "geoip2.records.Record.__setattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Record"
+        fully_qualified_name: "geoip2.records.Record"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PlaceRecord"
+  fully_qualified_name: "geoip2.records.PlaceRecord"
+  super_classes: "geoip2.records.Record"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.records.PlaceRecord.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.records.PlaceRecord"
+        fully_qualified_name: "geoip2.records.PlaceRecord"
+      }
+    }
+    parameters {
+      name: "locales"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Sequence[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "geoip2.records._Locales"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "geoip2.records.PlaceRecord.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.records.PlaceRecord"
+        fully_qualified_name: "geoip2.records.PlaceRecord"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "City"
+  fully_qualified_name: "geoip2.records.City"
+  super_classes: "geoip2.records.PlaceRecord"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "confidence"
+    fully_qualified_name: "geoip2.records.City.confidence"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "geoname_id"
+    fully_qualified_name: "geoip2.records.City.geoname_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "geoip2.records.City.names"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[typing.Mapping[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      fully_qualified_name: "geoip2.records._Names"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Continent"
+  fully_qualified_name: "geoip2.records.Continent"
+  super_classes: "geoip2.records.PlaceRecord"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "geoip2.records.Continent.code"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "geoname_id"
+    fully_qualified_name: "geoip2.records.Continent.geoname_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "geoip2.records.Continent.names"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[typing.Mapping[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      fully_qualified_name: "geoip2.records._Names"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Country"
+  fully_qualified_name: "geoip2.records.Country"
+  super_classes: "geoip2.records.PlaceRecord"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.records.Country.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Country"
+        fully_qualified_name: "geoip2.records.Country"
+      }
+    }
+    parameters {
+      name: "locales"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Sequence[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "geoip2.records._Locales"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "confidence"
+    fully_qualified_name: "geoip2.records.Country.confidence"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "geoname_id"
+    fully_qualified_name: "geoip2.records.Country.geoname_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_in_european_union"
+    fully_qualified_name: "geoip2.records.Country.is_in_european_union"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "iso_code"
+    fully_qualified_name: "geoip2.records.Country.iso_code"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "geoip2.records.Country.names"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[typing.Mapping[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      fully_qualified_name: "geoip2.records._Names"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RepresentedCountry"
+  fully_qualified_name: "geoip2.records.RepresentedCountry"
+  super_classes: "geoip2.records.Country"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "type"
+    fully_qualified_name: "geoip2.records.RepresentedCountry.type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Location"
+  fully_qualified_name: "geoip2.records.Location"
+  super_classes: "geoip2.records.Record"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "average_income"
+    fully_qualified_name: "geoip2.records.Location.average_income"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "accuracy_radius"
+    fully_qualified_name: "geoip2.records.Location.accuracy_radius"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "latitude"
+    fully_qualified_name: "geoip2.records.Location.latitude"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "longitude"
+    fully_qualified_name: "geoip2.records.Location.longitude"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "metro_code"
+    fully_qualified_name: "geoip2.records.Location.metro_code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "population_density"
+    fully_qualified_name: "geoip2.records.Location.population_density"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "time_zone"
+    fully_qualified_name: "geoip2.records.Location.time_zone"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "MaxMind"
+  fully_qualified_name: "geoip2.records.MaxMind"
+  super_classes: "geoip2.records.Record"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "queries_remaining"
+    fully_qualified_name: "geoip2.records.MaxMind.queries_remaining"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Postal"
+  fully_qualified_name: "geoip2.records.Postal"
+  super_classes: "geoip2.records.Record"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "geoip2.records.Postal.code"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "confidence"
+    fully_qualified_name: "geoip2.records.Postal.confidence"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Subdivision"
+  fully_qualified_name: "geoip2.records.Subdivision"
+  super_classes: "geoip2.records.PlaceRecord"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "confidence"
+    fully_qualified_name: "geoip2.records.Subdivision.confidence"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "geoname_id"
+    fully_qualified_name: "geoip2.records.Subdivision.geoname_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "iso_code"
+    fully_qualified_name: "geoip2.records.Subdivision.iso_code"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "geoip2.records.Subdivision.names"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[typing.Mapping[builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      fully_qualified_name: "geoip2.records._Names"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Subdivisions"
+  fully_qualified_name: "geoip2.records.Subdivisions"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "geoip2.records.Subdivisions.__new__"
+    return_annotation {
+      pretty_printed_name: "Tuple[geoip2.records.Subdivision]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "geoip2.records.Subdivision"
+        fully_qualified_name: "geoip2.records.Subdivision"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[Tuple[geoip2.records.Subdivision]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Tuple[geoip2.records.Subdivision]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "geoip2.records.Subdivision"
+            fully_qualified_name: "geoip2.records.Subdivision"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "locales"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Sequence[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "geoip2.records._Locales"
+      }
+    }
+    parameters {
+      name: "subdivisions"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Subdivision"
+        fully_qualified_name: "geoip2.records.Subdivision"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.records.Subdivisions.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[geoip2.records.Subdivision]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "geoip2.records.Subdivision"
+          fully_qualified_name: "geoip2.records.Subdivision"
+        }
+      }
+    }
+    parameters {
+      name: "locales"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Sequence[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "geoip2.records._Locales"
+      }
+    }
+    parameters {
+      name: "subdivisions"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Subdivision"
+        fully_qualified_name: "geoip2.records.Subdivision"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "most_specific"
+    fully_qualified_name: "geoip2.records.Subdivisions.most_specific"
+    return_annotation {
+      pretty_printed_name: "geoip2.records.Subdivision"
+      fully_qualified_name: "geoip2.records.Subdivision"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[geoip2.records.Subdivision]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "geoip2.records.Subdivision"
+          fully_qualified_name: "geoip2.records.Subdivision"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Traits"
+  fully_qualified_name: "geoip2.records.Traits"
+  super_classes: "geoip2.records.Record"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.records.Traits.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.records.Traits"
+        fully_qualified_name: "geoip2.records.Traits"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "autonomous_system_number"
+    fully_qualified_name: "geoip2.records.Traits.autonomous_system_number"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "autonomous_system_organization"
+    fully_qualified_name: "geoip2.records.Traits.autonomous_system_organization"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "connection_type"
+    fully_qualified_name: "geoip2.records.Traits.connection_type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "domain"
+    fully_qualified_name: "geoip2.records.Traits.domain"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ip_address"
+    fully_qualified_name: "geoip2.records.Traits.ip_address"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_anonymous"
+    fully_qualified_name: "geoip2.records.Traits.is_anonymous"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_anonymous_proxy"
+    fully_qualified_name: "geoip2.records.Traits.is_anonymous_proxy"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_anonymous_vpn"
+    fully_qualified_name: "geoip2.records.Traits.is_anonymous_vpn"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_hosting_provider"
+    fully_qualified_name: "geoip2.records.Traits.is_hosting_provider"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_legitimate_proxy"
+    fully_qualified_name: "geoip2.records.Traits.is_legitimate_proxy"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_public_proxy"
+    fully_qualified_name: "geoip2.records.Traits.is_public_proxy"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_satellite_provider"
+    fully_qualified_name: "geoip2.records.Traits.is_satellite_provider"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_tor_exit_node"
+    fully_qualified_name: "geoip2.records.Traits.is_tor_exit_node"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "isp"
+    fully_qualified_name: "geoip2.records.Traits.isp"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "organization"
+    fully_qualified_name: "geoip2.records.Traits.organization"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "user_type"
+    fully_qualified_name: "geoip2.records.Traits.user_type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}

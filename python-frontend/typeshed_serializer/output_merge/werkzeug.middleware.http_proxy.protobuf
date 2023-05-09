@@ -1,0 +1,279 @@
+fully_qualified_name: "werkzeug.middleware.http_proxy"
+classes {
+  name: "ProxyMiddleware"
+  fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+        fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+    parameters {
+      name: "targets"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[typing.MutableMapping[builtins.str,Any]]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[typing.MutableMapping[builtins.str,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "typing.MutableMapping"
+          }
+          fully_qualified_name: "werkzeug.middleware.http_proxy._MutableOpts"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "chunk_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "proxy_to"
+    fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware.proxy_to"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+        fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+      }
+    }
+    parameters {
+      name: "opts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[typing.Mapping[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        fully_qualified_name: "werkzeug.middleware.http_proxy._Opts"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware.__call__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+        fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+    parameters {
+      name: "start_response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.StartResponse"
+        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "app"
+    fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware.app"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "targets"
+    fully_qualified_name: "werkzeug.middleware.http_proxy.ProxyMiddleware.targets"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,TypeAlias[typing.MutableMapping[builtins.str,Any]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[typing.MutableMapping[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        fully_qualified_name: "werkzeug.middleware.http_proxy._MutableOpts"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}

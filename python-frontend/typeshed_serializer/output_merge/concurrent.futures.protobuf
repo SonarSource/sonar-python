@@ -1,0 +1,857 @@
+fully_qualified_name: "concurrent.futures"
+classes {
+  name: "CancelledError"
+  fully_qualified_name: "concurrent.futures._base.CancelledError"
+  super_classes: "concurrent.futures._base.Error"
+  valid_for: "27"
+}
+classes {
+  name: "Executor"
+  fully_qualified_name: "concurrent.futures._base.Executor"
+  super_classes: "builtins.object"
+  methods {
+    name: "submit"
+    fully_qualified_name: "concurrent.futures._base.Executor.submit"
+    return_annotation {
+      pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+      args {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "concurrent.futures._base.Future"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Executor"
+        fully_qualified_name: "concurrent.futures._base.Executor"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "map"
+    fully_qualified_name: "concurrent.futures._base.Executor.map"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[concurrent.futures._base._T]"
+      args {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Executor"
+        fully_qualified_name: "concurrent.futures._base.Executor"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "iterables"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "shutdown"
+    fully_qualified_name: "concurrent.futures._base.Executor.shutdown"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Executor"
+        fully_qualified_name: "concurrent.futures._base.Executor"
+      }
+    }
+    parameters {
+      name: "wait"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "concurrent.futures._base.Executor.__enter__"
+    return_annotation {
+      pretty_printed_name: "concurrent.futures._base._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "concurrent.futures._base.Executor.__exit__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Executor"
+        fully_qualified_name: "concurrent.futures._base.Executor"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "Future"
+  fully_qualified_name: "concurrent.futures._base.Future"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures._base.Future.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "concurrent.futures._base.Future.cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cancelled"
+    fully_qualified_name: "concurrent.futures._base.Future.cancelled"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "running"
+    fully_qualified_name: "concurrent.futures._base.Future.running"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "done"
+    fully_qualified_name: "concurrent.futures._base.Future.done"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_done_callback"
+    fully_qualified_name: "concurrent.futures._base.Future.add_done_callback"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "result"
+    fully_qualified_name: "concurrent.futures._base.Future.result"
+    return_annotation {
+      pretty_printed_name: "concurrent.futures._base._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_running_or_notify_cancel"
+    fully_qualified_name: "concurrent.futures._base.Future.set_running_or_notify_cancel"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_result"
+    fully_qualified_name: "concurrent.futures._base.Future.set_result"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exception"
+    fully_qualified_name: "concurrent.futures._base.Future.exception"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exception_info"
+    fully_qualified_name: "concurrent.futures._base.Future.exception_info"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,Union[types.TracebackType,None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_exception"
+    fully_qualified_name: "concurrent.futures._base.Future.set_exception"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_exception_info"
+    fully_qualified_name: "concurrent.futures._base.Future.set_exception_info"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "traceback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+}
+classes {
+  name: "TimeoutError"
+  fully_qualified_name: "concurrent.futures._base.TimeoutError"
+  super_classes: "concurrent.futures._base.Error"
+  valid_for: "27"
+}
+classes {
+  name: "ProcessPoolExecutor"
+  fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+  super_classes: "concurrent.futures._base.Executor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process.ProcessPoolExecutor"
+        fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+      }
+    }
+    parameters {
+      name: "max_workers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "ThreadPoolExecutor"
+  fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+  super_classes: "concurrent.futures._base.Executor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread.ThreadPoolExecutor"
+        fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+      }
+    }
+    parameters {
+      name: "max_workers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "thread_name_prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "as_completed"
+  fully_qualified_name: "concurrent.futures._base.as_completed"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+    args {
+      pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+      args {
+        pretty_printed_name: "concurrent.futures._base._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "concurrent.futures._base.Future"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "fs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "timeout"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "wait"
+  fully_qualified_name: "concurrent.futures._base.wait"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]],builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    args {
+      pretty_printed_name: "builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  parameters {
+    name: "fs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "concurrent.futures._base._Collection[concurrent.futures._base.Future[concurrent.futures._base._T]]"
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures._base._T]"
+        args {
+          pretty_printed_name: "concurrent.futures._base._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      fully_qualified_name: "concurrent.futures._base._Collection"
+    }
+  }
+  parameters {
+    name: "timeout"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "return_when"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ALL_COMPLETED"
+  fully_qualified_name: "concurrent.futures._base.ALL_COMPLETED"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "FIRST_COMPLETED"
+  fully_qualified_name: "concurrent.futures._base.FIRST_COMPLETED"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "FIRST_EXCEPTION"
+  fully_qualified_name: "concurrent.futures._base.FIRST_EXCEPTION"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+}

@@ -1,0 +1,361 @@
+fully_qualified_name: "tornado.concurrent"
+classes {
+  name: "ReturnValueIgnoredError"
+  fully_qualified_name: "tornado.concurrent.ReturnValueIgnoredError"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+classes {
+  name: "_TracebackLogger"
+  fully_qualified_name: "tornado.concurrent._TracebackLogger"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.concurrent._TracebackLogger"
+        fully_qualified_name: "tornado.concurrent._TracebackLogger"
+      }
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "activate"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.activate"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.clear"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.__del__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "exc_info"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.exc_info"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "formatted_tb"
+    fully_qualified_name: "tornado.concurrent._TracebackLogger.formatted_tb"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "Future"
+  fully_qualified_name: "tornado.concurrent.Future"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.concurrent.Future.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.concurrent.Future"
+        fully_qualified_name: "tornado.concurrent.Future"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "tornado.concurrent.Future.cancel"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cancelled"
+    fully_qualified_name: "tornado.concurrent.Future.cancelled"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "running"
+    fully_qualified_name: "tornado.concurrent.Future.running"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "done"
+    fully_qualified_name: "tornado.concurrent.Future.done"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "result"
+    fully_qualified_name: "tornado.concurrent.Future.result"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exception"
+    fully_qualified_name: "tornado.concurrent.Future.exception"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_done_callback"
+    fully_qualified_name: "tornado.concurrent.Future.add_done_callback"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_result"
+    fully_qualified_name: "tornado.concurrent.Future.set_result"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_exception"
+    fully_qualified_name: "tornado.concurrent.Future.set_exception"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exc_info"
+    fully_qualified_name: "tornado.concurrent.Future.exc_info"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_exc_info"
+    fully_qualified_name: "tornado.concurrent.Future.set_exc_info"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "exc_info"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "tornado.concurrent.Future.__del__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "DummyExecutor"
+  fully_qualified_name: "tornado.concurrent.DummyExecutor"
+  super_classes: "builtins.object"
+  methods {
+    name: "submit"
+    fully_qualified_name: "tornado.concurrent.DummyExecutor.submit"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "shutdown"
+    fully_qualified_name: "tornado.concurrent.DummyExecutor.shutdown"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "wait"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "is_future"
+  fully_qualified_name: "tornado.concurrent.is_future"
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "run_on_executor"
+  fully_qualified_name: "tornado.concurrent.run_on_executor"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "return_future"
+  fully_qualified_name: "tornado.concurrent.return_future"
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "chain_future"
+  fully_qualified_name: "tornado.concurrent.chain_future"
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+vars {
+  name: "futures"
+  fully_qualified_name: "tornado.concurrent.futures"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "TracebackFuture"
+  fully_qualified_name: "tornado.concurrent.TracebackFuture"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "FUTURES"
+  fully_qualified_name: "tornado.concurrent.FUTURES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "dummy_executor"
+  fully_qualified_name: "tornado.concurrent.dummy_executor"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

@@ -1,0 +1,1000 @@
+fully_qualified_name: "annoy"
+classes {
+  name: "_Vector"
+  fully_qualified_name: "annoy._Vector"
+  super_classes: "typing.Sized"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "annoy._Vector.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "annoy._Vector"
+        fully_qualified_name: "annoy._Vector"
+      }
+    }
+    parameters {
+      name: "i"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AnnoyIndex"
+  fully_qualified_name: "annoy.AnnoyIndex"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "annoy.AnnoyIndex.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "metric"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "annoy.AnnoyIndex.load"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "prefault"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "save"
+    fully_qualified_name: "annoy.AnnoyIndex.save"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "prefault"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_item_vector"
+    fully_qualified_name: "annoy.AnnoyIndex.get_item_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.float]"
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "__i"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_item"
+    fully_qualified_name: "annoy.AnnoyIndex.add_item"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "i"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy._Vector"
+        fully_qualified_name: "annoy._Vector"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "on_disk_build"
+    fully_qualified_name: "annoy.AnnoyIndex.on_disk_build"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "build"
+    fully_qualified_name: "annoy.AnnoyIndex.build"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "n_trees"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "n_jobs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unbuild"
+    fully_qualified_name: "annoy.AnnoyIndex.unbuild"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unload"
+    fully_qualified_name: "annoy.AnnoyIndex.unload"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_distance"
+    fully_qualified_name: "annoy.AnnoyIndex.get_distance"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "__i"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__j"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_n_items"
+    fully_qualified_name: "annoy.AnnoyIndex.get_n_items"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_n_trees"
+    fully_qualified_name: "annoy.AnnoyIndex.get_n_trees"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "verbose"
+    fully_qualified_name: "annoy.AnnoyIndex.verbose"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "__v"
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_seed"
+    fully_qualified_name: "annoy.AnnoyIndex.set_seed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "annoy.AnnoyIndex"
+        fully_qualified_name: "annoy.AnnoyIndex"
+      }
+    }
+    parameters {
+      name: "__s"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "get_nns_by_item"
+    fullname: "annoy.AnnoyIndex.get_nns_by_item"
+    definitions {
+      name: "get_nns_by_item"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_item"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "i"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "include_distances"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_nns_by_item"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_item"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.list[builtins.int],builtins.list[builtins.float]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.float]"
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "i"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "include_distances"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_nns_by_item"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_item"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.list[builtins.int],builtins.list[builtins.float]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.float]"
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "i"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "include_distances"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "get_nns_by_vector"
+    fullname: "annoy.AnnoyIndex.get_nns_by_vector"
+    definitions {
+      name: "get_nns_by_vector"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_vector"
+      return_annotation {
+        pretty_printed_name: "builtins.list[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "vector"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy._Vector"
+          fully_qualified_name: "annoy._Vector"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "include_distances"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_nns_by_vector"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_vector"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.list[builtins.int],builtins.list[builtins.float]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.float]"
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "vector"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy._Vector"
+          fully_qualified_name: "annoy._Vector"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "include_distances"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_nns_by_vector"
+      fully_qualified_name: "annoy.AnnoyIndex.get_nns_by_vector"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.list[builtins.int],builtins.list[builtins.float]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.list[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.float]"
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy.AnnoyIndex"
+          fully_qualified_name: "annoy.AnnoyIndex"
+        }
+      }
+      parameters {
+        name: "vector"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "annoy._Vector"
+          fully_qualified_name: "annoy._Vector"
+        }
+      }
+      parameters {
+        name: "n"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "search_k"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        has_default: true
+      }
+      parameters {
+        name: "include_distances"
+        kind: KEYWORD_ONLY
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "f"
+    fully_qualified_name: "annoy.AnnoyIndex.f"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}

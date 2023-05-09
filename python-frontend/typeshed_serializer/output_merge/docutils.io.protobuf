@@ -1,0 +1,1099 @@
+fully_qualified_name: "docutils.io"
+classes {
+  name: "InputError"
+  fully_qualified_name: "docutils.io.InputError"
+  super_classes: "builtins.OSError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "OutputError"
+  fully_qualified_name: "docutils.io.OutputError"
+  super_classes: "builtins.OSError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Input"
+  fully_qualified_name: "docutils.io.Input"
+  super_classes: "docutils.TransformSpec"
+  methods {
+    name: "read"
+    fully_qualified_name: "docutils.io.Input.read"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.Input"
+        fully_qualified_name: "docutils.io.Input"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "docutils.io.Input.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "docutils.io.Input"
+        fully_qualified_name: "docutils.io.Input"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "component_type"
+    fully_qualified_name: "docutils.io.Input.component_type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "default_source_path"
+    fully_qualified_name: "docutils.io.Input.default_source_path"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Output"
+  fully_qualified_name: "docutils.io.Output"
+  super_classes: "docutils.TransformSpec"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "docutils.io.Output.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.Output"
+        fully_qualified_name: "docutils.io.Output"
+      }
+    }
+    parameters {
+      name: "destination"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "destination_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "error_handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "docutils.io.Output.write"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.Output"
+        fully_qualified_name: "docutils.io.Output"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "encode"
+    fully_qualified_name: "docutils.io.Output.encode"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.Output"
+        fully_qualified_name: "docutils.io.Output"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "component_type"
+    fully_qualified_name: "docutils.io.Output.component_type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "default_destination_path"
+    fully_qualified_name: "docutils.io.Output.default_destination_path"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "FileInput"
+  fully_qualified_name: "docutils.io.FileInput"
+  super_classes: "docutils.io.Input"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "docutils.io.FileInput.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.FileInput"
+        fully_qualified_name: "docutils.io.FileInput"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "source_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "error_handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "autoclose"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "_typeshed.OpenTextModeReading"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "_typeshed.OpenBinaryModeReading"
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "docutils.io.FileInput.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.FileInput"
+        fully_qualified_name: "docutils.io.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "docutils.io.FileInput.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.FileInput"
+        fully_qualified_name: "docutils.io.FileInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FileOutput"
+  fully_qualified_name: "docutils.io.FileOutput"
+  super_classes: "docutils.io.Output"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "docutils.io.FileOutput.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "docutils.io.FileOutput"
+        fully_qualified_name: "docutils.io.FileOutput"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "mode"
+    fully_qualified_name: "docutils.io.FileOutput.mode"
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenTextModeWriting"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenBinaryModeWriting"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BinaryFileOutput"
+  fully_qualified_name: "docutils.io.BinaryFileOutput"
+  super_classes: "docutils.io.FileOutput"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "StringInput"
+  fully_qualified_name: "docutils.io.StringInput"
+  super_classes: "docutils.io.Input"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "default_source_path"
+    fully_qualified_name: "docutils.io.StringInput.default_source_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "StringOutput"
+  fully_qualified_name: "docutils.io.StringOutput"
+  super_classes: "docutils.io.Output"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "default_destination_path"
+    fully_qualified_name: "docutils.io.StringOutput.default_destination_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "destination"
+    fully_qualified_name: "docutils.io.StringOutput.destination"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NullInput"
+  fully_qualified_name: "docutils.io.NullInput"
+  super_classes: "docutils.io.Input"
+  methods {
+    name: "read"
+    fully_qualified_name: "docutils.io.NullInput.read"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.NullInput"
+        fully_qualified_name: "docutils.io.NullInput"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "default_source_path"
+    fully_qualified_name: "docutils.io.NullInput.default_source_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NullOutput"
+  fully_qualified_name: "docutils.io.NullOutput"
+  super_classes: "docutils.io.Output"
+  methods {
+    name: "write"
+    fully_qualified_name: "docutils.io.NullOutput.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "docutils.io.NullOutput"
+        fully_qualified_name: "docutils.io.NullOutput"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "default_destination_path"
+    fully_qualified_name: "docutils.io.NullOutput.default_destination_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DocTreeInput"
+  fully_qualified_name: "docutils.io.DocTreeInput"
+  super_classes: "docutils.io.Input"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "default_source_path"
+    fully_qualified_name: "docutils.io.DocTreeInput.default_source_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "check_encoding"
+  fully_qualified_name: "docutils.io.check_encoding"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "stream"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__docformat__"
+  fully_qualified_name: "docutils.io.__docformat__"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

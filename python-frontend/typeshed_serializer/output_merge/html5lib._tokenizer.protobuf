@@ -1,0 +1,1277 @@
+fully_qualified_name: "html5lib._tokenizer"
+classes {
+  name: "HTMLTokenizer"
+  fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "html5lib._tokenizer.HTMLTokenizer"
+        fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.__iter__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "consumeNumberEntity"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.consumeNumberEntity"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "isHex"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "consumeEntity"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.consumeEntity"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "html5lib._tokenizer.HTMLTokenizer"
+        fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer"
+      }
+    }
+    parameters {
+      name: "allowedChar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fromAttribute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "processEntityInAttribute"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.processEntityInAttribute"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "html5lib._tokenizer.HTMLTokenizer"
+        fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer"
+      }
+    }
+    parameters {
+      name: "allowedChar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "emitCurrentToken"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.emitCurrentToken"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "html5lib._tokenizer.HTMLTokenizer"
+        fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dataState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.dataState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "entityDataState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.entityDataState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rcdataState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rcdataState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "characterReferenceInRcdata"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.characterReferenceInRcdata"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rawtextState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rawtextState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "plaintextState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.plaintextState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.tagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "closeTagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.closeTagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tagNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.tagNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rcdataLessThanSignState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rcdataLessThanSignState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rcdataEndTagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rcdataEndTagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rcdataEndTagNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rcdataEndTagNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rawtextLessThanSignState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rawtextLessThanSignState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rawtextEndTagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rawtextEndTagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rawtextEndTagNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.rawtextEndTagNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataLessThanSignState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataLessThanSignState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEndTagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEndTagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEndTagNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEndTagNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapeStartState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapeStartState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapeStartDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapeStartDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedDashDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedDashDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedLessThanSignState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedLessThanSignState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedEndTagOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedEndTagOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataEscapedEndTagNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataEscapedEndTagNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapeStartState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapeStartState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapedDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapedDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapedDashDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapedDashDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapedLessThanSignState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapedLessThanSignState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scriptDataDoubleEscapeEndState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.scriptDataDoubleEscapeEndState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "beforeAttributeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.beforeAttributeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "attributeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.attributeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterAttributeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterAttributeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "beforeAttributeValueState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.beforeAttributeValueState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "attributeValueDoubleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.attributeValueDoubleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "attributeValueSingleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.attributeValueSingleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "attributeValueUnQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.attributeValueUnQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterAttributeValueState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterAttributeValueState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "selfClosingStartTagState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.selfClosingStartTagState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "bogusCommentState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.bogusCommentState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "markupDeclarationOpenState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.markupDeclarationOpenState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentStartState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentStartState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentStartDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentStartDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentEndDashState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentEndDashState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentEndState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentEndState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "commentEndBangState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.commentEndBangState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypeState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypeState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "beforeDoctypeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.beforeDoctypeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterDoctypeNameState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterDoctypeNameState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterDoctypePublicKeywordState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterDoctypePublicKeywordState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "beforeDoctypePublicIdentifierState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.beforeDoctypePublicIdentifierState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypePublicIdentifierDoubleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypePublicIdentifierDoubleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypePublicIdentifierSingleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypePublicIdentifierSingleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterDoctypePublicIdentifierState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterDoctypePublicIdentifierState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "betweenDoctypePublicAndSystemIdentifiersState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.betweenDoctypePublicAndSystemIdentifiersState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterDoctypeSystemKeywordState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterDoctypeSystemKeywordState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "beforeDoctypeSystemIdentifierState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.beforeDoctypeSystemIdentifierState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypeSystemIdentifierDoubleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypeSystemIdentifierDoubleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "doctypeSystemIdentifierSingleQuotedState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.doctypeSystemIdentifierSingleQuotedState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "afterDoctypeSystemIdentifierState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.afterDoctypeSystemIdentifierState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "bogusDoctypeState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.bogusDoctypeState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cdataSectionState"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.cdataSectionState"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "stream"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.stream"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parser"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.parser"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "escapeFlag"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.escapeFlag"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lastFourChars"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.lastFourChars"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "state"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.state"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "escape"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.escape"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "currentToken"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.currentToken"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tokenQueue"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.tokenQueue"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "temporaryBuffer"
+    fully_qualified_name: "html5lib._tokenizer.HTMLTokenizer.temporaryBuffer"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "entitiesTrie"
+  fully_qualified_name: "html5lib._tokenizer.entitiesTrie"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

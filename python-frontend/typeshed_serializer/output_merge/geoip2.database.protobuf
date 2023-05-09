@@ -1,0 +1,455 @@
+fully_qualified_name: "geoip2.database"
+classes {
+  name: "Reader"
+  fully_qualified_name: "geoip2.database.Reader"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "geoip2.database.Reader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "locales"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Sequence[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "geoip2.database._Locales"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "geoip2.database.Reader.__enter__"
+    return_annotation {
+      pretty_printed_name: "geoip2.database.Reader"
+      fully_qualified_name: "geoip2.database.Reader"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "geoip2.database.Reader.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "exc_type"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exc_val"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exc_tb"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "country"
+    fully_qualified_name: "geoip2.database.Reader.country"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.Country"
+      fully_qualified_name: "geoip2.models.Country"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "city"
+    fully_qualified_name: "geoip2.database.Reader.city"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.City"
+      fully_qualified_name: "geoip2.models.City"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "anonymous_ip"
+    fully_qualified_name: "geoip2.database.Reader.anonymous_ip"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.AnonymousIP"
+      fully_qualified_name: "geoip2.models.AnonymousIP"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "asn"
+    fully_qualified_name: "geoip2.database.Reader.asn"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.ASN"
+      fully_qualified_name: "geoip2.models.ASN"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connection_type"
+    fully_qualified_name: "geoip2.database.Reader.connection_type"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.ConnectionType"
+      fully_qualified_name: "geoip2.models.ConnectionType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "domain"
+    fully_qualified_name: "geoip2.database.Reader.domain"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.Domain"
+      fully_qualified_name: "geoip2.models.Domain"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "enterprise"
+    fully_qualified_name: "geoip2.database.Reader.enterprise"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.Enterprise"
+      fully_qualified_name: "geoip2.models.Enterprise"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isp"
+    fully_qualified_name: "geoip2.database.Reader.isp"
+    return_annotation {
+      pretty_printed_name: "geoip2.models.ISP"
+      fully_qualified_name: "geoip2.models.ISP"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "metadata"
+    fully_qualified_name: "geoip2.database.Reader.metadata"
+    return_annotation {
+      pretty_printed_name: "maxminddb.reader.Metadata"
+      fully_qualified_name: "maxminddb.reader.Metadata"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "geoip2.database.Reader.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "geoip2.database.Reader"
+        fully_qualified_name: "geoip2.database.Reader"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

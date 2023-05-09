@@ -1,0 +1,296 @@
+fully_qualified_name: "flask.wrappers"
+classes {
+  name: "Request"
+  fully_qualified_name: "flask.wrappers.Request"
+  super_classes: "builtins.object"
+  methods {
+    name: "max_content_length"
+    fully_qualified_name: "flask.wrappers.Request.max_content_length"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "endpoint"
+    fully_qualified_name: "flask.wrappers.Request.endpoint"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "blueprint"
+    fully_qualified_name: "flask.wrappers.Request.blueprint"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "blueprints"
+    fully_qualified_name: "flask.wrappers.Request.blueprints"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "on_json_loading_failed"
+    fully_qualified_name: "flask.wrappers.Request.on_json_loading_failed"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+    parameters {
+      name: "e"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.ValueError,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.ValueError"
+          fully_qualified_name: "builtins.ValueError"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "json_module"
+    fully_qualified_name: "flask.wrappers.Request.json_module"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "url_rule"
+    fully_qualified_name: "flask.wrappers.Request.url_rule"
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "view_args"
+    fully_qualified_name: "flask.wrappers.Request.view_args"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "routing_exception"
+    fully_qualified_name: "flask.wrappers.Request.routing_exception"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.Exception,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Response"
+  fully_qualified_name: "flask.wrappers.Response"
+  super_classes: "builtins.object"
+  methods {
+    name: "max_cookie_size"
+    fully_qualified_name: "flask.wrappers.Response.max_cookie_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Response"
+        fully_qualified_name: "flask.wrappers.Response"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "default_mimetype"
+    fully_qualified_name: "flask.wrappers.Response.default_mimetype"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "json_module"
+    fully_qualified_name: "flask.wrappers.Response.json_module"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "autocorrect_location_header"
+    fully_qualified_name: "flask.wrappers.Response.autocorrect_location_header"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "json"
+  fully_qualified_name: "flask.json"
+  is_imported_module: true
+}
+vars {
+  name: "current_app"
+  fully_qualified_name: "flask.globals.current_app"
+  type_annotation {
+    pretty_printed_name: "flask.app.Flask"
+    fully_qualified_name: "flask.app.Flask"
+  }
+}
+vars {
+  name: "Rule"
+  fully_qualified_name: "flask.wrappers.Rule"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}
+vars {
+  name: "RequestBase"
+  fully_qualified_name: "flask.wrappers.RequestBase"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}
+vars {
+  name: "ResponseBase"
+  fully_qualified_name: "flask.wrappers.ResponseBase"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}

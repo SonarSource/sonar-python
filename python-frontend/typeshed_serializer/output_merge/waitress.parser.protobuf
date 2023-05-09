@@ -1,0 +1,586 @@
+fully_qualified_name: "waitress.parser"
+classes {
+  name: "ParsingError"
+  fully_qualified_name: "waitress.parser.ParsingError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "TransferEncodingNotImplemented"
+  fully_qualified_name: "waitress.parser.TransferEncodingNotImplemented"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HTTPRequestParser"
+  fully_qualified_name: "waitress.parser.HTTPRequestParser"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.parser.HTTPRequestParser"
+        fully_qualified_name: "waitress.parser.HTTPRequestParser"
+      }
+    }
+    parameters {
+      name: "adj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.adjustments.Adjustments"
+        fully_qualified_name: "waitress.adjustments.Adjustments"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "received"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.received"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.parser.HTTPRequestParser"
+        fully_qualified_name: "waitress.parser.HTTPRequestParser"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_header"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.parse_header"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.parser.HTTPRequestParser"
+        fully_qualified_name: "waitress.parser.HTTPRequestParser"
+      }
+    }
+    parameters {
+      name: "header_plus"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_body_stream"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.get_body_stream"
+    return_annotation {
+      pretty_printed_name: "io.BytesIO"
+      fully_qualified_name: "io.BytesIO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.parser.HTTPRequestParser"
+        fully_qualified_name: "waitress.parser.HTTPRequestParser"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "waitress.parser.HTTPRequestParser"
+        fully_qualified_name: "waitress.parser.HTTPRequestParser"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "completed"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.completed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "empty"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.empty"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "expect_continue"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.expect_continue"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "headers_finished"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.headers_finished"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "header_plus"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.header_plus"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "chunked"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.chunked"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "content_length"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.content_length"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "header_bytes_received"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.header_bytes_received"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body_bytes_received"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.body_bytes_received"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body_rcv"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.body_rcv"
+    type_annotation {
+      pretty_printed_name: "Union[waitress.receiver.ChunkedReceiver,waitress.receiver.FixedStreamReceiver,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "waitress.receiver.ChunkedReceiver"
+        fully_qualified_name: "waitress.receiver.ChunkedReceiver"
+      }
+      args {
+        pretty_printed_name: "waitress.receiver.FixedStreamReceiver"
+        fully_qualified_name: "waitress.receiver.FixedStreamReceiver"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "version"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "error"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.error"
+    type_annotation {
+      pretty_printed_name: "Union[waitress.utilities.Error,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "waitress.utilities.Error"
+        fully_qualified_name: "waitress.utilities.Error"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "connection_close"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.connection_close"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.headers"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "adj"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.adj"
+    type_annotation {
+      pretty_printed_name: "waitress.adjustments.Adjustments"
+      fully_qualified_name: "waitress.adjustments.Adjustments"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "first_line"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.first_line"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "command"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.command"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "url_scheme"
+    fully_qualified_name: "waitress.parser.HTTPRequestParser.url_scheme"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "split_uri"
+  fully_qualified_name: "waitress.parser.split_uri"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.bytes,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "uri"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_header_lines"
+  fully_qualified_name: "waitress.parser.get_header_lines"
+  return_annotation {
+    pretty_printed_name: "typing.Sequence[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "typing.Sequence"
+  }
+  parameters {
+    name: "header"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "crack_first_line"
+  fully_qualified_name: "waitress.parser.crack_first_line"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.bytes,builtins.bytes,builtins.bytes]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "line"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HEADER_FIELD"
+  fully_qualified_name: "waitress.rfc7230.HEADER_FIELD"
+  type_annotation {
+    pretty_printed_name: "typing.Pattern[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "first_line_re"
+  fully_qualified_name: "waitress.parser.first_line_re"
+  type_annotation {
+    pretty_printed_name: "typing.Pattern[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.Pattern"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

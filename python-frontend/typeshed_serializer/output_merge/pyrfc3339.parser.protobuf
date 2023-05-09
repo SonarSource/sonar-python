@@ -1,0 +1,41 @@
+fully_qualified_name: "pyrfc3339.parser"
+functions {
+  name: "parse"
+  fully_qualified_name: "pyrfc3339.parser.parse"
+  return_annotation {
+    pretty_printed_name: "datetime.datetime"
+    fully_qualified_name: "datetime.datetime"
+  }
+  parameters {
+    name: "timestamp"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "utc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "produce_naive"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

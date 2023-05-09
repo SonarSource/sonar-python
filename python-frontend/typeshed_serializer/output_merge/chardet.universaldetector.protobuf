@@ -1,0 +1,285 @@
+fully_qualified_name: "chardet.universaldetector"
+classes {
+  name: "_FinalResultType"
+  fully_qualified_name: "chardet.universaldetector._FinalResultType"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_IntermediateResultType"
+  fully_qualified_name: "chardet.universaldetector._IntermediateResultType"
+  super_classes: "typing._TypedDict"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "UniversalDetector"
+  fully_qualified_name: "chardet.universaldetector.UniversalDetector"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "chardet.universaldetector.UniversalDetector"
+        fully_qualified_name: "chardet.universaldetector.UniversalDetector"
+      }
+    }
+    parameters {
+      name: "lang_filter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "chardet.universaldetector.UniversalDetector"
+        fully_qualified_name: "chardet.universaldetector.UniversalDetector"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "feed"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.feed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "chardet.universaldetector.UniversalDetector"
+        fully_qualified_name: "chardet.universaldetector.UniversalDetector"
+      }
+    }
+    parameters {
+      name: "byte_str"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.close"
+    return_annotation {
+      pretty_printed_name: "TypedDict"
+      kind: TYPED_DICT
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "chardet.universaldetector.UniversalDetector"
+        fully_qualified_name: "chardet.universaldetector.UniversalDetector"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "MINIMUM_THRESHOLD"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.MINIMUM_THRESHOLD"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "HIGH_BYTE_DETECTOR"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.HIGH_BYTE_DETECTOR"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ESC_DETECTOR"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.ESC_DETECTOR"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "WIN_BYTE_DETECTOR"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.WIN_BYTE_DETECTOR"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ISO_WIN_MAP"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.ISO_WIN_MAP"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "result"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.result"
+    type_annotation {
+      pretty_printed_name: "TypedDict"
+      kind: TYPED_DICT
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "done"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.done"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lang_filter"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.lang_filter"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "logger"
+    fully_qualified_name: "chardet.universaldetector.UniversalDetector.logger"
+    type_annotation {
+      pretty_printed_name: "logging.Logger"
+      fully_qualified_name: "logging.Logger"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}

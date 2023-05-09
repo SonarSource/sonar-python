@@ -1,0 +1,174 @@
+fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs12"
+functions {
+  name: "load_key_and_certificates"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs12.load_key_and_certificates"
+  return_annotation {
+    pretty_printed_name: "Tuple[Union[Any,None],Union[cryptography.x509.Certificate,None],builtins.list[cryptography.x509.Certificate]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "Union[cryptography.x509.Certificate,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.Certificate"
+        fully_qualified_name: "cryptography.x509.Certificate"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    args {
+      pretty_printed_name: "builtins.list[cryptography.x509.Certificate]"
+      args {
+        pretty_printed_name: "cryptography.x509.Certificate"
+        fully_qualified_name: "cryptography.x509.Certificate"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "serialize_key_and_certificates"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs12.serialize_key_and_certificates"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyWithSerialization,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerialization,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyWithSerialization]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyWithSerialization"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyWithSerialization"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerialization"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerialization"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyWithSerialization"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyWithSerialization"
+      }
+    }
+  }
+  parameters {
+    name: "cert"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.x509.Certificate,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.Certificate"
+        fully_qualified_name: "cryptography.x509.Certificate"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "cas"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[cryptography.x509.Certificate],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[cryptography.x509.Certificate]"
+        args {
+          pretty_printed_name: "cryptography.x509.Certificate"
+          fully_qualified_name: "cryptography.x509.Certificate"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "enc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

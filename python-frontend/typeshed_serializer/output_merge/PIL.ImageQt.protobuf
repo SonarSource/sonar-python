@@ -1,0 +1,312 @@
+fully_qualified_name: "PIL.ImageQt"
+classes {
+  name: "ImageQt"
+  fully_qualified_name: "PIL.ImageQt.ImageQt"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "PIL.ImageQt.ImageQt.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "PIL.ImageQt.ImageQt"
+        fully_qualified_name: "PIL.ImageQt.ImageQt"
+      }
+    }
+    parameters {
+      name: "im"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "PIL.Image.Image"
+        fully_qualified_name: "PIL.Image.Image"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "rgb"
+  fully_qualified_name: "PIL.ImageQt.rgb"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "r"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "g"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "a"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fromqimage"
+  fully_qualified_name: "PIL.ImageQt.fromqimage"
+  return_annotation {
+    pretty_printed_name: "PIL.Image.Image"
+    fully_qualified_name: "PIL.Image.Image"
+  }
+  parameters {
+    name: "im"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[PIL.Image.Image,TypeAlias[Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "PIL.Image.Image"
+        fully_qualified_name: "PIL.Image.Image"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "PIL.ImageQt.QImage"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fromqpixmap"
+  fully_qualified_name: "PIL.ImageQt.fromqpixmap"
+  return_annotation {
+    pretty_printed_name: "PIL.Image.Image"
+    fully_qualified_name: "PIL.Image.Image"
+  }
+  parameters {
+    name: "im"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[PIL.Image.Image,TypeAlias[Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "PIL.Image.Image"
+        fully_qualified_name: "PIL.Image.Image"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "PIL.ImageQt.QImage"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "align8to32"
+  fully_qualified_name: "PIL.ImageQt.align8to32"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "bytes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "width"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "toqimage"
+  fully_qualified_name: "PIL.ImageQt.toqimage"
+  return_annotation {
+    pretty_printed_name: "PIL.ImageQt.ImageQt"
+    fully_qualified_name: "PIL.ImageQt.ImageQt"
+  }
+  parameters {
+    name: "im"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "PIL.Image.Image"
+      fully_qualified_name: "PIL.Image.Image"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "toqpixmap"
+  fully_qualified_name: "PIL.ImageQt.toqpixmap"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Any]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "PIL.ImageQt.QPixmap"
+  }
+  parameters {
+    name: "im"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "PIL.Image.Image"
+      fully_qualified_name: "PIL.Image.Image"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "qt_versions"
+  fully_qualified_name: "PIL.ImageQt.qt_versions"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "qt_is_installed"
+  fully_qualified_name: "PIL.ImageQt.qt_is_installed"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "qt_version"
+  fully_qualified_name: "PIL.ImageQt.qt_version"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

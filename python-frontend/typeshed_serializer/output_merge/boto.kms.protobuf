@@ -1,0 +1,48 @@
+fully_qualified_name: "boto.kms"
+functions {
+  name: "regions"
+  fully_qualified_name: "boto.kms.regions"
+  return_annotation {
+    pretty_printed_name: "builtins.list[boto.regioninfo.RegionInfo]"
+    args {
+      pretty_printed_name: "boto.regioninfo.RegionInfo"
+      fully_qualified_name: "boto.regioninfo.RegionInfo"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "connect_to_region"
+  fully_qualified_name: "boto.kms.connect_to_region"
+  parameters {
+    name: "region_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "kw_params"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "boto"
+  fully_qualified_name: "boto"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

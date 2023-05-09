@@ -1,0 +1,55 @@
+fully_qualified_name: "requests.packages.urllib3.util.request"
+functions {
+  name: "make_headers"
+  fully_qualified_name: "requests.packages.urllib3.util.request.make_headers"
+  parameters {
+    name: "keep_alive"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "accept_encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "user_agent"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "basic_auth"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "proxy_basic_auth"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  parameters {
+    name: "disable_cache"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ACCEPT_ENCODING"
+  fully_qualified_name: "requests.packages.urllib3.util.request.ACCEPT_ENCODING"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

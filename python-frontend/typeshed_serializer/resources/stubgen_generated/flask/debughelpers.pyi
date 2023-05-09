@@ -1,0 +1,16 @@
+from .app import Flask as Flask
+from .blueprints import Blueprint as Blueprint
+from .globals import request_ctx as request_ctx
+from typing import Any
+
+class UnexpectedUnicodeError(AssertionError, UnicodeError): ...
+
+class DebugFilesKeyError(KeyError, AssertionError):
+    msg: Any
+    def __init__(self, request, key) -> None: ...
+
+class FormDataRoutingRedirect(AssertionError):
+    def __init__(self, request) -> None: ...
+
+def attach_enctype_error_multidict(request): ...
+def explain_template_loading_attempts(app: Flask, template, attempts) -> None: ...

@@ -1,0 +1,217 @@
+fully_qualified_name: "tornado.tcpserver"
+classes {
+  name: "TCPServer"
+  fully_qualified_name: "tornado.tcpserver.TCPServer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.tcpserver.TCPServer"
+        fully_qualified_name: "tornado.tcpserver.TCPServer"
+      }
+    }
+    parameters {
+      name: "io_loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "ssl_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "max_buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "read_chunk_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "listen"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.listen"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_sockets"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.add_sockets"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "sockets"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_socket"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.add_socket"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "socket"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "bind"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.bind"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "family"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "backlog"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "start"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.start"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "num_processes"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "stop"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.stop"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_stream"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.handle_stream"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "io_loop"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.io_loop"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "ssl_options"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.ssl_options"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "max_buffer_size"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.max_buffer_size"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "read_chunk_size"
+    fully_qualified_name: "tornado.tcpserver.TCPServer.read_chunk_size"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+vars {
+  name: "ssl"
+  fully_qualified_name: "tornado.tcpserver.ssl"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

@@ -1,0 +1,208 @@
+fully_qualified_name: "pyrfc3339.utils"
+classes {
+  name: "FixedOffset"
+  fully_qualified_name: "pyrfc3339.utils.FixedOffset"
+  super_classes: "datetime.tzinfo"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pyrfc3339.utils.FixedOffset.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyrfc3339.utils.FixedOffset"
+        fully_qualified_name: "pyrfc3339.utils.FixedOffset"
+      }
+    }
+    parameters {
+      name: "hours"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "minutes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "pyrfc3339.utils.FixedOffset.dst"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyrfc3339.utils.FixedOffset"
+        fully_qualified_name: "pyrfc3339.utils.FixedOffset"
+      }
+    }
+    parameters {
+      name: "dt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "pyrfc3339.utils.FixedOffset.utcoffset"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyrfc3339.utils.FixedOffset"
+        fully_qualified_name: "pyrfc3339.utils.FixedOffset"
+      }
+    }
+    parameters {
+      name: "dt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tzname"
+    fully_qualified_name: "pyrfc3339.utils.FixedOffset.tzname"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyrfc3339.utils.FixedOffset"
+        fully_qualified_name: "pyrfc3339.utils.FixedOffset"
+      }
+    }
+    parameters {
+      name: "dt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "timedelta_seconds"
+  fully_qualified_name: "pyrfc3339.utils.timedelta_seconds"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "td"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "timezone"
+  fully_qualified_name: "pyrfc3339.utils.timezone"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "utcoffset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

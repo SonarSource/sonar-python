@@ -1,0 +1,309 @@
+fully_qualified_name: "yaml.resolver"
+classes {
+  name: "ResolverError"
+  fully_qualified_name: "yaml.resolver.ResolverError"
+  super_classes: "yaml.error.YAMLError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BaseResolver"
+  fully_qualified_name: "yaml.resolver.BaseResolver"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "yaml.resolver.BaseResolver.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.resolver.BaseResolver"
+        fully_qualified_name: "yaml.resolver.BaseResolver"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_implicit_resolver"
+    fully_qualified_name: "yaml.resolver.BaseResolver.add_implicit_resolver"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "regexp"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "first"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_path_resolver"
+    fully_qualified_name: "yaml.resolver.BaseResolver.add_path_resolver"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kind"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "descend_resolver"
+    fully_qualified_name: "yaml.resolver.BaseResolver.descend_resolver"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "current_node"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "current_index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ascend_resolver"
+    fully_qualified_name: "yaml.resolver.BaseResolver.ascend_resolver"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "check_resolver_prefix"
+    fully_qualified_name: "yaml.resolver.BaseResolver.check_resolver_prefix"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "depth"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kind"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "current_node"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "current_index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resolve"
+    fully_qualified_name: "yaml.resolver.BaseResolver.resolve"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kind"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "implicit"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DEFAULT_SCALAR_TAG"
+    fully_qualified_name: "yaml.resolver.BaseResolver.DEFAULT_SCALAR_TAG"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "DEFAULT_SEQUENCE_TAG"
+    fully_qualified_name: "yaml.resolver.BaseResolver.DEFAULT_SEQUENCE_TAG"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "DEFAULT_MAPPING_TAG"
+    fully_qualified_name: "yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "yaml_implicit_resolvers"
+    fully_qualified_name: "yaml.resolver.BaseResolver.yaml_implicit_resolvers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "yaml_path_resolvers"
+    fully_qualified_name: "yaml.resolver.BaseResolver.yaml_path_resolvers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "resolver_exact_paths"
+    fully_qualified_name: "yaml.resolver.BaseResolver.resolver_exact_paths"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "resolver_prefix_paths"
+    fully_qualified_name: "yaml.resolver.BaseResolver.resolver_prefix_paths"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Resolver"
+  fully_qualified_name: "yaml.resolver.Resolver"
+  super_classes: "yaml.resolver.BaseResolver"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,604 @@
+fully_qualified_name: "requests.packages.urllib3.exceptions"
+classes {
+  name: "HTTPError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.HTTPError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HTTPWarning"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.HTTPWarning"
+  super_classes: "builtins.Warning"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PoolError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.PoolError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.PoolError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "requests.packages.urllib3.exceptions.PoolError"
+        fully_qualified_name: "requests.packages.urllib3.exceptions.PoolError"
+      }
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.PoolError.__reduce__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "pool"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.PoolError.pool"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.RequestError"
+  super_classes: "requests.packages.urllib3.exceptions.PoolError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.RequestError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "requests.packages.urllib3.exceptions.RequestError"
+        fully_qualified_name: "requests.packages.urllib3.exceptions.RequestError"
+      }
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.RequestError.__reduce__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "url"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.RequestError.url"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SSLError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.SSLError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ProxyError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ProxyError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DecodeError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.DecodeError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ProtocolError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ProtocolError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "MaxRetryError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.MaxRetryError"
+  super_classes: "requests.packages.urllib3.exceptions.RequestError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.MaxRetryError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "requests.packages.urllib3.exceptions.MaxRetryError"
+        fully_qualified_name: "requests.packages.urllib3.exceptions.MaxRetryError"
+      }
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "reason"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "reason"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.MaxRetryError.reason"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "HostChangedError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.HostChangedError"
+  super_classes: "requests.packages.urllib3.exceptions.RequestError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.HostChangedError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "requests.packages.urllib3.exceptions.HostChangedError"
+        fully_qualified_name: "requests.packages.urllib3.exceptions.HostChangedError"
+      }
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "retries"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "retries"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.HostChangedError.retries"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TimeoutStateError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.TimeoutStateError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "TimeoutError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.TimeoutError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ReadTimeoutError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ReadTimeoutError"
+  super_classes: "requests.packages.urllib3.exceptions.TimeoutError"
+  super_classes: "requests.packages.urllib3.exceptions.RequestError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ConnectTimeoutError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ConnectTimeoutError"
+  super_classes: "requests.packages.urllib3.exceptions.TimeoutError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EmptyPoolError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.EmptyPoolError"
+  super_classes: "requests.packages.urllib3.exceptions.PoolError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ClosedPoolError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ClosedPoolError"
+  super_classes: "requests.packages.urllib3.exceptions.PoolError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "LocationValueError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.LocationValueError"
+  super_classes: "builtins.ValueError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "LocationParseError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.LocationParseError"
+  super_classes: "requests.packages.urllib3.exceptions.LocationValueError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.LocationParseError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "requests.packages.urllib3.exceptions.LocationParseError"
+        fully_qualified_name: "requests.packages.urllib3.exceptions.LocationParseError"
+      }
+    }
+    parameters {
+      name: "location"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "location"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.LocationParseError.location"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ResponseError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ResponseError"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "GENERIC_ERROR"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.ResponseError.GENERIC_ERROR"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "SPECIFIC_ERROR"
+    fully_qualified_name: "requests.packages.urllib3.exceptions.ResponseError.SPECIFIC_ERROR"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SecurityWarning"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.SecurityWarning"
+  super_classes: "requests.packages.urllib3.exceptions.HTTPWarning"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InsecureRequestWarning"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.InsecureRequestWarning"
+  super_classes: "requests.packages.urllib3.exceptions.SecurityWarning"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SystemTimeWarning"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.SystemTimeWarning"
+  super_classes: "requests.packages.urllib3.exceptions.SecurityWarning"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InsecurePlatformWarning"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.InsecurePlatformWarning"
+  super_classes: "requests.packages.urllib3.exceptions.SecurityWarning"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ConnectionError"
+  fully_qualified_name: "requests.packages.urllib3.exceptions.ConnectionError"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

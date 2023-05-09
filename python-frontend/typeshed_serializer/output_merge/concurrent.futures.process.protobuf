@@ -1,0 +1,50 @@
+fully_qualified_name: "concurrent.futures.process"
+classes {
+  name: "ProcessPoolExecutor"
+  fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+  super_classes: "concurrent.futures._base.Executor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process.ProcessPoolExecutor"
+        fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+      }
+    }
+    parameters {
+      name: "max_workers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+vars {
+  name: "EXTRA_QUEUED_CALLS"
+  fully_qualified_name: "concurrent.futures.process.EXTRA_QUEUED_CALLS"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

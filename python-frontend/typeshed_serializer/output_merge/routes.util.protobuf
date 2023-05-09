@@ -1,0 +1,182 @@
+fully_qualified_name: "routes.util"
+classes {
+  name: "RoutesException"
+  fully_qualified_name: "routes.util.RoutesException"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+classes {
+  name: "MatchException"
+  fully_qualified_name: "routes.util.MatchException"
+  super_classes: "routes.util.RoutesException"
+  valid_for: "27"
+}
+classes {
+  name: "GenerationException"
+  fully_qualified_name: "routes.util.GenerationException"
+  super_classes: "routes.util.RoutesException"
+  valid_for: "27"
+}
+classes {
+  name: "URLGenerator"
+  fully_qualified_name: "routes.util.URLGenerator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "routes.util.URLGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "routes.util.URLGenerator"
+        fully_qualified_name: "routes.util.URLGenerator"
+      }
+    }
+    parameters {
+      name: "mapper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "routes.util.URLGenerator.__call__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "current"
+    fully_qualified_name: "routes.util.URLGenerator.current"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "mapper"
+    fully_qualified_name: "routes.util.URLGenerator.mapper"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "environ"
+    fully_qualified_name: "routes.util.URLGenerator.environ"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+functions {
+  name: "url_for"
+  fully_qualified_name: "routes.util.url_for"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  parameters {
+    name: "kargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "redirect_to"
+  fully_qualified_name: "routes.util.redirect_to"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  parameters {
+    name: "kargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "cache_hostinfo"
+  fully_qualified_name: "routes.util.cache_hostinfo"
+  parameters {
+    name: "environ"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "controller_scan"
+  fully_qualified_name: "routes.util.controller_scan"
+  parameters {
+    name: "directory"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "as_unicode"
+  fully_qualified_name: "routes.util.as_unicode"
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ascii_characters"
+  fully_qualified_name: "routes.util.ascii_characters"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}

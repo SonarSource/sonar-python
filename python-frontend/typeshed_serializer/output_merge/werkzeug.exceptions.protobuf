@@ -1,0 +1,2413 @@
+fully_qualified_name: "werkzeug.exceptions"
+classes {
+  name: "_EnvironContainer"
+  fully_qualified_name: "werkzeug.exceptions._EnvironContainer"
+  super_classes: "builtins.object"
+  methods {
+    name: "environ"
+    fully_qualified_name: "werkzeug.exceptions._EnvironContainer.environ"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions._EnvironContainer"
+        fully_qualified_name: "werkzeug.exceptions._EnvironContainer"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HTTPException"
+  fully_qualified_name: "werkzeug.exceptions.HTTPException"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.wrappers.Response,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.wrappers.Response"
+          fully_qualified_name: "werkzeug.wrappers.Response"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "wrap"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.wrap"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.exceptions.HTTPException]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.exceptions.HTTPException"
+          fully_qualified_name: "werkzeug.exceptions.HTTPException"
+        }
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[builtins.Exception]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_description"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.get_description"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_body"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.get_body"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_headers"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.get_headers"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_response"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.get_response"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.Response"
+      fully_qualified_name: "werkzeug.wrappers.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],werkzeug.exceptions._EnvironContainer,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "werkzeug.exceptions._EnvironContainer"
+          fully_qualified_name: "werkzeug.exceptions._EnvironContainer"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.__call__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+    parameters {
+      name: "start_response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.StartResponse"
+        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.code"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.description"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "response"
+    fully_qualified_name: "werkzeug.exceptions.HTTPException.response"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.wrappers.Response,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.wrappers.Response"
+        fully_qualified_name: "werkzeug.wrappers.Response"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BadRequest"
+  fully_qualified_name: "werkzeug.exceptions.BadRequest"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.BadRequest.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.BadRequest.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ClientDisconnected"
+  fully_qualified_name: "werkzeug.exceptions.ClientDisconnected"
+  super_classes: "werkzeug.exceptions.BadRequest"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SecurityError"
+  fully_qualified_name: "werkzeug.exceptions.SecurityError"
+  super_classes: "werkzeug.exceptions.BadRequest"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BadHost"
+  fully_qualified_name: "werkzeug.exceptions.BadHost"
+  super_classes: "werkzeug.exceptions.BadRequest"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Unauthorized"
+  fully_qualified_name: "werkzeug.exceptions.Unauthorized"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.Unauthorized.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.Unauthorized"
+        fully_qualified_name: "werkzeug.exceptions.Unauthorized"
+      }
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.wrappers.Response,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.wrappers.Response"
+          fully_qualified_name: "werkzeug.wrappers.Response"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "www_authenticate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.tuple[builtins.object],builtins.list[builtins.object],builtins.object]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.object]"
+          args {
+            pretty_printed_name: "builtins.object"
+            fully_qualified_name: "builtins.object"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.object]"
+          args {
+            pretty_printed_name: "builtins.object"
+            fully_qualified_name: "builtins.object"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.Unauthorized.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.Unauthorized.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "www_authenticate"
+    fully_qualified_name: "werkzeug.exceptions.Unauthorized.www_authenticate"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.object],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.object]"
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Forbidden"
+  fully_qualified_name: "werkzeug.exceptions.Forbidden"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.Forbidden.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.Forbidden.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NotFound"
+  fully_qualified_name: "werkzeug.exceptions.NotFound"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.NotFound.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.NotFound.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "MethodNotAllowed"
+  fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.MethodNotAllowed"
+        fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed"
+      }
+    }
+    parameters {
+      name: "valid_methods"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "valid_methods"
+    fully_qualified_name: "werkzeug.exceptions.MethodNotAllowed.valid_methods"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NotAcceptable"
+  fully_qualified_name: "werkzeug.exceptions.NotAcceptable"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.NotAcceptable.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.NotAcceptable.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestTimeout"
+  fully_qualified_name: "werkzeug.exceptions.RequestTimeout"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.RequestTimeout.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.RequestTimeout.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Conflict"
+  fully_qualified_name: "werkzeug.exceptions.Conflict"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.Conflict.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.Conflict.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Gone"
+  fully_qualified_name: "werkzeug.exceptions.Gone"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.Gone.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.Gone.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "LengthRequired"
+  fully_qualified_name: "werkzeug.exceptions.LengthRequired"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.LengthRequired.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.LengthRequired.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "PreconditionFailed"
+  fully_qualified_name: "werkzeug.exceptions.PreconditionFailed"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.PreconditionFailed.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.PreconditionFailed.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestEntityTooLarge"
+  fully_qualified_name: "werkzeug.exceptions.RequestEntityTooLarge"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.RequestEntityTooLarge.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.RequestEntityTooLarge.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestURITooLarge"
+  fully_qualified_name: "werkzeug.exceptions.RequestURITooLarge"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.RequestURITooLarge.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.RequestURITooLarge.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnsupportedMediaType"
+  fully_qualified_name: "werkzeug.exceptions.UnsupportedMediaType"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.UnsupportedMediaType.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.UnsupportedMediaType.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestedRangeNotSatisfiable"
+  fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable"
+        fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "units"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "length"
+    fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable.length"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "units"
+    fully_qualified_name: "werkzeug.exceptions.RequestedRangeNotSatisfiable.units"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ExpectationFailed"
+  fully_qualified_name: "werkzeug.exceptions.ExpectationFailed"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.ExpectationFailed.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.ExpectationFailed.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ImATeapot"
+  fully_qualified_name: "werkzeug.exceptions.ImATeapot"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.ImATeapot.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.ImATeapot.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnprocessableEntity"
+  fully_qualified_name: "werkzeug.exceptions.UnprocessableEntity"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.UnprocessableEntity.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.UnprocessableEntity.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Locked"
+  fully_qualified_name: "werkzeug.exceptions.Locked"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.Locked.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.Locked.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "FailedDependency"
+  fully_qualified_name: "werkzeug.exceptions.FailedDependency"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.FailedDependency.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.FailedDependency.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "PreconditionRequired"
+  fully_qualified_name: "werkzeug.exceptions.PreconditionRequired"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.PreconditionRequired.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.PreconditionRequired.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_RetryAfter"
+  fully_qualified_name: "werkzeug.exceptions._RetryAfter"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions._RetryAfter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions._RetryAfter"
+        fully_qualified_name: "werkzeug.exceptions._RetryAfter"
+      }
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.wrappers.Response,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.wrappers.Response"
+          fully_qualified_name: "werkzeug.wrappers.Response"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "retry_after"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,builtins.int,datetime.datetime]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "retry_after"
+    fully_qualified_name: "werkzeug.exceptions._RetryAfter.retry_after"
+    type_annotation {
+      pretty_printed_name: "Union[None,builtins.int,datetime.datetime]"
+      kind: UNION
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TooManyRequests"
+  fully_qualified_name: "werkzeug.exceptions.TooManyRequests"
+  super_classes: "werkzeug.exceptions._RetryAfter"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.TooManyRequests.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.TooManyRequests.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "RequestHeaderFieldsTooLarge"
+  fully_qualified_name: "werkzeug.exceptions.RequestHeaderFieldsTooLarge"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.RequestHeaderFieldsTooLarge.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.RequestHeaderFieldsTooLarge.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnavailableForLegalReasons"
+  fully_qualified_name: "werkzeug.exceptions.UnavailableForLegalReasons"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.UnavailableForLegalReasons.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.UnavailableForLegalReasons.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "InternalServerError"
+  fully_qualified_name: "werkzeug.exceptions.InternalServerError"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.InternalServerError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.InternalServerError"
+        fully_qualified_name: "werkzeug.exceptions.InternalServerError"
+      }
+    }
+    parameters {
+      name: "description"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.wrappers.Response,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.wrappers.Response"
+          fully_qualified_name: "werkzeug.wrappers.Response"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "original_exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.InternalServerError.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.InternalServerError.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NotImplemented"
+  fully_qualified_name: "werkzeug.exceptions.NotImplemented"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.NotImplemented.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.NotImplemented.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BadGateway"
+  fully_qualified_name: "werkzeug.exceptions.BadGateway"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.BadGateway.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.BadGateway.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ServiceUnavailable"
+  fully_qualified_name: "werkzeug.exceptions.ServiceUnavailable"
+  super_classes: "werkzeug.exceptions._RetryAfter"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.ServiceUnavailable.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.ServiceUnavailable.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "GatewayTimeout"
+  fully_qualified_name: "werkzeug.exceptions.GatewayTimeout"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.GatewayTimeout.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.GatewayTimeout.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "HTTPVersionNotSupported"
+  fully_qualified_name: "werkzeug.exceptions.HTTPVersionNotSupported"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.exceptions.HTTPVersionNotSupported.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "werkzeug.exceptions.HTTPVersionNotSupported.description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Aborter"
+  fully_qualified_name: "werkzeug.exceptions.Aborter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.exceptions.Aborter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.Aborter"
+        fully_qualified_name: "werkzeug.exceptions.Aborter"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "extra"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.exceptions.Aborter.__call__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.exceptions.Aborter"
+        fully_qualified_name: "werkzeug.exceptions.Aborter"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,werkzeug.wrappers.Response]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "werkzeug.wrappers.Response"
+          fully_qualified_name: "werkzeug.wrappers.Response"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "mapping"
+    fully_qualified_name: "werkzeug.exceptions.Aborter.mapping"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BadRequestKeyError"
+  fully_qualified_name: "werkzeug.exceptions.BadRequestKeyError"
+  super_classes: "werkzeug.exceptions.BadRequest"
+  super_classes: "builtins.KeyError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "abort"
+  fully_qualified_name: "werkzeug.exceptions.abort"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "status"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,werkzeug.wrappers.Response]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "werkzeug.wrappers.Response"
+        fully_qualified_name: "werkzeug.wrappers.Response"
+      }
+    }
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "default_exceptions"
+  fully_qualified_name: "werkzeug.exceptions.default_exceptions"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,Type[werkzeug.exceptions.HTTPException]]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "Type[werkzeug.exceptions.HTTPException]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.exceptions.HTTPException"
+        fully_qualified_name: "werkzeug.exceptions.HTTPException"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,3718 @@
+fully_qualified_name: "six"
+classes {
+  name: "StringIO"
+  fully_qualified_name: "StringIO.StringIO"
+  super_classes: "typing.IO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "StringIO.StringIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "StringIO.StringIO.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "next"
+    fully_qualified_name: "StringIO.StringIO.next"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "StringIO.StringIO.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "isatty"
+    fully_qualified_name: "StringIO.StringIO.isatty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "StringIO.StringIO.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "StringIO.StringIO.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "StringIO.StringIO.read"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "StringIO.StringIO.readline"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "StringIO.StringIO.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "sizehint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "truncate"
+    fully_qualified_name: "StringIO.StringIO.truncate"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "StringIO.StringIO.write"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "StringIO.StringIO.writelines"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "flush"
+    fully_qualified_name: "StringIO.StringIO.flush"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "StringIO.StringIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "StringIO.StringIO.__enter__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "StringIO.StringIO.__exit__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    parameters {
+      name: "type"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "traceback"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "StringIO.StringIO.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "readable"
+    fully_qualified_name: "StringIO.StringIO.readable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "seekable"
+    fully_qualified_name: "StringIO.StringIO.seekable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "writable"
+    fully_qualified_name: "StringIO.StringIO.writable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "StringIO.StringIO[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "StringIO.StringIO"
+      }
+    }
+    valid_for: "27"
+  }
+  is_generic: true
+  valid_for: "27"
+  attributes {
+    name: "closed"
+    fully_qualified_name: "StringIO.StringIO.closed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "softspace"
+    fully_qualified_name: "StringIO.StringIO.softspace"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "len"
+    fully_qualified_name: "StringIO.StringIO.len"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "StringIO.StringIO.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "Iterator"
+  fully_qualified_name: "six.Iterator"
+  super_classes: "builtins.object"
+  methods {
+    name: "next"
+    fully_qualified_name: "six.Iterator.next"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "six.Iterator"
+        fully_qualified_name: "six.Iterator"
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "_LazyDescriptor"
+  fully_qualified_name: "six._LazyDescriptor"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "six._LazyDescriptor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "six._LazyDescriptor"
+        fully_qualified_name: "six._LazyDescriptor"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "six._LazyDescriptor.__get__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "six._LazyDescriptor"
+        fully_qualified_name: "six._LazyDescriptor"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.object,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "six._LazyDescriptor.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "MovedModule"
+  fully_qualified_name: "six.MovedModule"
+  super_classes: "six._LazyDescriptor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "six.MovedModule.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "six.MovedModule"
+        fully_qualified_name: "six.MovedModule"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "old"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "six.MovedModule.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "six.MovedModule"
+        fully_qualified_name: "six.MovedModule"
+      }
+    }
+    parameters {
+      name: "attr"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "mod"
+    fully_qualified_name: "six.MovedModule.mod"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "MovedAttribute"
+  fully_qualified_name: "six.MovedAttribute"
+  super_classes: "six._LazyDescriptor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "six.MovedAttribute.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "six.MovedAttribute"
+        fully_qualified_name: "six.MovedAttribute"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "old_mod"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "new_mod"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "old_attr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "new_attr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "mod"
+    fully_qualified_name: "six.MovedAttribute.mod"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "attr"
+    fully_qualified_name: "six.MovedAttribute.attr"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "27"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BytesIO"
+  fully_qualified_name: "io.BytesIO"
+  super_classes: "io.BufferedIOBase"
+  super_classes: "typing.BinaryIO"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.BytesIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "initial_bytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "io.BytesIO.__enter__"
+    return_annotation {
+      pretty_printed_name: "io._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "io._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "io.BytesIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getbuffer"
+    fully_qualified_name: "io.BytesIO.getbuffer"
+    return_annotation {
+      pretty_printed_name: "builtins.memoryview"
+      fully_qualified_name: "builtins.memoryview"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BytesIO.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "io.BytesIO.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+    }
+    parameters {
+      name: "__size"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "io.BytesIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "StringIO"
+  fully_qualified_name: "io.StringIO"
+  super_classes: "io.TextIOWrapper"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "io.StringIO.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.StringIO"
+        fully_qualified_name: "io.StringIO"
+      }
+    }
+    parameters {
+      name: "initial_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getvalue"
+    fully_qualified_name: "io.StringIO.getvalue"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "io.StringIO"
+        fully_qualified_name: "io.StringIO"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "io.StringIO.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "unichr"
+  fully_qualified_name: "builtins.unichr"
+  return_annotation {
+    pretty_printed_name: "builtins.unicode"
+    fully_qualified_name: "builtins.unicode"
+  }
+  parameters {
+    name: "__i"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "wraps"
+  fully_qualified_name: "functools.wraps"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "wrapped"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "functools._AnyCallable"
+    }
+  }
+  parameters {
+    name: "assigned"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "updated"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "advance_iterator"
+  fully_qualified_name: "six.advance_iterator"
+  return_annotation {
+    pretty_printed_name: "six._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "it"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[six._T]"
+      args {
+        pretty_printed_name: "six._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "callable"
+  fully_qualified_name: "six.callable"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_unbound_function"
+  fully_qualified_name: "six.get_unbound_function"
+  return_annotation {
+    pretty_printed_name: "types.FunctionType"
+    fully_qualified_name: "types.FunctionType"
+  }
+  parameters {
+    name: "unbound"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.UnboundMethodType"
+      fully_qualified_name: "types.UnboundMethodType"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "get_unbound_function"
+  fully_qualified_name: "six.get_unbound_function"
+  return_annotation {
+    pretty_printed_name: "types.FunctionType"
+    fully_qualified_name: "types.FunctionType"
+  }
+  parameters {
+    name: "unbound"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "create_bound_method"
+  fully_qualified_name: "six.create_bound_method"
+  return_annotation {
+    pretty_printed_name: "types.UnboundMethodType"
+    fully_qualified_name: "types.UnboundMethodType"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "create_bound_method"
+  fully_qualified_name: "six.create_bound_method"
+  return_annotation {
+    pretty_printed_name: "types.MethodType"
+    fully_qualified_name: "types.MethodType"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "create_unbound_method"
+  fully_qualified_name: "six.create_unbound_method"
+  return_annotation {
+    pretty_printed_name: "types.UnboundMethodType"
+    fully_qualified_name: "types.UnboundMethodType"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  parameters {
+    name: "cls"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.type,types.ClassType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "types.ClassType"
+        fully_qualified_name: "types.ClassType"
+      }
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "create_unbound_method"
+  fully_qualified_name: "six.create_unbound_method"
+  return_annotation {
+    pretty_printed_name: "types.FunctionType"
+    fully_qualified_name: "types.FunctionType"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  parameters {
+    name: "cls"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_method_function"
+  fully_qualified_name: "six.get_method_function"
+  return_annotation {
+    pretty_printed_name: "types.FunctionType"
+    fully_qualified_name: "types.FunctionType"
+  }
+  parameters {
+    name: "meth"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.UnboundMethodType"
+      fully_qualified_name: "types.UnboundMethodType"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "get_method_function"
+  fully_qualified_name: "six.get_method_function"
+  return_annotation {
+    pretty_printed_name: "types.FunctionType"
+    fully_qualified_name: "types.FunctionType"
+  }
+  parameters {
+    name: "meth"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.MethodType"
+      fully_qualified_name: "types.MethodType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_method_self"
+  fully_qualified_name: "six.get_method_self"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.object,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "meth"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.UnboundMethodType"
+      fully_qualified_name: "types.UnboundMethodType"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "get_method_self"
+  fully_qualified_name: "six.get_method_self"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.object,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "meth"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.MethodType"
+      fully_qualified_name: "types.MethodType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_function_closure"
+  fully_qualified_name: "six.get_function_closure"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.tuple[types._Cell],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.tuple[types._Cell]"
+      args {
+        pretty_printed_name: "types._Cell"
+        fully_qualified_name: "types._Cell"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "fun"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_function_code"
+  fully_qualified_name: "six.get_function_code"
+  return_annotation {
+    pretty_printed_name: "types.CodeType"
+    fully_qualified_name: "types.CodeType"
+  }
+  parameters {
+    name: "fun"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_function_defaults"
+  fully_qualified_name: "six.get_function_defaults"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.tuple[Any],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "fun"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_function_globals"
+  fully_qualified_name: "six.get_function_globals"
+  return_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  parameters {
+    name: "fun"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.FunctionType"
+      fully_qualified_name: "types.FunctionType"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iterkeys"
+  fully_qualified_name: "six.iterkeys"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[six._K]"
+    args {
+      pretty_printed_name: "six._K"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "iterkeys"
+  fully_qualified_name: "six.iterkeys"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[six._K]"
+    args {
+      pretty_printed_name: "six._K"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,Any]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "itervalues"
+  fully_qualified_name: "six.itervalues"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[six._V]"
+    args {
+      pretty_printed_name: "six._V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "itervalues"
+  fully_qualified_name: "six.itervalues"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[six._V]"
+    args {
+      pretty_printed_name: "six._V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[Any,six._V]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iteritems"
+  fully_qualified_name: "six.iteritems"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[six._K,six._V]]"
+    args {
+      pretty_printed_name: "Tuple[six._K,six._V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "viewkeys"
+  fully_qualified_name: "six.viewkeys"
+  return_annotation {
+    pretty_printed_name: "typing.KeysView[six._K]"
+    args {
+      pretty_printed_name: "six._K"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.KeysView"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "viewkeys"
+  fully_qualified_name: "six.viewkeys"
+  return_annotation {
+    pretty_printed_name: "typing.KeysView[six._K]"
+    args {
+      pretty_printed_name: "six._K"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.KeysView"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,Any]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "viewvalues"
+  fully_qualified_name: "six.viewvalues"
+  return_annotation {
+    pretty_printed_name: "typing.ValuesView[six._V]"
+    args {
+      pretty_printed_name: "six._V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.ValuesView"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "viewvalues"
+  fully_qualified_name: "six.viewvalues"
+  return_annotation {
+    pretty_printed_name: "typing.ValuesView[six._V]"
+    args {
+      pretty_printed_name: "six._V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.ValuesView"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[Any,six._V]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "viewitems"
+  fully_qualified_name: "six.viewitems"
+  return_annotation {
+    pretty_printed_name: "typing.ItemsView[six._K,six._V]"
+    args {
+      pretty_printed_name: "six._K"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "six._V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.ItemsView"
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[six._K,six._V]"
+      args {
+        pretty_printed_name: "six._K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "six._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "b"
+  fully_qualified_name: "six.b"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "b"
+  fully_qualified_name: "six.b"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "u"
+  fully_qualified_name: "six.u"
+  return_annotation {
+    pretty_printed_name: "builtins.unicode"
+    fully_qualified_name: "builtins.unicode"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "u"
+  fully_qualified_name: "six.u"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "byte2int"
+  fully_qualified_name: "six.byte2int"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "bs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "byte2int"
+  fully_qualified_name: "six.byte2int"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "bs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "indexbytes"
+  fully_qualified_name: "six.indexbytes"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "buf"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "i"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "indexbytes"
+  fully_qualified_name: "six.indexbytes"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "buf"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "i"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iterbytes"
+  fully_qualified_name: "six.iterbytes"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "buf"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "iterbytes"
+  fully_qualified_name: "six.iterbytes"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "buf"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "assertCountEqual"
+  fully_qualified_name: "six.assertCountEqual"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "unittest.TestCase"
+      fully_qualified_name: "unittest.TestCase"
+    }
+  }
+  parameters {
+    name: "first"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[six._T]"
+      args {
+        pretty_printed_name: "six._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "second"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[six._T]"
+      args {
+        pretty_printed_name: "six._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "assertCountEqual"
+  fully_qualified_name: "six.assertCountEqual"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "unittest.case.TestCase"
+      fully_qualified_name: "unittest.case.TestCase"
+    }
+  }
+  parameters {
+    name: "first"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[six._T]"
+      args {
+        pretty_printed_name: "six._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "second"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[six._T]"
+      args {
+        pretty_printed_name: "six._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "assertRegex"
+  fully_qualified_name: "six.assertRegex"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "unittest.TestCase"
+      fully_qualified_name: "unittest.TestCase"
+    }
+  }
+  parameters {
+    name: "text"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "expected_regex"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.Pattern[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Pattern"
+      }
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "assertRegex"
+  fully_qualified_name: "six.assertRegex"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "unittest.case.TestCase"
+      fully_qualified_name: "unittest.case.TestCase"
+    }
+  }
+  parameters {
+    name: "text"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.AnyStr"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "expected_regex"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.AnyStr,typing.Pattern[typing.AnyStr]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.Pattern[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Pattern"
+      }
+    }
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "reraise"
+  fully_qualified_name: "six.reraise"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "tp"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[builtins.BaseException]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "tb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[types.TracebackType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "exec_"
+  fully_qualified_name: "six.exec_"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "_code_"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.unicode,types.CodeType]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+      args {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+    }
+  }
+  parameters {
+    name: "_globs_"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "_locs_"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "raise_from"
+  fully_qualified_name: "six.raise_from"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,Type[builtins.BaseException]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "Type[builtins.BaseException]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+      }
+    }
+  }
+  parameters {
+    name: "from_value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "with_metaclass"
+  fully_qualified_name: "six.with_metaclass"
+  return_annotation {
+    pretty_printed_name: "builtins.type"
+    fully_qualified_name: "builtins.type"
+  }
+  parameters {
+    name: "meta"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "bases"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "add_metaclass"
+  fully_qualified_name: "six.add_metaclass"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "metaclass"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ensure_binary"
+  fully_qualified_name: "six.ensure_binary"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ensure_binary"
+  fully_qualified_name: "six.ensure_binary"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ensure_str"
+  fully_qualified_name: "six.ensure_str"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ensure_str"
+  fully_qualified_name: "six.ensure_str"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ensure_text"
+  fully_qualified_name: "six.ensure_text"
+  return_annotation {
+    pretty_printed_name: "builtins.unicode"
+    fully_qualified_name: "builtins.unicode"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.unicode]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.unicode"
+        fully_qualified_name: "builtins.unicode"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "ensure_text"
+  fully_qualified_name: "six.ensure_text"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  parameters {
+    name: "encoding"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "python_2_unicode_compatible"
+  fully_qualified_name: "six.python_2_unicode_compatible"
+  return_annotation {
+    pretty_printed_name: "six._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "klass"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "six._T"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "add_move"
+  fully_qualified_name: "six.add_move"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "move"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[six.MovedModule,six.MovedAttribute]"
+      kind: UNION
+      args {
+        pretty_printed_name: "six.MovedModule"
+        fully_qualified_name: "six.MovedModule"
+      }
+      args {
+        pretty_printed_name: "six.MovedAttribute"
+        fully_qualified_name: "six.MovedAttribute"
+      }
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "remove_move"
+  fully_qualified_name: "six.remove_move"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "int2byte"
+  fully_qualified_name: "six.int2byte"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "i"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "assertRaisesRegex"
+  fullname: "six.assertRaisesRegex"
+  definitions {
+    name: "assertRaisesRegex"
+    fully_qualified_name: "six.assertRaisesRegex"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.TestCase"
+        fully_qualified_name: "unittest.TestCase"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "assertRaisesRegex"
+    fully_qualified_name: "six.assertRaisesRegex"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.TestCase"
+        fully_qualified_name: "unittest.TestCase"
+      }
+    }
+    parameters {
+      name: "callable_obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "27"
+}
+overloaded_functions {
+  name: "assertRaisesRegex"
+  fullname: "six.assertRaisesRegex"
+  definitions {
+    name: "assertRaisesRegex"
+    fully_qualified_name: "six.assertRaisesRegex"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "assertRaisesRegex"
+    fully_qualified_name: "six.assertRaisesRegex"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "callable_obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "next"
+  fullname: "builtins.next"
+  definitions {
+    name: "next"
+    fully_qualified_name: "builtins.next"
+    return_annotation {
+      pretty_printed_name: "builtins._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__i"
+      type_annotation {
+        pretty_printed_name: "typing.Iterator[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "next"
+    fully_qualified_name: "builtins.next"
+    return_annotation {
+      pretty_printed_name: "Union[builtins._T,builtins._VT]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins._T"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins._VT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__i"
+      type_annotation {
+        pretty_printed_name: "typing.Iterator[builtins._T]"
+        args {
+          pretty_printed_name: "builtins._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins._VT"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "moves"
+  fully_qualified_name: "six.moves"
+  is_imported_module: true
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "__version__"
+  fully_qualified_name: "six.__version__"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY2"
+  fully_qualified_name: "six.PY2"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY3"
+  fully_qualified_name: "six.PY3"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PY34"
+  fully_qualified_name: "six.PY34"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "string_types"
+  fully_qualified_name: "six.string_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[abc.ABCMeta],CallableType[abc.ABCMeta]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[abc.ABCMeta]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+    args {
+      pretty_printed_name: "CallableType[abc.ABCMeta]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+      fully_qualified_name: "abc.ABCMeta"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "string_types"
+  fully_qualified_name: "six.string_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[abc.ABCMeta]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[abc.ABCMeta]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+      fully_qualified_name: "abc.ABCMeta"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "integer_types"
+  fully_qualified_name: "six.integer_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[builtins.type],CallableType[builtins.type]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.type"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "integer_types"
+  fully_qualified_name: "six.integer_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[builtins.type]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "class_types"
+  fully_qualified_name: "six.class_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[builtins.type],CallableType[builtins.type]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.type"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "class_types"
+  fully_qualified_name: "six.class_types"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[builtins.type]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MAXSIZE"
+  fully_qualified_name: "six.MAXSIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "next"
+  fully_qualified_name: "six.next"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "int2byte"
+  fully_qualified_name: "six.int2byte"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+}
+vars {
+  name: "print_"
+  fully_qualified_name: "six.print_"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "unichr"
+  fully_qualified_name: "six.unichr"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "exec_"
+  fully_qualified_name: "six.exec_"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,364 @@
+fully_qualified_name: "tornado.util"
+classes {
+  name: "ObjectDict"
+  fully_qualified_name: "tornado.util.ObjectDict"
+  super_classes: "builtins.dict"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "tornado.util.ObjectDict.__getattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "tornado.util.ObjectDict.__setattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "GzipDecompressor"
+  fully_qualified_name: "tornado.util.GzipDecompressor"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.util.GzipDecompressor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.util.GzipDecompressor"
+        fully_qualified_name: "tornado.util.GzipDecompressor"
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "decompress"
+    fully_qualified_name: "tornado.util.GzipDecompressor.decompress"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "max_length"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "unconsumed_tail"
+    fully_qualified_name: "tornado.util.GzipDecompressor.unconsumed_tail"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "flush"
+    fully_qualified_name: "tornado.util.GzipDecompressor.flush"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "decompressobj"
+    fully_qualified_name: "tornado.util.GzipDecompressor.decompressobj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "Configurable"
+  fully_qualified_name: "tornado.util.Configurable"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "tornado.util.Configurable.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "configurable_base"
+    fully_qualified_name: "tornado.util.Configurable.configurable_base"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  methods {
+    name: "configurable_default"
+    fully_qualified_name: "tornado.util.Configurable.configurable_default"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  methods {
+    name: "initialize"
+    fully_qualified_name: "tornado.util.Configurable.initialize"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "configure"
+    fully_qualified_name: "tornado.util.Configurable.configure"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "impl"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  methods {
+    name: "configured_class"
+    fully_qualified_name: "tornado.util.Configurable.configured_class"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "ArgReplacer"
+  fully_qualified_name: "tornado.util.ArgReplacer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.util.ArgReplacer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.util.ArgReplacer"
+        fully_qualified_name: "tornado.util.ArgReplacer"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_old_value"
+    fully_qualified_name: "tornado.util.ArgReplacer.get_old_value"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "tornado.util.ArgReplacer.replace"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "new_value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "name"
+    fully_qualified_name: "tornado.util.ArgReplacer.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "arg_pos"
+    fully_qualified_name: "tornado.util.ArgReplacer.arg_pos"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+functions {
+  name: "import_object"
+  fully_qualified_name: "tornado.util.import_object"
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "errno_from_exception"
+  fully_qualified_name: "tornado.util.errno_from_exception"
+  parameters {
+    name: "e"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "timedelta_to_seconds"
+  fully_qualified_name: "tornado.util.timedelta_to_seconds"
+  parameters {
+    name: "td"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "doctests"
+  fully_qualified_name: "tornado.util.doctests"
+  valid_for: "27"
+}
+vars {
+  name: "xrange"
+  fully_qualified_name: "tornado.util.xrange"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "unicode_type"
+  fully_qualified_name: "tornado.util.unicode_type"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "basestring_type"
+  fully_qualified_name: "tornado.util.basestring_type"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "bytes_type"
+  fully_qualified_name: "tornado.util.bytes_type"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

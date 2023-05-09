@@ -1,0 +1,463 @@
+fully_qualified_name: "tornado.httpserver"
+classes {
+  name: "HTTPServer"
+  fully_qualified_name: "tornado.httpserver.HTTPServer"
+  super_classes: "tornado.tcpserver.TCPServer"
+  super_classes: "tornado.util.Configurable"
+  super_classes: "tornado.httputil.HTTPServerConnectionDelegate"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.httpserver.HTTPServer"
+        fully_qualified_name: "tornado.httpserver.HTTPServer"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "initialize"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.initialize"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "request_callback"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "no_keep_alive"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "io_loop"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "xheaders"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "ssl_options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "decompress_request"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "chunk_size"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "max_header_size"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "idle_connection_timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "body_timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "max_body_size"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "max_buffer_size"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "configurable_base"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.configurable_base"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  methods {
+    name: "configurable_default"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.configurable_default"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "27"
+  }
+  methods {
+    name: "close_all_connections"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.close_all_connections"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "handle_stream"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.handle_stream"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "start_request"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.start_request"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "server_conn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "request_conn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "on_close"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.on_close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "server_conn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "request_callback"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.request_callback"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "no_keep_alive"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.no_keep_alive"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "xheaders"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.xheaders"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "protocol"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.protocol"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "conn_params"
+    fully_qualified_name: "tornado.httpserver.HTTPServer.conn_params"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "_HTTPRequestContext"
+  fully_qualified_name: "tornado.httpserver._HTTPRequestContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.httpserver._HTTPRequestContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.httpserver._HTTPRequestContext"
+        fully_qualified_name: "tornado.httpserver._HTTPRequestContext"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "address"
+    fully_qualified_name: "tornado.httpserver._HTTPRequestContext.address"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "protocol"
+    fully_qualified_name: "tornado.httpserver._HTTPRequestContext.protocol"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "address_family"
+    fully_qualified_name: "tornado.httpserver._HTTPRequestContext.address_family"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "remote_ip"
+    fully_qualified_name: "tornado.httpserver._HTTPRequestContext.remote_ip"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "_ServerRequestAdapter"
+  fully_qualified_name: "tornado.httpserver._ServerRequestAdapter"
+  super_classes: "tornado.httputil.HTTPMessageDelegate"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "tornado.httpserver._ServerRequestAdapter"
+        fully_qualified_name: "tornado.httpserver._ServerRequestAdapter"
+      }
+    }
+    parameters {
+      name: "server"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "server_conn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "request_conn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "headers_received"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.headers_received"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "start_line"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "data_received"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.data_received"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "chunk"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "finish"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.finish"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "on_connection_close"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.on_connection_close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "server"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.server"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "connection"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.connection"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "request"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.request"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "delegate"
+    fully_qualified_name: "tornado.httpserver._ServerRequestAdapter.delegate"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+vars {
+  name: "HTTPRequest"
+  fully_qualified_name: "tornado.httpserver.HTTPRequest"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

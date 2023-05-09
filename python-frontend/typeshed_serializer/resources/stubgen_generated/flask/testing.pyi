@@ -1,0 +1,29 @@
+import typing as t
+import werkzeug.test
+from .app import Flask as Flask
+from .cli import ScriptInfo as ScriptInfo
+from .sessions import SessionMixin as SessionMixin
+from click.testing import CliRunner
+from types import TracebackType
+from typing import Any
+from werkzeug.test import Client, TestResponse as TestResponse
+
+class EnvironBuilder(werkzeug.test.EnvironBuilder):
+    app: Any
+    def __init__(self, app: Flask, path: str = ..., base_url: t.Optional[str] = ..., subdomain: t.Optional[str] = ..., url_scheme: t.Optional[str] = ..., *args: t.Any, **kwargs: t.Any) -> None: ...
+    def json_dumps(self, obj: t.Any, **kwargs: t.Any) -> str: ...
+
+class FlaskClient(Client):
+    application: Flask
+    preserve_context: bool
+    environ_base: Any
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None: ...
+    def session_transaction(self, *args: t.Any, **kwargs: t.Any) -> t.Generator[SessionMixin, None, None]: ...
+    def open(self, *args: t.Any, buffered: bool = ..., follow_redirects: bool = ..., **kwargs: t.Any) -> TestResponse: ...
+    def __enter__(self) -> FlaskClient: ...
+    def __exit__(self, exc_type: t.Optional[type], exc_value: t.Optional[BaseException], tb: t.Optional[TracebackType]) -> None: ...
+
+class FlaskCliRunner(CliRunner):
+    app: Any
+    def __init__(self, app: Flask, **kwargs: t.Any) -> None: ...
+    def invoke(self, cli: t.Any = ..., args: t.Any = ..., **kwargs: t.Any) -> t.Any: ...

@@ -1,0 +1,319 @@
+fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448"
+classes {
+  name: "Ed448PrivateKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.generate"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.from_private_bytes"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        }
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Ed448PublicKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "from_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.from_public_bytes"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        }
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,237 @@
+fully_qualified_name: "markdown.treeprocessors"
+classes {
+  name: "Treeprocessor"
+  fully_qualified_name: "markdown.treeprocessors.Treeprocessor"
+  super_classes: "markdown.util.Processor"
+  methods {
+    name: "run"
+    fully_qualified_name: "markdown.treeprocessors.Treeprocessor.run"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.treeprocessors.Treeprocessor"
+        fully_qualified_name: "markdown.treeprocessors.Treeprocessor"
+      }
+    }
+    parameters {
+      name: "root"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InlineProcessor"
+  fully_qualified_name: "markdown.treeprocessors.InlineProcessor"
+  super_classes: "markdown.treeprocessors.Treeprocessor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.treeprocessors.InlineProcessor"
+        fully_qualified_name: "markdown.treeprocessors.InlineProcessor"
+      }
+    }
+    parameters {
+      name: "md"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.run"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.treeprocessors.InlineProcessor"
+        fully_qualified_name: "markdown.treeprocessors.InlineProcessor"
+      }
+    }
+    parameters {
+      name: "tree"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "ancestors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "inlinePatterns"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.inlinePatterns"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ancestors"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.ancestors"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stashed_nodes"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.stashed_nodes"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parent_map"
+    fully_qualified_name: "markdown.treeprocessors.InlineProcessor.parent_map"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "PrettifyTreeprocessor"
+  fully_qualified_name: "markdown.treeprocessors.PrettifyTreeprocessor"
+  super_classes: "markdown.treeprocessors.Treeprocessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "build_treeprocessors"
+  fully_qualified_name: "markdown.treeprocessors.build_treeprocessors"
+  parameters {
+    name: "md"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "isString"
+  fully_qualified_name: "markdown.treeprocessors.isString"
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

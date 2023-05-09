@@ -1,0 +1,347 @@
+fully_qualified_name: "yaml.composer"
+classes {
+  name: "ComposerError"
+  fully_qualified_name: "yaml.composer.ComposerError"
+  super_classes: "yaml.error.MarkedYAMLError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Composer"
+  fully_qualified_name: "yaml.composer.Composer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "yaml.composer.Composer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "check_node"
+    fully_qualified_name: "yaml.composer.Composer.check_node"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_node"
+    fully_qualified_name: "yaml.composer.Composer.get_node"
+    return_annotation {
+      pretty_printed_name: "Union[yaml.nodes.Node,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "yaml.nodes.Node"
+        fully_qualified_name: "yaml.nodes.Node"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_single_node"
+    fully_qualified_name: "yaml.composer.Composer.get_single_node"
+    return_annotation {
+      pretty_printed_name: "Union[yaml.nodes.Node,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "yaml.nodes.Node"
+        fully_qualified_name: "yaml.nodes.Node"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compose_document"
+    fully_qualified_name: "yaml.composer.Composer.compose_document"
+    return_annotation {
+      pretty_printed_name: "Union[yaml.nodes.Node,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "yaml.nodes.Node"
+        fully_qualified_name: "yaml.nodes.Node"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compose_node"
+    fully_qualified_name: "yaml.composer.Composer.compose_node"
+    return_annotation {
+      pretty_printed_name: "Union[yaml.nodes.Node,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "yaml.nodes.Node"
+        fully_qualified_name: "yaml.nodes.Node"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[yaml.nodes.Node,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "yaml.nodes.Node"
+          fully_qualified_name: "yaml.nodes.Node"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compose_scalar_node"
+    fully_qualified_name: "yaml.composer.Composer.compose_scalar_node"
+    return_annotation {
+      pretty_printed_name: "yaml.nodes.ScalarNode"
+      fully_qualified_name: "yaml.nodes.ScalarNode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    parameters {
+      name: "anchor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,yaml.nodes.Node]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "yaml.nodes.Node"
+          fully_qualified_name: "yaml.nodes.Node"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compose_sequence_node"
+    fully_qualified_name: "yaml.composer.Composer.compose_sequence_node"
+    return_annotation {
+      pretty_printed_name: "yaml.nodes.SequenceNode"
+      fully_qualified_name: "yaml.nodes.SequenceNode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    parameters {
+      name: "anchor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,yaml.nodes.Node]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "yaml.nodes.Node"
+          fully_qualified_name: "yaml.nodes.Node"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "compose_mapping_node"
+    fully_qualified_name: "yaml.composer.Composer.compose_mapping_node"
+    return_annotation {
+      pretty_printed_name: "yaml.nodes.MappingNode"
+      fully_qualified_name: "yaml.nodes.MappingNode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "yaml.composer.Composer"
+        fully_qualified_name: "yaml.composer.Composer"
+      }
+    }
+    parameters {
+      name: "anchor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,yaml.nodes.Node]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "yaml.nodes.Node"
+          fully_qualified_name: "yaml.nodes.Node"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "anchors"
+    fully_qualified_name: "yaml.composer.Composer.anchors"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,yaml.nodes.Node]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "yaml.nodes.Node"
+        fully_qualified_name: "yaml.nodes.Node"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
