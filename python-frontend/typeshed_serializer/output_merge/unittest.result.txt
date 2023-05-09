@@ -1,0 +1,901 @@
+fully_qualified_name: "unittest.result"
+classes {
+  name: "TestResult"
+  fully_qualified_name: "unittest.result.TestResult"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "unittest.result.TestResult.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "descriptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "verbosity"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "printErrors"
+    fully_qualified_name: "unittest.result.TestResult.printErrors"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "wasSuccessful"
+    fully_qualified_name: "unittest.result.TestResult.wasSuccessful"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "stop"
+    fully_qualified_name: "unittest.result.TestResult.stop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startTest"
+    fully_qualified_name: "unittest.result.TestResult.startTest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "stopTest"
+    fully_qualified_name: "unittest.result.TestResult.stopTest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "startTestRun"
+    fully_qualified_name: "unittest.result.TestResult.startTestRun"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "stopTestRun"
+    fully_qualified_name: "unittest.result.TestResult.stopTestRun"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addError"
+    fully_qualified_name: "unittest.result.TestResult.addError"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "Type[builtins.BaseException]"
+              kind: TYPE
+              args {
+                pretty_printed_name: "builtins.BaseException"
+                fully_qualified_name: "builtins.BaseException"
+              }
+            }
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+            args {
+              pretty_printed_name: "types.TracebackType"
+              fully_qualified_name: "types.TracebackType"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[None,None,None]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        fully_qualified_name: "unittest.result._SysExcInfoType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addFailure"
+    fully_qualified_name: "unittest.result.TestResult.addFailure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "Type[builtins.BaseException]"
+              kind: TYPE
+              args {
+                pretty_printed_name: "builtins.BaseException"
+                fully_qualified_name: "builtins.BaseException"
+              }
+            }
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+            args {
+              pretty_printed_name: "types.TracebackType"
+              fully_qualified_name: "types.TracebackType"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[None,None,None]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        fully_qualified_name: "unittest.result._SysExcInfoType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addSuccess"
+    fully_qualified_name: "unittest.result.TestResult.addSuccess"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addSkip"
+    fully_qualified_name: "unittest.result.TestResult.addSkip"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "reason"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addExpectedFailure"
+    fully_qualified_name: "unittest.result.TestResult.addExpectedFailure"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "Type[builtins.BaseException]"
+              kind: TYPE
+              args {
+                pretty_printed_name: "builtins.BaseException"
+                fully_qualified_name: "builtins.BaseException"
+              }
+            }
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+            args {
+              pretty_printed_name: "types.TracebackType"
+              fully_qualified_name: "types.TracebackType"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[None,None,None]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        fully_qualified_name: "unittest.result._SysExcInfoType"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addUnexpectedSuccess"
+    fully_qualified_name: "unittest.result.TestResult.addUnexpectedSuccess"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "addSubTest"
+    fully_qualified_name: "unittest.result.TestResult.addSubTest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.result.TestResult"
+        fully_qualified_name: "unittest.result.TestResult"
+      }
+    }
+    parameters {
+      name: "test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "subtest"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+    }
+    parameters {
+      name: "err"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType],Tuple[None,None,None],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Type[builtins.BaseException]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "builtins.BaseException"
+              fully_qualified_name: "builtins.BaseException"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+        }
+        args {
+          pretty_printed_name: "Tuple[None,None,None]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "errors"
+    fully_qualified_name: "unittest.result.TestResult.errors"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[unittest.case.TestCase,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failures"
+    fully_qualified_name: "unittest.result.TestResult.failures"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[unittest.case.TestCase,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "skipped"
+    fully_qualified_name: "unittest.result.TestResult.skipped"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[unittest.case.TestCase,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "expectedFailures"
+    fully_qualified_name: "unittest.result.TestResult.expectedFailures"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[unittest.case.TestCase,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[unittest.case.TestCase,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "unittest.case.TestCase"
+          fully_qualified_name: "unittest.case.TestCase"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "unexpectedSuccesses"
+    fully_qualified_name: "unittest.result.TestResult.unexpectedSuccesses"
+    type_annotation {
+      pretty_printed_name: "builtins.list[unittest.case.TestCase]"
+      args {
+        pretty_printed_name: "unittest.case.TestCase"
+        fully_qualified_name: "unittest.case.TestCase"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "shouldStop"
+    fully_qualified_name: "unittest.result.TestResult.shouldStop"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "testsRun"
+    fully_qualified_name: "unittest.result.TestResult.testsRun"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "buffer"
+    fully_qualified_name: "unittest.result.TestResult.buffer"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "failfast"
+    fully_qualified_name: "unittest.result.TestResult.failfast"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tb_locals"
+    fully_qualified_name: "unittest.result.TestResult.tb_locals"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "failfast"
+  fully_qualified_name: "unittest.result.failfast"
+  return_annotation {
+    pretty_printed_name: "unittest.result._F"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "method"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "unittest.result._F"
+      kind: TYPE_VAR
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "unittest"
+  fully_qualified_name: "unittest"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

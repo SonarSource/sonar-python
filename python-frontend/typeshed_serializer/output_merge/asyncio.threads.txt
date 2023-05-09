@@ -1,0 +1,51 @@
+fully_qualified_name: "asyncio.threads"
+functions {
+  name: "to_thread"
+  fully_qualified_name: "asyncio.threads.to_thread"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.threads._T]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "asyncio.threads._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "__func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  is_asynchronous: true
+  valid_for: "39"
+  valid_for: "310"
+}

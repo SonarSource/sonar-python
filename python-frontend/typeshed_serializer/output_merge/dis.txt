@@ -1,0 +1,2378 @@
+fully_qualified_name: "dis"
+classes {
+  name: "Instruction"
+  fully_qualified_name: "dis.Instruction"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "dis.Instruction._replace"
+    return_annotation {
+      pretty_printed_name: "dis.Instruction._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "dis.Instruction._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "opname"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opcode"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "arg"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "argval"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "argrepr"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "offset"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "starts_line"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "is_jump_target"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "dis.Instruction.__new__"
+    return_annotation {
+      pretty_printed_name: "dis.Instruction._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[dis.Instruction._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "dis.Instruction._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "opname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "opcode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "arg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "argval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "argrepr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "starts_line"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "is_jump_target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "dis.Instruction._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "dis.Instruction._NT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "dis.Instruction._make"
+    return_annotation {
+      pretty_printed_name: "dis.Instruction._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[dis.Instruction._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "dis.Instruction._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "len"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "opname"
+    fully_qualified_name: "dis.Instruction.opname"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "opcode"
+    fully_qualified_name: "dis.Instruction.opcode"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "arg"
+    fully_qualified_name: "dis.Instruction.arg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "argval"
+    fully_qualified_name: "dis.Instruction.argval"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "argrepr"
+    fully_qualified_name: "dis.Instruction.argrepr"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "offset"
+    fully_qualified_name: "dis.Instruction.offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "starts_line"
+    fully_qualified_name: "dis.Instruction.starts_line"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_jump_target"
+    fully_qualified_name: "dis.Instruction.is_jump_target"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "39"
+    valid_for: "310"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "dis.Instruction._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "dis.Instruction._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "dis.Instruction._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "dis.Instruction._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "dis.Instruction.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Bytecode"
+  fully_qualified_name: "dis.Bytecode"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "dis.Bytecode.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "dis.Bytecode"
+        fully_qualified_name: "dis.Bytecode"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "types.MethodType"
+                fully_qualified_name: "types.MethodType"
+              }
+              args {
+                pretty_printed_name: "types.FunctionType"
+                fully_qualified_name: "types.FunctionType"
+              }
+              args {
+                pretty_printed_name: "types.CodeType"
+                fully_qualified_name: "types.CodeType"
+              }
+              args {
+                pretty_printed_name: "builtins.type"
+                fully_qualified_name: "builtins.type"
+              }
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+            }
+            fully_qualified_name: "dis._have_code"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "dis._have_code_or_string"
+      }
+    }
+    parameters {
+      name: "first_line"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "current_offset"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "dis.Bytecode.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,builtins.int,Union[builtins.int,None],Any,builtins.str,builtins.int,Union[builtins.int,None],builtins.bool]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.int,Union[builtins.int,None],Any,builtins.str,builtins.int,Union[builtins.int,None],builtins.bool]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "dis.Bytecode"
+        fully_qualified_name: "dis.Bytecode"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "dis.Bytecode.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "dis.Bytecode"
+        fully_qualified_name: "dis.Bytecode"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "info"
+    fully_qualified_name: "dis.Bytecode.info"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "dis.Bytecode"
+        fully_qualified_name: "dis.Bytecode"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dis"
+    fully_qualified_name: "dis.Bytecode.dis"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "dis.Bytecode"
+        fully_qualified_name: "dis.Bytecode"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_traceback"
+    fully_qualified_name: "dis.Bytecode.from_traceback"
+    return_annotation {
+      pretty_printed_name: "dis.Bytecode"
+      fully_qualified_name: "dis.Bytecode"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[dis.Bytecode]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "dis.Bytecode"
+          fully_qualified_name: "dis.Bytecode"
+        }
+      }
+    }
+    parameters {
+      name: "tb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "codeobj"
+    fully_qualified_name: "dis.Bytecode.codeobj"
+    type_annotation {
+      pretty_printed_name: "types.CodeType"
+      fully_qualified_name: "types.CodeType"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "first_line"
+    fully_qualified_name: "dis.Bytecode.first_line"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "findlabels"
+  fully_qualified_name: "dis.findlabels"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.UnboundMethodType"
+          fully_qualified_name: "types.UnboundMethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "findlabels"
+  fully_qualified_name: "dis.findlabels"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "findlinestarts"
+  fully_qualified_name: "dis.findlinestarts"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[builtins.int,builtins.int]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.UnboundMethodType"
+          fully_qualified_name: "types.UnboundMethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  valid_for: "27"
+}
+functions {
+  name: "findlinestarts"
+  fully_qualified_name: "dis.findlinestarts"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[builtins.int,builtins.int]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "code"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dis"
+  fully_qualified_name: "dis.dis"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "types.UnboundMethodType"
+              fully_qualified_name: "types.UnboundMethodType"
+            }
+            args {
+              pretty_printed_name: "types.FunctionType"
+              fully_qualified_name: "types.FunctionType"
+            }
+            args {
+              pretty_printed_name: "types.CodeType"
+              fully_qualified_name: "types.CodeType"
+            }
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "CallableType[builtins.function]"
+              kind: CALLABLE
+              args {
+                pretty_printed_name: "builtins.function"
+                fully_qualified_name: "builtins.function"
+              }
+            }
+          }
+          fully_qualified_name: "dis._have_code"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "dis._have_code_or_string"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "dis"
+  fully_qualified_name: "dis.dis"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function],builtins.str,builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.MethodType"
+        fully_qualified_name: "types.MethodType"
+      }
+      args {
+        pretty_printed_name: "types.FunctionType"
+        fully_qualified_name: "types.FunctionType"
+      }
+      args {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+}
+functions {
+  name: "dis"
+  fully_qualified_name: "dis.dis"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function],builtins.str,builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.MethodType"
+        fully_qualified_name: "types.MethodType"
+      }
+      args {
+        pretty_printed_name: "types.FunctionType"
+        fully_qualified_name: "types.FunctionType"
+      }
+      args {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "depth"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "distb"
+  fully_qualified_name: "dis.distb"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "tb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "types.TracebackType"
+      fully_qualified_name: "types.TracebackType"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "distb"
+  fully_qualified_name: "dis.distb"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "tb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[types.TracebackType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "disassemble"
+  fully_qualified_name: "dis.disassemble"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "co"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.UnboundMethodType"
+          fully_qualified_name: "types.UnboundMethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "lasti"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "disassemble"
+  fully_qualified_name: "dis.disassemble"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "co"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "lasti"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "disco"
+  fully_qualified_name: "dis.disco"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "co"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.UnboundMethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.UnboundMethodType"
+          fully_qualified_name: "types.UnboundMethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "lasti"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "disco"
+  fully_qualified_name: "dis.disco"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "co"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "lasti"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "stack_effect"
+  fully_qualified_name: "opcode.stack_effect"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__opcode"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__oparg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+}
+functions {
+  name: "stack_effect"
+  fully_qualified_name: "opcode.stack_effect"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "__opcode"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__oparg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "jump"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "pretty_flags"
+  fully_qualified_name: "dis.pretty_flags"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "flags"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "code_info"
+  fully_qualified_name: "dis.code_info"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.bytes]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]],builtins.str,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "types.MethodType"
+              fully_qualified_name: "types.MethodType"
+            }
+            args {
+              pretty_printed_name: "types.FunctionType"
+              fully_qualified_name: "types.FunctionType"
+            }
+            args {
+              pretty_printed_name: "types.CodeType"
+              fully_qualified_name: "types.CodeType"
+            }
+            args {
+              pretty_printed_name: "builtins.type"
+              fully_qualified_name: "builtins.type"
+            }
+            args {
+              pretty_printed_name: "CallableType[builtins.function]"
+              kind: CALLABLE
+              args {
+                pretty_printed_name: "builtins.function"
+                fully_qualified_name: "builtins.function"
+              }
+            }
+          }
+          fully_qualified_name: "dis._have_code"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+      fully_qualified_name: "dis._have_code_or_string"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "show_code"
+  fully_qualified_name: "dis.show_code"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "co"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "file"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_instructions"
+  fully_qualified_name: "dis.get_instructions"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[builtins.str,builtins.int,Union[builtins.int,None],Any,builtins.str,builtins.int,Union[builtins.int,None],builtins.bool]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int,Union[builtins.int,None],Any,builtins.str,builtins.int,Union[builtins.int,None],builtins.bool]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[types.MethodType,types.FunctionType,types.CodeType,builtins.type,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.MethodType"
+          fully_qualified_name: "types.MethodType"
+        }
+        args {
+          pretty_printed_name: "types.FunctionType"
+          fully_qualified_name: "types.FunctionType"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "dis._have_code"
+    }
+  }
+  parameters {
+    name: "first_line"
+    kind: KEYWORD_ONLY
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EXTENDED_ARG"
+  fully_qualified_name: "opcode.EXTENDED_ARG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HAVE_ARGUMENT"
+  fully_qualified_name: "opcode.HAVE_ARGUMENT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "cmp_op"
+  fully_qualified_name: "opcode.cmp_op"
+  type_annotation {
+    pretty_printed_name: "typing.Sequence[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Sequence"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hascompare"
+  fully_qualified_name: "opcode.hascompare"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasconst"
+  fully_qualified_name: "opcode.hasconst"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasfree"
+  fully_qualified_name: "opcode.hasfree"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasjabs"
+  fully_qualified_name: "opcode.hasjabs"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasjrel"
+  fully_qualified_name: "opcode.hasjrel"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "haslocal"
+  fully_qualified_name: "opcode.haslocal"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasname"
+  fully_qualified_name: "opcode.hasname"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "opmap"
+  fully_qualified_name: "opcode.opmap"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "opname"
+  fully_qualified_name: "opcode.opname"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "COMPILER_FLAG_NAMES"
+  fully_qualified_name: "dis.COMPILER_FLAG_NAMES"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "27"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "hasnargs"
+  fully_qualified_name: "opcode.hasnargs"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.int]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

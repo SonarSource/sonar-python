@@ -1,0 +1,298 @@
+fully_qualified_name: "multiprocessing.util"
+classes {
+  name: "Finalize"
+  fully_qualified_name: "multiprocessing.util.Finalize"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.util.Finalize.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "exitpriority"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "multiprocessing.util.Finalize.__call__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+    parameters {
+      name: "wr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "multiprocessing.util.Finalize.cancel"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "still_active"
+    fully_qualified_name: "multiprocessing.util.Finalize.still_active"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "ForkAwareThreadLock"
+  fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+classes {
+  name: "ForkAwareLocal"
+  fully_qualified_name: "multiprocessing.util.ForkAwareLocal"
+  super_classes: "threading.local"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.util.ForkAwareLocal.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "multiprocessing.util.ForkAwareLocal.__reduce__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "sub_debug"
+  fully_qualified_name: "multiprocessing.util.sub_debug"
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  valid_for: "27"
+}
+functions {
+  name: "debug"
+  fully_qualified_name: "multiprocessing.util.debug"
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  valid_for: "27"
+}
+functions {
+  name: "info"
+  fully_qualified_name: "multiprocessing.util.info"
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  valid_for: "27"
+}
+functions {
+  name: "sub_warning"
+  fully_qualified_name: "multiprocessing.util.sub_warning"
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  valid_for: "27"
+}
+functions {
+  name: "get_logger"
+  fully_qualified_name: "multiprocessing.util.get_logger"
+  valid_for: "27"
+}
+functions {
+  name: "log_to_stderr"
+  fully_qualified_name: "multiprocessing.util.log_to_stderr"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "level"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "27"
+}
+functions {
+  name: "get_temp_dir"
+  fully_qualified_name: "multiprocessing.util.get_temp_dir"
+  valid_for: "27"
+}
+functions {
+  name: "register_after_fork"
+  fully_qualified_name: "multiprocessing.util.register_after_fork"
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "is_exiting"
+  fully_qualified_name: "multiprocessing.util.is_exiting"
+  valid_for: "27"
+}
+vars {
+  name: "SUBDEBUG"
+  fully_qualified_name: "multiprocessing.util.SUBDEBUG"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SUBWARNING"
+  fully_qualified_name: "multiprocessing.util.SUBWARNING"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

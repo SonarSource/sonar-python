@@ -1,0 +1,489 @@
+fully_qualified_name: "multiprocessing.shared_memory"
+classes {
+  name: "SharedMemory"
+  fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "create"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "buf"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.buf"
+    return_annotation {
+      pretty_printed_name: "builtins.memoryview"
+      fully_qualified_name: "builtins.memoryview"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unlink"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.unlink"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ShareableList"
+  fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[multiprocessing.shared_memory._SLT],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[multiprocessing.shared_memory._SLT]"
+          args {
+            pretty_printed_name: "multiprocessing.shared_memory._SLT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "name"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__getitem__"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.shared_memory._SLT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "position"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "position"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[multiprocessing.shared_memory._S,builtins.tuple[multiprocessing.shared_memory._SLT]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "multiprocessing.shared_memory._S"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._S"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "format"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.format"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.count"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__class_getitem__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__class_getitem__"
+    return_annotation {
+      pretty_printed_name: "types.GenericAlias"
+      fully_qualified_name: "types.GenericAlias"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+          args {
+            pretty_printed_name: "multiprocessing.shared_memory._SLT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+        }
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "shm"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.shm"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+      fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+    }
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
