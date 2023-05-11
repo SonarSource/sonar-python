@@ -1,0 +1,229 @@
+fully_qualified_name: "flask.globals"
+classes {
+  name: "_FakeStack"
+  fully_qualified_name: "flask.globals._FakeStack"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.globals._FakeStack.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.globals._FakeStack"
+        fully_qualified_name: "flask.globals._FakeStack"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "cv"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.ContextVar[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+    }
+  }
+  methods {
+    name: "top"
+    fully_qualified_name: "flask.globals._FakeStack.top"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.globals._FakeStack"
+        fully_qualified_name: "flask.globals._FakeStack"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "flask.globals._FakeStack.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "cv"
+    fully_qualified_name: "flask.globals._FakeStack.cv"
+    type_annotation {
+      pretty_printed_name: "contextvars.ContextVar[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "contextvars.ContextVar"
+    }
+  }
+}
+functions {
+  name: "__getattr__"
+  fully_qualified_name: "flask.globals.__getattr__"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.globals.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_no_app_msg"
+  fully_qualified_name: "flask.globals._no_app_msg"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_cv_app"
+  fully_qualified_name: "flask.globals._cv_app"
+  type_annotation {
+    pretty_printed_name: "contextvars.ContextVar[flask.ctx.AppContext]"
+    args {
+      pretty_printed_name: "flask.ctx.AppContext"
+      fully_qualified_name: "flask.ctx.AppContext"
+    }
+    fully_qualified_name: "contextvars.ContextVar"
+  }
+}
+vars {
+  name: "__app_ctx_stack"
+  fully_qualified_name: "flask.globals.__app_ctx_stack"
+  type_annotation {
+    pretty_printed_name: "flask.globals._FakeStack"
+    fully_qualified_name: "flask.globals._FakeStack"
+  }
+}
+vars {
+  name: "app_ctx"
+  fully_qualified_name: "flask.globals.app_ctx"
+  type_annotation {
+    pretty_printed_name: "flask.ctx.AppContext"
+    fully_qualified_name: "flask.ctx.AppContext"
+  }
+}
+vars {
+  name: "current_app"
+  fully_qualified_name: "flask.globals.current_app"
+  type_annotation {
+    pretty_printed_name: "flask.app.Flask"
+    fully_qualified_name: "flask.app.Flask"
+  }
+}
+vars {
+  name: "g"
+  fully_qualified_name: "flask.globals.g"
+  type_annotation {
+    pretty_printed_name: "flask.ctx._AppCtxGlobals"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals"
+  }
+}
+vars {
+  name: "_no_req_msg"
+  fully_qualified_name: "flask.globals._no_req_msg"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_cv_request"
+  fully_qualified_name: "flask.globals._cv_request"
+  type_annotation {
+    pretty_printed_name: "contextvars.ContextVar[flask.ctx.RequestContext]"
+    args {
+      pretty_printed_name: "flask.ctx.RequestContext"
+      fully_qualified_name: "flask.ctx.RequestContext"
+    }
+    fully_qualified_name: "contextvars.ContextVar"
+  }
+}
+vars {
+  name: "__request_ctx_stack"
+  fully_qualified_name: "flask.globals.__request_ctx_stack"
+  type_annotation {
+    pretty_printed_name: "flask.globals._FakeStack"
+    fully_qualified_name: "flask.globals._FakeStack"
+  }
+}
+vars {
+  name: "request_ctx"
+  fully_qualified_name: "flask.globals.request_ctx"
+  type_annotation {
+    pretty_printed_name: "flask.ctx.RequestContext"
+    fully_qualified_name: "flask.ctx.RequestContext"
+  }
+}
+vars {
+  name: "request"
+  fully_qualified_name: "flask.globals.request"
+  type_annotation {
+    pretty_printed_name: "flask.wrappers.Request"
+    fully_qualified_name: "flask.wrappers.Request"
+  }
+}
+vars {
+  name: "session"
+  fully_qualified_name: "flask.globals.session"
+  type_annotation {
+    pretty_printed_name: "flask.sessions.SessionMixin"
+    fully_qualified_name: "flask.sessions.SessionMixin"
+  }
+}

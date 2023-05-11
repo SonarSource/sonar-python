@@ -1,0 +1,890 @@
+fully_qualified_name: "flask.sessions"
+classes {
+  name: "SessionMixin"
+  fully_qualified_name: "flask.sessions.SessionMixin"
+  super_classes: "typing.MutableMapping"
+  overloaded_methods {
+    name: "permanent"
+    fullname: "flask.sessions.SessionMixin.permanent"
+    definitions {
+      name: "permanent"
+      fully_qualified_name: "flask.sessions.SessionMixin.permanent"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "flask.sessions.SessionMixin"
+          fully_qualified_name: "flask.sessions.SessionMixin"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "permanent"
+      fully_qualified_name: "flask.sessions.SessionMixin.permanent"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "flask.sessions.SessionMixin"
+          fully_qualified_name: "flask.sessions.SessionMixin"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "permanent.setter"
+    }
+  }
+  attributes {
+    name: "new"
+    fully_qualified_name: "flask.sessions.SessionMixin.new"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "modified"
+    fully_qualified_name: "flask.sessions.SessionMixin.modified"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "accessed"
+    fully_qualified_name: "flask.sessions.SessionMixin.accessed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "SecureCookieSession"
+  fully_qualified_name: "flask.sessions.SecureCookieSession"
+  super_classes: "werkzeug.datastructures.structures.CallbackDict"
+  super_classes: "flask.sessions.SessionMixin"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSession"
+        fully_qualified_name: "flask.sessions.SecureCookieSession"
+      }
+    }
+    parameters {
+      name: "initial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSession"
+        fully_qualified_name: "flask.sessions.SecureCookieSession"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.get"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSession"
+        fully_qualified_name: "flask.sessions.SecureCookieSession"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.setdefault"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSession"
+        fully_qualified_name: "flask.sessions.SecureCookieSession"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "modified"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.modified"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "accessed"
+    fully_qualified_name: "flask.sessions.SecureCookieSession.accessed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "NullSession"
+  fully_qualified_name: "flask.sessions.NullSession"
+  super_classes: "flask.sessions.SecureCookieSession"
+  methods {
+    name: "_fail"
+    fully_qualified_name: "flask.sessions.NullSession._fail"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.NullSession"
+        fully_qualified_name: "flask.sessions.NullSession"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "__setitem__"
+    fully_qualified_name: "flask.sessions.NullSession.__setitem__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__delitem__"
+    fully_qualified_name: "flask.sessions.NullSession.__delitem__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "clear"
+    fully_qualified_name: "flask.sessions.NullSession.clear"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "pop"
+    fully_qualified_name: "flask.sessions.NullSession.pop"
+  }
+  attributes {
+    name: "popitem"
+    fully_qualified_name: "flask.sessions.NullSession.popitem"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "update"
+    fully_qualified_name: "flask.sessions.NullSession.update"
+  }
+  attributes {
+    name: "setdefault"
+    fully_qualified_name: "flask.sessions.NullSession.setdefault"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "SessionInterface"
+  fully_qualified_name: "flask.sessions.SessionInterface"
+  super_classes: "builtins.object"
+  methods {
+    name: "make_null_session"
+    fully_qualified_name: "flask.sessions.SessionInterface.make_null_session"
+    return_annotation {
+      pretty_printed_name: "flask.sessions.NullSession"
+      fully_qualified_name: "flask.sessions.NullSession"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "is_null_session"
+    fully_qualified_name: "flask.sessions.SessionInterface.is_null_session"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_name"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_domain"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_domain"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_path"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_path"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_httponly"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_httponly"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_secure"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_secure"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_cookie_samesite"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_cookie_samesite"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "get_expiration_time"
+    fully_qualified_name: "flask.sessions.SessionInterface.get_expiration_time"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "session"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+    }
+  }
+  methods {
+    name: "should_set_cookie"
+    fully_qualified_name: "flask.sessions.SessionInterface.should_set_cookie"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "session"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+    }
+  }
+  methods {
+    name: "open_session"
+    fully_qualified_name: "flask.sessions.SessionInterface.open_session"
+    return_annotation {
+      pretty_printed_name: "Union[flask.sessions.SessionMixin,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+  }
+  methods {
+    name: "save_session"
+    fully_qualified_name: "flask.sessions.SessionInterface.save_session"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionInterface"
+        fully_qualified_name: "flask.sessions.SessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "session"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Response"
+        fully_qualified_name: "flask.wrappers.Response"
+      }
+    }
+  }
+  attributes {
+    name: "null_session_class"
+    fully_qualified_name: "flask.sessions.SessionInterface.null_session_class"
+    type_annotation {
+      pretty_printed_name: "CallableType[abc.ABCMeta]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+  }
+  attributes {
+    name: "pickle_based"
+    fully_qualified_name: "flask.sessions.SessionInterface.pickle_based"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "SecureCookieSessionInterface"
+  fully_qualified_name: "flask.sessions.SecureCookieSessionInterface"
+  super_classes: "flask.sessions.SessionInterface"
+  methods {
+    name: "get_signing_serializer"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.get_signing_serializer"
+    return_annotation {
+      pretty_printed_name: "Union[itsdangerous.url_safe.URLSafeTimedSerializer,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "itsdangerous.url_safe.URLSafeTimedSerializer"
+        fully_qualified_name: "itsdangerous.url_safe.URLSafeTimedSerializer"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSessionInterface"
+        fully_qualified_name: "flask.sessions.SecureCookieSessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "open_session"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.open_session"
+    return_annotation {
+      pretty_printed_name: "Union[flask.sessions.SecureCookieSession,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "flask.sessions.SecureCookieSession"
+        fully_qualified_name: "flask.sessions.SecureCookieSession"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSessionInterface"
+        fully_qualified_name: "flask.sessions.SecureCookieSessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Request"
+        fully_qualified_name: "flask.wrappers.Request"
+      }
+    }
+  }
+  methods {
+    name: "save_session"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.save_session"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SecureCookieSessionInterface"
+        fully_qualified_name: "flask.sessions.SecureCookieSessionInterface"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "session"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.wrappers.Response"
+        fully_qualified_name: "flask.wrappers.Response"
+      }
+    }
+  }
+  attributes {
+    name: "salt"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.salt"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_method"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.digest_method"
+    type_annotation {
+      pretty_printed_name: "builtins.staticmethod[Unknown]"
+      args {
+      }
+      args {
+        pretty_printed_name: "hashlib._Hash"
+        fully_qualified_name: "hashlib._Hash"
+      }
+      fully_qualified_name: "builtins.staticmethod"
+    }
+  }
+  attributes {
+    name: "key_derivation"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.key_derivation"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "serializer"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.serializer"
+    type_annotation {
+      pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
+      fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
+    }
+  }
+  attributes {
+    name: "session_class"
+    fully_qualified_name: "flask.sessions.SecureCookieSessionInterface.session_class"
+    type_annotation {
+      pretty_printed_name: "CallableType[abc.ABCMeta]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.sessions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "session_json_serializer"
+  fully_qualified_name: "flask.sessions.session_json_serializer"
+  type_annotation {
+    pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
+  }
+}

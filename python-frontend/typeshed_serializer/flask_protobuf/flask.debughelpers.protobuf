@@ -1,0 +1,165 @@
+fully_qualified_name: "flask.debughelpers"
+classes {
+  name: "UnexpectedUnicodeError"
+  fully_qualified_name: "flask.debughelpers.UnexpectedUnicodeError"
+  super_classes: "builtins.AssertionError"
+  super_classes: "builtins.UnicodeError"
+}
+classes {
+  name: "DebugFilesKeyError"
+  fully_qualified_name: "flask.debughelpers.DebugFilesKeyError"
+  super_classes: "builtins.KeyError"
+  super_classes: "builtins.AssertionError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.debughelpers.DebugFilesKeyError.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "flask.debughelpers.DebugFilesKeyError.__str__"
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "msg"
+    fully_qualified_name: "flask.debughelpers.DebugFilesKeyError.msg"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "FormDataRoutingRedirect"
+  fully_qualified_name: "flask.debughelpers.FormDataRoutingRedirect"
+  super_classes: "builtins.AssertionError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.debughelpers.FormDataRoutingRedirect.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "newcls@82"
+  fully_qualified_name: "flask.debughelpers.newcls@82"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "flask.debughelpers.newcls@82.__getitem__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+}
+functions {
+  name: "attach_enctype_error_multidict"
+  fully_qualified_name: "flask.debughelpers.attach_enctype_error_multidict"
+  parameters {
+    name: "request"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_dump_loader_info"
+  fully_qualified_name: "flask.debughelpers._dump_loader_info"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[Any,Any,Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "loader"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "explain_template_loading_attempts"
+  fully_qualified_name: "flask.debughelpers.explain_template_loading_attempts"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "app"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+  parameters {
+    name: "template"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "attempts"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.debughelpers.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
