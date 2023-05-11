@@ -45,7 +45,6 @@ classes {
           kind: NONE
         }
       }
-      has_default: true
     }
   }
   methods {
@@ -78,7 +77,6 @@ classes {
         pretty_printed_name: "Any"
         kind: ANY
       }
-      has_default: true
     }
   }
   methods {
@@ -117,8 +115,20 @@ classes {
     name: "get_converter"
     fully_qualified_name: "flask.config.ConfigAttribute.get_converter"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
   }
 }
@@ -172,7 +182,6 @@ classes {
           kind: NONE
         }
       }
-      has_default: true
     }
   }
   methods {
@@ -205,7 +214,6 @@ classes {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
   }
   methods {
@@ -230,11 +238,10 @@ classes {
         pretty_printed_name: "builtins.str"
         fully_qualified_name: "builtins.str"
       }
-      has_default: true
     }
     parameters {
       name: "loads"
-      kind: KEYWORD_ONLY
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "CallableType[builtins.function]"
         kind: CALLABLE
@@ -243,7 +250,6 @@ classes {
           fully_qualified_name: "builtins.function"
         }
       }
-      has_default: true
     }
   }
   methods {
@@ -276,7 +282,6 @@ classes {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
   }
   methods {
@@ -353,7 +358,14 @@ classes {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
     }
   }
   methods {
@@ -394,11 +406,10 @@ classes {
           kind: NONE
         }
       }
-      has_default: true
     }
     parameters {
       name: "kwargs"
-      kind: VAR_KEYWORD
+      kind: POSITIONAL_OR_KEYWORD
       type_annotation {
         pretty_printed_name: "Any"
         kind: ANY
@@ -443,7 +454,6 @@ classes {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
     }
     parameters {
       name: "trim_namespace"
@@ -452,16 +462,46 @@ classes {
         pretty_printed_name: "builtins.bool"
         fully_qualified_name: "builtins.bool"
       }
-      has_default: true
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "flask.config.Config.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.config.Config"
+        fully_qualified_name: "flask.config.Config"
+      }
     }
   }
   attributes {
     name: "root_path"
     fully_qualified_name: "flask.config.Config.root_path"
     type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.config.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
       pretty_printed_name: "Any"
       kind: ANY
     }
+    fully_qualified_name: "builtins.dict"
   }
 }
 vars {
