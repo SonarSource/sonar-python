@@ -123,6 +123,20 @@ def serialize_custom_stubs(output_dir_name="output", python_version=(3, 8), is_d
         symbols.save_module(module_symbol, "custom_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
 
 
+def serialize_importer(output_dir_name="output_importer_binary", python_version=(3, 8), is_debug=False):
+    file_path = os.path.join(CURRENT_PATH, "import_everything.py")
+    fq_module_name = "import_everything"
+    opt = get_options(python_version)
+    source = build.BuildSource(file_path, module=fq_module_name)
+    build_result = build.build([source], options=opt)
+    for file in build_result.files:
+        if file == SONAR_CUSTOM_BASE_STUB_MODULE:
+            continue
+        current_file = build_result.files.get(file)
+        module_symbol = symbols.ModuleSymbol(current_file)
+        symbols.save_module(module_symbol, "custom_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
+
+
 def serialize_stubgen_generated(output_dir_name="output_stubgen_generated", python_version=(3, 8), is_debug=False):
     path = os.path.join(CURRENT_PATH, STUBGEN_GENERATED_PATH)
     opt = get_options(python_version)
@@ -165,10 +179,11 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 def main():
     # save_merged_symbols()
-    save_merged_symbols(is_third_parties=True, is_debug=True)
+    #save_merged_symbols(is_third_parties=True, is_debug=True)
     # serialize_custom_stubs()
     # serialize_typeshed_stdlib(is_debug=True)
-    serialize_stubgen_generated(is_debug=True)
+    #serialize_stubgen_generated(is_debug=True)
+    serialize_importer(is_debug=True)
 
 
 if __name__ == '__main__':
