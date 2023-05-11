@@ -1,282 +1,89 @@
 fully_qualified_name: "flask.signals"
-classes {
-  name: "Namespace"
-  fully_qualified_name: "flask.signals.Namespace"
-  super_classes: "builtins.object"
-  methods {
-    name: "signal"
-    fully_qualified_name: "flask.signals.Namespace.signal"
-    return_annotation {
-      pretty_printed_name: "flask.signals._FakeSignal"
-      fully_qualified_name: "flask.signals._FakeSignal"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.signals.Namespace"
-        fully_qualified_name: "flask.signals.Namespace"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "doc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
+functions {
+  name: "__getattr__"
+  fully_qualified_name: "flask.signals.__getattr__"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
   }
-}
-classes {
-  name: "_FakeSignal"
-  fully_qualified_name: "flask.signals._FakeSignal"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "flask.signals._FakeSignal.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.signals._FakeSignal"
-        fully_qualified_name: "flask.signals._FakeSignal"
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "doc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-  }
-  methods {
-    name: "send"
-    fully_qualified_name: "flask.signals._FakeSignal.send"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.signals._FakeSignal"
-        fully_qualified_name: "flask.signals._FakeSignal"
-      }
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  attributes {
+  parameters {
     name: "name"
-    fully_qualified_name: "flask.signals._FakeSignal.name"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "connect"
-    fully_qualified_name: "flask.signals._FakeSignal.connect"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "connect_via"
-    fully_qualified_name: "flask.signals._FakeSignal.connect_via"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "connected_to"
-    fully_qualified_name: "flask.signals._FakeSignal.connected_to"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "temporarily_connected_to"
-    fully_qualified_name: "flask.signals._FakeSignal.temporarily_connected_to"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "disconnect"
-    fully_qualified_name: "flask.signals._FakeSignal.disconnect"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "has_receivers_for"
-    fully_qualified_name: "flask.signals._FakeSignal.has_receivers_for"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "receivers_for"
-    fully_qualified_name: "flask.signals._FakeSignal.receivers_for"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
   }
 }
 vars {
-  name: "t"
-  fully_qualified_name: "typing"
-  is_imported_module: true
-}
-vars {
-  name: "signals_available"
-  fully_qualified_name: "flask.signals.signals_available"
+  name: "_signals"
+  fully_qualified_name: "flask.signals._signals"
   type_annotation {
-    pretty_printed_name: "builtins.bool"
-    fully_qualified_name: "builtins.bool"
-  }
-}
-vars {
-  name: "template_rendered"
-  fully_qualified_name: "flask.signals.template_rendered"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "before_render_template"
-  fully_qualified_name: "flask.signals.before_render_template"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "request_started"
-  fully_qualified_name: "flask.signals.request_started"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "request_finished"
-  fully_qualified_name: "flask.signals.request_finished"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "request_tearing_down"
-  fully_qualified_name: "flask.signals.request_tearing_down"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "got_request_exception"
-  fully_qualified_name: "flask.signals.got_request_exception"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "appcontext_tearing_down"
-  fully_qualified_name: "flask.signals.appcontext_tearing_down"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "appcontext_pushed"
-  fully_qualified_name: "flask.signals.appcontext_pushed"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "__"
   }
 }
 vars {
   name: "appcontext_popped"
   fully_qualified_name: "flask.signals.appcontext_popped"
   type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "appcontext_pushed"
+  fully_qualified_name: "flask.signals.appcontext_pushed"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "appcontext_tearing_down"
+  fully_qualified_name: "flask.signals.appcontext_tearing_down"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "before_render_template"
+  fully_qualified_name: "flask.signals.before_render_template"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "got_request_exception"
+  fully_qualified_name: "flask.signals.got_request_exception"
+  type_annotation {
+    pretty_printed_name: "__"
   }
 }
 vars {
   name: "message_flashed"
   fully_qualified_name: "flask.signals.message_flashed"
   type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "request_finished"
+  fully_qualified_name: "flask.signals.request_finished"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "request_started"
+  fully_qualified_name: "flask.signals.request_started"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "request_tearing_down"
+  fully_qualified_name: "flask.signals.request_tearing_down"
+  type_annotation {
+    pretty_printed_name: "__"
+  }
+}
+vars {
+  name: "template_rendered"
+  fully_qualified_name: "flask.signals.template_rendered"
+  type_annotation {
+    pretty_printed_name: "__"
   }
 }

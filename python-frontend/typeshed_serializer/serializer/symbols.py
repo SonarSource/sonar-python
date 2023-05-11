@@ -70,19 +70,20 @@ class TypeDescriptor:
         if isinstance(_type, mpt.Instance):
             self.kind = TypeKind.INSTANCE
             if _type.args is not None and len(_type.args) > 0:
-                items = [TypeDescriptor(t) for t in _type.args]
-                item_names = [i.pretty_printed_name for i in items]
+                items = [TypeDescriptor(t) for t in _type.args if not hasattr(t, "type") or not isinstance(t.type, mpn.FakeInfo)]
+                item_names = self.get_pretty_printed_names(items)
                 self.args.extend(items)
-                self.pretty_printed_name = f"{_type.type.fullname}[{','.join(item_names)}]"
+                pretty_name = "" if len(item_names) == 0 else f"[{','.join(item_names)}]"
+                self.pretty_printed_name = f"{_type.type.fullname}{pretty_name}"
                 self.fully_qualified_name = _type.type.fullname
             else:
                 self.pretty_printed_name = _type.type.fullname
                 self.fully_qualified_name = _type.type.fullname
         elif isinstance(_type, mpt.UnionType):
             self.kind = TypeKind.UNION
-            items = [TypeDescriptor(t) for t in _type.items]
+            items = [TypeDescriptor(t) for t in _type.items if not isinstance(t, mpn.FakeInfo)]
             self.args.extend(items)
-            item_names = [i.pretty_printed_name for i in items]
+            item_names = self.get_pretty_printed_names(items)
             self.pretty_printed_name = f"Union[{','.join(item_names)}]"
         elif isinstance(_type, mpt.TypeType):
             self.kind = TypeKind.TYPE
@@ -91,12 +92,12 @@ class TypeDescriptor:
             self.pretty_printed_name = f"Type[{item.pretty_printed_name}]"
         elif isinstance(_type, mpt.TupleType):
             self.kind = TypeKind.TUPLE
-            items = [TypeDescriptor(t) for t in _type.items]
+            items = [TypeDescriptor(t) for t in _type.items if not hasattr(t, "type") or not isinstance(t, mpn.FakeInfo)]
             if any(item.is_unknown for item in items):
                 self.kind = None
                 self.is_unknown = True
             else:
-                item_names = [i.pretty_printed_name for i in items]
+                item_names = self.get_pretty_printed_names(items)
                 self.args.extend(items)
                 self.pretty_printed_name = f"Tuple[{','.join(item_names)}]"
         elif isinstance(_type, mpt.TypeVarType):
@@ -111,10 +112,11 @@ class TypeDescriptor:
         elif isinstance(_type, mpt.TypeAliasType):
             self.kind = TypeKind.TYPE_ALIAS
             alias = _type.alias
-            target = TypeDescriptor(alias.target)
-            self.args.append(target)
-            self.pretty_printed_name = f"TypeAlias[{target.pretty_printed_name}]"
-            self.fully_qualified_name = _type.alias.fullname
+            if alias is not None:
+                target = TypeDescriptor(alias.target)
+                self.args.append(target)
+                self.pretty_printed_name = f"TypeAlias[{target.pretty_printed_name}]"
+                self.fully_qualified_name = _type.alias.fullname
         elif isinstance(_type, mpt.CallableType):
             self.kind = TypeKind.CALLABLE
             fallback = TypeDescriptor(_type.fallback)
@@ -145,11 +147,19 @@ class TypeDescriptor:
             # this can happen when there is a var symbol assigned to an overload symbol
             self.is_unknown = True
 
+    def get_pretty_printed_names(self, items):
+        try:
+            names = [i.pretty_printed_name for i in items if i.pretty_printed_name is not None]
+            return names
+        except:
+            return []
+
     def to_proto(self) -> symbols_pb2.Type:
         pb_type = symbols_pb2.Type()
-        if self.is_unknown:
+        if self.is_unknown or self.kind ==TypeKind.TYPE_ALIAS:
             return pb_type
-        pb_type.pretty_printed_name = self.pretty_printed_name
+        test = "__" if not hasattr(self, "pretty_printed_name") or self.pretty_printed_name is None else self.pretty_printed_name
+        pb_type.pretty_printed_name = test
         if self.kind is not None:
             pb_type.kind = symbols_pb2.TypeKind.Value(self.kind.name)
         if self.fully_qualified_name is not None:
@@ -281,8 +291,10 @@ class ClassSymbol:
         self.is_protocol = type_info.is_protocol
         self.metaclass_name = None
         for base in type_info.bases:
-            if isinstance(base, mpt.Instance):
+            if isinstance(base, mpt.Instance) and not isinstance(base.type, mpn.FakeInfo):
                 self.super_classes.append(base.type.fullname)
+            if isinstance(base, str):
+                self.super_classes.append(base)
         for key in type_info.names:
             name = type_info.names.get(key)
             node = name.node
@@ -534,13 +546,12 @@ def extract_parameters(func_def: mpn.FuncDef):
         return arguments
     arg_kinds = func_type.arg_kinds
     arg_names = func_type.arg_names
-    arg_types = func_type.arg_types
     # param names are actual names of the parameters
     # arg names can be None for positional only arguments
     param_names = func_def.arg_names
-    for kind, name, _type, param in zip(arg_kinds, arg_names, arg_types, param_names):
+    for kind, name, param in zip(arg_kinds, arg_names, param_names):
         # Assumption to validate: all lists have always the same length == to the number of params
-        arguments.append(ParameterSymbol(kind, name, _type, param))
+        arguments.append(ParameterSymbol(kind, name, None, param))
     return arguments
 
 
@@ -562,7 +573,8 @@ def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], dir_name="stdlib_pr
     if not os.path.exists(save_dir_path):
         os.makedirs(save_dir_path)
     save_name = ms.fullname if not is_python_2_only_exception(ms) else f"2@{ms.fullname}"
-    with open(f"{save_dir_path}/{save_name}.protobuf", open_mode) as f:
+    extension = ".txt" if is_debug else ".protobuf"
+    with open(f"{save_dir_path}/{save_name}{extension}", open_mode) as f:
         f.write(save_string)
 
 

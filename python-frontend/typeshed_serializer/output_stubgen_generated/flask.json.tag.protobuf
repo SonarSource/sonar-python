@@ -2,7 +2,6 @@ fully_qualified_name: "flask.json.tag"
 classes {
   name: "JSONTag"
   fully_qualified_name: "flask.json.tag.JSONTag"
-  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "flask.json.tag.JSONTag.__init__"
@@ -13,90 +12,25 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.JSONTag"
-        fully_qualified_name: "flask.json.tag.JSONTag"
-      }
     }
     parameters {
       name: "serializer"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
     }
   }
   methods {
     name: "check"
     fully_qualified_name: "flask.json.tag.JSONTag.check"
     return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.JSONTag"
-        fully_qualified_name: "flask.json.tag.JSONTag"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_json"
-    fully_qualified_name: "flask.json.tag.JSONTag.to_json"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.JSONTag"
-        fully_qualified_name: "flask.json.tag.JSONTag"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_python"
-    fully_qualified_name: "flask.json.tag.JSONTag.to_python"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.JSONTag"
-        fully_qualified_name: "flask.json.tag.JSONTag"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -109,17 +43,52 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.JSONTag"
-        fully_qualified_name: "flask.json.tag.JSONTag"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+    }
+  }
+  methods {
+    name: "to_json"
+    fully_qualified_name: "flask.json.tag.JSONTag.to_json"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "flask.json.tag.JSONTag.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.JSONTag.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "__"
       }
     }
   }
@@ -127,11 +96,10 @@ classes {
     name: "key"
     fully_qualified_name: "flask.json.tag.JSONTag.key"
     type_annotation {
-      pretty_printed_name: "Union[builtins.str,None]"
+      pretty_printed_name: "Union[None]"
       kind: UNION
       args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+        pretty_printed_name: "__"
       }
       args {
         pretty_printed_name: "None"
@@ -143,122 +111,26 @@ classes {
     name: "serializer"
     fully_qualified_name: "flask.json.tag.JSONTag.serializer"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-classes {
-  name: "TagDict"
-  fully_qualified_name: "flask.json.tag.TagDict"
-  super_classes: "flask.json.tag.JSONTag"
-  methods {
-    name: "check"
-    fully_qualified_name: "flask.json.tag.TagDict.check"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDict"
-        fully_qualified_name: "flask.json.tag.TagDict"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_json"
-    fully_qualified_name: "flask.json.tag.TagDict.to_json"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDict"
-        fully_qualified_name: "flask.json.tag.TagDict"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_python"
-    fully_qualified_name: "flask.json.tag.TagDict.to_python"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDict"
-        fully_qualified_name: "flask.json.tag.TagDict"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  attributes {
-    name: "key"
-    fully_qualified_name: "flask.json.tag.TagDict.key"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "__"
     }
   }
 }
 classes {
   name: "PassDict"
   fully_qualified_name: "flask.json.tag.PassDict"
-  super_classes: "flask.json.tag.JSONTag"
   methods {
     name: "check"
     fully_qualified_name: "flask.json.tag.PassDict.check"
     return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.PassDict"
-        fully_qualified_name: "flask.json.tag.PassDict"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -271,140 +143,48 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.PassDict"
-        fully_qualified_name: "flask.json.tag.PassDict"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.PassDict.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
     }
   }
   attributes {
     name: "tag"
     fully_qualified_name: "flask.json.tag.PassDict.tag"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-classes {
-  name: "TagTuple"
-  fully_qualified_name: "flask.json.tag.TagTuple"
-  super_classes: "flask.json.tag.JSONTag"
-  methods {
-    name: "check"
-    fully_qualified_name: "flask.json.tag.TagTuple.check"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagTuple"
-        fully_qualified_name: "flask.json.tag.TagTuple"
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
       }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_json"
-    fully_qualified_name: "flask.json.tag.TagTuple.to_json"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagTuple"
-        fully_qualified_name: "flask.json.tag.TagTuple"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_python"
-    fully_qualified_name: "flask.json.tag.TagTuple.to_python"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagTuple"
-        fully_qualified_name: "flask.json.tag.TagTuple"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  attributes {
-    name: "key"
-    fully_qualified_name: "flask.json.tag.TagTuple.key"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
     }
   }
 }
 classes {
   name: "PassList"
   fully_qualified_name: "flask.json.tag.PassList"
-  super_classes: "flask.json.tag.JSONTag"
   methods {
     name: "check"
     fully_qualified_name: "flask.json.tag.PassList.check"
     return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.PassList"
-        fully_qualified_name: "flask.json.tag.PassList"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -417,55 +197,48 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.PassList"
-        fully_qualified_name: "flask.json.tag.PassList"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.PassList.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
     }
   }
   attributes {
     name: "tag"
     fully_qualified_name: "flask.json.tag.PassList.tag"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
     }
   }
 }
 classes {
   name: "TagBytes"
   fully_qualified_name: "flask.json.tag.TagBytes"
-  super_classes: "flask.json.tag.JSONTag"
   methods {
     name: "check"
     fully_qualified_name: "flask.json.tag.TagBytes.check"
     return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagBytes"
-        fully_qualified_name: "flask.json.tag.TagBytes"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -478,18 +251,10 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagBytes"
-        fully_qualified_name: "flask.json.tag.TagBytes"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -502,225 +267,44 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagBytes"
-        fully_qualified_name: "flask.json.tag.TagBytes"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagBytes.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
     }
   }
   attributes {
     name: "key"
     fully_qualified_name: "flask.json.tag.TagBytes.key"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-}
-classes {
-  name: "TagMarkup"
-  fully_qualified_name: "flask.json.tag.TagMarkup"
-  super_classes: "flask.json.tag.JSONTag"
-  methods {
-    name: "check"
-    fully_qualified_name: "flask.json.tag.TagMarkup.check"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagMarkup"
-        fully_qualified_name: "flask.json.tag.TagMarkup"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_json"
-    fully_qualified_name: "flask.json.tag.TagMarkup.to_json"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagMarkup"
-        fully_qualified_name: "flask.json.tag.TagMarkup"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_python"
-    fully_qualified_name: "flask.json.tag.TagMarkup.to_python"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagMarkup"
-        fully_qualified_name: "flask.json.tag.TagMarkup"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  attributes {
-    name: "key"
-    fully_qualified_name: "flask.json.tag.TagMarkup.key"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-}
-classes {
-  name: "TagUUID"
-  fully_qualified_name: "flask.json.tag.TagUUID"
-  super_classes: "flask.json.tag.JSONTag"
-  methods {
-    name: "check"
-    fully_qualified_name: "flask.json.tag.TagUUID.check"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagUUID"
-        fully_qualified_name: "flask.json.tag.TagUUID"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_json"
-    fully_qualified_name: "flask.json.tag.TagUUID.to_json"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagUUID"
-        fully_qualified_name: "flask.json.tag.TagUUID"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "to_python"
-    fully_qualified_name: "flask.json.tag.TagUUID.to_python"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagUUID"
-        fully_qualified_name: "flask.json.tag.TagUUID"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  attributes {
-    name: "key"
-    fully_qualified_name: "flask.json.tag.TagUUID.key"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "__"
     }
   }
 }
 classes {
   name: "TagDateTime"
   fully_qualified_name: "flask.json.tag.TagDateTime"
-  super_classes: "flask.json.tag.JSONTag"
   methods {
     name: "check"
     fully_qualified_name: "flask.json.tag.TagDateTime.check"
     return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDateTime"
-        fully_qualified_name: "flask.json.tag.TagDateTime"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -733,18 +317,10 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDateTime"
-        fully_qualified_name: "flask.json.tag.TagDateTime"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -757,33 +333,295 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TagDateTime"
-        fully_qualified_name: "flask.json.tag.TagDateTime"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagDateTime.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
     }
   }
   attributes {
     name: "key"
     fully_qualified_name: "flask.json.tag.TagDateTime.key"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "__"
+    }
+  }
+}
+classes {
+  name: "TagDict"
+  fully_qualified_name: "flask.json.tag.TagDict"
+  methods {
+    name: "check"
+    fully_qualified_name: "flask.json.tag.TagDict.check"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_json"
+    fully_qualified_name: "flask.json.tag.TagDict.to_json"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "flask.json.tag.TagDict.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagDict.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "flask.json.tag.TagDict.key"
+    type_annotation {
+      pretty_printed_name: "__"
+    }
+  }
+}
+classes {
+  name: "TagMarkup"
+  fully_qualified_name: "flask.json.tag.TagMarkup"
+  methods {
+    name: "check"
+    fully_qualified_name: "flask.json.tag.TagMarkup.check"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_json"
+    fully_qualified_name: "flask.json.tag.TagMarkup.to_json"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "flask.json.tag.TagMarkup.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagMarkup.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "flask.json.tag.TagMarkup.key"
+    type_annotation {
+      pretty_printed_name: "__"
+    }
+  }
+}
+classes {
+  name: "TagTuple"
+  fully_qualified_name: "flask.json.tag.TagTuple"
+  methods {
+    name: "check"
+    fully_qualified_name: "flask.json.tag.TagTuple.check"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_json"
+    fully_qualified_name: "flask.json.tag.TagTuple.to_json"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "flask.json.tag.TagTuple.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagTuple.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "flask.json.tag.TagTuple.key"
+    type_annotation {
+      pretty_printed_name: "__"
+    }
+  }
+}
+classes {
+  name: "TagUUID"
+  fully_qualified_name: "flask.json.tag.TagUUID"
+  methods {
+    name: "check"
+    fully_qualified_name: "flask.json.tag.TagUUID.check"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_json"
+    fully_qualified_name: "flask.json.tag.TagUUID.to_json"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "flask.json.tag.TagUUID.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TagUUID.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "flask.json.tag.TagUUID.key"
+    type_annotation {
+      pretty_printed_name: "__"
     }
   }
 }
 classes {
   name: "TaggedJSONSerializer"
   fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.__init__"
@@ -794,152 +632,21 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
-    }
-  }
-  methods {
-    name: "register"
-    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.register"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
-    }
-    parameters {
-      name: "tag_class"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Type[flask.json.tag.JSONTag]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "flask.json.tag.JSONTag"
-          fully_qualified_name: "flask.json.tag.JSONTag"
-        }
-      }
-    }
-    parameters {
-      name: "force"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.bool"
-        fully_qualified_name: "builtins.bool"
-      }
-      has_default: true
-    }
-    parameters {
-      name: "index"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.int,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-  }
-  methods {
-    name: "tag"
-    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.tag"
-    return_annotation {
-      pretty_printed_name: "builtins.dict[builtins.str,Any]"
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      fully_qualified_name: "builtins.dict"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "untag"
-    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.untag"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.dict[builtins.str,Any]"
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "builtins.dict"
-      }
     }
   }
   methods {
     name: "dumps"
     fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.dumps"
     return_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
+      pretty_printed_name: "__"
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -952,17 +659,84 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.json.tag.TaggedJSONSerializer"
-        fully_qualified_name: "flask.json.tag.TaggedJSONSerializer"
-      }
     }
     parameters {
       name: "value"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
+    }
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.register"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tag_class"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "force"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+  }
+  methods {
+    name: "tag"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.tag"
+    return_annotation {
+      pretty_printed_name: "None[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "untag"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.untag"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "__"
+      }
+      args {
+        pretty_printed_name: "__"
       }
     }
   }
@@ -970,95 +744,28 @@ classes {
     name: "default_tags"
     fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.default_tags"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "tags"
-    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.tags"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None[CallableType[None]]"
+      args {
+        pretty_printed_name: "CallableType[None]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "__"
+        }
+      }
     }
   }
   attributes {
     name: "order"
     fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.order"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
     }
   }
-}
-functions {
-  name: "dumps"
-  fully_qualified_name: "flask.json.dumps"
-  return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
-  }
-  parameters {
-    name: "obj"
-    kind: POSITIONAL_OR_KEYWORD
+  attributes {
+    name: "tags"
+    fully_qualified_name: "flask.json.tag.TaggedJSONSerializer.tags"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
     }
   }
-  parameters {
-    name: "app"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-functions {
-  name: "loads"
-  fully_qualified_name: "flask.json.loads"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "s"
-    kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  parameters {
-    name: "app"
-    kind: KEYWORD_ONLY
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    has_default: true
-  }
-  parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-vars {
-  name: "t"
-  fully_qualified_name: "typing"
-  is_imported_module: true
 }

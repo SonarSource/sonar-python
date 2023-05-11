@@ -20,7 +20,7 @@
 
 import os
 
-from mypy import build, options
+from mypy import build, options, nodes
 
 from serializer import symbols_merger, symbols
 
@@ -71,7 +71,7 @@ def walk_custom_stubs(opt: options.Options = get_options(), path=CUSTOM_STUBS_PA
     return build_result, source_paths
 
 
-def get_sources(relative_path: str, generate_python2: bool):
+def get_sources(relative_path: str, generate_python2: bool, extension=".pyi"):
     source_list = []
     source_paths = set()
     path = os.path.join(CURRENT_PATH, relative_path)
@@ -81,10 +81,10 @@ def get_sources(relative_path: str, generate_python2: bool):
             # Avoid python2 stubs
             continue
         for file in files:
-            if not file.endswith(".pyi"):
+            if not file.endswith(extension):
                 # Only consider actual stubs
                 continue
-            module_name = file.replace(".pyi", "")
+            module_name = file.replace(extension, "")
             fq_module_name = f"{package_name}.{module_name}" if package_name != "" else module_name
             if module_name == "__init__":
                 fq_module_name = package_name
@@ -137,16 +137,20 @@ def serialize_stubgen_generated(output_dir_name="output_stubgen_generated", pyth
         symbols.save_module(module_symbol, "stubgen_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
 
 
-def serialize_flask(output_dir_name="output", python_version=(3, 8), is_debug=False):
-    path = os.path.join(CURRENT_PATH, "../resources/flask/src")
+def serialize_flask(output_dir_name="output", python_version=(3, 10), is_debug=True):
+    path = os.path.join(CURRENT_PATH, "../my_cache")
     opt = get_options(python_version)
-    build_result, _ = walk_custom_stubs(opt, path="../resources/flask/src")
-    for file in build_result.files:
-        current_file = build_result.files.get(file)
-        if not current_file.path.startswith(path):
-            continue
-        module_symbol = symbols.ModuleSymbol(current_file)
-        symbols.save_module(module_symbol, "flask_poc", is_debug=is_debug, debug_dir=output_dir_name)
+    opt.export_types = True
+    source = build.BuildSource(path, module="flask_test.test")
+    source_list, source_paths = get_sources(path, False, extension=".data.json")
+    import json
+    for path in source_paths:
+        with open(path) as json_file:
+            current_file = json.load(json_file)
+            mypy_file = nodes.SymbolNode.deserialize(current_file)
+            module_symbol = symbols.ModuleSymbol(mypy_file)
+            symbols.save_module(module_symbol, "flask_poc", is_debug=is_debug, debug_dir=output_dir_name)
+
 
 
 def serialize_typeshed_stdlib_multiple_python_version():
@@ -164,11 +168,12 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 
 def main():
-    # save_merged_symbols()
-    save_merged_symbols(is_third_parties=True, is_debug=True)
+#    save_merged_symbols(is_debug=True)
+#    save_merged_symbols(is_third_parties=True, is_debug=True)
     # serialize_custom_stubs()
-    # serialize_typeshed_stdlib(is_debug=True)
-    serialize_stubgen_generated(is_debug=True)
+#    serialize_typeshed_stdlib(is_debug=True)
+    # serialize_stubgen_generated(is_debug=True)
+    serialize_flask()
 
 
 if __name__ == '__main__':

@@ -1,257 +1,7 @@
 fully_qualified_name: "flask.scaffold"
 classes {
-  name: "AppGroup"
-  fully_qualified_name: "flask.cli.AppGroup"
-  super_classes: "builtins.object"
-  methods {
-    name: "command"
-    fully_qualified_name: "flask.cli.AppGroup.command"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-  }
-  methods {
-    name: "group"
-    fully_qualified_name: "flask.cli.AppGroup.group"
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-    }
-    parameters {
-      name: "args"
-      kind: VAR_POSITIONAL
-    }
-    parameters {
-      name: "kwargs"
-      kind: VAR_KEYWORD
-    }
-  }
-}
-classes {
-  name: "locked_cached_property"
-  fully_qualified_name: "flask.helpers.locked_cached_property"
-  super_classes: "builtins.object"
-  methods {
-    name: "__init__"
-    fully_qualified_name: "flask.helpers.locked_cached_property.__init__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.helpers.locked_cached_property"
-        fully_qualified_name: "flask.helpers.locked_cached_property"
-      }
-    }
-    parameters {
-      name: "fget"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "CallableType[builtins.function]"
-        kind: CALLABLE
-        args {
-          pretty_printed_name: "builtins.function"
-          fully_qualified_name: "builtins.function"
-        }
-      }
-    }
-    parameters {
-      name: "name"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-    parameters {
-      name: "doc"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-      has_default: true
-    }
-  }
-  methods {
-    name: "__get__"
-    fully_qualified_name: "flask.helpers.locked_cached_property.__get__"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.helpers.locked_cached_property"
-        fully_qualified_name: "flask.helpers.locked_cached_property"
-      }
-    }
-    parameters {
-      name: "obj"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "type"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.type"
-        fully_qualified_name: "builtins.type"
-      }
-      has_default: true
-    }
-  }
-  methods {
-    name: "__set__"
-    fully_qualified_name: "flask.helpers.locked_cached_property.__set__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.helpers.locked_cached_property"
-        fully_qualified_name: "flask.helpers.locked_cached_property"
-      }
-    }
-    parameters {
-      name: "obj"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-    parameters {
-      name: "value"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "__delete__"
-    fully_qualified_name: "flask.helpers.locked_cached_property.__delete__"
-    return_annotation {
-      pretty_printed_name: "None"
-      kind: NONE
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.helpers.locked_cached_property"
-        fully_qualified_name: "flask.helpers.locked_cached_property"
-      }
-    }
-    parameters {
-      name: "obj"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.object"
-        fully_qualified_name: "builtins.object"
-      }
-    }
-  }
-  attributes {
-    name: "lock"
-    fully_qualified_name: "flask.helpers.locked_cached_property.lock"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-classes {
-  name: "Response"
-  fully_qualified_name: "flask.wrappers.Response"
-  super_classes: "builtins.object"
-  methods {
-    name: "max_cookie_size"
-    fully_qualified_name: "flask.wrappers.Response.max_cookie_size"
-    return_annotation {
-      pretty_printed_name: "builtins.int"
-      fully_qualified_name: "builtins.int"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.wrappers.Response"
-        fully_qualified_name: "flask.wrappers.Response"
-      }
-    }
-    has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
-  }
-  attributes {
-    name: "default_mimetype"
-    fully_qualified_name: "flask.wrappers.Response.default_mimetype"
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  attributes {
-    name: "json_module"
-    fully_qualified_name: "flask.wrappers.Response.json_module"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "autocorrect_location_header"
-    fully_qualified_name: "flask.wrappers.Response.autocorrect_location_header"
-    type_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
-    }
-  }
-}
-classes {
   name: "Scaffold"
   fully_qualified_name: "flask.scaffold.Scaffold"
-  super_classes: "builtins.object"
   methods {
     name: "__init__"
     fully_qualified_name: "flask.scaffold.Scaffold.__init__"
@@ -262,462 +12,115 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "import_name"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
     }
     parameters {
       name: "static_folder"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "static_url_path"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "template_folder"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "os.PathLike[Any]"
-          args {
-            pretty_printed_name: "Any"
-            kind: ANY
-          }
-          fully_qualified_name: "os.PathLike"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "root_path"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+      has_default: true
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "flask.scaffold.Scaffold.__repr__"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+    }
+  }
+  methods {
+    name: "_check_setup_finished"
+    fully_qualified_name: "flask.scaffold.Scaffold._check_setup_finished"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_get_exc_class_and_code"
+    fully_qualified_name: "flask.scaffold.Scaffold._get_exc_class_and_code"
+    return_annotation {
+      pretty_printed_name: "Tuple[Type[None],Union[None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Type[None]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "__"
+        }
+      }
+      args {
+        pretty_printed_name: "Union[None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "__"
         }
         args {
           pretty_printed_name: "None"
           kind: NONE
         }
       }
-      has_default: true
-    }
-  }
-  methods {
-    name: "has_static_folder"
-    fully_qualified_name: "flask.scaffold.Scaffold.has_static_folder"
-    return_annotation {
-      pretty_printed_name: "builtins.bool"
-      fully_qualified_name: "builtins.bool"
     }
     parameters {
-      name: "self"
+      name: "exc_class_or_code"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     has_decorators: true
-    resolved_decorator_names: "property"
-    is_property: true
+    is_static: true
   }
   methods {
-    name: "get_send_file_max_age"
-    fully_qualified_name: "flask.scaffold.Scaffold.get_send_file_max_age"
+    name: "_method_route"
+    fully_qualified_name: "flask.scaffold.Scaffold._method_route"
     return_annotation {
-      pretty_printed_name: "Union[builtins.int,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "builtins.int"
-        fully_qualified_name: "builtins.int"
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
-    }
-  }
-  methods {
-    name: "send_static_file"
-    fully_qualified_name: "flask.scaffold.Scaffold.send_static_file"
-    return_annotation {
-      pretty_printed_name: "flask.wrappers.Response"
-      fully_qualified_name: "flask.wrappers.Response"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "filename"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-  }
-  methods {
-    name: "jinja_loader"
-    fully_qualified_name: "flask.scaffold.Scaffold.jinja_loader"
-    return_annotation {
-      pretty_printed_name: "Union[Any,None]"
-      kind: UNION
-      args {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-      args {
-        pretty_printed_name: "None"
-        kind: NONE
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-  }
-  methods {
-    name: "open_resource"
-    fully_qualified_name: "flask.scaffold.Scaffold.open_resource"
-    return_annotation {
-      pretty_printed_name: "typing.IO[typing.AnyStr]"
-      args {
-        pretty_printed_name: "typing.AnyStr"
-        kind: TYPE_VAR
-      }
-      fully_qualified_name: "typing.IO"
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "resource"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "mode"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-      has_default: true
-    }
-  }
-  methods {
-    name: "get"
-    fully_qualified_name: "flask.scaffold.Scaffold.get"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
+      pretty_printed_name: "CallableType[None]"
       kind: CALLABLE
       args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
+        pretty_printed_name: "__"
       }
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
+    }
+    parameters {
+      name: "method"
+      kind: POSITIONAL_OR_KEYWORD
     }
     parameters {
       name: "rule"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
     }
     parameters {
       name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "post"
-    fully_qualified_name: "flask.scaffold.Scaffold.post"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "rule"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "put"
-    fully_qualified_name: "flask.scaffold.Scaffold.put"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "rule"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "delete"
-    fully_qualified_name: "flask.scaffold.Scaffold.delete"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "rule"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "patch"
-    fully_qualified_name: "flask.scaffold.Scaffold.patch"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "rule"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
-  }
-  methods {
-    name: "route"
-    fully_qualified_name: "flask.scaffold.Scaffold.route"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "rule"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-    parameters {
-      name: "options"
-      kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
   }
   methods {
@@ -730,290 +133,322 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "rule"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
     }
     parameters {
       name: "endpoint"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "view_func"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Any,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "provide_automatic_options"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[builtins.bool,None]"
-        kind: UNION
-        args {
-          pretty_printed_name: "builtins.bool"
-          fully_qualified_name: "builtins.bool"
-        }
-        args {
-          pretty_printed_name: "None"
-          kind: NONE
-        }
-      }
       has_default: true
     }
     parameters {
       name: "options"
       kind: VAR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
-  }
-  methods {
-    name: "endpoint"
-    fully_qualified_name: "flask.scaffold.Scaffold.endpoint"
-    return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
-      kind: CALLABLE
-      args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
-      }
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "endpoint"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
-  }
-  methods {
-    name: "before_request"
-    fully_qualified_name: "flask.scaffold.Scaffold.before_request"
-    return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-    parameters {
-      name: "self"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
-    }
-    parameters {
-      name: "f"
-      kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
-    }
+    has_decorators: true
   }
   methods {
     name: "after_request"
     fully_qualified_name: "flask.scaffold.Scaffold.after_request"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "flask.scaffold.T_after_request"
+      kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "f"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
+    has_decorators: true
   }
   methods {
-    name: "teardown_request"
-    fully_qualified_name: "flask.scaffold.Scaffold.teardown_request"
+    name: "before_request"
+    fully_qualified_name: "flask.scaffold.Scaffold.before_request"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "flask.scaffold.T_before_request"
+      kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "f"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
+    has_decorators: true
   }
   methods {
     name: "context_processor"
     fully_qualified_name: "flask.scaffold.Scaffold.context_processor"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "flask.scaffold.T_template_context_processor"
+      kind: TYPE_VAR
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "f"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
+    has_decorators: true
   }
   methods {
-    name: "url_value_preprocessor"
-    fully_qualified_name: "flask.scaffold.Scaffold.url_value_preprocessor"
+    name: "delete"
+    fully_qualified_name: "flask.scaffold.Scaffold.delete"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
-      name: "f"
+      name: "rule"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
   }
   methods {
-    name: "url_defaults"
-    fully_qualified_name: "flask.scaffold.Scaffold.url_defaults"
+    name: "endpoint"
+    fully_qualified_name: "flask.scaffold.Scaffold.endpoint"
     return_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
-      name: "f"
+      name: "endpoint"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
-      }
     }
+    has_decorators: true
   }
   methods {
     name: "errorhandler"
     fully_qualified_name: "flask.scaffold.Scaffold.errorhandler"
     return_annotation {
-      pretty_printed_name: "CallableType[builtins.function]"
+      pretty_printed_name: "CallableType[None]"
       kind: CALLABLE
       args {
-        pretty_printed_name: "builtins.function"
-        fully_qualified_name: "builtins.function"
+        pretty_printed_name: "__"
       }
     }
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "code_or_exception"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Type[builtins.Exception],builtins.int]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[builtins.Exception]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.Exception"
-            fully_qualified_name: "builtins.Exception"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "flask.scaffold.Scaffold.get"
+    return_annotation {
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
       }
     }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "get_send_file_max_age"
+    fully_qualified_name: "flask.scaffold.Scaffold.get_send_file_max_age"
+    return_annotation {
+      pretty_printed_name: "Union[None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "__"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "has_static_folder"
+    fully_qualified_name: "flask.scaffold.Scaffold.has_static_folder"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    is_property: true
+  }
+  methods {
+    name: "jinja_loader"
+    fully_qualified_name: "flask.scaffold.Scaffold.jinja_loader"
+    return_annotation {
+      pretty_printed_name: "Union[None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "__"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "open_resource"
+    fully_qualified_name: "flask.scaffold.Scaffold.open_resource"
+    return_annotation {
+      pretty_printed_name: "None[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "resource"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+  }
+  methods {
+    name: "patch"
+    fully_qualified_name: "flask.scaffold.Scaffold.patch"
+    return_annotation {
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "post"
+    fully_qualified_name: "flask.scaffold.Scaffold.post"
+    return_annotation {
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "put"
+    fully_qualified_name: "flask.scaffold.Scaffold.put"
+    return_annotation {
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
   }
   methods {
     name: "register_error_handler"
@@ -1025,39 +460,106 @@ classes {
     parameters {
       name: "self"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "flask.scaffold.Scaffold"
-        fully_qualified_name: "flask.scaffold.Scaffold"
-      }
     }
     parameters {
       name: "code_or_exception"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Union[Type[builtins.Exception],builtins.int]"
-        kind: UNION
-        args {
-          pretty_printed_name: "Type[builtins.Exception]"
-          kind: TYPE
-          args {
-            pretty_printed_name: "builtins.Exception"
-            fully_qualified_name: "builtins.Exception"
-          }
-        }
-        args {
-          pretty_printed_name: "builtins.int"
-          fully_qualified_name: "builtins.int"
-        }
-      }
     }
     parameters {
       name: "f"
       kind: POSITIONAL_OR_KEYWORD
-      type_annotation {
-        pretty_printed_name: "Any"
-        kind: ANY
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "route"
+    fully_qualified_name: "flask.scaffold.Scaffold.route"
+    return_annotation {
+      pretty_printed_name: "CallableType[None]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "__"
       }
     }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: VAR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "send_static_file"
+    fully_qualified_name: "flask.scaffold.Scaffold.send_static_file"
+    return_annotation {
+      pretty_printed_name: "__"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "teardown_request"
+    fully_qualified_name: "flask.scaffold.Scaffold.teardown_request"
+    return_annotation {
+      pretty_printed_name: "flask.scaffold.T_teardown"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "url_defaults"
+    fully_qualified_name: "flask.scaffold.Scaffold.url_defaults"
+    return_annotation {
+      pretty_printed_name: "flask.scaffold.T_url_defaults"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+  }
+  methods {
+    name: "url_value_preprocessor"
+    fully_qualified_name: "flask.scaffold.Scaffold.url_value_preprocessor"
+    return_annotation {
+      pretty_printed_name: "flask.scaffold.T_url_value_preprocessor"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
   }
   overloaded_methods {
     name: "static_folder"
@@ -1066,11 +568,10 @@ classes {
       name: "static_folder"
       fully_qualified_name: "flask.scaffold.Scaffold.static_folder"
       return_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "__"
         }
         args {
           pretty_printed_name: "None"
@@ -1080,13 +581,8 @@ classes {
       parameters {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "flask.scaffold.Scaffold"
-          fully_qualified_name: "flask.scaffold.Scaffold"
-        }
       }
       has_decorators: true
-      resolved_decorator_names: "property"
       is_overload: true
       is_property: true
     }
@@ -1100,37 +596,12 @@ classes {
       parameters {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "flask.scaffold.Scaffold"
-          fully_qualified_name: "flask.scaffold.Scaffold"
-        }
       }
       parameters {
         name: "value"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "os.PathLike[Any]"
-            args {
-              pretty_printed_name: "Any"
-              kind: ANY
-            }
-            fully_qualified_name: "os.PathLike"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
       }
       has_decorators: true
-      resolved_decorator_names: "static_folder.setter"
     }
   }
   overloaded_methods {
@@ -1140,11 +611,10 @@ classes {
       name: "static_url_path"
       fully_qualified_name: "flask.scaffold.Scaffold.static_url_path"
       return_annotation {
-        pretty_printed_name: "Union[builtins.str,None]"
+        pretty_printed_name: "Union[None]"
         kind: UNION
         args {
-          pretty_printed_name: "builtins.str"
-          fully_qualified_name: "builtins.str"
+          pretty_printed_name: "__"
         }
         args {
           pretty_printed_name: "None"
@@ -1154,13 +624,8 @@ classes {
       parameters {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "flask.scaffold.Scaffold"
-          fully_qualified_name: "flask.scaffold.Scaffold"
-        }
       }
       has_decorators: true
-      resolved_decorator_names: "property"
       is_overload: true
       is_property: true
     }
@@ -1174,52 +639,22 @@ classes {
       parameters {
         name: "self"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "flask.scaffold.Scaffold"
-          fully_qualified_name: "flask.scaffold.Scaffold"
-        }
       }
       parameters {
         name: "value"
         kind: POSITIONAL_OR_KEYWORD
-        type_annotation {
-          pretty_printed_name: "Union[builtins.str,None]"
-          kind: UNION
-          args {
-            pretty_printed_name: "builtins.str"
-            fully_qualified_name: "builtins.str"
-          }
-          args {
-            pretty_printed_name: "None"
-            kind: NONE
-          }
-        }
       }
       has_decorators: true
-      resolved_decorator_names: "static_url_path.setter"
     }
   }
   attributes {
-    name: "name"
-    fully_qualified_name: "flask.scaffold.Scaffold.name"
+    name: "_static_folder"
+    fully_qualified_name: "flask.scaffold.Scaffold._static_folder"
     type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
-  }
-  attributes {
-    name: "json_encoder"
-    fully_qualified_name: "flask.scaffold.Scaffold.json_encoder"
-    type_annotation {
-      pretty_printed_name: "Union[Type[json.encoder.JSONEncoder],None]"
+      pretty_printed_name: "Union[None]"
       kind: UNION
       args {
-        pretty_printed_name: "Type[json.encoder.JSONEncoder]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "json.encoder.JSONEncoder"
-          fully_qualified_name: "json.encoder.JSONEncoder"
-        }
+        pretty_printed_name: "__"
       }
       args {
         pretty_printed_name: "None"
@@ -1228,22 +663,51 @@ classes {
     }
   }
   attributes {
-    name: "json_decoder"
-    fully_qualified_name: "flask.scaffold.Scaffold.json_decoder"
+    name: "_static_url_path"
+    fully_qualified_name: "flask.scaffold.Scaffold._static_url_path"
     type_annotation {
-      pretty_printed_name: "Union[Type[json.decoder.JSONDecoder],None]"
+      pretty_printed_name: "Union[None]"
       kind: UNION
       args {
-        pretty_printed_name: "Type[json.decoder.JSONDecoder]"
-        kind: TYPE
-        args {
-          pretty_printed_name: "json.decoder.JSONDecoder"
-          fully_qualified_name: "json.decoder.JSONDecoder"
-        }
+        pretty_printed_name: "__"
       }
       args {
         pretty_printed_name: "None"
         kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "after_request_funcs"
+    fully_qualified_name: "flask.scaffold.Scaffold.after_request_funcs"
+    type_annotation {
+      pretty_printed_name: "None"
+      args {
+      }
+    }
+  }
+  attributes {
+    name: "before_request_funcs"
+    fully_qualified_name: "flask.scaffold.Scaffold.before_request_funcs"
+    type_annotation {
+      pretty_printed_name: "None"
+      args {
+      }
+    }
+  }
+  attributes {
+    name: "cli"
+    fully_qualified_name: "flask.scaffold.Scaffold.cli"
+    type_annotation {
+      pretty_printed_name: "__"
+    }
+  }
+  attributes {
+    name: "error_handler_spec"
+    fully_qualified_name: "flask.scaffold.Scaffold.error_handler_spec"
+    type_annotation {
+      pretty_printed_name: "None"
+      args {
       }
     }
   }
@@ -1251,185 +715,140 @@ classes {
     name: "import_name"
     fully_qualified_name: "flask.scaffold.Scaffold.import_name"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "__"
     }
   }
   attributes {
-    name: "template_folder"
-    fully_qualified_name: "flask.scaffold.Scaffold.template_folder"
+    name: "name"
+    fully_qualified_name: "flask.scaffold.Scaffold.name"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "__"
     }
   }
   attributes {
     name: "root_path"
     fully_qualified_name: "flask.scaffold.Scaffold.root_path"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "cli"
-    fully_qualified_name: "flask.scaffold.Scaffold.cli"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "view_functions"
-    fully_qualified_name: "flask.scaffold.Scaffold.view_functions"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "error_handler_spec"
-    fully_qualified_name: "flask.scaffold.Scaffold.error_handler_spec"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "before_request_funcs"
-    fully_qualified_name: "flask.scaffold.Scaffold.before_request_funcs"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-  attributes {
-    name: "after_request_funcs"
-    fully_qualified_name: "flask.scaffold.Scaffold.after_request_funcs"
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "__"
     }
   }
   attributes {
     name: "teardown_request_funcs"
     fully_qualified_name: "flask.scaffold.Scaffold.teardown_request_funcs"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
+      args {
+      }
     }
   }
   attributes {
     name: "template_context_processors"
     fully_qualified_name: "flask.scaffold.Scaffold.template_context_processors"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
+      args {
+      }
     }
   }
   attributes {
-    name: "url_value_preprocessors"
-    fully_qualified_name: "flask.scaffold.Scaffold.url_value_preprocessors"
+    name: "template_folder"
+    fully_qualified_name: "flask.scaffold.Scaffold.template_folder"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "Union[None[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "__"
+      }
+      args {
+        pretty_printed_name: "None[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
     }
   }
   attributes {
     name: "url_default_functions"
     fully_qualified_name: "flask.scaffold.Scaffold.url_default_functions"
     type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
+      pretty_printed_name: "None"
+      args {
+      }
+    }
+  }
+  attributes {
+    name: "url_value_preprocessors"
+    fully_qualified_name: "flask.scaffold.Scaffold.url_value_preprocessors"
+    type_annotation {
+      pretty_printed_name: "None"
+      args {
+      }
+    }
+  }
+  attributes {
+    name: "view_functions"
+    fully_qualified_name: "flask.scaffold.Scaffold.view_functions"
+    type_annotation {
+      pretty_printed_name: "None[CallableType[None]]"
+      args {
+        pretty_printed_name: "CallableType[None]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "__"
+        }
+      }
     }
   }
 }
 functions {
-  name: "get_root_path"
-  fully_qualified_name: "flask.helpers.get_root_path"
+  name: "_endpoint_from_view_func"
+  fully_qualified_name: "flask.scaffold._endpoint_from_view_func"
   return_annotation {
-    pretty_printed_name: "builtins.str"
-    fully_qualified_name: "builtins.str"
+    pretty_printed_name: "__"
   }
+  parameters {
+    name: "view_func"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_find_package_path"
+  fully_qualified_name: "flask.scaffold._find_package_path"
   parameters {
     name: "import_name"
     kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
   }
 }
 functions {
-  name: "send_from_directory"
-  fully_qualified_name: "flask.helpers.send_from_directory"
-  return_annotation {
-    pretty_printed_name: "flask.wrappers.Response"
-    fully_qualified_name: "flask.wrappers.Response"
+  name: "_matching_loader_thinks_module_is_package"
+  fully_qualified_name: "flask.scaffold._matching_loader_thinks_module_is_package"
+  parameters {
+    name: "loader"
+    kind: POSITIONAL_OR_KEYWORD
   }
   parameters {
-    name: "directory"
+    name: "mod_name"
     kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[os.PathLike[Any],builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "os.PathLike[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
+  }
+}
+functions {
+  name: "_path_is_relative_to"
+  fully_qualified_name: "flask.scaffold._path_is_relative_to"
+  return_annotation {
+    pretty_printed_name: "__"
   }
   parameters {
     name: "path"
     kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Union[os.PathLike[Any],builtins.str]"
-      kind: UNION
-      args {
-        pretty_printed_name: "os.PathLike[Any]"
-        args {
-          pretty_printed_name: "Any"
-          kind: ANY
-        }
-        fully_qualified_name: "os.PathLike"
-      }
-      args {
-        pretty_printed_name: "builtins.str"
-        fully_qualified_name: "builtins.str"
-      }
-    }
   }
   parameters {
-    name: "kwargs"
-    kind: VAR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
-  }
-}
-functions {
-  name: "setupmethod"
-  fully_qualified_name: "flask.scaffold.setupmethod"
-  return_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-  parameters {
-    name: "f"
+    name: "base"
     kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "Any"
-      kind: ANY
-    }
   }
 }
 functions {
@@ -1442,107 +861,24 @@ functions {
   parameters {
     name: "import_name"
     kind: POSITIONAL_OR_KEYWORD
-    type_annotation {
-      pretty_printed_name: "builtins.str"
-      fully_qualified_name: "builtins.str"
-    }
+  }
+}
+functions {
+  name: "setupmethod"
+  fully_qualified_name: "flask.scaffold.setupmethod"
+  return_annotation {
+    pretty_printed_name: "flask.scaffold.F"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
   }
 }
 vars {
-  name: "t"
-  fully_qualified_name: "typing"
-  is_imported_module: true
-}
-vars {
-  name: "ft"
-  fully_qualified_name: "flask.typing"
-  is_imported_module: true
-}
-vars {
-  name: "current_app"
-  fully_qualified_name: "flask.globals.current_app"
+  name: "_sentinel"
+  fully_qualified_name: "flask.scaffold._sentinel"
   type_annotation {
-    pretty_printed_name: "flask.app.Flask"
-    fully_qualified_name: "flask.app.Flask"
-  }
-}
-vars {
-  name: "FileSystemLoader"
-  fully_qualified_name: "flask.scaffold.FileSystemLoader"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "F"
-  fully_qualified_name: "flask.scaffold.F"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_after_request"
-  fully_qualified_name: "flask.scaffold.T_after_request"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_before_request"
-  fully_qualified_name: "flask.scaffold.T_before_request"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_error_handler"
-  fully_qualified_name: "flask.scaffold.T_error_handler"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_teardown"
-  fully_qualified_name: "flask.scaffold.T_teardown"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_template_context_processor"
-  fully_qualified_name: "flask.scaffold.T_template_context_processor"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_url_defaults"
-  fully_qualified_name: "flask.scaffold.T_url_defaults"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_url_value_preprocessor"
-  fully_qualified_name: "flask.scaffold.T_url_value_preprocessor"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
-  }
-}
-vars {
-  name: "T_route"
-  fully_qualified_name: "flask.scaffold.T_route"
-  type_annotation {
-    pretty_printed_name: "Any"
-    kind: ANY
+    pretty_printed_name: "__"
   }
 }
