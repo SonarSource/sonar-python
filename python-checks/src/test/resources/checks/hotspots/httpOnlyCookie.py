@@ -73,16 +73,16 @@ def flask_tests():
     from flask import Response, make_response, redirect
 
     response1 = Response('OK')
-    response1.set_cookie('c1', 'value') # FN
+    response1.set_cookie('c1', 'value') # Noncompliant
 
     response2 = flask.Response('OK')
     response2.set_cookie('c1', 'value', httponly = True) # OK
 
     response3 = make_response()
-    response3.set_cookie('c', 'value') # FN
+    response3.set_cookie('c', 'value') # Noncompliant
 
     response4 = redirect()
-    response4.set_cookie('c', 'value') # FN
+    response4.set_cookie('c', 'value') # Noncompliant
 
 def flask_SessionCookieHttpOnlyFalse():
     from flask import Flask, request, url_for, render_template, redirect, make_response, request, session
