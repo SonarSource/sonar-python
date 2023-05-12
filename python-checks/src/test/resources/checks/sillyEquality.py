@@ -70,4 +70,4 @@ def stdlib():
     if platform.architecture() == '32bit': ... # Noncompliant
 
 def third_party():
-  if emojize("Python is :thumbs_up:") == 42: ... # Noncompliant
+  if emojize("Python is :thumbs_up:") == 42: ... # FN

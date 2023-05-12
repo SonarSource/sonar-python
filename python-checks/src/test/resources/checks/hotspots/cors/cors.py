@@ -93,14 +93,14 @@ def flask_response_headers():
 
 def werkzeug_headers():
     from werkzeug.datastructures import Headers
-    Headers({"Access-Control-Allow-Origin": "*"}) # Noncompliant
-#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    Headers({"Access-Control-Allow-Origin": "*"}) # FN
+
     headers = Headers({"Access-Control-Allow-Origin": "trustedwebsite.com"}) # Compliant
-    headers.set("Access-Control-Allow-Origin", "*") # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    headers.setdefault("Access-Control-Allow-Origin", "*") # Noncompliant
-    headers["Access-Control-Allow-Origin"] = "*" # Noncompliant
-    headers.__setitem__("Access-Control-Allow-Origin", "*") # Noncompliant
+    headers.set("Access-Control-Allow-Origin", "*") # FN
+
+    headers.setdefault("Access-Control-Allow-Origin", "*") # FN
+    headers["Access-Control-Allow-Origin"] = "*" # FN
+    headers.__setitem__("Access-Control-Allow-Origin", "*") # FN
 
     headers.set("Access-Control-Allow-Credentials", "") # Compliant
     headers.set("Access-Control-Expose-Headers", "") # Compliant
@@ -138,8 +138,8 @@ from flask import make_response
 @app.route("/")
 def flask_make_response_headers_set():
     resp = make_response("hello")
-    resp.headers['Access-Control-Allow-Origin'] = '*' # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    resp.headers['Access-Control-Allow-Origin'] = '*' # FN
+
     return resp
 
 

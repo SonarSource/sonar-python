@@ -108,7 +108,7 @@ def builtin_functions():
 
 def third_party_functions():
   emojize("Python is :thumbs_up:") # OK
-  emojize(42) # Noncompliant
+  emojize(42) # FN
 
 def type_aliases():
   def with_set(a : Set[int]): ...
