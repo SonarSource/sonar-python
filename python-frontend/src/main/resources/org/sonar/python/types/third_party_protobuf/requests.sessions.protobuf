@@ -1,1373 +1,0 @@
-
-requests.sessions‡
-SessionRedirectMixin&requests.sessions.SessionRedirectMixin"builtins.object*…
-resolve_redirects8requests.sessions.SessionRedirectMixin.resolve_redirects*
-self*
-resp*
-req*
-stream *
-timeout *
-verify *
-
-cert *
-proxies z35z36z37z38z39z310*ä
-rebuild_auth3requests.sessions.SessionRedirectMixin.rebuild_auth*
-self*
-prepared_request*
-responsez35z36z37z38z39z310*è
-rebuild_proxies6requests.sessions.SessionRedirectMixin.rebuild_proxies*
-self*
-prepared_request*
-proxiesz35z36z37z38z39z310*ä
-should_strip_auth8requests.sessions.SessionRedirectMixin.should_strip_auth*
-self*
-old_url*
-new_urlz35z36z37z38z39z310j35j36j37j38j39j310¶ç
-Sessionrequests.sessions.Session"&requests.sessions.SessionRedirectMixin*ì
-__init__"requests.sessions.Session.__init__"
-None*@
-self6
-requests.sessions.Session"requests.sessions.Sessionz35z36z37z38z39z310*ì
-	__enter__#requests.sessions.Session.__enter__"
-requests.sessions._SessionT*'
-self
-requests.sessions._SessionTz35z36z37z38z39z310*§
-__exit__"requests.sessions.Session.__exit__"
-None*>
-self6
-requests.sessions.Session"requests.sessions.Session*
-args
-Anyz35z36z37z38z39z310*l
-prepare_request)requests.sessions.Session.prepare_request*
-self*
-requestz35z36z37z38z39z310*≈L
-request!requests.sessions.Session.request"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*(
-method
-builtins.str"builtins.str*õ
-urlë
-/Union[builtins.str,builtins.bytes,builtins.str]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str*∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *∫
-data≠
-¡TypeAlias[Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]]À
-∂Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]
-None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingÁ
-=typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Iterable$
-typing.IO[Any]
-Any"	typing.IO"requests.sessions._Data *‚
-headers“
-<Union[typing.MutableMapping[builtins.str,builtins.str],None]Ö
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping
-None *œ
-cookiesø
-_Union[None,requests.cookies.RequestsCookieJar,typing.MutableMapping[builtins.str,builtins.str]]
-NoneH
-"requests.cookies.RequestsCookieJar""requests.cookies.RequestsCookieJarÖ
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping *Ï
-filesﬁ
->Union[typing.MutableMapping[builtins.str,typing.IO[Any]],None]è
-2typing.MutableMapping[builtins.str,typing.IO[Any]]
-builtins.str"builtins.str$
-typing.IO[Any]
-Any"	typing.IO"typing.MutableMapping
-None *£
-authñ
-PUnion[None,Tuple[builtins.str,builtins.str],Any,CallableType[builtins.function]]
-None`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function *‘
-timeoutƒ
-ZUnion[None,builtins.float,Tuple[builtins.float,builtins.float],Tuple[builtins.float,None]]
-None 
-builtins.float"builtins.floatl
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.floatJ
-Tuple[builtins.float,None] 
-builtins.float"builtins.float
-None *^
-allow_redirectsG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *‚
-proxies“
-<Union[typing.MutableMapping[builtins.str,builtins.str],None]Ö
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping
-None *˘
-hooksÎ
-ùUnion[typing.MutableMapping[builtins.str,Union[typing.Iterable[TypeAlias[CallableType[builtins.function]]],TypeAlias[CallableType[builtins.function]]]],None]º
-ëtyping.MutableMapping[builtins.str,Union[typing.Iterable[TypeAlias[CallableType[builtins.function]]],TypeAlias[CallableType[builtins.function]]]]
-builtins.str"builtins.str
-mUnion[typing.Iterable[TypeAlias[CallableType[builtins.function]]],TypeAlias[CallableType[builtins.function]]]Â
-;typing.Iterable[TypeAlias[CallableType[builtins.function]]]î
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"requests.sessions._Hook"typing.Iterableî
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"requests.sessions._Hook"typing.MutableMapping
-None *U
-streamG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *Ä
-verifyr
-&Union[None,builtins.bool,builtins.str]
-None
-builtins.bool"builtins.bool
-builtins.str"builtins.str *‘
-cert«
-9Union[builtins.str,Tuple[builtins.str,builtins.str],None]
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ô1
-getrequests.sessions.Session.get"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *2
-data&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*°1
-options!requests.sessions.Session.options"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *2
-data&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*õ1
-headrequests.sessions.Session.head"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *2
-data&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*§8
-postrequests.sessions.Session.post"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∫
-data≠
-¡TypeAlias[Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]]À
-∂Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]
-None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingÁ
-=typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Iterable$
-typing.IO[Any]
-Any"	typing.IO"requests.sessions._Data *2
-json&
-Union[Any,None]
-Any
-None *∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¢8
-putrequests.sessions.Session.put"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∫
-data≠
-¡TypeAlias[Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]]À
-∂Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]
-None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingÁ
-=typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Iterable$
-typing.IO[Any]
-Any"	typing.IO"requests.sessions._Data *∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¶8
-patchrequests.sessions.Session.patch"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∫
-data≠
-¡TypeAlias[Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]]À
-∂Union[None,builtins.str,builtins.bytes,typing.Mapping[builtins.str,Any],typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]],typing.IO[Any]]
-None
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MappingÁ
-=typing.Iterable[Tuple[builtins.str,Union[builtins.str,None]]]î
-,Tuple[builtins.str,Union[builtins.str,None]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None"typing.Iterable$
-typing.IO[Any]
-Any"	typing.IO"requests.sessions._Data *∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ü1
-delete requests.sessions.Session.delete"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*o
-urlf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*∑)
-params®)
-öUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes,None]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *2
-data&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None *5
-cookies&
-Union[Any,None]
-Any
-None *3
-files&
-Union[Any,None]
-Any
-None *2
-auth&
-Union[Any,None]
-Any
-None *5
-timeout&
-Union[Any,None]
-Any
-None *5
-allow_redirects
-builtins.bool"builtins.bool *5
-proxies&
-Union[Any,None]
-Any
-None *3
-hooks&
-Union[Any,None]
-Any
-None *4
-stream&
-Union[Any,None]
-Any
-None *4
-verify&
-Union[Any,None]
-Any
-None *2
-cert&
-Union[Any,None]
-Any
-None *2
-json&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ù
-sendrequests.sessions.Session.send"4
-requests.models.Response"requests.models.Response*@
-self6
-requests.sessions.Session"requests.sessions.Session*O
-requestB
-requests.models.PreparedRequest"requests.models.PreparedRequest*
-kwargs
-Anyz35z36z37z38z39z310*≠
-merge_environment_settings4requests.sessions.Session.merge_environment_settings*
-self*
-url*
-proxies*
-
-stream*
-
-verify*
-certz35z36z37z38z39z310*`
-get_adapter%requests.sessions.Session.get_adapter*
-self*
-urlz35z36z37z38z39z310*ç
-closerequests.sessions.Session.close"
-None*@
-self6
-requests.sessions.Session"requests.sessions.Sessionz35z36z37z38z39z310*¨
-mountrequests.sessions.Session.mount"
-None*@
-self6
-requests.sessions.Session"requests.sessions.Session*r
-prefixf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*)
-adapter
-UnboundType[BaseAdapter]z35z36z37z38z39z310j35j36j37j38j39j310rR
-	__attrs__#requests.sessions.Session.__attrs__
-Any*35*36*37*38*39*310r≈
-headers!requests.sessions.Session.headers~
-5requests.structures.CaseInsensitiveDict[builtins.str]
-builtins.str"builtins.str"'requests.structures.CaseInsensitiveDict*35*36*37*38*39*310rÿ
-authrequests.sessions.Session.authñ
-PUnion[None,Tuple[builtins.str,builtins.str],Any,CallableType[builtins.function]]
-None`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-AnyK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310rÕ
-proxies!requests.sessions.Session.proxiesÖ
-0typing.MutableMapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.MutableMapping*35*36*37*38*39*310r≈
-hooksrequests.sessions.Session.hooksÅ
-hTypeAlias[typing.MutableMapping[builtins.str,builtins.list[TypeAlias[CallableType[builtins.function]]]]]¯
-]typing.MutableMapping[builtins.str,builtins.list[TypeAlias[CallableType[builtins.function]]]]
-builtins.str"builtins.str·
-9builtins.list[TypeAlias[CallableType[builtins.function]]]î
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"requests.sessions._Hook"builtins.list"typing.MutableMapping"requests.sessions._Hooks*35*36*37*38*39*310r¢0
-params requests.sessions.Session.params‹/
-†TypeAlias[Union[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes]]ô)
-ïUnion[_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]],typing.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]],builtins.str,builtins.bytes]˚
-
-Å_typeshed.SupportsItems[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"_typeshed.SupportsItems“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueTypeÈ
-Ätyping.Iterable[Tuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]]“
-
-ÔTuple[TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],TypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]]ª
-ITypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"'requests.sessions._ParamsMappingKeyTypeù
-ûTypeAlias[Union[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]]Ã
-ìUnion[builtins.str,builtins.bytes,builtins.int,builtins.float,typing.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]],None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.floatß
-Otyping.Iterable[Union[builtins.str,builtins.bytes,builtins.int,builtins.float]]¬
->Union[builtins.str,builtins.bytes,builtins.int,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-builtins.int"builtins.int 
-builtins.float"builtins.float"typing.Iterable
-None")requests.sessions._ParamsMappingValueType"typing.Iterable
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"requests.sessions._Params*35*36*37*38*39*310rc
-stream requests.sessions.Session.stream
-builtins.bool"builtins.bool*35*36*37*38*39*310r∑
-verify requests.sessions.Session.verifyr
-&Union[None,builtins.bool,builtins.str]
-None
-builtins.bool"builtins.bool
-builtins.str"builtins.str*35*36*37*38*39*310râ
-certrequests.sessions.Session.cert«
-9Union[None,builtins.str,Tuple[builtins.str,builtins.str]]
-None
-builtins.str"builtins.str`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*35*36*37*38*39*310ro
-max_redirects'requests.sessions.Session.max_redirects
-builtins.int"builtins.int*35*36*37*38*39*310ri
-	trust_env#requests.sessions.Session.trust_env
-builtins.bool"builtins.bool*35*36*37*38*39*310rè
-cookies!requests.sessions.Session.cookiesH
-"requests.cookies.RequestsCookieJar""requests.cookies.RequestsCookieJar*35*36*37*38*39*310rí
-adapters"requests.sessions.Session.adaptersI
-typing.MutableMapping[Any,Any]
-Any
-Any"typing.MutableMapping*35*36*37*38*39*310rÌ
-redirect_cache(requests.sessions.Session.redirect_cacheó
-Erequests.packages.urllib3._collections.RecentlyUsedContainer[Any,Any]
-Any
-Any"<requests.packages.urllib3._collections.RecentlyUsedContainer*35*36*37*38*39*310Ö
-merge_settingrequests.sessions.merge_setting*
-request_setting*
-session_setting*
-
-dict_class z35z36z37z38z39z310}
-merge_hooksrequests.sessions.merge_hooks*
-request_hooks*
-session_hooks*
-
-dict_class z35z36z37z38z39z310u
-sessionrequests.sessions.session"6
-requests.sessions.Session"requests.sessions.Sessionz35z36z37z38z39z310*1
-_authrequests.auth *35*36*37*38*39*310*N
-BaseAdapterrequests.sessions.BaseAdapter
-Any*35*36*37*38*39*310*¢
-cookiejar_from_dict%requests.sessions.cookiejar_from_dictK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*®
-extract_cookies_to_jar(requests.sessions.extract_cookies_to_jarK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*ñ
-merge_cookiesrequests.sessions.merge_cookiesK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*d
-DEFAULT_REDIRECT_LIMIT(requests.sessions.DEFAULT_REDIRECT_LIMIT
-Any*35*36*37*38*39*310*ñ
-default_hooksrequests.sessions.default_hooksK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*ñ
-dispatch_hookrequests.sessions.dispatch_hookK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*V
-to_key_val_list!requests.sessions.to_key_val_list
-Any*35*36*37*38*39*310*V
-default_headers!requests.sessions.default_headers
-Any*35*36*37*38*39*310*X
-to_native_string"requests.sessions.to_native_string
-Any*35*36*37*38*39*310*N
-HTTPAdapterrequests.sessions.HTTPAdapter
-Any*35*36*37*38*39*310*N
-requote_urirequests.sessions.requote_uri
-Any*35*36*37*38*39*310*^
-get_environ_proxies%requests.sessions.get_environ_proxies
-Any*35*36*37*38*39*310*T
-get_netrc_auth requests.sessions.get_netrc_auth
-Any*35*36*37*38*39*310*b
-should_bypass_proxies'requests.sessions.should_bypass_proxies
-Any*35*36*37*38*39*310*Z
-get_auth_from_url#requests.sessions.get_auth_from_url
-Any*35*36*37*38*39*310*B
-codesrequests.sessions.codes
-Any*35*36*37*38*39*310*T
-REDIRECT_STATI requests.sessions.REDIRECT_STATI
-Any*35*36*37*38*39*310

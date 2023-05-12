@@ -1,284 +1,0 @@
-
-jwt.algorithmsÐ	
-	Algorithmjwt.algorithms.Algorithm"builtins.object*í
-prepare_key$jwt.algorithms.Algorithm.prepare_key"
-jwt.algorithms._K*h
-self^
-+jwt.algorithms.Algorithm[jwt.algorithms._K]
-jwt.algorithms._K"jwt.algorithms.Algorithm*
-key
-jwt.algorithms._Kz35z36z37z38z39z310*•
-signjwt.algorithms.Algorithm.sign" 
-builtins.bytes"builtins.bytes*h
-self^
-+jwt.algorithms.Algorithm[jwt.algorithms._K]
-jwt.algorithms._K"jwt.algorithms.Algorithm*)
-msg 
-builtins.bytes"builtins.bytes*
-key
-jwt.algorithms._Kz35z36z37z38z39z310*Â
-verifyjwt.algorithms.Algorithm.verify"
-builtins.bool"builtins.bool*h
-self^
-+jwt.algorithms.Algorithm[jwt.algorithms._K]
-jwt.algorithms._K"jwt.algorithms.Algorithm*)
-msg 
-builtins.bytes"builtins.bytes*
-key
-jwt.algorithms._K*)
-sig 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*–
-to_jwkjwt.algorithms.Algorithm.to_jwk"
-builtins.str"builtins.str*"
-key_obj
-jwt.algorithms._K0:staticmethodhz35z36z37z38z39z310*–
-from_jwk!jwt.algorithms.Algorithm.from_jwk"
-jwt.algorithms._K*%
-jwk
-builtins.str"builtins.str0:staticmethodhz35z36z37z38z39z310Pj35j36j37j38j39j310Ô
-NoneAlgorithmjwt.algorithms.NoneAlgorithm"jwt.algorithms.Algorithm*ñ
-prepare_key(jwt.algorithms.NoneAlgorithm.prepare_key"
-None*F
-self<
-jwt.algorithms.NoneAlgorithm"jwt.algorithms.NoneAlgorithm*M
-keyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez35z36z37z38z39z310j35j36j37j38j39j310º
-_HashAlgjwt.algorithms._HashAlg"builtins.object*ê
-__call__ jwt.algorithms._HashAlg.__call__"
-hashlib._Hash"hashlib._Hash*<
-self2
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlg*Ä
-arg¸
-<Union[builtins.bytes,builtins.bytearray,builtins.memoryview] 
-builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview z35z36z37z38z39z310j35j36j37j38j39j310Ã
-HMACAlgorithmjwt.algorithms.HMACAlgorithm"jwt.algorithms.Algorithm*Þ
-__init__%jwt.algorithms.HMACAlgorithm.__init__"
-None*F
-self<
-jwt.algorithms.HMACAlgorithm"jwt.algorithms.HMACAlgorithm*@
-hash_alg2
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlgz35z36z37z38z39z310*«
-prepare_key(jwt.algorithms.HMACAlgorithm.prepare_key" 
-builtins.bytes"builtins.bytes*F
-self<
-jwt.algorithms.HMACAlgorithm"jwt.algorithms.HMACAlgorithm*o
-keyf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*ë
-to_jwk#jwt.algorithms.HMACAlgorithm.to_jwk"
-builtins.str"builtins.str*s
-key_objf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes0:staticmethodhz35z36z37z38z39z310*ï
-from_jwk%jwt.algorithms.HMACAlgorithm.from_jwk" 
-builtins.bytes"builtins.bytes*o
-jwkf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes0:staticmethodhz35z36z37z38z39z310j35j36j37j38j39j310rz
-SHA256#jwt.algorithms.HMACAlgorithm.SHA2562
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlg*35*36*37*38*39*310rz
-SHA384#jwt.algorithms.HMACAlgorithm.SHA3842
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlg*35*36*37*38*39*310rz
-SHA512#jwt.algorithms.HMACAlgorithm.SHA5122
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlg*35*36*37*38*39*310r~
-hash_alg%jwt.algorithms.HMACAlgorithm.hash_alg2
-jwt.algorithms._HashAlg"jwt.algorithms._HashAlg*35*36*37*38*39*310¯ 
-RSAAlgorithmjwt.algorithms.RSAAlgorithm"jwt.algorithms.Algorithm*‡
-__init__$jwt.algorithms.RSAAlgorithm.__init__"
-None*D
-self:
-jwt.algorithms.RSAAlgorithm"jwt.algorithms.RSAAlgorithm*ë
-hash_algÜ
-tUnion[cryptography.hazmat.primitives.hashes.HashAlgorithm,cryptography.hazmat.primitives.asymmetric.utils.Prehashed]j
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithmv
-9cryptography.hazmat.primitives.asymmetric.utils.Prehashed"9cryptography.hazmat.primitives.asymmetric.utils.Prehashedz35z36z37z38z39z310*ð
-prepare_key'jwt.algorithms.RSAAlgorithm.prepare_key"÷
-}Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey]z
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey*D
-self:
-jwt.algorithms.RSAAlgorithm"jwt.algorithms.RSAAlgorithm*Þ
-keyÔ
-™Union[builtins.bytes,builtins.str,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strz
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyz35z36z37z38z39z310*‹
-to_jwk"jwt.algorithms.RSAAlgorithm.to_jwk"
-builtins.str"builtins.str*
-key_obj
-Any0:staticmethodhz35z36z37z38z39z310*Á
-from_jwk$jwt.algorithms.RSAAlgorithm.from_jwk"÷
-}Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey]z
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey*é
-jwkß
-BUnion[builtins.str,builtins.bytes,builtins.dict[builtins.str,Any]]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict0:staticmethodhz35z36z37z38z39z310*Ú
-sign jwt.algorithms.RSAAlgorithm.sign" 
-builtins.bytes"builtins.bytes*D
-self:
-jwt.algorithms.RSAAlgorithm"jwt.algorithms.RSAAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*ƒ
-keyz
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz35z36z37z38z39z310*…
-verify"jwt.algorithms.RSAAlgorithm.verify"
-builtins.bool"builtins.bool*D
-self:
-jwt.algorithms.RSAAlgorithm"jwt.algorithms.RSAAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*
-keyx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey*)
-sig 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310r£
-SHA256"jwt.algorithms.RSAAlgorithm.SHA256\
-,cryptography.hazmat.primitives.hashes.SHA256",cryptography.hazmat.primitives.hashes.SHA256*35*36*37*38*39*310r£
-SHA384"jwt.algorithms.RSAAlgorithm.SHA384\
-,cryptography.hazmat.primitives.hashes.SHA384",cryptography.hazmat.primitives.hashes.SHA384*35*36*37*38*39*310r£
-SHA512"jwt.algorithms.RSAAlgorithm.SHA512\
-,cryptography.hazmat.primitives.hashes.SHA512",cryptography.hazmat.primitives.hashes.SHA512*35*36*37*38*39*310r¨
-hash_alg$jwt.algorithms.RSAAlgorithm.hash_algÜ
-tUnion[cryptography.hazmat.primitives.hashes.HashAlgorithm,cryptography.hazmat.primitives.asymmetric.utils.Prehashed]j
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithmv
-9cryptography.hazmat.primitives.asymmetric.utils.Prehashed"9cryptography.hazmat.primitives.asymmetric.utils.Prehashed*35*36*37*38*39*310Î$
-ECAlgorithmjwt.algorithms.ECAlgorithm"jwt.algorithms.Algorithm*„
-__init__#jwt.algorithms.ECAlgorithm.__init__"
-None*B
-self8
-jwt.algorithms.ECAlgorithm"jwt.algorithms.ECAlgorithm*ë
-hash_algÜ
-tUnion[cryptography.hazmat.primitives.hashes.HashAlgorithm,cryptography.hazmat.primitives.asymmetric.utils.Prehashed]j
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithmv
-9cryptography.hazmat.primitives.asymmetric.utils.Prehashed"9cryptography.hazmat.primitives.asymmetric.utils.Prehashedz35z36z37z38z39z310*Þ
-prepare_key&jwt.algorithms.ECAlgorithm.prepare_key"°
-Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey]Œ
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyŠ
-Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey*B
-self8
-jwt.algorithms.ECAlgorithm"jwt.algorithms.ECAlgorithm*–
-keyŒ
-«Union[builtins.bytes,builtins.str,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.strŒ
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyŠ
-Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyz35z36z37z38z39z310*è
-to_jwk!jwt.algorithms.ECAlgorithm.to_jwk"
-builtins.str"builtins.str*ñ
-key_objã
- Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerialization,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey]®
-Ucryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerialization"Ucryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyWithSerializationŠ
-Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey0:staticmethodhz35z36z37z38z39z310*þ
-from_jwk#jwt.algorithms.ECAlgorithm.from_jwk"°
-Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey]Œ
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyŠ
-Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey*o
-jwkf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes0:staticmethodhz35z36z37z38z39z310*ê
-signjwt.algorithms.ECAlgorithm.sign" 
-builtins.bytes"builtins.bytes*B
-self8
-jwt.algorithms.ECAlgorithm"jwt.algorithms.ECAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*–
-keyŒ
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyz35z36z37z38z39z310*•
-verify!jwt.algorithms.ECAlgorithm.verify"
-builtins.bool"builtins.bool*B
-self8
-jwt.algorithms.ECAlgorithm"jwt.algorithms.ECAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*”
-keyŠ
-Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey*)
-sig 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310r¢
-SHA256!jwt.algorithms.ECAlgorithm.SHA256\
-,cryptography.hazmat.primitives.hashes.SHA256",cryptography.hazmat.primitives.hashes.SHA256*35*36*37*38*39*310r¢
-SHA384!jwt.algorithms.ECAlgorithm.SHA384\
-,cryptography.hazmat.primitives.hashes.SHA384",cryptography.hazmat.primitives.hashes.SHA384*35*36*37*38*39*310r¢
-SHA512!jwt.algorithms.ECAlgorithm.SHA512\
-,cryptography.hazmat.primitives.hashes.SHA512",cryptography.hazmat.primitives.hashes.SHA512*35*36*37*38*39*310r§
-hash_alg#jwt.algorithms.ECAlgorithm.hash_algÜ
-tUnion[cryptography.hazmat.primitives.hashes.HashAlgorithm,cryptography.hazmat.primitives.asymmetric.utils.Prehashed]j
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithmv
-9cryptography.hazmat.primitives.asymmetric.utils.Prehashed"9cryptography.hazmat.primitives.asymmetric.utils.Prehashed*35*36*37*38*39*310ø
-RSAPSSAlgorithmjwt.algorithms.RSAPSSAlgorithm"jwt.algorithms.RSAAlgorithm*ï
-sign#jwt.algorithms.RSAPSSAlgorithm.sign" 
-builtins.bytes"builtins.bytes*J
-self@
-jwt.algorithms.RSAPSSAlgorithm"jwt.algorithms.RSAPSSAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*
-key
-Anyz35z36z37z38z39z310*œ
-verify%jwt.algorithms.RSAPSSAlgorithm.verify"
-builtins.bool"builtins.bool*J
-self@
-jwt.algorithms.RSAPSSAlgorithm"jwt.algorithms.RSAPSSAlgorithm*)
-msg 
-builtins.bytes"builtins.bytes*
-key
-Any*)
-sig 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310Ô
-Ed25519Algorithmjwt.algorithms.Ed25519Algorithm"jwt.algorithms.Algorithm*º
-__init__(jwt.algorithms.Ed25519Algorithm.__init__"
-None*L
-selfB
-jwt.algorithms.Ed25519Algorithm"jwt.algorithms.Ed25519Algorithm*
-kwargs
-Anyz35z36z37z38z39z310*½
-prepare_key+jwt.algorithms.Ed25519Algorithm.prepare_key"
-Any*L
-selfB
-jwt.algorithms.Ed25519Algorithm"jwt.algorithms.Ed25519Algorithm*
-key†
-©Union[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesŠ
-Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyˆ
-Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKeyz35z36z37z38z39z310*½
-sign$jwt.algorithms.Ed25519Algorithm.sign" 
-builtins.bytes"builtins.bytes*L
-selfB
-jwt.algorithms.Ed25519Algorithm"jwt.algorithms.Ed25519Algorithm*o
-msgf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*”
-keyŠ
-Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyz35z36z37z38z39z310*®
-verify&jwt.algorithms.Ed25519Algorithm.verify"
-builtins.bool"builtins.bool*L
-selfB
-jwt.algorithms.Ed25519Algorithm"jwt.algorithms.Ed25519Algorithm*o
-msgf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*’
-keyˆ
-Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310‡
-get_default_algorithms%jwt.algorithms.get_default_algorithms"¬
-9builtins.dict[builtins.str,jwt.algorithms.Algorithm[Any]]
-builtins.str"builtins.strB
-jwt.algorithms.Algorithm[Any]
-Any"jwt.algorithms.Algorithm"builtins.dictz35z36z37z38z39z310

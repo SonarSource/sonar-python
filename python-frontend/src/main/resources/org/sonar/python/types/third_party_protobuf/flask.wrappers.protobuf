@@ -1,68 +1,615 @@
 
-flask.wrappersú
-RequestBasewerkzeug.wrappers.Request"werkzeug.wrappers.BaseRequest"werkzeug.wrappers.AcceptMixin""werkzeug.wrappers.ETagRequestMixin" werkzeug.wrappers.UserAgentMixin"$werkzeug.wrappers.AuthorizationMixin"/werkzeug.wrappers.CommonRequestDescriptorsMixinj35j36j37j38j39j310â
-ResponseBasewerkzeug.wrappers.Response"werkzeug.wrappers.BaseResponse"#werkzeug.wrappers.ETagResponseMixin"%werkzeug.wrappers.ResponseStreamMixin"0werkzeug.wrappers.CommonResponseDescriptorsMixin"&werkzeug.wrappers.WWWAuthenticateMixinj35j36j37j38j39j310µ
-	JSONMixinflask.wrappers.JSONMixin"builtins.object*≤
-is_json flask.wrappers.JSONMixin.is_json"
-builtins.bool"builtins.bool*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin0:property`z35z36z37z38z39z310*V
-jsonflask.wrappers.JSONMixin.json*
-self0:property`z35z36z37z38z39z310*ó
-get_json!flask.wrappers.JSONMixin.get_json"
-Any*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin*+
+flask.wrappersôH
+RequestBase!werkzeug.wrappers.request.Request"werkzeug.sansio.request.Request*±
+__init__*werkzeug.wrappers.request.Request.__init__"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*6
+populate_request
+builtins.bool"builtins.bool *-
+shallow
+builtins.bool"builtins.bool *ª
+from_values-werkzeug.wrappers.request.Request.from_values"F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*|
+clss
+'Type[werkzeug.wrappers.request.Request]F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*
+args
+Any*
+kwargs
+Any0:classmethodp*Ω
+application-werkzeug.wrappers.request.Request.application"õ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*|
+clss
+'Type[werkzeug.wrappers.request.Request]F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*Ã
+_get_file_stream2werkzeug.wrappers.request.Request._get_file_stream"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*^
+total_content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*V
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Z
+content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *–
+want_form_data_parsed7werkzeug.wrappers.request.Request.want_form_data_parsed"
+builtins.bool"builtins.bool*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*Ï
+make_form_data_parser7werkzeug.wrappers.request.Request.make_form_data_parser"H
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*†
+_load_form_data1werkzeug.wrappers.request.Request._load_form_data"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*
+_get_stream_for_parsing9werkzeug.wrappers.request.Request._get_stream_for_parsing"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*å
+close'werkzeug.wrappers.request.Request.close"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*–
+	__enter__+werkzeug.wrappers.request.Request.__enter__"F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*N
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request* 
+__exit__*werkzeug.wrappers.request.Request.__exit__"
+None*N
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*
+exc_type
+Any*
+	exc_value
+Any*
+tb
+Any*·
+stream(werkzeug.wrappers.request.Request.stream"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*µ
+data&werkzeug.wrappers.request.Request.data" 
+builtins.bytes"builtins.bytes*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*€
+form&werkzeug.wrappers.request.Request.form"≈
+Pwerkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"5werkzeug.datastructures.structures.ImmutableMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*›
+values(werkzeug.wrappers.request.Request.values"√
+Owerkzeug.datastructures.structures.CombinedMultiDict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"4werkzeug.datastructures.structures.CombinedMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*…
+files'werkzeug.wrappers.request.Request.files"±
+twerkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,werkzeug.datastructures.file_storage.FileStorage]
+builtins.str"builtins.strd
+0werkzeug.datastructures.file_storage.FileStorage"0werkzeug.datastructures.file_storage.FileStorage"5werkzeug.datastructures.structures.ImmutableMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*∫
+script_root-werkzeug.wrappers.request.Request.script_root"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*π
+url_root*werkzeug.wrappers.request.Request.url_root"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*∂
+json&werkzeug.wrappers.request.Request.json"&
+Union[Any,None]
+Any
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*è
+on_json_loading_failed8werkzeug.wrappers.request.Request.on_json_loading_failed"
+Any*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*`
+eY
+Union[builtins.ValueError,None]*
+builtins.ValueError"builtins.ValueError
+None2ä
+get_data*werkzeug.wrappers.request.Request.get_dataÈ
+get_data*werkzeug.wrappers.request.Request.get_data" 
+builtins.bytes"builtins.bytes*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+cache
+builtins.bool"builtins.bool *I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *5
+parse_form_data
+builtins.bool"builtins.bool 0:
+t.overloadXÂ
+get_data*werkzeug.wrappers.request.Request.get_data"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+cache
+builtins.bool"builtins.bool *I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *5
+parse_form_data
+builtins.bool"builtins.bool 0:
+t.overloadX2…
+get_json*werkzeug.wrappers.request.Request.get_json≈
+get_json*werkzeug.wrappers.request.Request.get_json"
+Any*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+force
+builtins.bool"builtins.bool *H
+silent:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *+
+cache
+builtins.bool"builtins.bool 0:
+t.overloadX»
+get_json*werkzeug.wrappers.request.Request.get_json"&
+Union[Any,None]
+Any
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
 force
 builtins.bool"builtins.bool *,
 silent
 builtins.bool"builtins.bool *+
 cache
-builtins.bool"builtins.bool z35z36z37z38z39z310*º
-on_json_loading_failed/flask.wrappers.JSONMixin.on_json_loading_failed"
-None*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin*
-e
-Anyz35z36z37z38z39z310j35j36j37j38j39j310≥
+builtins.bool"builtins.bool 0:
+t.overloadXrê
+max_content_length4werkzeug.wrappers.request.Request.max_content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerî
+max_form_memory_size6werkzeug.wrappers.request.Request.max_form_memory_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner`
+max_form_parts0werkzeug.wrappers.request.Request.max_form_parts
+builtins.int"builtins.intr 
+form_data_parser_class8werkzeug.wrappers.request.Request.form_data_parser_classv
+(Type[werkzeug.formparser.FormDataParser]H
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParserrﬁ
+environ)werkzeug.wrappers.request.Request.environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentrT
+shallow)werkzeug.wrappers.request.Request.shallow
+builtins.bool"builtins.boolrË
+input_stream.werkzeug.wrappers.request.Request.input_streamß
+:werkzeug.utils.environ_property[typing.IO[builtins.bytes]]H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO"werkzeug.utils.environ_propertyr¨
+remote_user-werkzeug.wrappers.request.Request.remote_usern
+-werkzeug.utils.environ_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.environ_propertyrµ
+is_multithread0werkzeug.wrappers.request.Request.is_multithreadq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyr∑
+is_multiprocess1werkzeug.wrappers.request.Request.is_multiprocessq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyrØ
+is_run_once-werkzeug.wrappers.request.Request.is_run_onceq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyrd
+_cached_json.werkzeug.wrappers.request.Request._cached_json$
+Tuple[Any,Any]
+Any
+AnyrG
+_cached_data.werkzeug.wrappers.request.Request._cached_data
+Anyäd
+ResponseBase#werkzeug.wrappers.response.Response"!werkzeug.sansio.response.Response*¢
+__init__,werkzeug.wrappers.response.Response.__init__"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Í
+responseŸ
+eUnion[typing.Iterable[builtins.bytes],builtins.bytes,typing.Iterable[builtins.str],builtins.str,None]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable 
+builtins.bytes"builtins.bytesN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str
+None *≤
+status£
+5Union[builtins.int,builtins.str,http.HTTPStatus,None]
+builtins.int"builtins.int
+builtins.str"builtins.str"
+http.HTTPStatus"http.HTTPStatus
+None *˚
+headersÎ
+åUnion[typing.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]],typing.Iterable[Tuple[builtins.str,builtins.str]],None]§
+Ntyping.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]]
+builtins.str"builtins.str£
+1Union[builtins.str,typing.Iterable[builtins.str]]
+builtins.str"builtins.strN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable"typing.Mapping¶
+1typing.Iterable[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable
+None *T
+mimetypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *8
+direct_passthrough
+builtins.bool"builtins.bool *º
+call_on_close1werkzeug.wrappers.response.Response.call_on_close"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*™
+__repr__,werkzeug.wrappers.response.Response.__repr__"
+builtins.str"builtins.str*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*˘
 
-Requestflask.wrappers.Request"werkzeug.wrappers.Request"flask.wrappers.JSONMixin*Ë
+force_type.werkzeug.wrappers.response.Response.force_type"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Ç
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*X
+responseJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*˛
+environÓ
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]ß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment
+None 0:classmethodp*™
+from_app,werkzeug.wrappers.response.Response.from_app"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Ç
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*.
+buffered
+builtins.bool"builtins.bool 0:classmethodp*ã
+set_data,werkzeug.wrappers.response.Response.set_data"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*q
+valuef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*Ù
+calculate_content_length<werkzeug.wrappers.response.Response.calculate_content_length"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*◊
+_ensure_sequence4werkzeug.wrappers.response.Response._ensure_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*-
+mutable
+builtins.bool"builtins.bool *¢
+make_sequence1werkzeug.wrappers.response.Response.make_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Ï
+iter_encoded0werkzeug.wrappers.response.Response.iter_encoded"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*¬
+is_streamed/werkzeug.wrappers.response.Response.is_streamed"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*¬
+is_sequence/werkzeug.wrappers.response.Response.is_sequence"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*í
+close)werkzeug.wrappers.response.Response.close"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*⁄
+	__enter__-werkzeug.wrappers.response.Response.__enter__"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*g
+__exit__,werkzeug.wrappers.response.Response.__exit__*
+self*
+exc_type*
+	exc_value*
+tb*î
+freeze*werkzeug.wrappers.response.Response.freeze"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*™
+get_wsgi_headers4werkzeug.wrappers.response.Response.get_wsgi_headers"R
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*§
+get_app_iter0werkzeug.wrappers.response.Response.get_app_iter"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*€
+get_wsgi_response5werkzeug.wrappers.response.Response.get_wsgi_response"Ä
+cTuple[typing.Iterable[builtins.bytes],builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Ó
+__call__,werkzeug.wrappers.response.Response.__call__"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponse*º
+json(werkzeug.wrappers.response.Response.json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*ı
+stream*werkzeug.wrappers.response.Response.stream"V
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:cached_property*É
+_wrap_range_response8werkzeug.wrappers.response.Response._wrap_range_response"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*'
+start
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.int*ê
+_is_range_request_processableAwerkzeug.wrappers.response.Response._is_range_request_processable"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*’
+_process_range_request:werkzeug.wrappers.response.Response._process_range_request"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Y
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*v
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str*¶
+make_conditional4werkzeug.wrappers.response.Response.make_conditional"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*‚
+request_or_environ…
+SUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request]ß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*x
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *[
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ı
+add_etag,werkzeug.wrappers.response.Response.add_etag"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*/
+	overwrite
+builtins.bool"builtins.bool **
+weak
+builtins.bool"builtins.bool 2Œ
+get_data,werkzeug.wrappers.response.Response.get_dataã
+get_data,werkzeug.wrappers.response.Response.get_data" 
+builtins.bytes"builtins.bytes*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadXÖ
+get_data,werkzeug.wrappers.response.Response.get_data"
+builtins.str"builtins.str*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*G
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:
+t.overloadX2˝
+get_json,werkzeug.wrappers.response.Response.get_jsonû
+get_json,werkzeug.wrappers.response.Response.get_json"
+Any*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *H
+silent:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX°
+get_json,werkzeug.wrappers.response.Response.get_json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *,
+silent
+builtins.bool"builtins.bool 0:
+t.overloadXrÄ
+implicit_sequence_conversion@werkzeug.wrappers.response.Response.implicit_sequence_conversion
+builtins.bool"builtins.boolr~
+autocorrect_location_header?werkzeug.wrappers.response.Response.autocorrect_location_header
+builtins.bool"builtins.boolrà
+ automatically_set_content_lengthDwerkzeug.wrappers.response.Response.automatically_set_content_length
+builtins.bool"builtins.boolr©
+response,werkzeug.wrappers.response.Response.responseÓ
+DUnion[typing.Iterable[builtins.str],typing.Iterable[builtins.bytes]]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.IterableT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterablerX
+data(werkzeug.wrappers.response.Response.data&
+builtins.property"builtins.propertyrl
+direct_passthrough6werkzeug.wrappers.response.Response.direct_passthrough
+builtins.bool"builtins.boolr…
+	_on_close-werkzeug.wrappers.response.Response._on_closeå
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listà
+Requestflask.wrappers.Request"!werkzeug.wrappers.request.Request*œ
 max_content_length)flask.wrappers.Request.max_content_length"D
 Union[builtins.int,None]
 builtins.int"builtins.int
 None*:
 self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310*‘
+flask.wrappers.Request"flask.wrappers.Request0:property`*ª
 endpointflask.wrappers.Request.endpoint"D
 Union[builtins.str,None]
 builtins.str"builtins.str
 None*:
 self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310*÷
+flask.wrappers.Request"flask.wrappers.Request0:property`*Ω
 	blueprint flask.wrappers.Request.blueprint"D
 Union[builtins.str,None]
 builtins.str"builtins.str
 None*:
 self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310j35j36j37j38j39j310r•
-url_ruleflask.wrappers.Request.url_rule_
-!Union[werkzeug.routing.Rule,None].
-werkzeug.routing.Rule"werkzeug.routing.Rule
-None*35*36*37*38*39*310rü
-	view_args flask.wrappers.Request.view_argsW
+flask.wrappers.Request"flask.wrappers.Request0:property`*≈
+
+blueprints!flask.wrappers.Request.blueprints"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*:
+self0
+flask.wrappers.Request"flask.wrappers.Request0:property`*
+_load_form_data&flask.wrappers.Request._load_form_data"
+None*:
+self0
+flask.wrappers.Request"flask.wrappers.Request*Ó
+on_json_loading_failed-flask.wrappers.Request.on_json_loading_failed"
+Any*:
+self0
+flask.wrappers.Request"flask.wrappers.Request*`
+eY
+Union[builtins.ValueError,None]*
+builtins.ValueError"builtins.ValueError
+Noner:
+json_module"flask.wrappers.Request.json_module
+Anyrû
+url_ruleflask.wrappers.Request.url_ruleq
+'Union[werkzeug.routing.rules.Rule,None]:
+werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
+Noner¬
+	view_args flask.wrappers.Request.view_argsí
++Union[builtins.dict[builtins.str,Any],None]W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*35*36*37*38*39*310r‹
-routing_exception(flask.wrappers.Request.routing_exceptionÉ
--Union[werkzeug.exceptions.HTTPException,None]F
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException
-None*35*36*37*38*39*310–
-Responseflask.wrappers.Response"werkzeug.wrappers.Response"flask.wrappers.JSONMixin*Ω
+Any"builtins.dict
+Nonerï
+routing_exception(flask.wrappers.Request.routing_exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+NoneË
+Responseflask.wrappers.Response"#werkzeug.wrappers.response.Response*§
 max_cookie_size'flask.wrappers.Response.max_cookie_size"
 builtins.int"builtins.int*<
 self2
-flask.wrappers.Response"flask.wrappers.Response0:property`z35z36z37z38z39z310j35j36j37j38j39j310rõ
+flask.wrappers.Response"flask.wrappers.Response0:property`rÇ
 default_mimetype(flask.wrappers.Response.default_mimetypeD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310
+Nonerr
+autocorrect_location_header3flask.wrappers.Response.autocorrect_location_header
+builtins.bool"builtins.bool*
+ttyping 

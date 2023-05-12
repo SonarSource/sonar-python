@@ -1,36 +1,44 @@
 
-werkzeug.formparserÈ
-_StreamFactory"werkzeug.formparser._StreamFactory"builtins.object*Ü
-__call__+werkzeug.formparser._StreamFactory.__call__"H
+werkzeug.formparserá
+TStreamFactory"werkzeug.formparser.TStreamFactory"builtins.object*Ω
+__call__+werkzeug.formparser.TStreamFactory.__call__"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*R
 selfH
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory*^
+"werkzeug.formparser.TStreamFactory""werkzeug.formparser.TStreamFactory*^
 total_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None**
-filename
-builtins.str"builtins.str*.
-content_type
-builtins.str"builtins.str*Z
+None*V
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Z
 content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z35z36z37z38z39z310Xj35j36j37j38j39j310§ 
-FormDataParser"werkzeug.formparser.FormDataParser"builtins.object*¨
+None X:
+FormDataParser"werkzeug.formparser.FormDataParser"builtins.object*…
 __init__+werkzeug.formparser.FormDataParser.__init__"
 None*R
 selfH
 "werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*ù
 stream_factoryÜ
-.Union[werkzeug.formparser._StreamFactory,None]H
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory
-None *+
-charset
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str *`
+.Union[werkzeug.formparser.TStreamFactory,None]H
+"werkzeug.formparser.TStreamFactory""werkzeug.formparser.TStreamFactory
+None *S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *`
 max_form_memory_sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -38,48 +46,62 @@
 max_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *í
-clsÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
+None *ú
+clsê
+GUnion[Type[werkzeug.datastructures.structures.MultiDict[Any,Any]],None]∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict
 None *,
 silent
-builtins.bool"builtins.bool z35z36z37z38z39z310*˚
+builtins.bool"builtins.bool *Z
+max_form_partsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *—
 get_parse_func1werkzeug.formparser.FormDataParser.get_parse_func"Ü
-+Union[CallableType[builtins.function],None]K
++Union[None,CallableType[builtins.function]]
+NoneK
 CallableType[builtins.function]&
-builtins.function"builtins.function
-None*R
+builtins.function"builtins.function*R
 selfH
 "werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser**
 mimetype
-builtins.str"builtins.str*
-options
-Anyz35z36z37z38z39z310*Ô
-parse_from_environ5werkzeug.formparser.FormDataParser.parse_from_environ"¸
->Tuple[typing.IO[builtins.bytes],TypeAlias[Any],TypeAlias[Any]]H
+builtins.str"builtins.str*Ç
+optionsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*Í
+parse_from_environ5werkzeug.formparser.FormDataParser.parse_from_environ"ê
+óTypeAlias[Tuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]]Õ
+åTuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]H
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict*R
+builtins.bytes"builtins.bytes"	typing.IOw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict""werkzeug.formparser.t_parse_result*R
 selfH
 "werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*µ
 environß
 *TypeAlias[builtins.dict[builtins.str,Any]]W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentz35z36z37z38z39z310*»
-parse(werkzeug.formparser.FormDataParser.parse"¸
->Tuple[typing.IO[builtins.bytes],TypeAlias[Any],TypeAlias[Any]]H
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*¿	
+parse(werkzeug.formparser.FormDataParser.parse"ê
+óTypeAlias[Tuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]]Õ
+åTuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]H
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict*R
+builtins.bytes"builtins.bytes"	typing.IOw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict""werkzeug.formparser.t_parse_result*R
 selfH
 "werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*T
 streamH
@@ -90,218 +112,242 @@
 content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*Ã
-optionsº
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
+None*…
+optionsπ
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z35z36z37z38z39z310j35j36j37j38j39j310r¶
-stream_factory1werkzeug.formparser.FormDataParser.stream_factoryH
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory*35*36*37*38*39*310rl
+builtins.str"builtins.str"builtins.dict
+None *è	
+_parse_multipart3werkzeug.formparser.FormDataParser._parse_multipart"ê
+óTypeAlias[Tuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]]Õ
+åTuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict""werkzeug.formparser.t_parse_result*R
+selfH
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+mimetype
+builtins.str"builtins.str*X
+content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Ç
+optionsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ë	
+_parse_urlencoded4werkzeug.formparser.FormDataParser._parse_urlencoded"ê
+óTypeAlias[Tuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]]Õ
+åTuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict""werkzeug.formparser.t_parse_result*R
+selfH
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+mimetype
+builtins.str"builtins.str*X
+content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Ç
+optionsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrˇ
+parse_functions2werkzeug.formparser.FormDataParser.parse_functions∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrê
+stream_factory1werkzeug.formparser.FormDataParser.stream_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrS
 charset*werkzeug.formparser.FormDataParser.charset
-builtins.str"builtins.str*35*36*37*38*39*310rj
+builtins.str"builtins.strrQ
 errors)werkzeug.formparser.FormDataParser.errors
-builtins.str"builtins.str*35*36*37*38*39*310rÆ
+builtins.str"builtins.strrï
 max_form_memory_size7werkzeug.formparser.FormDataParser.max_form_memory_sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*35*36*37*38*39*310r™
+Nonerë
 max_content_length5werkzeug.formparser.FormDataParser.max_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*35*36*37*38*39*310rì
-cls&werkzeug.formparser.FormDataParser.clsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310rl
+Nonerâ
+max_form_parts1werkzeug.formparser.FormDataParser.max_form_partsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerË
+cls&werkzeug.formparser.FormDataParser.cls∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictrS
 silent)werkzeug.formparser.FormDataParser.silent
-builtins.bool"builtins.bool*35*36*37*38*39*310rÙ
-parse_functions2werkzeug.formparser.FormDataParser.parse_functionsì
-Fbuiltins.dict[builtins.str,TypeAlias[CallableType[builtins.function]]]
-builtins.str"builtins.strõ
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"werkzeug.formparser._ParseFunc"builtins.dict*35*36*37*38*39*310¸(
-MultiPartParser#werkzeug.formparser.MultiPartParser"builtins.object*“
+builtins.bool"builtins.boolø
+MultiPartParser#werkzeug.formparser.MultiPartParser"builtins.object*Ô
 __init__,werkzeug.formparser.MultiPartParser.__init__"
 None*T
 selfJ
 #werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*ù
 stream_factoryÜ
-.Union[werkzeug.formparser._StreamFactory,None]H
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory
-None *+
-charset
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str *`
+.Union[werkzeug.formparser.TStreamFactory,None]H
+"werkzeug.formparser.TStreamFactory""werkzeug.formparser.TStreamFactory
+None *S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *`
 max_form_memory_sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *í
-clsÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
+None *ú
+clsê
+GUnion[Type[werkzeug.datastructures.structures.MultiDict[Any,Any]],None]∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict
 None */
 buffer_size
-builtins.int"builtins.int z35z36z37z38z39z310*ÿ
+builtins.int"builtins.int *Z
+max_form_partsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ø
 fail(werkzeug.formparser.MultiPartParser.fail"
 NoReturn
 *T
 selfJ
 #werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*)
 message
-builtins.str"builtins.strz35z36z37z38z39z310*Ü
-get_part_encoding5werkzeug.formparser.MultiPartParser.get_part_encoding"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*T
-selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*Ñ
-headersw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz35z36z37z38z39z310*‹
+builtins.str"builtins.str*ù
 get_part_charset4werkzeug.formparser.MultiPartParser.get_part_charset"
 builtins.str"builtins.str*T
 selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*Ñ
-headersw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz35z36z37z38z39z310*∏
-start_file_streaming8werkzeug.formparser.MultiPartParser.start_file_streaming"ô
--Tuple[builtins.str,typing.IO[builtins.bytes]]
-builtins.str"builtins.strH
+#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*_
+headersR
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*ù
+start_file_streaming8werkzeug.formparser.MultiPartParser.start_file_streaming"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*T
 selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*t
-filenamef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Ñ
-headersw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*^
+#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*K
+event@
+werkzeug.sansio.multipart.File"werkzeug.sansio.multipart.File*^
 total_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-Nonez35z36z37z38z39z310*Ô
-in_memory_threshold_reached?werkzeug.formparser.MultiPartParser.in_memory_threshold_reached"
-NoReturn
-*T
+None*”
+parse)werkzeug.formparser.MultiPartParser.parse"Ë
+rTuple[werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict*T
 selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*
-bytes
-Anyz35z36z37z38z39z310*ó
-validate_boundary5werkzeug.formparser.MultiPartParser.validate_boundary"
-None*T
-selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*R
-boundaryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez35z36z37z38z39z310*˘
-parse_lines/werkzeug.formparser.MultiPartParser.parse_lines"ü
-3typing.Generator[Tuple[builtins.str,Any],None,None]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any
-None
-None"typing.Generator*T
-selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*
-file
-Any*.
+#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*.
 boundary 
-builtins.bytes"builtins.bytes*0
-content_length
-builtins.int"builtins.int*3
-cap_at_buffer
-builtins.bool"builtins.bool z35z36z37z38z39z310*ƒ
-parse_parts/werkzeug.formparser.MultiPartParser.parse_parts"ü
-3typing.Generator[Tuple[builtins.str,Any],None,None]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any
-None
-None"typing.Generator*T
-selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*
-file
-Any*.
-boundary 
-builtins.bytes"builtins.bytes*0
-content_length
-builtins.int"builtins.intz35z36z37z38z39z310*±
-parse)werkzeug.formparser.MultiPartParser.parse"ò
-$Tuple[TypeAlias[Any],TypeAlias[Any]]6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict*T
-selfJ
-#werkzeug.formparser.MultiPartParser"#werkzeug.formparser.MultiPartParser*
-file
-Any*.
-boundary 
-builtins.bytes"builtins.bytes*0
-content_length
-builtins.int"builtins.intz35z36z37z38z39z310j35j36j37j38j39j310rm
+builtins.bytes"builtins.bytes*X
+content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerT
 charset+werkzeug.formparser.MultiPartParser.charset
-builtins.str"builtins.str*35*36*37*38*39*310rk
+builtins.str"builtins.strrR
 errors*werkzeug.formparser.MultiPartParser.errors
-builtins.str"builtins.str*35*36*37*38*39*310rØ
+builtins.str"builtins.strrñ
 max_form_memory_size8werkzeug.formparser.MultiPartParser.max_form_memory_sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*35*36*37*38*39*310rß
-stream_factory2werkzeug.formparser.MultiPartParser.stream_factoryH
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory*35*36*37*38*39*310rî
-cls'werkzeug.formparser.MultiPartParser.clsK
+Nonerä
+max_form_parts2werkzeug.formparser.MultiPartParser.max_form_partsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerë
+stream_factory2werkzeug.formparser.MultiPartParser.stream_factoryK
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310ru
+builtins.function"builtins.functionrÈ
+cls'werkzeug.formparser.MultiPartParser.cls∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictr\
 buffer_size/werkzeug.formparser.MultiPartParser.buffer_size
-builtins.int"builtins.int*35*36*37*38*39*310ø
+builtins.int"builtins.intˆ
 default_stream_factory*werkzeug.formparser.default_stream_factory"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*^
 total_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None**
-filename
-builtins.str"builtins.str*.
-content_type
-builtins.str"builtins.str*Z
+None*V
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Z
 content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z35z36z37z38z39z310Ñ	
-parse_form_data#werkzeug.formparser.parse_form_data"¸
->Tuple[typing.IO[builtins.bytes],TypeAlias[Any],TypeAlias[Any]]H
+None µ
+parse_form_data#werkzeug.formparser.parse_form_data"ê
+óTypeAlias[Tuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]]Õ
+åTuple[typing.IO[builtins.bytes],werkzeug.datastructures.structures.MultiDict[Any,Any],werkzeug.datastructures.structures.MultiDict[Any,Any]]H
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict6
-TypeAlias[Any]
-Any"werkzeug.formparser._Dict*µ
+builtins.bytes"builtins.bytes"	typing.IOw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDictw
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict""werkzeug.formparser.t_parse_result*µ
 environß
 *TypeAlias[builtins.dict[builtins.str,Any]]W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*ù
 stream_factoryÜ
-.Union[werkzeug.formparser._StreamFactory,None]H
-"werkzeug.formparser._StreamFactory""werkzeug.formparser._StreamFactory
-None *+
-charset
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str *`
+.Union[werkzeug.formparser.TStreamFactory,None]H
+"werkzeug.formparser.TStreamFactory""werkzeug.formparser.TStreamFactory
+None *S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *`
 max_form_memory_sizeD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -309,26 +355,29 @@ $Tuple[TypeAlias[Any],TypeAlias[Any]]6
 max_content_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *í
-clsÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
+None *ú
+clsê
+GUnion[Type[werkzeug.datastructures.structures.MultiDict[Any,Any]],None]∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict
 None *,
 silent
-builtins.bool"builtins.bool z35z36z37z38z39z310å
-exhaust_stream"werkzeug.formparser.exhaust_stream"
-werkzeug.formparser._F*!
-f
-werkzeug.formparser._Fz35z36z37z38z39z310≥
-is_valid_multipart_boundary/werkzeug.formparser.is_valid_multipart_boundary"
-builtins.bool"builtins.bool**
-boundary
-builtins.str"builtins.strz35z36z37z38z39z310„
-parse_multipart_headers+werkzeug.formparser.parse_multipart_headers"B
-werkzeug.datastructures.Headers"werkzeug.datastructures.Headers*Ω
-iterableÆ
-3typing.Iterable[Union[builtins.str,builtins.bytes]]f
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"typing.Iterablez35z36z37z38z39z310
+builtins.bool"builtins.bool *Z
+max_form_partsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ∫
+_chunk_iterwerkzeug.formparser._chunk_iter"ä
++typing.Iterator[Union[builtins.bytes,None]]J
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None"typing.Iterator*U
+readK
+CallableType[builtins.function]&
+builtins.function"builtins.function*&
+size
+builtins.int"builtins.int*
+ttyping *
+tetyping 

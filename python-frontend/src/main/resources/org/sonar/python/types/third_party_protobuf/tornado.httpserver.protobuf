@@ -1,110 +1,0 @@
-
-tornado.httpserver¨
-
-HTTPServertornado.httpserver.HTTPServer"tornado.tcpserver.TCPServer"tornado.util.Configurable*²
-__init__&tornado.httpserver.HTTPServer.__init__"
-None*H
-self>
-tornado.httpserver.HTTPServer"tornado.httpserver.HTTPServer*
-args
-Any*
-kwargs
-Anyz27*Ó
-
-initialize(tornado.httpserver.HTTPServer.initialize*
-self*
-request_callback*
-no_keep_alive *
-io_loop *
-xheaders *
-ssl_options *
-protocol *
-decompress_request *
-
-chunk_size *
-max_header_size *
-idle_connection_timeout *
-body_timeout *
-max_body_size *
-max_buffer_size z27*b
-configurable_base/tornado.httpserver.HTTPServer.configurable_base*
-cls0:classmethodpz27*h
-configurable_default2tornado.httpserver.HTTPServer.configurable_default*
-cls0:classmethodpz27*Z
-close_all_connections3tornado.httpserver.HTTPServer.close_all_connections*
-selfz27*c
-handle_stream+tornado.httpserver.HTTPServer.handle_stream*
-self*
-
-stream*
-addressz27*m
-start_request+tornado.httpserver.HTTPServer.start_request*
-self*
-server_conn*
-request_connz27*Q
-on_close&tornado.httpserver.HTTPServer.on_close*
-self*
-server_connz27j27rO
-request_callback.tornado.httpserver.HTTPServer.request_callback
-Any*27rI
-no_keep_alive+tornado.httpserver.HTTPServer.no_keep_alive
-Any*27r?
-xheaders&tornado.httpserver.HTTPServer.xheaders
-Any*27r?
-protocol&tornado.httpserver.HTTPServer.protocol
-Any*27rE
-conn_params)tornado.httpserver.HTTPServer.conn_params
-Any*27ð
-_HTTPRequestContext&tornado.httpserver._HTTPRequestContext"builtins.object*ç
-__init__/tornado.httpserver._HTTPRequestContext.__init__"
-None*Z
-selfP
-&tornado.httpserver._HTTPRequestContext"&tornado.httpserver._HTTPRequestContext*
-stream
-Any*
-address
-Any*
-protocol
-Anyz27j27rF
-address.tornado.httpserver._HTTPRequestContext.address
-Any*27rH
-protocol/tornado.httpserver._HTTPRequestContext.protocol
-Any*27rT
-address_family5tornado.httpserver._HTTPRequestContext.address_family
-Any*27rJ
-	remote_ip0tornado.httpserver._HTTPRequestContext.remote_ip
-Any*27„
-_ServerRequestAdapter(tornado.httpserver._ServerRequestAdapter"builtins.object*õ
-__init__1tornado.httpserver._ServerRequestAdapter.__init__"
-None*^
-selfT
-(tornado.httpserver._ServerRequestAdapter"(tornado.httpserver._ServerRequestAdapter*
-server
-Any*
-server_conn
-Any*
-request_conn
-Anyz27*x
-headers_received9tornado.httpserver._ServerRequestAdapter.headers_received*
-self*
-
-start_line*
-headersz27*`
-data_received6tornado.httpserver._ServerRequestAdapter.data_received*
-self*	
-chunkz27*G
-finish/tornado.httpserver._ServerRequestAdapter.finish*
-selfz27*a
-on_connection_close<tornado.httpserver._ServerRequestAdapter.on_connection_close*
-selfz27j27rF
-server/tornado.httpserver._ServerRequestAdapter.server
-Any*27rN
-
-connection3tornado.httpserver._ServerRequestAdapter.connection
-Any*27rH
-request0tornado.httpserver._ServerRequestAdapter.request
-Any*27rJ
-delegate1tornado.httpserver._ServerRequestAdapter.delegate
-Any*27*:
-HTTPRequesttornado.httpserver.HTTPRequest
-Any*27

@@ -1,0 +1,1035 @@
+
+codecs¿
+_Encodercodecs._Encoder"builtins.object*è
+__call__codecs._Encoder.__call__"f
+"Tuple[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*,
+self"
+codecs._Encoder"codecs._Encoder*'
+input
+builtins.str"builtins.str**
+errors
+builtins.str"builtins.str Xæ
+_Decodercodecs._Decoder"builtins.object*ç
+__call__codecs._Decoder.__call__"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*,
+self"
+codecs._Decoder"codecs._Decoder*+
+input 
+builtins.bytes"builtins.bytes**
+errors
+builtins.str"builtins.str X 
+_StreamReadercodecs._StreamReader"builtins.object*è
+__call__codecs._StreamReader.__call__"*
+codecs.StreamReader"codecs.StreamReader*6
+self,
+codecs._StreamReader"codecs._StreamReader*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+errors
+builtins.str"builtins.str X 
+_StreamWritercodecs._StreamWriter"builtins.object*è
+__call__codecs._StreamWriter.__call__"*
+codecs.StreamWriter"codecs.StreamWriter*6
+self,
+codecs._StreamWriter"codecs._StreamWriter*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+errors
+builtins.str"builtins.str Xû
+_IncrementalEncodercodecs._IncrementalEncoder"builtins.object*◊
+__call__#codecs._IncrementalEncoder.__call__"6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder*B
+self8
+codecs._IncrementalEncoder"codecs._IncrementalEncoder**
+errors
+builtins.str"builtins.str Xû
+_IncrementalDecodercodecs._IncrementalDecoder"builtins.object*◊
+__call__#codecs._IncrementalDecoder.__call__"6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder*B
+self8
+codecs._IncrementalDecoder"codecs._IncrementalDecoder**
+errors
+builtins.str"builtins.str X´
+	CodecInfocodecs.CodecInfo"builtins.tuple*Ÿ
+encodecodecs.CodecInfo.encode""
+codecs._Encoder"codecs._Encoder*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*Ÿ
+decodecodecs.CodecInfo.decode""
+codecs._Decoder"codecs._Decoder*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*Ô
+streamreadercodecs.CodecInfo.streamreader",
+codecs._StreamReader"codecs._StreamReader*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*Ô
+streamwritercodecs.CodecInfo.streamwriter",
+codecs._StreamWriter"codecs._StreamWriter*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*á
+incrementalencoder#codecs.CodecInfo.incrementalencoder"8
+codecs._IncrementalEncoder"codecs._IncrementalEncoder*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*á
+incrementaldecoder#codecs.CodecInfo.incrementaldecoder"8
+codecs._IncrementalDecoder"codecs._IncrementalDecoder*É
+self¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter0:property`*é
+__new__codecs.CodecInfo.__new__"¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter*ﬂ
+cls’
+VType[Tuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]]¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter*.
+encode"
+codecs._Encoder"codecs._Encoder*.
+decode"
+codecs._Decoder"codecs._Decoder*p
+streamreader\
+ Union[codecs._StreamReader,None],
+codecs._StreamReader"codecs._StreamReader
+None *p
+streamwriter\
+ Union[codecs._StreamWriter,None],
+codecs._StreamWriter"codecs._StreamWriter
+None *à
+incrementalencodern
+&Union[codecs._IncrementalEncoder,None]8
+codecs._IncrementalEncoder"codecs._IncrementalEncoder
+None *à
+incrementaldecodern
+&Union[codecs._IncrementalDecoder,None]8
+codecs._IncrementalDecoder"codecs._IncrementalDecoder
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *`
+_is_text_encodingG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None r;
+namecodecs.CodecInfo.name
+builtins.str"builtins.strÆ
+Codeccodecs.Codec"builtins.object*Ç
+encodecodecs.Codec.encode"f
+"Tuple[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*&
+self
+codecs.Codec"codecs.Codec*'
+input
+builtins.str"builtins.str**
+errors
+builtins.str"builtins.str *Ä
+decodecodecs.Codec.decode"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*&
+self
+codecs.Codec"codecs.Codec*+
+input 
+builtins.bytes"builtins.bytes**
+errors
+builtins.str"builtins.str „
+IncrementalEncodercodecs.IncrementalEncoder"builtins.object*¶
+__init__"codecs.IncrementalEncoder.__init__"
+None*@
+self6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder**
+errors
+builtins.str"builtins.str *¯
+encode codecs.IncrementalEncoder.encode" 
+builtins.bytes"builtins.bytes*@
+self6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder*'
+input
+builtins.str"builtins.str*+
+final
+builtins.bool"builtins.bool 0:abstractmethod@*t
+resetcodecs.IncrementalEncoder.reset"
+None*@
+self6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder*“
+getstate"codecs.IncrementalEncoder.getstate"`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*@
+self6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder*Á
+setstate"codecs.IncrementalEncoder.setstate"
+None*@
+self6
+codecs.IncrementalEncoder"codecs.IncrementalEncoder*k
+state`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strrH
+errors codecs.IncrementalEncoder.errors
+builtins.str"builtins.strÔ
+IncrementalDecodercodecs.IncrementalDecoder"builtins.object*¶
+__init__"codecs.IncrementalDecoder.__init__"
+None*@
+self6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder**
+errors
+builtins.str"builtins.str *¯
+decode codecs.IncrementalDecoder.decode"
+builtins.str"builtins.str*@
+self6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder*+
+input 
+builtins.bytes"builtins.bytes*+
+final
+builtins.bool"builtins.bool 0:abstractmethod@*t
+resetcodecs.IncrementalDecoder.reset"
+None*@
+self6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder*ÿ
+getstate"codecs.IncrementalDecoder.getstate"f
+"Tuple[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*@
+self6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder*Ì
+setstate"codecs.IncrementalDecoder.setstate"
+None*@
+self6
+codecs.IncrementalDecoder"codecs.IncrementalDecoder*q
+statef
+"Tuple[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.intrH
+errors codecs.IncrementalDecoder.errors
+builtins.str"builtins.str∑
+BufferedIncrementalEncoder!codecs.BufferedIncrementalEncoder"codecs.IncrementalEncoder*æ
+__init__*codecs.BufferedIncrementalEncoder.__init__"
+None*P
+selfF
+!codecs.BufferedIncrementalEncoder"!codecs.BufferedIncrementalEncoder**
+errors
+builtins.str"builtins.str *»
+_buffer_encode0codecs.BufferedIncrementalEncoder._buffer_encode" 
+builtins.bytes"builtins.bytes*P
+selfF
+!codecs.BufferedIncrementalEncoder"!codecs.BufferedIncrementalEncoder*'
+input
+builtins.str"builtins.str*(
+errors
+builtins.str"builtins.str*)
+final
+builtins.bool"builtins.bool0:abstractmethod@*¸
+encode(codecs.BufferedIncrementalEncoder.encode" 
+builtins.bytes"builtins.bytes*P
+selfF
+!codecs.BufferedIncrementalEncoder"!codecs.BufferedIncrementalEncoder*'
+input
+builtins.str"builtins.str*+
+final
+builtins.bool"builtins.bool rP
+buffer(codecs.BufferedIncrementalEncoder.buffer
+builtins.str"builtins.strˇ
+BufferedIncrementalDecoder!codecs.BufferedIncrementalDecoder"codecs.IncrementalDecoder*æ
+__init__*codecs.BufferedIncrementalDecoder.__init__"
+None*P
+selfF
+!codecs.BufferedIncrementalDecoder"!codecs.BufferedIncrementalDecoder**
+errors
+builtins.str"builtins.str *å
+_buffer_decode0codecs.BufferedIncrementalDecoder._buffer_decode"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*P
+selfF
+!codecs.BufferedIncrementalDecoder"!codecs.BufferedIncrementalDecoder*+
+input 
+builtins.bytes"builtins.bytes*(
+errors
+builtins.str"builtins.str*)
+final
+builtins.bool"builtins.bool0:abstractmethod@*¸
+decode(codecs.BufferedIncrementalDecoder.decode"
+builtins.str"builtins.str*P
+selfF
+!codecs.BufferedIncrementalDecoder"!codecs.BufferedIncrementalDecoder*+
+input 
+builtins.bytes"builtins.bytes*+
+final
+builtins.bool"builtins.bool rT
+buffer(codecs.BufferedIncrementalDecoder.buffer 
+builtins.bytes"builtins.bytes™
+StreamWritercodecs.StreamWriter"codecs.Codec*Í
+__init__codecs.StreamWriter.__init__"
+None*4
+self*
+codecs.StreamWriter"codecs.StreamWriter*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+errors
+builtins.str"builtins.str *å
+writecodecs.StreamWriter.write"
+None*4
+self*
+codecs.StreamWriter"codecs.StreamWriter*(
+object
+builtins.str"builtins.str*∆
+
+writelinescodecs.StreamWriter.writelines"
+None*4
+self*
+codecs.StreamWriter"codecs.StreamWriter*X
+listN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*b
+resetcodecs.StreamWriter.reset"
+None*4
+self*
+codecs.StreamWriter"codecs.StreamWriter*R
+	__enter__codecs.StreamWriter.__enter__"
+
+codecs._SW*
+self
+
+codecs._SW*«
+__exit__codecs.StreamWriter.__exit__"
+None*2
+self*
+codecs.StreamWriter"codecs.StreamWriter*í
+typä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*i
+excb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*Î
+__getattr__codecs.StreamWriter.__getattr__"
+Any*2
+self*
+codecs.StreamWriter"codecs.StreamWriter*$
+name
+builtins.str"builtins.str*X
+getattrK
+CallableType[builtins.function]&
+builtins.function"builtins.function rB
+errorscodecs.StreamWriter.errors
+builtins.str"builtins.str¥
+StreamReadercodecs.StreamReader"codecs.Codec*Í
+__init__codecs.StreamReader.__init__"
+None*4
+self*
+codecs.StreamReader"codecs.StreamReader*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+errors
+builtins.str"builtins.str *˙
+readcodecs.StreamReader.read"
+builtins.str"builtins.str*4
+self*
+codecs.StreamReader"codecs.StreamReader*(
+size
+builtins.int"builtins.int *)
+chars
+builtins.int"builtins.int */
+	firstline
+builtins.bool"builtins.bool *˛
+readlinecodecs.StreamReader.readline"
+builtins.str"builtins.str*4
+self*
+codecs.StreamReader"codecs.StreamReader*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *.
+keepends
+builtins.bool"builtins.bool *≤
+	readlinescodecs.StreamReader.readlines"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*4
+self*
+codecs.StreamReader"codecs.StreamReader*T
+sizehintD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *.
+keepends
+builtins.bool"builtins.bool *b
+resetcodecs.StreamReader.reset"
+None*4
+self*
+codecs.StreamReader"codecs.StreamReader*R
+	__enter__codecs.StreamReader.__enter__"
+
+codecs._SR*
+self
+
+codecs._SR*«
+__exit__codecs.StreamReader.__exit__"
+None*2
+self*
+codecs.StreamReader"codecs.StreamReader*í
+typä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*i
+excb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*¨
+__iter__codecs.StreamReader.__iter__"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*2
+self*
+codecs.StreamReader"codecs.StreamReader*Î
+__getattr__codecs.StreamReader.__getattr__"
+Any*2
+self*
+codecs.StreamReader"codecs.StreamReader*$
+name
+builtins.str"builtins.str*X
+getattrK
+CallableType[builtins.function]&
+builtins.function"builtins.function rB
+errorscodecs.StreamReader.errors
+builtins.str"builtins.strØ 
+StreamReaderWritercodecs.StreamReaderWriter"typing.TextIO*
+__init__"codecs.StreamReaderWriter.__init__"
+None*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*8
+Reader,
+codecs._StreamReader"codecs._StreamReader*8
+Writer,
+codecs._StreamWriter"codecs._StreamWriter**
+errors
+builtins.str"builtins.str *∞
+readcodecs.StreamReaderWriter.read"
+builtins.str"builtins.str*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*(
+size
+builtins.int"builtins.int *‡
+readline"codecs.StreamReaderWriter.readline"
+builtins.str"builtins.str*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *î
+	readlines#codecs.StreamReaderWriter.readlines"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*T
+sizehintD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *é
+__next__"codecs.StreamReaderWriter.__next__"
+builtins.str"builtins.str*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*T
+__iter__"codecs.StreamReaderWriter.__iter__"
+	codecs._T*
+self
+	codecs._T*∞
+writecodecs.StreamReaderWriter.write"
+builtins.int"builtins.int*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*&
+data
+builtins.str"builtins.str*ÿ
+
+writelines$codecs.StreamReaderWriter.writelines"
+None*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*X
+listN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*t
+resetcodecs.StreamReaderWriter.reset"
+None*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*‹
+seekcodecs.StreamReaderWriter.seek"
+builtins.int"builtins.int*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*(
+offset
+builtins.int"builtins.int**
+whence
+builtins.int"builtins.int *V
+	__enter__#codecs.StreamReaderWriter.__enter__"
+	codecs._T*
+self
+	codecs._T*Ÿ
+__exit__"codecs.StreamReaderWriter.__exit__"
+None*>
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*í
+typä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*i
+excb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*£
+__getattr__%codecs.StreamReaderWriter.__getattr__"
+Any*>
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*$
+name
+builtins.str"builtins.str*t
+closecodecs.StreamReaderWriter.close"
+None*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*ä
+fileno codecs.StreamReaderWriter.fileno"
+builtins.int"builtins.int*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*t
+flushcodecs.StreamReaderWriter.flush"
+None*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*å
+isatty codecs.StreamReaderWriter.isatty"
+builtins.bool"builtins.bool*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*ê
+readable"codecs.StreamReaderWriter.readable"
+builtins.bool"builtins.bool*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*‡
+truncate"codecs.StreamReaderWriter.truncate"
+builtins.int"builtins.int*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ê
+seekable"codecs.StreamReaderWriter.seekable"
+builtins.bool"builtins.bool*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*Ü
+tellcodecs.StreamReaderWriter.tell"
+builtins.int"builtins.int*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter*ê
+writable"codecs.StreamReaderWriter.writable"
+builtins.bool"builtins.bool*@
+self6
+codecs.StreamReaderWriter"codecs.StreamReaderWriterâ
+StreamRecodercodecs.StreamRecoder"typing.BinaryIO*¡
+__init__codecs.StreamRecoder.__init__"
+None*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*.
+encode"
+codecs._Encoder"codecs._Encoder*.
+decode"
+codecs._Decoder"codecs._Decoder*8
+Reader,
+codecs._StreamReader"codecs._StreamReader*8
+Writer,
+codecs._StreamWriter"codecs._StreamWriter**
+errors
+builtins.str"builtins.str *•
+readcodecs.StreamRecoder.read" 
+builtins.bytes"builtins.bytes*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*(
+size
+builtins.int"builtins.int *’
+readlinecodecs.StreamRecoder.readline" 
+builtins.bytes"builtins.bytes*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ã
+	readlinescodecs.StreamRecoder.readlines"P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*T
+sizehintD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *É
+__next__codecs.StreamRecoder.__next__" 
+builtins.bytes"builtins.bytes*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*S
+__iter__codecs.StreamRecoder.__iter__"
+codecs._SRT*
+self
+codecs._SRT*•
+writecodecs.StreamRecoder.write"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder**
+data 
+builtins.bytes"builtins.bytes*„
+
+writelinescodecs.StreamRecoder.writelines"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*^
+listT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*e
+resetcodecs.StreamRecoder.reset"
+None*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*î
+__getattr__ codecs.StreamRecoder.__getattr__"
+Any*4
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*$
+name
+builtins.str"builtins.str*U
+	__enter__codecs.StreamRecoder.__enter__"
+codecs._SRT*
+self
+codecs._SRT*Õ
+__exit__codecs.StreamRecoder.__exit__"
+None*4
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*ì
+typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*k
+valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*_
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*Õ
+seekcodecs.StreamRecoder.seek"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*(
+offset
+builtins.int"builtins.int**
+whence
+builtins.int"builtins.int *e
+closecodecs.StreamRecoder.close"
+None*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*{
+filenocodecs.StreamRecoder.fileno"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*e
+flushcodecs.StreamRecoder.flush"
+None*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*}
+isattycodecs.StreamRecoder.isatty"
+builtins.bool"builtins.bool*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*Å
+readablecodecs.StreamRecoder.readable"
+builtins.bool"builtins.bool*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*—
+truncatecodecs.StreamRecoder.truncate"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Å
+seekablecodecs.StreamRecoder.seekable"
+builtins.bool"builtins.bool*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*w
+tellcodecs.StreamRecoder.tell"
+builtins.int"builtins.int*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoder*Å
+writablecodecs.StreamRecoder.writable"
+builtins.bool"builtins.bool*6
+self,
+codecs.StreamRecoder"codecs.StreamRecoderæ
+lookupcodecs.lookup"¯
+PTuple[codecs._Encoder,codecs._Decoder,codecs._StreamReader,codecs._StreamWriter]"
+codecs._Encoder"codecs._Encoder"
+codecs._Decoder"codecs._Decoder,
+codecs._StreamReader"codecs._StreamReader,
+codecs._StreamWriter"codecs._StreamWriter**
+
+__encoding
+builtins.str"builtins.str∫
+utf_16_be_decodecodecs.utf_16_be_decode"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int**
+__data 
+builtins.bytes"builtins.bytes*R
+__errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+__final
+builtins.bool"builtins.bool é
+utf_16_be_encodecodecs.utf_16_be_encode"f
+"Tuple[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*%
+__str
+builtins.str"builtins.str*R
+__errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None o
+
+getencodercodecs.getencoder""
+codecs._Encoder"codecs._Encoder**
+encoding
+builtins.str"builtins.stro
+
+getdecodercodecs.getdecoder""
+codecs._Decoder"codecs._Decoder**
+encoding
+builtins.str"builtins.strõ
+getincrementalencodercodecs.getincrementalencoder"8
+codecs._IncrementalEncoder"codecs._IncrementalEncoder**
+encoding
+builtins.str"builtins.strõ
+getincrementaldecodercodecs.getincrementaldecoder"8
+codecs._IncrementalDecoder"codecs._IncrementalDecoder**
+encoding
+builtins.str"builtins.strw
+	getreadercodecs.getreader",
+codecs._StreamReader"codecs._StreamReader**
+encoding
+builtins.str"builtins.strw
+	getwritercodecs.getwriter",
+codecs._StreamWriter"codecs._StreamWriter**
+encoding
+builtins.str"builtins.strá
+registercodecs.register"
+None*`
+__search_functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function“
+opencodecs.open"6
+codecs.StreamReaderWriter"codecs.StreamReaderWriter**
+filename
+builtins.str"builtins.str*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None **
+errors
+builtins.str"builtins.str *-
+	buffering
+builtins.int"builtins.int €
+EncodedFilecodecs.EncodedFile",
+codecs.StreamRecoder"codecs.StreamRecoder*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*/
+data_encoding
+builtins.str"builtins.str*Y
+file_encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None **
+errors
+builtins.str"builtins.str À
+
+iterencodecodecs.iterencode"t
+*typing.Generator[builtins.bytes,None,None] 
+builtins.bytes"builtins.bytes
+None
+None"typing.Generator*\
+iteratorN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable**
+encoding
+builtins.str"builtins.str**
+errors
+builtins.str"builtins.str À
+
+iterdecodecodecs.iterdecode"n
+(typing.Generator[builtins.str,None,None]
+builtins.str"builtins.str
+None
+None"typing.Generator*b
+iteratorT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable**
+encoding
+builtins.str"builtins.str**
+errors
+builtins.str"builtins.str µ
+register_errorcodecs.register_error"
+None*(
+__errors
+builtins.str"builtins.str*X
+	__handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionò
+lookup_errorcodecs.lookup_error"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*&
+__name
+builtins.str"builtins.strß
+strict_errorscodecs.strict_errors"¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*=
+	exception.
+builtins.UnicodeError"builtins.UnicodeError©
+replace_errorscodecs.replace_errors"¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*=
+	exception.
+builtins.UnicodeError"builtins.UnicodeErrorß
+ignore_errorscodecs.ignore_errors"¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*=
+	exception.
+builtins.UnicodeError"builtins.UnicodeErrorΩ
+xmlcharrefreplace_errorscodecs.xmlcharrefreplace_errors"¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*=
+	exception.
+builtins.UnicodeError"builtins.UnicodeErrorª
+backslashreplace_errorscodecs.backslashreplace_errors"¿
+6Tuple[Union[builtins.str,builtins.bytes],builtins.int]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*=
+	exception.
+builtins.UnicodeError"builtins.UnicodeError"˝
+encodecodecs.encode√
+encodecodecs.encode" 
+builtins.bytes"builtins.bytes*)
+obj 
+builtins.bytes"builtins.bytes*¢
+encodingì
+ÒTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]˚	
+ÊUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"codecs._BytesToBytesEncodingT**
+errors
+builtins.str"builtins.str 0:overloadX“
+encodecodecs.encode"
+builtins.str"builtins.str*%
+obj
+builtins.str"builtins.str*π
+encoding®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str 0:overloadX»
+encodecodecs.encode" 
+builtins.bytes"builtins.bytes*%
+obj
+builtins.str"builtins.str*,
+encoding
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str 0:overloadX"˝
+decodecodecs.decode√
+decodecodecs.decode" 
+builtins.bytes"builtins.bytes*)
+obj 
+builtins.bytes"builtins.bytes*¢
+encodingì
+ÒTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]˚	
+ÊUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"codecs._BytesToBytesEncodingT**
+errors
+builtins.str"builtins.str 0:overloadX“
+decodecodecs.decode"
+builtins.str"builtins.str*%
+obj
+builtins.str"builtins.str*π
+encoding®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str 0:overloadX»
+decodecodecs.decode"
+builtins.str"builtins.str*)
+obj 
+builtins.bytes"builtins.bytes*,
+encoding
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str 0:overloadX*3
+BOM
+codecs.BOM 
+builtins.bytes"builtins.bytes*9
+BOM_BEcodecs.BOM_BE 
+builtins.bytes"builtins.bytes*9
+BOM_LEcodecs.BOM_LE 
+builtins.bytes"builtins.bytes*=
+BOM_UTF8codecs.BOM_UTF8 
+builtins.bytes"builtins.bytes*?
+	BOM_UTF16codecs.BOM_UTF16 
+builtins.bytes"builtins.bytes*E
+BOM_UTF16_BEcodecs.BOM_UTF16_BE 
+builtins.bytes"builtins.bytes*E
+BOM_UTF16_LEcodecs.BOM_UTF16_LE 
+builtins.bytes"builtins.bytes*?
+	BOM_UTF32codecs.BOM_UTF32 
+builtins.bytes"builtins.bytes*E
+BOM_UTF32_BEcodecs.BOM_UTF32_BE 
+builtins.bytes"builtins.bytes*E
+BOM_UTF32_LEcodecs.BOM_UTF32_LE 
+builtins.bytes"builtins.bytes

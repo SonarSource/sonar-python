@@ -1,336 +1,0 @@
-
-paramiko.channel‚]
-Channelparamiko.channel.Channel"#paramiko.util.ClosingContextManager*º
-__init__!paramiko.channel.Channel.__init__"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-chanid
-builtins.int"builtins.intz35z36z37z38z39z310*Œ
-__del__ paramiko.channel.Channel.__del__"
-None*<
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*ô
-get_pty paramiko.channel.Channel.get_pty"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-term
-builtins.str"builtins.str *)
-width
-builtins.int"builtins.int **
-height
-builtins.int"builtins.int *0
-width_pixels
-builtins.int"builtins.int *1
-height_pixels
-builtins.int"builtins.int z35z36z37z38z39z310*˜
-invoke_shell%paramiko.channel.Channel.invoke_shell"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Ã
-exec_command%paramiko.channel.Channel.exec_command"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*)
-command
-builtins.str"builtins.strz35z36z37z38z39z310*Í
-invoke_subsystem)paramiko.channel.Channel.invoke_subsystem"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*+
-	subsystem
-builtins.str"builtins.strz35z36z37z38z39z310*Ð
-
-resize_pty#paramiko.channel.Channel.resize_pty"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*)
-width
-builtins.int"builtins.int **
-height
-builtins.int"builtins.int *0
-width_pixels
-builtins.int"builtins.int *1
-height_pixels
-builtins.int"builtins.int z35z36z37z38z39z310*¯
-update_environment+paramiko.channel.Channel.update_environment"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*ˆ
-environmentw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingz35z36z37z38z39z310*
-set_environment_variable1paramiko.channel.Channel.set_environment_variable"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*&
-name
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz35z36z37z38z39z310*¸
-exit_status_ready*paramiko.channel.Channel.exit_status_ready"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*´
-recv_exit_status)paramiko.channel.Channel.recv_exit_status"
-builtins.int"builtins.int*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Ê
-send_exit_status)paramiko.channel.Channel.send_exit_status"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-status
-builtins.int"builtins.intz35z36z37z38z39z310*ç
-request_x11$paramiko.channel.Channel.request_x11" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*1
-screen_number
-builtins.int"builtins.int *Y
-auth_protocolD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-auth_cookieD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *7
-single_connection
-builtins.bool"builtins.bool *–
-handler†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310*š
-request_forward_agent.paramiko.channel.Channel.request_forward_agent"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*X
-handlerK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*Î
-get_transport&paramiko.channel.Channel.get_transport"<
-paramiko.transport.Transport"paramiko.transport.Transport*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*¸
-set_name!paramiko.channel.Channel.set_name"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*¤
-get_name!paramiko.channel.Channel.get_name"
-builtins.str"builtins.str*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310* 
-get_idparamiko.channel.Channel.get_id"
-builtins.int"builtins.int*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*ç
-set_combine_stderr+paramiko.channel.Channel.set_combine_stderr"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*+
-combine
-builtins.bool"builtins.boolz35z36z37z38z39z310*í
-
-settimeout#paramiko.channel.Channel.settimeout"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*W
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-Nonez35z36z37z38z39z310*Ö
-
-gettimeout#paramiko.channel.Channel.gettimeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Ä
-setblocking$paramiko.channel.Channel.setblocking"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*,
-blocking
-builtins.bool"builtins.boolz35z36z37z38z39z310*ª
-getpeername$paramiko.channel.Channel.getpeername"
-builtins.str"builtins.str*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Š
-closeparamiko.channel.Channel.close"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*ª
-
-recv_ready#paramiko.channel.Channel.recv_ready"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Ê
-recvparamiko.channel.Channel.recv" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-nbytes
-builtins.int"builtins.intz35z36z37z38z39z310*¸
-recv_stderr_ready*paramiko.channel.Channel.recv_stderr_ready"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Ø
-recv_stderr$paramiko.channel.Channel.recv_stderr" 
-builtins.bytes"builtins.bytes*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-nbytes
-builtins.int"builtins.intz35z36z37z38z39z310*ª
-
-send_ready#paramiko.channel.Channel.send_ready"
-builtins.bool"builtins.bool*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*Å
-sendparamiko.channel.Channel.send"
-builtins.int"builtins.int*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*'
-s 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*Ó
-send_stderr$paramiko.channel.Channel.send_stderr"
-builtins.int"builtins.int*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*'
-s 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*·
-sendall paramiko.channel.Channel.sendall"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*'
-s 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*Å
-sendall_stderr'paramiko.channel.Channel.sendall_stderr"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*'
-s 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*Ù
-makefile!paramiko.channel.Channel.makefile"<
-paramiko.channel.ChannelFile"paramiko.channel.ChannelFile*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*
-params
-Anyz35z36z37z38z39z310*ó
-makefile_stderr(paramiko.channel.Channel.makefile_stderr"H
-"paramiko.channel.ChannelStderrFile""paramiko.channel.ChannelStderrFile*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*
-params
-Anyz35z36z37z38z39z310*ï
-makefile_stdin'paramiko.channel.Channel.makefile_stdin"F
-!paramiko.channel.ChannelStdinFile"!paramiko.channel.ChannelStdinFile*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*
-params
-Anyz35z36z37z38z39z310* 
-filenoparamiko.channel.Channel.fileno"
-builtins.int"builtins.int*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*·
-shutdown!paramiko.channel.Channel.shutdown"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channel*%
-how
-builtins.int"builtins.intz35z36z37z38z39z310*š
-shutdown_read&paramiko.channel.Channel.shutdown_read"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310*œ
-shutdown_write'paramiko.channel.Channel.shutdown_write"
-None*>
-self4
-paramiko.channel.Channel"paramiko.channel.Channelz35z36z37z38z39z310j35j36j37j38j39j310r`
-chanidparamiko.channel.Channel.chanid
-builtins.int"builtins.int*35*36*37*38*39*310rn
-remote_chanid&paramiko.channel.Channel.remote_chanid
-builtins.int"builtins.int*35*36*37*38*39*310r¾
-	transport"paramiko.channel.Channel.transportt
-(Union[paramiko.transport.Transport,None]<
-paramiko.transport.Transport"paramiko.transport.Transport
-None*35*36*37*38*39*310rb
-activeparamiko.channel.Channel.active
-builtins.bool"builtins.bool*35*36*37*38*39*310rl
-eof_received%paramiko.channel.Channel.eof_received
-builtins.int"builtins.int*35*36*37*38*39*310rd
-eof_sent!paramiko.channel.Channel.eof_sent
-builtins.int"builtins.int*35*36*37*38*39*310r¢
-	in_buffer"paramiko.channel.Channel.in_bufferX
-(paramiko.buffered_pipe.BufferedPipe[Any]
-Any"#paramiko.buffered_pipe.BufferedPipe*35*36*37*38*39*310r°
-in_stderr_buffer)paramiko.channel.Channel.in_stderr_bufferX
-(paramiko.buffered_pipe.BufferedPipe[Any]
-Any"#paramiko.buffered_pipe.BufferedPipe*35*36*37*38*39*310r
-timeout paramiko.channel.Channel.timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*35*36*37*38*39*310rb
-closedparamiko.channel.Channel.closed
-builtins.bool"builtins.bool*35*36*37*38*39*310rl
-ultra_debug$paramiko.channel.Channel.ultra_debug
-builtins.bool"builtins.bool*35*36*37*38*39*310r`
-lockparamiko.channel.Channel.lock 
-threading.Lock"threading.Lock*35*36*37*38*39*310r|
-out_buffer_cv&paramiko.channel.Channel.out_buffer_cv*
-threading.Condition"threading.Condition*35*36*37*38*39*310rp
-in_window_size'paramiko.channel.Channel.in_window_size
-builtins.int"builtins.int*35*36*37*38*39*310rr
-out_window_size(paramiko.channel.Channel.out_window_size
-builtins.int"builtins.int*35*36*37*38*39*310rx
-in_max_packet_size+paramiko.channel.Channel.in_max_packet_size
-builtins.int"builtins.int*35*36*37*38*39*310rz
-out_max_packet_size,paramiko.channel.Channel.out_max_packet_size
-builtins.int"builtins.int*35*36*37*38*39*310rz
-in_window_threshold,paramiko.channel.Channel.in_window_threshold
-builtins.int"builtins.int*35*36*37*38*39*310rr
-in_window_sofar(paramiko.channel.Channel.in_window_sofar
-builtins.int"builtins.int*35*36*37*38*39*310rr
-status_event%paramiko.channel.Channel.status_event"
-threading.Event"threading.Event*35*36*37*38*39*310rd
-loggerparamiko.channel.Channel.logger 
-logging.Logger"logging.Logger*35*36*37*38*39*310rd
-eventparamiko.channel.Channel.event"
-threading.Event"threading.Event*35*36*37*38*39*310rl
-event_ready$paramiko.channel.Channel.event_ready
-builtins.bool"builtins.bool*35*36*37*38*39*310rr
-combine_stderr'paramiko.channel.Channel.combine_stderr
-builtins.bool"builtins.bool*35*36*37*38*39*310rj
-exit_status$paramiko.channel.Channel.exit_status
-builtins.int"builtins.int*35*36*37*38*39*310rV
-origin_addr$paramiko.channel.Channel.origin_addr
-None*35*36*37*38*39*310™
-ChannelFileparamiko.channel.ChannelFile"paramiko.file.BufferedFile*¶
-__init__%paramiko.channel.ChannelFile.__init__"
-None*F
-self<
-paramiko.channel.ChannelFile"paramiko.channel.ChannelFile*A
-channel4
-paramiko.channel.Channel"paramiko.channel.Channel*(
-mode
-builtins.str"builtins.str *+
-bufsize
-builtins.int"builtins.int z35z36z37z38z39z310j35j36j37j38j39j310r~
-channel$paramiko.channel.ChannelFile.channel4
-paramiko.channel.Channel"paramiko.channel.Channel*35*36*37*38*39*310n
-ChannelStderrFile"paramiko.channel.ChannelStderrFile"paramiko.channel.ChannelFilej35j36j37j38j39j310”
-ChannelStdinFile!paramiko.channel.ChannelStdinFile"paramiko.channel.ChannelFile*¥
-close'paramiko.channel.ChannelStdinFile.close"
-None*P
-selfF
-!paramiko.channel.ChannelStdinFile"!paramiko.channel.ChannelStdinFilez35z36z37z38z39z310j35j36j37j38j39j310°
-	open_onlyparamiko.channel.open_only"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*!
-func
-paramiko.channel._Fz35z36z37z38z39z310

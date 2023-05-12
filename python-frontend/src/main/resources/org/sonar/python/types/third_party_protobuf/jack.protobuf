@@ -1,981 +1,0 @@
-
-jackO
-_JackPositionTjack._JackPositionT"builtins.objectj35j36j37j38j39j310ó	
-_CBufferTypejack._CBufferType"builtins.object*‹
-__len__jack._CBufferType.__len__"
-builtins.int"builtins.int*.
-self&
-jack._CBufferType"jack._CBufferTypez35z36z37z38z39z310*•
-	__bytes__jack._CBufferType.__bytes__" 
-builtins.bytes"builtins.bytes*0
-self&
-jack._CBufferType"jack._CBufferTypez35z36z37z38z39z3102­
-__getitem__jack._CBufferType.__getitem__­
-__getitem__jack._CBufferType.__getitem__"
-builtins.str"builtins.str*.
-self&
-jack._CBufferType"jack._CBufferType*#
-key
-builtins.int"builtins.int0:overloadXµ
-__getitem__jack._CBufferType.__getitem__" 
-builtins.bytes"builtins.bytes*.
-self&
-jack._CBufferType"jack._CBufferType*'
-key 
-builtins.slice"builtins.slice0:overloadX"35"36"37"38"39"3102Ï
-__setitem__jack._CBufferType.__setitem__¾
-__setitem__jack._CBufferType.__setitem__"
-None*.
-self&
-jack._CBufferType"jack._CBufferType*#
-key
-builtins.int"builtins.int*#
-val
-builtins.str"builtins.str0:overloadXÆ
-__setitem__jack._CBufferType.__setitem__"
-None*.
-self&
-jack._CBufferType"jack._CBufferType*'
-key 
-builtins.slice"builtins.slice*'
-val 
-builtins.bytes"builtins.bytes0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310H
-	JackErrorjack.JackError"builtins.Exceptionj35j36j37j38j39j310Ö
-JackErrorCodejack.JackErrorCode"jack.JackError*Ñ
-__init__jack.JackErrorCode.__init__"
-None*2
-self(
-jack.JackErrorCode"jack.JackErrorCode*)
-message
-builtins.str"builtins.str*&
-code
-builtins.int"builtins.intz35z36z37z38z39z310j35j36j37j38j39j310r\
-messagejack.JackErrorCode.message
-builtins.str"builtins.str*35*36*37*38*39*310rV
-codejack.JackErrorCode.code
-builtins.int"builtins.int*35*36*37*38*39*310Ï
-JackOpenErrorjack.JackOpenError"jack.JackError*Î
-__init__jack.JackOpenError.__init__"
-None*2
-self(
-jack.JackOpenError"jack.JackOpenError*&
-name
-builtins.str"builtins.str*&
-status
-jack.Status"jack.Statusz35z36z37z38z39z310j35j36j37j38j39j310rV
-namejack.JackOpenError.name
-builtins.str"builtins.str*35*36*37*38*39*310rX
-statusjack.JackOpenError.status
-jack.Status"jack.Status*35*36*37*38*39*310Ë`
-Clientjack.Client"builtins.object*®
-__init__jack.Client.__init__"
-None*$
-self
-jack.Client"jack.Client*&
-name
-builtins.str"builtins.str*4
-use_exact_name
-builtins.bool"builtins.bool *5
-no_start_server
-builtins.bool"builtins.bool *V
-
-servernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *V
-
-session_idD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*ƒ
-namejack.Client.name"
-builtins.str"builtins.str*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*ƒ
-uuidjack.Client.uuid"
-builtins.str"builtins.str*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*
-
-sampleratejack.Client.samplerate"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*…
-statusjack.Client.status"
-jack.Status"jack.Status*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*
-realtimejack.Client.realtime"
-builtins.bool"builtins.bool*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*«
-frames_since_cycle_start$jack.Client.frames_since_cycle_start"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*
-
-frame_timejack.Client.frame_time"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*™
-last_frame_timejack.Client.last_frame_time"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*…
-inportsjack.Client.inports"
-
-jack.Ports"
-jack.Ports*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*‡
-outportsjack.Client.outports"
-
-jack.Ports"
-jack.Ports*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*
-midi_inportsjack.Client.midi_inports"
-
-jack.Ports"
-jack.Ports*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*‘
-midi_outportsjack.Client.midi_outports"
-
-jack.Ports"
-jack.Ports*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*Ú
-ownsjack.Client.owns"
-builtins.bool"builtins.bool*$
-self
-jack.Client"jack.Client*a
-portW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Portz35z36z37z38z39z310*i
-activatejack.Client.activate"
-None*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*¢
-
-deactivatejack.Client.deactivate"
-None*$
-self
-jack.Client"jack.Client*3
-ignore_errors
-builtins.bool"builtins.bool z35z36z37z38z39z310*
-cpu_loadjack.Client.cpu_load" 
-builtins.float"builtins.float*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*˜
-closejack.Client.close"
-None*$
-self
-jack.Client"jack.Client*3
-ignore_errors
-builtins.bool"builtins.bool z35z36z37z38z39z310*¶
-connectjack.Client.connect"
-None*$
-self
-jack.Client"jack.Client*c
-sourceW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Port*h
-destinationW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Portz35z36z37z38z39z310*¼
-
-disconnectjack.Client.disconnect"
-None*$
-self
-jack.Client"jack.Client*c
-sourceW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Port*h
-destinationW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Portz35z36z37z38z39z310*w
-transport_startjack.Client.transport_start"
-None*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*u
-transport_stopjack.Client.transport_stop"
-None*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*§
-transport_statejack.Client.transport_state"*
-jack.TransportState"jack.TransportState*$
-self
-jack.Client"jack.Client0:property`z35z36z37z38z39z310*¢
-transport_locatejack.Client.transport_locate"
-None*$
-self
-jack.Client"jack.Client*'
-frame
-builtins.int"builtins.intz35z36z37z38z39z310*³
-transport_queryjack.Client.transport_query"Ã
-:Tuple[jack.TransportState,builtins.dict[builtins.str,Any]]*
-jack.TransportState"jack.TransportStateW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*ˆ
-transport_query_struct"jack.Client.transport_query_struct"Š
-.Tuple[jack.TransportState,jack._JackPositionT]*
-jack.TransportState"jack.TransportState*
-jack._JackPositionT"jack._JackPositionT*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*É
-transport_reposition_struct'jack.Client.transport_reposition_struct"
-None*$
-self
-jack.Client"jack.Client*8
-position*
-jack._JackPositionT"jack._JackPositionTz35z36z37z38z39z310*¤
-set_sync_timeoutjack.Client.set_sync_timeout"
-None*$
-self
-jack.Client"jack.Client*)
-timeout
-builtins.int"builtins.intz35z36z37z38z39z310*ž
-set_freewheeljack.Client.set_freewheel"
-None*$
-self
-jack.Client"jack.Client*)
-onoff
-builtins.bool"builtins.boolz35z36z37z38z39z310*Þ
-set_shutdown_callback!jack.Client.set_shutdown_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*Ü
-set_process_callback jack.Client.set_process_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*à
-set_freewheel_callback"jack.Client.set_freewheel_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*à
-set_blocksize_callback"jack.Client.set_blocksize_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*â
-set_samplerate_callback#jack.Client.set_samplerate_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*ô
- set_client_registration_callback,jack.Client.set_client_registration_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*å
-set_port_registration_callback*jack.Client.set_port_registration_callback"
-None*$
-self
-jack.Client"jack.Client*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *4
-only_available
-builtins.bool"builtins.bool z35z36z37z38z39z310*Û
-set_port_connect_callback%jack.Client.set_port_connect_callback"
-None*$
-self
-jack.Client"jack.Client*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *4
-only_available
-builtins.bool"builtins.bool z35z36z37z38z39z310*Ù
-set_port_rename_callback$jack.Client.set_port_rename_callback"
-None*$
-self
-jack.Client"jack.Client*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *4
-only_available
-builtins.bool"builtins.bool z35z36z37z38z39z310*ä
-set_graph_order_callback$jack.Client.set_graph_order_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*Ö
-set_xrun_callbackjack.Client.set_xrun_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*“
-set_sync_callbackjack.Client.set_sync_callback"
-None*$
-self
-jack.Client"jack.Client*•
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-Nonez35z36z37z38z39z310*y
-release_timebasejack.Client.release_timebase"
-None*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z310*æ
-set_timebase_callback!jack.Client.set_timebase_callback"
-builtins.bool"builtins.bool*$
-self
-jack.Client"jack.Client*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *1
-conditional
-builtins.bool"builtins.bool z35z36z37z38z39z310*ì
-set_property_change_callback(jack.Client.set_property_change_callback"
-None*$
-self
-jack.Client"jack.Client*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*Å
-get_uuid_for_client_name$jack.Client.get_uuid_for_client_name"
-builtins.str"builtins.str*$
-self
-jack.Client"jack.Client*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*Ã
-get_client_name_by_uuid#jack.Client.get_client_name_by_uuid"
-builtins.str"builtins.str*$
-self
-jack.Client"jack.Client*&
-uuid
-builtins.str"builtins.strz35z36z37z38z39z310*¯
-get_port_by_namejack.Client.get_port_by_name"
-	jack.Port"	jack.Port*$
-self
-jack.Client"jack.Client*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*Ú
-get_all_connectionsjack.Client.get_all_connections"A
-builtins.list[jack.Port]
-	jack.Port"	jack.Port"builtins.list*$
-self
-jack.Client"jack.Client* 
-port
-	jack.Port"	jack.Portz35z36z37z38z39z310*¯
-	get_portsjack.Client.get_ports"A
-builtins.list[jack.Port]
-	jack.Port"	jack.Port"builtins.list*$
-self
-jack.Client"jack.Client*0
-name_pattern
-builtins.str"builtins.str *.
-is_audio
-builtins.bool"builtins.bool *-
-is_midi
-builtins.bool"builtins.bool *.
-is_input
-builtins.bool"builtins.bool */
-	is_output
-builtins.bool"builtins.bool *1
-is_physical
-builtins.bool"builtins.bool *1
-can_monitor
-builtins.bool"builtins.bool *1
-is_terminal
-builtins.bool"builtins.bool z35z36z37z38z39z310*¤
-set_propertyjack.Client.set_property"
-None*$
-self
-jack.Client"jack.Client*m
-subject`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*%
-key
-builtins.str"builtins.str*q
-valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*(
-type
-builtins.str"builtins.str z35z36z37z38z39z310*
-remove_propertyjack.Client.remove_property"
-None*$
-self
-jack.Client"jack.Client*m
-subject`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*%
-key
-builtins.str"builtins.strz35z36z37z38z39z310*þ
-remove_propertiesjack.Client.remove_properties"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client*m
-subject`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strz35z36z37z38z39z310*ƒ
-remove_all_properties!jack.Client.remove_all_properties"
-None*$
-self
-jack.Client"jack.Clientz35z36z37z38z39z3102É
-	blocksizejack.Client.blocksizev
-	blocksizejack.Client.blocksize"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:propertyX`“
-	blocksizejack.Client.blocksize"
-None*$
-self
-jack.Client"jack.Client*+
-	blocksize
-builtins.int"builtins.int0:blocksize.setter"35"36"37"38"39"3102ð
-transport_framejack.Client.transport_frame‚
-transport_framejack.Client.transport_frame"
-builtins.int"builtins.int*$
-self
-jack.Client"jack.Client0:propertyX`¡
-transport_framejack.Client.transport_frame"
-None*$
-self
-jack.Client"jack.Client*'
-frame
-builtins.int"builtins.int0:transport_frame.setter"35"36"37"38"39"310j35j36j37j38j39j310Ñ
-Port	jack.Port"builtins.object*¢
-__init__jack.Port.__init__"
-None* 
-self
-	jack.Port"	jack.Port*
-port_ptr
-Any*&
-client
-jack.Client"jack.Clientz35z36z37z38z39z310* 
-__eq__jack.Port.__eq__"
-builtins.bool"builtins.bool*
-self
-	jack.Port"	jack.Port*+
-other"
-builtins.object"builtins.objectz35z36z37z38z39z310* 
-__ne__jack.Port.__ne__"
-builtins.bool"builtins.bool*
-self
-	jack.Port"	jack.Port*+
-other"
-builtins.object"builtins.objectz35z36z37z38z39z310*}
-namejack.Port.name"
-builtins.str"builtins.str* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*±
-aliasesjack.Port.aliases"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*Ž
-	set_aliasjack.Port.set_alias"
-None* 
-self
-	jack.Port"	jack.Port*'
-alias
-builtins.str"builtins.strz35z36z37z38z39z310*’
-unset_aliasjack.Port.unset_alias"
-None* 
-self
-	jack.Port"	jack.Port*'
-alias
-builtins.str"builtins.strz35z36z37z38z39z310*}
-uuidjack.Port.uuid"
-builtins.str"builtins.str* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*‡
-is_inputjack.Port.is_input"
-builtins.bool"builtins.bool* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*‰
-	is_outputjack.Port.is_output"
-builtins.bool"builtins.bool* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*
-is_physicaljack.Port.is_physical"
-builtins.bool"builtins.bool* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*
-can_monitorjack.Port.can_monitor"
-builtins.bool"builtins.bool* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*
-is_terminaljack.Port.is_terminal"
-builtins.bool"builtins.bool* 
-self
-	jack.Port"	jack.Port0:property`z35z36z37z38z39z310*œ
-request_monitorjack.Port.request_monitor"
-None* 
-self
-	jack.Port"	jack.Port*)
-onoff
-builtins.bool"builtins.boolz35z36z37z38z39z3102»
-	shortnamejack.Port.shortnamep
-	shortnamejack.Port.shortname"
-builtins.str"builtins.str* 
-self
-	jack.Port"	jack.Port0:propertyX`
-	shortnamejack.Port.shortname"
-None* 
-self
-	jack.Port"	jack.Port*+
-	shortname
-builtins.str"builtins.str0:shortname.setter"35"36"37"38"39"310j35j36j37j38j39j310rW
-is_audiojack.Port.is_audio
-builtins.bool"builtins.bool*35*36*37*38*39*310rU
-is_midijack.Port.is_midi
-builtins.bool"builtins.bool*35*36*37*38*39*310õ
-MidiPortjack.MidiPort"	jack.Portj35j36j37j38j39j310r[
-is_audiojack.MidiPort.is_audio
-builtins.bool"builtins.bool*35*36*37*38*39*310rY
-is_midijack.MidiPort.is_midi
-builtins.bool"builtins.bool*35*36*37*38*39*310æ
-OwnPortjack.OwnPort"	jack.Port*¨
-number_of_connections"jack.OwnPort.number_of_connections"
-builtins.int"builtins.int*&
-self
-jack.OwnPort"jack.OwnPort0:property`z35z36z37z38z39z310*¹
-connectionsjack.OwnPort.connections"A
-builtins.list[jack.Port]
-	jack.Port"	jack.Port"builtins.list*&
-self
-jack.OwnPort"jack.OwnPort0:property`z35z36z37z38z39z310*ó
-is_connected_tojack.OwnPort.is_connected_to"
-builtins.bool"builtins.bool*&
-self
-jack.OwnPort"jack.OwnPort*a
-portW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Portz35z36z37z38z39z310*Í
-connectjack.OwnPort.connect"
-None*&
-self
-jack.OwnPort"jack.OwnPort*a
-portW
-Union[builtins.str,jack.Port]
-builtins.str"builtins.str
-	jack.Port"	jack.Portz35z36z37z38z39z310*å
-
-disconnectjack.OwnPort.disconnect"
-None*&
-self
-jack.OwnPort"jack.OwnPort*s
-otherf
-"Union[builtins.str,jack.Port,None]
-builtins.str"builtins.str
-	jack.Port"	jack.Port
-None z35z36z37z38z39z310*p
-
-unregisterjack.OwnPort.unregister"
-None*&
-self
-jack.OwnPort"jack.OwnPortz35z36z37z38z39z310*Ž
-
-get_bufferjack.OwnPort.get_buffer"&
-jack._CBufferType"jack._CBufferType*&
-self
-jack.OwnPort"jack.OwnPortz35z36z37z38z39z310*
-	get_arrayjack.OwnPort.get_array"*
-TypeAlias[Any]
-Any"jack._NDArray*&
-self
-jack.OwnPort"jack.OwnPortz35z36z37z38z39z310j35j36j37j38j39j310•
-OwnMidiPortjack.OwnMidiPort"jack.MidiPort"jack.OwnPort* 
-__init__jack.OwnMidiPort.__init__"
-None*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPort*
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310*š
-
-get_bufferjack.OwnMidiPort.get_buffer"&
-jack._CBufferType"jack._CBufferType*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPortz35z36z37z38z39z310*œ
-	get_arrayjack.OwnMidiPort.get_array"*
-TypeAlias[Any]
-Any"jack._NDArray*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPortz35z36z37z38z39z310*¦
-max_event_sizejack.OwnMidiPort.max_event_size"
-builtins.int"builtins.int*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPort0:property`z35z36z37z38z39z310*ª
-lost_midi_events!jack.OwnMidiPort.lost_midi_events"
-builtins.int"builtins.int*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPort0:property`z35z36z37z38z39z310*ã
-incoming_midi_events%jack.OwnMidiPort.incoming_midi_events"Ú
-Atyping.Generator[Tuple[builtins.int,jack._CBufferType],None,None]o
-%Tuple[builtins.int,jack._CBufferType]
-builtins.int"builtins.int&
-jack._CBufferType"jack._CBufferType
-None
-None"typing.Generator*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPortz35z36z37z38z39z310*€
-clear_bufferjack.OwnMidiPort.clear_buffer"
-None*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPortz35z36z37z38z39z310*¢
-write_midi_event!jack.OwnMidiPort.write_midi_event"
-None*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPort*&
-time
-builtins.int"builtins.int*ï
-eventã
-EUnion[builtins.bytes,typing.Sequence[builtins.int],jack._CBufferType] 
-builtins.bytes"builtins.bytesN
-typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequence&
-jack._CBufferType"jack._CBufferTypez35z36z37z38z39z310*ú
-reserve_midi_event#jack.OwnMidiPort.reserve_midi_event"&
-jack._CBufferType"jack._CBufferType*.
-self$
-jack.OwnMidiPort"jack.OwnMidiPort*&
-time
-builtins.int"builtins.int*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310j35j36j37j38j39j310¡
-Ports
-jack.Ports"builtins.object*¸
-__init__jack.Ports.__init__"
-None*"
-self
-
-jack.Ports"
-jack.Ports*&
-client
-jack.Client"jack.Client*
-porttype
-Any*
-flag
-Anyz35z36z37z38z39z310*v
-__len__jack.Ports.__len__"
-builtins.int"builtins.int* 
-self
-
-jack.Ports"
-jack.Portsz35z36z37z38z39z310*ž
-__getitem__jack.Ports.__getitem__"
-	jack.Port"	jack.Port* 
-self
-
-jack.Ports"
-jack.Ports*$
-name
-builtins.str"builtins.strz35z36z37z38z39z310*¡
-__iter__jack.Ports.__iter__"E
-typing.Iterator[jack.Port]
-	jack.Port"	jack.Port"typing.Iterator* 
-self
-
-jack.Ports"
-jack.Portsz35z36z37z38z39z310*‡
-registerjack.Ports.register"
-	jack.Port"	jack.Port*"
-self
-
-jack.Ports"
-jack.Ports*+
-	shortname
-builtins.str"builtins.str*1
-is_terminal
-builtins.bool"builtins.bool *1
-is_physical
-builtins.bool"builtins.bool z35z36z37z38z39z310*`
-clearjack.Ports.clear"
-None*"
-self
-
-jack.Ports"
-jack.Portsz35z36z37z38z39z310j35j36j37j38j39j310«
-
-RingBufferjack.RingBuffer"builtins.object*
-__init__jack.RingBuffer.__init__"
-None*,
-self"
-jack.RingBuffer"jack.RingBuffer*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310*
-write_spacejack.RingBuffer.write_space"
-builtins.int"builtins.int*,
-self"
-jack.RingBuffer"jack.RingBuffer0:property`z35z36z37z38z39z310*ô
-writejack.RingBuffer.write"
-builtins.int"builtins.int*,
-self"
-jack.RingBuffer"jack.RingBuffer*î
-dataã
-EUnion[builtins.bytes,typing.Iterable[builtins.int],jack._CBufferType] 
-builtins.bytes"builtins.bytesN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable&
-jack._CBufferType"jack._CBufferTypez35z36z37z38z39z310*ƒ
-write_buffersjack.RingBuffer.write_buffers"~
-*Tuple[jack._CBufferType,jack._CBufferType]&
-jack._CBufferType"jack._CBufferType&
-jack._CBufferType"jack._CBufferType*,
-self"
-jack.RingBuffer"jack.RingBuffer0:property`z35z36z37z38z39z310*§
-write_advancejack.RingBuffer.write_advance"
-None*,
-self"
-jack.RingBuffer"jack.RingBuffer*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310*›
-
-read_spacejack.RingBuffer.read_space"
-builtins.int"builtins.int*,
-self"
-jack.RingBuffer"jack.RingBuffer0:property`z35z36z37z38z39z310*³
-readjack.RingBuffer.read"&
-jack._CBufferType"jack._CBufferType*,
-self"
-jack.RingBuffer"jack.RingBuffer*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310*³
-peekjack.RingBuffer.peek"&
-jack._CBufferType"jack._CBufferType*,
-self"
-jack.RingBuffer"jack.RingBuffer*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310*
-read_buffersjack.RingBuffer.read_buffers"~
-*Tuple[jack._CBufferType,jack._CBufferType]&
-jack._CBufferType"jack._CBufferType&
-jack._CBufferType"jack._CBufferType*,
-self"
-jack.RingBuffer"jack.RingBuffer0:property`z35z36z37z38z39z310*¥
-read_advancejack.RingBuffer.read_advance"
-None*,
-self"
-jack.RingBuffer"jack.RingBuffer*&
-size
-builtins.int"builtins.intz35z36z37z38z39z310*o
-mlockjack.RingBuffer.mlock"
-None*,
-self"
-jack.RingBuffer"jack.RingBufferz35z36z37z38z39z310*Á
-resetjack.RingBuffer.reset"
-None*,
-self"
-jack.RingBuffer"jack.RingBuffer*P
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z35z36z37z38z39z310*
-sizejack.RingBuffer.size"
-builtins.int"builtins.int*,
-self"
-jack.RingBuffer"jack.RingBuffer0:property`z35z36z37z38z39z310j35j36j37j38j39j310™
-Statusjack.Status"builtins.object*‘
-__init__jack.Status.__init__"
-None*$
-self
-jack.Status"jack.Status*&
-code
-builtins.int"builtins.intz35z36z37z38z39z310*‹
-failurejack.Status.failure"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*™
-invalid_optionjack.Status.invalid_option"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*›
-name_not_uniquejack.Status.name_not_unique"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*™
-server_startedjack.Status.server_started"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*—
-server_failedjack.Status.server_failed"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*•
-server_errorjack.Status.server_error"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*™
-no_such_clientjack.Status.no_such_client"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*•
-load_failurejack.Status.load_failure"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*•
-init_failurejack.Status.init_failure"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*“
-shm_failurejack.Status.shm_failure"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*—
-version_errorjack.Status.version_error"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*—
-backend_errorjack.Status.backend_error"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310*—
-client_zombiejack.Status.client_zombie"
-builtins.bool"builtins.bool*$
-self
-jack.Status"jack.Status0:property`z35z36z37z38z39z310j35j36j37j38j39j310Ô
-TransportStatejack.TransportState"builtins.object*©
-__init__jack.TransportState.__init__"
-None*4
-self*
-jack.TransportState"jack.TransportState*&
-code
-builtins.int"builtins.intz35z36z37z38z39z310*¾
-__eq__jack.TransportState.__eq__"
-builtins.bool"builtins.bool*2
-self*
-jack.TransportState"jack.TransportState*+
-other"
-builtins.object"builtins.objectz35z36z37z38z39z310*•
-__hash__jack.TransportState.__hash__"
-builtins.int"builtins.int*4
-self*
-jack.TransportState"jack.TransportStatez35z36z37z38z39z310j35j36j37j38j39j310N
-CallbackExitjack.CallbackExit"builtins.Exceptionj35j36j37j38j39j310÷
-get_propertyjack.get_property"¤
-.Union[Tuple[builtins.bytes,builtins.str],None]f
-"Tuple[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-None*m
-subject`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str*%
-key
-builtins.str"builtins.strz35z36z37z38z39z310…
-get_propertiesjack.get_properties"Õ
->builtins.dict[builtins.str,Tuple[builtins.bytes,builtins.str]]
-builtins.str"builtins.strf
-"Tuple[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"builtins.dict*m
-subject`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.strz35z36z37z38z39z310ª
-get_all_propertiesjack.get_all_properties"á
-Zbuiltins.dict[builtins.str,builtins.dict[builtins.str,Tuple[builtins.bytes,builtins.str]]]
-builtins.str"builtins.strÕ
->builtins.dict[builtins.str,Tuple[builtins.bytes,builtins.str]]
-builtins.str"builtins.strf
-"Tuple[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"builtins.dict"builtins.dictz35z36z37z38z39z310Ê
-position2dictjack.position2dict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*3
-pos*
-jack._JackPositionT"jack._JackPositionTz35z36z37z38z39z310é
-versionjack.version"¶
-:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.intz35z36z37z38z39z310\
-version_stringjack.version_string"
-builtins.str"builtins.strz35z36z37z38z39z310`
-client_name_sizejack.client_name_size"
-builtins.int"builtins.intz35z36z37z38z39z310\
-port_name_sizejack.port_name_size"
-builtins.int"builtins.intz35z36z37z38z39z310ê
-set_error_functionjack.set_error_function"
-None*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310è
-set_info_functionjack.set_info_function"
-None*—
-callback†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310|
-
-client_pidjack.client_pid"
-builtins.int"builtins.int*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*N
-STOPPEDjack.STOPPED
-builtins.int"builtins.int*35*36*37*38*39*310*N
-ROLLINGjack.ROLLING
-builtins.int"builtins.int*35*36*37*38*39*310*P
-STARTINGjack.STARTING
-builtins.int"builtins.int*35*36*37*38*39*310*V
-NETSTARTINGjack.NETSTARTING
-builtins.int"builtins.int*35*36*37*38*39*310*`
-PROPERTY_CREATEDjack.PROPERTY_CREATED
-builtins.int"builtins.int*35*36*37*38*39*310*`
-PROPERTY_CHANGEDjack.PROPERTY_CHANGED
-builtins.int"builtins.int*35*36*37*38*39*310*`
-PROPERTY_DELETEDjack.PROPERTY_DELETED
-builtins.int"builtins.int*35*36*37*38*39*310*X
-POSITION_BBTjack.POSITION_BBT
-builtins.int"builtins.int*35*36*37*38*39*310*b
-POSITION_TIMECODEjack.POSITION_TIMECODE
-builtins.int"builtins.int*35*36*37*38*39*310*r
-POSITION_BBT_FRAME_OFFSETjack.POSITION_BBT_FRAME_OFFSET
-builtins.int"builtins.int*35*36*37*38*39*310*t
-POSITION_AUDIO_VIDEO_RATIOjack.POSITION_AUDIO_VIDEO_RATIO
-builtins.int"builtins.int*35*36*37*38*39*310*v
-POSITION_VIDEO_FRAME_OFFSET jack.POSITION_VIDEO_FRAME_OFFSET
-builtins.int"builtins.int*35*36*37*38*39*310

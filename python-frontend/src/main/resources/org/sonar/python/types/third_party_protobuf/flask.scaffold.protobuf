@@ -1,0 +1,418 @@
+
+flask.scaffoldÏw
+Scaffoldflask.scaffold.Scaffold"builtins.object*‡
+__init__ flask.scaffold.Scaffold.__init__"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*-
+import_name
+builtins.str"builtins.str*”
+static_folder
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+None *[
+static_url_pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *–
+template_folder
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+None *U
+	root_pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *†
+__repr__ flask.scaffold.Scaffold.__repr__"
+builtins.str"builtins.str*:
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*¸
+_check_setup_finished-flask.scaffold.Scaffold._check_setup_finished"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*(
+f_name
+builtins.str"builtins.str*ª
+has_static_folder)flask.scaffold.Scaffold.has_static_folder"
+builtins.bool"builtins.bool*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold0:property`*ž
+get_send_file_max_age-flask.scaffold.Scaffold.get_send_file_max_age"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Ú
+send_static_file(flask.scaffold.Scaffold.send_static_file"2
+flask.wrappers.Response"flask.wrappers.Response*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold**
+filename
+builtins.str"builtins.str*„
+jinja_loader$flask.scaffold.Scaffold.jinja_loader"}
++Union[jinja2.loaders.FileSystemLoader,None]B
+jinja2.loaders.FileSystemLoader"jinja2.loaders.FileSystemLoader
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold0:cached_property*„
+open_resource%flask.scaffold.Scaffold.open_resource"8
+typing.IO[typing.AnyStr]
+typing.AnyStr"	typing.IO*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold**
+resource
+builtins.str"builtins.str*(
+mode
+builtins.str"builtins.str *Û
+_method_route%flask.scaffold.Scaffold._method_route"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*(
+method
+builtins.str"builtins.str*&
+rule
+builtins.str"builtins.str*F
+options9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*ú
+getflask.scaffold.Scaffold.get"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*ü
+postflask.scaffold.Scaffold.post"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*ú
+putflask.scaffold.Scaffold.put"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*€
+deleteflask.scaffold.Scaffold.delete"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*þ
+patchflask.scaffold.Scaffold.patch"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*þ
+routeflask.scaffold.Scaffold.route"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*
+options
+Any0:setupmethod*ä
+add_url_rule$flask.scaffold.Scaffold.add_url_rule"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*&
+rule
+builtins.str"builtins.str*T
+endpointD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ø
+	view_funcÆ
+]Union[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]],None]Ø
+QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]ä
+FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"flask.typing.RouteCallable
+None *h
+provide_automatic_optionsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *
+options
+Any0:setupmethod*ò
+endpoint flask.scaffold.Scaffold.endpoint"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold**
+endpoint
+builtins.str"builtins.str0:setupmethod*Ö
+before_request&flask.scaffold.Scaffold.before_request"#
+flask.scaffold.T_before_request*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold**
+f#
+flask.scaffold.T_before_request0:setupmethod*Ò
+after_request%flask.scaffold.Scaffold.after_request""
+flask.scaffold.T_after_request*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*)
+f"
+flask.scaffold.T_after_request0:setupmethod*Î
+teardown_request(flask.scaffold.Scaffold.teardown_request"
+flask.scaffold.T_teardown*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*$
+f
+flask.scaffold.T_teardown0:setupmethod*ô
+context_processor)flask.scaffold.Scaffold.context_processor"/
++flask.scaffold.T_template_context_processor*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*6
+f/
++flask.scaffold.T_template_context_processor0:setupmethod*ö
+url_value_preprocessor.flask.scaffold.Scaffold.url_value_preprocessor"+
+'flask.scaffold.T_url_value_preprocessor*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*2
+f+
+'flask.scaffold.T_url_value_preprocessor0:setupmethod*Î
+url_defaults$flask.scaffold.Scaffold.url_defaults"!
+flask.scaffold.T_url_defaults*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*(
+f!
+flask.scaffold.T_url_defaults0:setupmethod*ÿ
+errorhandler$flask.scaffold.Scaffold.errorhandler"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*®
+code_or_exception–
+,Union[Type[builtins.Exception],builtins.int]F
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception
+builtins.int"builtins.int0:setupmethod*ù
+register_error_handler.flask.scaffold.Scaffold.register_error_handler"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*®
+code_or_exception–
+,Union[Type[builtins.Exception],builtins.int]F
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception
+builtins.int"builtins.int*¦
+fž
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"!flask.typing.ErrorHandlerCallable0:setupmethod*Ú
+_get_exc_class_and_code/flask.scaffold.Scaffold._get_exc_class_and_code"Ê
+8Tuple[Type[builtins.Exception],Union[builtins.int,None]]F
+Type[builtins.Exception](
+builtins.Exception"builtins.ExceptionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*®
+exc_class_or_code–
+,Union[Type[builtins.Exception],builtins.int]F
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception
+builtins.int"builtins.int0:staticmethodh2©
+static_folder%flask.scaffold.Scaffold.static_folderÊ
+static_folder%flask.scaffold.Scaffold.static_folder"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold0:propertyX`£
+static_folder%flask.scaffold.Scaffold.static_folder"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*Š
+value
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+None0:static_folder.setter2û
+static_url_path'flask.scaffold.Scaffold.static_url_pathÎ
+static_url_path'flask.scaffold.Scaffold.static_url_path"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold0:propertyX`í
+static_url_path'flask.scaffold.Scaffold.static_url_path"
+None*<
+self2
+flask.scaffold.Scaffold"flask.scaffold.Scaffold*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None0:static_url_path.setterrB
+nameflask.scaffold.Scaffold.name
+builtins.str"builtins.strr~
+_static_folder&flask.scaffold.Scaffold._static_folderD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner‚
+_static_url_path(flask.scaffold.Scaffold._static_url_pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerP
+import_name#flask.scaffold.Scaffold.import_name
+builtins.str"builtins.strr»
+template_folder'flask.scaffold.Scaffold.template_folder
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+NonerL
+	root_path!flask.scaffold.Scaffold.root_path
+builtins.str"builtins.strrL
+cliflask.scaffold.Scaffold.cli(
+flask.cli.AppGroup"flask.cli.AppGrouprò
+view_functions&flask.scaffold.Scaffold.view_functions·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrµ
+error_handler_spec*flask.scaffold.Scaffold.error_handler_specò
+­builtins.dict[TypeAlias[Union[builtins.str,None]],builtins.dict[Union[builtins.int,None],builtins.dict[Type[builtins.Exception],TypeAlias[CallableType[builtins.function]]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKey 
+zbuiltins.dict[Union[builtins.int,None],builtins.dict[Type[builtins.Exception],TypeAlias[CallableType[builtins.function]]]]D
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneÌ
+Rbuiltins.dict[Type[builtins.Exception],TypeAlias[CallableType[builtins.function]]]F
+Type[builtins.Exception](
+builtins.Exception"builtins.Exceptionž
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"!flask.typing.ErrorHandlerCallable"builtins.dict"builtins.dict"builtins.dictrÓ
+before_request_funcs,flask.scaffold.Scaffold.before_request_funcsŒ
+“builtins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKeyÔ
+`builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]à
+QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]ä
+FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function""flask.typing.BeforeRequestCallable"builtins.list"builtins.dictrÐ
+after_request_funcs+flask.scaffold.Scaffold.after_request_funcs‹
+“builtins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKeyÓ
+`builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]ß
+QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]ä
+FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"!flask.typing.AfterRequestCallable"builtins.list"builtins.dictrÒ
+teardown_request_funcs.flask.scaffold.Scaffold.teardown_request_funcs‡
+“builtins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKeyÏ
+`builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]Û
+QTypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]ä
+FUnion[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"flask.typing.TeardownCallable"builtins.list"builtins.dictrÜ
+template_context_processors3flask.scaffold.Scaffold.template_context_processors‡
+lbuiltins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[CallableType[builtins.function]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKey÷
+9builtins.list[TypeAlias[CallableType[builtins.function]]]ª
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"-flask.typing.TemplateContextProcessorCallable"builtins.list"builtins.dictrÐ
+url_value_preprocessors/flask.scaffold.Scaffold.url_value_preprocessorsƒ
+lbuiltins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[CallableType[builtins.function]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKeyó
+9builtins.list[TypeAlias[CallableType[builtins.function]]]¦
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function")flask.typing.URLValuePreprocessorCallable"builtins.list"builtins.dictrÂ
+url_default_functions-flask.scaffold.Scaffold.url_default_functionsù
+lbuiltins.dict[TypeAlias[Union[builtins.str,None]],builtins.list[TypeAlias[CallableType[builtins.function]]]]
+#TypeAlias[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"flask.typing.AppOrBlueprintKeyé
+9builtins.list[TypeAlias[CallableType[builtins.function]]]œ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"flask.typing.URLDefaultCallable"builtins.list"builtins.dict\
+setupmethodflask.scaffold.setupmethod"
+flask.scaffold.F*
+f
+flask.scaffold.F½
+_endpoint_from_view_func'flask.scaffold._endpoint_from_view_func"
+builtins.str"builtins.str*Z
+	view_funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+)_matching_loader_thinks_module_is_package8flask.scaffold._matching_loader_thinks_module_is_package*
+
+loader*
+mod_name³
+_path_is_relative_to#flask.scaffold._path_is_relative_to"
+builtins.bool"builtins.bool*.
+path$
+pathlib.PurePath"pathlib.PurePath*&
+base
+builtins.str"builtins.strH
+_find_package_path!flask.scaffold._find_package_path*
+import_namec
+find_packageflask.scaffold.find_package"
+Any*-
+import_name
+builtins.str"builtins.str*
+	importlib	importlib *
+ttyping *
+ftflask.typing *I
+	_sentinelflask.scaffold._sentinel"
+builtins.object"builtins.object

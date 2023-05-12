@@ -1,269 +1,0 @@
-
-pymssql¥
-
-Connectionpymssql.Connection"builtins.object*›
-__init__pymssql.Connection.__init__"
-None*2
-self(
-pymssql.Connection"pymssql.Connection*
-user
-Any*
-password
-Any*
-host
-Any*
-database
-Any*
-timeout
-Any*
-login_timeout
-Any*
-charset
-Any*
-as_dict
-Anyz27*™
-
-autocommitpymssql.Connection.autocommit"
-None*2
-self(
-pymssql.Connection"pymssql.Connection**
-status
-builtins.bool"builtins.boolz27*c
-closepymssql.Connection.close"
-None*2
-self(
-pymssql.Connection"pymssql.Connectionz27*e
-commitpymssql.Connection.commit"
-None*2
-self(
-pymssql.Connection"pymssql.Connectionz27*}
-cursorpymssql.Connection.cursor" 
-pymssql.Cursor"pymssql.Cursor*2
-self(
-pymssql.Connection"pymssql.Connectionz27*i
-rollbackpymssql.Connection.rollback"
-None*2
-self(
-pymssql.Connection"pymssql.Connectionz27j27¥K
-Cursorpymssql.Cursor"builtins.object*]
-__init__pymssql.Cursor.__init__"
-None**
-self 
-pymssql.Cursor"pymssql.Cursorz27*1
-__iter__pymssql.Cursor.__iter__*
-selfz27*\
-__next__pymssql.Cursor.__next__"
-Any**
-self 
-pymssql.Cursor"pymssql.Cursorz27*
-callprocpymssql.Cursor.callproc"
-None**
-self 
-pymssql.Cursor"pymssql.Cursor**
-procname
-builtins.str"builtins.str*
-kwargs
-Anyz27*W
-closepymssql.Cursor.close"
-None**
-self 
-pymssql.Cursor"pymssql.Cursorz27*Ş
-executepymssql.Cursor.execute"
-None**
-self 
-pymssql.Cursor"pymssql.Cursor*&
-stmt
-builtins.str"builtins.str*Ø
-paramsË
-àUnion[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time,builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],None]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time³
-xbuiltins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.tupleİ
-„builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]
-builtins.str"builtins.str¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.dict
-Nonez27*•
-executemanypymssql.Cursor.executemany"
-None**
-self 
-pymssql.Cursor"pymssql.Cursor*&
-stmt
-builtins.str"builtins.str*‡
-paramsú
-•Union[typing.Sequence[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]],None]Ó
-‰typing.Sequence[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]³
-xbuiltins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.tuple"typing.Sequence
-Nonez27*Ï
-fetchallpymssql.Cursor.fetchall"ù
-builtins.list[TypeAlias[Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]]]Æ
-TypeAlias[Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]]Ÿ
-„Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]³
-xbuiltins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.tupleİ
-„builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]
-builtins.str"builtins.str¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.dict"pymssql.Result"builtins.list**
-self 
-pymssql.Cursor"pymssql.Cursorz27*¡
-	fetchmanypymssql.Cursor.fetchmany"ù
-builtins.list[TypeAlias[Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]]]Æ
-TypeAlias[Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]]Ÿ
-„Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]³
-xbuiltins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.tupleİ
-„builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]
-builtins.str"builtins.str¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.dict"pymssql.Result"builtins.list**
-self 
-pymssql.Cursor"pymssql.Cursor*N
-sizeD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonez27*œ
-fetchonepymssql.Cursor.fetchone"Æ
-TypeAlias[Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]]Ÿ
-„Union[builtins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]],builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]]³
-xbuiltins.tuple[TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.tupleİ
-„builtins.dict[builtins.str,TypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]]
-builtins.str"builtins.str¦
-hTypeAlias[Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]]§
-]Union[builtins.int,builtins.float,builtins.str,datetime.datetime,datetime.date,datetime.time]
-builtins.int"builtins.int 
-builtins.float"builtins.float
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date
-datetime.time"datetime.time"pymssql.Scalar"builtins.dict"pymssql.Result**
-self 
-pymssql.Cursor"pymssql.Cursorz27j27Õ
-
-connectpymssql.connect"(
-pymssql.Connection"pymssql.Connection*P
-serverD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-userD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-databaseD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*Q
-timeoutD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*W
-login_timeoutD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*Q
-charsetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*T
-as_dictG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*N
-hostD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*Q
-appnameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*N
-portD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*È
-conn_properties²
-6Union[builtins.str,typing.Sequence[builtins.str],None]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None*W
-
-autocommitG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*U
-tds_versionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez27T
-get_max_connectionspymssql.get_max_connections"
-builtins.int"builtins.intz27e
-set_max_connectionspymssql.set_max_connections"
-None*#
-n
-builtins.int"builtins.intz27

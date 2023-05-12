@@ -1,375 +1,0 @@
-
-boto.s3ÿE
-S3Connectionboto.s3.connection.S3Connection"!boto.connection.AWSAuthConnection*ú	
-__init__(boto.s3.connection.S3Connection.__init__"
-None*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*?
-aws_access_key_id&
-Union[Any,None]
-Any
-None *C
-aws_secret_access_key&
-Union[Any,None]
-Any
-None */
-	is_secure
-builtins.bool"builtins.bool *2
-port&
-Union[Any,None]
-Any
-None *3
-proxy&
-Union[Any,None]
-Any
-None *8
-
-proxy_port&
-Union[Any,None]
-Any
-None *8
-
-proxy_user&
-Union[Any,None]
-Any
-None *8
-
-proxy_pass&
-Union[Any,None]
-Any
-None *
-host
-Any *)
-debug
-builtins.int"builtins.int *F
-https_connection_factory&
-Union[Any,None]
-Any
-None *
-calling_format
-Any *(
-path
-builtins.str"builtins.str *,
-provider
-builtins.str"builtins.str *c
-bucket_classO
-Type[boto.s3.bucket.Bucket].
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket *<
-security_token&
-Union[Any,None]
-Any
-None *=
-suppress_consec_slashes
-builtins.bool"builtins.bool **
-anon
-builtins.bool"builtins.bool *<
-validate_certs&
-Union[Any,None]
-Any
-None *:
-profile_name&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*W
-__iter__(boto.s3.connection.S3Connection.__iter__*
-selfz35z36z37z38z39z310*p
-__contains__,boto.s3.connection.S3Connection.__contains__*
-self*
-bucket_namez35z36z37z38z39z310*˜
-set_bucket_class0boto.s3.connection.S3Connection.set_bucket_class"
-None*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*a
-bucket_classO
-Type[boto.s3.bucket.Bucket].
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucketz35z36z37z38z39z310*Ž
-build_post_policy1boto.s3.connection.S3Connection.build_post_policy*
-self*
-expiration_time*
-
-conditionsz35z36z37z38z39z310*î
-build_post_form_args4boto.s3.connection.S3Connection.build_post_form_args"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-bucket_name
-Any*
-key
-Any*.
-
-expires_in
-builtins.int"builtins.int *1
-acl&
-Union[Any,None]
-Any
-None *E
-success_action_redirect&
-Union[Any,None]
-Any
-None *@
-max_content_length&
-Union[Any,None]
-Any
-None */
-http_method
-builtins.str"builtins.str *4
-fields&
-Union[Any,None]
-Any
-None *8
-
-conditions&
-Union[Any,None]
-Any
-None *1
-storage_class
-builtins.str"builtins.str *D
-server_side_encryption&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*€
-generate_url_sigv42boto.s3.connection.S3Connection.generate_url_sigv4"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-
-expires_in
-Any*
-method
-Any**
-bucket
-builtins.str"builtins.str *'
-key
-builtins.str"builtins.str *É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *0
-
-force_http
-builtins.bool"builtins.bool *Ò
-response_headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None *6
-iso_date&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*©
-generate_url,boto.s3.connection.S3Connection.generate_url"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-
-expires_in
-Any*
-method
-Any**
-bucket
-builtins.str"builtins.str *'
-key
-builtins.str"builtins.str *É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *0
-
-query_auth
-builtins.bool"builtins.bool *0
-
-force_http
-builtins.bool"builtins.bool *Ò
-response_headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *9
-expires_in_absolute
-builtins.bool"builtins.bool *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*þ
-get_all_buckets/boto.s3.connection.S3Connection.get_all_buckets"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Š
-get_canonical_user_id5boto.s3.connection.S3Connection.get_canonical_user_id"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ú
-
-get_bucket*boto.s3.connection.S3Connection.get_bucket".
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*-
-bucket_name
-builtins.str"builtins.str*.
-validate
-builtins.bool"builtins.bool *É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*
-head_bucket+boto.s3.connection.S3Connection.head_bucket"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-bucket_name
-Any*É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*¶
-lookup&boto.s3.connection.S3Connection.lookup"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-bucket_name
-Any*.
-validate
-builtins.bool"builtins.bool *É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ã
-create_bucket-boto.s3.connection.S3Connection.create_bucket"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-bucket_name
-Any*É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *
-location
-Any *4
-policy&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*
-delete_bucket-boto.s3.connection.S3Connection.delete_bucket"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-bucket
-Any*É
-headers¹
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*
-make_request,boto.s3.connection.S3Connection.make_request"
-Any*L
-selfB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*
-method
-Any**
-bucket
-builtins.str"builtins.str *'
-key
-builtins.str"builtins.str *5
-headers&
-Union[Any,None]
-Any
-None *(
-data
-builtins.str"builtins.str *8
-
-query_args&
-Union[Any,None]
-Any
-None *4
-sender&
-Union[Any,None]
-Any
-None *B
-override_num_retries&
-Union[Any,None]
-Any
-None *;
-retry_handler&
-Union[Any,None]
-Any
-None *
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310r\
-DefaultHost+boto.s3.connection.S3Connection.DefaultHost
-Any*35*36*37*38*39*310rn
-DefaultCallingFormat4boto.s3.connection.S3Connection.DefaultCallingFormat
-Any*35*36*37*38*39*310rq
-QueryString+boto.s3.connection.S3Connection.QueryString
-builtins.str"builtins.str*35*36*37*38*39*310rb
-calling_format.boto.s3.connection.S3Connection.calling_format
-Any*35*36*37*38*39*310r¦
-bucket_class,boto.s3.connection.S3Connection.bucket_classO
-Type[boto.s3.bucket.Bucket].
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*35*36*37*38*39*310rN
-anon$boto.s3.connection.S3Connection.anon
-Any*35*36*37*38*39*310¨
-S3RegionInfoboto.s3.S3RegionInfo"boto.regioninfo.RegionInfo*Ì
-connectboto.s3.S3RegionInfo.connect"B
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*6
-self,
-boto.s3.S3RegionInfo"boto.s3.S3RegionInfo*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-endpointD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Í
-connection_cls¶
-3Union[Type[boto.connection.AWSAuthConnection],None]s
-'Type[boto.connection.AWSAuthConnection]F
-!boto.connection.AWSAuthConnection"!boto.connection.AWSAuthConnection
-None *
-	kw_params
-Anyz35z36z37z38z39z310j35j36j37j38j39j310—
-regionsboto.s3.regions"b
-#builtins.list[boto.s3.S3RegionInfo],
-boto.s3.S3RegionInfo"boto.s3.S3RegionInfo"builtins.listz35z36z37z38z39z310—
-connect_to_regionboto.s3.connect_to_region"
-Any*-
-region_name
-builtins.str"builtins.str*
-	kw_params
-Anyz35z36z37z38z39z310

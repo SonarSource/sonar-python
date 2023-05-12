@@ -1,7 +1,7 @@
 
-concurrent.futures]
-CancelledError'concurrent.futures._base.CancelledError"concurrent.futures._base.Errorj27‡
-Executor!concurrent.futures._base.Executor"builtins.object*ˆ
+concurrent.futuresY
+CancelledError'concurrent.futures._base.CancelledError"concurrent.futures._base.Errorœ
+Executor!concurrent.futures._base.Executor"builtins.object*„
 submit(concurrent.futures._base.Executor.submit"€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
 concurrent.futures._base._T"concurrent.futures._base.Future*P
@@ -13,13 +13,13 @@
 args
 Any*
 kwargs
-Anyz27*×
+Any*€
 map%concurrent.futures._base.Executor.map"`
 ,typing.Iterator[concurrent.futures._base._T]
 concurrent.futures._base._T"typing.Iterator*P
 selfF
-!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*U
-funcK
+!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
+fnK
 CallableType[builtins.function]&
 builtins.function"builtins.function*?
 	iterables0
@@ -28,17 +28,19 @@
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None z27*Â
+None *-
+	chunksize
+builtins.int"builtins.int *¾
 shutdown*concurrent.futures._base.Executor.shutdown"
 None*P
 selfF
 !concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
 wait
-builtins.bool"builtins.bool z27*†
+builtins.bool"builtins.bool *‚
 	__enter__+concurrent.futures._base.Executor.__enter__"
 concurrent.futures._base._T*'
 self
-concurrent.futures._base._Tz27*
+concurrent.futures._base._T*‹
 __exit__*concurrent.futures._base.Executor.__exit__"G
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
@@ -50,33 +52,33 @@
 exc_val
 Any*
 exc_tb
-Anyz27j27
-Futureconcurrent.futures._base.Future"builtins.object*Ð
+Anyå
+Futureconcurrent.futures._base.Future"builtins.object*Ì
 __init__(concurrent.futures._base.Future.__init__"
 None*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*â
+concurrent.futures._base._T"concurrent.futures._base.Future*Þ
 cancel&concurrent.futures._base.Future.cancel"
 builtins.bool"builtins.bool*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*è
+concurrent.futures._base._T"concurrent.futures._base.Future*ä
 	cancelled)concurrent.futures._base.Future.cancelled"
 builtins.bool"builtins.bool*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*ä
+concurrent.futures._base._T"concurrent.futures._base.Future*à
 running'concurrent.futures._base.Future.running"
 builtins.bool"builtins.bool*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*Þ
+concurrent.futures._base._T"concurrent.futures._base.Future*Ú
 done$concurrent.futures._base.Future.done"
 builtins.bool"builtins.bool*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*·
+concurrent.futures._base._T"concurrent.futures._base.Future*³
 add_done_callback1concurrent.futures._base.Future.add_done_callback"
 None*‹
 self€
@@ -84,7 +86,7 @@
 concurrent.futures._base._T"concurrent.futures._base.Future*S
 fnK
 CallableType[builtins.function]&
-builtins.function"builtins.functionz27*¾
+builtins.function"builtins.function*º
 result&concurrent.futures._base.Future.result"
 concurrent.futures._base._T*‹
 self€
@@ -93,12 +95,12 @@
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None z27*Ž
+None *Š
 set_running_or_notify_cancel<concurrent.futures._base.Future.set_running_or_notify_cancel"
 builtins.bool"builtins.bool*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*
+concurrent.futures._base._T"concurrent.futures._base.Future*ý
 
 set_result*concurrent.futures._base.Future.set_result"
 None*‹
@@ -106,21 +108,10 @@ set_result*concurrent.futures._base.Future.set_result"
 <concurrent.futures._base.Future[concurrent.futures._base._T]
 concurrent.futures._base._T"concurrent.futures._base.Future*+
 result
-concurrent.futures._base._Tz27*¬
-	exception)concurrent.futures._base.Future.exception"
-Any*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*Â
-exception_info.concurrent.futures._base.Future.exception_info"’
-*Tuple[Any,Union[types.TracebackType,None]]
-AnyY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
+concurrent.futures._base._T*ƒ
+	exception)concurrent.futures._base.Future.exception"b
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
 None*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
@@ -128,27 +119,18 @@ set_result*concurrent.futures._base.Future.set_result"
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None z27*ò
+None *É
 set_exception-concurrent.futures._base.Future.set_exception"
 None*‹
 self€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*
-	exception
-Anyz27*æ
-set_exception_info2concurrent.futures._base.Future.set_exception_info"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*
-	exception
-Any*h
-	tracebackY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez27Pj27Y
-TimeoutError%concurrent.futures._base.TimeoutError"concurrent.futures._base.Errorj27…
-ProcessPoolExecutor.concurrent.futures.process.ProcessPoolExecutor"!concurrent.futures._base.Executor*–
+concurrent.futures._base._T"concurrent.futures._base.Future*q
+	exceptionb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+NonePU
+TimeoutError%concurrent.futures._base.TimeoutError"concurrent.futures._base.Errorù
+ProcessPoolExecutor.concurrent.futures.process.ProcessPoolExecutor"!concurrent.futures._base.Executor*Ž
 __init__7concurrent.futures.process.ProcessPoolExecutor.__init__"
 None*j
 self`
@@ -156,8 +138,21 @@ set_result*concurrent.futures._base.Future.set_result"
 max_workersD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z27j27´
-ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*È
+None *œ
+
+mp_context‰
+/Union[multiprocessing.context.BaseContext,None]J
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext
+None *š
+initializer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *>
+initargs.
+builtins.tuple[Any]
+Any"builtins.tuple ˆ
+ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*¡
 __init__5concurrent.futures.thread.ThreadPoolExecutor.__init__"
 None*f
 self\
@@ -167,7 +162,20 @@ set_result*concurrent.futures._base.Future.set_result"
 builtins.int"builtins.int
 None *6
 thread_name_prefix
-builtins.str"builtins.str z27j27é
+builtins.str"builtins.str *š
+initializer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *>
+initargs.
+builtins.tuple[Any]
+Any"builtins.tuple r}
+_work_queue8concurrent.futures.thread.ThreadPoolExecutor._work_queue4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue_
+InvalidStateError*concurrent.futures._base.InvalidStateError"concurrent.futures._base.ErrorP
+BrokenExecutor'concurrent.futures._base.BrokenExecutor"builtins.RuntimeErrorå
 as_completed%concurrent.futures._base.as_completed"ã
 Mtyping.Iterator[concurrent.futures._base.Future[concurrent.futures._base._T]]€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
@@ -179,28 +187,23 @@ Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]€
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None z27²
-waitconcurrent.futures._base.wait"á
-œTuple[builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]],builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]]Ý
-Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]€
+None Á
+waitconcurrent.futures._base.wait"ž
+Kconcurrent.futures._base.DoneAndNotDoneFutures[concurrent.futures._base._T]
+concurrent.futures._base._T".concurrent.futures._base.DoneAndNotDoneFutures*ì
+fsã
+Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]€
 <concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"builtins.setÝ
-Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*–
-fs
-bconcurrent.futures._base._Collection[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"$concurrent.futures._base._Collection*Y
+concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
 None */
 return_when
-builtins.str"builtins.str z27*Y
+builtins.str"builtins.str *U
 ALL_COMPLETED&concurrent.futures._base.ALL_COMPLETED
-builtins.str"builtins.str*27*]
+builtins.str"builtins.str*Y
 FIRST_COMPLETED(concurrent.futures._base.FIRST_COMPLETED
-builtins.str"builtins.str*27*]
+builtins.str"builtins.str*Y
 FIRST_EXCEPTION(concurrent.futures._base.FIRST_EXCEPTION
-builtins.str"builtins.str*27
+builtins.str"builtins.str

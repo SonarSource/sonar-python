@@ -1,14 +1,18 @@
 
-click.types¬
-BoolParamTypeclick.types.BoolParamType"click.core._ParamType*»
-__call__"click.types.BoolParamType.__call__"
-builtins.bool"builtins.bool*@
-self6
-click.types.BoolParamType"click.types.BoolParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
+click.types‚
+	ParamTypeclick.types.ParamType"builtins.object*≈
+to_info_dict"click.types.ParamType.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+self.
+click.types.ParamType"click.types.ParamType*œ
+__call__click.types.ParamType.__call__"
+Any*8
+self.
+click.types.ParamType"click.types.ParamType*
+value
+Any*i
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -16,13 +20,29 @@
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-None z35z36z37z38z39z310*ö
-convert!click.types.BoolParamType.convert"
-builtins.bool"builtins.bool*@
-self6
-click.types.BoolParamType"click.types.BoolParamType*'
-value
-builtins.str"builtins.str*g
+None *È
+get_metavar!click.types.ParamType.get_metavar"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+click.types.ParamType"click.types.ParamType*7
+param,
+click.core.Parameter"click.core.Parameter*˘
+get_missing_message)click.types.ParamType.get_missing_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+click.types.ParamType"click.types.ParamType*7
+param,
+click.core.Parameter"click.core.Parameter*…
+convertclick.types.ParamType.convert"
+Any*8
+self.
+click.types.ParamType"click.types.ParamType*
+value
+Any*g
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -30,26 +50,197 @@
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310 
-CompositeParamTypeclick.types.CompositeParamType"click.core._ParamTypej35j36j37j38j39j310rd
-arity$click.types.CompositeParamType.arity
-builtins.int"builtins.int*35*36*37*38*39*310ﬂ
-Choiceclick.types.Choice"click.core._ParamType*ë
+None*Ó
+split_envvar_value(click.types.ParamType.split_envvar_value"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*8
+self.
+click.types.ParamType"click.types.ParamType*$
+rv
+builtins.str"builtins.str*„
+failclick.types.ParamType.fail"
+NoReturn
+*8
+self.
+click.types.ParamType"click.types.ParamType*)
+message
+builtins.str"builtins.str*i
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None *a
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None *¢
+shell_complete$click.types.ParamType.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*8
+self.
+click.types.ParamType"click.types.ParamType*1
+ctx(
+click.core.Context"click.core.Context*7
+param,
+click.core.Parameter"click.core.Parameter*,
+
+incomplete
+builtins.str"builtins.strrR
+is_composite"click.types.ParamType.is_composite
+builtins.bool"builtins.boolrB
+arityclick.types.ParamType.arity
+builtins.int"builtins.intr@
+nameclick.types.ParamType.name
+builtins.str"builtins.strrà
+envvar_list_splitter*click.types.ParamType.envvar_list_splitterD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None–
+CompositeParamTypeclick.types.CompositeParamType"click.types.ParamType*•
+arity$click.types.CompositeParamType.arity"
+builtins.int"builtins.int*J
+self@
+click.types.CompositeParamType"click.types.CompositeParamType0:property`r[
+is_composite+click.types.CompositeParamType.is_composite
+builtins.bool"builtins.bool∂
+FuncParamTypeclick.types.FuncParamType"click.types.ParamType*—
+__init__"click.types.FuncParamType.__init__"
+None*@
+self6
+click.types.FuncParamType"click.types.FuncParamType*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*—
+to_info_dict&click.types.FuncParamType.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*@
+self6
+click.types.FuncParamType"click.types.FuncParamType*’
+convert!click.types.FuncParamType.convert"
+Any*@
+self6
+click.types.FuncParamType"click.types.FuncParamType*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+Noners
+funcclick.types.FuncParamType.funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function≠
+UnprocessedParamType click.types.UnprocessedParamType"click.types.ParamType*Í
+convert(click.types.UnprocessedParamType.convert"
+Any*N
+selfD
+ click.types.UnprocessedParamType" click.types.UnprocessedParamType*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*°
+__repr__)click.types.UnprocessedParamType.__repr__"
+builtins.str"builtins.str*L
+selfD
+ click.types.UnprocessedParamType" click.types.UnprocessedParamTyperK
+name%click.types.UnprocessedParamType.name
+builtins.str"builtins.strÄ
+StringParamTypeclick.types.StringParamType"click.types.ParamType*€
+convert#click.types.StringParamType.convert"
+Any*D
+self:
+click.types.StringParamType"click.types.StringParamType*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*í
+__repr__$click.types.StringParamType.__repr__"
+builtins.str"builtins.str*B
+self:
+click.types.StringParamType"click.types.StringParamTyperF
+name click.types.StringParamType.name
+builtins.str"builtins.str÷
+Choiceclick.types.Choice"click.types.ParamType*¯
 __init__click.types.Choice.__init__"
 None*2
 self(
 click.types.Choice"click.types.Choice*[
 choicesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*4
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*4
 case_sensitive
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310ré
+builtins.bool"builtins.bool *º
+to_info_dictclick.types.Choice.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+click.types.Choice"click.types.Choice*∏
+get_metavarclick.types.Choice.get_metavar"
+builtins.str"builtins.str*2
+self(
+click.types.Choice"click.types.Choice*7
+param,
+click.core.Parameter"click.core.Parameter*»
+get_missing_message&click.types.Choice.get_missing_message"
+builtins.str"builtins.str*2
+self(
+click.types.Choice"click.types.Choice*7
+param,
+click.core.Parameter"click.core.Parameter*¿
+convertclick.types.Choice.convert"
+Any*2
+self(
+click.types.Choice"click.types.Choice*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*w
+__repr__click.types.Choice.__repr__"
+builtins.str"builtins.str*0
+self(
+click.types.Choice"click.types.Choice*ô
+shell_complete!click.types.Choice.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*2
+self(
+click.types.Choice"click.types.Choice*1
+ctx(
+click.core.Context"click.core.Context*7
+param,
+click.core.Parameter"click.core.Parameter*,
+
+incomplete
+builtins.str"builtins.strr=
+nameclick.types.Choice.name
+builtins.str"builtins.strru
 choicesclick.types.Choice.choicesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*35*36*37*38*39*310rl
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequencerS
 case_sensitive!click.types.Choice.case_sensitive
-builtins.bool"builtins.bool*35*36*37*38*39*310ö
-DateTimeclick.types.DateTime"click.core._ParamType*û
+builtins.bool"builtins.bool÷
+DateTimeclick.types.DateTime"click.types.ParamType*Ö
 __init__click.types.DateTime.__init__"
 None*6
 self,
@@ -58,13 +249,35 @@
 )Union[typing.Sequence[builtins.str],None]N
 typing.Sequence[builtins.str]
 builtins.str"builtins.str"typing.Sequence
-None z35z36z37z38z39z310*ì
-convertclick.types.DateTime.convert"&
-datetime.datetime"datetime.datetime*6
+None *¬
+to_info_dict!click.types.DateTime.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
 self,
-click.types.DateTime"click.types.DateTime*'
-value
-builtins.str"builtins.str*g
+click.types.DateTime"click.types.DateTime*æ
+get_metavar click.types.DateTime.get_metavar"
+builtins.str"builtins.str*6
+self,
+click.types.DateTime"click.types.DateTime*7
+param,
+click.core.Parameter"click.core.Parameter*å
+_try_to_convert_date)click.types.DateTime._try_to_convert_date"S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None*6
+self,
+click.types.DateTime"click.types.DateTime*
+value
+Any*(
+format
+builtins.str"builtins.str*∆
+convertclick.types.DateTime.convert"
+Any*6
+self,
+click.types.DateTime"click.types.DateTime*
+value
+Any*g
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -72,33 +285,23 @@
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310rê
+None*}
+__repr__click.types.DateTime.__repr__"
+builtins.str"builtins.str*4
+self,
+click.types.DateTime"click.types.DateTimer?
+nameclick.types.DateTime.name
+builtins.str"builtins.strrw
 formatsclick.types.DateTime.formatsN
 typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*35*36*37*38*39*310Œ
-FloatParamTypeclick.types.FloatParamType"click.core._ParamType*Õ
-__call__#click.types.FloatParamType.__call__" 
-builtins.float"builtins.float*B
-self8
-click.types.FloatParamType"click.types.FloatParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*ü
-convert"click.types.FloatParamType.convert" 
-builtins.float"builtins.float*B
-self8
-click.types.FloatParamType"click.types.FloatParamType*'
-value
-builtins.str"builtins.str*g
+builtins.str"builtins.str"typing.Sequenceï
+_NumberParamTypeBase click.types._NumberParamTypeBase"click.types.ParamType*Í
+convert(click.types._NumberParamTypeBase.convert"
+Any*N
+selfD
+ click.types._NumberParamTypeBase" click.types._NumberParamTypeBase*
+value
+Any*g
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -106,9 +309,124 @@
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310≥
+NonerW
+_number_class.click.types._NumberParamTypeBase._number_class
+	Type[Any]
+Anyî
+_NumberRangeBaseclick.types._NumberRangeBase" click.types._NumberParamTypeBase*æ
+__init__%click.types._NumberRangeBase.__init__"
+None*F
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBase*U
+minJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *U
+maxJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *.
+min_open
+builtins.bool"builtins.bool *.
+max_open
+builtins.bool"builtins.bool *+
+clamp
+builtins.bool"builtins.bool *⁄
+to_info_dict)click.types._NumberRangeBase.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*F
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBase*ﬁ
+convert$click.types._NumberRangeBase.convert"
+Any*F
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBase*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*£
+_clamp#click.types._NumberRangeBase._clamp" 
+builtins.float"builtins.float*F
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBase*+
+bound 
+builtins.float"builtins.float*≤
+dir®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int*(
+open
+builtins.bool"builtins.bool*•
+_describe_range,click.types._NumberRangeBase._describe_range"
+builtins.str"builtins.str*F
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBase*ï
+__repr__%click.types._NumberRangeBase.__repr__"
+builtins.str"builtins.str*D
+self<
+click.types._NumberRangeBase"click.types._NumberRangeBasers
+min click.types._NumberRangeBase.minJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Noners
+max click.types._NumberRangeBase.maxJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerQ
+min_open%click.types._NumberRangeBase.min_open
+builtins.bool"builtins.boolrQ
+max_open%click.types._NumberRangeBase.max_open
+builtins.bool"builtins.boolrK
+clamp"click.types._NumberRangeBase.clamp
+builtins.bool"builtins.bool•
+IntParamTypeclick.types.IntParamType" click.types._NumberParamTypeBase*â
+__repr__!click.types.IntParamType.__repr__"
+builtins.str"builtins.str*<
+self4
+click.types.IntParamType"click.types.IntParamTyperC
+nameclick.types.IntParamType.name
+builtins.str"builtins.strrá
+_number_class&click.types.IntParamType._number_classN
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.typeü
+IntRangeclick.types.IntRange"click.types._NumberRangeBase"click.types.IntParamType*É
+_clampclick.types.IntRange._clamp"
+builtins.int"builtins.int*6
+self,
+click.types.IntRange"click.types.IntRange*'
+bound
+builtins.int"builtins.int*≤
+dir®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int*(
+open
+builtins.bool"builtins.boolr?
+nameclick.types.IntRange.name
+builtins.str"builtins.str£
+FloatParamTypeclick.types.FloatParamType" click.types._NumberParamTypeBase*è
+__repr__#click.types.FloatParamType.__repr__"
+builtins.str"builtins.str*@
+self8
+click.types.FloatParamType"click.types.FloatParamTyperE
+nameclick.types.FloatParamType.name
+builtins.str"builtins.strrz
+_number_class(click.types.FloatParamType._number_class?
+CallableType[builtins.type]
+builtins.type"builtins.type‰
 
-FloatRangeclick.types.FloatRange"click.types.FloatParamType*Â
+FloatRangeclick.types.FloatRange"click.types._NumberRangeBase"click.types.FloatParamType*¨
 __init__click.types.FloatRange.__init__"
 None*:
 self0
@@ -120,20 +438,72 @@ FloatRangeclick.types.FloatRange"click.types.FloatParamType*Â
 maxJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None *+
+None *.
+min_open
+builtins.bool"builtins.bool *.
+max_open
+builtins.bool"builtins.bool *+
 clamp
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310rÜ
-minclick.types.FloatRange.minJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*35*36*37*38*39*310rÜ
-maxclick.types.FloatRange.maxJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*35*36*37*38*39*310r^
-clampclick.types.FloatRange.clamp
-builtins.bool"builtins.bool*35*36*37*38*39*310ä
-Fileclick.types.File"click.core._ParamType*¯
+builtins.bool"builtins.bool *ë
+_clampclick.types.FloatRange._clamp" 
+builtins.float"builtins.float*:
+self0
+click.types.FloatRange"click.types.FloatRange*+
+bound 
+builtins.float"builtins.float*≤
+dir®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int*(
+open
+builtins.bool"builtins.boolrA
+nameclick.types.FloatRange.name
+builtins.str"builtins.strÓ
+BoolParamTypeclick.types.BoolParamType"click.types.ParamType*’
+convert!click.types.BoolParamType.convert"
+Any*@
+self6
+click.types.BoolParamType"click.types.BoolParamType*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*å
+__repr__"click.types.BoolParamType.__repr__"
+builtins.str"builtins.str*>
+self6
+click.types.BoolParamType"click.types.BoolParamTyperD
+nameclick.types.BoolParamType.name
+builtins.str"builtins.strí
+UUIDParameterTypeclick.types.UUIDParameterType"click.types.ParamType*·
+convert%click.types.UUIDParameterType.convert"
+Any*H
+self>
+click.types.UUIDParameterType"click.types.UUIDParameterType*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*ò
+__repr__&click.types.UUIDParameterType.__repr__"
+builtins.str"builtins.str*F
+self>
+click.types.UUIDParameterType"click.types.UUIDParameterTyperH
+name"click.types.UUIDParameterType.name
+builtins.str"builtins.strÍ
+Fileclick.types.File"click.types.ParamType*∂
 __init__click.types.File.__init__"
 None*.
 self$
@@ -151,168 +521,68 @@ FloatRangeclick.types.FloatRange"click.types.FloatParamType*Â
 lazyG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None *U
-atomicG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z35z36z37z38z39z310*≥
-__call__click.types.File.__call__"$
-typing.IO[Any]
-Any"	typing.IO*.
+None *,
+atomic
+builtins.bool"builtins.bool *∂
+to_info_dictclick.types.File.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*.
 self$
-click.types.File"click.types.File*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*Ö
-convertclick.types.File.convert"$
-typing.IO[Any]
-Any"	typing.IO*.
-self$
-click.types.File"click.types.File*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310*…
+click.types.File"click.types.File*õ
 resolve_lazy_flag"click.types.File.resolve_lazy_flag"
 builtins.bool"builtins.bool*.
 self$
-click.types.File"click.types.File*'
-value
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rT
+click.types.File"click.types.File*
+value
+Any*∫
+convertclick.types.File.convert"
+Any*.
+self$
+click.types.File"click.types.File*
+value
+Any*g
+param\
+ Union[click.core.Parameter,None],
+click.core.Parameter"click.core.Parameter
+None*_
+ctxV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None*ì
+shell_completeclick.types.File.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*.
+self$
+click.types.File"click.types.File*1
+ctx(
+click.core.Context"click.core.Context*7
+param,
+click.core.Parameter"click.core.Parameter*,
+
+incomplete
+builtins.str"builtins.strr;
+nameclick.types.File.name
+builtins.str"builtins.strr[
+envvar_list_splitter%click.types.File.envvar_list_splitter
+builtins.str"builtins.strr;
 modeclick.types.File.mode
-builtins.str"builtins.str*35*36*37*38*39*310rÑ
+builtins.str"builtins.strrk
 encodingclick.types.File.encodingD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rÄ
+Nonerg
 errorsclick.types.File.errorsD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310r
+Nonerf
 lazyclick.types.File.lazyG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None*35*36*37*38*39*310rZ
+NonerA
 atomicclick.types.File.atomic
-builtins.bool"builtins.bool*35*36*37*38*39*310ù
-FuncParamTypeclick.types.FuncParamType"click.core._ParamType*”
-__init__"click.types.FuncParamType.__init__"
-None*d
-selfZ
-)click.types.FuncParamType[click.types._F]
-click.types._F"click.types.FuncParamType*ô
-funcé
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"click.types._Funcz35z36z37z38z39z310*‡
-__call__"click.types.FuncParamType.__call__"
-click.types._F*d
-selfZ
-)click.types.FuncParamType[click.types._F]
-click.types._F"click.types.FuncParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*≤
-convert!click.types.FuncParamType.convert"
-click.types._F*d
-selfZ
-)click.types.FuncParamType[click.types._F]
-click.types._F"click.types.FuncParamType*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310Pj35j36j37j38j39j310r–
-funcclick.types.FuncParamType.funcé
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"click.types._Func*35*36*37*38*39*310∂
-IntParamTypeclick.types.IntParamType"click.core._ParamType*√
-__call__!click.types.IntParamType.__call__"
-builtins.int"builtins.int*>
-self4
-click.types.IntParamType"click.types.IntParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*ï
-convert click.types.IntParamType.convert"
-builtins.int"builtins.int*>
-self4
-click.types.IntParamType"click.types.IntParamType*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310á
-IntRangeclick.types.IntRange"click.types.IntParamType*”
-__init__click.types.IntRange.__init__"
-None*6
-self,
-click.types.IntRange"click.types.IntRange*O
-minD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *O
-maxD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *+
-clamp
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r~
-minclick.types.IntRange.minD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*35*36*37*38*39*310r~
-maxclick.types.IntRange.maxD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*35*36*37*38*39*310r\
-clampclick.types.IntRange.clamp
-builtins.bool"builtins.bool*35*36*37*38*39*310Ó
-Pathclick.types.Path"click.core._ParamType*“
+builtins.bool"builtins.bool˜
+Pathclick.types.Path"click.types.ParamType*¥
 __init__click.types.Path.__init__"
 None*.
 self$
@@ -331,42 +601,33 @@ FloatRangeclick.types.FloatRange"click.types.FloatParamType*Â
 builtins.bool"builtins.bool *0
 
 allow_dash
-builtins.bool"builtins.bool *Ç
-	path_typeq
-'Union[Type[click.types._PathType],None]:
-Type[click.types._PathType]
-click.types._PathType
-None z35z36z37z38z39z310*ç
-coerce_path_result#click.types.Path.coerce_path_result"
-click.types._PathType*.
+builtins.bool"builtins.bool *L
+	path_type;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None *0
+
+executable
+builtins.bool"builtins.bool *∂
+to_info_dictclick.types.Path.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*.
 self$
-click.types.Path"click.types.Path*n
-rvf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*®
-__call__click.types.Path.__call__"
-click.types._PathType*.
+click.types.Path"click.types.Path*É
+coerce_path_result#click.types.Path.coerce_path_result"
+Any*.
 self$
-click.types.Path"click.types.Path*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*˙
-convertclick.types.Path.convert"
-click.types._PathType*.
+click.types.Path"click.types.Path*
+rv
+Any*∫
+convertclick.types.Path.convert"
+Any*.
 self$
-click.types.Path"click.types.Path*'
-value
-builtins.str"builtins.str*g
+click.types.Path"click.types.Path*
+value
+Any*g
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -374,90 +635,75 @@ allow_dash
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310rZ
+None*ì
+shell_completeclick.types.Path.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*.
+self$
+click.types.Path"click.types.Path*1
+ctx(
+click.core.Context"click.core.Context*7
+param,
+click.core.Parameter"click.core.Parameter*,
+
+incomplete
+builtins.str"builtins.strr[
+envvar_list_splitter%click.types.Path.envvar_list_splitter
+builtins.str"builtins.strrA
 existsclick.types.Path.exists
-builtins.bool"builtins.bool*35*36*37*38*39*310r`
+builtins.bool"builtins.boolrG
 	file_okayclick.types.Path.file_okay
-builtins.bool"builtins.bool*35*36*37*38*39*310r^
+builtins.bool"builtins.boolrE
 dir_okayclick.types.Path.dir_okay
-builtins.bool"builtins.bool*35*36*37*38*39*310r^
-writableclick.types.Path.writable
-builtins.bool"builtins.bool*35*36*37*38*39*310r^
+builtins.bool"builtins.boolrE
 readableclick.types.Path.readable
-builtins.bool"builtins.bool*35*36*37*38*39*310rf
+builtins.bool"builtins.boolrE
+writableclick.types.Path.writable
+builtins.bool"builtins.boolrI
+
+executableclick.types.Path.executable
+builtins.bool"builtins.boolrM
 resolve_pathclick.types.Path.resolve_path
-builtins.bool"builtins.bool*35*36*37*38*39*310rb
+builtins.bool"builtins.boolrI
 
 allow_dashclick.types.Path.allow_dash
-builtins.bool"builtins.bool*35*36*37*38*39*310rÏ
-typeclick.types.Path.type≥
-3Union[Type[builtins.str],Type[builtins.bytes],None]4
-Type[builtins.str]
-builtins.str"builtins.str:
-Type[builtins.bytes] 
-builtins.bytes"builtins.bytes
-None*35*36*37*38*39*310Œ
-StringParamTypeclick.types.StringParamType"click.core._ParamType*Ã
-__call__$click.types.StringParamType.__call__"
-builtins.str"builtins.str*D
-self:
-click.types.StringParamType"click.types.StringParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*û
-convert#click.types.StringParamType.convert"
-builtins.str"builtins.str*D
-self:
-click.types.StringParamType"click.types.StringParamType*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310˘	
-Tupleclick.types.Tuple"click.types.CompositeParamType*∏
+builtins.bool"builtins.boolrZ
+typeclick.types.Path.type;
+Union[Type[Any],None]
+	Type[Any]
+Any
+None	
+Tupleclick.types.Tuple"click.types.CompositeParamType*Ø
 __init__click.types.Tuple.__init__"
 None*0
 self&
-click.types.Tuple"click.types.Tuple*;
-types0
-typing.Iterable[Any]
-Any"typing.Iterablez35z36z37z38z39z310*∏
-__call__click.types.Tuple.__call__"&
-click.types.Tuple"click.types.Tuple*0
+click.types.Tuple"click.types.Tuple* 
+typesæ
+7typing.Sequence[Union[Type[Any],click.types.ParamType]]r
+&Union[Type[Any],click.types.ParamType]
+	Type[Any]
+Any.
+click.types.ParamType"click.types.ParamType"typing.Sequence*π
+to_info_dictclick.types.Tuple.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*0
 self&
-click.types.Tuple"click.types.Tuple*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*ä
-convertclick.types.Tuple.convert"&
-click.types.Tuple"click.types.Tuple*0
+click.types.Tuple"click.types.Tuple*|
+nameclick.types.Tuple.name"
+builtins.str"builtins.str*0
 self&
-click.types.Tuple"click.types.Tuple*'
-value
-builtins.str"builtins.str*g
+click.types.Tuple"click.types.Tuple0:property`*~
+arityclick.types.Tuple.arity"
+builtins.int"builtins.int*0
+self&
+click.types.Tuple"click.types.Tuple0:property`*Ω
+convertclick.types.Tuple.convert"
+Any*0
+self&
+click.types.Tuple"click.types.Tuple*
+value
+Any*g
 param\
  Union[click.core.Parameter,None],
 click.core.Parameter"click.core.Parameter
@@ -465,72 +711,35 @@ allow_dashclick.types.Path.allow_dash
 ctxV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310r†
+Nonerá
 typesclick.types.Tuple.typese
-$builtins.list[click.core._ParamType].
-click.core._ParamType"click.core._ParamType"builtins.list*35*36*37*38*39*310h
-UnprocessedParamType click.types.UnprocessedParamType"click.core._ParamTypej35j36j37j38j39j310“
-UUIDParameterTypeclick.types.UUIDParameterType"click.core._ParamType*Ã
-__call__&click.types.UUIDParameterType.__call__"
-	uuid.UUID"	uuid.UUID*H
-self>
-click.types.UUIDParameterType"click.types.UUIDParameterType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*û
-convert%click.types.UUIDParameterType.convert"
-	uuid.UUID"	uuid.UUID*H
-self>
-click.types.UUIDParameterType"click.types.UUIDParameterType*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310j35j36j37j38j39j310¶
+$builtins.list[click.types.ParamType].
+click.types.ParamType"click.types.ParamType"builtins.list]
+_gettext.gettext"
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strø
 convert_typeclick.types.convert_type".
-click.core._ParamType"click.core._ParamType*˚
-tyÚ
-™Union[builtins.type,click.core._ParamType,builtins.tuple[Union[builtins.type,click.core._ParamType]],CallableType[builtins.function],CallableType[builtins.function],None]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamTypeÃ
-:builtins.tuple[Union[builtins.type,click.core._ParamType]]~
-*Union[builtins.type,click.core._ParamType]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamType"builtins.tupleK
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function
+click.types.ParamType"click.types.ParamType*.
+ty&
+Union[Any,None]
+Any
 None*5
 default&
 Union[Any,None]
 Any
-None z35z36z37z38z39z310*]
-_PyTupletyping.Tuple*
-typing._SpecialForm"typing._SpecialForm*35*36*37*38*39*310*i
-BOOLclick.types.BOOL6
-click.types.BoolParamType"click.types.BoolParamType*35*36*37*38*39*310*m
-FLOATclick.types.FLOAT8
-click.types.FloatParamType"click.types.FloatParamType*35*36*37*38*39*310*e
-INTclick.types.INT4
-click.types.IntParamType"click.types.IntParamType*35*36*37*38*39*310*q
-STRINGclick.types.STRING:
-click.types.StringParamType"click.types.StringParamType*35*36*37*38*39*310*Ö
+None *
+ttyping *
+tetyping_extensions *l
 UNPROCESSEDclick.types.UNPROCESSEDD
- click.types.UnprocessedParamType" click.types.UnprocessedParamType*35*36*37*38*39*310*q
+ click.types.UnprocessedParamType" click.types.UnprocessedParamType*X
+STRINGclick.types.STRING:
+click.types.StringParamType"click.types.StringParamType*L
+INTclick.types.INT4
+click.types.IntParamType"click.types.IntParamType*T
+FLOATclick.types.FLOAT8
+click.types.FloatParamType"click.types.FloatParamType*P
+BOOLclick.types.BOOL6
+click.types.BoolParamType"click.types.BoolParamType*X
 UUIDclick.types.UUID>
-click.types.UUIDParameterType"click.types.UUIDParameterType*35*36*37*38*39*310
+click.types.UUIDParameterType"click.types.UUIDParameterType

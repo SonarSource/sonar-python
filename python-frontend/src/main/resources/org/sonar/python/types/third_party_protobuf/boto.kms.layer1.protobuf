@@ -1,438 +1,0 @@
-
-boto.kms.layer1Âo
-KMSConnectionboto.kms.layer1.KMSConnection""boto.connection.AWSQueryConnection*¥
-__init__&boto.kms.layer1.KMSConnection.__init__"
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*
-kwargs
-Anyz35z36z37z38z39z310*ë
-create_alias*boto.kms.layer1.KMSConnection.create_alias"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*,
-
-alias_name
-builtins.str"builtins.str*/
-target_key_id
-builtins.str"builtins.strz35z36z37z38z39z310*É	
-create_grant*boto.kms.layer1.KMSConnection.create_grant"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*3
-grantee_principal
-builtins.str"builtins.str*^
-retiring_principalD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *î
-
-operationsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None *ﬂ
-constraintsÀ
-PUnion[builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.str]],None]Í
-Dbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.str]]
-builtins.str"builtins.stru
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict"builtins.dict
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*≤
-
-create_key(boto.kms.layer1.KMSConnection.create_key"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*R
-policyD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *W
-descriptionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	key_usageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*´
-decrypt%boto.kms.layer1.KMSConnection.decrypt"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*5
-ciphertext_blob 
-builtins.bytes"builtins.bytes*∞
-encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*‡
-delete_alias*boto.kms.layer1.KMSConnection.delete_alias"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*,
-
-alias_name
-builtins.str"builtins.strz35z36z37z38z39z310*‹
-describe_key*boto.kms.layer1.KMSConnection.describe_key"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*⁄
-disable_key)boto.kms.layer1.KMSConnection.disable_key"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*Ï
-disable_key_rotation2boto.kms.layer1.KMSConnection.disable_key_rotation"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*ÿ
-
-enable_key(boto.kms.layer1.KMSConnection.enable_key"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*Í
-enable_key_rotation1boto.kms.layer1.KMSConnection.enable_key_rotation"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*œ
-encrypt%boto.kms.layer1.KMSConnection.encrypt"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*/
-	plaintext 
-builtins.bytes"builtins.bytes*∞
-encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*Â
-generate_data_key/boto.kms.layer1.KMSConnection.generate_data_key"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*∞
-encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *[
-number_of_bytesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-key_specD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*â
-#generate_data_key_without_plaintextAboto.kms.layer1.KMSConnection.generate_data_key_without_plaintext"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*∞
-encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *T
-key_specD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *[
-number_of_bytesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*ï
-generate_random-boto.kms.layer1.KMSConnection.generate_random"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*[
-number_of_bytesD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z35z36z37z38z39z310*è
-get_key_policy,boto.kms.layer1.KMSConnection.get_key_policy"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*-
-policy_name
-builtins.str"builtins.strz35z36z37z38z39z310*Ú
-get_key_rotation_status5boto.kms.layer1.KMSConnection.get_key_rotation_status"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.strz35z36z37z38z39z310*Ÿ
-list_aliases*boto.kms.layer1.KMSConnection.list_aliases"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*Q
-limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *R
-markerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*Å
-list_grants)boto.kms.layer1.KMSConnection.list_grants"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*Q
-limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *R
-markerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*ç
-list_key_policies/boto.kms.layer1.KMSConnection.list_key_policies"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*Q
-limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *R
-markerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*”
-	list_keys'boto.kms.layer1.KMSConnection.list_keys"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*Q
-limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *R
-markerD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*π
-put_key_policy,boto.kms.layer1.KMSConnection.put_key_policy"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*-
-policy_name
-builtins.str"builtins.str*(
-policy
-builtins.str"builtins.strz35z36z37z38z39z310*≠
-
-re_encrypt(boto.kms.layer1.KMSConnection.re_encrypt"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*5
-ciphertext_blob 
-builtins.bytes"builtins.bytes*4
-destination_key_id
-builtins.str"builtins.str*∑
-source_encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *º
-destination_encryption_contextï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *ñ
-grant_tokensÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*·
-retire_grant*boto.kms.layer1.KMSConnection.retire_grant"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*-
-grant_token
-builtins.str"builtins.strz35z36z37z38z39z310*à
-revoke_grant*boto.kms.layer1.KMSConnection.revoke_grant"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str**
-grant_id
-builtins.str"builtins.strz35z36z37z38z39z310*ü
-update_key_description4boto.kms.layer1.KMSConnection.update_key_description"í
-+Union[builtins.dict[builtins.str,Any],None]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
-None*H
-self>
-boto.kms.layer1.KMSConnection"boto.kms.layer1.KMSConnection*(
-key_id
-builtins.str"builtins.str*-
-description
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rm
-
-APIVersion(boto.kms.layer1.KMSConnection.APIVersion
-builtins.str"builtins.str*35*36*37*38*39*310r{
-DefaultRegionName/boto.kms.layer1.KMSConnection.DefaultRegionName
-builtins.str"builtins.str*35*36*37*38*39*310rÉ
-DefaultRegionEndpoint3boto.kms.layer1.KMSConnection.DefaultRegionEndpoint
-builtins.str"builtins.str*35*36*37*38*39*310ro
-ServiceName)boto.kms.layer1.KMSConnection.ServiceName
-builtins.str"builtins.str*35*36*37*38*39*310rq
-TargetPrefix*boto.kms.layer1.KMSConnection.TargetPrefix
-builtins.str"builtins.str*35*36*37*38*39*310rù
-ResponseError+boto.kms.layer1.KMSConnection.ResponseErrorF
-Type[builtins.Exception](
-builtins.Exception"builtins.Exception*35*36*37*38*39*310rP
-region$boto.kms.layer1.KMSConnection.region
-Any*35*36*37*38*39*310

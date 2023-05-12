@@ -1,229 +1,236 @@
 
-	flask.cli`
-NoAppExceptionflask.cli.NoAppException"click.exceptions.UsageErrorj35j36j37j38j39j310«
-DispatchingAppflask.cli.DispatchingApp"builtins.object*ﬁ
-__init__!flask.cli.DispatchingApp.__init__"
-None*>
-self4
-flask.cli.DispatchingApp"flask.cli.DispatchingApp*
-loader
-Any*7
-use_eager_loading
-builtins.bool"builtins.bool z35z36z37z38z39z310*¬
-__call__!flask.cli.DispatchingApp.__call__"
-Any*>
-self4
-flask.cli.DispatchingApp"flask.cli.DispatchingApp*
-environ
-Any*
-start_response
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rK
-loaderflask.cli.DispatchingApp.loader
-Any*35*36*37*38*39*310ã
+	flask.cliG
+NoAppExceptionflask.cli.NoAppException"click.exceptions.UsageError≈	
 
-ScriptInfoflask.cli.ScriptInfo"builtins.object*˝
+ScriptInfoflask.cli.ScriptInfo"builtins.object*ö
 __init__flask.cli.ScriptInfo.__init__"
 None*6
 self,
-flask.cli.ScriptInfo"flask.cli.ScriptInfo*=
-app_import_path&
-Union[Any,None]
-Any
-None *8
+flask.cli.ScriptInfo"flask.cli.ScriptInfo*[
+app_import_pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ô
 
-create_app&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*L
-load_appflask.cli.ScriptInfo.load_app*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rY
-app_import_path$flask.cli.ScriptInfo.app_import_path
-Any*35*36*37*38*39*310rO
+create_appÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *4
+set_debug_flag
+builtins.bool"builtins.bool *Ö
+load_appflask.cli.ScriptInfo.load_app""
+flask.app.Flask"flask.app.Flask*6
+self,
+flask.cli.ScriptInfo"flask.cli.ScriptInfor}
+app_import_path$flask.cli.ScriptInfo.app_import_pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner∂
 
-create_appflask.cli.ScriptInfo.create_app
-Any*35*36*37*38*39*310rC
-dataflask.cli.ScriptInfo.data
-Any*35*36*37*38*39*310ë
-AppGroupflask.cli.AppGroup"click.core.Group*£
-commandflask.cli.AppGroup.command"
-Any*2
-self(
-flask.cli.AppGroup"flask.cli.AppGroup*
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310*ü
-groupflask.cli.AppGroup.group"
-Any*2
-self(
-flask.cli.AppGroup"flask.cli.AppGroup*
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310Í
+create_appflask.cli.ScriptInfo.create_appÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner\
+dataflask.cli.ScriptInfo.data9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrU
+set_debug_flag#flask.cli.ScriptInfo.set_debug_flag
+builtins.bool"builtins.boolr~
+_loaded_app flask.cli.ScriptInfo._loaded_appM
+Union[flask.app.Flask,None]"
+flask.app.Flask"flask.app.Flask
+None∫
+AppGroupflask.cli.AppGroup"click.core.Group*E
+commandflask.cli.AppGroup.command*
+self*
+args*
 
-FlaskGroupflask.cli.FlaskGroup"flask.cli.AppGroup*˚
+kwargs*A
+groupflask.cli.AppGroup.group*
+self*
+args*
+
+kwargs⁄
+
+FlaskGroupflask.cli.FlaskGroup"flask.cli.AppGroup*˙
 __init__flask.cli.FlaskGroup.__init__"
 None*6
 self,
 flask.cli.FlaskGroup"flask.cli.FlaskGroup*:
 add_default_commands
-builtins.bool"builtins.bool *8
+builtins.bool"builtins.bool *ô
 
-create_app&
-Union[Any,None]
-Any
+create_appÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
 None *8
 add_version_option
 builtins.bool"builtins.bool *1
 load_dotenv
+builtins.bool"builtins.bool *4
+set_debug_flag
 builtins.bool"builtins.bool *
 extra
-Anyz35z36z37z38z39z310*Æ
-get_command flask.cli.FlaskGroup.get_command"
-Any*6
+Any*M
+_load_plugin_commands*flask.cli.FlaskGroup._load_plugin_commands*
+self*L
+get_command flask.cli.FlaskGroup.get_command*
+self*
+ctx*
+name*F
+list_commands"flask.cli.FlaskGroup.list_commands*
+self*
+ctx*∏
+make_context!flask.cli.FlaskGroup.make_context"(
+click.core.Context"click.core.Context*6
 self,
-flask.cli.FlaskGroup"flask.cli.FlaskGroup*
-ctx
-Any*
-name
-Anyz35z36z37z38z39z310*ü
-list_commands"flask.cli.FlaskGroup.list_commands"
-Any*6
-self,
-flask.cli.FlaskGroup"flask.cli.FlaskGroup*
-ctx
-Anyz35z36z37z38z39z310*£
-mainflask.cli.FlaskGroup.main"
-Any*6
-self,
-flask.cli.FlaskGroup"flask.cli.FlaskGroup*
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rO
+flask.cli.FlaskGroup"flask.cli.FlaskGroup*S
+	info_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*d
+parentV
+Union[click.core.Context,None](
+click.core.Context"click.core.Context
+None *
+extra
+Any*∫
 
-create_appflask.cli.FlaskGroup.create_app
-Any*35*36*37*38*39*310rQ
-load_dotenv flask.cli.FlaskGroup.load_dotenv
-Any*35*36*37*38*39*310ﬁ
-CertParamTypeflask.cli.CertParamType"click.core._ParamType*ç
-__init__ flask.cli.CertParamType.__init__"
-None*<
-self2
-flask.cli.CertParamType"flask.cli.CertParamTypez35z36z37z38z39z310*ƒ
-convertflask.cli.CertParamType.convert"
-Any*<
-self2
-flask.cli.CertParamType"flask.cli.CertParamType*
-value
-Any*
-param
-Any*
-ctx
-Anyz35z36z37z38z39z310j35j36j37j38j39j310r[
+parse_argsflask.cli.FlaskGroup.parse_args"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*6
+self,
+flask.cli.FlaskGroup"flask.cli.FlaskGroup*1
+ctx(
+click.core.Context"click.core.Context*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr∂
+
+create_appflask.cli.FlaskGroup.create_appÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NonerO
+load_dotenv flask.cli.FlaskGroup.load_dotenv
+builtins.bool"builtins.boolrU
+set_debug_flag#flask.cli.FlaskGroup.set_debug_flag
+builtins.bool"builtins.boolrg
+_loaded_plugin_commands,flask.cli.FlaskGroup._loaded_plugin_commands
+builtins.bool"builtins.bool…
+CertParamTypeflask.cli.CertParamType"click.types.ParamType*6
+__init__ flask.cli.CertParamType.__init__*
+self*S
+convertflask.cli.CertParamType.convert*
+self*	
+value*	
+param*
+ctxrB
 nameflask.cli.CertParamType.name
-builtins.str"builtins.str*35*36*37*38*39*310rP
+builtins.str"builtins.strr7
 	path_type!flask.cli.CertParamType.path_type
-Any*35*36*37*38*39*310y
-find_best_appflask.cli.find_best_app"
-Any*
-script_info
-Any*
-module
-Anyz35z36z37z38z39z310ñ
-call_factoryflask.cli.call_factory"
-Any*
-script_info
-Any*
-app_factory
-Any*
-	arguments
-Any z35z36z37z38z39z310ö
-find_app_by_stringflask.cli.find_app_by_string"
-Any*
-script_info
-Any*
-module
-Any*
-app_name
-Anyz35z36z37z38z39z310_
-prepare_importflask.cli.prepare_import"
-Any*
-path
-Anyz35z36z37z38z39z310…
+Anyõ
+SeparatedPathTypeflask.cli.SeparatedPathType"click.types.Path*W
+convert#flask.cli.SeparatedPathType.convert*
+self*	
+value*	
+param*
+ctx4
+find_best_appflask.cli.find_best_app*
 
-locate_appflask.cli.locate_app"
-Any*
-script_info
-Any*
-module_name
-Any*
-app_name
-Any*8
-raise_if_not_found
-builtins.bool"builtins.bool z35z36z37z38z39z310Ä
-get_versionflask.cli.get_version"
-Any*
-ctx
-Any*
-param
-Any*
-value
-Anyz35z36z37z38z39z310^
-with_appcontextflask.cli.with_appcontext"
-Any*
-f
-Anyz35z36z37z38z39z310z
-load_dotenvflask.cli.load_dotenv"
-Any*2
-path&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310¥
-show_server_bannerflask.cli.show_server_banner"
-Any*
-env
-Any*
-debug
-Any*
-app_import_path
-Any*
-eager_loading
-Anyz35z36z37z38z39z310ˆ
-run_commandflask.cli.run_command"
-None*
-info
-Any*
-host
-Any*
-port
-Any*
-reload
-Any*
-debugger
-Any*
-eager_loading
-Any*
-with_threads
-Any*
-cert
-Anyz35z36z37z38z39z310K
-shell_commandflask.cli.shell_command"
-Nonez35z36z37z38z39z310y
-routes_commandflask.cli.routes_command"
-Any*
-sort
-Any*
-all_methods
-Anyz35z36z37z38z39z310j
+moduleC
+_called_with_wrong_args!flask.cli._called_with_wrong_args*
+fL
+find_app_by_stringflask.cli.find_app_by_string*
+
+module*
+app_name4
+prepare_importflask.cli.prepare_import*
+path[
+
+locate_appflask.cli.locate_app*
+module_name*
+app_name*
+raise_if_not_found C
+get_versionflask.cli.get_version*
+ctx*	
+param*	
+value3
+with_appcontextflask.cli.with_appcontext*
+fõ
+_set_appflask.cli._set_app"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*1
+ctx(
+click.core.Context"click.core.Context*1
+param&
+click.core.Option"click.core.Option*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None¸
+
+_set_debugflask.cli._set_debug"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*1
+ctx(
+click.core.Context"click.core.Context*1
+param&
+click.core.Option"click.core.Option*)
+value
+builtins.bool"builtins.boolØ
+_env_file_callbackflask.cli._env_file_callback"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*1
+ctx(
+click.core.Context"click.core.Context*1
+param&
+click.core.Option"click.core.Option*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneE
+_path_is_ancestorflask.cli._path_is_ancestor*
+path*	
+other“
+load_dotenvflask.cli.load_dotenv"
+builtins.bool"builtins.bool*ã
+path
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+None R
+show_server_bannerflask.cli.show_server_banner*	
+debug*
+app_import_pathG
+_validate_keyflask.cli._validate_key*
+ctx*	
+param*	
+value 
 mainflask.cli.main"
-None*/
-	as_module
-builtins.bool"builtins.bool z35z36z37z38z39z310*L
-version_optionflask.cli.version_option
-Any*35*36*37*38*39*310*P
-pass_script_infoflask.cli.pass_script_info
-Any*35*36*37*38*39*310*6
-cliflask.cli.cli
-Any*35*36*37*38*39*310
+None*
+ttyping *R
+version_optionflask.cli.version_option&
+click.core.Option"click.core.Option*{
+pass_script_infoflask.cli.pass_script_infoK
+CallableType[builtins.function]&
+builtins.function"builtins.function*L
+_app_optionflask.cli._app_option&
+click.core.Option"click.core.Option*P
+_debug_optionflask.cli._debug_option&
+click.core.Option"click.core.Option*V
+_env_file_optionflask.cli._env_file_option&
+click.core.Option"click.core.Option*B
+cliflask.cli.cli,
+flask.cli.FlaskGroup"flask.cli.FlaskGroup

@@ -1,1112 +1,0 @@
-
-pkg_resources§'
-
-WorkingSetpkg_resources.WorkingSet"builtins.object*ª
-__init__!pkg_resources.WorkingSet.__init__"
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*—
-entries‡
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None z35z36z37z38z39z310*É
-require pkg_resources.WorkingSet.require"x
-+typing.Sequence[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution"typing.Sequence*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*È
-requirementsµ
-XTypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]¼
-MUnion[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]
-builtins.str"builtins.strÊ
-9typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]|
-(Union[builtins.str,typing.Iterable[Any]]
-builtins.str"builtins.str0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable"pkg_resources._NestedStrz35z36z37z38z39z310*ï
-
-run_script#pkg_resources.WorkingSet.run_script"
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet**
-requires
-builtins.str"builtins.str*-
-script_name
-builtins.str"builtins.strz35z36z37z38z39z310*¨
-iter_entry_points*pkg_resources.WorkingSet.iter_entry_points"’
-4typing.Generator[pkg_resources.EntryPoint,None,None]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint
-None
-None"typing.Generator*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*'
-group
-builtins.str"builtins.str*P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*»
-	add_entry"pkg_resources.WorkingSet.add_entry"
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*'
-entry
-builtins.str"builtins.strz35z36z37z38z39z310*î
-__contains__%pkg_resources.WorkingSet.__contains__"
-builtins.bool"builtins.bool*<
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*@
-dist8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*Ÿ
-__iter__!pkg_resources.WorkingSet.__iter__"˜
-6typing.Generator[pkg_resources.Distribution,None,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None
-None"typing.Generator*<
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSetz35z36z37z38z39z310*¯
-findpkg_resources.WorkingSet.find"n
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*?
-req6
-pkg_resources.Requirement"pkg_resources.Requirementz35z36z37z38z39z310*—
-resolve pkg_resources.WorkingSet.resolve"t
-)builtins.list[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution"builtins.list*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*‡
-requirementsu
-*typing.Iterable[pkg_resources.Requirement]6
-pkg_resources.Requirement"pkg_resources.Requirement"typing.Iterable*v
-envk
-%Union[pkg_resources.Environment,None]6
-pkg_resources.Environment"pkg_resources.Environment
-None *˜
-	installer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310*ú
-addpkg_resources.WorkingSet.add"
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*B
-dist8
-pkg_resources.Distribution"pkg_resources.Distribution*Q
-entryD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *,
-insert
-builtins.bool"builtins.bool *-
-replace
-builtins.bool"builtins.bool z35z36z37z38z39z310*í
-	subscribe"pkg_resources.WorkingSet.subscribe"
-None*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*¡
-find_plugins%pkg_resources.WorkingSet.find_plugins"›
-mTuple[builtins.list[pkg_resources.Distribution],builtins.dict[pkg_resources.Distribution,builtins.Exception]]t
-)builtins.list[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution"builtins.list±
-<builtins.dict[pkg_resources.Distribution,builtins.Exception]8
-pkg_resources.Distribution"pkg_resources.Distribution(
-builtins.Exception"builtins.Exception"builtins.dict*>
-self4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*F
-
-plugin_env6
-pkg_resources.Environment"pkg_resources.Environment*{
-full_envk
-%Union[pkg_resources.Environment,None]6
-pkg_resources.Environment"pkg_resources.Environment
-None *.
-fallback
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310r
-entries pkg_resources.WorkingSet.entriesJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310‚!
-Environmentpkg_resources.Environment"builtins.object*Û
-__init__"pkg_resources.Environment.__init__"
-None*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*›
-search_path‡
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *T
-platformD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-pythonD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*±
-__getitem__%pkg_resources.Environment.__getitem__"t
-)builtins.list[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution"builtins.list*>
-self6
-pkg_resources.Environment"pkg_resources.Environment*,
-project_name
-builtins.str"builtins.strz35z36z37z38z39z310*÷
-__iter__"pkg_resources.Environment.__iter__"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*>
-self6
-pkg_resources.Environment"pkg_resources.Environmentz35z36z37z38z39z310*Í
-addpkg_resources.Environment.add"
-None*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*B
-dist8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*Ó
-remove pkg_resources.Environment.remove"
-None*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*B
-dist8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*ë
-can_add!pkg_resources.Environment.can_add"
-builtins.bool"builtins.bool*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*B
-dist8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*û
-__add__!pkg_resources.Environment.__add__"6
-pkg_resources.Environment"pkg_resources.Environment*>
-self6
-pkg_resources.Environment"pkg_resources.Environment*»
-other±
-;Union[pkg_resources.Distribution,pkg_resources.Environment]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Environment"pkg_resources.Environmentz35z36z37z38z39z310*ý
-__iadd__"pkg_resources.Environment.__iadd__"6
-pkg_resources.Environment"pkg_resources.Environment*>
-self6
-pkg_resources.Environment"pkg_resources.Environment*»
-other±
-;Union[pkg_resources.Distribution,pkg_resources.Environment]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Environment"pkg_resources.Environmentz35z36z37z38z39z310*©
-scanpkg_resources.Environment.scan"
-None*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*›
-search_path‡
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None z35z36z37z38z39z3102“
-
-best_match$pkg_resources.Environment.best_matchÄ
-
-best_match$pkg_resources.Environment.best_match"8
-pkg_resources.Distribution"pkg_resources.Distribution*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*?
-req6
-pkg_resources.Requirement"pkg_resources.Requirement*E
-working_set4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet0:overloadXþ
-
-best_match$pkg_resources.Environment.best_match"
-pkg_resources._T*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*?
-req6
-pkg_resources.Requirement"pkg_resources.Requirement*E
-working_set4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*\
-	installerK
-CallableType[builtins.function]&
-builtins.function"builtins.function 0:overloadX"35"36"37"38"39"3102Í
-obtain pkg_resources.Environment.obtainÍ
-obtain pkg_resources.Environment.obtain"
-None*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*G
-requirement6
-pkg_resources.Requirement"pkg_resources.Requirement0:overloadX·
-obtain pkg_resources.Environment.obtain"
-pkg_resources._T*@
-self6
-pkg_resources.Environment"pkg_resources.Environment*G
-requirement6
-pkg_resources.Requirement"pkg_resources.Requirement*\
-	installerK
-CallableType[builtins.function]&
-builtins.function"builtins.function 0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310¨
-Requirementpkg_resources.Requirement"builtins.object*¹
-parsepkg_resources.Requirement.parse"6
-pkg_resources.Requirement"pkg_resources.Requirement*«
-s£
-1Union[builtins.str,typing.Iterable[builtins.str]]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable0:staticmethodhz35z36z37z38z39z310*°
-__contains__&pkg_resources.Requirement.__contains__"
-builtins.bool"builtins.bool*>
-self6
-pkg_resources.Requirement"pkg_resources.Requirement*þ
-itemõ
-KUnion[pkg_resources.Distribution,builtins.str,builtins.tuple[builtins.str]]8
-pkg_resources.Distribution"pkg_resources.Distribution
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuplez35z36z37z38z39z310*Á
-__eq__ pkg_resources.Requirement.__eq__"
-builtins.bool"builtins.bool*>
-self6
-pkg_resources.Requirement"pkg_resources.Requirement*
-other_requirement
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rk
-unsafe_name%pkg_resources.Requirement.unsafe_name
-builtins.str"builtins.str*35*36*37*38*39*310rm
-project_name&pkg_resources.Requirement.project_name
-builtins.str"builtins.str*35*36*37*38*39*310r[
-keypkg_resources.Requirement.key
-builtins.str"builtins.str*35*36*37*38*39*310r‘
-extras pkg_resources.Requirement.extrasL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*35*36*37*38*39*310ræ
-specspkg_resources.Requirement.specs¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rk
-marker pkg_resources.Requirement.marker&
-Union[Any,None]
-Any
-None*35*36*37*38*39*310Í"
-
-EntryPointpkg_resources.EntryPoint"builtins.object*š
-__init__!pkg_resources.EntryPoint.__init__"
-None*>
-self4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*&
-name
-builtins.str"builtins.str*-
-module_name
-builtins.str"builtins.str*Y
-attrsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple *Z
-extrasL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple *z
-distn
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None z35z36z37z38z39z310*
-parsepkg_resources.EntryPoint.parse"4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*a
-clsX
-Type[pkg_resources.EntryPoint]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*%
-src
-builtins.str"builtins.str*z
-distn
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None 0:classmethodpz35z36z37z38z39z310*³
-parse_group$pkg_resources.EntryPoint.parse_group"™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict*a
-clsX
-Type[pkg_resources.EntryPoint]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*'
-group
-builtins.str"builtins.str*¯
-lines£
-1Union[builtins.str,typing.Sequence[builtins.str]]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*z
-distn
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None 0:classmethodpz35z36z37z38z39z310*ø
-	parse_map"pkg_resources.EntryPoint.parse_map"™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict*a
-clsX
-Type[pkg_resources.EntryPoint]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*¡
-data–
-Union[builtins.dict[builtins.str,Union[builtins.str,typing.Sequence[builtins.str]]],builtins.str,typing.Sequence[builtins.str]]¢
-Mbuiltins.dict[builtins.str,Union[builtins.str,typing.Sequence[builtins.str]]]
-builtins.str"builtins.str£
-1Union[builtins.str,typing.Sequence[builtins.str]]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence"builtins.dict
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*z
-distn
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None 0:classmethodpz35z36z37z38z39z310*É
-loadpkg_resources.EntryPoint.load"
-Any*>
-self4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*-
-require
-builtins.bool"builtins.bool *v
-envk
-%Union[pkg_resources.Environment,None]6
-pkg_resources.Environment"pkg_resources.Environment
-None *˜
-	installer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310*¡
-require pkg_resources.EntryPoint.require"
-None*>
-self4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint*v
-envk
-%Union[pkg_resources.Environment,None]6
-pkg_resources.Environment"pkg_resources.Environment
-None *˜
-	installer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310*
-resolve pkg_resources.EntryPoint.resolve"
-Any*>
-self4
-pkg_resources.EntryPoint"pkg_resources.EntryPointz35z36z37z38z39z310j35j36j37j38j39j310r\
-namepkg_resources.EntryPoint.name
-builtins.str"builtins.str*35*36*37*38*39*310rj
-module_name$pkg_resources.EntryPoint.module_name
-builtins.str"builtins.str*35*36*37*38*39*310rŽ
-attrspkg_resources.EntryPoint.attrsL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*35*36*37*38*39*310r
-extraspkg_resources.EntryPoint.extrasL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*35*36*37*38*39*310r®
-distpkg_resources.EntryPoint.distn
-&Union[pkg_resources.Distribution,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None*35*36*37*38*39*310æ2
-Distributionpkg_resources.Distribution"pkg_resources.IResourceProvider"pkg_resources.IMetadataProvider*»
-__init__#pkg_resources.Distribution.__init__"
-None*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*T
-locationD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ç
-metadataÖ
-6TypeAlias[Union[pkg_resources.IResourceProvider,None]]}
-+Union[pkg_resources.IResourceProvider,None]B
-pkg_resources.IResourceProvider"pkg_resources.IResourceProvider
-None"pkg_resources._MetadataType *X
-project_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-versionD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *.
-
-py_version
-builtins.str"builtins.str *T
-platformD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *.
-
-precedence
-builtins.int"builtins.int z35z36z37z38z39z310*Á
-from_location(pkg_resources.Distribution.from_location"8
-pkg_resources.Distribution"pkg_resources.Distribution*g
-cls^
- Type[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution**
-location
-builtins.str"builtins.str**
-basename
-builtins.str"builtins.str*ç
-metadataÖ
-6TypeAlias[Union[pkg_resources.IResourceProvider,None]]}
-+Union[pkg_resources.IResourceProvider,None]B
-pkg_resources.IResourceProvider"pkg_resources.IResourceProvider
-None"pkg_resources._MetadataType *w
-kwo
-%Union[builtins.str,None,builtins.int]
-builtins.str"builtins.str
-None
-builtins.int"builtins.int0:classmethodpz35z36z37z38z39z310*•
-from_filename(pkg_resources.Distribution.from_filename"8
-pkg_resources.Distribution"pkg_resources.Distribution*g
-cls^
- Type[pkg_resources.Distribution]8
-pkg_resources.Distribution"pkg_resources.Distribution**
-filename
-builtins.str"builtins.str*ç
-metadataÖ
-6TypeAlias[Union[pkg_resources.IResourceProvider,None]]}
-+Union[pkg_resources.IResourceProvider,None]B
-pkg_resources.IResourceProvider"pkg_resources.IResourceProvider
-None"pkg_resources._MetadataType *w
-kwo
-%Union[builtins.str,None,builtins.int]
-builtins.str"builtins.str
-None
-builtins.int"builtins.int0:classmethodpz35z36z37z38z39z310*§
-activate#pkg_resources.Distribution.activate"
-None*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*Ž
-path
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*Ð
-as_requirement)pkg_resources.Distribution.as_requirement"6
-pkg_resources.Requirement"pkg_resources.Requirement*B
-self8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*Û
-requires#pkg_resources.Distribution.requires"q
-(builtins.list[pkg_resources.Requirement]6
-pkg_resources.Requirement"pkg_resources.Requirement"builtins.list*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*Z
-extrasL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple z35z36z37z38z39z310*·
-clone pkg_resources.Distribution.clone"6
-pkg_resources.Requirement"pkg_resources.Requirement*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*w
-kwo
-%Union[builtins.str,builtins.int,None]
-builtins.str"builtins.str
-builtins.int"builtins.int
-Nonez35z36z37z38z39z310*ª
-egg_name#pkg_resources.Distribution.egg_name"
-builtins.str"builtins.str*B
-self8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310*º
-__cmp__"pkg_resources.Distribution.__cmp__"
-builtins.bool"builtins.bool*@
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*
-other
-Anyz35z36z37z38z39z310*Ó
-get_entry_info)pkg_resources.Distribution.get_entry_info"h
-$Union[pkg_resources.EntryPoint,None]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint
-None*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*'
-group
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*ö
-load_entry_point+pkg_resources.Distribution.load_entry_point"
-Any*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*'
-group
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz35z36z37z38z39z3102Ñ
-get_entry_map(pkg_resources.Distribution.get_entry_map©
-get_entry_map(pkg_resources.Distribution.get_entry_map"›
-Pbuiltins.dict[builtins.str,builtins.dict[builtins.str,pkg_resources.EntryPoint]]
-builtins.str"builtins.str™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict"builtins.dict*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution0:overloadXÐ
-get_entry_map(pkg_resources.Distribution.get_entry_map"™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict*B
-self8
-pkg_resources.Distribution"pkg_resources.Distribution*'
-group
-builtins.str"builtins.str0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rf
-PKG_INFO#pkg_resources.Distribution.PKG_INFO
-builtins.str"builtins.str*35*36*37*38*39*310rf
-location#pkg_resources.Distribution.location
-builtins.str"builtins.str*35*36*37*38*39*310rn
-project_name'pkg_resources.Distribution.project_name
-builtins.str"builtins.str*35*36*37*38*39*310r\
-keypkg_resources.Distribution.key
-builtins.str"builtins.str*35*36*37*38*39*310r
-extras!pkg_resources.Distribution.extrasJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rd
-version"pkg_resources.Distribution.version
-builtins.str"builtins.str*35*36*37*38*39*310r¢
-parsed_version)pkg_resources.Distribution.parsed_versionL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*35*36*37*38*39*310rj
-
-py_version%pkg_resources.Distribution.py_version
-builtins.str"builtins.str*35*36*37*38*39*310rŽ
-platform#pkg_resources.Distribution.platformD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*35*36*37*38*39*310rj
-
-precedence%pkg_resources.Distribution.precedence
-builtins.int"builtins.int*35*36*37*38*39*310«#
-IResourceManagerpkg_resources.IResourceManager"builtins.object*ø
-resource_exists.pkg_resources.IResourceManager.resource_exists"
-builtins.bool"builtins.bool*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*¢
-resource_stream.pkg_resources.IResourceManager.resource_stream"H
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*ú
-resource_string.pkg_resources.IResourceManager.resource_string" 
-builtins.bytes"builtins.bytes*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*ö
-resource_isdir-pkg_resources.IResourceManager.resource_isdir"
-builtins.bool"builtins.bool*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*¦
-resource_listdir/pkg_resources.IResourceManager.resource_listdir"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*ú
-resource_filename0pkg_resources.IResourceManager.resource_filename"
-builtins.str"builtins.str*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310*à
-set_extraction_path2pkg_resources.IResourceManager.set_extraction_path"
-None*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*&
-path
-builtins.str"builtins.strz35z36z37z38z39z310*£
-cleanup_resources0pkg_resources.IResourceManager.cleanup_resources"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*+
-force
-builtins.bool"builtins.bool z35z36z37z38z39z310*Ï
-get_cache_path-pkg_resources.IResourceManager.get_cache_path"
-builtins.str"builtins.str*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*.
-archive_name
-builtins.str"builtins.str*[
-namesN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable z35z36z37z38z39z310*²
-extraction_error/pkg_resources.IResourceManager.extraction_error"
-None*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManagerz35z36z37z38z39z310*€
-postprocess*pkg_resources.IResourceManager.postprocess"
-None*J
-self@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager**
-tempname
-builtins.str"builtins.str**
-filename
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310Ù
-IMetadataProviderpkg_resources.IMetadataProvider"builtins.object*ë
-has_metadata,pkg_resources.IMetadataProvider.has_metadata"
-builtins.bool"builtins.bool*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*ï
-metadata_isdir.pkg_resources.IMetadataProvider.metadata_isdir"
-builtins.bool"builtins.bool*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*Ÿ
-metadata_listdir0pkg_resources.IMetadataProvider.metadata_listdir"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*é
-get_metadata,pkg_resources.IMetadataProvider.get_metadata"
-builtins.str"builtins.str*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*Ç
-get_metadata_lines2pkg_resources.IMetadataProvider.get_metadata_lines"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*À
-
-run_script*pkg_resources.IMetadataProvider.run_script"
-None*L
-selfB
-pkg_resources.IMetadataProvider"pkg_resources.IMetadataProvider*-
-script_name
-builtins.str"builtins.str*f
-	namespaceW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dictz35z36z37z38z39z310j35j36j37j38j39j310]
-ResolutionErrorpkg_resources.ResolutionError"builtins.Exceptionj35j36j37j38j39j310ô
-DistributionNotFound"pkg_resources.DistributionNotFound"pkg_resources.ResolutionError*à
-req&pkg_resources.DistributionNotFound.req"6
-pkg_resources.Requirement"pkg_resources.Requirement*R
-selfH
-"pkg_resources.DistributionNotFound""pkg_resources.DistributionNotFound0:property`z35z36z37z38z39z310*þ
-	requirers,pkg_resources.DistributionNotFound.requirers"H
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*R
-selfH
-"pkg_resources.DistributionNotFound""pkg_resources.DistributionNotFound0:property`z35z36z37z38z39z310*Ú
-requirers_str0pkg_resources.DistributionNotFound.requirers_str"
-builtins.str"builtins.str*R
-selfH
-"pkg_resources.DistributionNotFound""pkg_resources.DistributionNotFound0:property`z35z36z37z38z39z310*¾
-report)pkg_resources.DistributionNotFound.report"
-builtins.str"builtins.str*R
-selfH
-"pkg_resources.DistributionNotFound""pkg_resources.DistributionNotFoundz35z36z37z38z39z310j35j36j37j38j39j310´
-VersionConflictpkg_resources.VersionConflict"pkg_resources.ResolutionError*¤
-dist"pkg_resources.VersionConflict.dist"
-Any*H
-self>
-pkg_resources.VersionConflict"pkg_resources.VersionConflict0:property`z35z36z37z38z39z310*¢
-req!pkg_resources.VersionConflict.req"
-Any*H
-self>
-pkg_resources.VersionConflict"pkg_resources.VersionConflict0:property`z35z36z37z38z39z310*¯
-report$pkg_resources.VersionConflict.report"
-builtins.str"builtins.str*H
-self>
-pkg_resources.VersionConflict"pkg_resources.VersionConflictz35z36z37z38z39z310*Ë
-with_context*pkg_resources.VersionConflict.with_context">
-pkg_resources.VersionConflict"pkg_resources.VersionConflict*H
-self>
-pkg_resources.VersionConflict"pkg_resources.VersionConflict*ë
-required_byÙ
-<builtins.set[Union[pkg_resources.Distribution,builtins.str]]Š
-.Union[pkg_resources.Distribution,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution
-builtins.str"builtins.str"builtins.setz35z36z37z38z39z310j35j36j37j38j39j310¢
-ContextualVersionConflict'pkg_resources.ContextualVersionConflict"pkg_resources.VersionConflict*£
-required_by3pkg_resources.ContextualVersionConflict.required_by"Ù
-<builtins.set[Union[pkg_resources.Distribution,builtins.str]]Š
-.Union[pkg_resources.Distribution,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution
-builtins.str"builtins.str"builtins.set*\
-selfR
-'pkg_resources.ContextualVersionConflict"'pkg_resources.ContextualVersionConflict0:property`z35z36z37z38z39z310j35j36j37j38j39j310b
-UnknownExtrapkg_resources.UnknownExtra"pkg_resources.ResolutionErrorj35j36j37j38j39j310Þ
-ExtractionErrorpkg_resources.ExtractionError"builtins.Exceptionj35j36j37j38j39j310r‹
-manager%pkg_resources.ExtractionError.manager@
-pkg_resources.IResourceManager"pkg_resources.IResourceManager*35*36*37*38*39*310rm
-
-cache_path(pkg_resources.ExtractionError.cache_path
-builtins.str"builtins.str*35*36*37*38*39*310r
-original_error,pkg_resources.ExtractionError.original_error(
-builtins.Exception"builtins.Exception*35*36*37*38*39*310‡
-	_Importerpkg_resources._Importer"importlib.abc.MetaPathFinder"importlib.abc.InspectLoader@babc.ABCMetaj35j36j37j38j39j310n
-IResourceProviderpkg_resources.IResourceProvider"pkg_resources.IMetadataProviderj35j36j37j38j39j310T
-NullProviderpkg_resources.NullProvider"builtins.objectj35j36j37j38j39j310]
-EggProviderpkg_resources.EggProvider"pkg_resources.NullProviderj35j36j37j38j39j310d
-DefaultProviderpkg_resources.DefaultProvider"pkg_resources.EggProviderj35j36j37j38j39j310ð
-PathMetadatapkg_resources.PathMetadata"pkg_resources.DefaultProvider"pkg_resources.IResourceProvider*ê
-__init__#pkg_resources.PathMetadata.__init__"
-None*B
-self8
-pkg_resources.PathMetadata"pkg_resources.PathMetadata*&
-path
-builtins.str"builtins.str**
-egg_info
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310\
-ZipProviderpkg_resources.ZipProvider"pkg_resources.EggProviderj35j36j37j38j39j310Ô
-EggMetadatapkg_resources.EggMetadata"pkg_resources.ZipProvider"pkg_resources.IResourceProvider*Ô
-__init__"pkg_resources.EggMetadata.__init__"
-None*@
-self6
-pkg_resources.EggMetadata"pkg_resources.EggMetadata*?
-zipimporter.
-zipimport.zipimporter"zipimport.zipimporterz35z36z37z38z39z310j35j36j37j38j39j310a
-EmptyProviderpkg_resources.EmptyProvider"pkg_resources.NullProviderj35j36j37j38j39j310Î
-FileMetadatapkg_resources.FileMetadata"pkg_resources.EmptyProvider"pkg_resources.IResourceProvider*Ê
-__init__#pkg_resources.FileMetadata.__init__"
-None*B
-self8
-pkg_resources.FileMetadata"pkg_resources.FileMetadata*2
-path_to_pkg_info
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310
-declare_namespacepkg_resources.declare_namespace"
-None*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310’
-fixup_namespace_packages&pkg_resources.fixup_namespace_packages"
-None*+
-	path_item
-builtins.str"builtins.strz35z36z37z38z39z310˜
-parse_requirements pkg_resources.parse_requirements"•
-5typing.Generator[pkg_resources.Requirement,None,None]6
-pkg_resources.Requirement"pkg_resources.Requirement
-None
-None"typing.Generator*®
-strs£
-1Union[builtins.str,typing.Iterable[builtins.str]]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterablez35z36z37z38z39z310„
-load_entry_pointpkg_resources.load_entry_point"
-Any*Ü
-distÑ
-STypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]Ü
-HUnion[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Requirement"pkg_resources.Requirement
-builtins.str"builtins.str"pkg_resources._EPDistType*'
-group
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310á
-get_entry_infopkg_resources.get_entry_info"h
-$Union[pkg_resources.EntryPoint,None]4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint
-None*Ü
-distÑ
-STypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]Ü
-HUnion[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Requirement"pkg_resources.Requirement
-builtins.str"builtins.str"pkg_resources._EPDistType*'
-group
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310Ã
-find_distributions pkg_resources.find_distributions"˜
-6typing.Generator[pkg_resources.Distribution,None,None]8
-pkg_resources.Distribution"pkg_resources.Distribution
-None
-None"typing.Generator*+
-	path_item
-builtins.str"builtins.str**
-only
-builtins.bool"builtins.bool z35z36z37z38z39z310ï
-get_distributionpkg_resources.get_distribution"8
-pkg_resources.Distribution"pkg_resources.Distribution*ç
-distÜ
-HUnion[pkg_resources.Requirement,builtins.str,pkg_resources.Distribution]6
-pkg_resources.Requirement"pkg_resources.Requirement
-builtins.str"builtins.str8
-pkg_resources.Distribution"pkg_resources.Distributionz35z36z37z38z39z310›
-resource_existspkg_resources.resource_exists"
-builtins.bool"builtins.bool*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310Å
-resource_streampkg_resources.resource_stream"H
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310
-resource_stringpkg_resources.resource_string" 
-builtins.bytes"builtins.bytes*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310™
-resource_isdirpkg_resources.resource_isdir"
-builtins.bool"builtins.bool*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310É
-resource_listdirpkg_resources.resource_listdir"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310
-resource_filenamepkg_resources.resource_filename"
-builtins.str"builtins.str*þ
-package_or_requirementá
-8TypeAlias[Union[builtins.str,pkg_resources.Requirement]]‡
--Union[builtins.str,pkg_resources.Requirement]
-builtins.str"builtins.str6
-pkg_resources.Requirement"pkg_resources.Requirement"pkg_resources._PkgReqType*/
-resource_name
-builtins.str"builtins.strz35z36z37z38z39z310ƒ
-set_extraction_path!pkg_resources.set_extraction_path"
-None*&
-path
-builtins.str"builtins.strz35z36z37z38z39z310Æ
-cleanup_resourcespkg_resources.cleanup_resources"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*+
-force
-builtins.bool"builtins.bool z35z36z37z38z39z310½
-register_finderpkg_resources.register_finder"
-None*1
-importer_type
-builtins.type"builtins.type*´
-distribution_finderš
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pkg_resources._DistFinderTypez35z36z37z38z39z310ñ
-register_loader_type"pkg_resources.register_loader_type"
-None*/
-loader_type
-builtins.type"builtins.type*a
-provider_factoryK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310Ð
-register_namespace_handler(pkg_resources.register_namespace_handler"
-None*1
-importer_type
-builtins.type"builtins.type*±
-namespace_handler™
-*TypeAlias[CallableType[builtins.function]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function"pkg_resources._NSHandlerTypez35z36z37z38z39z310ƒ
-parse_versionpkg_resources.parse_version"–
-$Union[TypeAlias[Any],TypeAlias[Any]]2
-TypeAlias[Any]
-Any"pkg_resources.Version8
-TypeAlias[Any]
-Any"pkg_resources.LegacyVersion*#
-v
-builtins.str"builtins.strz35z36z37z38z39z310ô
-yield_linespkg_resources.yield_lines"n
-(typing.Generator[builtins.str,None,None]
-builtins.str"builtins.str
-None
-None"typing.Generator*À
-strsµ
-XTypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]¼
-MUnion[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]
-builtins.str"builtins.strÊ
-9typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]|
-(Union[builtins.str,typing.Iterable[Any]]
-builtins.str"builtins.str0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable"pkg_resources._NestedStrz35z36z37z38z39z310”
-split_sectionspkg_resources.split_sections"‡
-Htyping.Generator[Tuple[Union[builtins.str,None],builtins.str],None,None]”
-,Tuple[Union[builtins.str,None],builtins.str]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str
-None
-None"typing.Generator*À
-strsµ
-XTypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]¼
-MUnion[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]
-builtins.str"builtins.strÊ
-9typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]|
-(Union[builtins.str,typing.Iterable[Any]]
-builtins.str"builtins.str0
-typing.Iterable[Any]
-Any"typing.Iterable"typing.Iterable"pkg_resources._NestedStrz35z36z37z38z39z310ƒ
-	safe_namepkg_resources.safe_name"
-builtins.str"builtins.str*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310Œ
-safe_versionpkg_resources.safe_version"
-builtins.str"builtins.str*)
-version
-builtins.str"builtins.strz35z36z37z38z39z310†
-
-safe_extrapkg_resources.safe_extra"
-builtins.str"builtins.str*'
-extra
-builtins.str"builtins.strz35z36z37z38z39z310’
-to_filenamepkg_resources.to_filename"
-builtins.str"builtins.str*1
-name_or_version
-builtins.str"builtins.strz35z36z37z38z39z310m
-get_build_platform pkg_resources.get_build_platform"
-builtins.str"builtins.strz35z36z37z38z39z310a
-get_platformpkg_resources.get_platform"
-builtins.str"builtins.strz35z36z37z38z39z310u
-get_supported_platform$pkg_resources.get_supported_platform"
-builtins.str"builtins.strz35z36z37z38z39z310›
-compatible_platforms"pkg_resources.compatible_platforms"
-builtins.bool"builtins.bool*R
-providedD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*R
-requiredD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonez35z36z37z38z39z310k
-get_default_cachepkg_resources.get_default_cache"
-builtins.str"builtins.strz35z36z37z38z39z310¤
-get_importerpkg_resources.get_importer"2
-pkg_resources._Importer"pkg_resources._Importer*+
-	path_item
-builtins.str"builtins.strz35z36z37z38z39z310}
-ensure_directorypkg_resources.ensure_directory"
-None*&
-path
-builtins.str"builtins.strz35z36z37z38z39z310‘
-normalize_pathpkg_resources.normalize_path"
-builtins.str"builtins.str**
-filename
-builtins.str"builtins.strz35z36z37z38z39z310"à
-
-get_entry_mappkg_resources.get_entry_map·
-get_entry_mappkg_resources.get_entry_map"›
-Pbuiltins.dict[builtins.str,builtins.dict[builtins.str,pkg_resources.EntryPoint]]
-builtins.str"builtins.str™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict"builtins.dict*Ü
-distÑ
-STypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]Ü
-HUnion[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Requirement"pkg_resources.Requirement
-builtins.str"builtins.str"pkg_resources._EPDistType0:overloadXÞ
-get_entry_mappkg_resources.get_entry_map"™
-4builtins.dict[builtins.str,pkg_resources.EntryPoint]
-builtins.str"builtins.str4
-pkg_resources.EntryPoint"pkg_resources.EntryPoint"builtins.dict*Ü
-distÑ
-STypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]Ü
-HUnion[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]8
-pkg_resources.Distribution"pkg_resources.Distribution6
-pkg_resources.Requirement"pkg_resources.Requirement
-builtins.str"builtins.str"pkg_resources._EPDistType*'
-group
-builtins.str"builtins.str0:overloadX"35"36"37"38"39"310"Å
-get_providerpkg_resources.get_provider¶
-get_providerpkg_resources.get_provider"B
-pkg_resources.IResourceProvider"pkg_resources.IResourceProvider*8
-package_or_requirement
-builtins.str"builtins.str0:overloadXÆ
-get_providerpkg_resources.get_provider"8
-pkg_resources.Distribution"pkg_resources.Distribution*R
-package_or_requirement6
-pkg_resources.Requirement"pkg_resources.Requirement0:overloadX"35"36"37"38"39"310*1
-	importlib	importlib *35*36*37*38*39*310*w
-working_setpkg_resources.working_set4
-pkg_resources.WorkingSet"pkg_resources.WorkingSet*35*36*37*38*39*310*†
-requirepkg_resources.requireK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*Œ
-
-run_scriptpkg_resources.run_scriptK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*š
-iter_entry_pointspkg_resources.iter_entry_pointsK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*¦
-add_activation_listener%pkg_resources.add_activation_listenerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*Y
-EGG_DISTpkg_resources.EGG_DIST
-builtins.int"builtins.int*35*36*37*38*39*310*_
-BINARY_DISTpkg_resources.BINARY_DIST
-builtins.int"builtins.int*35*36*37*38*39*310*_
-SOURCE_DISTpkg_resources.SOURCE_DIST
-builtins.int"builtins.int*35*36*37*38*39*310*c
-CHECKOUT_DISTpkg_resources.CHECKOUT_DIST
-builtins.int"builtins.int*35*36*37*38*39*310*a
-DEVELOP_DISTpkg_resources.DEVELOP_DIST
-builtins.int"builtins.int*35*36*37*38*39*310*ƒ
-empty_providerpkg_resources.empty_provider:
-pkg_resources.EmptyProvider"pkg_resources.EmptyProvider*35*36*37*38*39*310

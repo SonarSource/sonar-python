@@ -1,145 +1,205 @@
 
-filelockþ
-Timeoutfilelock.Timeout"builtins.TimeoutError*¥
-__init__filelock.Timeout.__init__"
-None*.
-self$
-filelock.Timeout"filelock.Timeout*+
-	lock_file
-builtins.str"builtins.strz35z36z37z38z39z310*ˆ
-__str__filelock.Timeout.__str__"
-builtins.str"builtins.str*,
-self$
-filelock.Timeout"filelock.Timeoutz35z36z37z38z39z310j35j36j37j38j39j310ð
-_Acquire_ReturnProxyfilelock._Acquire_ReturnProxy"builtins.object*Ç
-__init__&filelock._Acquire_ReturnProxy.__init__"
-None*H
-self>
-filelock._Acquire_ReturnProxy"filelock._Acquire_ReturnProxy*&
-lock
-builtins.str"builtins.strz35z36z37z38z39z310*³
-	__enter__'filelock._Acquire_ReturnProxy.__enter__"
-builtins.str"builtins.str*F
-self>
-filelock._Acquire_ReturnProxy"filelock._Acquire_ReturnProxyz35z36z37z38z39z310*Ž
-__exit__&filelock._Acquire_ReturnProxy.__exit__"
-None*F
-self>
-filelock._Acquire_ReturnProxy"filelock._Acquire_ReturnProxy*—
+filelockË
+AcquireReturnProxy filelock._api.AcquireReturnProxy"builtins.object*Ó
+__init__)filelock._api.AcquireReturnProxy.__init__"
+None*N
+selfD
+ filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
+lock8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*¿
+	__enter__*filelock._api.AcquireReturnProxy.__enter__"8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*L
+selfD
+ filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*€
+__exit__)filelock._api.AcquireReturnProxy.__exit__"
+None*L
+selfD
+ filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*—
 exc_typeŠ
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*o
+	exc_valueb
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
 None*f
 	tracebackY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez35z36z37z38z39z310j35j36j37j38j39j310¹
-BaseFileLockfilelock.BaseFileLock"builtins.object*Ø
-__init__filelock.BaseFileLock.__init__"
-None*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock*+
-	lock_file
-builtins.str"builtins.str*¡
-timeout‘
-/Union[builtins.float,builtins.int,builtins.str] 
-builtins.float"builtins.float
-builtins.int"builtins.int
-builtins.str"builtins.str z35z36z37z38z39z310*«
-	lock_filefilelock.BaseFileLock.lock_file"
-builtins.str"builtins.str*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock0:property`z35z36z37z38z39z310*­
-	is_lockedfilelock.BaseFileLock.is_locked"
-builtins.bool"builtins.bool*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock0:property`z35z36z37z38z39z310*Î
-acquirefilelock.BaseFileLock.acquire">
-filelock._Acquire_ReturnProxy"filelock._Acquire_ReturnProxy*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock*Y
+Nonerg
+lock%filelock._api.AcquireReturnProxy.lock8
+filelock._api.BaseFileLock"filelock._api.BaseFileLockð
+BaseFileLockfilelock._api.BaseFileLock"abc.ABC"contextlib.ContextDecorator*
+__init__#filelock._api.BaseFileLock.__init__"
+None*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*
+	lock_filep
+$Union[builtins.str,os.PathLike[Any]]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike*/
+timeout 
+builtins.float"builtins.float *(
+mode
+builtins.int"builtins.int *2
+thread_local
+builtins.bool"builtins.bool *¡
+is_thread_local*filelock._api.BaseFileLock.is_thread_local"
+builtins.bool"builtins.bool*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*¡
+	lock_file$filelock._api.BaseFileLock.lock_file"
+builtins.str"builtins.str*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:property`*‘
+_acquire#filelock._api.BaseFileLock._acquire"
+None*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abstractmethod@*‘
+_release#filelock._api.BaseFileLock._release"
+None*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:abstractmethod@*£
+	is_locked$filelock._api.BaseFileLock.is_locked"
+builtins.bool"builtins.bool*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:property`*§
+lock_counter'filelock._api.BaseFileLock.lock_counter"
+builtins.int"builtins.int*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:property`*Û
+acquire"filelock._api.BaseFileLock.acquire"D
+ filelock._api.AcquireReturnProxy" filelock._api.AcquireReturnProxy*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*Y
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None *6
-poll_intervall 
-builtins.float"builtins.float z35z36z37z38z39z310*²
-releasefilelock.BaseFileLock.release"
-None*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock*+
+None *5
+poll_interval 
+builtins.float"builtins.float *`
+poll_intervallJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *.
+blocking
+builtins.bool"builtins.bool *¨
+release"filelock._api.BaseFileLock.release"
+None*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*+
 force
-builtins.bool"builtins.bool z35z36z37z38z39z310*­
-	__enter__filelock.BaseFileLock.__enter__".
-filelock.BaseFileLock"filelock.BaseFileLock*6
-self.
-filelock.BaseFileLock"filelock.BaseFileLockz35z36z37z38z39z310*ö
-__exit__filelock.BaseFileLock.__exit__"
-None*6
-self.
-filelock.BaseFileLock"filelock.BaseFileLock*—
+builtins.bool"builtins.bool *­
+	__enter__$filelock._api.BaseFileLock.__enter__"8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*@
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*î
+__exit__#filelock._api.BaseFileLock.__exit__"
+None*@
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*—
 exc_typeŠ
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*o
+	exc_valueb
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
 None*f
 	tracebackY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez35z36z37z38z39z310*ƒ
-__del__filelock.BaseFileLock.__del__"
-None*6
-self.
-filelock.BaseFileLock"filelock.BaseFileLockz35z36z37z38z39z3102ù
-timeoutfilelock.BaseFileLock.timeout”
-timeoutfilelock.BaseFileLock.timeout" 
-builtins.float"builtins.float*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock0:propertyX`ž
-timeoutfilelock.BaseFileLock.timeout"
-None*8
-self.
-filelock.BaseFileLock"filelock.BaseFileLock*
-value‘
-/Union[builtins.int,builtins.str,builtins.float]
-builtins.int"builtins.int
-builtins.str"builtins.str 
-builtins.float"builtins.float0:timeout.setter"35"36"37"38"39"310j35j36j37j38j39j310
-WindowsFileLockfilelock.WindowsFileLock"filelock.BaseFileLock*
-_acquire!filelock.WindowsFileLock._acquire"
-None*>
-self4
-filelock.WindowsFileLock"filelock.WindowsFileLockz35z36z37z38z39z310*
-_release!filelock.WindowsFileLock._release"
-None*>
-self4
-filelock.WindowsFileLock"filelock.WindowsFileLockz35z36z37z38z39z310j35j36j37j38j39j310é
-UnixFileLockfilelock.UnixFileLock"filelock.BaseFileLock*‡
-_acquirefilelock.UnixFileLock._acquire"
-None*8
-self.
-filelock.UnixFileLock"filelock.UnixFileLockz35z36z37z38z39z310*‡
-_releasefilelock.UnixFileLock._release"
-None*8
-self.
-filelock.UnixFileLock"filelock.UnixFileLockz35z36z37z38z39z310j35j36j37j38j39j310é
-SoftFileLockfilelock.SoftFileLock"filelock.BaseFileLock*‡
-_acquirefilelock.SoftFileLock._acquire"
-None*8
-self.
-filelock.SoftFileLock"filelock.SoftFileLockz35z36z37z38z39z310*‡
-_releasefilelock.SoftFileLock._release"
-None*8
-self.
-filelock.SoftFileLock"filelock.SoftFileLockz35z36z37z38z39z310j35j36j37j38j39j310T
-loggerfilelock.logger" 
-logging.Logger"logging.Loggerz35z36z37z38z39z310
+None*y
+__del__"filelock._api.BaseFileLock.__del__"
+None*@
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock2Ö
+timeout"filelock._api.BaseFileLock.timeout£
+timeout"filelock._api.BaseFileLock.timeout" 
+builtins.float"builtins.float*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock0:propertyX`€
+timeout"filelock._api.BaseFileLock.timeout"
+None*B
+self8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*q
+valuef
+"Union[builtins.float,builtins.str] 
+builtins.float"builtins.float
+builtins.str"builtins.str0:timeout.setterr_
+_is_thread_local+filelock._api.BaseFileLock._is_thread_local
+builtins.bool"builtins.boolro
+_context#filelock._api.BaseFileLock._context>
+filelock._api.FileLockContext"filelock._api.FileLockContextÄ
+Timeoutfilelock._error.Timeout"builtins.TimeoutError*¡
+__init__ filelock._error.Timeout.__init__"
+None*<
+self2
+filelock._error.Timeout"filelock._error.Timeout*+
+	lock_file
+builtins.str"builtins.str*é
+
+__reduce__"filelock._error.Timeout.__reduce__"y
+'Union[builtins.str,builtins.tuple[Any]]
+builtins.str"builtins.str.
+builtins.tuple[Any]
+Any"builtins.tuple*<
+self2
+filelock._error.Timeout"filelock._error.Timeout*„
+__str__filelock._error.Timeout.__str__"
+builtins.str"builtins.str*:
+self2
+filelock._error.Timeout"filelock._error.Timeout*†
+__repr__ filelock._error.Timeout.__repr__"
+builtins.str"builtins.str*:
+self2
+filelock._error.Timeout"filelock._error.Timeout*˜
+	lock_file!filelock._error.Timeout.lock_file"
+builtins.str"builtins.str*<
+self2
+filelock._error.Timeout"filelock._error.Timeout0:property`rN
+
+_lock_file"filelock._error.Timeout._lock_file
+builtins.str"builtins.strÍ
+SoftFileLockfilelock._soft.SoftFileLock"filelock._api.BaseFileLock*€
+_acquire$filelock._soft.SoftFileLock._acquire"
+None*D
+self:
+filelock._soft.SoftFileLock"filelock._soft.SoftFileLock*€
+_release$filelock._soft.SoftFileLock._release"
+None*D
+self:
+filelock._soft.SoftFileLock"filelock._soft.SoftFileLockÍ
+UnixFileLockfilelock._unix.UnixFileLock"filelock._api.BaseFileLock*€
+_acquire$filelock._unix.UnixFileLock._acquire"
+None*D
+self:
+filelock._unix.UnixFileLock"filelock._unix.UnixFileLock*€
+_release$filelock._unix.UnixFileLock._release"
+None*D
+self:
+filelock._unix.UnixFileLock"filelock._unix.UnixFileLockú
+WindowsFileLock!filelock._windows.WindowsFileLock"filelock._api.BaseFileLock*’
+_acquire*filelock._windows.WindowsFileLock._acquire"
+None*P
+selfF
+!filelock._windows.WindowsFileLock"!filelock._windows.WindowsFileLock*’
+_release*filelock._windows.WindowsFileLock._release"
+None*P
+selfF
+!filelock._windows.WindowsFileLock"!filelock._windows.WindowsFileLock*E
+	has_fcntlfilelock._unix.has_fcntl
+builtins.bool"builtins.bool*A
+versionfilelock.version.version
+builtins.str"builtins.str*A
+__version__filelock.__version__
+builtins.str"builtins.str*
+	_FileLockfilelock._FileLock^
+ Type[filelock._api.BaseFileLock]8
+filelock._api.BaseFileLock"filelock._api.BaseFileLock*g
+__all__filelock.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

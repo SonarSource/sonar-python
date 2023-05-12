@@ -1,175 +1,442 @@
 
 
-jinja2.ext»
-ExtensionRegistryjinja2.ext.ExtensionRegistry"builtins.type*m
-__new__$jinja2.ext.ExtensionRegistry.__new__*
-cls*
-name*	
-bases*
-dz35z36z37z38z39z310j35j36j37j38j39j310◊
+jinja2.ext§
+_TranslationsBasicjinja2.ext._TranslationsBasic"builtins.object*√
+gettext%jinja2.ext._TranslationsBasic.gettext"
+builtins.str"builtins.str*H
+self>
+jinja2.ext._TranslationsBasic"jinja2.ext._TranslationsBasic*)
+message
+builtins.str"builtins.str*ï
+ngettext&jinja2.ext._TranslationsBasic.ngettext"
+builtins.str"builtins.str*H
+self>
+jinja2.ext._TranslationsBasic"jinja2.ext._TranslationsBasic**
+singular
+builtins.str"builtins.str*(
+plural
+builtins.str"builtins.str*#
+n
+builtins.int"builtins.intXö
+_TranslationsContextjinja2.ext._TranslationsContext"jinja2.ext._TranslationsBasic*ˆ
+pgettext(jinja2.ext._TranslationsContext.pgettext"
+builtins.str"builtins.str*L
+selfB
+jinja2.ext._TranslationsContext"jinja2.ext._TranslationsContext*)
+context
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.str*»
+	npgettext)jinja2.ext._TranslationsContext.npgettext"
+builtins.str"builtins.str*L
+selfB
+jinja2.ext._TranslationsContext"jinja2.ext._TranslationsContext*)
+context
+builtins.str"builtins.str**
+singular
+builtins.str"builtins.str*(
+plural
+builtins.str"builtins.str*#
+n
+builtins.int"builtins.intì
 	Extensionjinja2.ext.Extension"builtins.object*û
+__init_subclass__&jinja2.ext.Extension.__init_subclass__"
+None*U
+clsL
+Type[jinja2.ext.Extension],
+jinja2.ext.Extension"jinja2.ext.Extensionp*æ
 __init__jinja2.ext.Extension.__init__"
 None*6
 self,
-jinja2.ext.Extension"jinja2.ext.Extension*
-environment
-Anyz35z36z37z38z39z310*U
-bindjinja2.ext.Extension.bind*
-self*
-environmentz35z36z37z38z39z310*Á
-
-preprocessjinja2.ext.Extension.preprocess"
-Any*6
+jinja2.ext.Extension"jinja2.ext.Extension*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*⁄
+bindjinja2.ext.Extension.bind",
+jinja2.ext.Extension"jinja2.ext.Extension*6
 self,
-jinja2.ext.Extension"jinja2.ext.Extension*
-source
-Any*
-name
-Any*6
-filename&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*b
-filter_stream"jinja2.ext.Extension.filter_stream*
-self*
+jinja2.ext.Extension"jinja2.ext.Extension*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*”
 
-streamz35z36z37z38z39z310*R
-parsejinja2.ext.Extension.parse*
-self*
-
-parserz35z36z37z38z39z310*ƒ
-attrjinja2.ext.Extension.attr"
-Any*6
+preprocessjinja2.ext.Extension.preprocess"
+builtins.str"builtins.str*6
 self,
-jinja2.ext.Extension"jinja2.ext.Extension*
-name
-Any*4
-lineno&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*Æ
-call_method jinja2.ext.Extension.call_method"
-Any*6
+jinja2.ext.Extension"jinja2.ext.Extension*(
+source
+builtins.str"builtins.str*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *™
+filter_stream"jinja2.ext.Extension.filter_stream"˙
+^Union[jinja2.lexer.TokenStream,typing.Iterable[Tuple[builtins.int,builtins.str,builtins.str]]]4
+jinja2.lexer.TokenStream"jinja2.lexer.TokenStreamﬂ
+>typing.Iterable[Tuple[builtins.int,builtins.str,builtins.str]]ã
+-Tuple[builtins.int,builtins.str,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable*6
 self,
-jinja2.ext.Extension"jinja2.ext.Extension*
-name
-Any*2
-args&
-Union[Any,None]
-Any
-None *4
-kwargs&
-Union[Any,None]
-Any
-None *6
-dyn_args&
-Union[Any,None]
-Any
-None *8
+jinja2.ext.Extension"jinja2.ext.Extension*@
+stream4
+jinja2.lexer.TokenStream"jinja2.lexer.TokenStream*ÿ
+parsejinja2.ext.Extension.parse"¿
+9Union[jinja2.nodes.Node,builtins.list[jinja2.nodes.Node]]&
+jinja2.nodes.Node"jinja2.nodes.NodeY
+ builtins.list[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"builtins.list*6
+self,
+jinja2.ext.Extension"jinja2.ext.Extension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parser*ô
+attrjinja2.ext.Extension.attr"B
+jinja2.nodes.ExtensionAttribute"jinja2.nodes.ExtensionAttribute*6
+self,
+jinja2.ext.Extension"jinja2.ext.Extension*&
+name
+builtins.str"builtins.str*R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ø
+call_method jinja2.ext.Extension.call_method"&
+jinja2.nodes.Call"jinja2.nodes.Call*6
+self,
+jinja2.ext.Extension"jinja2.ext.Extension*&
+name
+builtins.str"builtins.str*¢
+argsï
+,Union[builtins.list[jinja2.nodes.Expr],None]Y
+ builtins.list[jinja2.nodes.Expr]&
+jinja2.nodes.Expr"jinja2.nodes.Expr"builtins.list
+None *∞
+kwargs°
+/Union[builtins.list[jinja2.nodes.Keyword],None]b
+#builtins.list[jinja2.nodes.Keyword],
+jinja2.nodes.Keyword"jinja2.nodes.Keyword"builtins.list
+None *c
+dyn_argsS
+Union[jinja2.nodes.Expr,None]&
+jinja2.nodes.Expr"jinja2.nodes.Expr
+None *e
 
-dyn_kwargs&
-Union[Any,None]
-Any
-None *4
-lineno&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310j35j36j37j38j39j310rC
-tagsjinja2.ext.Extension.tags
-Any*35*36*37*38*39*310r`
+dyn_kwargsS
+Union[jinja2.nodes.Expr,None]&
+jinja2.nodes.Expr"jinja2.nodes.Expr
+None *R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None rK
+
+identifierjinja2.ext.Extension.identifier
+builtins.str"builtins.strrk
+tagsjinja2.ext.Extension.tagsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrG
 priorityjinja2.ext.Extension.priority
-builtins.int"builtins.int*35*36*37*38*39*310rQ
-environment jinja2.ext.Extension.environment
-Any*35*36*37*38*39*310ñ
-InternationalizationExtension(jinja2.ext.InternationalizationExtension"jinja2.ext.Extension*⁄
+builtins.int"builtins.intrq
+environment jinja2.ext.Extension.environment@
+jinja2.environment.Environment"jinja2.environment.EnvironmentØ+
+InternationalizationExtension(jinja2.ext.InternationalizationExtension"jinja2.ext.Extension*˙
 __init__1jinja2.ext.InternationalizationExtension.__init__"
 None*^
 selfT
-(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*
-environment
-Anyz35z36z37z38z39z310*f
-parse.jinja2.ext.InternationalizationExtension.parse*
-self*
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*€
+_install1jinja2.ext.InternationalizationExtension._install"
+None*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*ÿ
+translations≈
+OTypeAlias[Union[jinja2.ext._TranslationsBasic,jinja2.ext._TranslationsContext]]Ã
+DUnion[jinja2.ext._TranslationsBasic,jinja2.ext._TranslationsContext]>
+jinja2.ext._TranslationsBasic"jinja2.ext._TranslationsBasicB
+jinja2.ext._TranslationsContext"jinja2.ext._TranslationsContext"!jinja2.ext._SupportedTranslations*W
+newstyleG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ä
+_install_null6jinja2.ext.InternationalizationExtension._install_null"
+None*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*W
+newstyleG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *˛
+_install_callables;jinja2.ext.InternationalizationExtension._install_callables"
+None*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*X
+gettextK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Y
+ngettextK
+CallableType[builtins.function]&
+builtins.function"builtins.function*W
+newstyleG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ó
+pgettextÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ò
+	npgettextÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Ü
 
-parserz35z36z37z38z39z310j35j36j37j38j39j310rW
-tags-jinja2.ext.InternationalizationExtension.tags
-Any*35*36*37*38*39*310â
-ExprStmtExtensionjinja2.ext.ExprStmtExtension"jinja2.ext.Extension*Z
-parse"jinja2.ext.ExprStmtExtension.parse*
-self*
+_uninstall3jinja2.ext.InternationalizationExtension._uninstall"
+None*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*ÿ
+translations≈
+OTypeAlias[Union[jinja2.ext._TranslationsBasic,jinja2.ext._TranslationsContext]]Ã
+DUnion[jinja2.ext._TranslationsBasic,jinja2.ext._TranslationsContext]>
+jinja2.ext._TranslationsBasic"jinja2.ext._TranslationsBasicB
+jinja2.ext._TranslationsContext"jinja2.ext._TranslationsContext"!jinja2.ext._SupportedTranslations*±
+_extract1jinja2.ext.InternationalizationExtension._extract"û
+styping.Iterator[Tuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]]]ï
+bTuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]]
+builtins.int"builtins.int
+builtins.str"builtins.str
+AUnion[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]
+builtins.str"builtins.str
+NoneÄ
+(builtins.tuple[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.tuple"typing.Iterator*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*á
+source{
+)Union[builtins.str,jinja2.nodes.Template]
+builtins.str"builtins.str.
+jinja2.nodes.Template"jinja2.nodes.Template*g
+gettext_functionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *î
+parse.jinja2.ext.InternationalizationExtension.parse"¿
+9Union[jinja2.nodes.Node,builtins.list[jinja2.nodes.Node]]&
+jinja2.nodes.Node"jinja2.nodes.NodeY
+ builtins.list[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"builtins.list*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parser*—
+_trim_whitespace9jinja2.ext.InternationalizationExtension._trim_whitespace"
+builtins.str"builtins.str*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*(
+string
+builtins.str"builtins.str*Z
+_ws_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern *¥
+_parse_block5jinja2.ext.InternationalizationExtension._parse_block"ù
+/Tuple[builtins.list[builtins.str],builtins.str]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+builtins.str"builtins.str*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parser*3
+allow_pluralize
+builtins.bool"builtins.bool*Ñ
 
-parserz35z36z37z38z39z310j35j36j37j38j39j310rK
-tags!jinja2.ext.ExprStmtExtension.tags
-Any*35*36*37*38*39*310ï
-LoopControlExtensionjinja2.ext.LoopControlExtension"jinja2.ext.Extension*]
-parse%jinja2.ext.LoopControlExtension.parse*
-self*
-
-parserz35z36z37z38z39z310j35j36j37j38j39j310rN
-tags$jinja2.ext.LoopControlExtension.tags
-Any*35*36*37*38*39*310˘
-WithExtensionjinja2.ext.WithExtension"jinja2.ext.Extension*V
-parsejinja2.ext.WithExtension.parse*
-self*
-
-parserz35z36z37z38z39z310j35j36j37j38j39j310rG
-tagsjinja2.ext.WithExtension.tags
-Any*35*36*37*38*39*310ë
-AutoEscapeExtensionjinja2.ext.AutoEscapeExtension"jinja2.ext.Extension*\
-parse$jinja2.ext.AutoEscapeExtension.parse*
-self*
-
-parserz35z36z37z38z39z310j35j36j37j38j39j310rM
-tags#jinja2.ext.AutoEscapeExtension.tags
-Any*35*36*37*38*39*310Á
-_CommentFinderjinja2.ext._CommentFinder"builtins.object*√
+_make_node3jinja2.ext.InternationalizationExtension._make_node"*
+jinja2.nodes.Output"jinja2.nodes.Output*^
+selfT
+(jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension**
+singular
+builtins.str"builtins.str*P
+pluralD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Q
+contextD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*î
+	variablesÑ
+-builtins.dict[builtins.str,jinja2.nodes.Expr]
+builtins.str"builtins.str&
+jinja2.nodes.Expr"jinja2.nodes.Expr"builtins.dict*d
+plural_exprS
+Union[jinja2.nodes.Expr,None]&
+jinja2.nodes.Expr"jinja2.nodes.Expr
+None*3
+vars_referenced
+builtins.bool"builtins.bool*2
+num_called_num
+builtins.bool"builtins.boolr
+tags-jinja2.ext.InternationalizationExtension.tagsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setú
+ExprStmtExtensionjinja2.ext.ExprStmtExtension"jinja2.ext.Extension*›
+parse"jinja2.ext.ExprStmtExtension.parse".
+jinja2.nodes.ExprStmt"jinja2.nodes.ExprStmt*F
+self<
+jinja2.ext.ExprStmtExtension"jinja2.ext.ExprStmtExtension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parserrs
+tags!jinja2.ext.ExprStmtExtension.tagsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.seté
+LoopControlExtensionjinja2.ext.LoopControlExtension"jinja2.ext.Extension*∆
+parse%jinja2.ext.LoopControlExtension.parse"ç
+/Union[jinja2.nodes.Break,jinja2.nodes.Continue](
+jinja2.nodes.Break"jinja2.nodes.Break.
+jinja2.nodes.Continue"jinja2.nodes.Continue*L
+selfB
+jinja2.ext.LoopControlExtension"jinja2.ext.LoopControlExtension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parserrv
+tags$jinja2.ext.LoopControlExtension.tagsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set‘
+DebugExtensionjinja2.ext.DebugExtension"jinja2.ext.Extension*–
+parsejinja2.ext.DebugExtension.parse"*
+jinja2.nodes.Output"jinja2.nodes.Output*@
+self6
+jinja2.ext.DebugExtension"jinja2.ext.DebugExtension*8
+parser,
+jinja2.parser.Parser"jinja2.parser.Parser*À
+_render!jinja2.ext.DebugExtension._render"
+builtins.str"builtins.str*@
+self6
+jinja2.ext.DebugExtension"jinja2.ext.DebugExtension*=
+context0
+jinja2.runtime.Context"jinja2.runtime.Contextrp
+tagsjinja2.ext.DebugExtension.tagsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set®
+_CommentFinderjinja2.ext._CommentFinder"builtins.object*À
 __init__"jinja2.ext._CommentFinder.__init__"
 None*@
 self6
-jinja2.ext._CommentFinder"jinja2.ext._CommentFinder*
-tokens
-Any*
-comment_tags
-Anyz35z36z37z38z39z310*i
-find_backwards(jinja2.ext._CommentFinder.find_backwards*
-self*
-
-offsetz35z36z37z38z39z310*g
-find_comments'jinja2.ext._CommentFinder.find_comments*
-self*
-
-linenoz35z36z37z38z39z310j35j36j37j38j39j310rL
-tokens jinja2.ext._CommentFinder.tokens
-Any*35*36*37*38*39*310rX
-comment_tags&jinja2.ext._CommentFinder.comment_tags
-Any*35*36*37*38*39*310ra
+jinja2.ext._CommentFinder"jinja2.ext._CommentFinder*Ï
+tokensﬂ
+>typing.Sequence[Tuple[builtins.int,builtins.str,builtins.str]]ã
+-Tuple[builtins.int,builtins.str,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Sequence*`
+comment_tagsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*Ú
+find_backwards(jinja2.ext._CommentFinder.find_backwards"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*@
+self6
+jinja2.ext._CommentFinder"jinja2.ext._CommentFinder*(
+offset
+builtins.int"builtins.int*
+find_comments'jinja2.ext._CommentFinder.find_comments"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*@
+self6
+jinja2.ext._CommentFinder"jinja2.ext._CommentFinder*(
+lineno
+builtins.int"builtins.intrå
+tokens jinja2.ext._CommentFinder.tokensﬂ
+>typing.Sequence[Tuple[builtins.int,builtins.str,builtins.str]]ã
+-Tuple[builtins.int,builtins.str,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.SequencerÜ
+comment_tags&jinja2.ext._CommentFinder.comment_tagsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequencerH
 offset jinja2.ext._CommentFinder.offset
-builtins.int"builtins.int*35*36*37*38*39*310rk
+builtins.int"builtins.intrR
 last_lineno%jinja2.ext._CommentFinder.last_lineno
-builtins.int"builtins.int*35*36*37*38*39*310π
-extract_from_astjinja2.ext.extract_from_ast"
-Any*
-node
-Any* 
-gettext_functions
-Any *1
+builtins.int"builtins.int’
+_make_new_gettextjinja2.ext._make_new_gettext"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function◊
+_make_new_ngettextjinja2.ext._make_new_ngettext"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function◊
+_make_new_pgettextjinja2.ext._make_new_pgettext"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionŸ
+_make_new_npgettextjinja2.ext._make_new_npgettext"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+extract_from_astjinja2.ext.extract_from_ast"û
+styping.Iterator[Tuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]]]ï
+bTuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]]
+builtins.int"builtins.int
+builtins.str"builtins.str
+AUnion[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]
+builtins.str"builtins.str
+NoneÄ
+(builtins.tuple[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.tuple"typing.Iterator*7
+ast.
+jinja2.nodes.Template"jinja2.nodes.Template*g
+gettext_functionsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *1
 babel_style
-builtins.bool"builtins.bool z35z36z37z38z39z310|
-babel_extractjinja2.ext.babel_extract*
-fileobj*
-keywords*
-comment_tags*
-optionsz35z36z37z38z39z310*S
-GETTEXT_FUNCTIONSjinja2.ext.GETTEXT_FUNCTIONS
-Any*35*36*37*38*39*310*9
-i18njinja2.ext.i18n
-Any*35*36*37*38*39*310*5
-dojinja2.ext.do
-Any*35*36*37*38*39*310*I
-loopcontrolsjinja2.ext.loopcontrols
-Any*35*36*37*38*39*310*;
-with_jinja2.ext.with_
-Any*35*36*37*38*39*310*E
-
-autoescapejinja2.ext.autoescape
-Any*35*36*37*38*39*310
+builtins.bool"builtins.bool ¶
+babel_extractjinja2.ext.babel_extract"£
+ètyping.Iterator[Tuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]],builtins.list[builtins.str]]]˝
+~Tuple[builtins.int,builtins.str,Union[builtins.str,None,builtins.tuple[Union[builtins.str,None]]],builtins.list[builtins.str]]
+builtins.int"builtins.int
+builtins.str"builtins.str
+AUnion[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]
+builtins.str"builtins.str
+NoneÄ
+(builtins.tuple[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.tupleJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"typing.Iterator*/
+fileobj"
+typing.BinaryIO"typing.BinaryIO*\
+keywordsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*`
+comment_tagsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*d
+optionsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+ttyping *
+tetyping_extensions *
+GETTEXT_FUNCTIONSjinja2.ext.GETTEXT_FUNCTIONSL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*i
+_ws_rejinja2.ext._ws_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern

@@ -1,420 +1,0 @@
-
-PIL.PdfParser^
-PdfFormatErrorPIL.PdfParser.PdfFormatError"builtins.RuntimeErrorj35j36j37j38j39j310“
-IndirectReferencePIL.PdfParser.IndirectReference"builtins.object*Y
-	__bytes__)PIL.PdfParser.IndirectReference.__bytes__*
-selfz35z36z37z38z39z310*^
-__eq__&PIL.PdfParser.IndirectReference.__eq__*
-self*	
-otherz35z36z37z38z39z310*^
-__ne__&PIL.PdfParser.IndirectReference.__ne__*
-self*	
-otherz35z36z37z38z39z310*W
-__hash__(PIL.PdfParser.IndirectReference.__hash__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310n
-IndirectObjectDefPIL.PdfParser.IndirectObjectDef"PIL.PdfParser.IndirectReferencej35j36j37j38j39j310Ô
-
-	XrefTablePIL.PdfParser.XrefTable"builtins.object*ç
-__init__ PIL.PdfParser.XrefTable.__init__"
-None*<
-self2
-PIL.PdfParser.XrefTable"PIL.PdfParser.XrefTablez35z36z37z38z39z310*≥
-__setitem__#PIL.PdfParser.XrefTable.__setitem__"
-None*:
-self2
-PIL.PdfParser.XrefTable"PIL.PdfParser.XrefTable*
-key
-Any*
-value
-Anyz35z36z37z38z39z310*^
-__getitem__#PIL.PdfParser.XrefTable.__getitem__*
-self*
-keyz35z36z37z38z39z310*°
-__delitem__#PIL.PdfParser.XrefTable.__delitem__"
-None*:
-self2
-PIL.PdfParser.XrefTable"PIL.PdfParser.XrefTable*
-key
-Anyz35z36z37z38z39z310*`
-__contains__$PIL.PdfParser.XrefTable.__contains__*
-self*
-keyz35z36z37z38z39z310*M
-__len__PIL.PdfParser.XrefTable.__len__*
-selfz35z36z37z38z39z310*G
-keysPIL.PdfParser.XrefTable.keys*
-selfz35z36z37z38z39z310*P
-writePIL.PdfParser.XrefTable.write*
-self*
-fz35z36z37z38z39z310j35j36j37j38j39j310r^
-existing_entries(PIL.PdfParser.XrefTable.existing_entries
-Any*35*36*37*38*39*310rT
-new_entries#PIL.PdfParser.XrefTable.new_entries
-Any*35*36*37*38*39*310r\
-deleted_entries'PIL.PdfParser.XrefTable.deleted_entries
-Any*35*36*37*38*39*310ru
-reading_finished(PIL.PdfParser.XrefTable.reading_finished
-builtins.bool"builtins.bool*35*36*37*38*39*310«
-PdfNamePIL.PdfParser.PdfName"builtins.object*ö
-__init__PIL.PdfParser.PdfName.__init__"
-None*8
-self.
-PIL.PdfParser.PdfName"PIL.PdfParser.PdfName*
-name
-Anyz35z36z37z38z39z310*S
-name_as_str!PIL.PdfParser.PdfName.name_as_str*
-selfz35z36z37z38z39z310*T
-__eq__PIL.PdfParser.PdfName.__eq__*
-self*	
-otherz35z36z37z38z39z310*M
-__hash__PIL.PdfParser.PdfName.__hash__*
-selfz35z36z37z38z39z310*u
-from_pdf_stream%PIL.PdfParser.PdfName.from_pdf_stream*
-cls*
-data0:classmethodpz35z36z37z38z39z310*O
-	__bytes__PIL.PdfParser.PdfName.__bytes__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rD
-namePIL.PdfParser.PdfName.name
-Any*35*36*37*38*39*310rV
-allowed_chars#PIL.PdfParser.PdfName.allowed_chars
-Any*35*36*37*38*39*310ú
-PdfArrayPIL.PdfParser.PdfArray"builtins.list*P
-	__bytes__ PIL.PdfParser.PdfArray.__bytes__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310Æ
-PdfDictPIL.PdfParser.PdfDict"collections.UserDict*≠
-__setattr__!PIL.PdfParser.PdfDict.__setattr__"
-None*6
-self.
-PIL.PdfParser.PdfDict"PIL.PdfParser.PdfDict*
-key
-Any*
-value
-Anyz35z36z37z38z39z310*\
-__getattr__!PIL.PdfParser.PdfDict.__getattr__*
-self*
-keyz35z36z37z38z39z310*O
-	__bytes__PIL.PdfParser.PdfDict.__bytes__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310å
-	PdfBinaryPIL.PdfParser.PdfBinary"builtins.object*†
-__init__ PIL.PdfParser.PdfBinary.__init__"
-None*<
-self2
-PIL.PdfParser.PdfBinary"PIL.PdfParser.PdfBinary*
-data
-Anyz35z36z37z38z39z310*Q
-	__bytes__!PIL.PdfParser.PdfBinary.__bytes__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rF
-dataPIL.PdfParser.PdfBinary.data
-Any*35*36*37*38*39*310
-	PdfStreamPIL.PdfParser.PdfStream"builtins.object*∏
-__init__ PIL.PdfParser.PdfStream.__init__"
-None*<
-self2
-PIL.PdfParser.PdfStream"PIL.PdfParser.PdfStream*
-
-dictionary
-Any*
-buf
-Anyz35z36z37z38z39z310*K
-decodePIL.PdfParser.PdfStream.decode*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rR
-
-dictionary"PIL.PdfParser.PdfStream.dictionary
-Any*35*36*37*38*39*310rD
-bufPIL.PdfParser.PdfStream.buf
-Any*35*36*37*38*39*310÷M
-	PdfParserPIL.PdfParser.PdfParser"builtins.object*Ö
-__init__ PIL.PdfParser.PdfParser.__init__"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*6
-filename&
-Union[Any,None]
-Any
-None */
-f&
-Union[Any,None]
-Any
-None *1
-buf&
-Union[Any,None]
-Any
-None *0
-start_offset
-builtins.int"builtins.int *(
-mode
-builtins.str"builtins.str z35z36z37z38z39z310*Q
-	__enter__!PIL.PdfParser.PdfParser.__enter__*
-selfz35z36z37z38z39z310*{
-__exit__ PIL.PdfParser.PdfParser.__exit__*
-self*
-exc_type*
-	exc_value*
-	tracebackz35z36z37z38z39z310*ó
-start_writing%PIL.PdfParser.PdfParser.start_writing"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*è
-	close_buf!PIL.PdfParser.PdfParser.close_buf"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*á
-closePIL.PdfParser.PdfParser.close"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*ç
-seek_end PIL.PdfParser.PdfParser.seek_end"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*ï
-write_header$PIL.PdfParser.PdfParser.write_header"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*ß
-write_comment%PIL.PdfParser.PdfParser.write_comment"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*
-s
-Anyz35z36z37z38z39z310*Y
-write_catalog%PIL.PdfParser.PdfParser.write_catalog*
-selfz35z36z37z38z39z310*ó
-rewrite_pages%PIL.PdfParser.PdfParser.rewrite_pages"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*Â
-write_xref_and_trailer.PIL.PdfParser.PdfParser.write_xref_and_trailer"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*:
-new_root_ref&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*t
-
-write_page"PIL.PdfParser.PdfParser.write_page*
-self*
-ref*
-objs*
-dict_objz35z36z37z38z39z310*r
-	write_obj!PIL.PdfParser.PdfParser.write_obj*
-self*
-ref*
-objs*
-dict_objz35z36z37z38z39z310*ç
-del_root PIL.PdfParser.PdfParser.del_root"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*p
-get_buf_from_file)PIL.PdfParser.PdfParser.get_buf_from_file*
-f0:staticmethodhz35z36z37z38z39z310*ó
-read_pdf_info%PIL.PdfParser.PdfParser.read_pdf_info"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*Œ
-next_object_id&PIL.PdfParser.PdfParser.next_object_id"
-Any*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*4
-offset&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ï
-read_trailer$PIL.PdfParser.PdfParser.read_trailer"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParserz35z36z37z38z39z310*¡
-read_prev_trailer)PIL.PdfParser.PdfParser.read_prev_trailer"
-None*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser* 
-xref_section_offset
-Anyz35z36z37z38z39z310*É
-interpret_trailer)PIL.PdfParser.PdfParser.interpret_trailer*
-cls*
-trailer_data0:classmethodpz35z36z37z38z39z310*å
-interpret_name&PIL.PdfParser.PdfParser.interpret_name"
-Any*^
-clsU
-Type[PIL.PdfParser.PdfParser]2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*
-raw
-Any*-
-as_text
-builtins.bool"builtins.bool 0:classmethodpz35z36z37z38z39z310*Ÿ
-	get_value!PIL.PdfParser.PdfParser.get_value"
-Any*^
-clsU
-Type[PIL.PdfParser.PdfParser]2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*
-data
-Any*
-offset
-Any*=
-expect_indirect&
-Union[Any,None]
-Any
-None */
-max_nesting
-builtins.int"builtins.int 0:classmethodpz35z36z37z38z39z310*â
-get_literal_string*PIL.PdfParser.PdfParser.get_literal_string*
-cls*
-data*
-
-offset0:classmethodpz35z36z37z38z39z310*v
-read_xref_table'PIL.PdfParser.PdfParser.read_xref_table*
-self*
-xref_section_offsetz35z36z37z38z39z310*Ÿ
-read_indirect%PIL.PdfParser.PdfParser.read_indirect"
-Any*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*
-ref
-Any*/
-max_nesting
-builtins.int"builtins.int z35z36z37z38z39z310*÷
-linearize_page_tree+PIL.PdfParser.PdfParser.linearize_page_tree"
-Any*<
-self2
-PIL.PdfParser.PdfParser"PIL.PdfParser.PdfParser*2
-node&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310j35j36j37j38j39j310rN
-filename PIL.PdfParser.PdfParser.filename
-Any*35*36*37*38*39*310rD
-bufPIL.PdfParser.PdfParser.buf
-Any*35*36*37*38*39*310r@
-fPIL.PdfParser.PdfParser.f
-Any*35*36*37*38*39*310rV
-start_offset$PIL.PdfParser.PdfParser.start_offset
-Any*35*36*37*38*39*310ru
-should_close_buf(PIL.PdfParser.PdfParser.should_close_buf
-builtins.bool"builtins.bool*35*36*37*38*39*310rw
-should_close_file)PIL.PdfParser.PdfParser.should_close_file
-builtins.bool"builtins.bool*35*36*37*38*39*310rZ
-cached_objects&PIL.PdfParser.PdfParser.cached_objects
-Any*35*36*37*38*39*310rq
-file_size_total'PIL.PdfParser.PdfParser.file_size_total
-builtins.int"builtins.int*35*36*37*38*39*310rF
-rootPIL.PdfParser.PdfParser.root
-Any*35*36*37*38*39*310rN
-root_ref PIL.PdfParser.PdfParser.root_ref
-Any*35*36*37*38*39*310rF
-infoPIL.PdfParser.PdfParser.info
-Any*35*36*37*38*39*310rN
-info_ref PIL.PdfParser.PdfParser.info_ref
-Any*35*36*37*38*39*310rZ
-page_tree_root&PIL.PdfParser.PdfParser.page_tree_root
-Any*35*36*37*38*39*310rH
-pagesPIL.PdfParser.PdfParser.pages
-Any*35*36*37*38*39*310rR
-
-orig_pages"PIL.PdfParser.PdfParser.orig_pages
-Any*35*36*37*38*39*310rP
-	pages_ref!PIL.PdfParser.PdfParser.pages_ref
-Any*35*36*37*38*39*310rn
-last_xref_section_offset0PIL.PdfParser.PdfParser.last_xref_section_offset
-Any*35*36*37*38*39*310rV
-trailer_dict$PIL.PdfParser.PdfParser.trailer_dict
-Any*35*36*37*38*39*310rR
-
-xref_table"PIL.PdfParser.PdfParser.xref_table
-Any*35*36*37*38*39*310rZ
-file_size_this&PIL.PdfParser.PdfParser.file_size_this
-Any*35*36*37*38*39*310ri
-	delimiter!PIL.PdfParser.PdfParser.delimiter 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310ru
-delimiter_or_ws'PIL.PdfParser.PdfParser.delimiter_or_ws 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rk
-
-whitespace"PIL.PdfParser.PdfParser.whitespace 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310ry
-whitespace_or_hex)PIL.PdfParser.PdfParser.whitespace_or_hex 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rd
-whitespace_optional+PIL.PdfParser.PdfParser.whitespace_optional
-Any*35*36*37*38*39*310rf
-whitespace_mandatory,PIL.PdfParser.PdfParser.whitespace_mandatory
-Any*35*36*37*38*39*310râ
-whitespace_optional_no_nl1PIL.PdfParser.PdfParser.whitespace_optional_no_nl 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310ro
-newline_only$PIL.PdfParser.PdfParser.newline_only 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rL
-newlinePIL.PdfParser.PdfParser.newline
-Any*35*36*37*38*39*310rZ
-re_trailer_end&PIL.PdfParser.PdfParser.re_trailer_end
-Any*35*36*37*38*39*310r\
-re_trailer_prev'PIL.PdfParser.PdfParser.re_trailer_prev
-Any*35*36*37*38*39*310rj
-re_whitespace_optional.PIL.PdfParser.PdfParser.re_whitespace_optional
-Any*35*36*37*38*39*310rL
-re_namePIL.PdfParser.PdfParser.re_name
-Any*35*36*37*38*39*310rX
-re_dict_start%PIL.PdfParser.PdfParser.re_dict_start
-Any*35*36*37*38*39*310rT
-re_dict_end#PIL.PdfParser.PdfParser.re_dict_end
-Any*35*36*37*38*39*310r`
-re_hashes_in_name)PIL.PdfParser.PdfParser.re_hashes_in_name
-Any*35*36*37*38*39*310rL
-re_nullPIL.PdfParser.PdfParser.re_null
-Any*35*36*37*38*39*310rL
-re_truePIL.PdfParser.PdfParser.re_true
-Any*35*36*37*38*39*310rN
-re_false PIL.PdfParser.PdfParser.re_false
-Any*35*36*37*38*39*310rJ
-re_intPIL.PdfParser.PdfParser.re_int
-Any*35*36*37*38*39*310rL
-re_realPIL.PdfParser.PdfParser.re_real
-Any*35*36*37*38*39*310rZ
-re_array_start&PIL.PdfParser.PdfParser.re_array_start
-Any*35*36*37*38*39*310rV
-re_array_end$PIL.PdfParser.PdfParser.re_array_end
-Any*35*36*37*38*39*310rX
-re_string_hex%PIL.PdfParser.PdfParser.re_string_hex
-Any*35*36*37*38*39*310rX
-re_string_lit%PIL.PdfParser.PdfParser.re_string_lit
-Any*35*36*37*38*39*310rh
-re_indirect_reference-PIL.PdfParser.PdfParser.re_indirect_reference
-Any*35*36*37*38*39*310rh
-re_indirect_def_start-PIL.PdfParser.PdfParser.re_indirect_def_start
-Any*35*36*37*38*39*310rd
-re_indirect_def_end+PIL.PdfParser.PdfParser.re_indirect_def_end
-Any*35*36*37*38*39*310rR
-
-re_comment"PIL.PdfParser.PdfParser.re_comment
-Any*35*36*37*38*39*310r\
-re_stream_start'PIL.PdfParser.PdfParser.re_stream_start
-Any*35*36*37*38*39*310rX
-re_stream_end%PIL.PdfParser.PdfParser.re_stream_end
-Any*35*36*37*38*39*310r^
-re_lit_str_token(PIL.PdfParser.PdfParser.re_lit_str_token
-Any*35*36*37*38*39*310rX
-escaped_chars%PIL.PdfParser.PdfParser.escaped_chars
-Any*35*36*37*38*39*310rh
-re_xref_section_start-PIL.PdfParser.PdfParser.re_xref_section_start
-Any*35*36*37*38*39*310rn
-re_xref_subsection_start0PIL.PdfParser.PdfParser.re_xref_subsection_start
-Any*35*36*37*38*39*310rX
-re_xref_entry%PIL.PdfParser.PdfParser.re_xref_entry
-Any*35*36*37*38*39*310à
-encode_textPIL.PdfParser.encode_text" 
-builtins.bytes"builtins.bytes*#
-s
-builtins.str"builtins.strz35z36z37z38z39z310à
-decode_textPIL.PdfParser.decode_text"
-builtins.str"builtins.str*'
-b 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310ï
-check_format_condition$PIL.PdfParser.check_format_condition"
-None*
-	condition
-Any*
-error_message
-Anyz35z36z37z38z39z310m
-pdf_reprPIL.PdfParser.pdf_repr" 
-builtins.bytes"builtins.bytes*
-x
-Anyz35z36z37z38z39z310*æ
-PDFDocEncodingPIL.PdfParser.PDFDocEncodingu
-(builtins.dict[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict*35*36*37*38*39*310

@@ -1,231 +1,831 @@
 
-werkzeugä
-modulewerkzeug.module"types.ModuleType*W
-__getattr__werkzeug.module.__getattr__*
-self*
-namez35z36z37z38z39z310*E
-__dir__werkzeug.module.__dir__*
-selfz35z36z37z38z39z310j35j36j37j38j39j310*:
-	_internalwerkzeug._internal *35*36*37*38*39*310*D
-datastructureswerkzeug.datastructures *35*36*37*38*39*310*2
-debugwerkzeug.debug *35*36*37*38*39*310*<
-
-exceptionswerkzeug.exceptions *35*36*37*38*39*310*<
-
-formparserwerkzeug.formparser *35*36*37*38*39*310*0
-httpwerkzeug.http *35*36*37*38*39*310*2
-localwerkzeug.local *35*36*37*38*39*310*8
-securitywerkzeug.security *35*36*37*38*39*310*6
-servingwerkzeug.serving *35*36*37*38*39*310*0
-testwerkzeug.test *35*36*37*38*39*310*6
-testappwerkzeug.testapp *35*36*37*38*39*310*0
-urlswerkzeug.urls *35*36*37*38*39*310*<
-
-useragentswerkzeug.useragents *35*36*37*38*39*310*2
-utilswerkzeug.utils *35*36*37*38*39*310*8
-wrapperswerkzeug.wrappers *35*36*37*38*39*310*0
-wsgiwerkzeug.wsgi *35*36*37*38*39*310*E
-__version__werkzeug.__version__
-Any*35*36*37*38*39*310*C
-
-run_simplewerkzeug.run_simple
-Any*35*36*37*38*39*310*?
-test_appwerkzeug.test_app
-Any*35*36*37*38*39*310*A
-	UserAgentwerkzeug.UserAgent
-Any*35*36*37*38*39*310*‡
-
-_eastereggwerkzeug._eastereggK
+werkzeugû0
+Clientwerkzeug.test.Client"builtins.object*é
+__init__werkzeug.test.Client.__init__"
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*­
+application›
+*TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*U
-DebuggedApplicationwerkzeug.DebuggedApplication
-Any*35*36*37*38*39*310*;
-escapewerkzeug.escape
-Any*35*36*37*38*39*310*O
-environ_propertywerkzeug.environ_property
-Any*35*36*37*38*39*310*Y
-append_slash_redirectwerkzeug.append_slash_redirect
-Any*35*36*37*38*39*310*?
-redirectwerkzeug.redirect
-Any*35*36*37*38*39*310*M
-cached_propertywerkzeug.cached_property
-Any*35*36*37*38*39*310*I
-import_stringwerkzeug.import_string
-Any*35*36*37*38*39*310*E
-dump_cookiewerkzeug.dump_cookie
-Any*35*36*37*38*39*310*G
-parse_cookiewerkzeug.parse_cookie
-Any*35*36*37*38*39*310*?
-unescapewerkzeug.unescape
-Any*35*36*37*38*39*310*I
-format_stringwerkzeug.format_string
-Any*35*36*37*38*39*310*G
-find_moduleswerkzeug.find_modules
-Any*35*36*37*38*39*310*M
-header_propertywerkzeug.header_property
-Any*35*36*37*38*39*310*7
-htmlwerkzeug.html
-Any*35*36*37*38*39*310*9
-xhtmlwerkzeug.xhtml
-Any*35*36*37*38*39*310*E
-HTMLBuilderwerkzeug.HTMLBuilder
-Any*35*36*37*38*39*310*S
-validate_argumentswerkzeug.validate_arguments
-Any*35*36*37*38*39*310*]
-ArgumentValidationError werkzeug.ArgumentValidationError
-Any*35*36*37*38*39*310*K
-bind_argumentswerkzeug.bind_arguments
-Any*35*36*37*38*39*310*M
-secure_filenamewerkzeug.secure_filename
-Any*35*36*37*38*39*310*G
-BaseResponsewerkzeug.BaseResponse
-Any*35*36*37*38*39*310*E
-BaseRequestwerkzeug.BaseRequest
-Any*35*36*37*38*39*310*=
-Requestwerkzeug.Request
-Any*35*36*37*38*39*310*?
-Responsewerkzeug.Response
-Any*35*36*37*38*39*310*E
-AcceptMixinwerkzeug.AcceptMixin
-Any*35*36*37*38*39*310*O
-ETagRequestMixinwerkzeug.ETagRequestMixin
-Any*35*36*37*38*39*310*Q
-ETagResponseMixinwerkzeug.ETagResponseMixin
-Any*35*36*37*38*39*310*U
-ResponseStreamMixinwerkzeug.ResponseStreamMixin
-Any*35*36*37*38*39*310*k
-CommonResponseDescriptorsMixin'werkzeug.CommonResponseDescriptorsMixin
-Any*35*36*37*38*39*310*K
-UserAgentMixinwerkzeug.UserAgentMixin
-Any*35*36*37*38*39*310*S
-AuthorizationMixinwerkzeug.AuthorizationMixin
-Any*35*36*37*38*39*310*W
-WWWAuthenticateMixinwerkzeug.WWWAuthenticateMixin
-Any*35*36*37*38*39*310*i
-CommonRequestDescriptorsMixin&werkzeug.CommonRequestDescriptorsMixin
-Any*35*36*37*38*39*310*
-release_localwerkzeug.release_localK
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*×
+response_wrapper¾
+5Union[Type[werkzeug.wrappers.response.Response],None]y
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response
+None *1
+use_cookies
+builtins.bool"builtins.bool *?
+allow_subdomain_redirects
+builtins.bool"builtins.bool *
+
+cookie_jarwerkzeug.test.Client.cookie_jar"§
+1Union[typing.Iterable[werkzeug.test.Cookie],None]f
+%typing.Iterable[werkzeug.test.Cookie],
+werkzeug.test.Cookie"werkzeug.test.Cookie"typing.Iterable
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client0:property`*À
+
+get_cookiewerkzeug.test.Client.get_cookie"\
+ Union[werkzeug.test.Cookie,None],
+werkzeug.test.Cookie"werkzeug.test.Cookie
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*%
+key
+builtins.str"builtins.str**
+domain
+builtins.str"builtins.str *(
+path
+builtins.str"builtins.str *ò
+
+set_cookiewerkzeug.test.Client.set_cookie"
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*%
+key
+builtins.str"builtins.str*)
+value
+builtins.str"builtins.str *
+args
+Any**
+domain
+builtins.str"builtins.str *1
+origin_only
+builtins.bool"builtins.bool *(
+path
+builtins.str"builtins.str *
+kwargs
+Any*š
+delete_cookie"werkzeug.test.Client.delete_cookie"
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*%
+key
+builtins.str"builtins.str*
+args
+Any**
+domain
+builtins.str"builtins.str *(
+path
+builtins.str"builtins.str *
+kwargs
+Any*»
+_add_cookies_to_wsgi)werkzeug.test.Client._add_cookies_to_wsgi"
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Å
+_update_cookies_from_response2werkzeug.test.Client._update_cookies_from_response"
+None*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*-
+server_name
+builtins.str"builtins.str*&
+path
+builtins.str"builtins.str*W
+headersJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*û
+run_wsgi_app!werkzeug.test.Client.run_wsgi_app"§
+[Tuple[typing.Iterable[builtins.bytes],builtins.str,werkzeug.datastructures.headers.Headers]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.strR
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*.
+buffered
+builtins.bool"builtins.bool *£
+resolve_redirect%werkzeug.test.Client.resolve_redirect"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*F
+response8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*.
+buffered
+builtins.bool"builtins.bool *£
+openwerkzeug.test.Client.open"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*.
+buffered
+builtins.bool"builtins.bool *6
+follow_redirects
+builtins.bool"builtins.bool *
+kwargs
+Any*µ
+getwerkzeug.test.Client.get"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*·
+postwerkzeug.test.Client.post"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*µ
+putwerkzeug.test.Client.put"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*»
+deletewerkzeug.test.Client.delete"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*¹
+patchwerkzeug.test.Client.patch"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*½
+optionswerkzeug.test.Client.options"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*·
+headwerkzeug.test.Client.head"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*¹
+tracewerkzeug.test.Client.trace"8
+werkzeug.test.TestResponse"werkzeug.test.TestResponse*6
+self,
+werkzeug.test.Client"werkzeug.test.Client*
+args
+Any*
+kw
+Any*}
+__repr__werkzeug.test.Client.__repr__"
+builtins.str"builtins.str*4
+self,
+werkzeug.test.Client"werkzeug.test.Clientr|
+application werkzeug.test.Client.applicationK
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*Ÿ
-generate_password_hashwerkzeug.generate_password_hashK
+builtins.function"builtins.functionr™
+response_wrapper%werkzeug.test.Client.response_wrapper^
+ Type[werkzeug.test.TestResponse]8
+werkzeug.test.TestResponse"werkzeug.test.TestResponser¸
+_cookieswerkzeug.test.Client._cookiesŒ
+]Union[builtins.dict[Tuple[builtins.str,builtins.str,builtins.str],werkzeug.test.Cookie],None]ž
+Qbuiltins.dict[Tuple[builtins.str,builtins.str,builtins.str],werkzeug.test.Cookie]‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str,
+werkzeug.test.Cookie"werkzeug.test.Cookie"builtins.dict
+Nonerk
+allow_subdomain_redirects.werkzeug.test.Client.allow_subdomain_redirects
+builtins.bool"builtins.bool•H
+Request!werkzeug.wrappers.request.Request"werkzeug.sansio.request.Request*±
+__init__*werkzeug.wrappers.request.Request.__init__"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*6
+populate_request
+builtins.bool"builtins.bool *-
+shallow
+builtins.bool"builtins.bool *»
+from_values-werkzeug.wrappers.request.Request.from_values"F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*|
+clss
+'Type[werkzeug.wrappers.request.Request]F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*
+args
+Any*
+kwargs
+Any0:classmethodp*½
+application-werkzeug.wrappers.request.Request.application"›
+*TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*™
-check_password_hashwerkzeug.check_password_hashK
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*|
+clss
+'Type[werkzeug.wrappers.request.Request]F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*R
+fK
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*;
-Clientwerkzeug.Client
-Any*35*36*37*38*39*310*K
-EnvironBuilderwerkzeug.EnvironBuilder
-Any*35*36*37*38*39*310*K
-create_environwerkzeug.create_environ
-Any*35*36*37*38*39*310*G
-run_wsgi_appwerkzeug.run_wsgi_app
-Any*35*36*37*38*39*310*M
-get_current_urlwerkzeug.get_current_url
-Any*35*36*37*38*39*310*?
-get_hostwerkzeug.get_host
-Any*35*36*37*38*39*310*I
-pop_path_infowerkzeug.pop_path_info
-Any*35*36*37*38*39*310*K
-peek_path_infowerkzeug.peek_path_info
-Any*35*36*37*38*39*310*W
-SharedDataMiddlewarewerkzeug.SharedDataMiddleware
-Any*35*36*37*38*39*310*W
-DispatcherMiddlewarewerkzeug.DispatcherMiddleware
-Any*35*36*37*38*39*310*M
-ClosingIteratorwerkzeug.ClosingIterator
-Any*35*36*37*38*39*310*E
-FileWrapperwerkzeug.FileWrapper
-Any*35*36*37*38*39*310*K
-make_line_iterwerkzeug.make_line_iter
-Any*35*36*37*38*39*310*I
-LimitedStreamwerkzeug.LimitedStream
-Any*35*36*37*38*39*310*A
-	responderwerkzeug.responder
-Any*35*36*37*38*39*310*A
-	wrap_filewerkzeug.wrap_file
-Any*35*36*37*38*39*310*Q
-extract_path_infowerkzeug.extract_path_info
-Any*35*36*37*38*39*310*E
-parse_etagswerkzeug.parse_etags
-Any*35*36*37*38*39*310*C
+builtins.function"builtins.function0:classmethodp*Ì
+_get_file_stream2werkzeug.wrappers.request.Request._get_file_stream"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*^
+total_content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*V
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Z
+content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ð
+want_form_data_parsed7werkzeug.wrappers.request.Request.want_form_data_parsed"
+builtins.bool"builtins.bool*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*ì
+make_form_data_parser7werkzeug.wrappers.request.Request.make_form_data_parser"H
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParser*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request* 
+_load_form_data1werkzeug.wrappers.request.Request._load_form_data"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*ð
+_get_stream_for_parsing9werkzeug.wrappers.request.Request._get_stream_for_parsing"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*Œ
+close'werkzeug.wrappers.request.Request.close"
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*Ð
+	__enter__+werkzeug.wrappers.request.Request.__enter__"F
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*N
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*Ê
+__exit__*werkzeug.wrappers.request.Request.__exit__"
+None*N
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*
+exc_type
+Any*
+	exc_value
+Any*
+tb
+Any*á
+stream(werkzeug.wrappers.request.Request.stream"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*µ
+data&werkzeug.wrappers.request.Request.data" 
+builtins.bytes"builtins.bytes*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*Û
+form&werkzeug.wrappers.request.Request.form"Å
+Pwerkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"5werkzeug.datastructures.structures.ImmutableMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*Ý
+values(werkzeug.wrappers.request.Request.values"Ã
+Owerkzeug.datastructures.structures.CombinedMultiDict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"4werkzeug.datastructures.structures.CombinedMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*É
+files'werkzeug.wrappers.request.Request.files"±
+twerkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,werkzeug.datastructures.file_storage.FileStorage]
+builtins.str"builtins.strd
+0werkzeug.datastructures.file_storage.FileStorage"0werkzeug.datastructures.file_storage.FileStorage"5werkzeug.datastructures.structures.ImmutableMultiDict*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*º
+script_root-werkzeug.wrappers.request.Request.script_root"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*¹
+url_root*werkzeug.wrappers.request.Request.url_root"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:cached_property*¶
+json&werkzeug.wrappers.request.Request.json"&
+Union[Any,None]
+Any
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request0:property`*
+on_json_loading_failed8werkzeug.wrappers.request.Request.on_json_loading_failed"
+Any*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*`
+eY
+Union[builtins.ValueError,None]*
+builtins.ValueError"builtins.ValueError
+None2Š
+get_data*werkzeug.wrappers.request.Request.get_dataé
+get_data*werkzeug.wrappers.request.Request.get_data" 
+builtins.bytes"builtins.bytes*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+cache
+builtins.bool"builtins.bool *I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *5
+parse_form_data
+builtins.bool"builtins.bool 0:
+t.overloadXå
+get_data*werkzeug.wrappers.request.Request.get_data"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+cache
+builtins.bool"builtins.bool *I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *5
+parse_form_data
+builtins.bool"builtins.bool 0:
+t.overloadX2É
+get_json*werkzeug.wrappers.request.Request.get_jsonÅ
+get_json*werkzeug.wrappers.request.Request.get_json"
+Any*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+force
+builtins.bool"builtins.bool *H
+silent:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *+
+cache
+builtins.bool"builtins.bool 0:
+t.overloadXÈ
+get_json*werkzeug.wrappers.request.Request.get_json"&
+Union[Any,None]
+Any
+None*P
+selfF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*+
+force
+builtins.bool"builtins.bool *,
+silent
+builtins.bool"builtins.bool *+
+cache
+builtins.bool"builtins.bool 0:
+t.overloadXr
+max_content_length4werkzeug.wrappers.request.Request.max_content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner”
+max_form_memory_size6werkzeug.wrappers.request.Request.max_form_memory_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner`
+max_form_parts0werkzeug.wrappers.request.Request.max_form_parts
+builtins.int"builtins.intrÊ
+form_data_parser_class8werkzeug.wrappers.request.Request.form_data_parser_classv
+(Type[werkzeug.formparser.FormDataParser]H
+"werkzeug.formparser.FormDataParser""werkzeug.formparser.FormDataParserrÞ
+environ)werkzeug.wrappers.request.Request.environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentrT
+shallow)werkzeug.wrappers.request.Request.shallow
+builtins.bool"builtins.boolrè
+input_stream.werkzeug.wrappers.request.Request.input_stream§
+:werkzeug.utils.environ_property[typing.IO[builtins.bytes]]H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO"werkzeug.utils.environ_propertyr¬
+remote_user-werkzeug.wrappers.request.Request.remote_usern
+-werkzeug.utils.environ_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.environ_propertyrµ
+is_multithread0werkzeug.wrappers.request.Request.is_multithreadq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyr·
+is_multiprocess1werkzeug.wrappers.request.Request.is_multiprocessq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyr¯
+is_run_once-werkzeug.wrappers.request.Request.is_run_onceq
+.werkzeug.utils.environ_property[builtins.bool]
+builtins.bool"builtins.bool"werkzeug.utils.environ_propertyrd
+_cached_json.werkzeug.wrappers.request.Request._cached_json$
+Tuple[Any,Any]
+Any
+AnyrG
+_cached_data.werkzeug.wrappers.request.Request._cached_data
+Any†d
+Response#werkzeug.wrappers.response.Response"!werkzeug.sansio.response.Response*¢
+__init__,werkzeug.wrappers.response.Response.__init__"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ê
+responseÙ
+eUnion[typing.Iterable[builtins.bytes],builtins.bytes,typing.Iterable[builtins.str],builtins.str,None]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable 
+builtins.bytes"builtins.bytesN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str
+None *²
+status£
+5Union[builtins.int,builtins.str,http.HTTPStatus,None]
+builtins.int"builtins.int
+builtins.str"builtins.str"
+http.HTTPStatus"http.HTTPStatus
+None *û
+headersë
+ŒUnion[typing.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]],typing.Iterable[Tuple[builtins.str,builtins.str]],None]¤
+Ntyping.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]]
+builtins.str"builtins.str£
+1Union[builtins.str,typing.Iterable[builtins.str]]
+builtins.str"builtins.strN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable"typing.Mapping¦
+1typing.Iterable[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable
+None *T
+mimetypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *8
+direct_passthrough
+builtins.bool"builtins.bool *¼
+call_on_close1werkzeug.wrappers.response.Response.call_on_close"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ª
+__repr__,werkzeug.wrappers.response.Response.__repr__"
+builtins.str"builtins.str*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ù
 
-parse_datewerkzeug.parse_date
-Any*35*36*37*38*39*310*A
-	http_datewerkzeug.http_date
-Any*35*36*37*38*39*310*E
-cookie_datewerkzeug.cookie_date
-Any*35*36*37*38*39*310*c
-parse_cache_control_header#werkzeug.parse_cache_control_header
-Any*35*36*37*38*39*310*W
-is_resource_modifiedwerkzeug.is_resource_modified
-Any*35*36*37*38*39*310*U
-parse_accept_headerwerkzeug.parse_accept_header
-Any*35*36*37*38*39*310*O
-parse_set_headerwerkzeug.parse_set_header
-Any*35*36*37*38*39*310*C
+force_type.werkzeug.wrappers.response.Response.force_type"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*‚
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*X
+responseJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*þ
+environî
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment
+None 0:classmethodp*ª
+from_app,werkzeug.wrappers.response.Response.from_app"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*‚
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*¥
+app›
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*.
+buffered
+builtins.bool"builtins.bool 0:classmethodp*‹
+set_data,werkzeug.wrappers.response.Response.set_data"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*q
+valuef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*ô
+calculate_content_length<werkzeug.wrappers.response.Response.calculate_content_length"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*×
+_ensure_sequence4werkzeug.wrappers.response.Response._ensure_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*-
+mutable
+builtins.bool"builtins.bool *¢
+make_sequence1werkzeug.wrappers.response.Response.make_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ì
+iter_encoded0werkzeug.wrappers.response.Response.iter_encoded"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Â
+is_streamed/werkzeug.wrappers.response.Response.is_streamed"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*Â
+is_sequence/werkzeug.wrappers.response.Response.is_sequence"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*’
+close)werkzeug.wrappers.response.Response.close"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Ú
+	__enter__-werkzeug.wrappers.response.Response.__enter__"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*g
+__exit__,werkzeug.wrappers.response.Response.__exit__*
+self*
+exc_type*
+	exc_value*
+tb*”
+freeze*werkzeug.wrappers.response.Response.freeze"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ª
+get_wsgi_headers4werkzeug.wrappers.response.Response.get_wsgi_headers"R
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*¤
+get_app_iter0werkzeug.wrappers.response.Response.get_app_iter"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Û
+get_wsgi_response5werkzeug.wrappers.response.Response.get_wsgi_response"€
+cTuple[typing.Iterable[builtins.bytes],builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*î
+__call__,werkzeug.wrappers.response.Response.__call__"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponse*¼
+json(werkzeug.wrappers.response.Response.json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*õ
+stream*werkzeug.wrappers.response.Response.stream"V
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:cached_property*ƒ
+_wrap_range_response8werkzeug.wrappers.response.Response._wrap_range_response"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*'
+start
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.int*
+_is_range_request_processableAwerkzeug.wrappers.response.Response._is_range_request_processable"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Õ
+_process_range_request:werkzeug.wrappers.response.Response._process_range_request"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Y
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*v
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str*¦
+make_conditional4werkzeug.wrappers.response.Response.make_conditional"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*â
+request_or_environÉ
+SUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request]§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*x
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *[
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *õ
+add_etag,werkzeug.wrappers.response.Response.add_etag"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*/
+	overwrite
+builtins.bool"builtins.bool **
+weak
+builtins.bool"builtins.bool 2Î
+get_data,werkzeug.wrappers.response.Response.get_data‹
+get_data,werkzeug.wrappers.response.Response.get_data" 
+builtins.bytes"builtins.bytes*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX…
+get_data,werkzeug.wrappers.response.Response.get_data"
+builtins.str"builtins.str*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*G
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:
+t.overloadX2ý
+get_json,werkzeug.wrappers.response.Response.get_jsonž
+get_json,werkzeug.wrappers.response.Response.get_json"
+Any*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *H
+silent:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX¡
+get_json,werkzeug.wrappers.response.Response.get_json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *,
+silent
+builtins.bool"builtins.bool 0:
+t.overloadXr€
+implicit_sequence_conversion@werkzeug.wrappers.response.Response.implicit_sequence_conversion
+builtins.bool"builtins.boolr~
+autocorrect_location_header?werkzeug.wrappers.response.Response.autocorrect_location_header
+builtins.bool"builtins.boolrˆ
+ automatically_set_content_lengthDwerkzeug.wrappers.response.Response.automatically_set_content_length
+builtins.bool"builtins.boolr©
+response,werkzeug.wrappers.response.Response.responseî
+DUnion[typing.Iterable[builtins.str],typing.Iterable[builtins.bytes]]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.IterableT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterablerX
+data(werkzeug.wrappers.response.Response.data&
+builtins.property"builtins.propertyrl
+direct_passthrough6werkzeug.wrappers.response.Response.direct_passthrough
+builtins.bool"builtins.boolrÉ
+	_on_close-werkzeug.wrappers.response.Response._on_closeŒ
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list·
 
-quote_etagwerkzeug.quote_etag
-Any*35*36*37*38*39*310*G
-unquote_etagwerkzeug.unquote_etag
-Any*35*36*37*38*39*310*I
-generate_etagwerkzeug.generate_etag
-Any*35*36*37*38*39*310*E
-dump_headerwerkzeug.dump_header
-Any*35*36*37*38*39*310*Q
-parse_list_headerwerkzeug.parse_list_header
-Any*35*36*37*38*39*310*Q
-parse_dict_headerwerkzeug.parse_dict_header
-Any*35*36*37*38*39*310*c
-parse_authorization_header#werkzeug.parse_authorization_header
-Any*35*36*37*38*39*310*i
-parse_www_authenticate_header&werkzeug.parse_www_authenticate_header
-Any*35*36*37*38*39*310*Y
-remove_entity_headerswerkzeug.remove_entity_headers
-Any*35*36*37*38*39*310*O
-is_entity_headerwerkzeug.is_entity_header
-Any*35*36*37*38*39*310*a
-remove_hop_by_hop_headers"werkzeug.remove_hop_by_hop_headers
-Any*35*36*37*38*39*310*W
-parse_options_headerwerkzeug.parse_options_header
-Any*35*36*37*38*39*310*U
-dump_options_headerwerkzeug.dump_options_header
-Any*35*36*37*38*39*310*W
-is_hop_by_hop_headerwerkzeug.is_hop_by_hop_header
-Any*35*36*37*38*39*310*W
-unquote_header_valuewerkzeug.unquote_header_value
-Any*35*36*37*38*39*310*S
-quote_header_valuewerkzeug.quote_header_value
-Any*35*36*37*38*39*310*Q
-HTTP_STATUS_CODESwerkzeug.HTTP_STATUS_CODES
-Any*35*36*37*38*39*310*C
+run_simplewerkzeug.serving.run_simple"
+None**
+hostname
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*­
+application›
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*2
+use_reloader
+builtins.bool"builtins.bool *2
+use_debugger
+builtins.bool"builtins.bool *0
 
-url_decodewerkzeug.url_decode
-Any*35*36*37*38*39*310*C
-
-url_encodewerkzeug.url_encode
-Any*35*36*37*38*39*310*A
-	url_quotewerkzeug.url_quote
-Any*35*36*37*38*39*310*K
-url_quote_pluswerkzeug.url_quote_plus
-Any*35*36*37*38*39*310*E
-url_unquotewerkzeug.url_unquote
-Any*35*36*37*38*39*310*O
-url_unquote_pluswerkzeug.url_unquote_plus
-Any*35*36*37*38*39*310*=
-url_fixwerkzeug.url_fix
-Any*35*36*37*38*39*310*7
-Hrefwerkzeug.Href
-Any*35*36*37*38*39*310*C
-
-iri_to_uriwerkzeug.iri_to_uri
-Any*35*36*37*38*39*310*C
-
-uri_to_iriwerkzeug.uri_to_iri
-Any*35*36*37*38*39*310*M
-parse_form_datawerkzeug.parse_form_data
-Any*35*36*37*38*39*310*9
-abortwerkzeug.abort
-Any*35*36*37*38*39*310*=
-Aborterwerkzeug.Aborter
-Any*35*36*37*38*39*310
+use_evalex
+builtins.bool"builtins.bool *›
+extra_files‡
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None * 
+exclude_patterns‡
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *5
+reloader_interval
+builtins.int"builtins.int *1
+reloader_type
+builtins.str"builtins.str *.
+threaded
+builtins.bool"builtins.bool *-
+	processes
+builtins.int"builtins.int *Ö
+request_handler¾
+5Union[Type[werkzeug.serving.WSGIRequestHandler],None]y
+)Type[werkzeug.serving.WSGIRequestHandler]J
+#werkzeug.serving.WSGIRequestHandler"#werkzeug.serving.WSGIRequestHandler
+None *¼
+static_files§
+\Union[builtins.dict[builtins.str,Union[builtins.str,Tuple[builtins.str,builtins.str]]],None]º
+Pbuiltins.dict[builtins.str,Union[builtins.str,Tuple[builtins.str,builtins.str]]]
+builtins.str"builtins.str¸
+4Union[builtins.str,Tuple[builtins.str,builtins.str]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *8
+passthrough_errors
+builtins.bool"builtins.bool *‡
+ssl_contextó
+tUnion[TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]],None]î
+hTypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]]Ý
+]Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None] 
+ssl.SSLContext"ssl.SSLContext”
+,Tuple[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None" werkzeug.serving._TSSLContextArg
+None *A
+__version__werkzeug.__version__
+builtins.str"builtins.str

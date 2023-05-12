@@ -1,13 +1,171 @@
 
-	maxminddb 
-open_databasemaxminddb.open_database"
-Any**
-database
-builtins.str"builtins.str*(
+	maxminddbT
+InvalidDatabaseError%maxminddb.errors.InvalidDatabaseError"builtins.RuntimeErrorè'
+Readermaxminddb.reader.Reader"builtins.object*ö
+__init__ maxminddb.reader.Reader.__init__"
+None*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*Õ
+databaseÆ
+AUnion[typing.AnyStr,builtins.int,os.PathLike[Any],typing.IO[Any]]
+typing.AnyStr
+builtins.int"builtins.int(
+os.PathLike[Any]
+Any"os.PathLike$
+typing.IO[Any]
+Any"	typing.IO*(
 mode
-builtins.int"builtins.int z35z36z37z38z39z310h
-Readermaxminddb.Reader"
-Any**
-database
-builtins.str"builtins.strz35z36z37z38z39z310*5
-readermaxminddb.reader *35*36*37*38*39*310
+builtins.int"builtins.int *¢
+metadata maxminddb.reader.Reader.metadata"6
+maxminddb.reader.Metadata"maxminddb.reader.Metadata*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*’
+getmaxminddb.reader.Reader.get"Ú
+oUnion[Any,builtins.bool,builtins.float,builtins.int,maxminddb.types.RecordList,maxminddb.types.RecordDict,None]
+Any
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int8
+maxminddb.types.RecordList"maxminddb.types.RecordList8
+maxminddb.types.RecordDict"maxminddb.types.RecordDict
+None*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*Ò
+
+ip_addressÁ
+?Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]
+builtins.str"builtins.str.
+ipaddress.IPv6Address"ipaddress.IPv6Address.
+ipaddress.IPv4Address"ipaddress.IPv4Address*Û
+get_with_prefix_len+maxminddb.reader.Reader.get_with_prefix_len"ƒ
+ƒTuple[Union[Any,builtins.bool,builtins.float,builtins.int,maxminddb.types.RecordList,maxminddb.types.RecordDict,None],builtins.int]Ú
+oUnion[Any,builtins.bool,builtins.float,builtins.int,maxminddb.types.RecordList,maxminddb.types.RecordDict,None]
+Any
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int8
+maxminddb.types.RecordList"maxminddb.types.RecordList8
+maxminddb.types.RecordDict"maxminddb.types.RecordDict
+None
+builtins.int"builtins.int*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*Ò
+
+ip_addressÁ
+?Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]
+builtins.str"builtins.str.
+ipaddress.IPv6Address"ipaddress.IPv6Address.
+ipaddress.IPv4Address"ipaddress.IPv4Address*œ
+_find_address_in_tree-maxminddb.reader.Reader._find_address_in_tree"`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*4
+packed(
+builtins.bytearray"builtins.bytearray*¸
+_start_node#maxminddb.reader.Reader._start_node"
+builtins.int"builtins.int*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*(
+length
+builtins.int"builtins.int*ä
+
+_read_node"maxminddb.reader.Reader._read_node"
+builtins.int"builtins.int*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*-
+node_number
+builtins.int"builtins.int*'
+index
+builtins.int"builtins.int*£
+_resolve_data_pointer-maxminddb.reader.Reader._resolve_data_pointer"ñ
+—TypeAlias[Union[TypeAlias[Union[UnboundType[AnyStr],builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]º
+ŒUnion[TypeAlias[Union[UnboundType[AnyStr],builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]²
+OTypeAlias[Union[UnboundType[AnyStr],builtins.bool,builtins.float,builtins.int]]Á
+DUnion[UnboundType[AnyStr],builtins.bool,builtins.float,builtins.int]
+UnboundType[AnyStr]
+builtins.bool"builtins.bool 
+builtins.float"builtins.float
+builtins.int"builtins.int"maxminddb.types.Primitive8
+maxminddb.types.RecordList"maxminddb.types.RecordList8
+maxminddb.types.RecordDict"maxminddb.types.RecordDict"maxminddb.types.Record*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*)
+pointer
+builtins.int"builtins.int*n
+closemaxminddb.reader.Reader.close"
+None*<
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*…
+__exit__ maxminddb.reader.Reader.__exit__"
+None*:
+self2
+maxminddb.reader.Reader"maxminddb.reader.Reader*
+args
+Any*ž
+	__enter__!maxminddb.reader.Reader.__enter__"2
+maxminddb.reader.Reader"maxminddb.reader.Reader*:
+self2
+maxminddb.reader.Reader"maxminddb.reader.Readerrr
+_DATA_SECTION_SEPARATOR_SIZE4maxminddb.reader.Reader._DATA_SECTION_SEPARATOR_SIZE
+builtins.int"builtins.intrj
+_METADATA_START_MARKER.maxminddb.reader.Reader._METADATA_START_MARKER 
+builtins.bytes"builtins.bytesrÜ
+_buffermaxminddb.reader.Reader._buffer¯
+9Union[builtins.bytes,maxminddb.file.FileBuffer,mmap.mmap] 
+builtins.bytes"builtins.bytes6
+maxminddb.file.FileBuffer"maxminddb.file.FileBuffer
+	mmap.mmap"	mmap.mmaprx
+_ipv4_start#maxminddb.reader.Reader._ipv4_startD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerR
+_buffer_size$maxminddb.reader.Reader._buffer_size
+builtins.int"builtins.intrf
+	_metadata!maxminddb.reader.Reader._metadata6
+maxminddb.reader.Metadata"maxminddb.reader.Metadatard
+_decoder maxminddb.reader.Reader._decoder6
+maxminddb.decoder.Decoder"maxminddb.decoder.DecoderrH
+closedmaxminddb.reader.Reader.closed
+builtins.bool"builtins.boolÞ
+open_databasemaxminddb.open_database"2
+maxminddb.reader.Reader"maxminddb.reader.Reader*Õ
+databaseÆ
+AUnion[typing.AnyStr,builtins.int,os.PathLike[Any],typing.IO[Any]]
+typing.AnyStr
+builtins.int"builtins.int(
+os.PathLike[Any]
+Any"os.PathLike$
+typing.IO[Any]
+Any"	typing.IO*(
+mode
+builtins.int"builtins.int *D
+	MODE_AUTOmaxminddb.const.MODE_AUTO
+builtins.int"builtins.int*@
+MODE_FDmaxminddb.const.MODE_FD
+builtins.int"builtins.int*D
+	MODE_FILEmaxminddb.const.MODE_FILE
+builtins.int"builtins.int*H
+MODE_MEMORYmaxminddb.const.MODE_MEMORY
+builtins.int"builtins.int*D
+	MODE_MMAPmaxminddb.const.MODE_MMAP
+builtins.int"builtins.int*L
+MODE_MMAP_EXTmaxminddb.const.MODE_MMAP_EXT
+builtins.int"builtins.int*#
+
+_extensionmaxminddb.extension *h
+__all__maxminddb.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*>
+	__title__maxminddb.__title__
+builtins.str"builtins.str*B
+__version__maxminddb.__version__
+builtins.str"builtins.str*@
+
+__author__maxminddb.__author__
+builtins.str"builtins.str*B
+__license__maxminddb.__license__
+builtins.str"builtins.str*F
+__copyright__maxminddb.__copyright__
+builtins.str"builtins.str

@@ -1,0 +1,206 @@
+
+email.policy†
+Policyemail.policy.Policy"builtins.object*y
+__init__email.policy.Policy.__init__"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*
+kw
+Any*•
+cloneemail.policy.Policy.clone"*
+email.policy.Policy"email.policy.Policy*4
+self*
+email.policy.Policy"email.policy.Policy*
+kw
+Any*ñ
+handle_defect!email.policy.Policy.handle_defect"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*7
+obj.
+email.message.Message"email.message.Message*D
+defect8
+email.errors.MessageDefect"email.errors.MessageDefect*õ
+register_defect#email.policy.Policy.register_defect"
+None*4
+self*
+email.policy.Policy"email.policy.Policy*7
+obj.
+email.message.Message"email.message.Message*D
+defect8
+email.errors.MessageDefect"email.errors.MessageDefect*Ü
+header_max_count$email.policy.Policy.header_max_count"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*Ç
+header_source_parse'email.policy.Policy.header_source_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*[
+sourcelinesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list0:abstractmethod@*¹
+header_store_parse&email.policy.Policy.header_store_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@*õ
+header_fetch_parse&email.policy.Policy.header_fetch_parse"
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@*Ù
+foldemail.policy.Policy.fold"
+builtins.str"builtins.str*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@*ë
+fold_binaryemail.policy.Policy.fold_binary" 
+builtins.bytes"builtins.bytes*4
+self*
+email.policy.Policy"email.policy.Policy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str0:abstractmethod@r|
+max_line_length#email.policy.Policy.max_line_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerD
+linesepemail.policy.Policy.linesep
+builtins.str"builtins.strrF
+cte_typeemail.policy.Policy.cte_type
+builtins.str"builtins.strrV
+raise_on_defect#email.policy.Policy.raise_on_defect
+builtins.bool"builtins.boolrL
+
+mange_fromemail.policy.Policy.mange_from
+builtins.bool"builtins.bool‘
+Compat32email.policy.Compat32"email.policy.Policy*¹
+header_source_parse)email.policy.Compat32.header_source_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*8
+self.
+email.policy.Compat32"email.policy.Compat32*[
+sourcelinesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*«
+header_store_parse(email.policy.Compat32.header_store_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*8
+self.
+email.policy.Compat32"email.policy.Compat32*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*À
+header_fetch_parse(email.policy.Compat32.header_fetch_parse"u
+'Union[builtins.str,email.header.Header]
+builtins.str"builtins.str*
+email.header.Header"email.header.Header*8
+self.
+email.policy.Compat32"email.policy.Compat32*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*Ë
+foldemail.policy.Compat32.fold"
+builtins.str"builtins.str*8
+self.
+email.policy.Compat32"email.policy.Compat32*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*Ý
+fold_binary!email.policy.Compat32.fold_binary" 
+builtins.bytes"builtins.bytes*8
+self.
+email.policy.Compat32"email.policy.Compat32*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.strœ
+EmailPolicyemail.policy.EmailPolicy"email.policy.Policy*Â
+header_source_parse,email.policy.EmailPolicy.header_source_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*>
+self4
+email.policy.EmailPolicy"email.policy.EmailPolicy*[
+sourcelinesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*´
+header_store_parse+email.policy.EmailPolicy.header_store_parse"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*>
+self4
+email.policy.EmailPolicy"email.policy.EmailPolicy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*ð
+header_fetch_parse+email.policy.EmailPolicy.header_fetch_parse"
+builtins.str"builtins.str*>
+self4
+email.policy.EmailPolicy"email.policy.EmailPolicy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*Ô
+foldemail.policy.EmailPolicy.fold"
+builtins.str"builtins.str*>
+self4
+email.policy.EmailPolicy"email.policy.EmailPolicy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*æ
+fold_binary$email.policy.EmailPolicy.fold_binary" 
+builtins.bytes"builtins.bytes*>
+self4
+email.policy.EmailPolicy"email.policy.EmailPolicy*&
+name
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.strrE
+utf8email.policy.EmailPolicy.utf8
+builtins.bool"builtins.boolrU
+refold_source&email.policy.EmailPolicy.refold_source
+builtins.str"builtins.strr†
+header_factory'email.policy.EmailPolicy.header_factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr‡
+content_manager(email.policy.EmailPolicy.content_managerJ
+#email.contentmanager.ContentManager"#email.contentmanager.ContentManager*Q
+compat32email.policy.compat32.
+email.policy.Compat32"email.policy.Compat32*U
+defaultemail.policy.default4
+email.policy.EmailPolicy"email.policy.EmailPolicy*O
+SMTPemail.policy.SMTP4
+email.policy.EmailPolicy"email.policy.EmailPolicy*W
+SMTPUTF8email.policy.SMTPUTF84
+email.policy.EmailPolicy"email.policy.EmailPolicy*O
+HTTPemail.policy.HTTP4
+email.policy.EmailPolicy"email.policy.EmailPolicy*S
+strictemail.policy.strict4
+email.policy.EmailPolicy"email.policy.EmailPolicy

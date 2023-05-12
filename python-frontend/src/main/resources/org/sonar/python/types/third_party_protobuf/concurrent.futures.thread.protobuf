@@ -1,6 +1,7 @@
 
-concurrent.futures.thread¥
-ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*»
+concurrent.futures.threadg
+BrokenThreadPool*concurrent.futures.thread.BrokenThreadPool"'concurrent.futures._base.BrokenExecutorà
+ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*°
 __init__5concurrent.futures.thread.ThreadPoolExecutor.__init__"
 None*f
 self\
@@ -10,8 +11,19 @@
 builtins.int"builtins.int
 None *6
 thread_name_prefix
-builtins.str"builtins.str z27j27∆
-	_WorkItem#concurrent.futures.thread._WorkItem"builtins.object*Ë
+builtins.str"builtins.str *ö
+initializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *>
+initargs.
+builtins.tuple[Any]
+Any"builtins.tuple r}
+_work_queue8concurrent.futures.thread.ThreadPoolExecutor._work_queue4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue™
+	_WorkItem#concurrent.futures.thread._WorkItem"builtins.object*‰
 __init__,concurrent.futures.thread._WorkItem.__init__"
 None*ï
 selfä
@@ -29,22 +41,22 @@ Aconcurrent.futures.thread._WorkItem[concurrent.futures.thread._S]
 kwargsY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mappingz27*‘
+Any"typing.Mapping*–
 run'concurrent.futures.thread._WorkItem.run"
 None*ï
 selfä
 Aconcurrent.futures.thread._WorkItem[concurrent.futures.thread._S] 
-concurrent.futures.thread._S"#concurrent.futures.thread._WorkItemz27Pj27rΩ
+concurrent.futures.thread._S"#concurrent.futures.thread._WorkItemPrπ
 future*concurrent.futures.thread._WorkItem.futureÇ
 =concurrent.futures._base.Future[concurrent.futures.thread._S] 
-concurrent.futures.thread._S"concurrent.futures._base.Future*27r}
+concurrent.futures.thread._S"concurrent.futures._base.Futurery
 fn&concurrent.futures.thread._WorkItem.fnK
 CallableType[builtins.function]&
-builtins.function"builtins.function*27rf
+builtins.function"builtins.functionrb
 args(concurrent.futures.thread._WorkItem.args0
 typing.Iterable[Any]
-Any"typing.Iterable*27rì
+Any"typing.Iterablerè
 kwargs*concurrent.futures.thread._WorkItem.kwargsY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping*27
+Any"typing.Mapping

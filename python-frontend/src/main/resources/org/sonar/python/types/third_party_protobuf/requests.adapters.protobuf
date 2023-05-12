@@ -1,184 +1,0 @@
-
-requests.adaptersß
-BaseAdapterrequests.adapters.BaseAdapter"builtins.object*Ÿ
-__init__&requests.adapters.BaseAdapter.__init__"
-None*H
-self>
-requests.adapters.BaseAdapter"requests.adapters.BaseAdapterz35z36z37z38z39z310*È
-
-send"requests.adapters.BaseAdapter.send"4
-requests.models.Response"requests.models.Response*H
-self>
-requests.adapters.BaseAdapter"requests.adapters.BaseAdapter*O
-requestB
-requests.models.PreparedRequest"requests.models.PreparedRequest*,
-stream
-builtins.bool"builtins.bool *Ô
-timeoutÄ
-ZUnion[None,builtins.float,Tuple[builtins.float,builtins.float],Tuple[builtins.float,None]]
-None 
-builtins.float"builtins.floatl
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.floatJ
-Tuple[builtins.float,None] 
-builtins.float"builtins.float
-None *q
-verifyc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str *ê
-certÝ
-\Union[None,builtins.bytes,builtins.str,typing.Container[Union[builtins.bytes,builtins.str]]]
-None 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str°
-4typing.Container[Union[builtins.bytes,builtins.str]]f
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"typing.Container *Ì
-proxies¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z35z36z37z38z39z310*™
-close#requests.adapters.BaseAdapter.close"
-None*H
-self>
-requests.adapters.BaseAdapter"requests.adapters.BaseAdapterz35z36z37z38z39z310j35j36j37j38j39j310¬
-HTTPAdapterrequests.adapters.HTTPAdapter"requests.adapters.BaseAdapter*™
-__init__&requests.adapters.HTTPAdapter.__init__"
-None*H
-self>
-requests.adapters.HTTPAdapter"requests.adapters.HTTPAdapter*4
-pool_connections
-builtins.int"builtins.int *0
-pool_maxsize
-builtins.int"builtins.int *Ý
-max_retriesÉ
-CUnion[requests.packages.urllib3.util.retry.Retry,builtins.int,None]X
-*requests.packages.urllib3.util.retry.Retry"*requests.packages.urllib3.util.retry.Retry
-builtins.int"builtins.int
-None *0
-
-pool_block
-builtins.bool"builtins.bool z35z36z37z38z39z310*¡
-init_poolmanager.requests.adapters.HTTPAdapter.init_poolmanager*
-self*
-connections*
-maxsize*
-block *
-pool_kwargsz35z36z37z38z39z310*„
-proxy_manager_for/requests.adapters.HTTPAdapter.proxy_manager_for*
-self*	
-proxy*
-proxy_kwargsz35z36z37z38z39z310*„
-cert_verify)requests.adapters.HTTPAdapter.cert_verify*
-self*
-conn*
-url*
-
-verify*
-certz35z36z37z38z39z310*t
-build_response,requests.adapters.HTTPAdapter.build_response*
-self*
-req*
-respz35z36z37z38z39z310*y
-get_connection,requests.adapters.HTTPAdapter.get_connection*
-self*
-url*
-proxies z35z36z37z38z39z310*O
-close#requests.adapters.HTTPAdapter.close*
-selfz35z36z37z38z39z310*u
-request_url)requests.adapters.HTTPAdapter.request_url*
-self*
-request*
-proxiesz35z36z37z38z39z310*t
-add_headers)requests.adapters.HTTPAdapter.add_headers*
-self*
-request*
-
-kwargsz35z36z37z38z39z310*j
-proxy_headers+requests.adapters.HTTPAdapter.proxy_headers*
-self*	
-proxyz35z36z37z38z39z310*È
-
-send"requests.adapters.HTTPAdapter.send"4
-requests.models.Response"requests.models.Response*H
-self>
-requests.adapters.HTTPAdapter"requests.adapters.HTTPAdapter*O
-requestB
-requests.models.PreparedRequest"requests.models.PreparedRequest*,
-stream
-builtins.bool"builtins.bool *Ô
-timeoutÄ
-ZUnion[None,builtins.float,Tuple[builtins.float,builtins.float],Tuple[builtins.float,None]]
-None 
-builtins.float"builtins.floatl
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.floatJ
-Tuple[builtins.float,None] 
-builtins.float"builtins.float
-None *q
-verifyc
-!Union[builtins.bool,builtins.str]
-builtins.bool"builtins.bool
-builtins.str"builtins.str *ê
-certÝ
-\Union[None,builtins.bytes,builtins.str,typing.Container[Union[builtins.bytes,builtins.str]]]
-None 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str°
-4typing.Container[Union[builtins.bytes,builtins.str]]f
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"typing.Container *Ì
-proxies¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z35z36z37z38z39z310j35j36j37j38j39j310rV
-	__attrs__'requests.adapters.HTTPAdapter.__attrs__
-Any*35*36*37*38*39*310r«
-max_retries)requests.adapters.HTTPAdapter.max_retriesX
-*requests.packages.urllib3.util.retry.Retry"*requests.packages.urllib3.util.retry.Retry*35*36*37*38*39*310rP
-config$requests.adapters.HTTPAdapter.config
-Any*35*36*37*38*39*310r^
-proxy_manager+requests.adapters.HTTPAdapter.proxy_manager
-Any*35*36*37*38*39*310rZ
-poolmanager)requests.adapters.HTTPAdapter.poolmanager
-Any*35*36*37*38*39*310*U
-urllib3_exceptions$requests.packages.urllib3.exceptions *35*36*37*38*39*310*˜
-proxy_from_url requests.adapters.proxy_from_urlK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*d
-DEFAULT_CA_BUNDLE_PATH(requests.adapters.DEFAULT_CA_BUNDLE_PATH
-Any*35*36*37*38*39*310*®
-get_encoding_from_headers+requests.adapters.get_encoding_from_headersK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*¬
-prepend_scheme_if_needed*requests.adapters.prepend_scheme_if_neededK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*ž
-get_auth_from_url#requests.adapters.get_auth_from_urlK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*–
-urldefragauthrequests.adapters.urldefragauthK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*¨
-extract_cookies_to_jar(requests.adapters.extract_cookies_to_jarK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*q
-DEFAULT_POOLBLOCK#requests.adapters.DEFAULT_POOLBLOCK
-builtins.bool"builtins.bool*35*36*37*38*39*310*m
-DEFAULT_POOLSIZE"requests.adapters.DEFAULT_POOLSIZE
-builtins.int"builtins.int*35*36*37*38*39*310*k
-DEFAULT_RETRIES!requests.adapters.DEFAULT_RETRIES
-builtins.int"builtins.int*35*36*37*38*39*310*£
-DEFAULT_POOL_TIMEOUT&requests.adapters.DEFAULT_POOL_TIMEOUTJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*35*36*37*38*39*310

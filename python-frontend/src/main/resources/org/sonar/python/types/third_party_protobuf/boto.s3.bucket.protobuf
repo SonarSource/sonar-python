@@ -1,1007 +1,0 @@
-
-boto.s3.bucketå
-BucketListResultSet/boto.s3.bucketlistresultset.BucketListResultSet"typing.Iterable*Ü
-__init__8boto.s3.bucketlistresultset.BucketListResultSet.__init__"
-None*l
-selfb
-/boto.s3.bucketlistresultset.BucketListResultSet"/boto.s3.bucketlistresultset.BucketListResultSet*4
-bucket&
-Union[Any,None]
-Any
-None **
-prefix
-builtins.str"builtins.str *-
-	delimiter
-builtins.str"builtins.str **
-marker
-builtins.str"builtins.str *5
-headers&
-Union[Any,None]
-Any
-None *;
-encoding_type&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¢
-__iter__8boto.s3.bucketlistresultset.BucketListResultSet.__iter__"W
- typing.Iterator[boto.s3.key.Key]"
-boto.s3.key.Key"boto.s3.key.Key"typing.Iterator*j
-selfb
-/boto.s3.bucketlistresultset.BucketListResultSet"/boto.s3.bucketlistresultset.BucketListResultSetz35z36z37z38z39z310j35j36j37j38j39j310rb
-bucket6boto.s3.bucketlistresultset.BucketListResultSet.bucket
-Any*35*36*37*38*39*310rb
-prefix6boto.s3.bucketlistresultset.BucketListResultSet.prefix
-Any*35*36*37*38*39*310rh
-	delimiter9boto.s3.bucketlistresultset.BucketListResultSet.delimiter
-Any*35*36*37*38*39*310rb
-marker6boto.s3.bucketlistresultset.BucketListResultSet.marker
-Any*35*36*37*38*39*310rd
-headers7boto.s3.bucketlistresultset.BucketListResultSet.headers
-Any*35*36*37*38*39*310rp
-encoding_type=boto.s3.bucketlistresultset.BucketListResultSet.encoding_type
-Any*35*36*37*38*39*310¢
-S3WebsiteEndpointTranslate)boto.s3.bucket.S3WebsiteEndpointTranslate"builtins.object*’
-translate_region:boto.s3.bucket.S3WebsiteEndpointTranslate.translate_region"
-builtins.str"builtins.str*ï
-clsã
-/Type[boto.s3.bucket.S3WebsiteEndpointTranslate]V
-)boto.s3.bucket.S3WebsiteEndpointTranslate")boto.s3.bucket.S3WebsiteEndpointTranslate*%
-reg
-builtins.str"builtins.str0:classmethodpz35z36z37z38z39z310j35j36j37j38j39j310r÷
-trans_region6boto.s3.bucket.S3WebsiteEndpointTranslate.trans_regionu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*35*36*37*38*39*310Ã›
-Bucketboto.s3.bucket.Bucket"builtins.object*ª
-__init__boto.s3.bucket.Bucket.__init__"
-None*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*è
-
-connection}
-+Union[boto.s3.connection.S3Connection,None]B
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection
-None *P
-nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *N
-	key_class=
-Type[boto.s3.key.Key]"
-boto.s3.key.Key"boto.s3.key.Key z35z36z37z38z39z310*M
-__iter__boto.s3.bucket.Bucket.__iter__*
-selfz35z36z37z38z39z310*∏
-__contains__"boto.s3.bucket.Bucket.__contains__"
-builtins.bool"builtins.bool*6
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Anyz35z36z37z38z39z310*z
-startElement"boto.s3.bucket.Bucket.startElement*
-self*
-name*	
-attrs*
-
-connectionz35z36z37z38z39z310*v
-
-endElement boto.s3.bucket.Bucket.endElement*
-self*
-name*	
-value*
-
-connectionz35z36z37z38z39z310*f
-set_key_class#boto.s3.bucket.Bucket.set_key_class*
-self*
-	key_classz35z36z37z38z39z310*Â
-lookupboto.s3.bucket.Bucket.lookup"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*¡
-get_keyboto.s3.bucket.Bucket.get_key""
-boto.s3.key.Key"boto.s3.key.Key*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None *“
-response_headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *.
-validate
-builtins.bool"builtins.bool z35z36z37z38z39z310*È
-listboto.s3.bucket.Bucket.list"b
-/boto.s3.bucketlistresultset.BucketListResultSet"/boto.s3.bucketlistresultset.BucketListResultSet*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket**
-prefix
-builtins.str"builtins.str *-
-	delimiter
-builtins.str"builtins.str **
-marker
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *;
-encoding_type&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*‘
-list_versions#boto.s3.bucket.Bucket.list_versions"b
-/boto.s3.bucketlistresultset.BucketListResultSet"/boto.s3.bucketlistresultset.BucketListResultSet*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket**
-prefix
-builtins.str"builtins.str *-
-	delimiter
-builtins.str"builtins.str *.
-
-key_marker
-builtins.str"builtins.str *5
-version_id_marker
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *Y
-encoding_typeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*ë
-list_multipart_uploads,boto.s3.bucket.Bucket.list_multipart_uploads"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*.
-
-key_marker
-builtins.str"builtins.str *4
-upload_id_marker
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *;
-encoding_type&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*|
-validate_kwarg_names*boto.s3.bucket.Bucket.validate_kwarg_names*
-self*
-
-kwargs*	
-namesz35z36z37z38z39z310*Ô
-get_all_keys"boto.s3.bucket.Bucket.get_all_keys"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *
-params
-Anyz35z36z37z38z39z310*˜
-get_all_versions&boto.s3.bucket.Bucket.get_all_versions"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *
-params
-Anyz35z36z37z38z39z310*â
- validate_get_all_versions_params6boto.s3.bucket.Bucket.validate_get_all_versions_params*
-self*
-
-paramsz35z36z37z38z39z310*â
-get_all_multipart_uploads/boto.s3.bucket.Bucket.get_all_multipart_uploads"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *
-params
-Anyz35z36z37z38z39z310*º
-new_keyboto.s3.bucket.Bucket.new_key"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*6
-key_name&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*·
-generate_url"boto.s3.bucket.Bucket.generate_url"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-
-expires_in
-Any**
-method
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *0
-
-force_http
-builtins.bool"builtins.bool *“
-response_headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *9
-expires_in_absolute
-builtins.bool"builtins.bool z35z36z37z38z39z310*—
-delete_keys!boto.s3.bucket.Bucket.delete_keys"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-keys
-Any*+
-quiet
-builtins.bool"builtins.bool *7
-	mfa_token&
-Union[Any,None]
-Any
-None *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*‡
-
-delete_key boto.s3.bucket.Bucket.delete_key"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None *7
-	mfa_token&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*
-copy_keyboto.s3.bucket.Bucket.copy_key"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-new_key_name
-Any*
-src_bucket_name
-Any*
-src_key_name
-Any*6
-metadata&
-Union[Any,None]
-Any
-None *<
-src_version_id&
-Union[Any,None]
-Any
-None *1
-storage_class
-builtins.str"builtins.str *2
-preserve_acl
-builtins.bool"builtins.bool *1
-encrypt_key
-builtins.bool"builtins.bool *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-query_args&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*‹
-set_canned_acl$boto.s3.bucket.Bucket.set_canned_acl"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-acl_str
-Any*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¿
-get_xml_acl!boto.s3.bucket.Bucket.get_xml_acl"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*Ü
-set_xml_acl!boto.s3.bucket.Bucket.set_xml_acl"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-acl_str
-Any*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None *.
-
-query_args
-builtins.str"builtins.str z35z36z37z38z39z310*—
-set_aclboto.s3.bucket.Bucket.set_acl"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-
-acl_or_str
-Any*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*∏
-get_aclboto.s3.bucket.Bucket.get_acl"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ˆ
-set_subresource%boto.s3.bucket.Bucket.set_subresource"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-subresource
-Any*
-value
-Any*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*‚
-get_subresource%boto.s3.bucket.Bucket.get_subresource"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-subresource
-Any*,
-key_name
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-
-version_id&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*â
-make_public!boto.s3.bucket.Bucket.make_public"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*/
-	recursive
-builtins.bool"builtins.bool *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*∆
-add_email_grant%boto.s3.bucket.Bucket.add_email_grant"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-
-permission
-Any*
-email_address
-Any*/
-	recursive
-builtins.bool"builtins.bool *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*˙
-add_user_grant$boto.s3.bucket.Bucket.add_user_grant"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-
-permission
-Any*
-user_id
-Any*/
-	recursive
-builtins.bool"builtins.bool *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *:
-display_name&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ÿ
-list_grants!boto.s3.bucket.Bucket.list_grants"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*U
-get_location"boto.s3.bucket.Bucket.get_location*
-selfz35z36z37z38z39z310*˙
-set_xml_logging%boto.s3.bucket.Bucket.set_xml_logging"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-logging_str
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*„
-enable_logging$boto.s3.bucket.Bucket.enable_logging"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-target_bucket
-Any*1
-target_prefix
-builtins.str"builtins.str *4
-grants&
-Union[Any,None]
-Any
-None *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*‡
-disable_logging%boto.s3.bucket.Bucket.disable_logging"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ê
-get_logging_status(boto.s3.bucket.Bucket.get_logging_status"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ï
-set_as_logging_target+boto.s3.bucket.Bucket.set_as_logging_target"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ë
-get_request_payment)boto.s3.bucket.Bucket.get_request_payment"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ì
-set_request_payment)boto.s3.bucket.Bucket.set_request_payment"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*)
-payer
-builtins.str"builtins.str *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ó
-configure_versioning*boto.s3.bucket.Bucket.configure_versioning"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-
-versioning
-Any*0
-
-mfa_delete
-builtins.bool"builtins.bool *7
-	mfa_token&
-Union[Any,None]
-Any
-None *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ï
-get_versioning_status+boto.s3.bucket.Bucket.get_versioning_status"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*á
-configure_lifecycle)boto.s3.bucket.Bucket.configure_lifecycle"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-lifecycle_config
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Í
-get_lifecycle_config*boto.s3.bucket.Bucket.get_lifecycle_config"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*˛
-delete_lifecycle_configuration4boto.s3.bucket.Bucket.delete_lifecycle_configuration"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ÿ
-configure_website'boto.s3.bucket.Bucket.configure_website"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*4
-suffix&
-Union[Any,None]
-Any
-None *7
-	error_key&
-Union[Any,None]
-Any
-None *F
-redirect_all_requests_to&
-Union[Any,None]
-Any
-None *;
-routing_rules&
-Union[Any,None]
-Any
-None *…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*â
-set_website_configuration/boto.s3.bucket.Bucket.set_website_configuration"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-config
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*é
-set_website_configuration_xml3boto.s3.bucket.Bucket.set_website_configuration_xml"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-xml
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ù
-get_website_configuration/boto.s3.bucket.Bucket.get_website_configuration"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*¸
-get_website_configuration_obj3boto.s3.bucket.Bucket.get_website_configuration_obj"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ü
-"get_website_configuration_with_xml8boto.s3.bucket.Bucket.get_website_configuration_with_xml"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*¸
-get_website_configuration_xml3boto.s3.bucket.Bucket.get_website_configuration_xml"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*˙
-delete_website_configuration2boto.s3.bucket.Bucket.delete_website_configuration"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*e
-get_website_endpoint*boto.s3.bucket.Bucket.get_website_endpoint*
-selfz35z36z37z38z39z310*÷
-
-get_policy boto.s3.bucket.Bucket.get_policy"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Î
-
-set_policy boto.s3.bucket.Bucket.set_policy"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-policy
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*‹
-delete_policy#boto.s3.bucket.Bucket.delete_policy"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ò
-set_cors_xml"boto.s3.bucket.Bucket.set_cors_xml"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-cors_xml
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ï
-set_corsboto.s3.bucket.Bucket.set_cors"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-cors_config
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*⁄
-get_cors_xml"boto.s3.bucket.Bucket.get_cors_xml"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*“
-get_corsboto.s3.bucket.Bucket.get_cors"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ÿ
-delete_cors!boto.s3.bucket.Bucket.delete_cors"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Ê
-initiate_multipart_upload/boto.s3.bucket.Bucket.initiate_multipart_upload"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *8
-reduced_redundancy
-builtins.bool"builtins.bool *6
-metadata&
-Union[Any,None]
-Any
-None *1
-encrypt_key
-builtins.bool"builtins.bool *4
-policy&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*∫
-complete_multipart_upload/boto.s3.bucket.Bucket.complete_multipart_upload"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*
-	upload_id
-Any*
-xml_body
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ü
-cancel_multipart_upload-boto.s3.bucket.Bucket.cancel_multipart_upload"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-key_name
-Any*
-	upload_id
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*Œ
-deleteboto.s3.bucket.Bucket.delete"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*M
-get_tagsboto.s3.bucket.Bucket.get_tags*
-selfz35z36z37z38z39z310*U
-get_xml_tags"boto.s3.bucket.Bucket.get_xml_tags*
-selfz35z36z37z38z39z310*†
-set_xml_tags"boto.s3.bucket.Bucket.set_xml_tags"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-tag_str
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None *.
-
-query_args
-builtins.str"builtins.str z35z36z37z38z39z310*Â
-set_tagsboto.s3.bucket.Bucket.set_tags"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*
-tags
-Any*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310*ÿ
-delete_tags!boto.s3.bucket.Bucket.delete_tags"
-Any*8
-self.
-boto.s3.bucket.Bucket"boto.s3.bucket.Bucket*…
-headersπ
-4Union[builtins.dict[builtins.str,builtins.str],None]u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict
-None z35z36z37z38z39z310j35j36j37j38j39j310ri
-LoggingGroup"boto.s3.bucket.Bucket.LoggingGroup
-builtins.str"builtins.str*35*36*37*38*39*310rs
-BucketPaymentBody'boto.s3.bucket.Bucket.BucketPaymentBody
-builtins.str"builtins.str*35*36*37*38*39*310rm
-VersioningBody$boto.s3.bucket.Bucket.VersioningBody
-builtins.str"builtins.str*35*36*37*38*39*310rc
-	VersionREboto.s3.bucket.Bucket.VersionRE
-builtins.str"builtins.str*35*36*37*38*39*310rg
-MFADeleteRE!boto.s3.bucket.Bucket.MFADeleteRE
-builtins.str"builtins.str*35*36*37*38*39*310rY
-nameboto.s3.bucket.Bucket.name
-builtins.str"builtins.str*35*36*37*38*39*310rã
-
-connection boto.s3.bucket.Bucket.connectionB
-boto.s3.connection.S3Connection"boto.s3.connection.S3Connection*35*36*37*38*39*310rÑ
-	key_classboto.s3.bucket.Bucket.key_class=
-Type[boto.s3.key.Key]"
-boto.s3.key.Key"boto.s3.key.Key*35*36*37*38*39*310rV
-creation_date#boto.s3.bucket.Bucket.creation_date
-Any*35*36*37*38*39*310*í
-S3Permissionsboto.s3.bucket.S3PermissionsJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310

@@ -1,7 +1,18 @@
 
 
-click.coreß@
-Contextclick.core.Context"builtins.object*Ô
+click.core≥
+ParameterSourceclick.core.ParameterSource"	enum.EnumHrM
+COMMANDLINE&click.core.ParameterSource.COMMANDLINE
+	enum.auto"	enum.autorM
+ENVIRONMENT&click.core.ParameterSource.ENVIRONMENT
+	enum.auto"	enum.autorE
+DEFAULT"click.core.ParameterSource.DEFAULT
+	enum.auto"	enum.autorM
+DEFAULT_MAP&click.core.ParameterSource.DEFAULT_MAP
+	enum.auto"	enum.autorC
+PROMPT!click.core.ParameterSource.PROMPT
+	enum.auto"	enum.auto∞N
+Contextclick.core.Context"builtins.object*∞
 __init__click.core.Context.__init__"
 None*2
 self(
@@ -23,12 +34,12 @@ click.coreß@
 auto_envvar_prefixD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *©
-default_mapï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
+None *¶
+default_mapí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping
+Any"builtins.dict
 None *Z
 terminal_widthD
 Union[builtins.int,None]
@@ -65,94 +76,125 @@ click.coreß@
 colorG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None z35z36z37z38z39z310*”
+None *[
+show_defaultG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *º
+to_info_dictclick.core.Context.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+click.core.Context"click.core.Context*Ö
+	__enter__click.core.Context.__enter__"(
+click.core.Context"click.core.Context*0
+self(
+click.core.Context"click.core.Context*V
+__exit__click.core.Context.__exit__*
+self*
+exc_type*
+	exc_value*
+tb*¯
+scopeclick.core.Context.scope"`
+#typing.Iterator[click.core.Context](
+click.core.Context"click.core.Context"typing.Iterator*2
+self(
+click.core.Context"click.core.Context*-
+cleanup
+builtins.bool"builtins.bool 0:contextmanager*∫
 metaclick.core.Context.meta"W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
 Any"builtins.dict*2
 self(
-click.core.Context"click.core.Context0:property`z35z36z37z38z39z310*®
-command_pathclick.core.Context.command_path"
-builtins.str"builtins.str*2
-self(
-click.core.Context"click.core.Context0:property`z35z36z37z38z39z310*ã
-scopeclick.core.Context.scope"l
-)typing.ContextManager[click.core.Context](
-click.core.Context"click.core.Context"typing.ContextManager*2
-self(
-click.core.Context"click.core.Context*-
-cleanup
-builtins.bool"builtins.bool z35z36z37z38z39z310*¬
+click.core.Context"click.core.Context0:property`*©
 make_formatter!click.core.Context.make_formatter"@
 click.formatting.HelpFormatter"click.formatting.HelpFormatter*2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*≠
-call_on_close click.core.Context.call_on_close"
-click.core._CC*2
+click.core.Context"click.core.Context*‹
+with_resource click.core.Context.with_resource"
+click.core.V*2
 self(
-click.core.Context"click.core.Context*
-f
-click.core._CCz35z36z37z38z39z310*x
+click.core.Context"click.core.Context*c
+context_managerN
+#typing.ContextManager[click.core.V]
+click.core.V"typing.ContextManager*Ü
+call_on_close click.core.Context.call_on_close"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*2
+self(
+click.core.Context"click.core.Context*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*_
 closeclick.core.Context.close"
 None*2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*†
+click.core.Context"click.core.Context*è
+command_pathclick.core.Context.command_path"
+builtins.str"builtins.str*2
+self(
+click.core.Context"click.core.Context0:property`*á
 	find_rootclick.core.Context.find_root"(
 click.core.Context"click.core.Context*2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*¥
-find_objectclick.core.Context.find_object"
-Any*2
+click.core.Context"click.core.Context*÷
+find_objectclick.core.Context.find_object"8
+Union[click.core.V,None]
+click.core.V
+None*2
 self(
-click.core.Context"click.core.Context*/
-object_type
-builtins.type"builtins.typez35z36z37z38z39z310*∏
-ensure_object click.core.Context.ensure_object"
-Any*2
+click.core.Context"click.core.Context*9
+object_type(
+Type[click.core.V]
+click.core.V*≤
+ensure_object click.core.Context.ensure_object"
+click.core.V*2
 self(
-click.core.Context"click.core.Context*/
-object_type
-builtins.type"builtins.typez35z36z37z38z39z310*±
-lookup_default!click.core.Context.lookup_default"
-Any*2
-self(
-click.core.Context"click.core.Context*&
-name
-builtins.str"builtins.strz35z36z37z38z39z310*•
+click.core.Context"click.core.Context*9
+object_type(
+Type[click.core.V]
+click.core.V*å
 failclick.core.Context.fail"
 NoReturn
 *2
 self(
 click.core.Context"click.core.Context*)
 message
-builtins.str"builtins.strz35z36z37z38z39z310*|
+builtins.str"builtins.str*c
 abortclick.core.Context.abort"
 NoReturn
 *2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*Ë
+click.core.Context"click.core.Context*ã
 exitclick.core.Context.exit"
 NoReturn
 *2
 self(
-click.core.Context"click.core.Context*l
-code`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str z35z36z37z38z39z310*î
+click.core.Context"click.core.Context*(
+code
+builtins.int"builtins.int *{
 	get_usageclick.core.Context.get_usage"
 builtins.str"builtins.str*2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*í
+click.core.Context"click.core.Context*y
 get_helpclick.core.Context.get_help"
 builtins.str"builtins.str*2
 self(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*Á
+click.core.Context"click.core.Context*Œ
+_make_sub_context$click.core.Context._make_sub_context"(
+click.core.Context"click.core.Context*2
+self(
+click.core.Context"click.core.Context*5
+command(
+click.core.Command"click.core.Command*Œ
 invokeclick.core.Context.invoke"
 Any*2
-self(
+__self(
 click.core.Context"click.core.Context*√
-callback¥
+
+__callback¥
 9Union[click.core.Command,CallableType[builtins.function]](
 click.core.Command"click.core.CommandK
 CallableType[builtins.function]&
@@ -160,124 +202,197 @@ click.coreß@
 args
 Any*
 kwargs
-Anyz35z36z37z38z39z310*È
+Any*Ω
 forwardclick.core.Context.forward"
 Any*2
-self(
-click.core.Context"click.core.Context*√
-callback¥
-9Union[click.core.Command,CallableType[builtins.function]](
-click.core.Command"click.core.CommandK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
+__self(
+click.core.Context"click.core.Context*1
+__cmd(
+click.core.Command"click.core.Command*
 args
 Any*
 kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rî
+Any*Î
+set_parameter_source'click.core.Context.set_parameter_source"
+None*2
+self(
+click.core.Context"click.core.Context*&
+name
+builtins.str"builtins.str*D
+source8
+click.core.ParameterSource"click.core.ParameterSource*ã
+get_parameter_source'click.core.Context.get_parameter_source"n
+&Union[click.core.ParameterSource,None]8
+click.core.ParameterSource"click.core.ParameterSource
+None*2
+self(
+click.core.Context"click.core.Context*&
+name
+builtins.str"builtins.str2≈
+lookup_default!click.core.Context.lookup_defaultè
+lookup_default!click.core.Context.lookup_default"&
+Union[Any,None]
+Any
+None*2
+self(
+click.core.Context"click.core.Context*&
+name
+builtins.str"builtins.str*F
+call:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX˝
+lookup_default!click.core.Context.lookup_default"ì
+/Union[Any,CallableType[builtins.function],None]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*2
+self(
+click.core.Context"click.core.Context*&
+name
+builtins.str"builtins.str*F
+call:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadXr°
+formatter_class"click.core.Context.formatter_classj
+$Type[click.formatting.HelpFormatter]@
+click.formatting.HelpFormatter"click.formatting.HelpFormatterr{
 parentclick.core.Context.parentV
 Union[click.core.Context,None](
 click.core.Context"click.core.Context
-None*35*36*37*38*39*310rh
+NonerO
 commandclick.core.Context.command(
-click.core.Command"click.core.Command*35*36*37*38*39*310rà
+click.core.Command"click.core.Commandro
 	info_nameclick.core.Context.info_nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rw
-paramsclick.core.Context.params9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*35*36*37*38*39*310rÑ
+Noner|
+paramsclick.core.Context.paramsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrk
 argsclick.core.Context.argsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rò
+builtins.str"builtins.str"builtins.listr
 protected_args!click.core.Context.protected_argsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310r?
+builtins.str"builtins.str"builtins.listr{
+_opt_prefixes click.core.Context._opt_prefixesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr&
 objclick.core.Context.obj
-Any*35*36*37*38*39*310rﬁ
-default_mapclick.core.Context.default_mapï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
+Anyrz
+_metaclick.core.Context._metaW
+builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping
-None*35*36*37*38*39*310rö
+Any"builtins.dictr¬
+default_mapclick.core.Context.default_mapí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+NonerÅ
 invoked_subcommand%click.core.Context.invoked_subcommandD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rí
+Nonery
 terminal_width!click.core.Context.terminal_widthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*35*36*37*38*39*310rò
+Noner
 max_content_width$click.core.Context.max_content_widthD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*35*36*37*38*39*310rp
+NonerW
 allow_extra_args#click.core.Context.allow_extra_args
-builtins.bool"builtins.bool*35*36*37*38*39*310r~
+builtins.bool"builtins.boolre
 allow_interspersed_args*click.core.Context.allow_interspersed_args
-builtins.bool"builtins.bool*35*36*37*38*39*310r|
+builtins.bool"builtins.boolrc
 ignore_unknown_options)click.core.Context.ignore_unknown_options
-builtins.bool"builtins.bool*35*36*37*38*39*310rû
+builtins.bool"builtins.boolrÖ
 help_option_names$click.core.Context.help_option_namesJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310r·
+builtins.str"builtins.str"builtins.listr»
 token_normalize_func'click.core.Context.token_normalize_funcÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None*35*36*37*38*39*310rr
+NonerY
 resilient_parsing$click.core.Context.resilient_parsing
-builtins.bool"builtins.bool*35*36*37*38*39*310rö
+builtins.bool"builtins.boolrÅ
 auto_envvar_prefix%click.core.Context.auto_envvar_prefixD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rÉ
+Nonerj
 colorclick.core.Context.colorG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None*35*36*37*38*39*310rì
-_metaclick.core.Context._metaW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*35*36*37*38*39*310r~
-_close_callbacks#click.core.Context._close_callbacks,
-builtins.list[Any]
-Any"builtins.list*35*36*37*38*39*310rZ
+Nonerx
+show_defaultclick.core.Context.show_defaultG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner∆
+_close_callbacks#click.core.Context._close_callbackså
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listrA
 _depthclick.core.Context._depth
-builtins.int"builtins.int*35*36*37*38*39*310Æ
-BaseCommandclick.core.BaseCommand"builtins.object*∏
+builtins.int"builtins.intr€
+_parameter_source$click.core.Context._parameter_sourceü
+6builtins.dict[builtins.str,click.core.ParameterSource]
+builtins.str"builtins.str8
+click.core.ParameterSource"click.core.ParameterSource"builtins.dictr[
+_exit_stackclick.core.Context._exit_stack,
+contextlib.ExitStack"contextlib.ExitStackÁ%
+BaseCommandclick.core.BaseCommand"builtins.object*Ô
 __init__click.core.BaseCommand.__init__"
 None*:
 self0
-click.core.BaseCommand"click.core.BaseCommand*&
-name
-builtins.str"builtins.str*É
-context_settingsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
+click.core.BaseCommand"click.core.BaseCommand*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*´
+context_settingsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
 Any"builtins.dict
-None z35z36z37z38z39z310*”
+None *˚
+to_info_dict#click.core.BaseCommand.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*:
+self0
+click.core.BaseCommand"click.core.BaseCommand*1
+ctx(
+click.core.Context"click.core.Context*É
+__repr__click.core.BaseCommand.__repr__"
+builtins.str"builtins.str*8
+self0
+click.core.BaseCommand"click.core.BaseCommand*∫
 	get_usage click.core.BaseCommand.get_usage"
 builtins.str"builtins.str*:
 self0
 click.core.BaseCommand"click.core.BaseCommand*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*—
+click.core.Context"click.core.Context*∏
 get_helpclick.core.BaseCommand.get_help"
 builtins.str"builtins.str*:
 self0
 click.core.BaseCommand"click.core.BaseCommand*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*Ø
+click.core.Context"click.core.Context*æ
 make_context#click.core.BaseCommand.make_context"(
 click.core.Context"click.core.Context*:
 self0
-click.core.BaseCommand"click.core.BaseCommand*+
-	info_name
-builtins.str"builtins.str*T
+click.core.BaseCommand"click.core.BaseCommand*S
+	info_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*T
 argsJ
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*d
@@ -286,7 +401,7 @@ click.coreß@
 click.core.Context"click.core.Context
 None *
 extra
-Anyz35z36z37z38z39z310*Ÿ
+Any*¿
 
 parse_args!click.core.BaseCommand.parse_args"J
 builtins.list[builtins.str]
@@ -297,21 +412,78 @@ parse_args!click.core.BaseCommand.parse_args"J
 click.core.Context"click.core.Context*T
 argsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz35z36z37z38z39z310*∏
+builtins.str"builtins.str"builtins.list*ü
 invokeclick.core.BaseCommand.invoke"
 Any*:
 self0
 click.core.BaseCommand"click.core.BaseCommand*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*é
+click.core.Context"click.core.Context*Ï
+shell_complete%click.core.BaseCommand.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*:
+self0
+click.core.BaseCommand"click.core.BaseCommand*1
+ctx(
+click.core.Context"click.core.Context*,
+
+incomplete
+builtins.str"builtins.str*˚
+_main_shell_completion-click.core.BaseCommand._main_shell_completion"
+None*:
+self0
+click.core.BaseCommand"click.core.BaseCommand*e
+ctx_argsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*+
+	prog_name
+builtins.str"builtins.str*X
+complete_varD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ò
+__call__click.core.BaseCommand.__call__"
+Any*:
+self0
+click.core.BaseCommand"click.core.BaseCommand*
+args
+Any*
+kwargs
+Any2‡
+mainclick.core.BaseCommand.main¨
+mainclick.core.BaseCommand.main"
+NoReturn
+*:
+self0
+click.core.BaseCommand"click.core.BaseCommand*î
+argsá
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *U
+	prog_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+complete_varD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+standalone_mode:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *
+extra
+Any0:
+t.overloadXã
 mainclick.core.BaseCommand.main"
 Any*:
 self0
-click.core.BaseCommand"click.core.BaseCommand*é
-argsÅ
-'Union[builtins.list[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
+click.core.BaseCommand"click.core.BaseCommand*î
+argsá
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
 None *U
 	prog_nameD
 Union[builtins.str,None]
@@ -324,38 +496,38 @@ parse_args!click.core.BaseCommand.parse_args"J
 standalone_mode
 builtins.bool"builtins.bool *
 extra
-Anyz35z36z37z38z39z310*±
-__call__click.core.BaseCommand.__call__"
-Any*:
-self0
-click.core.BaseCommand"click.core.BaseCommand*
-args
-Any*
-kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rt
+Any0:
+t.overloadXr}
+context_class$click.core.BaseCommand.context_classF
+Type[click.core.Context](
+click.core.Context"click.core.Contextr[
 allow_extra_args'click.core.BaseCommand.allow_extra_args
-builtins.bool"builtins.bool*35*36*37*38*39*310rÇ
+builtins.bool"builtins.boolri
 allow_interspersed_args.click.core.BaseCommand.allow_interspersed_args
-builtins.bool"builtins.bool*35*36*37*38*39*310rÄ
+builtins.bool"builtins.boolrg
 ignore_unknown_options-click.core.BaseCommand.ignore_unknown_options
-builtins.bool"builtins.bool*35*36*37*38*39*310rZ
-nameclick.core.BaseCommand.name
-builtins.str"builtins.str*35*36*37*38*39*310rè
-context_settings'click.core.BaseCommand.context_settings9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*35*36*37*38*39*310¢*
-Commandclick.core.Command"click.core.BaseCommand*˙
+builtins.bool"builtins.boolri
+nameclick.core.BaseCommand.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerî
+context_settings'click.core.BaseCommand.context_settingsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÖ2
+Commandclick.core.Command"click.core.BaseCommand*Ÿ	
 __init__click.core.Command.__init__"
 None*2
 self(
-click.core.Command"click.core.Command*&
-name
-builtins.str"builtins.str*É
-context_settingsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
+click.core.Command"click.core.Command*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*´
+context_settingsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
 Any"builtins.dict
 None *ó
 callbackÜ
@@ -380,9 +552,11 @@ parse_args!click.core.BaseCommand.parse_args"J
 short_helpD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *3
-options_metavar
-builtins.str"builtins.str *5
+None *[
+options_metavarD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *5
 add_help_option
 builtins.bool"builtins.bool *5
 no_args_is_help
@@ -391,7 +565,21 @@ short_helpD
 builtins.bool"builtins.bool *0
 
 deprecated
-builtins.bool"builtins.bool z35z36z37z38z39z310*è
+builtins.bool"builtins.bool *Ô
+to_info_dictclick.core.Command.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*Æ
+	get_usageclick.core.Command.get_usage"
+builtins.str"builtins.str*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*ˆ
 
 get_paramsclick.core.Command.get_params"b
 #builtins.list[click.core.Parameter],
@@ -399,7 +587,7 @@ get_paramsclick.core.Command.get_params"b
 self(
 click.core.Command"click.core.Command*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*ä
+click.core.Context"click.core.Context*Ò
 format_usageclick.core.Command.format_usage"
 None*2
 self(
@@ -407,21 +595,21 @@ get_paramsclick.core.Command.get_params"b
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310*ã
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*Ú
 collect_usage_pieces'click.core.Command.collect_usage_pieces"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*2
 self(
 click.core.Command"click.core.Command*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*ã
-get_help_option_names(click.core.Command.get_help_option_names"H
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set*2
+click.core.Context"click.core.Context*Ù
+get_help_option_names(click.core.Command.get_help_option_names"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*2
 self(
 click.core.Command"click.core.Command*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*ä
+click.core.Context"click.core.Context*Ò
 get_help_option"click.core.Command.get_help_option"S
 Union[click.core.Option,None]&
 click.core.Option"click.core.Option
@@ -429,19 +617,25 @@ get_paramsclick.core.Command.get_params"b
 self(
 click.core.Command"click.core.Command*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*Â
+click.core.Context"click.core.Context*Ã
 make_parserclick.core.Command.make_parser"6
 click.parser.OptionParser"click.parser.OptionParser*2
 self(
 click.core.Command"click.core.Command*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*—
+click.core.Context"click.core.Context*¨
+get_helpclick.core.Command.get_help"
+builtins.str"builtins.str*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*∏
 get_short_help_str%click.core.Command.get_short_help_str"
 builtins.str"builtins.str*2
 self(
 click.core.Command"click.core.Command*)
 limit
-builtins.int"builtins.int z35z36z37z38z39z310*à
+builtins.int"builtins.int *Ô
 format_helpclick.core.Command.format_help"
 None*2
 self(
@@ -449,7 +643,7 @@ get_paramsclick.core.Command.get_params"b
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310*í
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*˘
 format_help_text#click.core.Command.format_help_text"
 None*2
 self(
@@ -457,7 +651,7 @@ get_paramsclick.core.Command.get_params"b
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310*é
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*ı
 format_options!click.core.Command.format_options"
 None*2
 self(
@@ -465,7 +659,7 @@ get_paramsclick.core.Command.get_params"b
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310*å
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*Û
 format_epilog click.core.Command.format_epilog"
 None*2
 self(
@@ -473,40 +667,69 @@ get_paramsclick.core.Command.get_params"b
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310j35j36j37j38j39j310r…
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*¥
+
+parse_argsclick.core.Command.parse_args"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ì
+invokeclick.core.Command.invoke"
+Any*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*‡
+shell_complete!click.core.Command.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*2
+self(
+click.core.Command"click.core.Command*1
+ctx(
+click.core.Context"click.core.Context*,
+
+incomplete
+builtins.str"builtins.strr∞
 callbackclick.core.Command.callbackÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None*35*36*37*38*39*310r†
+Nonerá
 paramsclick.core.Command.paramsb
 #builtins.list[click.core.Parameter],
-click.core.Parameter"click.core.Parameter"builtins.list*35*36*37*38*39*310r~
+click.core.Parameter"click.core.Parameter"builtins.listre
 helpclick.core.Command.helpD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rÇ
+Noneri
 epilogclick.core.Command.epilogD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rä
+Noner{
+options_metavar"click.core.Command.options_metavarD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerq
 
 short_helpclick.core.Command.short_helpD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rl
-options_metavar"click.core.Command.options_metavar
-builtins.str"builtins.str*35*36*37*38*39*310rn
+NonerU
 add_help_option"click.core.Command.add_help_option
-builtins.bool"builtins.bool*35*36*37*38*39*310rn
+builtins.bool"builtins.boolrU
 no_args_is_help"click.core.Command.no_args_is_help
-builtins.bool"builtins.bool*35*36*37*38*39*310r\
+builtins.bool"builtins.boolrC
 hiddenclick.core.Command.hidden
-builtins.bool"builtins.bool*35*36*37*38*39*310rd
+builtins.bool"builtins.boolrK
 
 deprecatedclick.core.Command.deprecated
-builtins.bool"builtins.bool*35*36*37*38*39*310å
-MultiCommandclick.core.MultiCommand"click.core.Command*ø
+builtins.bool"builtins.bool‡$
+MultiCommandclick.core.MultiCommand"click.core.Command*¶
 __init__ click.core.MultiCommand.__init__"
 None*<
 self2
@@ -533,14 +756,37 @@ deprecatedclick.core.Command.deprecated
 builtins.function"builtins.function
 None *
 attrs
-Anyz35z36z37z38z39z310*ã
-resultcallback&click.core.MultiCommand.resultcallback"K
+Any*˛
+to_info_dict$click.core.MultiCommand.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*Å
+collect_usage_pieces,click.core.MultiCommand.collect_usage_pieces"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*Ñ
+format_options&click.core.MultiCommand.format_options"
+None*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*O
+	formatter@
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*Ù
+result_callback'click.core.MultiCommand.result_callback"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*<
 self2
 click.core.MultiCommand"click.core.MultiCommand*-
 replace
-builtins.bool"builtins.bool z35z36z37z38z39z310*ü
+builtins.bool"builtins.bool *Ü
 format_commands'click.core.MultiCommand.format_commands"
 None*<
 self2
@@ -548,11 +794,9 @@ deprecatedclick.core.Command.deprecated
 ctx(
 click.core.Context"click.core.Context*O
 	formatter@
-click.formatting.HelpFormatter"click.formatting.HelpFormatterz35z36z37z38z39z310*˜
-resolve_command'click.core.MultiCommand.resolve_command"⁄
-BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
-builtins.str"builtins.str(
-click.core.Command"click.core.CommandJ
+click.formatting.HelpFormatter"click.formatting.HelpFormatter*√
+
+parse_args"click.core.MultiCommand.parse_args"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*<
 self2
@@ -561,7 +805,30 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 click.core.Context"click.core.Context*T
 argsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz35z36z37z38z39z310*¿
+builtins.str"builtins.str"builtins.list*¢
+invokeclick.core.MultiCommand.invoke"
+Any*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*Ã
+resolve_command'click.core.MultiCommand.resolve_command"»
+ZTuple[Union[builtins.str,None],Union[click.core.Command,None],builtins.list[builtins.str]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneV
+Union[click.core.Command,None](
+click.core.Command"click.core.Command
+NoneJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ß
 get_command#click.core.MultiCommand.get_command"V
 Union[click.core.Command,None](
 click.core.Command"click.core.Command
@@ -571,26 +838,40 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 ctx(
 click.core.Context"click.core.Context**
 cmd_name
-builtins.str"builtins.strz35z36z37z38z39z310*ê
-list_commands%click.core.MultiCommand.list_commands"N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*<
+builtins.str"builtins.str*Û
+list_commands%click.core.MultiCommand.list_commands"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*<
 self2
 click.core.MultiCommand"click.core.MultiCommand*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310j35j36j37j38j39j310rs
-no_args_is_help'click.core.MultiCommand.no_args_is_help
-builtins.bool"builtins.bool*35*36*37*38*39*310rÅ
+click.core.Context"click.core.Context*Ô
+shell_complete&click.core.MultiCommand.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*<
+self2
+click.core.MultiCommand"click.core.MultiCommand*1
+ctx(
+click.core.Context"click.core.Context*,
+
+incomplete
+builtins.str"builtins.strr\
+allow_extra_args(click.core.MultiCommand.allow_extra_args
+builtins.bool"builtins.boolrj
+allow_interspersed_args/click.core.MultiCommand.allow_interspersed_args
+builtins.bool"builtins.boolrh
 invoke_without_command.click.core.MultiCommand.invoke_without_command
-builtins.bool"builtins.bool*35*36*37*38*39*310rw
+builtins.bool"builtins.boolr^
 subcommand_metavar*click.core.MultiCommand.subcommand_metavar
-builtins.str"builtins.str*35*36*37*38*39*310r_
+builtins.str"builtins.strrF
 chainclick.core.MultiCommand.chain
-builtins.bool"builtins.bool*35*36*37*38*39*310r†
-result_callback'click.core.MultiCommand.result_callbackK
+builtins.bool"builtins.boolr≈
+_result_callback(click.core.MultiCommand._result_callbackÜ
++Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310ß
-Groupclick.core.Group"click.core.MultiCommand*ƒ
+builtins.function"builtins.function
+NoneŸ
+Groupclick.core.Group"click.core.MultiCommand*±
 __init__click.core.Group.__init__"
 None*.
 self$
@@ -598,15 +879,17 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *„
-commands“
-:Union[builtins.dict[builtins.str,click.core.Command],None]á
+None *È
+commandsÿ
+^Union[builtins.dict[builtins.str,click.core.Command],typing.Sequence[click.core.Command],None]á
 .builtins.dict[builtins.str,click.core.Command]
 builtins.str"builtins.str(
-click.core.Command"click.core.Command"builtins.dict
+click.core.Command"click.core.Command"builtins.dict`
+#typing.Sequence[click.core.Command](
+click.core.Command"click.core.Command"typing.Sequence
 None *
 attrs
-Anyz35z36z37z38z39z310*É
+Any*Í
 add_commandclick.core.Group.add_command"
 None*.
 self$
@@ -616,7 +899,33 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z35z36z37z38z39z310*·
+None *í
+get_commandclick.core.Group.get_command"V
+Union[click.core.Command,None](
+click.core.Command"click.core.Command
+None*.
+self$
+click.core.Group"click.core.Group*1
+ctx(
+click.core.Context"click.core.Context**
+cmd_name
+builtins.str"builtins.str*ﬁ
+list_commandsclick.core.Group.list_commands"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*.
+self$
+click.core.Group"click.core.Group*1
+ctx(
+click.core.Context"click.core.Context2Â
+commandclick.core.Group.command‰
+commandclick.core.Group.command"(
+click.core.Command"click.core.Command*.
+self$
+click.core.Group"click.core.Group*U
+__funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:
+t.overloadXÿ
 commandclick.core.Group.command"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*.
@@ -625,7 +934,17 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 args
 Any*
 kwargs
-Anyz35z36z37z38z39z310*›
+Any0:
+t.overloadX2’
+groupclick.core.Group.group‹
+groupclick.core.Group.group"$
+click.core.Group"click.core.Group*.
+self$
+click.core.Group"click.core.Group*U
+__funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:
+t.overloadX‘
 groupclick.core.Group.group"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*.
@@ -634,12 +953,25 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 args
 Any*
 kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310r»
+Any0:
+t.overloadXr´
+command_classclick.core.Group.command_classz
+$Union[Type[click.core.Command],None]F
+Type[click.core.Command](
+click.core.Command"click.core.Command
+NonerÌ
+group_classclick.core.Group.group_classø
+6Union[Type[click.core.Group],Type[builtins.type],None]@
+Type[click.core.Group]$
+click.core.Group"click.core.Group7
+Type[builtins.type]
+builtins.type"builtins.type
+NonerØ
 commandsclick.core.Group.commandsá
 .builtins.dict[builtins.str,click.core.Command]
 builtins.str"builtins.str(
-click.core.Command"click.core.Command"builtins.dict*35*36*37*38*39*310∆
-CommandCollectionclick.core.CommandCollection"click.core.MultiCommand*¬
+click.core.Command"click.core.Command"builtins.dict†
+CommandCollectionclick.core.CommandCollection"click.core.MultiCommand*©
 __init__%click.core.CommandCollection.__init__"
 None*F
 self<
@@ -654,119 +986,56 @@ BTuple[builtins.str,click.core.Command,builtins.list[builtins.str]]
 click.core.MultiCommand"click.core.MultiCommand"builtins.list
 None *
 attrs
-Anyz35z36z37z38z39z310*„
+Any* 
 
 add_source'click.core.CommandCollection.add_source"
 None*F
 self<
 click.core.CommandCollection"click.core.CommandCollection*A
 	multi_cmd2
-click.core.MultiCommand"click.core.MultiCommandz35z36z37z38z39z310j35j36j37j38j39j310rµ
+click.core.MultiCommand"click.core.MultiCommand*∂
+get_command(click.core.CommandCollection.get_command"V
+Union[click.core.Command,None](
+click.core.Command"click.core.Command
+None*F
+self<
+click.core.CommandCollection"click.core.CommandCollection*1
+ctx(
+click.core.Context"click.core.Context**
+cmd_name
+builtins.str"builtins.str*Ç
+list_commands*click.core.CommandCollection.list_commands"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*F
+self<
+click.core.CommandCollection"click.core.CommandCollection*1
+ctx(
+click.core.Context"click.core.Contextrú
 sources$click.core.CommandCollection.sourcesk
 &builtins.list[click.core.MultiCommand]2
-click.core.MultiCommand"click.core.MultiCommand"builtins.list*35*36*37*38*39*310™
-
-_ParamTypeclick.core._ParamType"builtins.object*•
-__call__click.core._ParamType.__call__"
-Any*8
-self.
-click.core._ParamType"click.core._ParamType*O
-valueD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310*⁄
-get_metavar!click.core._ParamType.get_metavar"
-builtins.str"builtins.str*8
-self.
-click.core._ParamType"click.core._ParamType*7
-param,
-click.core.Parameter"click.core.Parameterz35z36z37z38z39z310*Í
-get_missing_message)click.core._ParamType.get_missing_message"
-builtins.str"builtins.str*8
-self.
-click.core._ParamType"click.core._ParamType*7
-param,
-click.core.Parameter"click.core.Parameterz35z36z37z38z39z310*˜
-convertclick.core._ParamType.convert"
-Any*8
-self.
-click.core._ParamType"click.core._ParamType*'
-value
-builtins.str"builtins.str*g
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None*_
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-Nonez35z36z37z38z39z310*É
-split_envvar_value(click.core._ParamType.split_envvar_value"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*8
-self.
-click.core._ParamType"click.core._ParamType*$
-rv
-builtins.str"builtins.strz35z36z37z38z39z310*¸
-failclick.core._ParamType.fail"
-NoReturn
-*8
-self.
-click.core._ParamType"click.core._ParamType*)
-message
-builtins.str"builtins.str*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None *a
-ctxV
-Union[click.core.Context,None](
-click.core.Context"click.core.Context
-None z35z36z37z38z39z310j35j36j37j38j39j310rY
-nameclick.core._ParamType.name
-builtins.str"builtins.str*35*36*37*38*39*310rk
-is_composite"click.core._ParamType.is_composite
-builtins.bool"builtins.bool*35*36*37*38*39*310r°
-envvar_list_splitter*click.core._ParamType.envvar_list_splitterD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*35*36*37*38*39*310ê9
-	Parameterclick.core.Parameter"builtins.object*Ô
+click.core.MultiCommand"click.core.MultiCommand"builtins.listŸA
+	Parameterclick.core.Parameter"builtins.object*ì
 __init__click.core.Parameter.__init__"
 None*6
 self,
 click.core.Parameter"click.core.Parameter*õ
 param_declsá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *ˇ
-typeÚ
-™Union[builtins.type,click.core._ParamType,builtins.tuple[Union[builtins.type,click.core._ParamType]],CallableType[builtins.function],CallableType[builtins.function],None]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamTypeÃ
-:builtins.tuple[Union[builtins.type,click.core._ParamType]]~
-*Union[builtins.type,click.core._ParamType]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamType"builtins.tupleK
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *x
+typel
+%Union[click.types.ParamType,Any,None].
+click.types.ParamType"click.types.ParamType
+Any
 None *.
 required
-builtins.bool"builtins.bool *5
-default&
-Union[Any,None]
-Any
+builtins.bool"builtins.bool *£
+defaultì
+/Union[Any,CallableType[builtins.function],None]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function
 None *ó
 callbackÜ
 +Union[CallableType[builtins.function],None]K
@@ -776,7 +1045,9 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 nargsD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *S
+None *.
+multiple
+builtins.bool"builtins.bool *S
 metavarD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -784,27 +1055,52 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 expose_value
 builtins.bool"builtins.bool *.
 is_eager
-builtins.bool"builtins.bool *ª
-envvar¨
-4Union[builtins.str,builtins.list[builtins.str],None]
-builtins.str"builtins.strJ
+builtins.bool"builtins.bool *¡
+envvar≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *ù
+shell_completeÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *¬
+to_info_dict!click.core.Parameter.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+self,
+click.core.Parameter"click.core.Parameter*}
+__repr__click.core.Parameter.__repr__"
+builtins.str"builtins.str*4
+self,
+click.core.Parameter"click.core.Parameter*≤
+_parse_decls!click.core.Parameter._parse_decls"π
+WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None z35z36z37z38z39z310*º
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*6
+self,
+click.core.Parameter"click.core.Parameter*Y
+declsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*0
+expose_value
+builtins.bool"builtins.bool*£
 human_readable_name(click.core.Parameter.human_readable_name"
 builtins.str"builtins.str*6
 self,
-click.core.Parameter"click.core.Parameter0:property`z35z36z37z38z39z310*†
+click.core.Parameter"click.core.Parameter0:property`*á
 make_metavar!click.core.Parameter.make_metavar"
 builtins.str"builtins.str*6
 self,
-click.core.Parameter"click.core.Parameterz35z36z37z38z39z310*º
-get_default click.core.Parameter.get_default"
-Any*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*Ö
+click.core.Parameter"click.core.Parameter*Ï
 add_to_parser"click.core.Parameter.add_to_parser"
 None*6
 self,
@@ -812,17 +1108,19 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 parser6
 click.parser.OptionParser"click.parser.OptionParser*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*£
-consume_value"click.core.Parameter.consume_value"
-Any*6
+click.core.Context"click.core.Context*Ò
+consume_value"click.core.Parameter.consume_value"l
+%Tuple[Any,click.core.ParameterSource]
+Any8
+click.core.ParameterSource"click.core.ParameterSource*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Context*a
-optsW
-builtins.dict[builtins.str,Any]
+click.core.Context"click.core.Context*c
+optsY
+ typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dictz35z36z37z38z39z310*ÿ
+Any"typing.Mapping*ø
 type_cast_value$click.core.Parameter.type_cast_value"
 Any*6
 self,
@@ -830,7 +1128,13 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 ctx(
 click.core.Context"click.core.Context*
 value
-Anyz35z36z37z38z39z310*‘
+Any*•
+value_is_missing%click.core.Parameter.value_is_missing"
+builtins.bool"builtins.bool*6
+self,
+click.core.Parameter"click.core.Parameter*
+value
+Any*ª
 process_value"click.core.Parameter.process_value"
 Any*6
 self,
@@ -838,36 +1142,23 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 ctx(
 click.core.Context"click.core.Context*
 value
-Anyz35z36z37z38z39z310*æ
-value_is_missing%click.core.Parameter.value_is_missing"
-builtins.bool"builtins.bool*6
-self,
-click.core.Parameter"click.core.Parameter*
-value
-Anyz35z36z37z38z39z310*ﬁ
-full_process_value'click.core.Parameter.full_process_value"
-Any*6
+Any*Ú
+resolve_envvar_value)click.core.Parameter.resolve_envvar_value"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Context*
-value
-Anyz35z36z37z38z39z310*„
-resolve_envvar_value)click.core.Parameter.resolve_envvar_value"
-builtins.str"builtins.str*6
+click.core.Context"click.core.Context*Œ
+value_from_envvar&click.core.Parameter.value_from_envvar"&
+Union[Any,None]
+Any
+None*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*ﬂ
-value_from_envvar&click.core.Parameter.value_from_envvar"ù
-/Union[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*6
-self,
-click.core.Parameter"click.core.Parameter*1
-ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*˝
+click.core.Context"click.core.Context*Ê
 handle_parse_result(click.core.Parameter.handle_parse_result"
 &Tuple[Any,builtins.list[builtins.str]]
 AnyJ
@@ -876,91 +1167,147 @@ _ParamTypeclick.core._ParamType"builtins.object*•
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Context*a
-optsW
-builtins.dict[builtins.str,Any]
+click.core.Context"click.core.Context*c
+optsY
+ typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*T
+Any"typing.Mapping*T
 argsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listz35z36z37z38z39z310*ù
-get_help_record$click.core.Parameter.get_help_record"`
+builtins.str"builtins.str"builtins.list*¡
+get_help_record$click.core.Parameter.get_help_record"ú
+,Union[Tuple[builtins.str,builtins.str],None]`
  Tuple[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str*6
+builtins.str"builtins.str
+None*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*â
+click.core.Context"click.core.Context*
 get_usage_pieces%click.core.Parameter.get_usage_pieces"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310*◊
+click.core.Context"click.core.Context*æ
 get_error_hint#click.core.Parameter.get_error_hint"
 builtins.str"builtins.str*6
 self,
 click.core.Parameter"click.core.Parameter*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310j35j36j37j38j39j310rn
+click.core.Context"click.core.Context*Ê
+shell_complete#click.core.Parameter.shell_complete"ï
+4builtins.list[click.shell_completion.CompletionItem]N
+%click.shell_completion.CompletionItem"%click.shell_completion.CompletionItem"builtins.list*6
+self,
+click.core.Parameter"click.core.Parameter*1
+ctx(
+click.core.Context"click.core.Context*,
+
+incomplete
+builtins.str"builtins.str2ª
+get_default click.core.Parameter.get_defaultö
+get_default click.core.Parameter.get_default"&
+Union[Any,None]
+Any
+None*6
+self,
+click.core.Parameter"click.core.Parameter*1
+ctx(
+click.core.Context"click.core.Context*F
+call:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadXÏ
+get_default click.core.Parameter.get_default"ì
+/Union[Any,CallableType[builtins.function],None]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*6
+self,
+click.core.Parameter"click.core.Parameter*1
+ctx(
+click.core.Context"click.core.Context**
+call
+builtins.bool"builtins.bool 0:
+t.overloadXrU
 param_type_name$click.core.Parameter.param_type_name
-builtins.str"builtins.str*35*36*37*38*39*310rX
-nameclick.core.Parameter.name
-builtins.str"builtins.str*35*36*37*38*39*310rÜ
+builtins.str"builtins.strrg
+nameclick.core.Parameter.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerm
 optsclick.core.Parameter.optsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rö
+builtins.str"builtins.str"builtins.listrÅ
 secondary_opts#click.core.Parameter.secondary_optsJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*35*36*37*38*39*310rj
+builtins.str"builtins.str"builtins.listrQ
 typeclick.core.Parameter.type.
-click.core._ParamType"click.core._ParamType*35*36*37*38*39*310rb
+click.types.ParamType"click.types.ParamTyperI
 requiredclick.core.Parameter.required
-builtins.bool"builtins.bool*35*36*37*38*39*310rÀ
+builtins.bool"builtins.boolr≤
 callbackclick.core.Parameter.callbackÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None*35*36*37*38*39*310rZ
+NonerA
 nargsclick.core.Parameter.nargs
-builtins.int"builtins.int*35*36*37*38*39*310rb
+builtins.int"builtins.intrI
 multipleclick.core.Parameter.multiple
-builtins.bool"builtins.bool*35*36*37*38*39*310rj
+builtins.bool"builtins.boolrQ
 expose_value!click.core.Parameter.expose_value
-builtins.bool"builtins.bool*35*36*37*38*39*310rI
-defaultclick.core.Parameter.default
-Any*35*36*37*38*39*310rb
+builtins.bool"builtins.boolrΩ
+defaultclick.core.Parameter.defaultì
+/Union[Any,CallableType[builtins.function],None]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NonerI
 is_eagerclick.core.Parameter.is_eager
-builtins.bool"builtins.bool*35*36*37*38*39*310rÜ
+builtins.bool"builtins.boolrm
 metavarclick.core.Parameter.metavarD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310rÌ
-envvarclick.core.Parameter.envvar¨
-4Union[builtins.str,builtins.list[builtins.str],None]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list
-None*35*36*37*38*39*310Û
-Optionclick.core.Option"click.core.Parameter*”
+Noner⁄
+envvarclick.core.Parameter.envvar≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+NonerŒ
+_custom_shell_complete+click.core.Parameter._custom_shell_completeÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None…/
+Optionclick.core.Option"click.core.Parameter*É
 __init__click.core.Option.__init__"
 None*0
 self&
 click.core.Option"click.core.Option*õ
 param_declsá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *2
-show_default
-builtins.bool"builtins.bool *q
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *Ü
+show_defaultr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None *q
 promptc
 !Union[builtins.bool,builtins.str]
 builtins.bool"builtins.bool
-builtins.str"builtins.str *9
-confirmation_prompt
+builtins.str"builtins.str *~
+confirmation_promptc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *5
+prompt_required
 builtins.bool"builtins.bool *0
 
 hide_input
@@ -979,19 +1326,11 @@ flag_value&
 count
 builtins.bool"builtins.bool *8
 allow_from_autoenv
-builtins.bool"builtins.bool *ˇ
-typeÚ
-™Union[builtins.type,click.core._ParamType,builtins.tuple[Union[builtins.type,click.core._ParamType]],CallableType[builtins.function],CallableType[builtins.function],None]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamTypeÃ
-:builtins.tuple[Union[builtins.type,click.core._ParamType]]~
-*Union[builtins.type,click.core._ParamType]
-builtins.type"builtins.type.
-click.core._ParamType"click.core._ParamType"builtins.tupleK
-CallableType[builtins.function]&
-builtins.function"builtins.functionK
-CallableType[builtins.function]&
-builtins.function"builtins.function
+builtins.bool"builtins.bool *x
+typel
+%Union[click.types.ParamType,Any,None].
+click.types.ParamType"click.types.ParamType
+Any
 None *P
 helpD
 Union[builtins.str,None]
@@ -1004,89 +1343,263 @@ flag_value&
 show_envvar
 builtins.bool"builtins.bool *
 attrs
-Anyz35z36z37z38z39z310*Ω
+Any*π
+to_info_dictclick.core.Option.to_info_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*0
+self&
+click.core.Option"click.core.Option*©
+_parse_declsclick.core.Option._parse_decls"π
+WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*0
+self&
+click.core.Option"click.core.Option*Y
+declsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*0
+expose_value
+builtins.bool"builtins.bool*„
+add_to_parserclick.core.Option.add_to_parser"
+None*0
+self&
+click.core.Option"click.core.Option*B
+parser6
+click.parser.OptionParser"click.parser.OptionParser*1
+ctx(
+click.core.Context"click.core.Context*∏
+get_help_record!click.core.Option.get_help_record"ú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context*§
 prompt_for_value"click.core.Option.prompt_for_value"
 Any*0
 self&
 click.core.Option"click.core.Option*1
 ctx(
-click.core.Context"click.core.Contextz35z36z37z38z39z310j35j36j37j38j39j310rY
-promptclick.core.Option.prompt
-builtins.str"builtins.str*35*36*37*38*39*310ru
-confirmation_prompt%click.core.Option.confirmation_prompt
-builtins.bool"builtins.bool*35*36*37*38*39*310rc
+click.core.Context"click.core.Context*È
+resolve_envvar_value&click.core.Option.resolve_envvar_value"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context*≈
+value_from_envvar#click.core.Option.value_from_envvar"&
+Union[Any,None]
+Any
+None*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context*†
+consume_valueclick.core.Option.consume_value"l
+%Tuple[Any,click.core.ParameterSource]
+Any8
+click.core.ParameterSource"click.core.ParameterSource*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context*ö
+optsè
+1typing.Mapping[builtins.str,click.core.Parameter]
+builtins.str"builtins.str,
+click.core.Parameter"click.core.Parameter"typing.Mapping2¶
+get_defaultclick.core.Option.get_defaultë
+get_defaultclick.core.Option.get_default"&
+Union[Any,None]
+Any
+None*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context*F
+call:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX„
+get_defaultclick.core.Option.get_default"ì
+/Union[Any,CallableType[builtins.function],None]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*0
+self&
+click.core.Option"click.core.Option*1
+ctx(
+click.core.Context"click.core.Context**
+call
+builtins.bool"builtins.bool 0:
+t.overloadXrR
+param_type_name!click.core.Option.param_type_name
+builtins.str"builtins.strrh
+promptclick.core.Option.promptD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner°
+confirmation_prompt%click.core.Option.confirmation_promptc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.strrT
+prompt_required!click.core.Option.prompt_required
+builtins.bool"builtins.boolrJ
 
 hide_inputclick.core.Option.hide_input
-builtins.bool"builtins.bool*35*36*37*38*39*310r]
+builtins.bool"builtins.boolrB
+hiddenclick.core.Option.hidden
+builtins.bool"builtins.boolrX
+_flag_needs_value#click.core.Option._flag_needs_value
+builtins.bool"builtins.boolr´
+defaultclick.core.Option.defaultÑ
+*Union[Any,CallableType[builtins.function]]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrD
 is_flagclick.core.Option.is_flag
-builtins.bool"builtins.bool*35*36*37*38*39*310rL
+builtins.bool"builtins.boolrN
+is_bool_flagclick.core.Option.is_bool_flag
+builtins.bool"builtins.boolr3
 
 flag_valueclick.core.Option.flag_value
-Any*35*36*37*38*39*310rg
-is_bool_flagclick.core.Option.is_bool_flag
-builtins.bool"builtins.bool*35*36*37*38*39*310rY
+Anyr@
 countclick.core.Option.count
-builtins.bool"builtins.bool*35*36*37*38*39*310r_
-multipleclick.core.Option.multiple
-builtins.bool"builtins.bool*35*36*37*38*39*310rs
+builtins.bool"builtins.boolrZ
 allow_from_autoenv$click.core.Option.allow_from_autoenv
-builtins.bool"builtins.bool*35*36*37*38*39*310r}
+builtins.bool"builtins.boolrd
 helpclick.core.Option.helpD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310r[
-hiddenclick.core.Option.hidden
-builtins.bool"builtins.bool*35*36*37*38*39*310rg
-show_defaultclick.core.Option.show_default
-builtins.bool"builtins.bool*35*36*37*38*39*310rg
+Noner¢
+show_defaultclick.core.Option.show_defaultr
+&Union[builtins.bool,builtins.str,None]
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+NonerN
 show_choicesclick.core.Option.show_choices
-builtins.bool"builtins.bool*35*36*37*38*39*310re
+builtins.bool"builtins.boolrL
 show_envvarclick.core.Option.show_envvar
-builtins.bool"builtins.bool*35*36*37*38*39*310›
-Argumentclick.core.Argument"click.core.Parameter*å
+builtins.bool"builtins.bool∫
+Argumentclick.core.Argument"click.core.Parameter*∂
 __init__click.core.Argument.__init__"
 None*4
 self*
-click.core.Argument"click.core.Argument*õ
-param_declsá
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *W
+click.core.Argument"click.core.Argument*_
+param_declsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*W
 requiredG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
 None *
 attrs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310Û
-invoke_param_callback click.core.invoke_param_callback"
-Any*Y
-callbackK
-CallableType[builtins.function]&
-builtins.function"builtins.function*1
-ctx(
-click.core.Context"click.core.Context*7
-param,
-click.core.Parameter"click.core.Parameter*O
-valueD
+Any*†
+human_readable_name'click.core.Argument.human_readable_name"
+builtins.str"builtins.str*4
+self*
+click.core.Argument"click.core.Argument0:property`*Ñ
+make_metavar click.core.Argument.make_metavar"
+builtins.str"builtins.str*4
+self*
+click.core.Argument"click.core.Argument*Ø
+_parse_decls click.core.Argument._parse_decls"π
+WTuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]D
 Union[builtins.str,None]
 builtins.str"builtins.str
-Nonez35z36z37z38z39z310Æ
-augment_usage_errorsclick.core.augment_usage_errors">
-typing.ContextManager[None]
-None"typing.ContextManager*1
+NoneJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*4
+self*
+click.core.Argument"click.core.Argument*Y
+declsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*0
+expose_value
+builtins.bool"builtins.bool*Ì
+get_usage_pieces$click.core.Argument.get_usage_pieces"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*4
+self*
+click.core.Argument"click.core.Argument*1
 ctx(
-click.core.Context"click.core.Context*i
-param\
- Union[click.core.Parameter,None],
-click.core.Parameter"click.core.Parameter
-None z35z36z37z38z39z310¡
-iter_params_for_processing%click.core.iter_params_for_processing"f
-%typing.Iterable[click.core.Parameter],
-click.core.Parameter"click.core.Parameter"typing.Iterable*|
+click.core.Context"click.core.Context*ª
+get_error_hint"click.core.Argument.get_error_hint"
+builtins.str"builtins.str*4
+self*
+click.core.Argument"click.core.Argument*1
+ctx(
+click.core.Context"click.core.Context*È
+add_to_parser!click.core.Argument.add_to_parser"
+None*4
+self*
+click.core.Argument"click.core.Argument*B
+parser6
+click.parser.OptionParser"click.parser.OptionParser*1
+ctx(
+click.core.Context"click.core.ContextrT
+param_type_name#click.core.Argument.param_type_name
+builtins.str"builtins.str]
+_gettext.gettext"
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strÂ
+_complete_visible_commands%click.core._complete_visible_commands"æ
+7typing.Iterator[Tuple[builtins.str,click.core.Command]]r
+&Tuple[builtins.str,click.core.Command]
+builtins.str"builtins.str(
+click.core.Command"click.core.Command"typing.Iterator*1
+ctx(
+click.core.Context"click.core.Context*,
+
+incomplete
+builtins.str"builtins.strî
+_check_multicommandclick.core._check_multicommand"
+None*D
+base_command2
+click.core.MultiCommand"click.core.MultiCommand**
+cmd_name
+builtins.str"builtins.str*1
+cmd(
+click.core.Command"click.core.Command*.
+register
+builtins.bool"builtins.bool ô
+batchclick.core.batch"~
++builtins.list[builtins.tuple[click.core.V]]@
+builtins.tuple[click.core.V]
+click.core.V"builtins.tuple"builtins.list*P
+iterableB
+typing.Iterable[click.core.V]
+click.core.V"typing.Iterable*,
+
+batch_size
+builtins.int"builtins.int§
+iter_params_for_processing%click.core.iter_params_for_processing"b
+#builtins.list[click.core.Parameter],
+click.core.Parameter"click.core.Parameter"builtins.list*|
 invocation_orderf
 %typing.Sequence[click.core.Parameter],
 click.core.Parameter"click.core.Parameter"typing.Sequence*}
 declaration_orderf
-%typing.Iterable[click.core.Parameter],
-click.core.Parameter"click.core.Parameter"typing.Iterablez35z36z37z38z39z310
+%typing.Sequence[click.core.Parameter],
+click.core.Parameter"click.core.Parameter"typing.Sequencek
+_check_iterclick.core._check_iter"0
+typing.Iterator[Any]
+Any"typing.Iterator*
+value
+Any*
+ttyping *
+tetyping_extensions 

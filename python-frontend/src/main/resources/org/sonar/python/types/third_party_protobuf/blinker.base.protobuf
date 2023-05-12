@@ -1,0 +1,284 @@
+
+blinker.baseÅC
+Signalblinker.base.Signal"builtins.object*¯
+receiver_connected&blinker.base.Signal.receiver_connected"*
+blinker.base.Signal"blinker.base.Signal*4
+self*
+blinker.base.Signal"blinker.base.Signal0:lazy_property*µ
+receiver_disconnected)blinker.base.Signal.receiver_disconnected"*
+blinker.base.Signal"blinker.base.Signal*4
+self*
+blinker.base.Signal"blinker.base.Signal0:lazy_property*¹
+__init__blinker.base.Signal.__init__"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*O
+docD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ç
+connectblinker.base.Signal.connect"
+blinker.base.T_callable*4
+self*
+blinker.base.Signal"blinker.base.Signal*)
+receiver
+blinker.base.T_callable*
+sender
+Any **
+weak
+builtins.bool"builtins.bool *ò
+connect_viablinker.base.Signal.connect_via"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any**
+weak
+builtins.bool"builtins.bool *¾
+connected_to blinker.base.Signal.connected_to"R
+ typing.Generator[None,None,None]
+None
+None
+None"typing.Generator*4
+self*
+blinker.base.Signal"blinker.base.Signal*Y
+receiverK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+sender
+Any 0:contextmanager*¾
+mutedblinker.base.Signal.muted"R
+ typing.Generator[None,None,None]
+None
+None
+None"typing.Generator*4
+self*
+blinker.base.Signal"blinker.base.Signal0:contextmanager*°
+temporarily_connected_to,blinker.base.Signal.temporarily_connected_to">
+typing.ContextManager[None]
+None"typing.ContextManager*4
+self*
+blinker.base.Signal"blinker.base.Signal*Y
+receiverK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+sender
+Any *Ï
+sendblinker.base.Signal.send"Ñ
+9builtins.list[Tuple[CallableType[builtins.function],Any]]„
+*Tuple[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.list*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any*ø
+_async_wrapperá
+6Union[TypeAlias[CallableType[builtins.function]],None]š
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"blinker.base.AsyncWrapperType
+None *
+kwargs
+Any*×
+
+send_asyncblinker.base.Signal.send_async"Í
+Styping.Coroutine[Any,Any,builtins.list[Tuple[CallableType[builtins.function],Any]]]
+Any
+AnyÑ
+9builtins.list[Tuple[CallableType[builtins.function],Any]]„
+*Tuple[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.list"typing.Coroutine*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any*ö
+_sync_wrapperà
+6Union[TypeAlias[CallableType[builtins.function]],None]™
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"blinker.base.SyncWrapperType
+None *
+kwargs
+AnyH*Š
+_extract_sender#blinker.base.Signal._extract_sender"
+Any*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any*¥
+has_receivers_for%blinker.base.Signal.has_receivers_for"
+builtins.bool"builtins.bool*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any*„
+receivers_for!blinker.base.Signal.receivers_for"„
+ityping.Generator[Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref],None,None]ğ
+MUnion[CallableType[builtins.function],blinker._utilities.annotatable_weakref]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionP
+&blinker._utilities.annotatable_weakref"&blinker._utilities.annotatable_weakref
+None
+None"typing.Generator*4
+self*
+blinker.base.Signal"blinker.base.Signal*
+sender
+Any*Ş
+
+disconnectblinker.base.Signal.disconnect"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*Y
+receiverK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+sender
+Any *Ä
+_disconnectblinker.base.Signal._disconnect"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*é
+receiver_id×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityType*ç
+	sender_id×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityType*Ş
+_cleanup_receiver%blinker.base.Signal._cleanup_receiver"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*b
+receiver_refP
+&blinker._utilities.annotatable_weakref"&blinker._utilities.annotatable_weakref*Ø
+_cleanup_sender#blinker.base.Signal._cleanup_sender"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*`
+
+sender_refP
+&blinker._utilities.annotatable_weakref"&blinker._utilities.annotatable_weakref*€
+_cleanup_bookkeeping(blinker.base.Signal._cleanup_bookkeeping"
+None*4
+self*
+blinker.base.Signal"blinker.base.Signal*p
+_clear_state blinker.base.Signal._clear_state"
+None*4
+self*
+blinker.base.Signal"blinker.base.SignalrV
+ANYblinker.base.Signal.ANY6
+blinker._utilities.symbol"blinker._utilities.symbolrµ
+	receiversblinker.base.Signal.receiversˆ
+©builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref]]×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityTypeğ
+MUnion[CallableType[builtins.function],blinker._utilities.annotatable_weakref]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionP
+&blinker._utilities.annotatable_weakref"&blinker._utilities.annotatable_weakref"builtins.dictrH
+is_mutedblinker.base.Signal.is_muted
+builtins.bool"builtins.boolrä
+_by_receiver blinker.base.Signal._by_receiver±
+|builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],builtins.set[TypeAlias[Unknown]]]×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityTypeH
+ builtins.set[TypeAlias[Unknown]]
+TypeAlias[Unknown]"builtins.set"builtins.dictrà
+
+_by_senderblinker.base.Signal._by_sender±
+|builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],builtins.set[TypeAlias[Unknown]]]×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityTypeH
+ builtins.set[TypeAlias[Unknown]]
+TypeAlias[Unknown]"builtins.set"builtins.dictrõ
+_weak_senders!blinker.base.Signal._weak_sendersÀ
+‚builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],blinker._utilities.annotatable_weakref]×
+LTypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]ã
+AUnion[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int"blinker._utilities.IdentityTypeP
+&blinker._utilities.annotatable_weakref"&blinker._utilities.annotatable_weakref"builtins.dict€
+NamedSignalblinker.base.NamedSignal"blinker.base.Signal*ğ
+__init__!blinker.base.NamedSignal.__init__"
+None*>
+self4
+blinker.base.NamedSignal"blinker.base.NamedSignal*&
+name
+builtins.str"builtins.str*O
+docD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‰
+__repr__!blinker.base.NamedSignal.__repr__"
+builtins.str"builtins.str*<
+self4
+blinker.base.NamedSignal"blinker.base.NamedSignalrC
+nameblinker.base.NamedSignal.name
+builtins.str"builtins.strÇ
+	Namespaceblinker.base.Namespace"builtins.dict*’
+signalblinker.base.Namespace.signal"4
+blinker.base.NamedSignal"blinker.base.NamedSignal*:
+self0
+blinker.base.Namespace"blinker.base.Namespace*&
+name
+builtins.str"builtins.str*O
+docD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None é
+WeakNamespaceblinker.base.WeakNamespace"weakref.WeakValueDictionary*
+signal!blinker.base.WeakNamespace.signal"4
+blinker.base.NamedSignal"blinker.base.NamedSignal*B
+self8
+blinker.base.WeakNamespace"blinker.base.WeakNamespace*&
+name
+builtins.str"builtins.str*O
+docD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+ttyping *
+tetyping_extensions *O
+Pblinker.base.P:
+typing_extensions.ParamSpec"typing_extensions.ParamSpec*O
+ANYblinker.base.ANY6
+blinker._utilities.symbol"blinker._utilities.symbol*;
+ANY_IDblinker.base.ANY_ID
+builtins.int"builtins.int*a
+receiver_connectedblinker.base.receiver_connected*
+blinker.base.Signal"blinker.base.Signal*j
+signalblinker.base.signalK
+CallableType[builtins.function]&
+builtins.function"builtins.function

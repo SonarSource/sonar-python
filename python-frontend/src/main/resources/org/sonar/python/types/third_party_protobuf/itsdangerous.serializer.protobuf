@@ -1,0 +1,286 @@
+
+itsdangerous.serializerZ
+
+Serializer"itsdangerous.serializer.Serializer"builtins.object*Ù
+__init__+itsdangerous.serializer.Serializer.__init__"
+None*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*¬
+
+secret_key›
+cTypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]Š
+XUnion[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]“
+>typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]¿
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"$itsdangerous.serializer._t_str_bytes"typing.Iterable
+TypeAlias[Unknown]"%itsdangerous.serializer._t_secret_key*ä
+salt×
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None"(itsdangerous.serializer._t_opt_str_bytes *8
+
+serializer&
+Union[Any,None]
+Any
+None *¬
+serializer_kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *©
+signerš
+,Union[Type[itsdangerous.signer.Signer],None]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer
+None *¨
+signer_kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ë
+fallback_signersÒ
+¥Union[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]],None]›
+™builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]í
+ŠUnion[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]ª
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"!itsdangerous.serializer._t_kwargs–
+ETuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]²
++TypeAlias[Type[itsdangerous.signer.Signer]]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"!itsdangerous.serializer._t_signer
+TypeAlias[Unknown]
+TypeAlias[Unknown]"builtins.list
+None *¿
+
+secret_key-itsdangerous.serializer.Serializer.secret_key" 
+builtins.bytes"builtins.bytes*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer0:property`*…
+load_payload/itsdangerous.serializer.Serializer.load_payload"
+Any*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*-
+payload 
+builtins.bytes"builtins.bytes*8
+
+serializer&
+Union[Any,None]
+Any
+None *Ç
+dump_payload/itsdangerous.serializer.Serializer.dump_payload" 
+builtins.bytes"builtins.bytes*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*
+obj
+Any*Ï
+make_signer.itsdangerous.serializer.Serializer.make_signer"8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *•
+iter_unsigners1itsdangerous.serializer.Serializer.iter_unsigners"x
++typing.Iterator[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"typing.Iterator*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *İ
+dumps(itsdangerous.serializer.Serializer.dumps"¿
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"$itsdangerous.serializer._t_str_bytes*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*
+obj
+Any*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *Ğ
+dump'itsdangerous.serializer.Serializer.dump"
+None*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*
+obj
+Any*+
+f$
+typing.IO[Any]
+Any"	typing.IO*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *ñ
+loads(itsdangerous.serializer.Serializer.loads"
+Any*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*Ç
+s¿
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"$itsdangerous.serializer._t_str_bytes*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *
+kwargs
+Any*½
+load'itsdangerous.serializer.Serializer.load"
+Any*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*+
+f$
+typing.IO[Any]
+Any"	typing.IO*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *ú
+loads_unsafe/itsdangerous.serializer.Serializer.loads_unsafe"–
+#TypeAlias[Tuple[builtins.bool,Any]]E
+Tuple[builtins.bool,Any]
+builtins.bool"builtins.bool
+Any"&itsdangerous.serializer._t_load_unsafe*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*Ç
+s¿
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"$itsdangerous.serializer._t_str_bytes*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *Á
+_loads_unsafe_impl5itsdangerous.serializer.Serializer._loads_unsafe_impl"–
+#TypeAlias[Tuple[builtins.bool,Any]]E
+Tuple[builtins.bool,Any]
+builtins.bool"builtins.bool
+Any"&itsdangerous.serializer._t_load_unsafe*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*Ç
+s¿
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"$itsdangerous.serializer._t_str_bytes*â
+salt×
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None"(itsdangerous.serializer._t_opt_str_bytes*¦
+load_kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *®
+load_payload_kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Û
+load_unsafe.itsdangerous.serializer.Serializer.load_unsafe"–
+#TypeAlias[Tuple[builtins.bool,Any]]E
+Tuple[builtins.bool,Any]
+builtins.bool"builtins.bool
+Any"&itsdangerous.serializer._t_load_unsafe*R
+selfH
+"itsdangerous.serializer.Serializer""itsdangerous.serializer.Serializer*+
+f$
+typing.IO[Any]
+Any"	typing.IO*
+saltu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None rT
+default_serializer5itsdangerous.serializer.Serializer.default_serializer
+Anyrø
+default_signer1itsdangerous.serializer.Serializer.default_signer²
++TypeAlias[Type[itsdangerous.signer.Signer]]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"!itsdangerous.serializer._t_signerrÇ
+default_fallback_signers;itsdangerous.serializer.Serializer.default_fallback_signersí
+¤TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]]›
+™builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]í
+ŠUnion[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]ª
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"!itsdangerous.serializer._t_kwargs–
+ETuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]²
++TypeAlias[Type[itsdangerous.signer.Signer]]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"!itsdangerous.serializer._t_signer
+TypeAlias[Unknown]
+TypeAlias[Unknown]"builtins.list"$itsdangerous.serializer._t_fallbacksr
+secret_keys.itsdangerous.serializer.Serializer.secret_keysP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.listr{
+salt'itsdangerous.serializer.Serializer.saltJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+NonerD
+
+serializer-itsdangerous.serializer.Serializer.serializer
+Anyrk
+is_text_serializer5itsdangerous.serializer.Serializer.is_text_serializer
+builtins.bool"builtins.boolrè
+signer)itsdangerous.serializer.Serializer.signer²
++TypeAlias[Type[itsdangerous.signer.Signer]]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"!itsdangerous.serializer._t_signerrî
+signer_kwargs0itsdangerous.serializer.Serializer.signer_kwargsª
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"!itsdangerous.serializer._t_kwargsr·
+fallback_signers3itsdangerous.serializer.Serializer.fallback_signersí
+¤TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]]›
+™builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]í
+ŠUnion[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]ª
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"!itsdangerous.serializer._t_kwargs–
+ETuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]²
++TypeAlias[Type[itsdangerous.signer.Signer]]^
+ Type[itsdangerous.signer.Signer]8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer"!itsdangerous.serializer._t_signer
+TypeAlias[Unknown]
+TypeAlias[Unknown]"builtins.list"$itsdangerous.serializer._t_fallbacksrö
+serializer_kwargs4itsdangerous.serializer.Serializer.serializer_kwargsª
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"!itsdangerous.serializer._t_kwargsy
+is_text_serializer*itsdangerous.serializer.is_text_serializer"
+builtins.bool"builtins.bool*
+
+serializer
+Any*
+_ttyping 

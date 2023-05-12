@@ -1,0 +1,186 @@
+
+itsdangerous.signer¨
+SigningAlgorithm$itsdangerous.signer.SigningAlgorithm"builtins.object*•
+get_signature2itsdangerous.signer.SigningAlgorithm.get_signature" 
+builtins.bytes"builtins.bytes*V
+selfL
+$itsdangerous.signer.SigningAlgorithm"$itsdangerous.signer.SigningAlgorithm*)
+key 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytes*Ä
+verify_signature5itsdangerous.signer.SigningAlgorithm.verify_signature"
+builtins.bool"builtins.bool*V
+selfL
+$itsdangerous.signer.SigningAlgorithm"$itsdangerous.signer.SigningAlgorithm*)
+key 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytes*)
+sig 
+builtins.bytes"builtins.bytesç
+NoneAlgorithm!itsdangerous.signer.NoneAlgorithm"$itsdangerous.signer.SigningAlgorithm*Œ
+get_signature/itsdangerous.signer.NoneAlgorithm.get_signature" 
+builtins.bytes"builtins.bytes*P
+selfF
+!itsdangerous.signer.NoneAlgorithm"!itsdangerous.signer.NoneAlgorithm*)
+key 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytesß
+HMACAlgorithm!itsdangerous.signer.HMACAlgorithm"$itsdangerous.signer.SigningAlgorithm*Ï
+__init__*itsdangerous.signer.HMACAlgorithm.__init__"
+None*P
+selfF
+!itsdangerous.signer.HMACAlgorithm"!itsdangerous.signer.HMACAlgorithm*;
+digest_method&
+Union[Any,None]
+Any
+None *Œ
+get_signature/itsdangerous.signer.HMACAlgorithm.get_signature" 
+builtins.bytes"builtins.bytes*P
+selfF
+!itsdangerous.signer.HMACAlgorithm"!itsdangerous.signer.HMACAlgorithm*)
+key 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytesrY
+default_digest_method7itsdangerous.signer.HMACAlgorithm.default_digest_method
+AnyrI
+digest_method/itsdangerous.signer.HMACAlgorithm.digest_method
+AnyÚ$
+Signeritsdangerous.signer.Signer"builtins.object*‹
+__init__#itsdangerous.signer.Signer.__init__"
+None*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*¤
+
+secret_key“
+cTypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]†
+XUnion[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]
+>typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes"typing.Iterable
+TypeAlias[Unknown]"!itsdangerous.signer._t_secret_key*à
+saltÓ
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None"$itsdangerous.signer._t_opt_str_bytes *Ç
+sep»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes *Z
+key_derivationD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *;
+digest_method&
+Union[Any,None]
+Any
+None *ž
+	algorithmŒ
+0Union[itsdangerous.signer.SigningAlgorithm,None]L
+$itsdangerous.signer.SigningAlgorithm"$itsdangerous.signer.SigningAlgorithm
+None *§
+
+secret_key%itsdangerous.signer.Signer.secret_key" 
+builtins.bytes"builtins.bytes*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer0:property`*£
+
+derive_key%itsdangerous.signer.Signer.derive_key" 
+builtins.bytes"builtins.bytes*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*‡
+
+secret_keyu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *é
+get_signature(itsdangerous.signer.Signer.get_signature" 
+builtins.bytes"builtins.bytes*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*Ç
+value»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes*×
+signitsdangerous.signer.Signer.sign" 
+builtins.bytes"builtins.bytes*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*Ç
+value»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes*µ
+verify_signature+itsdangerous.signer.Signer.verify_signature"
+builtins.bool"builtins.bool*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*Ç
+value»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes*Å
+sig»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes*â
+unsign!itsdangerous.signer.Signer.unsign" 
+builtins.bytes"builtins.bytes*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*Î
+signed_value»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes*ä
+validate#itsdangerous.signer.Signer.validate"
+builtins.bool"builtins.bool*B
+self8
+itsdangerous.signer.Signer"itsdangerous.signer.Signer*Î
+signed_value»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytesrR
+default_digest_method0itsdangerous.signer.Signer.default_digest_method
+Anyri
+default_key_derivation1itsdangerous.signer.Signer.default_key_derivation
+builtins.str"builtins.strr‡
+secret_keys&itsdangerous.signer.Signer.secret_keysP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.listrG
+sepitsdangerous.signer.Signer.sep 
+builtins.bytes"builtins.bytesrI
+saltitsdangerous.signer.Signer.salt 
+builtins.bytes"builtins.bytesrY
+key_derivation)itsdangerous.signer.Signer.key_derivation
+builtins.str"builtins.strrB
+digest_method(itsdangerous.signer.Signer.digest_method
+Anyr
+	algorithm$itsdangerous.signer.Signer.algorithmL
+$itsdangerous.signer.SigningAlgorithm"$itsdangerous.signer.SigningAlgorithm¯
+_make_keys_list#itsdangerous.signer._make_keys_list"P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*¤
+
+secret_key“
+cTypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]†
+XUnion[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]
+>typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]»
+-TypeAlias[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes" itsdangerous.signer._t_str_bytes"typing.Iterable
+TypeAlias[Unknown]"!itsdangerous.signer._t_secret_key*
+_ttyping 

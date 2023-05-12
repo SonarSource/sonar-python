@@ -1,485 +1,0 @@
-
-redis.connection¢
-
-BaseParserredis.connection.BaseParser"builtins.object*g
-parse_error'redis.connection.BaseParser.parse_error*
-self*
-responsez35z36z37z38z39z310j35j36j37j38j39j310rd
-EXCEPTION_CLASSES-redis.connection.BaseParser.EXCEPTION_CLASSES
-Any*35*36*37*38*39*310ƒ	
-SocketBufferredis.connection.SocketBuffer"builtins.object*ð
-__init__&redis.connection.SocketBuffer.__init__"
-None*H
-self>
-redis.connection.SocketBuffer"redis.connection.SocketBuffer*
-socket
-Any*
-socket_read_size
-Any*
-socket_timeout
-Anyz35z36z37z38z39z310*_
-length$redis.connection.SocketBuffer.length*
-self0:property`z35z36z37z38z39z310*Y
-read"redis.connection.SocketBuffer.read*
-self*
-
-lengthz35z36z37z38z39z310*U
-readline&redis.connection.SocketBuffer.readline*
-selfz35z36z37z38z39z310*O
-purge#redis.connection.SocketBuffer.purge*
-selfz35z36z37z38z39z310*O
-close#redis.connection.SocketBuffer.close*
-selfz35z36z37z38z39z310*b
-can_read&redis.connection.SocketBuffer.can_read*
-self*
-timeoutz35z36z37z38z39z310j35j36j37j38j39j310rd
-socket_read_size.redis.connection.SocketBuffer.socket_read_size
-Any*35*36*37*38*39*310r^
-bytes_written+redis.connection.SocketBuffer.bytes_written
-Any*35*36*37*38*39*310rX
-
-bytes_read(redis.connection.SocketBuffer.bytes_read
-Any*35*36*37*38*39*310Æ
-PythonParserredis.connection.PythonParser"redis.connection.BaseParser*¾
-__init__&redis.connection.PythonParser.__init__"
-None*H
-self>
-redis.connection.PythonParser"redis.connection.PythonParser*
-socket_read_size
-Anyz35z36z37z38z39z310*S
-__del__%redis.connection.PythonParser.__del__*
-selfz35z36z37z38z39z310*i
-
-on_connect(redis.connection.PythonParser.on_connect*
-self*
-
-connectionz35z36z37z38z39z310*_
-on_disconnect+redis.connection.PythonParser.on_disconnect*
-selfz35z36z37z38z39z310*b
-can_read&redis.connection.PythonParser.can_read*
-self*
-timeoutz35z36z37z38z39z310*_
-read_response+redis.connection.PythonParser.read_response*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rT
-encoding&redis.connection.PythonParser.encoding
-Any*35*36*37*38*39*310rd
-socket_read_size.redis.connection.PythonParser.socket_read_size
-Any*35*36*37*38*39*310–	
-HiredisParserredis.connection.HiredisParser"redis.connection.BaseParser*Á
-__init__'redis.connection.HiredisParser.__init__"
-None*J
-self@
-redis.connection.HiredisParser"redis.connection.HiredisParser*
-socket_read_size
-Anyz35z36z37z38z39z310*T
-__del__&redis.connection.HiredisParser.__del__*
-selfz35z36z37z38z39z310*j
-
-on_connect)redis.connection.HiredisParser.on_connect*
-self*
-
-connectionz35z36z37z38z39z310*`
-on_disconnect,redis.connection.HiredisParser.on_disconnect*
-selfz35z36z37z38z39z310*c
-can_read'redis.connection.HiredisParser.can_read*
-self*
-timeoutz35z36z37z38z39z310*˜
-read_from_socket/redis.connection.HiredisParser.read_from_socket"
-builtins.bool"builtins.bool*J
-self@
-redis.connection.HiredisParser"redis.connection.HiredisParser*
-timeout
-Any *6
-raise_on_timeout
-builtins.bool"builtins.bool z35z36z37z38z39z310*`
-read_response,redis.connection.HiredisParser.read_response*
-selfz35z36z37z38z39z310j35j36j37j38j39j310re
-socket_read_size/redis.connection.HiredisParser.socket_read_size
-Any*35*36*37*38*39*310‹	
-Encoderredis.connection.Encoder"builtins.object*û
-__init__!redis.connection.Encoder.__init__"
-None*>
-self4
-redis.connection.Encoder"redis.connection.Encoder*
-encoding
-Any*
-encoding_errors
-Any*4
-decode_responses
-builtins.bool"builtins.boolz35z36z37z38z39z310*¸
-encoderedis.connection.Encoder.encode" 
-builtins.bytes"builtins.bytes*>
-self4
-redis.connection.Encoder"redis.connection.Encoder*‘
-value…
-SUnion[builtins.str,builtins.bytes,builtins.memoryview,builtins.bool,builtins.float]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*
-builtins.memoryview"builtins.memoryview
-builtins.bool"builtins.bool 
-builtins.float"builtins.floatz35z36z37z38z39z310*‚
-decoderedis.connection.Encoder.decode"
-builtins.str"builtins.str*>
-self4
-redis.connection.Encoder"redis.connection.Encoder*²
-value¦
-6Union[builtins.str,builtins.bytes,builtins.memoryview]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*
-builtins.memoryview"builtins.memoryview*+
-force
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310ä%
-
-Connectionredis.connection.Connection"builtins.object*×
-__init__$redis.connection.Connection.__init__"
-None*D
-self:
-redis.connection.Connection"redis.connection.Connection*(
-host
-builtins.str"builtins.str *(
-port
-builtins.int"builtins.int *&
-db
-builtins.int"builtins.int *T
-passwordD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *`
-socket_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *h
-socket_connect_timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *6
-socket_keepalive
-builtins.bool"builtins.bool *Ê
-socket_keepalive_options©
-IUnion[typing.Mapping[builtins.str,Union[builtins.int,builtins.str]],None]Ï
-=typing.Mapping[builtins.str,Union[builtins.int,builtins.str]]
-builtins.str"builtins.str`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"typing.Mapping
-None */
-socket_type
-builtins.int"builtins.int *6
-retry_on_timeout
-builtins.bool"builtins.bool *,
-encoding
-builtins.str"builtins.str *3
-encoding_errors
-builtins.str"builtins.str *6
-decode_responses
-builtins.bool"builtins.bool *u
-parser_classa
-!Type[redis.connection.BaseParser]:
-redis.connection.BaseParser"redis.connection.BaseParser *4
-socket_read_size
-builtins.int"builtins.int *9
-health_check_interval
-builtins.int"builtins.int *W
-client_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *T
-usernameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*Q
-__del__#redis.connection.Connection.__del__*
-selfz35z36z37z38z39z310*ƒ
-register_connect_callback5redis.connection.Connection.register_connect_callback*
-self*
-callbackz35z36z37z38z39z310*q
-clear_connect_callbacks3redis.connection.Connection.clear_connect_callbacks*
-selfz35z36z37z38z39z310*Q
-connect#redis.connection.Connection.connect*
-selfz35z36z37z38z39z310*W
-
-on_connect&redis.connection.Connection.on_connect*
-selfz35z36z37z38z39z310*W
-
-disconnect&redis.connection.Connection.disconnect*
-selfz35z36z37z38z39z310*¡
-check_health(redis.connection.Connection.check_health"
-None*D
-self:
-redis.connection.Connection"redis.connection.Connectionz35z36z37z38z39z310*ø
-send_packed_command/redis.connection.Connection.send_packed_command"
-Any*D
-self:
-redis.connection.Connection"redis.connection.Connection*
-command
-Any*2
-check_health
-builtins.bool"builtins.bool z35z36z37z38z39z310*e
-send_command(redis.connection.Connection.send_command*
-self*
-argsz35z36z37z38z39z310*b
-can_read$redis.connection.Connection.can_read*
-self*
-timeout z35z36z37z38z39z310*]
-read_response)redis.connection.Connection.read_response*
-selfz35z36z37z38z39z310*e
-pack_command(redis.connection.Connection.pack_command*
-self*
-argsz35z36z37z38z39z310*k
-pack_commands)redis.connection.Connection.pack_commands*
-self*
-commandsz35z36z37z38z39z310*º
-repr_pieces'redis.connection.Connection.repr_pieces"¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*D
-self:
-redis.connection.Connection"redis.connection.Connectionz35z36z37z38z39z310j35j36j37j38j39j310rf
-description_format.redis.connection.Connection.description_format
-Any*35*36*37*38*39*310rH
-pidredis.connection.Connection.pid
-Any*35*36*37*38*39*310rJ
-host redis.connection.Connection.host
-Any*35*36*37*38*39*310rJ
-port redis.connection.Connection.port
-Any*35*36*37*38*39*310rF
-dbredis.connection.Connection.db
-Any*35*36*37*38*39*310rR
-password$redis.connection.Connection.password
-Any*35*36*37*38*39*310r^
-socket_timeout*redis.connection.Connection.socket_timeout
-Any*35*36*37*38*39*310rn
-socket_connect_timeout2redis.connection.Connection.socket_connect_timeout
-Any*35*36*37*38*39*310rb
-socket_keepalive,redis.connection.Connection.socket_keepalive
-Any*35*36*37*38*39*310rr
-socket_keepalive_options4redis.connection.Connection.socket_keepalive_options
-Any*35*36*37*38*39*310rb
-retry_on_timeout,redis.connection.Connection.retry_on_timeout
-Any*35*36*37*38*39*310rR
-encoding$redis.connection.Connection.encoding
-Any*35*36*37*38*39*310r`
-encoding_errors+redis.connection.Connection.encoding_errors
-Any*35*36*37*38*39*310rb
-decode_responses,redis.connection.Connection.decode_responses
-Any*35*36*37*38*39*310”
-SSLConnectionredis.connection.SSLConnection"redis.connection.Connection*å
-__init__'redis.connection.SSLConnection.__init__"
-None*J
-self@
-redis.connection.SSLConnection"redis.connection.SSLConnection*
-ssl_keyfile
-Any *
-ssl_certfile
-Any *
-ssl_cert_reqs
-Any *
-ssl_ca_certs
-Any *8
-ssl_check_hostname
-builtins.bool"builtins.bool *
-kwargs
-Anyz35z36z37z38z39z310j35j36j37j38j39j310ri
-description_format1redis.connection.SSLConnection.description_format
-Any*35*36*37*38*39*310rS
-keyfile&redis.connection.SSLConnection.keyfile
-Any*35*36*37*38*39*310rU
-certfile'redis.connection.SSLConnection.certfile
-Any*35*36*37*38*39*310rW
-	cert_reqs(redis.connection.SSLConnection.cert_reqs
-Any*35*36*37*38*39*310rU
-ca_certs'redis.connection.SSLConnection.ca_certs
-Any*35*36*37*38*39*310ƒ
-UnixDomainSocketConnection+redis.connection.UnixDomainSocketConnection"redis.connection.Connection*ü
-__init__4redis.connection.UnixDomainSocketConnection.__init__"
-None*d
-selfZ
-+redis.connection.UnixDomainSocketConnection"+redis.connection.UnixDomainSocketConnection*
-path
-Any *&
-db
-builtins.int"builtins.int *
-username
-Any *
-password
-Any *
-socket_timeout
-Any *
-encoding
-Any *
-encoding_errors
-Any *
-decode_responses
-Any *
-retry_on_timeout
-Any *
-parser_class
-Any *4
-socket_read_size
-builtins.int"builtins.int *9
-health_check_interval
-builtins.int"builtins.int *
-client_name
-Any z35z36z37z38z39z310*ê
-repr_pieces7redis.connection.UnixDomainSocketConnection.repr_pieces"¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list*d
-selfZ
-+redis.connection.UnixDomainSocketConnection"+redis.connection.UnixDomainSocketConnectionz35z36z37z38z39z310j35j36j37j38j39j310rv
-description_format>redis.connection.UnixDomainSocketConnection.description_format
-Any*35*36*37*38*39*310rX
-pid/redis.connection.UnixDomainSocketConnection.pid
-Any*35*36*37*38*39*310rZ
-path0redis.connection.UnixDomainSocketConnection.path
-Any*35*36*37*38*39*310rV
-db.redis.connection.UnixDomainSocketConnection.db
-Any*35*36*37*38*39*310rb
-password4redis.connection.UnixDomainSocketConnection.password
-Any*35*36*37*38*39*310rn
-socket_timeout:redis.connection.UnixDomainSocketConnection.socket_timeout
-Any*35*36*37*38*39*310rr
-retry_on_timeout<redis.connection.UnixDomainSocketConnection.retry_on_timeout
-Any*35*36*37*38*39*310rb
-encoding4redis.connection.UnixDomainSocketConnection.encoding
-Any*35*36*37*38*39*310rp
-encoding_errors;redis.connection.UnixDomainSocketConnection.encoding_errors
-Any*35*36*37*38*39*310rr
-decode_responses<redis.connection.UnixDomainSocketConnection.decode_responses
-Any*35*36*37*38*39*310Ò
-ConnectionPoolredis.connection.ConnectionPool"builtins.object*ß
-from_url(redis.connection.ConnectionPool.from_url"B
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*v
-clsm
-%Type[redis.connection.ConnectionPool]B
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*%
-url
-builtins.str"builtins.str*N
-dbD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *7
-decode_components
-builtins.bool"builtins.bool *
-kwargs
-Any0:classmethodpz35z36z37z38z39z310*†
-__init__(redis.connection.ConnectionPool.__init__"
-None*L
-selfB
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*
-connection_class
-Any *
-max_connections
-Any *
-connection_kwargs
-Anyz35z36z37z38z39z310*Q
-reset%redis.connection.ConnectionPool.reset*
-selfz35z36z37z38z39z310*Œ
-get_connection.redis.connection.ConnectionPool.get_connection*
-self*
-command_name*
-keys*
-optionsz35z36z37z38z39z310*e
-make_connection/redis.connection.ConnectionPool.make_connection*
-selfz35z36z37z38z39z310*e
-release'redis.connection.ConnectionPool.release*
-self*
-
-connectionz35z36z37z38z39z310*á
-
-disconnect*redis.connection.ConnectionPool.disconnect"
-Any*L
-selfB
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*7
-inuse_connections
-builtins.bool"builtins.bool z35z36z37z38z39z310*×
-get_encoder+redis.connection.ConnectionPool.get_encoder"4
-redis.connection.Encoder"redis.connection.Encoder*L
-selfB
-redis.connection.ConnectionPool"redis.connection.ConnectionPoolz35z36z37z38z39z310*•
-owns_connection/redis.connection.ConnectionPool.owns_connection"
-builtins.bool"builtins.bool*L
-selfB
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*J
-
-connection:
-redis.connection.Connection"redis.connection.Connectionz35z36z37z38z39z310j35j36j37j38j39j310rf
-connection_class0redis.connection.ConnectionPool.connection_class
-Any*35*36*37*38*39*310rh
-connection_kwargs1redis.connection.ConnectionPool.connection_kwargs
-Any*35*36*37*38*39*310rd
-max_connections/redis.connection.ConnectionPool.max_connections
-Any*35*36*37*38*39*310rL
-pid#redis.connection.ConnectionPool.pid
-Any*35*36*37*38*39*310÷
-
-BlockingConnectionPool'redis.connection.BlockingConnectionPool"redis.connection.ConnectionPool*Ò
-__init__0redis.connection.BlockingConnectionPool.__init__"
-None*\
-selfR
-'redis.connection.BlockingConnectionPool"'redis.connection.BlockingConnectionPool*
-max_connections
-Any *
-timeout
-Any *
-connection_class
-Any *
-queue_class
-Any *
-connection_kwargs
-Anyz35z36z37z38z39z310*Y
-reset-redis.connection.BlockingConnectionPool.reset*
-selfz35z36z37z38z39z310*m
-make_connection7redis.connection.BlockingConnectionPool.make_connection*
-selfz35z36z37z38z39z310*”
-get_connection6redis.connection.BlockingConnectionPool.get_connection*
-self*
-command_name*
-keys*
-optionsz35z36z37z38z39z310*m
-release/redis.connection.BlockingConnectionPool.release*
-self*
-
-connectionz35z36z37z38z39z310*c
-
-disconnect2redis.connection.BlockingConnectionPool.disconnect*
-selfz35z36z37z38z39z310j35j36j37j38j39j310rd
-queue_class3redis.connection.BlockingConnectionPool.queue_class
-Any*35*36*37*38*39*310r\
-timeout/redis.connection.BlockingConnectionPool.timeout
-Any*35*36*37*38*39*310rT
-pid+redis.connection.BlockingConnectionPool.pid
-Any*35*36*37*38*39*310rV
-pool,redis.connection.BlockingConnectionPool.pool
-Any*35*36*37*38*39*310‹
-to_boolredis.connection.to_bool"
-builtins.bool"builtins.bool*-
-value"
-builtins.object"builtins.objectz35z36z37z38z39z310*Q
-ssl_availableredis.connection.ssl_available
-Any*35*36*37*38*39*310*U
-hiredis_version redis.connection.hiredis_version
-Any*35*36*37*38*39*310*w
- HIREDIS_SUPPORTS_CALLABLE_ERRORS1redis.connection.HIREDIS_SUPPORTS_CALLABLE_ERRORS
-Any*35*36*37*38*39*310*o
-HIREDIS_SUPPORTS_BYTE_BUFFER-redis.connection.HIREDIS_SUPPORTS_BYTE_BUFFER
-Any*35*36*37*38*39*310*=
-msgredis.connection.msg
-Any*35*36*37*38*39*310*e
-HIREDIS_USE_BYTE_BUFFER(redis.connection.HIREDIS_USE_BYTE_BUFFER
-Any*35*36*37*38*39*310*G
-SYM_STARredis.connection.SYM_STAR
-Any*35*36*37*38*39*310*K
-
-SYM_DOLLARredis.connection.SYM_DOLLAR
-Any*35*36*37*38*39*310*G
-SYM_CRLFredis.connection.SYM_CRLF
-Any*35*36*37*38*39*310*I
-	SYM_EMPTYredis.connection.SYM_EMPTY
-Any*35*36*37*38*39*310*s
-SERVER_CLOSED_CONNECTION_ERROR/redis.connection.SERVER_CLOSED_CONNECTION_ERROR
-Any*35*36*37*38*39*310*Q
-DefaultParserredis.connection.DefaultParser
-Any*35*36*37*38*39*310

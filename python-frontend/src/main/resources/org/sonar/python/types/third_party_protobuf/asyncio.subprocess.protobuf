@@ -1,0 +1,352 @@
+
+asyncio.subprocessﬁ
+SubprocessStreamProtocol+asyncio.subprocess.SubprocessStreamProtocol" asyncio.streams.FlowControlMixin"$asyncio.protocols.SubprocessProtocol*©
+__init__4asyncio.subprocess.SubprocessStreamProtocol.__init__"
+None*d
+selfZ
++asyncio.subprocess.SubprocessStreamProtocol"+asyncio.subprocess.SubprocessStreamProtocol*'
+limit
+builtins.int"builtins.int*N
+loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*ì
+connection_made;asyncio.subprocess.SubprocessStreamProtocol.connection_made"
+None*d
+selfZ
++asyncio.subprocess.SubprocessStreamProtocol"+asyncio.subprocess.SubprocessStreamProtocol*S
+	transportD
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*‹
+pipe_data_received>asyncio.subprocess.SubprocessStreamProtocol.pipe_data_received"
+None*d
+selfZ
++asyncio.subprocess.SubprocessStreamProtocol"+asyncio.subprocess.SubprocessStreamProtocol*$
+fd
+builtins.int"builtins.int*p
+dataf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*œ
+pipe_connection_lost@asyncio.subprocess.SubprocessStreamProtocol.pipe_connection_lost"
+None*d
+selfZ
++asyncio.subprocess.SubprocessStreamProtocol"+asyncio.subprocess.SubprocessStreamProtocol*$
+fd
+builtins.int"builtins.int*_
+excV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None*º
+process_exited:asyncio.subprocess.SubprocessStreamProtocol.process_exited"
+None*d
+selfZ
++asyncio.subprocess.SubprocessStreamProtocol"+asyncio.subprocess.SubprocessStreamProtocolr∞
+stdin1asyncio.subprocess.SubprocessStreamProtocol.stdint
+(Union[asyncio.streams.StreamWriter,None]<
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriter
+Noner≤
+stdout2asyncio.subprocess.SubprocessStreamProtocol.stdoutt
+(Union[asyncio.streams.StreamReader,None]<
+asyncio.streams.StreamReader"asyncio.streams.StreamReader
+Noner≤
+stderr2asyncio.subprocess.SubprocessStreamProtocol.stderrt
+(Union[asyncio.streams.StreamReader,None]<
+asyncio.streams.StreamReader"asyncio.streams.StreamReader
+Noneÿ
+Processasyncio.subprocess.Process"builtins.object*Ú
+__init__#asyncio.subprocess.Process.__init__"
+None*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process*S
+	transportD
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*N
+protocol@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*N
+loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*À
+
+returncode%asyncio.subprocess.Process.returncode"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process0:property`*Ÿ
+waitasyncio.subprocess.Process.wait"j
+&typing.Coroutine[Any,Any,builtins.int]
+Any
+Any
+builtins.int"builtins.int"typing.Coroutine*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.ProcessH*≠
+send_signal&asyncio.subprocess.Process.send_signal"
+None*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process*(
+signal
+builtins.int"builtins.int*
+	terminate$asyncio.subprocess.Process.terminate"
+None*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process*u
+killasyncio.subprocess.Process.kill"
+None*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process*©
+communicate&asyncio.subprocess.Process.communicate"“
+>typing.Coroutine[Any,Any,Tuple[builtins.bytes,builtins.bytes]]
+Any
+Anyl
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"typing.Coroutine*B
+self8
+asyncio.subprocess.Process"asyncio.subprocess.Process*W
+inputJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None Hrü
+stdin asyncio.subprocess.Process.stdint
+(Union[asyncio.streams.StreamWriter,None]<
+asyncio.streams.StreamWriter"asyncio.streams.StreamWriter
+Noner°
+stdout!asyncio.subprocess.Process.stdoutt
+(Union[asyncio.streams.StreamReader,None]<
+asyncio.streams.StreamReader"asyncio.streams.StreamReader
+Noner°
+stderr!asyncio.subprocess.Process.stderrt
+(Union[asyncio.streams.StreamReader,None]<
+asyncio.streams.StreamReader"asyncio.streams.StreamReader
+NonerC
+pidasyncio.subprocess.Process.pid
+builtins.int"builtins.intÊ
+create_subprocess_shell*asyncio.subprocess.create_subprocess_shell"î
+4typing.Coroutine[Any,Any,asyncio.subprocess.Process]
+Any
+Any8
+asyncio.subprocess.Process"asyncio.subprocess.Process"typing.Coroutine*o
+cmdf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*Ü
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *ç
+loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+None *)
+limit
+builtins.int"builtins.int *T
+universal_newlines:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *G
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *F
+bufsize7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *x
+textl
+"Union[Literal[builtins.bool],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+None *‘
+
+executable¡
+]Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike
+None *ô
+
+preexec_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None */
+	close_fds
+builtins.bool"builtins.bool *Õ
+cwd¡
+]Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike
+None *æ
+env≤
+æUnion[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Unknown]],None]È
+Çtyping.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]] 
+builtins.bytes"builtins.bytesØ
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath"typing.Mappingw
+/typing.Mapping[builtins.str,TypeAlias[Unknown]]
+builtins.str"builtins.str
+TypeAlias[Unknown]"typing.Mapping
+None *9
+startupinfo&
+Union[Any,None]
+Any
+None *1
+creationflags
+builtins.int"builtins.int *5
+restore_signals
+builtins.bool"builtins.bool *7
+start_new_session
+builtins.bool"builtins.bool *
+pass_fds
+Any HÔ"
+create_subprocess_exec)asyncio.subprocess.create_subprocess_exec"î
+4typing.Coroutine[Any,Any,asyncio.subprocess.Process]
+Any
+Any8
+asyncio.subprocess.Process"asyncio.subprocess.Process"typing.Coroutine*œ
+program¡
+nTypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]Ø
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath"asyncio.subprocess._ExecArg*Ã
+args¡
+nTypeAlias[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]Ø
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath"asyncio.subprocess._ExecArg*Ü
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *ç
+loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+None *)
+limit
+builtins.int"builtins.int *T
+universal_newlines:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *G
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *F
+bufsize7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *S
+textG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *‘
+
+executable¡
+]Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike
+None *ô
+
+preexec_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None */
+	close_fds
+builtins.bool"builtins.bool *Õ
+cwd¡
+]Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike
+None *æ
+env≤
+æUnion[typing.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]],typing.Mapping[builtins.str,TypeAlias[Unknown]],None]È
+Çtyping.Mapping[builtins.bytes,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]] 
+builtins.bytes"builtins.bytesØ
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]≤
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath"typing.Mappingw
+/typing.Mapping[builtins.str,TypeAlias[Unknown]]
+builtins.str"builtins.str
+TypeAlias[Unknown]"typing.Mapping
+None *9
+startupinfo&
+Union[Any,None]
+Any
+None *1
+creationflags
+builtins.int"builtins.int *5
+restore_signals
+builtins.bool"builtins.bool *7
+start_new_session
+builtins.bool"builtins.bool *
+pass_fds
+Any H*=
+PIPEasyncio.subprocess.PIPE
+builtins.int"builtins.int*A
+STDOUTasyncio.subprocess.STDOUT
+builtins.int"builtins.int*C
+DEVNULLasyncio.subprocess.DEVNULL
+builtins.int"builtins.int
