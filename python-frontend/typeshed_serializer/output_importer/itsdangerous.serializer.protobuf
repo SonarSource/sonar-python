@@ -1,0 +1,1235 @@
+fully_qualified_name: "itsdangerous.serializer"
+classes {
+  name: "Serializer"
+  fully_qualified_name: "itsdangerous.serializer.Serializer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "secret_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]"
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+                args {
+                  pretty_printed_name: "builtins.bytes"
+                  fully_qualified_name: "builtins.bytes"
+                }
+              }
+              fully_qualified_name: "itsdangerous.serializer._t_str_bytes"
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_secret_key"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+    parameters {
+      name: "serializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "serializer_kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[builtins.dict[builtins.str,Any]],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_kwargs"
+      }
+    }
+    parameters {
+      name: "signer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Type[itsdangerous.signer.Signer]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "itsdangerous.signer.Signer"
+              fully_qualified_name: "itsdangerous.signer.Signer"
+            }
+          }
+          fully_qualified_name: "itsdangerous.serializer._t_signer"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "signer_kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[builtins.dict[builtins.str,Any]],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_kwargs"
+      }
+    }
+    parameters {
+      name: "fallback_signers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]"
+            args {
+              pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "builtins.dict[builtins.str,Any]"
+                  args {
+                    pretty_printed_name: "builtins.str"
+                    fully_qualified_name: "builtins.str"
+                  }
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "builtins.dict"
+                }
+                fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+              }
+              args {
+                pretty_printed_name: "Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]"
+                kind: TUPLE
+                args {
+                  pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+                  kind: TYPE_ALIAS
+                  args {
+                    pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+                    kind: TYPE
+                    args {
+                      pretty_printed_name: "itsdangerous.signer.Signer"
+                      fully_qualified_name: "itsdangerous.signer.Signer"
+                    }
+                  }
+                  fully_qualified_name: "itsdangerous.serializer._t_signer"
+                }
+                args {
+                  pretty_printed_name: "TypeAlias[Unknown]"
+                  kind: TYPE_ALIAS
+                }
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Unknown]"
+                kind: TYPE_ALIAS
+              }
+            }
+            fully_qualified_name: "builtins.list"
+          }
+          fully_qualified_name: "itsdangerous.serializer._t_fallbacks"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "secret_key"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.secret_key"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "load_payload"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.load_payload"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "serializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "dump_payload"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.dump_payload"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "make_signer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.make_signer"
+    return_annotation {
+      pretty_printed_name: "itsdangerous.signer.Signer"
+      fully_qualified_name: "itsdangerous.signer.Signer"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "iter_unsigners"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.iter_unsigners"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[itsdangerous.signer.Signer]"
+      args {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "dumps"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.dumps"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_str_bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "dump"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.dump"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "loads"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.loads"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.load"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "loads_unsafe"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.loads_unsafe"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.bool,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.bool,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_load_unsafe"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "_loads_unsafe_impl"
+    fully_qualified_name: "itsdangerous.serializer.Serializer._loads_unsafe_impl"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.bool,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.bool,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_load_unsafe"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+    parameters {
+      name: "load_kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[builtins.dict[builtins.str,Any]],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_kwargs"
+      }
+    }
+    parameters {
+      name: "load_payload_kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[builtins.dict[builtins.str,Any]],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_kwargs"
+      }
+    }
+  }
+  methods {
+    name: "load_unsafe"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.load_unsafe"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.bool,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.bool,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_load_unsafe"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.serializer.Serializer"
+        fully_qualified_name: "itsdangerous.serializer.Serializer"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.serializer._t_opt_str_bytes"
+      }
+    }
+  }
+  attributes {
+    name: "default_serializer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.default_serializer"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "default_signer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.default_signer"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "itsdangerous.signer.Signer"
+          fully_qualified_name: "itsdangerous.signer.Signer"
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_signer"
+    }
+  }
+  attributes {
+    name: "default_fallback_signers"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.default_fallback_signers"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]"
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+                kind: TYPE
+                args {
+                  pretty_printed_name: "itsdangerous.signer.Signer"
+                  fully_qualified_name: "itsdangerous.signer.Signer"
+                }
+              }
+              fully_qualified_name: "itsdangerous.serializer._t_signer"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Unknown]"
+              kind: TYPE_ALIAS
+            }
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_fallbacks"
+    }
+  }
+  attributes {
+    name: "secret_keys"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.secret_keys"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "salt"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.salt"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "serializer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.serializer"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "is_text_serializer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.is_text_serializer"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "signer"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.signer"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "itsdangerous.signer.Signer"
+          fully_qualified_name: "itsdangerous.signer.Signer"
+        }
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_signer"
+    }
+  }
+  attributes {
+    name: "signer_kwargs"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.signer_kwargs"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+    }
+  }
+  attributes {
+    name: "fallback_signers"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.fallback_signers"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.list[Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]]"
+        args {
+          pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]],TypeAlias[Unknown]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "builtins.dict[builtins.str,Any]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "builtins.dict"
+            }
+            fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Type[itsdangerous.signer.Signer]],TypeAlias[Unknown]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Type[itsdangerous.signer.Signer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Type[itsdangerous.signer.Signer]"
+                kind: TYPE
+                args {
+                  pretty_printed_name: "itsdangerous.signer.Signer"
+                  fully_qualified_name: "itsdangerous.signer.Signer"
+                }
+              }
+              fully_qualified_name: "itsdangerous.serializer._t_signer"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Unknown]"
+              kind: TYPE_ALIAS
+            }
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_fallbacks"
+    }
+  }
+  attributes {
+    name: "serializer_kwargs"
+    fully_qualified_name: "itsdangerous.serializer.Serializer.serializer_kwargs"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "itsdangerous.serializer._t_kwargs"
+    }
+  }
+}
+functions {
+  name: "is_text_serializer"
+  fully_qualified_name: "itsdangerous.serializer.is_text_serializer"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "serializer"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous.serializer.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

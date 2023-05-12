@@ -1,0 +1,1033 @@
+fully_qualified_name: "cryptography.hazmat._oid"
+classes {
+  name: "ObjectIdentifier"
+  fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "dotted_string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "_name"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier._name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "dotted_string"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier.dotted_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "_dotted_string"
+    fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier._dotted_string"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "ExtensionOID"
+  fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "SUBJECT_DIRECTORY_ATTRIBUTES"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.SUBJECT_DIRECTORY_ATTRIBUTES"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SUBJECT_KEY_IDENTIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.SUBJECT_KEY_IDENTIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "KEY_USAGE"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.KEY_USAGE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SUBJECT_ALTERNATIVE_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.SUBJECT_ALTERNATIVE_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ISSUER_ALTERNATIVE_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.ISSUER_ALTERNATIVE_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "BASIC_CONSTRAINTS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.BASIC_CONSTRAINTS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "NAME_CONSTRAINTS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.NAME_CONSTRAINTS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CRL_DISTRIBUTION_POINTS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.CRL_DISTRIBUTION_POINTS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CERTIFICATE_POLICIES"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.CERTIFICATE_POLICIES"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "POLICY_MAPPINGS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.POLICY_MAPPINGS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "AUTHORITY_KEY_IDENTIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.AUTHORITY_KEY_IDENTIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "POLICY_CONSTRAINTS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.POLICY_CONSTRAINTS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "EXTENDED_KEY_USAGE"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.EXTENDED_KEY_USAGE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "FRESHEST_CRL"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.FRESHEST_CRL"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "INHIBIT_ANY_POLICY"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.INHIBIT_ANY_POLICY"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ISSUING_DISTRIBUTION_POINT"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.ISSUING_DISTRIBUTION_POINT"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "AUTHORITY_INFORMATION_ACCESS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.AUTHORITY_INFORMATION_ACCESS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SUBJECT_INFORMATION_ACCESS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.SUBJECT_INFORMATION_ACCESS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "OCSP_NO_CHECK"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.OCSP_NO_CHECK"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "TLS_FEATURE"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.TLS_FEATURE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CRL_NUMBER"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.CRL_NUMBER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DELTA_CRL_INDICATOR"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.DELTA_CRL_INDICATOR"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "PRECERT_SIGNED_CERTIFICATE_TIMESTAMPS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.PRECERT_SIGNED_CERTIFICATE_TIMESTAMPS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "PRECERT_POISON"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.PRECERT_POISON"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SIGNED_CERTIFICATE_TIMESTAMPS"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtensionOID.SIGNED_CERTIFICATE_TIMESTAMPS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "OCSPExtensionOID"
+  fully_qualified_name: "cryptography.hazmat._oid.OCSPExtensionOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "NONCE"
+    fully_qualified_name: "cryptography.hazmat._oid.OCSPExtensionOID.NONCE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "CRLEntryExtensionOID"
+  fully_qualified_name: "cryptography.hazmat._oid.CRLEntryExtensionOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "CERTIFICATE_ISSUER"
+    fully_qualified_name: "cryptography.hazmat._oid.CRLEntryExtensionOID.CERTIFICATE_ISSUER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CRL_REASON"
+    fully_qualified_name: "cryptography.hazmat._oid.CRLEntryExtensionOID.CRL_REASON"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "INVALIDITY_DATE"
+    fully_qualified_name: "cryptography.hazmat._oid.CRLEntryExtensionOID.INVALIDITY_DATE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "NameOID"
+  fully_qualified_name: "cryptography.hazmat._oid.NameOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "COMMON_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.COMMON_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "COUNTRY_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.COUNTRY_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "LOCALITY_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.LOCALITY_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "STATE_OR_PROVINCE_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.STATE_OR_PROVINCE_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "STREET_ADDRESS"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.STREET_ADDRESS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ORGANIZATION_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.ORGANIZATION_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ORGANIZATIONAL_UNIT_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.ORGANIZATIONAL_UNIT_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SERIAL_NUMBER"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.SERIAL_NUMBER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SURNAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.SURNAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "GIVEN_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.GIVEN_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "TITLE"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.TITLE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "GENERATION_QUALIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.GENERATION_QUALIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "X500_UNIQUE_IDENTIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.X500_UNIQUE_IDENTIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DN_QUALIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.DN_QUALIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "PSEUDONYM"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.PSEUDONYM"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "USER_ID"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.USER_ID"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DOMAIN_COMPONENT"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.DOMAIN_COMPONENT"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "EMAIL_ADDRESS"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.EMAIL_ADDRESS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "JURISDICTION_COUNTRY_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.JURISDICTION_COUNTRY_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "JURISDICTION_LOCALITY_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.JURISDICTION_LOCALITY_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "JURISDICTION_STATE_OR_PROVINCE_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.JURISDICTION_STATE_OR_PROVINCE_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "BUSINESS_CATEGORY"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.BUSINESS_CATEGORY"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "POSTAL_ADDRESS"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.POSTAL_ADDRESS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "POSTAL_CODE"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.POSTAL_CODE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "INN"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.INN"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "OGRN"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.OGRN"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SNILS"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.SNILS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "UNSTRUCTURED_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.NameOID.UNSTRUCTURED_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "SignatureAlgorithmOID"
+  fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "RSA_WITH_MD5"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_MD5"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSA_WITH_SHA1"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_SHA1"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "_RSA_WITH_SHA1"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID._RSA_WITH_SHA1"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSA_WITH_SHA224"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_SHA224"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSA_WITH_SHA256"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_SHA256"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSA_WITH_SHA384"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_SHA384"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSA_WITH_SHA512"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSA_WITH_SHA512"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "RSASSA_PSS"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.RSASSA_PSS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ECDSA_WITH_SHA1"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ECDSA_WITH_SHA1"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ECDSA_WITH_SHA224"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ECDSA_WITH_SHA224"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ECDSA_WITH_SHA256"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ECDSA_WITH_SHA256"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ECDSA_WITH_SHA384"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ECDSA_WITH_SHA384"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ECDSA_WITH_SHA512"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ECDSA_WITH_SHA512"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DSA_WITH_SHA1"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.DSA_WITH_SHA1"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DSA_WITH_SHA224"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.DSA_WITH_SHA224"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DSA_WITH_SHA256"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.DSA_WITH_SHA256"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DSA_WITH_SHA384"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.DSA_WITH_SHA384"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "DSA_WITH_SHA512"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.DSA_WITH_SHA512"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ED25519"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ED25519"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ED448"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.ED448"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "GOSTR3411_94_WITH_3410_2001"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.GOSTR3411_94_WITH_3410_2001"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "GOSTR3410_2012_WITH_3411_2012_256"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.GOSTR3410_2012_WITH_3411_2012_256"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "GOSTR3410_2012_WITH_3411_2012_512"
+    fully_qualified_name: "cryptography.hazmat._oid.SignatureAlgorithmOID.GOSTR3410_2012_WITH_3411_2012_512"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "ExtendedKeyUsageOID"
+  fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "SERVER_AUTH"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.SERVER_AUTH"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CLIENT_AUTH"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.CLIENT_AUTH"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CODE_SIGNING"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.CODE_SIGNING"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "EMAIL_PROTECTION"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.EMAIL_PROTECTION"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "TIME_STAMPING"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.TIME_STAMPING"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "OCSP_SIGNING"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.OCSP_SIGNING"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ANY_EXTENDED_KEY_USAGE"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.ANY_EXTENDED_KEY_USAGE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "SMARTCARD_LOGON"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.SMARTCARD_LOGON"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "KERBEROS_PKINIT_KDC"
+    fully_qualified_name: "cryptography.hazmat._oid.ExtendedKeyUsageOID.KERBEROS_PKINIT_KDC"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "AuthorityInformationAccessOID"
+  fully_qualified_name: "cryptography.hazmat._oid.AuthorityInformationAccessOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "CA_ISSUERS"
+    fully_qualified_name: "cryptography.hazmat._oid.AuthorityInformationAccessOID.CA_ISSUERS"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "OCSP"
+    fully_qualified_name: "cryptography.hazmat._oid.AuthorityInformationAccessOID.OCSP"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "SubjectInformationAccessOID"
+  fully_qualified_name: "cryptography.hazmat._oid.SubjectInformationAccessOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "CA_REPOSITORY"
+    fully_qualified_name: "cryptography.hazmat._oid.SubjectInformationAccessOID.CA_REPOSITORY"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "CertificatePoliciesOID"
+  fully_qualified_name: "cryptography.hazmat._oid.CertificatePoliciesOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "CPS_QUALIFIER"
+    fully_qualified_name: "cryptography.hazmat._oid.CertificatePoliciesOID.CPS_QUALIFIER"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "CPS_USER_NOTICE"
+    fully_qualified_name: "cryptography.hazmat._oid.CertificatePoliciesOID.CPS_USER_NOTICE"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "ANY_POLICY"
+    fully_qualified_name: "cryptography.hazmat._oid.CertificatePoliciesOID.ANY_POLICY"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "AttributeOID"
+  fully_qualified_name: "cryptography.hazmat._oid.AttributeOID"
+  super_classes: "builtins.object"
+  attributes {
+    name: "CHALLENGE_PASSWORD"
+    fully_qualified_name: "cryptography.hazmat._oid.AttributeOID.CHALLENGE_PASSWORD"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "UNSTRUCTURED_NAME"
+    fully_qualified_name: "cryptography.hazmat._oid.AttributeOID.UNSTRUCTURED_NAME"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat._oid.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_SIG_OIDS_TO_HASH"
+  fully_qualified_name: "cryptography.hazmat._oid._SIG_OIDS_TO_HASH"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[cryptography.hazmat._oid.ObjectIdentifier,Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]]"
+    args {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_OID_NAMES"
+  fully_qualified_name: "cryptography.hazmat._oid._OID_NAMES"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]"
+    args {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

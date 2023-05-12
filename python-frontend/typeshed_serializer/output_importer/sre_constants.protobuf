@@ -1,0 +1,1059 @@
+fully_qualified_name: "sre_constants"
+classes {
+  name: "error"
+  fully_qualified_name: "sre_constants.error"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "sre_constants.error.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "sre_constants.error"
+        fully_qualified_name: "sre_constants.error"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "msg"
+    fully_qualified_name: "sre_constants.error.msg"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "sre_constants.error.pattern"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "pos"
+    fully_qualified_name: "sre_constants.error.pos"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "sre_constants.error.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "colno"
+    fully_qualified_name: "sre_constants.error.colno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "_NamedIntConstant"
+  fully_qualified_name: "sre_constants._NamedIntConstant"
+  super_classes: "builtins.int"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "sre_constants._NamedIntConstant.__new__"
+    return_annotation {
+      pretty_printed_name: "sre_constants._NamedIntConstant.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[sre_constants._NamedIntConstant.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "sre_constants._NamedIntConstant.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "sre_constants._NamedIntConstant.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "sre_constants.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "MAXGROUPS"
+  fully_qualified_name: "sre_constants.MAXGROUPS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "MAGIC"
+  fully_qualified_name: "sre_constants.MAGIC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "MAXREPEAT"
+  fully_qualified_name: "sre_constants.MAXREPEAT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "OPCODES"
+  fully_qualified_name: "sre_constants.OPCODES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "ATCODES"
+  fully_qualified_name: "sre_constants.ATCODES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "CHCODES"
+  fully_qualified_name: "sre_constants.CHCODES"
+  type_annotation {
+    pretty_printed_name: "builtins.list[sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "OP_IGNORE"
+  fully_qualified_name: "sre_constants.OP_IGNORE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "OP_LOCALE_IGNORE"
+  fully_qualified_name: "sre_constants.OP_LOCALE_IGNORE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "OP_UNICODE_IGNORE"
+  fully_qualified_name: "sre_constants.OP_UNICODE_IGNORE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "AT_MULTILINE"
+  fully_qualified_name: "sre_constants.AT_MULTILINE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "AT_LOCALE"
+  fully_qualified_name: "sre_constants.AT_LOCALE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "AT_UNICODE"
+  fully_qualified_name: "sre_constants.AT_UNICODE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "CH_LOCALE"
+  fully_qualified_name: "sre_constants.CH_LOCALE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "CH_UNICODE"
+  fully_qualified_name: "sre_constants.CH_UNICODE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[sre_constants._NamedIntConstant,sre_constants._NamedIntConstant]"
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    args {
+      pretty_printed_name: "sre_constants._NamedIntConstant"
+      fully_qualified_name: "sre_constants._NamedIntConstant"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "SRE_FLAG_TEMPLATE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_TEMPLATE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_IGNORECASE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_IGNORECASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_LOCALE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_LOCALE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_MULTILINE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_MULTILINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_DOTALL"
+  fully_qualified_name: "sre_constants.SRE_FLAG_DOTALL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_UNICODE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_UNICODE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_VERBOSE"
+  fully_qualified_name: "sre_constants.SRE_FLAG_VERBOSE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_DEBUG"
+  fully_qualified_name: "sre_constants.SRE_FLAG_DEBUG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_FLAG_ASCII"
+  fully_qualified_name: "sre_constants.SRE_FLAG_ASCII"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_INFO_PREFIX"
+  fully_qualified_name: "sre_constants.SRE_INFO_PREFIX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_INFO_LITERAL"
+  fully_qualified_name: "sre_constants.SRE_INFO_LITERAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SRE_INFO_CHARSET"
+  fully_qualified_name: "sre_constants.SRE_INFO_CHARSET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FAILURE"
+  fully_qualified_name: "sre_constants.FAILURE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "SUCCESS"
+  fully_qualified_name: "sre_constants.SUCCESS"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "ANY"
+  fully_qualified_name: "sre_constants.ANY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "ANY_ALL"
+  fully_qualified_name: "sre_constants.ANY_ALL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "ASSERT"
+  fully_qualified_name: "sre_constants.ASSERT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "ASSERT_NOT"
+  fully_qualified_name: "sre_constants.ASSERT_NOT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT"
+  fully_qualified_name: "sre_constants.AT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "BRANCH"
+  fully_qualified_name: "sre_constants.BRANCH"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CALL"
+  fully_qualified_name: "sre_constants.CALL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY"
+  fully_qualified_name: "sre_constants.CATEGORY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CHARSET"
+  fully_qualified_name: "sre_constants.CHARSET"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "BIGCHARSET"
+  fully_qualified_name: "sre_constants.BIGCHARSET"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "GROUPREF"
+  fully_qualified_name: "sre_constants.GROUPREF"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "GROUPREF_EXISTS"
+  fully_qualified_name: "sre_constants.GROUPREF_EXISTS"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "GROUPREF_IGNORE"
+  fully_qualified_name: "sre_constants.GROUPREF_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "IN"
+  fully_qualified_name: "sre_constants.IN"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "IN_IGNORE"
+  fully_qualified_name: "sre_constants.IN_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "INFO"
+  fully_qualified_name: "sre_constants.INFO"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "JUMP"
+  fully_qualified_name: "sre_constants.JUMP"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "LITERAL"
+  fully_qualified_name: "sre_constants.LITERAL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "LITERAL_IGNORE"
+  fully_qualified_name: "sre_constants.LITERAL_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MARK"
+  fully_qualified_name: "sre_constants.MARK"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MAX_UNTIL"
+  fully_qualified_name: "sre_constants.MAX_UNTIL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MIN_UNTIL"
+  fully_qualified_name: "sre_constants.MIN_UNTIL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "NOT_LITERAL"
+  fully_qualified_name: "sre_constants.NOT_LITERAL"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "NOT_LITERAL_IGNORE"
+  fully_qualified_name: "sre_constants.NOT_LITERAL_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "NEGATE"
+  fully_qualified_name: "sre_constants.NEGATE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "RANGE"
+  fully_qualified_name: "sre_constants.RANGE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "REPEAT"
+  fully_qualified_name: "sre_constants.REPEAT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "REPEAT_ONE"
+  fully_qualified_name: "sre_constants.REPEAT_ONE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "SUBPATTERN"
+  fully_qualified_name: "sre_constants.SUBPATTERN"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MIN_REPEAT_ONE"
+  fully_qualified_name: "sre_constants.MIN_REPEAT_ONE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "RANGE_UNI_IGNORE"
+  fully_qualified_name: "sre_constants.RANGE_UNI_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "GROUPREF_LOC_IGNORE"
+  fully_qualified_name: "sre_constants.GROUPREF_LOC_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "GROUPREF_UNI_IGNORE"
+  fully_qualified_name: "sre_constants.GROUPREF_UNI_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "IN_LOC_IGNORE"
+  fully_qualified_name: "sre_constants.IN_LOC_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "IN_UNI_IGNORE"
+  fully_qualified_name: "sre_constants.IN_UNI_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "LITERAL_LOC_IGNORE"
+  fully_qualified_name: "sre_constants.LITERAL_LOC_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "LITERAL_UNI_IGNORE"
+  fully_qualified_name: "sre_constants.LITERAL_UNI_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "NOT_LITERAL_LOC_IGNORE"
+  fully_qualified_name: "sre_constants.NOT_LITERAL_LOC_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "NOT_LITERAL_UNI_IGNORE"
+  fully_qualified_name: "sre_constants.NOT_LITERAL_UNI_IGNORE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MIN_REPEAT"
+  fully_qualified_name: "sre_constants.MIN_REPEAT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "MAX_REPEAT"
+  fully_qualified_name: "sre_constants.MAX_REPEAT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_BEGINNING"
+  fully_qualified_name: "sre_constants.AT_BEGINNING"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_BEGINNING_LINE"
+  fully_qualified_name: "sre_constants.AT_BEGINNING_LINE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_BEGINNING_STRING"
+  fully_qualified_name: "sre_constants.AT_BEGINNING_STRING"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_NON_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_NON_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_END"
+  fully_qualified_name: "sre_constants.AT_END"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_END_LINE"
+  fully_qualified_name: "sre_constants.AT_END_LINE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_END_STRING"
+  fully_qualified_name: "sre_constants.AT_END_STRING"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_LOC_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_LOC_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_LOC_NON_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_LOC_NON_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_UNI_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_UNI_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "AT_UNI_NON_BOUNDARY"
+  fully_qualified_name: "sre_constants.AT_UNI_NON_BOUNDARY"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_DIGIT"
+  fully_qualified_name: "sre_constants.CATEGORY_DIGIT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_NOT_DIGIT"
+  fully_qualified_name: "sre_constants.CATEGORY_NOT_DIGIT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_SPACE"
+  fully_qualified_name: "sre_constants.CATEGORY_SPACE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_NOT_SPACE"
+  fully_qualified_name: "sre_constants.CATEGORY_NOT_SPACE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_NOT_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_NOT_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_LINEBREAK"
+  fully_qualified_name: "sre_constants.CATEGORY_LINEBREAK"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_NOT_LINEBREAK"
+  fully_qualified_name: "sre_constants.CATEGORY_NOT_LINEBREAK"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_LOC_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_LOC_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_LOC_NOT_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_LOC_NOT_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_DIGIT"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_DIGIT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_NOT_DIGIT"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_NOT_DIGIT"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_SPACE"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_SPACE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_NOT_SPACE"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_NOT_SPACE"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_NOT_WORD"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_NOT_WORD"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_LINEBREAK"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_LINEBREAK"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}
+vars {
+  name: "CATEGORY_UNI_NOT_LINEBREAK"
+  fully_qualified_name: "sre_constants.CATEGORY_UNI_NOT_LINEBREAK"
+  type_annotation {
+    pretty_printed_name: "sre_constants._NamedIntConstant"
+    fully_qualified_name: "sre_constants._NamedIntConstant"
+  }
+}

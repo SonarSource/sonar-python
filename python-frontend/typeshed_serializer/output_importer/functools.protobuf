@@ -1,0 +1,2274 @@
+fully_qualified_name: "functools"
+classes {
+  name: "_CacheInfo"
+  fully_qualified_name: "functools._CacheInfo"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "functools._CacheInfo._replace"
+    return_annotation {
+      pretty_printed_name: "functools._CacheInfo._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._CacheInfo._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "hits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "misses"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "currsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "functools._CacheInfo.__new__"
+    return_annotation {
+      pretty_printed_name: "functools._CacheInfo._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[functools._CacheInfo._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "functools._CacheInfo._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "hits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "misses"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "currsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "functools._CacheInfo._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._CacheInfo._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "functools._CacheInfo._make"
+    return_annotation {
+      pretty_printed_name: "functools._CacheInfo._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[functools._CacheInfo._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "functools._CacheInfo._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "hits"
+    fully_qualified_name: "functools._CacheInfo.hits"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "misses"
+    fully_qualified_name: "functools._CacheInfo.misses"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "maxsize"
+    fully_qualified_name: "functools._CacheInfo.maxsize"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "currsize"
+    fully_qualified_name: "functools._CacheInfo.currsize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "hits"
+    fully_qualified_name: "functools._CacheInfo.hits"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "misses"
+    fully_qualified_name: "functools._CacheInfo.misses"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "maxsize"
+    fully_qualified_name: "functools._CacheInfo.maxsize"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "currsize"
+    fully_qualified_name: "functools._CacheInfo.currsize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "functools._CacheInfo._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "functools._CacheInfo._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "functools._CacheInfo._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "functools._CacheInfo._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "functools._CacheInfo.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "_lru_cache_wrapper"
+  fully_qualified_name: "functools._lru_cache_wrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "functools._lru_cache_wrapper.__call__"
+    return_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._lru_cache_wrapper"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+    }
+  }
+  methods {
+    name: "cache_info"
+    fully_qualified_name: "functools._lru_cache_wrapper.cache_info"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,Union[builtins.int,None],builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,Union[builtins.int,None],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "functools._CacheInfo"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._lru_cache_wrapper"
+      }
+    }
+  }
+  methods {
+    name: "cache_clear"
+    fully_qualified_name: "functools._lru_cache_wrapper.cache_clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._lru_cache_wrapper"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "functools._lru_cache_wrapper.__copy__"
+    return_annotation {
+      pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+      args {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "functools._lru_cache_wrapper"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._lru_cache_wrapper"
+      }
+    }
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "functools._lru_cache_wrapper.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+      args {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "functools._lru_cache_wrapper"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._lru_cache_wrapper"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  has_decorators: true
+  is_generic: true
+  attributes {
+    name: "__wrapped__"
+    fully_qualified_name: "functools._lru_cache_wrapper.__wrapped__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "partial"
+  fully_qualified_name: "functools.partial"
+  super_classes: "builtins.object"
+  methods {
+    name: "func"
+    fully_qualified_name: "functools.partial.func"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.partial[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partial"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "args"
+    fully_qualified_name: "functools.partial.args"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.partial[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partial"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "keywords"
+    fully_qualified_name: "functools.partial.keywords"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.partial[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partial"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "functools.partial.__new__"
+    return_annotation {
+      pretty_printed_name: "functools.partial.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[functools.partial.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "functools.partial.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "functools.partial.__call__"
+    return_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "functools.partial[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partial"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "partialmethod"
+  fully_qualified_name: "functools.partialmethod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__get__"
+    fully_qualified_name: "functools.partialmethod.__get__"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.partialmethod[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partialmethod"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "functools.partialmethod.__isabstractmethod__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.partialmethod[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.partialmethod"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "functools.partialmethod.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "functools.partialmethod.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.partialmethod[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.partialmethod"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "keywords"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "functools.partialmethod.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.partialmethod[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.partialmethod"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Any]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "functools._Descriptor"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "keywords"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "func"
+    fully_qualified_name: "functools.partialmethod.func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],TypeAlias[Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "functools._Descriptor"
+      }
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "functools.partialmethod.args"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  attributes {
+    name: "keywords"
+    fully_qualified_name: "functools.partialmethod.keywords"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "_SingleDispatchCallable"
+  fully_qualified_name: "functools._SingleDispatchCallable"
+  super_classes: "builtins.object"
+  methods {
+    name: "dispatch"
+    fully_qualified_name: "functools._SingleDispatchCallable.dispatch"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._SingleDispatchCallable"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_clear_cache"
+    fully_qualified_name: "functools._SingleDispatchCallable._clear_cache"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._SingleDispatchCallable"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "functools._SingleDispatchCallable.__call__"
+    return_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools._SingleDispatchCallable"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  overloaded_methods {
+    name: "register"
+    fullname: "functools._SingleDispatchCallable.register"
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools._SingleDispatchCallable.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools._SingleDispatchCallable"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools._SingleDispatchCallable.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools._SingleDispatchCallable"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools._SingleDispatchCallable.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools._SingleDispatchCallable"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "registry"
+    fully_qualified_name: "functools._SingleDispatchCallable.registry"
+    type_annotation {
+      pretty_printed_name: "types.MappingProxyType[Any,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "types.MappingProxyType"
+    }
+  }
+}
+classes {
+  name: "singledispatchmethod"
+  fully_qualified_name: "functools.singledispatchmethod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "functools.singledispatchmethod.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.singledispatchmethod"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "functools.singledispatchmethod.__isabstractmethod__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.singledispatchmethod"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "functools.singledispatchmethod.__get__"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.singledispatchmethod"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._S"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[functools._S],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[functools._S]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "functools._S"
+            kind: TYPE_VAR
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  overloaded_methods {
+    name: "register"
+    fullname: "functools.singledispatchmethod.register"
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools.singledispatchmethod.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.singledispatchmethod"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "method"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools.singledispatchmethod.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.singledispatchmethod"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "method"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "register"
+      fully_qualified_name: "functools.singledispatchmethod.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.singledispatchmethod[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.singledispatchmethod"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+      }
+      parameters {
+        name: "method"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "dispatcher"
+    fully_qualified_name: "functools.singledispatchmethod.dispatcher"
+    type_annotation {
+      pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+      args {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "functools._SingleDispatchCallable"
+    }
+  }
+  attributes {
+    name: "func"
+    fully_qualified_name: "functools.singledispatchmethod.func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "cached_property"
+  fully_qualified_name: "functools.cached_property"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "functools.cached_property.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.cached_property[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.cached_property"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__set_name__"
+    fully_qualified_name: "functools.cached_property.__set_name__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.cached_property[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.cached_property"
+      }
+    }
+    parameters {
+      name: "owner"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__set__"
+    fully_qualified_name: "functools.cached_property.__set__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools.cached_property[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.cached_property"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__get__"
+    fullname: "functools.cached_property.__get__"
+    definitions {
+      name: "__get__"
+      fully_qualified_name: "functools.cached_property.__get__"
+      return_annotation {
+        pretty_printed_name: "functools.cached_property[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "functools.cached_property"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.cached_property[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.cached_property"
+        }
+      }
+      parameters {
+        name: "instance"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "owner"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Type[Any],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Type[Any]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__get__"
+      fully_qualified_name: "functools.cached_property.__get__"
+      return_annotation {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "functools.cached_property[functools._T]"
+          args {
+            pretty_printed_name: "functools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "functools.cached_property"
+        }
+      }
+      parameters {
+        name: "instance"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      parameters {
+        name: "owner"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Type[Any],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Type[Any]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "func"
+    fully_qualified_name: "functools.cached_property.func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "attrname"
+    fully_qualified_name: "functools.cached_property.attrname"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "update_wrapper"
+  fully_qualified_name: "functools.update_wrapper"
+  return_annotation {
+    pretty_printed_name: "functools._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "wrapper"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "wrapped"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "functools._AnyCallable"
+    }
+  }
+  parameters {
+    name: "assigned"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  parameters {
+    name: "updated"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+functions {
+  name: "wraps"
+  fully_qualified_name: "functools.wraps"
+  return_annotation {
+    pretty_printed_name: "_typeshed.IdentityFunction"
+    fully_qualified_name: "_typeshed.IdentityFunction"
+  }
+  parameters {
+    name: "wrapped"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "functools._AnyCallable"
+    }
+  }
+  parameters {
+    name: "assigned"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  parameters {
+    name: "updated"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+functions {
+  name: "total_ordering"
+  fully_qualified_name: "functools.total_ordering"
+  return_annotation {
+    pretty_printed_name: "Type[functools._T]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "cls"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[functools._T]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+}
+functions {
+  name: "cmp_to_key"
+  fully_qualified_name: "functools.cmp_to_key"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "mycmp"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "singledispatch"
+  fully_qualified_name: "functools.singledispatch"
+  return_annotation {
+    pretty_printed_name: "functools._SingleDispatchCallable[functools._T]"
+    args {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "functools._SingleDispatchCallable"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "_make_key"
+  fully_qualified_name: "functools._make_key"
+  return_annotation {
+    pretty_printed_name: "typing.Hashable"
+    fully_qualified_name: "typing.Hashable"
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[typing.Hashable]"
+      args {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "_typeshed.SupportsItems[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "_typeshed.SupportsItems"
+    }
+  }
+  parameters {
+    name: "typed"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "kwd_mark"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.object]"
+      args {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "fasttypes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.type]"
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  parameters {
+    name: "tuple"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "len"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+overloaded_functions {
+  name: "reduce"
+  fullname: "functools.reduce"
+  definitions {
+    name: "reduce"
+    fully_qualified_name: "functools.reduce"
+    return_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "function"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[functools._S]"
+        args {
+          pretty_printed_name: "functools._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "initial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "reduce"
+    fully_qualified_name: "functools.reduce"
+    return_annotation {
+      pretty_printed_name: "functools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "function"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[functools._T]"
+        args {
+          pretty_printed_name: "functools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "lru_cache"
+  fullname: "functools.lru_cache"
+  definitions {
+    name: "lru_cache"
+    fully_qualified_name: "functools.lru_cache"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "typed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "lru_cache"
+    fully_qualified_name: "functools.lru_cache"
+    return_annotation {
+      pretty_printed_name: "functools._lru_cache_wrapper[functools._T]"
+      args {
+        pretty_printed_name: "functools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "functools._lru_cache_wrapper"
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "typed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "functools.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "functools.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "WRAPPER_ASSIGNMENTS"
+  fully_qualified_name: "functools.WRAPPER_ASSIGNMENTS"
+  type_annotation {
+    pretty_printed_name: "Tuple[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+vars {
+  name: "WRAPPER_UPDATES"
+  fully_qualified_name: "functools.WRAPPER_UPDATES"
+  type_annotation {
+    pretty_printed_name: "Tuple[Literal[builtins.str]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "Literal[builtins.str]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}

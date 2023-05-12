@@ -1,0 +1,137 @@
+fully_qualified_name: "click._textwrap"
+classes {
+  name: "TextWrapper"
+  fully_qualified_name: "click._textwrap.TextWrapper"
+  super_classes: "textwrap.TextWrapper"
+  methods {
+    name: "_handle_long_word"
+    fully_qualified_name: "click._textwrap.TextWrapper._handle_long_word"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._textwrap.TextWrapper"
+        fully_qualified_name: "click._textwrap.TextWrapper"
+      }
+    }
+    parameters {
+      name: "reversed_chunks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "cur_line"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "cur_len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "width"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "extra_indent"
+    fully_qualified_name: "click._textwrap.TextWrapper.extra_indent"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[None]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._textwrap.TextWrapper"
+        fully_qualified_name: "click._textwrap.TextWrapper"
+      }
+    }
+    parameters {
+      name: "indent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "indent_only"
+    fully_qualified_name: "click._textwrap.TextWrapper.indent_only"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._textwrap.TextWrapper"
+        fully_qualified_name: "click._textwrap.TextWrapper"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "click._textwrap.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

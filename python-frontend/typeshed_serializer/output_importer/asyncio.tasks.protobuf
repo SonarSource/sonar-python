@@ -1,0 +1,3564 @@
+fully_qualified_name: "asyncio.tasks"
+classes {
+  name: "Task"
+  fully_qualified_name: "asyncio.tasks.Task"
+  super_classes: "asyncio.futures.Future"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.tasks.Task.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+    parameters {
+      name: "coro"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T_co],typing.Awaitable[asyncio.tasks._T_co]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T_co]"
+          args {
+            pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
+              kind: UNION
+              args {
+                pretty_printed_name: "asyncio.futures.Future[builtins.object]"
+                args {
+                  pretty_printed_name: "builtins.object"
+                  fully_qualified_name: "builtins.object"
+                }
+                fully_qualified_name: "asyncio.futures.Future"
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+            fully_qualified_name: "asyncio.tasks._TaskYieldType"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.tasks._T_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+        args {
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T_co]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_coro"
+    fully_qualified_name: "asyncio.tasks.Task.get_coro"
+    return_annotation {
+      pretty_printed_name: "Union[typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T_co],typing.Awaitable[asyncio.tasks._T_co]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Generator[TypeAlias[Union[asyncio.futures.Future[builtins.object],None]],None,asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[builtins.object],None]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[asyncio.futures.Future[builtins.object],None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "asyncio.futures.Future[builtins.object]"
+              args {
+                pretty_printed_name: "builtins.object"
+                fully_qualified_name: "builtins.object"
+              }
+              fully_qualified_name: "asyncio.futures.Future"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "asyncio.tasks._TaskYieldType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Generator"
+      }
+      args {
+        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Awaitable"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+  }
+  methods {
+    name: "get_name"
+    fully_qualified_name: "asyncio.tasks.Task.get_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+  }
+  methods {
+    name: "set_name"
+    fully_qualified_name: "asyncio.tasks.Task.set_name"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "get_stack"
+    fully_qualified_name: "asyncio.tasks.Task.get_stack"
+    return_annotation {
+      pretty_printed_name: "builtins.list[types.FrameType]"
+      args {
+        pretty_printed_name: "types.FrameType"
+        fully_qualified_name: "types.FrameType"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "print_stack"
+    fully_qualified_name: "asyncio.tasks.Task.print_stack"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "current_task"
+    fully_qualified_name: "asyncio.tasks.Task.current_task"
+    return_annotation {
+      pretty_printed_name: "Union[asyncio.tasks.Task[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.tasks.Task[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T_co]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.tasks.Task"
+        }
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "all_tasks"
+    fully_qualified_name: "asyncio.tasks.Task.all_tasks"
+    return_annotation {
+      pretty_printed_name: "builtins.set[asyncio.tasks.Task[Any]]"
+      args {
+        pretty_printed_name: "asyncio.tasks.Task[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "asyncio.tasks.Task"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[asyncio.tasks.Task[asyncio.tasks._T_co]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T_co]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.tasks.Task"
+        }
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  is_generic: true
+}
+functions {
+  name: "as_completed"
+  fully_qualified_name: "asyncio.tasks.as_completed"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[asyncio.futures.Future[asyncio.tasks._T]]"
+    args {
+      pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+      args {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "fs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "timeout"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "run_coroutine_threadsafe"
+  fully_qualified_name: "asyncio.tasks.run_coroutine_threadsafe"
+  return_annotation {
+    pretty_printed_name: "concurrent.futures._base.Future[asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "asyncio.tasks._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "concurrent.futures._base.Future"
+  }
+  parameters {
+    name: "coro"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+        args {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+        args {
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+      }
+      fully_qualified_name: "asyncio.tasks._FutureLike"
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+  }
+}
+functions {
+  name: "shield"
+  fully_qualified_name: "asyncio.tasks.shield"
+  return_annotation {
+    pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "asyncio.tasks._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "asyncio.futures.Future"
+  }
+  parameters {
+    name: "arg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+        args {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+        args {
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+      }
+      fully_qualified_name: "asyncio.tasks._FutureLike"
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "wait_for"
+  fully_qualified_name: "asyncio.tasks.wait_for"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "asyncio.tasks._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "fut"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "asyncio.futures.Future"
+        }
+        args {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+        args {
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+      }
+      fully_qualified_name: "asyncio.tasks._FutureLike"
+    }
+  }
+  parameters {
+    name: "timeout"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  is_asynchronous: true
+}
+functions {
+  name: "all_tasks"
+  fully_qualified_name: "asyncio.tasks.all_tasks"
+  return_annotation {
+    pretty_printed_name: "builtins.set[asyncio.tasks.Task[Any]]"
+    args {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "create_task"
+  fully_qualified_name: "asyncio.tasks.create_task"
+  return_annotation {
+    pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+    args {
+      pretty_printed_name: "asyncio.tasks._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "asyncio.tasks.Task"
+  }
+  parameters {
+    name: "coro"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Generator[Any,None,asyncio.tasks._T],typing.Coroutine[Any,Any,asyncio.tasks._T]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Generator"
+      }
+      args {
+        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Coroutine"
+      }
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "current_task"
+  fully_qualified_name: "asyncio.tasks.current_task"
+  return_annotation {
+    pretty_printed_name: "Union[asyncio.tasks.Task[Any],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_enter_task"
+  fully_qualified_name: "asyncio.tasks._enter_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+}
+functions {
+  name: "_leave_task"
+  fully_qualified_name: "asyncio.tasks._leave_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "loop"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+}
+functions {
+  name: "_register_task"
+  fully_qualified_name: "asyncio.tasks._register_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+}
+functions {
+  name: "_unregister_task"
+  fully_qualified_name: "asyncio.tasks._unregister_task"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "task"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+  }
+}
+overloaded_functions {
+  name: "ensure_future"
+  fullname: "asyncio.tasks.ensure_future"
+  definitions {
+    name: "ensure_future"
+    fully_qualified_name: "asyncio.tasks.ensure_future"
+    return_annotation {
+      pretty_printed_name: "asyncio.tasks._FT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "coro_or_future"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks._FT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "ensure_future"
+    fully_qualified_name: "asyncio.tasks.ensure_future"
+    return_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+      args {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+    parameters {
+      name: "coro_or_future"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+        args {
+          pretty_printed_name: "asyncio.tasks._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Awaitable"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "gather"
+  fullname: "asyncio.tasks.gather"
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[asyncio.tasks._T1]]"
+      args {
+        pretty_printed_name: "Tuple[asyncio.tasks._T1]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.tasks._T1"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2]]"
+      args {
+        pretty_printed_name: "Tuple[asyncio.tasks._T1,asyncio.tasks._T2]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.tasks._T1"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T2"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3]]"
+      args {
+        pretty_printed_name: "Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.tasks._T1"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T2"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T3"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4]]"
+      args {
+        pretty_printed_name: "Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.tasks._T1"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T2"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T3"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T4"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4,asyncio.tasks._T5]]"
+      args {
+        pretty_printed_name: "Tuple[asyncio.tasks._T1,asyncio.tasks._T2,asyncio.tasks._T3,asyncio.tasks._T4,asyncio.tasks._T5]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.tasks._T1"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T2"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T3"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T4"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "asyncio.tasks._T5"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]]"
+      args {
+        pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T1,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException]]]"
+      args {
+        pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T1,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T2,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException]]]"
+      args {
+        pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T1,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T2,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T3,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException]]]"
+      args {
+        pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T1,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T2,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T3,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T4,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T4"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException],Union[asyncio.tasks._T5,builtins.BaseException]]]"
+      args {
+        pretty_printed_name: "Tuple[Union[asyncio.tasks._T1,builtins.BaseException],Union[asyncio.tasks._T2,builtins.BaseException],Union[asyncio.tasks._T3,builtins.BaseException],Union[asyncio.tasks._T4,builtins.BaseException],Union[asyncio.tasks._T5,builtins.BaseException]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T1,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T2,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T3,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T4,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T4"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[asyncio.tasks._T5,builtins.BaseException]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.tasks._T5"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "gather"
+    fully_qualified_name: "asyncio.tasks.gather"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[builtins.list[Any]]"
+      args {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "coros_or_futures"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[asyncio.futures.Future[asyncio.tasks._T],typing.Generator[Any,None,asyncio.tasks._T],typing.Awaitable[asyncio.tasks._T]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "asyncio.futures.Future[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.futures.Future"
+          }
+          args {
+            pretty_printed_name: "typing.Generator[Any,None,asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Generator"
+          }
+          args {
+            pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Awaitable"
+          }
+        }
+        fully_qualified_name: "asyncio.tasks._FutureLike"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_exceptions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "sleep"
+  fullname: "asyncio.tasks.sleep"
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  definitions {
+    name: "sleep"
+    fully_qualified_name: "asyncio.tasks.sleep"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.tasks._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.tasks._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "wait"
+  fullname: "asyncio.tasks.wait"
+  definitions {
+    name: "wait"
+    fully_qualified_name: "asyncio.tasks.wait"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.set[asyncio.tasks._FT],builtins.set[asyncio.tasks._FT]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.set[asyncio.tasks._FT]"
+          args {
+            pretty_printed_name: "asyncio.tasks._FT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.set"
+        }
+        args {
+          pretty_printed_name: "builtins.set[asyncio.tasks._FT]"
+          args {
+            pretty_printed_name: "asyncio.tasks._FT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.set"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "fs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[asyncio.tasks._FT]"
+        args {
+          pretty_printed_name: "asyncio.tasks._FT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_when"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+  definitions {
+    name: "wait"
+    fully_qualified_name: "asyncio.tasks.wait"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.set[asyncio.tasks.Task[asyncio.tasks._T]],builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]"
+          args {
+            pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.tasks.Task"
+          }
+          fully_qualified_name: "builtins.set"
+        }
+        args {
+          pretty_printed_name: "builtins.set[asyncio.tasks.Task[asyncio.tasks._T]]"
+          args {
+            pretty_printed_name: "asyncio.tasks.Task[asyncio.tasks._T]"
+            args {
+              pretty_printed_name: "asyncio.tasks._T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "asyncio.tasks.Task"
+          }
+          fully_qualified_name: "builtins.set"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "fs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.Awaitable[asyncio.tasks._T]]"
+        args {
+          pretty_printed_name: "typing.Awaitable[asyncio.tasks._T]"
+          args {
+            pretty_printed_name: "asyncio.tasks._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "return_when"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_asynchronous: true
+    is_overload: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.tasks.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "concurrent"
+  fully_qualified_name: "concurrent"
+  is_imported_module: true
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.tasks.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "FIRST_COMPLETED"
+  fully_qualified_name: "asyncio.tasks.FIRST_COMPLETED"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "FIRST_EXCEPTION"
+  fully_qualified_name: "asyncio.tasks.FIRST_EXCEPTION"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "ALL_COMPLETED"
+  fully_qualified_name: "asyncio.tasks.ALL_COMPLETED"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.str]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

@@ -1,0 +1,1143 @@
+fully_qualified_name: "blinker.base"
+classes {
+  name: "Signal"
+  fully_qualified_name: "blinker.base.Signal"
+  super_classes: "builtins.object"
+  methods {
+    name: "receiver_connected"
+    fully_qualified_name: "blinker.base.Signal.receiver_connected"
+    return_annotation {
+      pretty_printed_name: "blinker.base.Signal"
+      fully_qualified_name: "blinker.base.Signal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "lazy_property"
+  }
+  methods {
+    name: "receiver_disconnected"
+    fully_qualified_name: "blinker.base.Signal.receiver_disconnected"
+    return_annotation {
+      pretty_printed_name: "blinker.base.Signal"
+      fully_qualified_name: "blinker.base.Signal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "lazy_property"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "blinker.base.Signal.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "connect"
+    fully_qualified_name: "blinker.base.Signal.connect"
+    return_annotation {
+      pretty_printed_name: "blinker.base.T_callable"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.T_callable"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "weak"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "connect_via"
+    fully_qualified_name: "blinker.base.Signal.connect_via"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "weak"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "connected_to"
+    fully_qualified_name: "blinker.base.Signal.connected_to"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[None,None,None]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "muted"
+    fully_qualified_name: "blinker.base.Signal.muted"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[None,None,None]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "temporarily_connected_to"
+    fully_qualified_name: "blinker.base.Signal.temporarily_connected_to"
+    return_annotation {
+      pretty_printed_name: "contextlib.AbstractContextManager[None]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "contextlib.AbstractContextManager"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "send"
+    fully_qualified_name: "blinker.base.Signal.send"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[CallableType[builtins.function],Any]]"
+      args {
+        pretty_printed_name: "Tuple[CallableType[builtins.function],Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_async_wrapper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[CallableType[builtins.function]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "blinker.base.AsyncWrapperType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "send_async"
+    fully_qualified_name: "blinker.base.Signal.send_async"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.list[Tuple[CallableType[builtins.function],Any]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[CallableType[builtins.function],Any]]"
+        args {
+          pretty_printed_name: "Tuple[CallableType[builtins.function],Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_sync_wrapper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[CallableType[builtins.function]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "blinker.base.SyncWrapperType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "_extract_sender"
+    fully_qualified_name: "blinker.base.Signal._extract_sender"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "has_receivers_for"
+    fully_qualified_name: "blinker.base.Signal.has_receivers_for"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "receivers_for"
+    fully_qualified_name: "blinker.base.Signal.receivers_for"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref],None,None]"
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "blinker._utilities.annotatable_weakref"
+          fully_qualified_name: "blinker._utilities.annotatable_weakref"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "disconnect"
+    fully_qualified_name: "blinker.base.Signal.disconnect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sender"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_disconnect"
+    fully_qualified_name: "blinker.base.Signal._disconnect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+    }
+    parameters {
+      name: "sender_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+    }
+  }
+  methods {
+    name: "_cleanup_receiver"
+    fully_qualified_name: "blinker.base.Signal._cleanup_receiver"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "receiver_ref"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker._utilities.annotatable_weakref"
+        fully_qualified_name: "blinker._utilities.annotatable_weakref"
+      }
+    }
+  }
+  methods {
+    name: "_cleanup_sender"
+    fully_qualified_name: "blinker.base.Signal._cleanup_sender"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+    parameters {
+      name: "sender_ref"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker._utilities.annotatable_weakref"
+        fully_qualified_name: "blinker._utilities.annotatable_weakref"
+      }
+    }
+  }
+  methods {
+    name: "_cleanup_bookkeeping"
+    fully_qualified_name: "blinker.base.Signal._cleanup_bookkeeping"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+  }
+  methods {
+    name: "_clear_state"
+    fully_qualified_name: "blinker.base.Signal._clear_state"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Signal"
+        fully_qualified_name: "blinker.base.Signal"
+      }
+    }
+  }
+  attributes {
+    name: "ANY"
+    fully_qualified_name: "blinker.base.Signal.ANY"
+    type_annotation {
+      pretty_printed_name: "blinker._utilities.symbol"
+      fully_qualified_name: "blinker._utilities.symbol"
+    }
+  }
+  attributes {
+    name: "receivers"
+    fully_qualified_name: "blinker.base.Signal.receivers"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],blinker._utilities.annotatable_weakref]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "blinker._utilities.annotatable_weakref"
+          fully_qualified_name: "blinker._utilities.annotatable_weakref"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "is_muted"
+    fully_qualified_name: "blinker.base.Signal.is_muted"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_by_receiver"
+    fully_qualified_name: "blinker.base.Signal._by_receiver"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],builtins.set[TypeAlias[Unknown]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+      args {
+        pretty_printed_name: "builtins.set[TypeAlias[Unknown]]"
+        args {
+          pretty_printed_name: "TypeAlias[Unknown]"
+          kind: TYPE_ALIAS
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_by_sender"
+    fully_qualified_name: "blinker.base.Signal._by_sender"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],builtins.set[TypeAlias[Unknown]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+      args {
+        pretty_printed_name: "builtins.set[TypeAlias[Unknown]]"
+        args {
+          pretty_printed_name: "TypeAlias[Unknown]"
+          kind: TYPE_ALIAS
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_weak_senders"
+    fully_qualified_name: "blinker.base.Signal._weak_senders"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]],blinker._utilities.annotatable_weakref]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "blinker._utilities.IdentityType"
+      }
+      args {
+        pretty_printed_name: "blinker._utilities.annotatable_weakref"
+        fully_qualified_name: "blinker._utilities.annotatable_weakref"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "NamedSignal"
+  fully_qualified_name: "blinker.base.NamedSignal"
+  super_classes: "blinker.base.Signal"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "blinker.base.NamedSignal.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.NamedSignal"
+        fully_qualified_name: "blinker.base.NamedSignal"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "blinker.base.NamedSignal.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "blinker.base.NamedSignal"
+        fully_qualified_name: "blinker.base.NamedSignal"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "blinker.base.NamedSignal.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Namespace"
+  fully_qualified_name: "blinker.base.Namespace"
+  super_classes: "builtins.dict"
+  methods {
+    name: "signal"
+    fully_qualified_name: "blinker.base.Namespace.signal"
+    return_annotation {
+      pretty_printed_name: "blinker.base.NamedSignal"
+      fully_qualified_name: "blinker.base.NamedSignal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.Namespace"
+        fully_qualified_name: "blinker.base.Namespace"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "WeakNamespace"
+  fully_qualified_name: "blinker.base.WeakNamespace"
+  super_classes: "weakref.WeakValueDictionary"
+  methods {
+    name: "signal"
+    fully_qualified_name: "blinker.base.WeakNamespace.signal"
+    return_annotation {
+      pretty_printed_name: "blinker.base.NamedSignal"
+      fully_qualified_name: "blinker.base.NamedSignal"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "blinker.base.WeakNamespace"
+        fully_qualified_name: "blinker.base.WeakNamespace"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "blinker.base.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "ANY"
+  fully_qualified_name: "blinker.base.ANY"
+  type_annotation {
+    pretty_printed_name: "blinker._utilities.symbol"
+    fully_qualified_name: "blinker._utilities.symbol"
+  }
+}
+vars {
+  name: "ANY_ID"
+  fully_qualified_name: "blinker.base.ANY_ID"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "receiver_connected"
+  fully_qualified_name: "blinker.base.receiver_connected"
+  type_annotation {
+    pretty_printed_name: "blinker.base.Signal"
+    fully_qualified_name: "blinker.base.Signal"
+  }
+}
+vars {
+  name: "signal"
+  fully_qualified_name: "blinker.base.signal"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+}

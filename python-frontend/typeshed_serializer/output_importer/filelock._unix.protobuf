@@ -1,0 +1,74 @@
+fully_qualified_name: "filelock._unix"
+classes {
+  name: "UnixFileLock"
+  fully_qualified_name: "filelock._unix.UnixFileLock"
+  super_classes: "filelock._api.BaseFileLock"
+  methods {
+    name: "_acquire"
+    fully_qualified_name: "filelock._unix.UnixFileLock._acquire"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._unix.UnixFileLock"
+        fully_qualified_name: "filelock._unix.UnixFileLock"
+      }
+    }
+  }
+  methods {
+    name: "_release"
+    fully_qualified_name: "filelock._unix.UnixFileLock._release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._unix.UnixFileLock"
+        fully_qualified_name: "filelock._unix.UnixFileLock"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "filelock._unix.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "has_fcntl"
+  fully_qualified_name: "filelock._unix.has_fcntl"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "filelock._unix.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

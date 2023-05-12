@@ -1,0 +1,1312 @@
+fully_qualified_name: "flask.blueprints"
+classes {
+  name: "BlueprintSetupState"
+  fully_qualified_name: "flask.blueprints.BlueprintSetupState"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.BlueprintSetupState"
+        fully_qualified_name: "flask.blueprints.BlueprintSetupState"
+      }
+    }
+    parameters {
+      name: "blueprint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "first_registration"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "add_url_rule"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.add_url_rule"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.BlueprintSetupState"
+        fully_qualified_name: "flask.blueprints.BlueprintSetupState"
+      }
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "endpoint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "view_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.app"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+  attributes {
+    name: "blueprint"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.blueprint"
+    type_annotation {
+      pretty_printed_name: "flask.blueprints.Blueprint"
+      fully_qualified_name: "flask.blueprints.Blueprint"
+    }
+  }
+  attributes {
+    name: "options"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.options"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "first_registration"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.first_registration"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "subdomain"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.subdomain"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "url_prefix"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.url_prefix"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "name_prefix"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.name_prefix"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "url_defaults"
+    fully_qualified_name: "flask.blueprints.BlueprintSetupState.url_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Blueprint"
+  fully_qualified_name: "flask.blueprints.Blueprint"
+  super_classes: "flask.scaffold.Scaffold"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.blueprints.Blueprint.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "import_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "static_folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "static_url_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "template_folder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "url_prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "subdomain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "url_defaults"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[Any,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[Any,Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "root_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "cli_group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_check_setup_finished"
+    fully_qualified_name: "flask.blueprints.Blueprint._check_setup_finished"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "record"
+    fully_qualified_name: "flask.blueprints.Blueprint.record"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "record_once"
+    fully_qualified_name: "flask.blueprints.Blueprint.record_once"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "make_setup_state"
+    fully_qualified_name: "flask.blueprints.Blueprint.make_setup_state"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.BlueprintSetupState"
+      fully_qualified_name: "flask.blueprints.BlueprintSetupState"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "first_registration"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "register_blueprint"
+    fully_qualified_name: "flask.blueprints.Blueprint.register_blueprint"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "blueprint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "flask.blueprints.Blueprint.register"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  methods {
+    name: "add_url_rule"
+    fully_qualified_name: "flask.blueprints.Blueprint.add_url_rule"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "endpoint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "view_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "CallableType[builtins.function]"
+              kind: CALLABLE
+              args {
+                pretty_printed_name: "builtins.function"
+                fully_qualified_name: "builtins.function"
+              }
+            }
+            args {
+              pretty_printed_name: "CallableType[builtins.function]"
+              kind: CALLABLE
+              args {
+                pretty_printed_name: "builtins.function"
+                fully_qualified_name: "builtins.function"
+              }
+            }
+          }
+          fully_qualified_name: "flask.typing.RouteCallable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "provide_automatic_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_template_filter"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_template_filter"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "add_app_template_filter"
+    fully_qualified_name: "flask.blueprints.Blueprint.add_app_template_filter"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "flask.typing.TemplateFilterCallable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_template_test"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_template_test"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "add_app_template_test"
+    fully_qualified_name: "flask.blueprints.Blueprint.add_app_template_test"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "flask.typing.TemplateTestCallable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_template_global"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_template_global"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "add_app_template_global"
+    fully_qualified_name: "flask.blueprints.Blueprint.add_app_template_global"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "flask.typing.TemplateGlobalCallable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "before_app_request"
+    fully_qualified_name: "flask.blueprints.Blueprint.before_app_request"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_before_request"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_before_request"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "after_app_request"
+    fully_qualified_name: "flask.blueprints.Blueprint.after_app_request"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_after_request"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_after_request"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "teardown_app_request"
+    fully_qualified_name: "flask.blueprints.Blueprint.teardown_app_request"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_teardown"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_teardown"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_context_processor"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_context_processor"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_template_context_processor"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_template_context_processor"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_errorhandler"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_errorhandler"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.Exception],builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.Exception]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.Exception"
+            fully_qualified_name: "builtins.Exception"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_url_value_preprocessor"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_url_value_preprocessor"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_url_value_preprocessor"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_url_value_preprocessor"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  methods {
+    name: "app_url_defaults"
+    fully_qualified_name: "flask.blueprints.Blueprint.app_url_defaults"
+    return_annotation {
+      pretty_printed_name: "flask.blueprints.T_url_defaults"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.Blueprint"
+        fully_qualified_name: "flask.blueprints.Blueprint"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.blueprints.T_url_defaults"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "setupmethod"
+  }
+  attributes {
+    name: "_got_registered_once"
+    fully_qualified_name: "flask.blueprints.Blueprint._got_registered_once"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "url_prefix"
+    fully_qualified_name: "flask.blueprints.Blueprint.url_prefix"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "subdomain"
+    fully_qualified_name: "flask.blueprints.Blueprint.subdomain"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "deferred_functions"
+    fully_qualified_name: "flask.blueprints.Blueprint.deferred_functions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[TypeAlias[CallableType[builtins.function]]]"
+      args {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "flask.blueprints.DeferredSetupFunction"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "url_values_defaults"
+    fully_qualified_name: "flask.blueprints.Blueprint.url_values_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "cli_group"
+    fully_qualified_name: "flask.blueprints.Blueprint.cli_group"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_blueprints"
+    fully_qualified_name: "flask.blueprints.Blueprint._blueprints"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]]"
+      args {
+        pretty_printed_name: "Tuple[flask.blueprints.Blueprint,builtins.dict[Any,Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "flask.blueprints.Blueprint"
+          fully_qualified_name: "flask.blueprints.Blueprint"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[Any,Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.blueprints.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "ft"
+  fully_qualified_name: "flask.typing"
+  is_imported_module: true
+}

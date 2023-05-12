@@ -1,0 +1,6331 @@
+fully_qualified_name: "click.core"
+classes {
+  name: "ParameterSource"
+  fully_qualified_name: "click.core.ParameterSource"
+  super_classes: "enum.Enum"
+  is_enum: true
+  attributes {
+    name: "COMMANDLINE"
+    fully_qualified_name: "click.core.ParameterSource.COMMANDLINE"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "ENVIRONMENT"
+    fully_qualified_name: "click.core.ParameterSource.ENVIRONMENT"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "DEFAULT"
+    fully_qualified_name: "click.core.ParameterSource.DEFAULT"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "DEFAULT_MAP"
+    fully_qualified_name: "click.core.ParameterSource.DEFAULT_MAP"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "PROMPT"
+    fully_qualified_name: "click.core.ParameterSource.PROMPT"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+}
+classes {
+  name: "Context"
+  fully_qualified_name: "click.core.Context"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Context.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "info_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "auto_envvar_prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "default_map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "terminal_width"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "max_content_width"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "resilient_parsing"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "allow_extra_args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "allow_interspersed_args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ignore_unknown_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "help_option_names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "token_normalize_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "color"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "show_default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.Context.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "click.core.Context.__enter__"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "click.core.Context.__exit__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "scope"
+    fully_qualified_name: "click.core.Context.scope"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[click.core.Context]"
+      args {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "cleanup"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "meta"
+    fully_qualified_name: "click.core.Context.meta"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "make_formatter"
+    fully_qualified_name: "click.core.Context.make_formatter"
+    return_annotation {
+      pretty_printed_name: "click.formatting.HelpFormatter"
+      fully_qualified_name: "click.formatting.HelpFormatter"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "with_resource"
+    fully_qualified_name: "click.core.Context.with_resource"
+    return_annotation {
+      pretty_printed_name: "click.core.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "context_manager"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextlib.AbstractContextManager[click.core.V]"
+        args {
+          pretty_printed_name: "click.core.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+    }
+  }
+  methods {
+    name: "call_on_close"
+    fully_qualified_name: "click.core.Context.call_on_close"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "click.core.Context.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "command_path"
+    fully_qualified_name: "click.core.Context.command_path"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "find_root"
+    fully_qualified_name: "click.core.Context.find_root"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "find_object"
+    fully_qualified_name: "click.core.Context.find_object"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.V,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.V"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "object_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[click.core.V]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "click.core.V"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "ensure_object"
+    fully_qualified_name: "click.core.Context.ensure_object"
+    return_annotation {
+      pretty_printed_name: "click.core.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "object_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[click.core.V]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "click.core.V"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "fail"
+    fully_qualified_name: "click.core.Context.fail"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "abort"
+    fully_qualified_name: "click.core.Context.abort"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "exit"
+    fully_qualified_name: "click.core.Context.exit"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "get_usage"
+    fully_qualified_name: "click.core.Context.get_usage"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help"
+    fully_qualified_name: "click.core.Context.get_help"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "_make_sub_context"
+    fully_qualified_name: "click.core.Context._make_sub_context"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+  }
+  methods {
+    name: "invoke"
+    fully_qualified_name: "click.core.Context.invoke"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Command,CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Command"
+          fully_qualified_name: "click.core.Command"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "forward"
+    fully_qualified_name: "click.core.Context.forward"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "set_parameter_source"
+    fully_qualified_name: "click.core.Context.set_parameter_source"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.ParameterSource"
+        fully_qualified_name: "click.core.ParameterSource"
+      }
+    }
+  }
+  methods {
+    name: "get_parameter_source"
+    fully_qualified_name: "click.core.Context.get_parameter_source"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.ParameterSource,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.ParameterSource"
+        fully_qualified_name: "click.core.ParameterSource"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "lookup_default"
+    fullname: "click.core.Context.lookup_default"
+    definitions {
+      name: "lookup_default"
+      fully_qualified_name: "click.core.Context.lookup_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "lookup_default"
+      fully_qualified_name: "click.core.Context.lookup_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "formatter_class"
+    fully_qualified_name: "click.core.Context.formatter_class"
+    type_annotation {
+      pretty_printed_name: "Type[click.formatting.HelpFormatter]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  attributes {
+    name: "parent"
+    fully_qualified_name: "click.core.Context.parent"
+    type_annotation {
+      pretty_printed_name: "Union[click.core.Context,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "command"
+    fully_qualified_name: "click.core.Context.command"
+    type_annotation {
+      pretty_printed_name: "click.core.Command"
+      fully_qualified_name: "click.core.Command"
+    }
+  }
+  attributes {
+    name: "info_name"
+    fully_qualified_name: "click.core.Context.info_name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "params"
+    fully_qualified_name: "click.core.Context.params"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "click.core.Context.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "protected_args"
+    fully_qualified_name: "click.core.Context.protected_args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_opt_prefixes"
+    fully_qualified_name: "click.core.Context._opt_prefixes"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "obj"
+    fully_qualified_name: "click.core.Context.obj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_meta"
+    fully_qualified_name: "click.core.Context._meta"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "default_map"
+    fully_qualified_name: "click.core.Context.default_map"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "invoked_subcommand"
+    fully_qualified_name: "click.core.Context.invoked_subcommand"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "terminal_width"
+    fully_qualified_name: "click.core.Context.terminal_width"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max_content_width"
+    fully_qualified_name: "click.core.Context.max_content_width"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "allow_extra_args"
+    fully_qualified_name: "click.core.Context.allow_extra_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "allow_interspersed_args"
+    fully_qualified_name: "click.core.Context.allow_interspersed_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "ignore_unknown_options"
+    fully_qualified_name: "click.core.Context.ignore_unknown_options"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "help_option_names"
+    fully_qualified_name: "click.core.Context.help_option_names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "token_normalize_func"
+    fully_qualified_name: "click.core.Context.token_normalize_func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "resilient_parsing"
+    fully_qualified_name: "click.core.Context.resilient_parsing"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "auto_envvar_prefix"
+    fully_qualified_name: "click.core.Context.auto_envvar_prefix"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "color"
+    fully_qualified_name: "click.core.Context.color"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "show_default"
+    fully_qualified_name: "click.core.Context.show_default"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_close_callbacks"
+    fully_qualified_name: "click.core.Context._close_callbacks"
+    type_annotation {
+      pretty_printed_name: "builtins.list[CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_depth"
+    fully_qualified_name: "click.core.Context._depth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_parameter_source"
+    fully_qualified_name: "click.core.Context._parameter_source"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,click.core.ParameterSource]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "click.core.ParameterSource"
+        fully_qualified_name: "click.core.ParameterSource"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_exit_stack"
+    fully_qualified_name: "click.core.Context._exit_stack"
+    type_annotation {
+      pretty_printed_name: "contextlib.ExitStack"
+      fully_qualified_name: "contextlib.ExitStack"
+    }
+  }
+}
+classes {
+  name: "BaseCommand"
+  fully_qualified_name: "click.core.BaseCommand"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.BaseCommand.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "context_settings"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.BaseCommand.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "click.core.BaseCommand.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+  }
+  methods {
+    name: "get_usage"
+    fully_qualified_name: "click.core.BaseCommand.get_usage"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help"
+    fully_qualified_name: "click.core.BaseCommand.get_help"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "make_context"
+    fully_qualified_name: "click.core.BaseCommand.make_context"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "info_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extra"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "parse_args"
+    fully_qualified_name: "click.core.BaseCommand.parse_args"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "invoke"
+    fully_qualified_name: "click.core.BaseCommand.invoke"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "shell_complete"
+    fully_qualified_name: "click.core.BaseCommand.shell_complete"
+    return_annotation {
+      pretty_printed_name: "builtins.list[click.shell_completion.CompletionItem]"
+      args {
+        pretty_printed_name: "click.shell_completion.CompletionItem"
+        fully_qualified_name: "click.shell_completion.CompletionItem"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "incomplete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_main_shell_completion"
+    fully_qualified_name: "click.core.BaseCommand._main_shell_completion"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "ctx_args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "prog_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "complete_var"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "click.core.BaseCommand.__call__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.BaseCommand"
+        fully_qualified_name: "click.core.BaseCommand"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  overloaded_methods {
+    name: "main"
+    fullname: "click.core.BaseCommand.main"
+    definitions {
+      name: "main"
+      fully_qualified_name: "click.core.BaseCommand.main"
+      return_annotation {
+        pretty_printed_name: "NoReturn"
+        kind: UNINHABITED
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.BaseCommand"
+          fully_qualified_name: "click.core.BaseCommand"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "prog_name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "complete_var"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "standalone_mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      parameters {
+        name: "extra"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "main"
+      fully_qualified_name: "click.core.BaseCommand.main"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.BaseCommand"
+          fully_qualified_name: "click.core.BaseCommand"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "prog_name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "complete_var"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "standalone_mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "extra"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "context_class"
+    fully_qualified_name: "click.core.BaseCommand.context_class"
+    type_annotation {
+      pretty_printed_name: "Type[click.core.Context]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  attributes {
+    name: "allow_extra_args"
+    fully_qualified_name: "click.core.BaseCommand.allow_extra_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "allow_interspersed_args"
+    fully_qualified_name: "click.core.BaseCommand.allow_interspersed_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "ignore_unknown_options"
+    fully_qualified_name: "click.core.BaseCommand.ignore_unknown_options"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "click.core.BaseCommand.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "context_settings"
+    fully_qualified_name: "click.core.BaseCommand.context_settings"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Command"
+  fully_qualified_name: "click.core.Command"
+  super_classes: "click.core.BaseCommand"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Command.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "context_settings"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[click.core.Parameter],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[click.core.Parameter]"
+          args {
+            pretty_printed_name: "click.core.Parameter"
+            fully_qualified_name: "click.core.Parameter"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "help"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "epilog"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "short_help"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "options_metavar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "add_help_option"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "no_args_is_help"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "hidden"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "deprecated"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.Command.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_usage"
+    fully_qualified_name: "click.core.Command.get_usage"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_params"
+    fully_qualified_name: "click.core.Command.get_params"
+    return_annotation {
+      pretty_printed_name: "builtins.list[click.core.Parameter]"
+      args {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "format_usage"
+    fully_qualified_name: "click.core.Command.format_usage"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "collect_usage_pieces"
+    fully_qualified_name: "click.core.Command.collect_usage_pieces"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help_option_names"
+    fully_qualified_name: "click.core.Command.get_help_option_names"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help_option"
+    fully_qualified_name: "click.core.Command.get_help_option"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.Option,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "make_parser"
+    fully_qualified_name: "click.core.Command.make_parser"
+    return_annotation {
+      pretty_printed_name: "click.parser.OptionParser"
+      fully_qualified_name: "click.parser.OptionParser"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help"
+    fully_qualified_name: "click.core.Command.get_help"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_short_help_str"
+    fully_qualified_name: "click.core.Command.get_short_help_str"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "format_help"
+    fully_qualified_name: "click.core.Command.format_help"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "format_help_text"
+    fully_qualified_name: "click.core.Command.format_help_text"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "format_options"
+    fully_qualified_name: "click.core.Command.format_options"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "format_epilog"
+    fully_qualified_name: "click.core.Command.format_epilog"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "parse_args"
+    fully_qualified_name: "click.core.Command.parse_args"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "invoke"
+    fully_qualified_name: "click.core.Command.invoke"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "shell_complete"
+    fully_qualified_name: "click.core.Command.shell_complete"
+    return_annotation {
+      pretty_printed_name: "builtins.list[click.shell_completion.CompletionItem]"
+      args {
+        pretty_printed_name: "click.shell_completion.CompletionItem"
+        fully_qualified_name: "click.shell_completion.CompletionItem"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "incomplete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "callback"
+    fully_qualified_name: "click.core.Command.callback"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "params"
+    fully_qualified_name: "click.core.Command.params"
+    type_annotation {
+      pretty_printed_name: "builtins.list[click.core.Parameter]"
+      args {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "help"
+    fully_qualified_name: "click.core.Command.help"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "epilog"
+    fully_qualified_name: "click.core.Command.epilog"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "options_metavar"
+    fully_qualified_name: "click.core.Command.options_metavar"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "short_help"
+    fully_qualified_name: "click.core.Command.short_help"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "add_help_option"
+    fully_qualified_name: "click.core.Command.add_help_option"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "no_args_is_help"
+    fully_qualified_name: "click.core.Command.no_args_is_help"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "hidden"
+    fully_qualified_name: "click.core.Command.hidden"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "deprecated"
+    fully_qualified_name: "click.core.Command.deprecated"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "MultiCommand"
+  fully_qualified_name: "click.core.MultiCommand"
+  super_classes: "click.core.Command"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.MultiCommand.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "invoke_without_command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "no_args_is_help"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "subcommand_metavar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "chain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "result_callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.MultiCommand.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "collect_usage_pieces"
+    fully_qualified_name: "click.core.MultiCommand.collect_usage_pieces"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "format_options"
+    fully_qualified_name: "click.core.MultiCommand.format_options"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "result_callback"
+    fully_qualified_name: "click.core.MultiCommand.result_callback"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "replace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "format_commands"
+    fully_qualified_name: "click.core.MultiCommand.format_commands"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "formatter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.formatting.HelpFormatter"
+        fully_qualified_name: "click.formatting.HelpFormatter"
+      }
+    }
+  }
+  methods {
+    name: "parse_args"
+    fully_qualified_name: "click.core.MultiCommand.parse_args"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "invoke"
+    fully_qualified_name: "click.core.MultiCommand.invoke"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "resolve_command"
+    fully_qualified_name: "click.core.MultiCommand.resolve_command"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],Union[click.core.Command,None],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Union[click.core.Command,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Command"
+          fully_qualified_name: "click.core.Command"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "get_command"
+    fully_qualified_name: "click.core.MultiCommand.get_command"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.Command,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "cmd_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_commands"
+    fully_qualified_name: "click.core.MultiCommand.list_commands"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "shell_complete"
+    fully_qualified_name: "click.core.MultiCommand.shell_complete"
+    return_annotation {
+      pretty_printed_name: "builtins.list[click.shell_completion.CompletionItem]"
+      args {
+        pretty_printed_name: "click.shell_completion.CompletionItem"
+        fully_qualified_name: "click.shell_completion.CompletionItem"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "incomplete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "allow_extra_args"
+    fully_qualified_name: "click.core.MultiCommand.allow_extra_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "allow_interspersed_args"
+    fully_qualified_name: "click.core.MultiCommand.allow_interspersed_args"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "invoke_without_command"
+    fully_qualified_name: "click.core.MultiCommand.invoke_without_command"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "subcommand_metavar"
+    fully_qualified_name: "click.core.MultiCommand.subcommand_metavar"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "chain"
+    fully_qualified_name: "click.core.MultiCommand.chain"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_result_callback"
+    fully_qualified_name: "click.core.MultiCommand._result_callback"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Group"
+  fully_qualified_name: "click.core.Group"
+  super_classes: "click.core.MultiCommand"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Group.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Group"
+        fully_qualified_name: "click.core.Group"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "commands"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,click.core.Command],typing.Sequence[click.core.Command],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,click.core.Command]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "click.core.Command"
+            fully_qualified_name: "click.core.Command"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[click.core.Command]"
+          args {
+            pretty_printed_name: "click.core.Command"
+            fully_qualified_name: "click.core.Command"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "add_command"
+    fully_qualified_name: "click.core.Group.add_command"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Group"
+        fully_qualified_name: "click.core.Group"
+      }
+    }
+    parameters {
+      name: "cmd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_command"
+    fully_qualified_name: "click.core.Group.get_command"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.Command,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Group"
+        fully_qualified_name: "click.core.Group"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "cmd_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_commands"
+    fully_qualified_name: "click.core.Group.list_commands"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Group"
+        fully_qualified_name: "click.core.Group"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "command"
+    fullname: "click.core.Group.command"
+    definitions {
+      name: "command"
+      fully_qualified_name: "click.core.Group.command"
+      return_annotation {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Group"
+          fully_qualified_name: "click.core.Group"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "command"
+      fully_qualified_name: "click.core.Group.command"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Group"
+          fully_qualified_name: "click.core.Group"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "group"
+    fullname: "click.core.Group.group"
+    definitions {
+      name: "group"
+      fully_qualified_name: "click.core.Group.group"
+      return_annotation {
+        pretty_printed_name: "click.core.Group"
+        fully_qualified_name: "click.core.Group"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Group"
+          fully_qualified_name: "click.core.Group"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "group"
+      fully_qualified_name: "click.core.Group.group"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Group"
+          fully_qualified_name: "click.core.Group"
+        }
+      }
+      parameters {
+        name: "args"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "command_class"
+    fully_qualified_name: "click.core.Group.command_class"
+    type_annotation {
+      pretty_printed_name: "Union[Type[click.core.Command],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[click.core.Command]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "click.core.Command"
+          fully_qualified_name: "click.core.Command"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "group_class"
+    fully_qualified_name: "click.core.Group.group_class"
+    type_annotation {
+      pretty_printed_name: "Union[Type[click.core.Group],Type[builtins.type],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[click.core.Group]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "click.core.Group"
+          fully_qualified_name: "click.core.Group"
+        }
+      }
+      args {
+        pretty_printed_name: "Type[builtins.type]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "commands"
+    fully_qualified_name: "click.core.Group.commands"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,click.core.Command]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "CommandCollection"
+  fully_qualified_name: "click.core.CommandCollection"
+  super_classes: "click.core.MultiCommand"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.CommandCollection.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.CommandCollection"
+        fully_qualified_name: "click.core.CommandCollection"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "sources"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[click.core.MultiCommand],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[click.core.MultiCommand]"
+          args {
+            pretty_printed_name: "click.core.MultiCommand"
+            fully_qualified_name: "click.core.MultiCommand"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "add_source"
+    fully_qualified_name: "click.core.CommandCollection.add_source"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.CommandCollection"
+        fully_qualified_name: "click.core.CommandCollection"
+      }
+    }
+    parameters {
+      name: "multi_cmd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+    }
+  }
+  methods {
+    name: "get_command"
+    fully_qualified_name: "click.core.CommandCollection.get_command"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.Command,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.CommandCollection"
+        fully_qualified_name: "click.core.CommandCollection"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "cmd_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_commands"
+    fully_qualified_name: "click.core.CommandCollection.list_commands"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.CommandCollection"
+        fully_qualified_name: "click.core.CommandCollection"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  attributes {
+    name: "sources"
+    fully_qualified_name: "click.core.CommandCollection.sources"
+    type_annotation {
+      pretty_printed_name: "builtins.list[click.core.MultiCommand]"
+      args {
+        pretty_printed_name: "click.core.MultiCommand"
+        fully_qualified_name: "click.core.MultiCommand"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Parameter"
+  fully_qualified_name: "click.core.Parameter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Parameter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "param_decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.types.ParamType,Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.types.ParamType"
+          fully_qualified_name: "click.types.ParamType"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "required"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "nargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "multiple"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "metavar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "expose_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "is_eager"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "envvar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "shell_complete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.Parameter.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "click.core.Parameter.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+  }
+  methods {
+    name: "_parse_decls"
+    fully_qualified_name: "click.core.Parameter._parse_decls"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "expose_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "human_readable_name"
+    fully_qualified_name: "click.core.Parameter.human_readable_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "make_metavar"
+    fully_qualified_name: "click.core.Parameter.make_metavar"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+  }
+  methods {
+    name: "add_to_parser"
+    fully_qualified_name: "click.core.Parameter.add_to_parser"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.parser.OptionParser"
+        fully_qualified_name: "click.parser.OptionParser"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "consume_value"
+    fully_qualified_name: "click.core.Parameter.consume_value"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,click.core.ParameterSource]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "click.core.ParameterSource"
+        fully_qualified_name: "click.core.ParameterSource"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "opts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "type_cast_value"
+    fully_qualified_name: "click.core.Parameter.type_cast_value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "value_is_missing"
+    fully_qualified_name: "click.core.Parameter.value_is_missing"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "process_value"
+    fully_qualified_name: "click.core.Parameter.process_value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "resolve_envvar_value"
+    fully_qualified_name: "click.core.Parameter.resolve_envvar_value"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "value_from_envvar"
+    fully_qualified_name: "click.core.Parameter.value_from_envvar"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "handle_parse_result"
+    fully_qualified_name: "click.core.Parameter.handle_parse_result"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "opts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "get_help_record"
+    fully_qualified_name: "click.core.Parameter.get_help_record"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_usage_pieces"
+    fully_qualified_name: "click.core.Parameter.get_usage_pieces"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_error_hint"
+    fully_qualified_name: "click.core.Parameter.get_error_hint"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "shell_complete"
+    fully_qualified_name: "click.core.Parameter.shell_complete"
+    return_annotation {
+      pretty_printed_name: "builtins.list[click.shell_completion.CompletionItem]"
+      args {
+        pretty_printed_name: "click.shell_completion.CompletionItem"
+        fully_qualified_name: "click.shell_completion.CompletionItem"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "incomplete"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get_default"
+    fullname: "click.core.Parameter.get_default"
+    definitions {
+      name: "get_default"
+      fully_qualified_name: "click.core.Parameter.get_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Parameter"
+          fully_qualified_name: "click.core.Parameter"
+        }
+      }
+      parameters {
+        name: "ctx"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_default"
+      fully_qualified_name: "click.core.Parameter.get_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Parameter"
+          fully_qualified_name: "click.core.Parameter"
+        }
+      }
+      parameters {
+        name: "ctx"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "param_type_name"
+    fully_qualified_name: "click.core.Parameter.param_type_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "click.core.Parameter.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "opts"
+    fully_qualified_name: "click.core.Parameter.opts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "secondary_opts"
+    fully_qualified_name: "click.core.Parameter.secondary_opts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "click.core.Parameter.type"
+    type_annotation {
+      pretty_printed_name: "click.types.ParamType"
+      fully_qualified_name: "click.types.ParamType"
+    }
+  }
+  attributes {
+    name: "required"
+    fully_qualified_name: "click.core.Parameter.required"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "callback"
+    fully_qualified_name: "click.core.Parameter.callback"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "nargs"
+    fully_qualified_name: "click.core.Parameter.nargs"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "multiple"
+    fully_qualified_name: "click.core.Parameter.multiple"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "expose_value"
+    fully_qualified_name: "click.core.Parameter.expose_value"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "default"
+    fully_qualified_name: "click.core.Parameter.default"
+    type_annotation {
+      pretty_printed_name: "Union[Any,CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "is_eager"
+    fully_qualified_name: "click.core.Parameter.is_eager"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "metavar"
+    fully_qualified_name: "click.core.Parameter.metavar"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "envvar"
+    fully_qualified_name: "click.core.Parameter.envvar"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_custom_shell_complete"
+    fully_qualified_name: "click.core.Parameter._custom_shell_complete"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Option"
+  fully_qualified_name: "click.core.Option"
+  super_classes: "click.core.Parameter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Option.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "param_decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "show_default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "prompt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "confirmation_prompt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "prompt_required"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "hide_input"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "is_flag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "flag_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "multiple"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "allow_from_autoenv"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.types.ParamType,Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.types.ParamType"
+          fully_qualified_name: "click.types.ParamType"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "help"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "hidden"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "show_choices"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "show_envvar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "to_info_dict"
+    fully_qualified_name: "click.core.Option.to_info_dict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+  }
+  methods {
+    name: "_parse_decls"
+    fully_qualified_name: "click.core.Option._parse_decls"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "expose_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "add_to_parser"
+    fully_qualified_name: "click.core.Option.add_to_parser"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.parser.OptionParser"
+        fully_qualified_name: "click.parser.OptionParser"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_help_record"
+    fully_qualified_name: "click.core.Option.get_help_record"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "prompt_for_value"
+    fully_qualified_name: "click.core.Option.prompt_for_value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "resolve_envvar_value"
+    fully_qualified_name: "click.core.Option.resolve_envvar_value"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "value_from_envvar"
+    fully_qualified_name: "click.core.Option.value_from_envvar"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "consume_value"
+    fully_qualified_name: "click.core.Option.consume_value"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,click.core.ParameterSource]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "click.core.ParameterSource"
+        fully_qualified_name: "click.core.ParameterSource"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Option"
+        fully_qualified_name: "click.core.Option"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "opts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,click.core.Parameter]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "click.core.Parameter"
+          fully_qualified_name: "click.core.Parameter"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get_default"
+    fullname: "click.core.Option.get_default"
+    definitions {
+      name: "get_default"
+      fully_qualified_name: "click.core.Option.get_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Option"
+          fully_qualified_name: "click.core.Option"
+        }
+      }
+      parameters {
+        name: "ctx"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_default"
+      fully_qualified_name: "click.core.Option.get_default"
+      return_annotation {
+        pretty_printed_name: "Union[Any,CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Option"
+          fully_qualified_name: "click.core.Option"
+        }
+      }
+      parameters {
+        name: "ctx"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+      }
+      parameters {
+        name: "call"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "param_type_name"
+    fully_qualified_name: "click.core.Option.param_type_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "prompt"
+    fully_qualified_name: "click.core.Option.prompt"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "confirmation_prompt"
+    fully_qualified_name: "click.core.Option.confirmation_prompt"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "prompt_required"
+    fully_qualified_name: "click.core.Option.prompt_required"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "hide_input"
+    fully_qualified_name: "click.core.Option.hide_input"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "hidden"
+    fully_qualified_name: "click.core.Option.hidden"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_flag_needs_value"
+    fully_qualified_name: "click.core.Option._flag_needs_value"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "default"
+    fully_qualified_name: "click.core.Option.default"
+    type_annotation {
+      pretty_printed_name: "Union[Any,CallableType[builtins.function]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "is_flag"
+    fully_qualified_name: "click.core.Option.is_flag"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "is_bool_flag"
+    fully_qualified_name: "click.core.Option.is_bool_flag"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "flag_value"
+    fully_qualified_name: "click.core.Option.flag_value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "count"
+    fully_qualified_name: "click.core.Option.count"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "allow_from_autoenv"
+    fully_qualified_name: "click.core.Option.allow_from_autoenv"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "help"
+    fully_qualified_name: "click.core.Option.help"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "show_default"
+    fully_qualified_name: "click.core.Option.show_default"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "show_choices"
+    fully_qualified_name: "click.core.Option.show_choices"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "show_envvar"
+    fully_qualified_name: "click.core.Option.show_envvar"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Argument"
+  fully_qualified_name: "click.core.Argument"
+  super_classes: "click.core.Parameter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.core.Argument.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    parameters {
+      name: "param_decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "required"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "human_readable_name"
+    fully_qualified_name: "click.core.Argument.human_readable_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "make_metavar"
+    fully_qualified_name: "click.core.Argument.make_metavar"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+  }
+  methods {
+    name: "_parse_decls"
+    fully_qualified_name: "click.core.Argument._parse_decls"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],builtins.list[builtins.str],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    parameters {
+      name: "decls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "expose_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "get_usage_pieces"
+    fully_qualified_name: "click.core.Argument.get_usage_pieces"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_error_hint"
+    fully_qualified_name: "click.core.Argument.get_error_hint"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  methods {
+    name: "add_to_parser"
+    fully_qualified_name: "click.core.Argument.add_to_parser"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Argument"
+        fully_qualified_name: "click.core.Argument"
+      }
+    }
+    parameters {
+      name: "parser"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.parser.OptionParser"
+        fully_qualified_name: "click.parser.OptionParser"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+  }
+  attributes {
+    name: "param_type_name"
+    fully_qualified_name: "click.core.Argument.param_type_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_"
+  fully_qualified_name: "gettext.gettext"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_complete_visible_commands"
+  fully_qualified_name: "click.core._complete_visible_commands"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[builtins.str,click.core.Command]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,click.core.Command]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+  }
+  parameters {
+    name: "incomplete"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_check_multicommand"
+  fully_qualified_name: "click.core._check_multicommand"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "base_command"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.MultiCommand"
+      fully_qualified_name: "click.core.MultiCommand"
+    }
+  }
+  parameters {
+    name: "cmd_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "cmd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Command"
+      fully_qualified_name: "click.core.Command"
+    }
+  }
+  parameters {
+    name: "register"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "batch"
+  fully_qualified_name: "click.core.batch"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.tuple[click.core.V]]"
+    args {
+      pretty_printed_name: "builtins.tuple[click.core.V]"
+      args {
+        pretty_printed_name: "click.core.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "iterable"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[click.core.V]"
+      args {
+        pretty_printed_name: "click.core.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "batch_size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "iter_params_for_processing"
+  fully_qualified_name: "click.core.iter_params_for_processing"
+  return_annotation {
+    pretty_printed_name: "builtins.list[click.core.Parameter]"
+    args {
+      pretty_printed_name: "click.core.Parameter"
+      fully_qualified_name: "click.core.Parameter"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "invocation_order"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[click.core.Parameter]"
+      args {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  parameters {
+    name: "declaration_order"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[click.core.Parameter]"
+      args {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+functions {
+  name: "_check_iter"
+  fully_qualified_name: "click.core._check_iter"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "click.core.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}

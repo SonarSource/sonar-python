@@ -1,0 +1,4057 @@
+fully_qualified_name: "jinja2.nodes"
+classes {
+  name: "Impossible"
+  fully_qualified_name: "jinja2.nodes.Impossible"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "NodeType"
+  fully_qualified_name: "jinja2.nodes.NodeType"
+  super_classes: "builtins.type"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "jinja2.nodes.NodeType.__new__"
+    parameters {
+      name: "mcs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "d"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "EvalContext"
+  fully_qualified_name: "jinja2.nodes.EvalContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.nodes.EvalContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.EvalContext"
+        fully_qualified_name: "jinja2.nodes.EvalContext"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "save"
+    fully_qualified_name: "jinja2.nodes.EvalContext.save"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.EvalContext"
+        fully_qualified_name: "jinja2.nodes.EvalContext"
+      }
+    }
+  }
+  methods {
+    name: "revert"
+    fully_qualified_name: "jinja2.nodes.EvalContext.revert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.EvalContext"
+        fully_qualified_name: "jinja2.nodes.EvalContext"
+      }
+    }
+    parameters {
+      name: "old"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  attributes {
+    name: "environment"
+    fully_qualified_name: "jinja2.nodes.EvalContext.environment"
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  attributes {
+    name: "autoescape"
+    fully_qualified_name: "jinja2.nodes.EvalContext.autoescape"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "volatile"
+    fully_qualified_name: "jinja2.nodes.EvalContext.volatile"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Node"
+  fully_qualified_name: "jinja2.nodes.Node"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.nodes.Node.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "fields"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attributes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "iter_fields"
+    fully_qualified_name: "jinja2.nodes.Node.iter_fields"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,Any]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "exclude"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Container[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Container[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Container"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "only"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Container[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Container[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Container"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "iter_child_nodes"
+    fully_qualified_name: "jinja2.nodes.Node.iter_child_nodes"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "exclude"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Container[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Container[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Container"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "only"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Container[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Container[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Container"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "jinja2.nodes.Node.find"
+    return_annotation {
+      pretty_printed_name: "Union[jinja2.nodes._NodeBound,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes._NodeBound"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "node_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.nodes._NodeBound]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.nodes._NodeBound"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "find_all"
+    fully_qualified_name: "jinja2.nodes.Node.find_all"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[jinja2.nodes._NodeBound]"
+      args {
+        pretty_printed_name: "jinja2.nodes._NodeBound"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "node_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[jinja2.nodes._NodeBound],builtins.tuple[Type[jinja2.nodes._NodeBound]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[jinja2.nodes._NodeBound]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "jinja2.nodes._NodeBound"
+            kind: TYPE_VAR
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[Type[jinja2.nodes._NodeBound]]"
+          args {
+            pretty_printed_name: "Type[jinja2.nodes._NodeBound]"
+            kind: TYPE
+            args {
+              pretty_printed_name: "jinja2.nodes._NodeBound"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+    }
+  }
+  methods {
+    name: "set_ctx"
+    fully_qualified_name: "jinja2.nodes.Node.set_ctx"
+    return_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set_lineno"
+    fully_qualified_name: "jinja2.nodes.Node.set_lineno"
+    return_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "override"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "set_environment"
+    fully_qualified_name: "jinja2.nodes.Node.set_environment"
+    return_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "jinja2.nodes.Node.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.nodes.Node.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+  }
+  methods {
+    name: "dump"
+    fully_qualified_name: "jinja2.nodes.Node.dump"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+  }
+  has_metaclass: true
+  metaclass_name: "jinja2.nodes.NodeType"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Node.fields"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  attributes {
+    name: "attributes"
+    fully_qualified_name: "jinja2.nodes.Node.attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.Node.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "jinja2.nodes.Node.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "environment"
+    fully_qualified_name: "jinja2.nodes.Node.environment"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.environment.Environment,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "jinja2.nodes.Node.__hash__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "Stmt"
+  fully_qualified_name: "jinja2.nodes.Stmt"
+  super_classes: "jinja2.nodes.Node"
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.Stmt.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Helper"
+  fully_qualified_name: "jinja2.nodes.Helper"
+  super_classes: "jinja2.nodes.Node"
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.Helper.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Template"
+  fully_qualified_name: "jinja2.nodes.Template"
+  super_classes: "jinja2.nodes.Node"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Template.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.Template.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Output"
+  fully_qualified_name: "jinja2.nodes.Output"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Output.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "nodes"
+    fully_qualified_name: "jinja2.nodes.Output.nodes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Extends"
+  fully_qualified_name: "jinja2.nodes.Extends"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Extends.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "template"
+    fully_qualified_name: "jinja2.nodes.Extends.template"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "For"
+  fully_qualified_name: "jinja2.nodes.For"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.For.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "target"
+    fully_qualified_name: "jinja2.nodes.For.target"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  attributes {
+    name: "iter"
+    fully_qualified_name: "jinja2.nodes.For.iter"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.For.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "else_"
+    fully_qualified_name: "jinja2.nodes.For.else_"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "test"
+    fully_qualified_name: "jinja2.nodes.For.test"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Node,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "recursive"
+    fully_qualified_name: "jinja2.nodes.For.recursive"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "If"
+  fully_qualified_name: "jinja2.nodes.If"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.If.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "test"
+    fully_qualified_name: "jinja2.nodes.If.test"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.If.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "elif_"
+    fully_qualified_name: "jinja2.nodes.If.elif_"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.If]"
+      args {
+        pretty_printed_name: "jinja2.nodes.If"
+        fully_qualified_name: "jinja2.nodes.If"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "else_"
+    fully_qualified_name: "jinja2.nodes.If.else_"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Macro"
+  fully_qualified_name: "jinja2.nodes.Macro"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Macro.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.Macro.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "jinja2.nodes.Macro.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Name]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Name"
+        fully_qualified_name: "jinja2.nodes.Name"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "defaults"
+    fully_qualified_name: "jinja2.nodes.Macro.defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.Macro.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "CallBlock"
+  fully_qualified_name: "jinja2.nodes.CallBlock"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.CallBlock.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "call"
+    fully_qualified_name: "jinja2.nodes.CallBlock.call"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Call"
+      fully_qualified_name: "jinja2.nodes.Call"
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "jinja2.nodes.CallBlock.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Name]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Name"
+        fully_qualified_name: "jinja2.nodes.Name"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "defaults"
+    fully_qualified_name: "jinja2.nodes.CallBlock.defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.CallBlock.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "FilterBlock"
+  fully_qualified_name: "jinja2.nodes.FilterBlock"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.FilterBlock.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.FilterBlock.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "filter"
+    fully_qualified_name: "jinja2.nodes.FilterBlock.filter"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Filter"
+      fully_qualified_name: "jinja2.nodes.Filter"
+    }
+  }
+}
+classes {
+  name: "With"
+  fully_qualified_name: "jinja2.nodes.With"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.With.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "targets"
+    fully_qualified_name: "jinja2.nodes.With.targets"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "jinja2.nodes.With.values"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.With.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Block"
+  fully_qualified_name: "jinja2.nodes.Block"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Block.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.Block.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.Block.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "scoped"
+    fully_qualified_name: "jinja2.nodes.Block.scoped"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "required"
+    fully_qualified_name: "jinja2.nodes.Block.required"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Include"
+  fully_qualified_name: "jinja2.nodes.Include"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Include.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "template"
+    fully_qualified_name: "jinja2.nodes.Include.template"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "with_context"
+    fully_qualified_name: "jinja2.nodes.Include.with_context"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "ignore_missing"
+    fully_qualified_name: "jinja2.nodes.Include.ignore_missing"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Import"
+  fully_qualified_name: "jinja2.nodes.Import"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Import.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "template"
+    fully_qualified_name: "jinja2.nodes.Import.template"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "target"
+    fully_qualified_name: "jinja2.nodes.Import.target"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "with_context"
+    fully_qualified_name: "jinja2.nodes.Import.with_context"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "FromImport"
+  fully_qualified_name: "jinja2.nodes.FromImport"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.FromImport.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "template"
+    fully_qualified_name: "jinja2.nodes.FromImport.template"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "jinja2.nodes.FromImport.names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Union[builtins.str,Tuple[builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "with_context"
+    fully_qualified_name: "jinja2.nodes.FromImport.with_context"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "ExprStmt"
+  fully_qualified_name: "jinja2.nodes.ExprStmt"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.ExprStmt.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.ExprStmt.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+}
+classes {
+  name: "Assign"
+  fully_qualified_name: "jinja2.nodes.Assign"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Assign.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "target"
+    fully_qualified_name: "jinja2.nodes.Assign.target"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.Assign.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+}
+classes {
+  name: "AssignBlock"
+  fully_qualified_name: "jinja2.nodes.AssignBlock"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.AssignBlock.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "target"
+    fully_qualified_name: "jinja2.nodes.AssignBlock.target"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "filter"
+    fully_qualified_name: "jinja2.nodes.AssignBlock.filter"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Filter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Filter"
+        fully_qualified_name: "jinja2.nodes.Filter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.AssignBlock.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Expr"
+  fully_qualified_name: "jinja2.nodes.Expr"
+  super_classes: "jinja2.nodes.Node"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Expr.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "can_assign"
+    fully_qualified_name: "jinja2.nodes.Expr.can_assign"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+    }
+  }
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.Expr.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "BinExpr"
+  fully_qualified_name: "jinja2.nodes.BinExpr"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.BinExpr.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.BinExpr"
+        fully_qualified_name: "jinja2.nodes.BinExpr"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.BinExpr.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "left"
+    fully_qualified_name: "jinja2.nodes.BinExpr.left"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "right"
+    fully_qualified_name: "jinja2.nodes.BinExpr.right"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.BinExpr.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.BinExpr.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "UnaryExpr"
+  fully_qualified_name: "jinja2.nodes.UnaryExpr"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.UnaryExpr.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.UnaryExpr"
+        fully_qualified_name: "jinja2.nodes.UnaryExpr"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.UnaryExpr.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.UnaryExpr.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.UnaryExpr.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.UnaryExpr.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Name"
+  fully_qualified_name: "jinja2.nodes.Name"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "can_assign"
+    fully_qualified_name: "jinja2.nodes.Name.can_assign"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Name"
+        fully_qualified_name: "jinja2.nodes.Name"
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Name.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.Name.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "jinja2.nodes.Name.ctx"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "NSRef"
+  fully_qualified_name: "jinja2.nodes.NSRef"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "can_assign"
+    fully_qualified_name: "jinja2.nodes.NSRef.can_assign"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.NSRef"
+        fully_qualified_name: "jinja2.nodes.NSRef"
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.NSRef.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.NSRef.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "attr"
+    fully_qualified_name: "jinja2.nodes.NSRef.attr"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Literal"
+  fully_qualified_name: "jinja2.nodes.Literal"
+  super_classes: "jinja2.nodes.Expr"
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes.Literal.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Const"
+  fully_qualified_name: "jinja2.nodes.Const"
+  super_classes: "jinja2.nodes.Literal"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Const.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Const"
+        fully_qualified_name: "jinja2.nodes.Const"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "from_untrusted"
+    fully_qualified_name: "jinja2.nodes.Const.from_untrusted"
+    return_annotation {
+      pretty_printed_name: "jinja2.nodes.Const"
+      fully_qualified_name: "jinja2.nodes.Const"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.nodes.Const]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.nodes.Const"
+          fully_qualified_name: "jinja2.nodes.Const"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.environment.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.environment.Environment"
+          fully_qualified_name: "jinja2.environment.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Const.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "jinja2.nodes.Const.value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "TemplateData"
+  fully_qualified_name: "jinja2.nodes.TemplateData"
+  super_classes: "jinja2.nodes.Literal"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.TemplateData.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.TemplateData"
+        fully_qualified_name: "jinja2.nodes.TemplateData"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.TemplateData.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "data"
+    fully_qualified_name: "jinja2.nodes.TemplateData.data"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Tuple"
+  fully_qualified_name: "jinja2.nodes.Tuple"
+  super_classes: "jinja2.nodes.Literal"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Tuple.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Tuple"
+        fully_qualified_name: "jinja2.nodes.Tuple"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "can_assign"
+    fully_qualified_name: "jinja2.nodes.Tuple.can_assign"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Tuple"
+        fully_qualified_name: "jinja2.nodes.Tuple"
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Tuple.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "items"
+    fully_qualified_name: "jinja2.nodes.Tuple.items"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "jinja2.nodes.Tuple.ctx"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "List"
+  fully_qualified_name: "jinja2.nodes.List"
+  super_classes: "jinja2.nodes.Literal"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.List.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.List"
+        fully_qualified_name: "jinja2.nodes.List"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.List.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "items"
+    fully_qualified_name: "jinja2.nodes.List.items"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Dict"
+  fully_qualified_name: "jinja2.nodes.Dict"
+  super_classes: "jinja2.nodes.Literal"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Dict.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Dict"
+        fully_qualified_name: "jinja2.nodes.Dict"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Dict.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "items"
+    fully_qualified_name: "jinja2.nodes.Dict.items"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Pair]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Pair"
+        fully_qualified_name: "jinja2.nodes.Pair"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Pair"
+  fully_qualified_name: "jinja2.nodes.Pair"
+  super_classes: "jinja2.nodes.Helper"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Pair.as_const"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Pair"
+        fully_qualified_name: "jinja2.nodes.Pair"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Pair.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "jinja2.nodes.Pair.key"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "jinja2.nodes.Pair.value"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "Keyword"
+  fully_qualified_name: "jinja2.nodes.Keyword"
+  super_classes: "jinja2.nodes.Helper"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Keyword.as_const"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Keyword"
+        fully_qualified_name: "jinja2.nodes.Keyword"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Keyword.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "jinja2.nodes.Keyword.key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "jinja2.nodes.Keyword.value"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "CondExpr"
+  fully_qualified_name: "jinja2.nodes.CondExpr"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.CondExpr.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.CondExpr"
+        fully_qualified_name: "jinja2.nodes.CondExpr"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.CondExpr.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "test"
+    fully_qualified_name: "jinja2.nodes.CondExpr.test"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "expr1"
+    fully_qualified_name: "jinja2.nodes.CondExpr.expr1"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "expr2"
+    fully_qualified_name: "jinja2.nodes.CondExpr.expr2"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "_FilterTestCommon"
+  fully_qualified_name: "jinja2.nodes._FilterTestCommon"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes._FilterTestCommon"
+        fully_qualified_name: "jinja2.nodes._FilterTestCommon"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.kwargs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Pair]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Pair"
+        fully_qualified_name: "jinja2.nodes.Pair"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "dyn_args"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.dyn_args"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "dyn_kwargs"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.dyn_kwargs"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "abstract"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon.abstract"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_is_filter"
+    fully_qualified_name: "jinja2.nodes._FilterTestCommon._is_filter"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Filter"
+  fully_qualified_name: "jinja2.nodes.Filter"
+  super_classes: "jinja2.nodes._FilterTestCommon"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Filter.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Filter"
+        fully_qualified_name: "jinja2.nodes.Filter"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.Filter.node"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Test"
+  fully_qualified_name: "jinja2.nodes.Test"
+  super_classes: "jinja2.nodes._FilterTestCommon"
+  attributes {
+    name: "_is_filter"
+    fully_qualified_name: "jinja2.nodes.Test._is_filter"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Call"
+  fully_qualified_name: "jinja2.nodes.Call"
+  super_classes: "jinja2.nodes.Expr"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Call.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.Call.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "jinja2.nodes.Call.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "jinja2.nodes.Call.kwargs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Keyword]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Keyword"
+        fully_qualified_name: "jinja2.nodes.Keyword"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "dyn_args"
+    fully_qualified_name: "jinja2.nodes.Call.dyn_args"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "dyn_kwargs"
+    fully_qualified_name: "jinja2.nodes.Call.dyn_kwargs"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Getitem"
+  fully_qualified_name: "jinja2.nodes.Getitem"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Getitem.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Getitem"
+        fully_qualified_name: "jinja2.nodes.Getitem"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Getitem.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.Getitem.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "arg"
+    fully_qualified_name: "jinja2.nodes.Getitem.arg"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "jinja2.nodes.Getitem.ctx"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Getattr"
+  fully_qualified_name: "jinja2.nodes.Getattr"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Getattr.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Getattr"
+        fully_qualified_name: "jinja2.nodes.Getattr"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Getattr.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "node"
+    fully_qualified_name: "jinja2.nodes.Getattr.node"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "attr"
+    fully_qualified_name: "jinja2.nodes.Getattr.attr"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "jinja2.nodes.Getattr.ctx"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Slice"
+  fully_qualified_name: "jinja2.nodes.Slice"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Slice.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.slice"
+      fully_qualified_name: "builtins.slice"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Slice"
+        fully_qualified_name: "jinja2.nodes.Slice"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Slice.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "start"
+    fully_qualified_name: "jinja2.nodes.Slice.start"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "stop"
+    fully_qualified_name: "jinja2.nodes.Slice.stop"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "step"
+    fully_qualified_name: "jinja2.nodes.Slice.step"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.Expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Concat"
+  fully_qualified_name: "jinja2.nodes.Concat"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Concat.as_const"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Concat"
+        fully_qualified_name: "jinja2.nodes.Concat"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Concat.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "nodes"
+    fully_qualified_name: "jinja2.nodes.Concat.nodes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Expr]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Expr"
+        fully_qualified_name: "jinja2.nodes.Expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Compare"
+  fully_qualified_name: "jinja2.nodes.Compare"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Compare.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Compare"
+        fully_qualified_name: "jinja2.nodes.Compare"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Compare.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "expr"
+    fully_qualified_name: "jinja2.nodes.Compare.expr"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "ops"
+    fully_qualified_name: "jinja2.nodes.Compare.ops"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Operand]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Operand"
+        fully_qualified_name: "jinja2.nodes.Operand"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Operand"
+  fully_qualified_name: "jinja2.nodes.Operand"
+  super_classes: "jinja2.nodes.Helper"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Operand.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "op"
+    fully_qualified_name: "jinja2.nodes.Operand.op"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "expr"
+    fully_qualified_name: "jinja2.nodes.Operand.expr"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "Mul"
+  fully_qualified_name: "jinja2.nodes.Mul"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Mul.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Div"
+  fully_qualified_name: "jinja2.nodes.Div"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Div.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "FloorDiv"
+  fully_qualified_name: "jinja2.nodes.FloorDiv"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.FloorDiv.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Add"
+  fully_qualified_name: "jinja2.nodes.Add"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Add.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Sub"
+  fully_qualified_name: "jinja2.nodes.Sub"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Sub.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Mod"
+  fully_qualified_name: "jinja2.nodes.Mod"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Mod.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Pow"
+  fully_qualified_name: "jinja2.nodes.Pow"
+  super_classes: "jinja2.nodes.BinExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Pow.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "And"
+  fully_qualified_name: "jinja2.nodes.And"
+  super_classes: "jinja2.nodes.BinExpr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.And.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.And"
+        fully_qualified_name: "jinja2.nodes.And"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.And.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Or"
+  fully_qualified_name: "jinja2.nodes.Or"
+  super_classes: "jinja2.nodes.BinExpr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.Or.as_const"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Or"
+        fully_qualified_name: "jinja2.nodes.Or"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Or.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Not"
+  fully_qualified_name: "jinja2.nodes.Not"
+  super_classes: "jinja2.nodes.UnaryExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Not.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Neg"
+  fully_qualified_name: "jinja2.nodes.Neg"
+  super_classes: "jinja2.nodes.UnaryExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Neg.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Pos"
+  fully_qualified_name: "jinja2.nodes.Pos"
+  super_classes: "jinja2.nodes.UnaryExpr"
+  attributes {
+    name: "operator"
+    fully_qualified_name: "jinja2.nodes.Pos.operator"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "EnvironmentAttribute"
+  fully_qualified_name: "jinja2.nodes.EnvironmentAttribute"
+  super_classes: "jinja2.nodes.Expr"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.EnvironmentAttribute.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.EnvironmentAttribute.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "ExtensionAttribute"
+  fully_qualified_name: "jinja2.nodes.ExtensionAttribute"
+  super_classes: "jinja2.nodes.Expr"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.ExtensionAttribute.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "identifier"
+    fully_qualified_name: "jinja2.nodes.ExtensionAttribute.identifier"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.ExtensionAttribute.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "ImportedName"
+  fully_qualified_name: "jinja2.nodes.ImportedName"
+  super_classes: "jinja2.nodes.Expr"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.ImportedName.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "importname"
+    fully_qualified_name: "jinja2.nodes.ImportedName.importname"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "InternalName"
+  fully_qualified_name: "jinja2.nodes.InternalName"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.nodes.InternalName.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.InternalName"
+        fully_qualified_name: "jinja2.nodes.InternalName"
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.InternalName.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.nodes.InternalName.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "MarkSafe"
+  fully_qualified_name: "jinja2.nodes.MarkSafe"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.MarkSafe.as_const"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.MarkSafe"
+        fully_qualified_name: "jinja2.nodes.MarkSafe"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.MarkSafe.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "expr"
+    fully_qualified_name: "jinja2.nodes.MarkSafe.expr"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "MarkSafeIfAutoescape"
+  fully_qualified_name: "jinja2.nodes.MarkSafeIfAutoescape"
+  super_classes: "jinja2.nodes.Expr"
+  methods {
+    name: "as_const"
+    fully_qualified_name: "jinja2.nodes.MarkSafeIfAutoescape.as_const"
+    return_annotation {
+      pretty_printed_name: "Union[markupsafe.Markup,Any]"
+      kind: UNION
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.MarkSafeIfAutoescape"
+        fully_qualified_name: "jinja2.nodes.MarkSafeIfAutoescape"
+      }
+    }
+    parameters {
+      name: "eval_ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.nodes.EvalContext"
+          fully_qualified_name: "jinja2.nodes.EvalContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.MarkSafeIfAutoescape.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "expr"
+    fully_qualified_name: "jinja2.nodes.MarkSafeIfAutoescape.expr"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+}
+classes {
+  name: "ContextReference"
+  fully_qualified_name: "jinja2.nodes.ContextReference"
+  super_classes: "jinja2.nodes.Expr"
+}
+classes {
+  name: "DerivedContextReference"
+  fully_qualified_name: "jinja2.nodes.DerivedContextReference"
+  super_classes: "jinja2.nodes.Expr"
+}
+classes {
+  name: "Continue"
+  fully_qualified_name: "jinja2.nodes.Continue"
+  super_classes: "jinja2.nodes.Stmt"
+}
+classes {
+  name: "Break"
+  fully_qualified_name: "jinja2.nodes.Break"
+  super_classes: "jinja2.nodes.Stmt"
+}
+classes {
+  name: "Scope"
+  fully_qualified_name: "jinja2.nodes.Scope"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.Scope.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.Scope.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "OverlayScope"
+  fully_qualified_name: "jinja2.nodes.OverlayScope"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.OverlayScope.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "context"
+    fully_qualified_name: "jinja2.nodes.OverlayScope.context"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Expr"
+      fully_qualified_name: "jinja2.nodes.Expr"
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.OverlayScope.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "EvalContextModifier"
+  fully_qualified_name: "jinja2.nodes.EvalContextModifier"
+  super_classes: "jinja2.nodes.Stmt"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.EvalContextModifier.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "options"
+    fully_qualified_name: "jinja2.nodes.EvalContextModifier.options"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Keyword]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Keyword"
+        fully_qualified_name: "jinja2.nodes.Keyword"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "ScopedEvalContextModifier"
+  fully_qualified_name: "jinja2.nodes.ScopedEvalContextModifier"
+  super_classes: "jinja2.nodes.EvalContextModifier"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "jinja2.nodes.ScopedEvalContextModifier.fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "jinja2.nodes.ScopedEvalContextModifier.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "get_eval_context"
+  fully_qualified_name: "jinja2.nodes.get_eval_context"
+  return_annotation {
+    pretty_printed_name: "jinja2.nodes.EvalContext"
+    fully_qualified_name: "jinja2.nodes.EvalContext"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.EvalContext"
+        fully_qualified_name: "jinja2.nodes.EvalContext"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "args_as_const"
+  fully_qualified_name: "jinja2.nodes.args_as_const"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.list[Any],builtins.dict[Any,Any]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.list[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    args {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes._FilterTestCommon,jinja2.nodes.Call]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes._FilterTestCommon"
+        fully_qualified_name: "jinja2.nodes._FilterTestCommon"
+      }
+      args {
+        pretty_printed_name: "jinja2.nodes.Call"
+        fully_qualified_name: "jinja2.nodes.Call"
+      }
+    }
+  }
+  parameters {
+    name: "eval_ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.nodes.EvalContext,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.nodes.EvalContext"
+        fully_qualified_name: "jinja2.nodes.EvalContext"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_failing_new"
+  fully_qualified_name: "jinja2.nodes._failing_new"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.nodes.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "_binop_to_func"
+  fully_qualified_name: "jinja2.nodes._binop_to_func"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_uaop_to_func"
+  fully_qualified_name: "jinja2.nodes._uaop_to_func"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_cmpop_to_func"
+  fully_qualified_name: "jinja2.nodes._cmpop_to_func"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

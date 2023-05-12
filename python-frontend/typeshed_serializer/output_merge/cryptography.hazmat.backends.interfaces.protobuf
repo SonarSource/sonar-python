@@ -1,0 +1,2252 @@
+fully_qualified_name: "cryptography.hazmat.backends.interfaces"
+classes {
+  name: "CipherBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "cipher_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.cipher_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+      }
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_symmetric_encryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.create_symmetric_encryption_ctx"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+      }
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_symmetric_decryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.create_symmetric_decryption_ctx"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+      }
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "cmac_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend.cmac_algorithm_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.BlockCipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.BlockCipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_cmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend.create_cmac_ctx"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.BlockCipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.BlockCipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DERSerializationBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "load_der_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_parameters"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_der_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_private_key"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_der_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_public_key"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DHBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "dh_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.dh_parameters_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dh_x942_serialization_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.dh_x942_serialization_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dh_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dh_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dh_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_private_key_and_parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dh_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_parameter_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameterNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameterNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dh_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPrivateNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dh_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHPublicNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DSABackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "dsa_hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.dsa_hash_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.dsa_parameters_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dsa_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_dsa_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_private_key_and_parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dsa_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_parameter_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_dsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EllipticCurveBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "derive_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.derive_elliptic_curve_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "private_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "elliptic_curve_signature_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.elliptic_curve_signature_algorithm_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      }
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "elliptic_curve_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.elliptic_curve_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.generate_elliptic_curve_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurve"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_elliptic_curve_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.load_elliptic_curve_private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_elliptic_curve_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.load_elliptic_curve_public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "create_hmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend.create_hmac_ctx"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cmac_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend.cmac_algorithm_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HashBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "create_hash_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend.create_hash_ctx"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend.hash_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PBKDF2HMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "derive_pbkdf2_hmac"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend.derive_pbkdf2_hmac"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "iterations"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pbkdf2_hmac_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend.pbkdf2_hmac_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PEMSerializationBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "load_pem_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_parameters"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_pem_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_private_key"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_pem_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_public_key"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "RSABackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate_rsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.generate_rsa_parameters_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generate_rsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.generate_rsa_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_rsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.load_rsa_public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_rsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.load_rsa_private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "rsa_padding_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.rsa_padding_supported"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.padding.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.AsymmetricPadding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ScryptBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "derive_scrypt"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend.derive_scrypt"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+      }
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "X509Backend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+  super_classes: "builtins.object"
+  methods {
+    name: "create_x509_certificate"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.create_x509_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.Certificate"
+      fully_qualified_name: "cryptography.x509.Certificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_x509_crl"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.create_x509_crl"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.CertificateRevocationList"
+      fully_qualified_name: "cryptography.x509.CertificateRevocationList"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_x509_csr"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.create_x509_csr"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.CertificateSigningRequest"
+      fully_qualified_name: "cryptography.x509.CertificateSigningRequest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "create_x509_revoked_certificate"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.create_x509_revoked_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.RevokedCertificate"
+      fully_qualified_name: "cryptography.x509.RevokedCertificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.RevokedCertificateBuilder"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_der_x509_certificate"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.load_der_x509_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.Certificate"
+      fully_qualified_name: "cryptography.x509.Certificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_der_x509_csr"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.load_der_x509_csr"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.CertificateSigningRequest"
+      fully_qualified_name: "cryptography.x509.CertificateSigningRequest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_pem_x509_certificate"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.load_pem_x509_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.Certificate"
+      fully_qualified_name: "cryptography.x509.Certificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_pem_x509_csr"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.load_pem_x509_csr"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.CertificateSigningRequest"
+      fully_qualified_name: "cryptography.x509.CertificateSigningRequest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "x509_name_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend.x509_name_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.X509Backend"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.Name"
+        fully_qualified_name: "cryptography.x509.Name"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

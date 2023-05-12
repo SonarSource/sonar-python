@@ -1,0 +1,508 @@
+fully_qualified_name: "asyncio.protocols"
+classes {
+  name: "BaseProtocol"
+  fully_qualified_name: "asyncio.protocols.BaseProtocol"
+  super_classes: "builtins.object"
+  methods {
+    name: "connection_made"
+    fully_qualified_name: "asyncio.protocols.BaseProtocol.connection_made"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
+      }
+    }
+  }
+  methods {
+    name: "connection_lost"
+    fully_qualified_name: "asyncio.protocols.BaseProtocol.connection_lost"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "pause_writing"
+    fully_qualified_name: "asyncio.protocols.BaseProtocol.pause_writing"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+  }
+  methods {
+    name: "resume_writing"
+    fully_qualified_name: "asyncio.protocols.BaseProtocol.resume_writing"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+  }
+}
+classes {
+  name: "Protocol"
+  fully_qualified_name: "asyncio.protocols.Protocol"
+  super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "data_received"
+    fully_qualified_name: "asyncio.protocols.Protocol.data_received"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.Protocol"
+        fully_qualified_name: "asyncio.protocols.Protocol"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "eof_received"
+    fully_qualified_name: "asyncio.protocols.Protocol.eof_received"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.Protocol"
+        fully_qualified_name: "asyncio.protocols.Protocol"
+      }
+    }
+  }
+}
+classes {
+  name: "BufferedProtocol"
+  fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+  super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "get_buffer"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.get_buffer"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytearray"
+              fully_qualified_name: "builtins.bytearray"
+            }
+            args {
+              pretty_printed_name: "builtins.memoryview"
+              fully_qualified_name: "builtins.memoryview"
+            }
+            args {
+              pretty_printed_name: "array.array[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "array.array"
+            }
+            args {
+              pretty_printed_name: "mmap.mmap"
+              fully_qualified_name: "mmap.mmap"
+            }
+            args {
+              pretty_printed_name: "ctypes._CData"
+              fully_qualified_name: "ctypes._CData"
+            }
+            args {
+              pretty_printed_name: "pickle.PickleBuffer"
+              fully_qualified_name: "pickle.PickleBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.WriteableBuffer"
+        }
+      }
+      fully_qualified_name: "_typeshed.ReadableBuffer"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+    parameters {
+      name: "sizehint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "buffer_updated"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.buffer_updated"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+    parameters {
+      name: "nbytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "eof_received"
+    fully_qualified_name: "asyncio.protocols.BufferedProtocol.eof_received"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BufferedProtocol"
+        fully_qualified_name: "asyncio.protocols.BufferedProtocol"
+      }
+    }
+  }
+}
+classes {
+  name: "DatagramProtocol"
+  fully_qualified_name: "asyncio.protocols.DatagramProtocol"
+  super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "connection_made"
+    fully_qualified_name: "asyncio.protocols.DatagramProtocol.connection_made"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.DatagramProtocol"
+        fully_qualified_name: "asyncio.protocols.DatagramProtocol"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.DatagramTransport"
+        fully_qualified_name: "asyncio.transports.DatagramTransport"
+      }
+    }
+  }
+  methods {
+    name: "datagram_received"
+    fully_qualified_name: "asyncio.protocols.DatagramProtocol.datagram_received"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.DatagramProtocol"
+        fully_qualified_name: "asyncio.protocols.DatagramProtocol"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "addr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Union[builtins.str,Any],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.str,Any]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+  }
+  methods {
+    name: "error_received"
+    fully_qualified_name: "asyncio.protocols.DatagramProtocol.error_received"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.DatagramProtocol"
+        fully_qualified_name: "asyncio.protocols.DatagramProtocol"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+    }
+  }
+}
+classes {
+  name: "SubprocessProtocol"
+  fully_qualified_name: "asyncio.protocols.SubprocessProtocol"
+  super_classes: "asyncio.protocols.BaseProtocol"
+  methods {
+    name: "pipe_data_received"
+    fully_qualified_name: "asyncio.protocols.SubprocessProtocol.pipe_data_received"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.SubprocessProtocol"
+        fully_qualified_name: "asyncio.protocols.SubprocessProtocol"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "pipe_connection_lost"
+    fully_qualified_name: "asyncio.protocols.SubprocessProtocol.pipe_connection_lost"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.SubprocessProtocol"
+        fully_qualified_name: "asyncio.protocols.SubprocessProtocol"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "process_exited"
+    fully_qualified_name: "asyncio.protocols.SubprocessProtocol.process_exited"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.SubprocessProtocol"
+        fully_qualified_name: "asyncio.protocols.SubprocessProtocol"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.protocols.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.protocols.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

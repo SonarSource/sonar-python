@@ -1,0 +1,330 @@
+fully_qualified_name: "blinker._utilities"
+classes {
+  name: "_symbol"
+  fully_qualified_name: "blinker._utilities._symbol"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "blinker._utilities._symbol.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "blinker._utilities._symbol.__reduce__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "blinker._utilities._symbol.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "blinker._utilities._symbol.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "symbol"
+  fully_qualified_name: "blinker._utilities.symbol"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "blinker._utilities.symbol.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "symbols"
+    fully_qualified_name: "blinker._utilities.symbol.symbols"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "annotatable_weakref"
+  fully_qualified_name: "blinker._utilities.annotatable_weakref"
+  super_classes: "_weakref.ReferenceType"
+  attributes {
+    name: "receiver_id"
+    fully_qualified_name: "blinker._utilities.annotatable_weakref.receiver_id"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "sender_id"
+    fully_qualified_name: "blinker._utilities.annotatable_weakref.sender_id"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "lazy_property"
+  fully_qualified_name: "blinker._utilities.lazy_property"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "blinker._utilities.lazy_property.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "deferred"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "blinker._utilities.lazy_property.__get__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "_deferred"
+    fully_qualified_name: "blinker._utilities.lazy_property._deferred"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "hashable_identity"
+  fully_qualified_name: "blinker._utilities.hashable_identity"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[Tuple[builtins.int,builtins.int],builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "blinker._utilities.IdentityType"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "reference"
+  fully_qualified_name: "blinker._utilities.reference"
+  return_annotation {
+    pretty_printed_name: "blinker._utilities.annotatable_weakref"
+    fully_qualified_name: "blinker._utilities.annotatable_weakref"
+  }
+  parameters {
+    name: "object"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "callback"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "annotations"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "callable_reference"
+  fully_qualified_name: "blinker._utilities.callable_reference"
+  parameters {
+    name: "object"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "callback"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "is_coroutine_function"
+  fully_qualified_name: "blinker._utilities.is_coroutine_function"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "blinker._utilities.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "WeakTypes"
+  fully_qualified_name: "blinker._utilities.WeakTypes"
+  type_annotation {
+    pretty_printed_name: "Tuple[CallableType[builtins.type],CallableType[builtins.type]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    args {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+}

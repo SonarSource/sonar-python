@@ -1,0 +1,243 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519"
+classes {
+  name: "_X25519PublicKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+  }
+  methods {
+    name: "_raw_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey._raw_public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PublicKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_X25519PrivateKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+      }
+    }
+  }
+  methods {
+    name: "exchange"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey.exchange"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+      }
+    }
+    parameters {
+      name: "peer_public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+      }
+    }
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+      }
+    }
+  }
+  methods {
+    name: "_raw_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey._raw_private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519PrivateKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_X25519_KEY_SIZE"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.x25519._X25519_KEY_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

@@ -1,0 +1,617 @@
+fully_qualified_name: "werkzeug.debug.tbtools"
+classes {
+  name: "DebugTraceback"
+  fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "te"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[traceback.TracebackException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "traceback.TracebackException"
+          fully_qualified_name: "traceback.TracebackException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "skip"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hide"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+  }
+  methods {
+    name: "all_tracebacks"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.all_tracebacks"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[Union[builtins.str,None],traceback.TracebackException]]"
+      args {
+        pretty_printed_name: "Tuple[Union[builtins.str,None],traceback.TracebackException]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "traceback.TracebackException"
+          fully_qualified_name: "traceback.TracebackException"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "all_frames"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.all_frames"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.debug.tbtools.DebugFrameSummary]"
+      args {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "render_traceback_text"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_traceback_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+  }
+  methods {
+    name: "render_traceback_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_traceback_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "include_title"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "render_debugger_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_debugger_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "evalex"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "secret"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "evalex_trusted"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_te"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback._te"
+    type_annotation {
+      pretty_printed_name: "traceback.TracebackException"
+      fully_qualified_name: "traceback.TracebackException"
+    }
+  }
+}
+classes {
+  name: "DebugFrameSummary"
+  fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+  super_classes: "traceback.FrameSummary"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "locals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "info"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.info"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "is_library"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.is_library"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "console"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.console"
+    return_annotation {
+      pretty_printed_name: "werkzeug.debug.console.Console"
+      fully_qualified_name: "werkzeug.debug.console.Console"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "eval"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.eval"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "render_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.render_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "mark_library"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "local_ns"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.local_ns"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "global_ns"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.global_ns"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+functions {
+  name: "_process_traceback"
+  fully_qualified_name: "werkzeug.debug.tbtools._process_traceback"
+  return_annotation {
+    pretty_printed_name: "traceback.TracebackException"
+    fully_qualified_name: "traceback.TracebackException"
+  }
+  parameters {
+    name: "exc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.BaseException"
+      fully_qualified_name: "builtins.BaseException"
+    }
+  }
+  parameters {
+    name: "te"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[traceback.TracebackException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "traceback.TracebackException"
+        fully_qualified_name: "traceback.TracebackException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "skip"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "hide"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "render_console_html"
+  fully_qualified_name: "werkzeug.debug.tbtools.render_console_html"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "secret"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "evalex_trusted"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.debug.tbtools.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "HEADER"
+  fully_qualified_name: "werkzeug.debug.tbtools.HEADER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "FOOTER"
+  fully_qualified_name: "werkzeug.debug.tbtools.FOOTER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "PAGE_HTML"
+  fully_qualified_name: "werkzeug.debug.tbtools.PAGE_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "CONSOLE_HTML"
+  fully_qualified_name: "werkzeug.debug.tbtools.CONSOLE_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "SUMMARY_HTML"
+  fully_qualified_name: "werkzeug.debug.tbtools.SUMMARY_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "FRAME_HTML"
+  fully_qualified_name: "werkzeug.debug.tbtools.FRAME_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}

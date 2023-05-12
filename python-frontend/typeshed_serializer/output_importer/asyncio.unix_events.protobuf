@@ -1,0 +1,1248 @@
+fully_qualified_name: "asyncio.unix_events"
+classes {
+  name: "AbstractChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+  super_classes: "builtins.object"
+  methods {
+    name: "add_child_handler"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.add_child_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "remove_child_handler"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.remove_child_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "attach_loop"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.attach_loop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.__enter__"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher.Self"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "is_active"
+    fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher.is_active"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+}
+classes {
+  name: "BaseChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.BaseChildWatcher"
+  super_classes: "asyncio.unix_events.AbstractChildWatcher"
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.unix_events.BaseChildWatcher.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.BaseChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.BaseChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "is_active"
+    fully_qualified_name: "asyncio.unix_events.BaseChildWatcher.is_active"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.BaseChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.BaseChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "attach_loop"
+    fully_qualified_name: "asyncio.unix_events.BaseChildWatcher.attach_loop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.BaseChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.BaseChildWatcher"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+}
+classes {
+  name: "SafeChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.SafeChildWatcher"
+  super_classes: "asyncio.unix_events.BaseChildWatcher"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "asyncio.unix_events.SafeChildWatcher.__enter__"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.SafeChildWatcher.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.SafeChildWatcher.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "asyncio.unix_events.SafeChildWatcher.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.SafeChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.SafeChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "add_child_handler"
+    fully_qualified_name: "asyncio.unix_events.SafeChildWatcher.add_child_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.SafeChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.SafeChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_child_handler"
+    fully_qualified_name: "asyncio.unix_events.SafeChildWatcher.remove_child_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.SafeChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.SafeChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+}
+classes {
+  name: "FastChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.FastChildWatcher"
+  super_classes: "asyncio.unix_events.BaseChildWatcher"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "asyncio.unix_events.FastChildWatcher.__enter__"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.FastChildWatcher.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.FastChildWatcher.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "asyncio.unix_events.FastChildWatcher.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.FastChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.FastChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "add_child_handler"
+    fully_qualified_name: "asyncio.unix_events.FastChildWatcher.add_child_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.FastChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.FastChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_child_handler"
+    fully_qualified_name: "asyncio.unix_events.FastChildWatcher.remove_child_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.FastChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.FastChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+}
+classes {
+  name: "_UnixSelectorEventLoop"
+  fully_qualified_name: "asyncio.unix_events._UnixSelectorEventLoop"
+  super_classes: "asyncio.selector_events.BaseSelectorEventLoop"
+}
+classes {
+  name: "_UnixDefaultEventLoopPolicy"
+  fully_qualified_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy"
+  super_classes: "asyncio.events.BaseDefaultEventLoopPolicy"
+  methods {
+    name: "get_child_watcher"
+    fully_qualified_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy.get_child_watcher"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+      fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy"
+        fully_qualified_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy"
+      }
+    }
+  }
+  methods {
+    name: "set_child_watcher"
+    fully_qualified_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy.set_child_watcher"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy"
+        fully_qualified_name: "asyncio.unix_events._UnixDefaultEventLoopPolicy"
+      }
+    }
+    parameters {
+      name: "watcher"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.unix_events.AbstractChildWatcher,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.unix_events.AbstractChildWatcher"
+          fully_qualified_name: "asyncio.unix_events.AbstractChildWatcher"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "_Warn"
+  fully_qualified_name: "asyncio.unix_events._Warn"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "asyncio.unix_events._Warn.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events._Warn"
+        fully_qualified_name: "asyncio.unix_events._Warn"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "category"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.Warning],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.Warning]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.Warning"
+            fully_qualified_name: "builtins.Warning"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stacklevel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "MultiLoopChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+  super_classes: "asyncio.unix_events.AbstractChildWatcher"
+  methods {
+    name: "is_active"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.is_active"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.__enter__"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "add_child_handler"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.add_child_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_child_handler"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.remove_child_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "attach_loop"
+    fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher.attach_loop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.MultiLoopChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.MultiLoopChildWatcher"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "ThreadedChildWatcher"
+  fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+  super_classes: "asyncio.unix_events.AbstractChildWatcher"
+  methods {
+    name: "is_active"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.is_active"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.__enter__"
+    return_annotation {
+      pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events._Warn"
+        fully_qualified_name: "asyncio.unix_events._Warn"
+      }
+    }
+  }
+  methods {
+    name: "add_child_handler"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.add_child_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_child_handler"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.remove_child_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+    parameters {
+      name: "pid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "attach_loop"
+    fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher.attach_loop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.unix_events.ThreadedChildWatcher"
+        fully_qualified_name: "asyncio.unix_events.ThreadedChildWatcher"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.unix_events.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.unix_events.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

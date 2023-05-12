@@ -1,0 +1,79 @@
+fully_qualified_name: "markdown.extensions.legacy_em"
+classes {
+  name: "LegacyUnderscoreProcessor"
+  fully_qualified_name: "markdown.extensions.legacy_em.LegacyUnderscoreProcessor"
+  super_classes: "markdown.inlinepatterns.UnderscoreProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "LegacyEmExtension"
+  fully_qualified_name: "markdown.extensions.legacy_em.LegacyEmExtension"
+  super_classes: "markdown.extensions.Extension"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "makeExtension"
+  fully_qualified_name: "markdown.extensions.legacy_em.makeExtension"
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EMPHASIS_RE"
+  fully_qualified_name: "markdown.extensions.legacy_em.EMPHASIS_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_RE"
+  fully_qualified_name: "markdown.extensions.legacy_em.STRONG_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_EM_RE"
+  fully_qualified_name: "markdown.extensions.legacy_em.STRONG_EM_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

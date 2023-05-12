@@ -1,0 +1,2648 @@
+fully_qualified_name: "jinja2.lexer"
+classes {
+  name: "Failure"
+  fully_qualified_name: "jinja2.lexer.Failure"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.lexer.Failure.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Failure"
+        fully_qualified_name: "jinja2.lexer.Failure"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.exceptions.TemplateSyntaxError]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.exceptions.TemplateSyntaxError"
+          fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "jinja2.lexer.Failure.__call__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Failure"
+        fully_qualified_name: "jinja2.lexer.Failure"
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "jinja2.lexer.Failure.message"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "error_class"
+    fully_qualified_name: "jinja2.lexer.Failure.error_class"
+    type_annotation {
+      pretty_printed_name: "Type[jinja2.exceptions.TemplateSyntaxError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "jinja2.exceptions.TemplateSyntaxError"
+        fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError"
+      }
+    }
+  }
+}
+classes {
+  name: "Token"
+  fully_qualified_name: "jinja2.lexer.Token"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.lexer.Token.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  methods {
+    name: "test"
+    fully_qualified_name: "jinja2.lexer.Token.test"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "expr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "test_any"
+    fully_qualified_name: "jinja2.lexer.Token.test_any"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_replace"
+    fully_qualified_name: "jinja2.lexer.Token._replace"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.Token._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Token._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "jinja2.lexer.Token.__new__"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.Token._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.lexer.Token._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.lexer.Token._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "jinja2.lexer.Token._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Token._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "jinja2.lexer.Token._make"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.Token._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.lexer.Token._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.lexer.Token._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "jinja2.lexer.Token.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "jinja2.lexer.Token.type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "jinja2.lexer.Token.value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "jinja2.lexer.Token.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "jinja2.lexer.Token.type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "jinja2.lexer.Token.value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "jinja2.lexer.Token._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "jinja2.lexer.Token._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "jinja2.lexer.Token._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "jinja2.lexer.Token._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "jinja2.lexer.Token.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "TokenStreamIterator"
+  fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.lexer.TokenStreamIterator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStreamIterator"
+        fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.lexer.TokenStreamIterator.__iter__"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.TokenStreamIterator"
+      fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStreamIterator"
+        fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "jinja2.lexer.TokenStreamIterator.__next__"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "jinja2.lexer.Token"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStreamIterator"
+        fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+      }
+    }
+  }
+  attributes {
+    name: "stream"
+    fully_qualified_name: "jinja2.lexer.TokenStreamIterator.stream"
+    type_annotation {
+      pretty_printed_name: "jinja2.lexer.TokenStream"
+      fully_qualified_name: "jinja2.lexer.TokenStream"
+    }
+  }
+}
+classes {
+  name: "TokenStream"
+  fully_qualified_name: "jinja2.lexer.TokenStream"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.lexer.TokenStream.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]"
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          fully_qualified_name: "jinja2.lexer.Token"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.lexer.TokenStream.__iter__"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.TokenStreamIterator"
+      fully_qualified_name: "jinja2.lexer.TokenStreamIterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "jinja2.lexer.TokenStream.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "eos"
+    fully_qualified_name: "jinja2.lexer.TokenStream.eos"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "jinja2.lexer.TokenStream.push"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "token"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "jinja2.lexer.Token"
+      }
+    }
+  }
+  methods {
+    name: "look"
+    fully_qualified_name: "jinja2.lexer.TokenStream.look"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "jinja2.lexer.Token"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "skip"
+    fully_qualified_name: "jinja2.lexer.TokenStream.skip"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "next_if"
+    fully_qualified_name: "jinja2.lexer.TokenStream.next_if"
+    return_annotation {
+      pretty_printed_name: "Union[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "jinja2.lexer.Token"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "expr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "skip_if"
+    fully_qualified_name: "jinja2.lexer.TokenStream.skip_if"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "expr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "jinja2.lexer.TokenStream.__next__"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "jinja2.lexer.Token"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "jinja2.lexer.TokenStream.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+  }
+  methods {
+    name: "expect"
+    fully_qualified_name: "jinja2.lexer.TokenStream.expect"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "jinja2.lexer.Token"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.TokenStream"
+        fully_qualified_name: "jinja2.lexer.TokenStream"
+      }
+    }
+    parameters {
+      name: "expr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_iter"
+    fully_qualified_name: "jinja2.lexer.TokenStream._iter"
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "jinja2.lexer.Token"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+  }
+  attributes {
+    name: "_pushed"
+    fully_qualified_name: "jinja2.lexer.TokenStream._pushed"
+    type_annotation {
+      pretty_printed_name: "collections.deque[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "jinja2.lexer.Token"
+      }
+      fully_qualified_name: "collections.deque"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.lexer.TokenStream.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "jinja2.lexer.TokenStream.filename"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "closed"
+    fully_qualified_name: "jinja2.lexer.TokenStream.closed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "current"
+    fully_qualified_name: "jinja2.lexer.TokenStream.current"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+classes {
+  name: "OptionalLStrip"
+  fully_qualified_name: "jinja2.lexer.OptionalLStrip"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "jinja2.lexer.OptionalLStrip.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "members"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.lexer.OptionalLStrip.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+}
+classes {
+  name: "_Rule"
+  fully_qualified_name: "jinja2.lexer._Rule"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "jinja2.lexer._Rule._replace"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer._Rule._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer._Rule._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "re.Pattern[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "re.Pattern"
+      }
+    }
+    parameters {
+      name: "tokens"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "Tuple[jinja2.lexer.Failure]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "jinja2.lexer.Failure"
+            fully_qualified_name: "jinja2.lexer.Failure"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "jinja2.lexer._Rule.__new__"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer._Rule._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.lexer._Rule._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.lexer._Rule._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "re.Pattern[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "re.Pattern"
+      }
+    }
+    parameters {
+      name: "tokens"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "Tuple[jinja2.lexer.Failure]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "jinja2.lexer.Failure"
+            fully_qualified_name: "jinja2.lexer.Failure"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "jinja2.lexer._Rule._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer._Rule._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "jinja2.lexer._Rule._make"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer._Rule._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.lexer._Rule._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.lexer._Rule._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "jinja2.lexer._Rule.pattern"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "tokens"
+    fully_qualified_name: "jinja2.lexer._Rule.tokens"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "Tuple[jinja2.lexer.Failure]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "jinja2.lexer.Failure"
+          fully_qualified_name: "jinja2.lexer.Failure"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "command"
+    fully_qualified_name: "jinja2.lexer._Rule.command"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "jinja2.lexer._Rule.pattern"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "tokens"
+    fully_qualified_name: "jinja2.lexer._Rule.tokens"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "Tuple[jinja2.lexer.Failure]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "jinja2.lexer.Failure"
+          fully_qualified_name: "jinja2.lexer.Failure"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "command"
+    fully_qualified_name: "jinja2.lexer._Rule.command"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "jinja2.lexer._Rule._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "jinja2.lexer._Rule._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "jinja2.lexer._Rule._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "jinja2.lexer._Rule._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "jinja2.lexer._Rule.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Lexer"
+  fully_qualified_name: "jinja2.lexer.Lexer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.lexer.Lexer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Lexer"
+        fully_qualified_name: "jinja2.lexer.Lexer"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+  }
+  methods {
+    name: "_normalize_newlines"
+    fully_qualified_name: "jinja2.lexer.Lexer._normalize_newlines"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Lexer"
+        fully_qualified_name: "jinja2.lexer.Lexer"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "tokenize"
+    fully_qualified_name: "jinja2.lexer.Lexer.tokenize"
+    return_annotation {
+      pretty_printed_name: "jinja2.lexer.TokenStream"
+      fully_qualified_name: "jinja2.lexer.TokenStream"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Lexer"
+        fully_qualified_name: "jinja2.lexer.Lexer"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "wrap"
+    fully_qualified_name: "jinja2.lexer.Lexer.wrap"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "jinja2.lexer.Token"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Lexer"
+        fully_qualified_name: "jinja2.lexer.Lexer"
+      }
+    }
+    parameters {
+      name: "stream"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.int,builtins.str,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "tokeniter"
+    fully_qualified_name: "jinja2.lexer.Lexer.tokeniter"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.int,builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.lexer.Lexer"
+        fully_qualified_name: "jinja2.lexer.Lexer"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "state"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "lstrip_blocks"
+    fully_qualified_name: "jinja2.lexer.Lexer.lstrip_blocks"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "newline_sequence"
+    fully_qualified_name: "jinja2.lexer.Lexer.newline_sequence"
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "keep_trailing_newline"
+    fully_qualified_name: "jinja2.lexer.Lexer.keep_trailing_newline"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "jinja2.lexer.Lexer.rules"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[TypeAlias[Tuple[re.Pattern[builtins.str],Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]],Union[builtins.str,None]]]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[TypeAlias[Tuple[re.Pattern[builtins.str],Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]],Union[builtins.str,None]]]]"
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[re.Pattern[builtins.str],Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]],Union[builtins.str,None]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[re.Pattern[builtins.str],Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]],Union[builtins.str,None]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "re.Pattern[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "re.Pattern"
+            }
+            args {
+              pretty_printed_name: "Union[builtins.str,builtins.tuple[builtins.str],Tuple[jinja2.lexer.Failure]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "builtins.tuple[builtins.str]"
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+                fully_qualified_name: "builtins.tuple"
+              }
+              args {
+                pretty_printed_name: "Tuple[jinja2.lexer.Failure]"
+                kind: TUPLE
+                args {
+                  pretty_printed_name: "jinja2.lexer.Failure"
+                  fully_qualified_name: "jinja2.lexer.Failure"
+                }
+              }
+            }
+            args {
+              pretty_printed_name: "Union[builtins.str,None]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+          }
+          fully_qualified_name: "jinja2.lexer._Rule"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+functions {
+  name: "_describe_token_type"
+  fully_qualified_name: "jinja2.lexer._describe_token_type"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "token_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "describe_token"
+  fully_qualified_name: "jinja2.lexer.describe_token"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "token"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "jinja2.lexer.Token"
+    }
+  }
+}
+functions {
+  name: "describe_token_expr"
+  fully_qualified_name: "jinja2.lexer.describe_token_expr"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "expr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "count_newlines"
+  fully_qualified_name: "jinja2.lexer.count_newlines"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "compile_rules"
+  fully_qualified_name: "jinja2.lexer.compile_rules"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+}
+functions {
+  name: "get_lexer"
+  fully_qualified_name: "jinja2.lexer.get_lexer"
+  return_annotation {
+    pretty_printed_name: "jinja2.lexer.Lexer"
+    fully_qualified_name: "jinja2.lexer.Lexer"
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.lexer.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "name_re"
+  fully_qualified_name: "jinja2._identifier.pattern"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "_lexer_cache"
+  fully_qualified_name: "jinja2.lexer._lexer_cache"
+  type_annotation {
+    pretty_printed_name: "typing.MutableMapping[builtins.tuple[Any],jinja2.lexer.Lexer]"
+    args {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "jinja2.lexer.Lexer"
+      fully_qualified_name: "jinja2.lexer.Lexer"
+    }
+    fully_qualified_name: "typing.MutableMapping"
+  }
+}
+vars {
+  name: "whitespace_re"
+  fully_qualified_name: "jinja2.lexer.whitespace_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "newline_re"
+  fully_qualified_name: "jinja2.lexer.newline_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "string_re"
+  fully_qualified_name: "jinja2.lexer.string_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "integer_re"
+  fully_qualified_name: "jinja2.lexer.integer_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "float_re"
+  fully_qualified_name: "jinja2.lexer.float_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "TOKEN_ADD"
+  fully_qualified_name: "jinja2.lexer.TOKEN_ADD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_ASSIGN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_ASSIGN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_COLON"
+  fully_qualified_name: "jinja2.lexer.TOKEN_COLON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_COMMA"
+  fully_qualified_name: "jinja2.lexer.TOKEN_COMMA"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_DIV"
+  fully_qualified_name: "jinja2.lexer.TOKEN_DIV"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_DOT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_DOT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_EQ"
+  fully_qualified_name: "jinja2.lexer.TOKEN_EQ"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_FLOORDIV"
+  fully_qualified_name: "jinja2.lexer.TOKEN_FLOORDIV"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_GT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_GT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_GTEQ"
+  fully_qualified_name: "jinja2.lexer.TOKEN_GTEQ"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LBRACE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LBRACE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LBRACKET"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LBRACKET"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LPAREN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LPAREN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LTEQ"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LTEQ"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_MOD"
+  fully_qualified_name: "jinja2.lexer.TOKEN_MOD"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_MUL"
+  fully_qualified_name: "jinja2.lexer.TOKEN_MUL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_NE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_NE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_PIPE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_PIPE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_POW"
+  fully_qualified_name: "jinja2.lexer.TOKEN_POW"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_RBRACE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_RBRACE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_RBRACKET"
+  fully_qualified_name: "jinja2.lexer.TOKEN_RBRACKET"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_RPAREN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_RPAREN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_SEMICOLON"
+  fully_qualified_name: "jinja2.lexer.TOKEN_SEMICOLON"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_SUB"
+  fully_qualified_name: "jinja2.lexer.TOKEN_SUB"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_TILDE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_TILDE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_WHITESPACE"
+  fully_qualified_name: "jinja2.lexer.TOKEN_WHITESPACE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_FLOAT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_FLOAT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_INTEGER"
+  fully_qualified_name: "jinja2.lexer.TOKEN_INTEGER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_NAME"
+  fully_qualified_name: "jinja2.lexer.TOKEN_NAME"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_STRING"
+  fully_qualified_name: "jinja2.lexer.TOKEN_STRING"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_OPERATOR"
+  fully_qualified_name: "jinja2.lexer.TOKEN_OPERATOR"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_BLOCK_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_BLOCK_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_BLOCK_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_BLOCK_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_VARIABLE_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_VARIABLE_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_VARIABLE_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_VARIABLE_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_RAW_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_RAW_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_RAW_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_RAW_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_COMMENT_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_COMMENT_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_COMMENT_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_COMMENT_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_COMMENT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_COMMENT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LINESTATEMENT_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LINESTATEMENT_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LINESTATEMENT_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LINESTATEMENT_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LINECOMMENT_BEGIN"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LINECOMMENT_BEGIN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LINECOMMENT_END"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LINECOMMENT_END"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_LINECOMMENT"
+  fully_qualified_name: "jinja2.lexer.TOKEN_LINECOMMENT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_DATA"
+  fully_qualified_name: "jinja2.lexer.TOKEN_DATA"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_INITIAL"
+  fully_qualified_name: "jinja2.lexer.TOKEN_INITIAL"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "TOKEN_EOF"
+  fully_qualified_name: "jinja2.lexer.TOKEN_EOF"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "operators"
+  fully_qualified_name: "jinja2.lexer.operators"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "reverse_operators"
+  fully_qualified_name: "jinja2.lexer.reverse_operators"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "operator_re"
+  fully_qualified_name: "jinja2.lexer.operator_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "ignored_tokens"
+  fully_qualified_name: "jinja2.lexer.ignored_tokens"
+  type_annotation {
+    pretty_printed_name: "builtins.frozenset[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.frozenset"
+  }
+}
+vars {
+  name: "ignore_if_empty"
+  fully_qualified_name: "jinja2.lexer.ignore_if_empty"
+  type_annotation {
+    pretty_printed_name: "builtins.frozenset[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.frozenset"
+  }
+}

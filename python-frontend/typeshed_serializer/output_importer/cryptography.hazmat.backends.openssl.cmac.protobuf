@@ -1,0 +1,170 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac"
+classes {
+  name: "_CMACContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.copy"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+      fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext.algorithm"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext._key"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext._algorithm"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_output_length"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext._output_length"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac._CMACContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.cmac.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

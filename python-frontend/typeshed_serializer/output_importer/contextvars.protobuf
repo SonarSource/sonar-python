@@ -1,0 +1,583 @@
+fully_qualified_name: "contextvars"
+classes {
+  name: "ContextVar"
+  fully_qualified_name: "contextvars.ContextVar"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "contextvars.ContextVar.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "set"
+    fully_qualified_name: "contextvars.ContextVar.set"
+    return_annotation {
+      pretty_printed_name: "contextvars.Token[contextvars._T]"
+      args {
+        pretty_printed_name: "contextvars._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "contextvars.Token"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "contextvars.ContextVar.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars.Token[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.Token"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "contextvars.ContextVar.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextvars.ContextVar.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "contextvars.ContextVar.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "get"
+    fullname: "contextvars.ContextVar.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "contextvars.ContextVar.get"
+      return_annotation {
+        pretty_printed_name: "contextvars._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "contextvars.ContextVar.get"
+      return_annotation {
+        pretty_printed_name: "Union[contextvars._D,contextvars._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars._D"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[contextvars._D,contextvars._T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "contextvars._D"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  has_decorators: true
+  is_generic: true
+}
+classes {
+  name: "Token"
+  fully_qualified_name: "contextvars.Token"
+  super_classes: "builtins.object"
+  methods {
+    name: "var"
+    fully_qualified_name: "contextvars.Token.var"
+    return_annotation {
+      pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+      args {
+        pretty_printed_name: "contextvars._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "contextvars.ContextVar"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.Token[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.Token"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "old_value"
+    fully_qualified_name: "contextvars.Token.old_value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.Token[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.Token"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  has_decorators: true
+  is_generic: true
+  attributes {
+    name: "MISSING"
+    fully_qualified_name: "contextvars.Token.MISSING"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+classes {
+  name: "Context"
+  fully_qualified_name: "contextvars.Context"
+  super_classes: "typing.Mapping"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "contextvars.Context.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "contextvars.Context.run"
+    return_annotation {
+      pretty_printed_name: "contextvars._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+    parameters {
+      name: "callable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "contextvars.Context.copy"
+    return_annotation {
+      pretty_printed_name: "contextvars.Context"
+      fully_qualified_name: "contextvars.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "contextvars.Context.__getitem__"
+    return_annotation {
+      pretty_printed_name: "contextvars._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "contextvars.Context.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[contextvars.ContextVar[Any]]"
+      args {
+        pretty_printed_name: "contextvars.ContextVar[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "contextvars.ContextVar"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "contextvars.Context.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "contextvars.Context"
+        fully_qualified_name: "contextvars.Context"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get"
+    fullname: "contextvars.Context.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "contextvars.Context.get"
+      return_annotation {
+        pretty_printed_name: "Union[contextvars._T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "contextvars.Context.get"
+      return_annotation {
+        pretty_printed_name: "Union[contextvars._T,contextvars._D]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "contextvars._D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "contextvars.ContextVar[contextvars._T]"
+          args {
+            pretty_printed_name: "contextvars._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "contextvars._D"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  has_decorators: true
+}
+functions {
+  name: "copy_context"
+  fully_qualified_name: "contextvars.copy_context"
+  return_annotation {
+    pretty_printed_name: "contextvars.Context"
+    fully_qualified_name: "contextvars.Context"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "contextvars.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "contextvars.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

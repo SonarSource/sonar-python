@@ -1,0 +1,2086 @@
+fully_qualified_name: "jinja2.filters"
+classes {
+  name: "HasHTML"
+  fully_qualified_name: "jinja2.filters.HasHTML"
+  super_classes: "builtins.object"
+  methods {
+    name: "__html__"
+    fully_qualified_name: "jinja2.filters.HasHTML.__html__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.filters.HasHTML"
+        fully_qualified_name: "jinja2.filters.HasHTML"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "_GroupTuple"
+  fully_qualified_name: "jinja2.filters._GroupTuple"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.filters._GroupTuple.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,builtins.list[Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.filters._GroupTuple.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Tuple[Any,builtins.list[Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+    }
+  }
+  methods {
+    name: "_replace"
+    fully_qualified_name: "jinja2.filters._GroupTuple._replace"
+    return_annotation {
+      pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "grouper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "jinja2.filters._GroupTuple.__new__"
+    return_annotation {
+      pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.filters._GroupTuple._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "grouper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "jinja2.filters._GroupTuple._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "jinja2.filters._GroupTuple._make"
+    return_annotation {
+      pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.filters._GroupTuple._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.filters._GroupTuple._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "grouper"
+    fully_qualified_name: "jinja2.filters._GroupTuple.grouper"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "list"
+    fully_qualified_name: "jinja2.filters._GroupTuple.list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "grouper"
+    fully_qualified_name: "jinja2.filters._GroupTuple.grouper"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "list"
+    fully_qualified_name: "jinja2.filters._GroupTuple.list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "jinja2.filters._GroupTuple._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "jinja2.filters._GroupTuple._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "jinja2.filters._GroupTuple._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "jinja2.filters._GroupTuple._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "jinja2.filters._GroupTuple.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+functions {
+  name: "ignore_case"
+  fully_qualified_name: "jinja2.filters.ignore_case"
+  return_annotation {
+    pretty_printed_name: "jinja2.filters.V"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "make_attrgetter"
+  fully_qualified_name: "jinja2.filters.make_attrgetter"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  parameters {
+    name: "attribute"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "postprocess"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "default"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "make_multi_attrgetter"
+  fully_qualified_name: "jinja2.filters.make_multi_attrgetter"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  parameters {
+    name: "attribute"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "postprocess"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_prepare_attribute_parts"
+  fully_qualified_name: "jinja2.filters._prepare_attribute_parts"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Union[builtins.str,builtins.int]]"
+    args {
+      pretty_printed_name: "Union[builtins.str,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "do_forceescape"
+  fully_qualified_name: "jinja2.filters.do_forceescape"
+  return_annotation {
+    pretty_printed_name: "markupsafe.Markup"
+    fully_qualified_name: "markupsafe.Markup"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,jinja2.filters.HasHTML]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "jinja2.filters.HasHTML"
+        fully_qualified_name: "jinja2.filters.HasHTML"
+      }
+    }
+  }
+}
+functions {
+  name: "do_urlencode"
+  fully_qualified_name: "jinja2.filters.do_urlencode"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.Mapping[builtins.str,Any],typing.Iterable[Tuple[builtins.str,Any]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[builtins.str,Any]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+}
+functions {
+  name: "do_upper"
+  fully_qualified_name: "jinja2.filters.do_upper"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_lower"
+  fully_qualified_name: "jinja2.filters.do_lower"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_items"
+  fully_qualified_name: "jinja2.filters.do_items"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[jinja2.filters.K,jinja2.filters.V]]"
+    args {
+      pretty_printed_name: "Tuple[jinja2.filters.K,jinja2.filters.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "jinja2.filters.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[jinja2.filters.K,jinja2.filters.V],jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[jinja2.filters.K,jinja2.filters.V]"
+        args {
+          pretty_printed_name: "jinja2.filters.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "jinja2.filters.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+}
+functions {
+  name: "do_capitalize"
+  fully_qualified_name: "jinja2.filters.do_capitalize"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_title"
+  fully_qualified_name: "jinja2.filters.do_title"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_dictsort"
+  fully_qualified_name: "jinja2.filters.do_dictsort"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Tuple[jinja2.filters.K,jinja2.filters.V]]"
+    args {
+      pretty_printed_name: "Tuple[jinja2.filters.K,jinja2.filters.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "jinja2.filters.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[jinja2.filters.K,jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  parameters {
+    name: "case_sensitive"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "by"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  parameters {
+    name: "reverse"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "_min_or_max"
+  fully_qualified_name: "jinja2.filters._min_or_max"
+  return_annotation {
+    pretty_printed_name: "Union[jinja2.filters.V,jinja2.runtime.Undefined]"
+    kind: UNION
+    args {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+    args {
+      pretty_printed_name: "jinja2.runtime.Undefined"
+      fully_qualified_name: "jinja2.runtime.Undefined"
+    }
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "case_sensitive"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "attribute"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "do_default"
+  fully_qualified_name: "jinja2.filters.do_default"
+  return_annotation {
+    pretty_printed_name: "jinja2.filters.V"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "default_value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "boolean"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "do_center"
+  fully_qualified_name: "jinja2.filters.do_center"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "width"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "do_filesizeformat"
+  fully_qualified_name: "jinja2.filters.do_filesizeformat"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.float,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  parameters {
+    name: "binary"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "do_pprint"
+  fully_qualified_name: "jinja2.filters.do_pprint"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "do_indent"
+  fully_qualified_name: "jinja2.filters.do_indent"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "width"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  parameters {
+    name: "first"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "blank"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "do_wordcount"
+  fully_qualified_name: "jinja2.filters.do_wordcount"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_int"
+  fully_qualified_name: "jinja2.filters.do_int"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "default"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "base"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "do_float"
+  fully_qualified_name: "jinja2.filters.do_float"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "default"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+}
+functions {
+  name: "do_format"
+  fully_qualified_name: "jinja2.filters.do_format"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "do_trim"
+  fully_qualified_name: "jinja2.filters.do_trim"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "chars"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "do_striptags"
+  fully_qualified_name: "jinja2.filters.do_striptags"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,jinja2.filters.HasHTML]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "jinja2.filters.HasHTML"
+        fully_qualified_name: "jinja2.filters.HasHTML"
+      }
+    }
+  }
+}
+functions {
+  name: "sync_do_slice"
+  fully_qualified_name: "jinja2.filters.sync_do_slice"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.list[jinja2.filters.V]]"
+    args {
+      pretty_printed_name: "builtins.list[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Collection[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Collection"
+    }
+  }
+  parameters {
+    name: "slices"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "fill_with"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.filters.V,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "do_batch"
+  fully_qualified_name: "jinja2.filters.do_batch"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.list[jinja2.filters.V]]"
+    args {
+      pretty_printed_name: "builtins.list[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "linecount"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "fill_with"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.filters.V,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "do_round"
+  fully_qualified_name: "jinja2.filters.do_round"
+  return_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  parameters {
+    name: "precision"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "method"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+}
+functions {
+  name: "sync_do_list"
+  fully_qualified_name: "jinja2.filters.sync_do_list"
+  return_annotation {
+    pretty_printed_name: "builtins.list[jinja2.filters.V]"
+    args {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "do_mark_safe"
+  fully_qualified_name: "jinja2.filters.do_mark_safe"
+  return_annotation {
+    pretty_printed_name: "markupsafe.Markup"
+    fully_qualified_name: "markupsafe.Markup"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "do_mark_unsafe"
+  fully_qualified_name: "jinja2.filters.do_mark_unsafe"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "prepare_map"
+  fully_qualified_name: "jinja2.filters.prepare_map"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+functions {
+  name: "prepare_select_or_reject"
+  fully_qualified_name: "jinja2.filters.prepare_select_or_reject"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "modfunc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "lookup_attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "select_or_reject"
+  fully_qualified_name: "jinja2.filters.select_or_reject"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[jinja2.filters.V]"
+    args {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "modfunc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "lookup_attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "async_select_or_reject"
+  fully_qualified_name: "jinja2.filters.async_select_or_reject"
+  return_annotation {
+    pretty_printed_name: "typing.AsyncIterator[jinja2.filters.V]"
+    args {
+      pretty_printed_name: "jinja2.filters.V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.AsyncIterator"
+  }
+  parameters {
+    name: "context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.AsyncIterable[jinja2.filters.V],typing.Iterable[jinja2.filters.V]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AsyncIterable[jinja2.filters.V]"
+        args {
+          pretty_printed_name: "jinja2.filters.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AsyncIterable"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+        args {
+          pretty_printed_name: "jinja2.filters.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "modfunc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "lookup_attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  is_asynchronous: true
+}
+overloaded_functions {
+  name: "do_reverse"
+  fullname: "jinja2.filters.do_reverse"
+  definitions {
+    name: "do_reverse"
+    fully_qualified_name: "jinja2.filters.do_reverse"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "do_reverse"
+    fully_qualified_name: "jinja2.filters.do_reverse"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+      args {
+        pretty_printed_name: "jinja2.filters.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[jinja2.filters.V]"
+        args {
+          pretty_printed_name: "jinja2.filters.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "sync_do_map"
+  fullname: "jinja2.filters.sync_do_map"
+  definitions {
+    name: "sync_do_map"
+    fully_qualified_name: "jinja2.filters.sync_do_map"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "sync_do_map"
+    fully_qualified_name: "jinja2.filters.sync_do_map"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "do_map"
+  fullname: "jinja2.filters.do_map"
+  definitions {
+    name: "do_map"
+    fully_qualified_name: "jinja2.filters.do_map"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.AsyncIterable[Any],typing.Iterable[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.AsyncIterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.AsyncIterable"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "do_map"
+    fully_qualified_name: "jinja2.filters.do_map"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.AsyncIterable[Any],typing.Iterable[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.AsyncIterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.AsyncIterable"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "typing.overload"
+    is_overload: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.filters.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "_word_beginning_split_re"
+  fully_qualified_name: "jinja2.filters._word_beginning_split_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_uri_scheme_re"
+  fully_qualified_name: "jinja2.filters._uri_scheme_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_word_re"
+  fully_qualified_name: "jinja2.filters._word_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "FILTERS"
+  fully_qualified_name: "jinja2.filters.FILTERS"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

@@ -1,0 +1,145 @@
+fully_qualified_name: "click.globals"
+functions {
+  name: "push_context"
+  fully_qualified_name: "click.globals.push_context"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+  }
+}
+functions {
+  name: "pop_context"
+  fully_qualified_name: "click.globals.pop_context"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "resolve_color_default"
+  fully_qualified_name: "click.globals.resolve_color_default"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "color"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+overloaded_functions {
+  name: "get_current_context"
+  fullname: "click.globals.get_current_context"
+  definitions {
+    name: "get_current_context"
+    fully_qualified_name: "click.globals.get_current_context"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "silent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "get_current_context"
+    fully_qualified_name: "click.globals.get_current_context"
+    return_annotation {
+      pretty_printed_name: "Union[click.core.Context,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "silent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "click.globals.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "_local"
+  fully_qualified_name: "click.globals._local"
+  type_annotation {
+    pretty_printed_name: "threading.local"
+    fully_qualified_name: "threading.local"
+  }
+}

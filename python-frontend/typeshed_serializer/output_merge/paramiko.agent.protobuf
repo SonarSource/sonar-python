@@ -1,0 +1,983 @@
+fully_qualified_name: "paramiko.agent"
+classes {
+  name: "_AgentProxy"
+  fully_qualified_name: "paramiko.agent._AgentProxy"
+  super_classes: "builtins.object"
+  methods {
+    name: "connect"
+    fully_qualified_name: "paramiko.agent._AgentProxy.connect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent._AgentProxy"
+        fully_qualified_name: "paramiko.agent._AgentProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "paramiko.agent._AgentProxy.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent._AgentProxy"
+        fully_qualified_name: "paramiko.agent._AgentProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentSSH"
+  fully_qualified_name: "paramiko.agent.AgentSSH"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentSSH.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentSSH"
+        fully_qualified_name: "paramiko.agent.AgentSSH"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_keys"
+    fully_qualified_name: "paramiko.agent.AgentSSH.get_keys"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[paramiko.agent.AgentKey]"
+      args {
+        pretty_printed_name: "paramiko.agent.AgentKey"
+        fully_qualified_name: "paramiko.agent.AgentKey"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentSSH"
+        fully_qualified_name: "paramiko.agent.AgentSSH"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentProxyThread"
+  fully_qualified_name: "paramiko.agent.AgentProxyThread"
+  super_classes: "threading.Thread"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentProxyThread.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentProxyThread"
+        fully_qualified_name: "paramiko.agent.AgentProxyThread"
+      }
+    }
+    parameters {
+      name: "agent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent._AgentProxy"
+        fully_qualified_name: "paramiko.agent._AgentProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "paramiko.agent.AgentProxyThread.run"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentProxyThread"
+        fully_qualified_name: "paramiko.agent.AgentProxyThread"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentLocalProxy"
+  fully_qualified_name: "paramiko.agent.AgentLocalProxy"
+  super_classes: "paramiko.agent.AgentProxyThread"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentLocalProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentLocalProxy"
+        fully_qualified_name: "paramiko.agent.AgentLocalProxy"
+      }
+    }
+    parameters {
+      name: "agent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_connection"
+    fully_qualified_name: "paramiko.agent.AgentLocalProxy.get_connection"
+    return_annotation {
+      pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentLocalProxy"
+        fully_qualified_name: "paramiko.agent.AgentLocalProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentRemoteProxy"
+  fully_qualified_name: "paramiko.agent.AgentRemoteProxy"
+  super_classes: "paramiko.agent.AgentProxyThread"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentRemoteProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentRemoteProxy"
+        fully_qualified_name: "paramiko.agent.AgentRemoteProxy"
+      }
+    }
+    parameters {
+      name: "agent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentClientProxy"
+        fully_qualified_name: "paramiko.agent.AgentClientProxy"
+      }
+    }
+    parameters {
+      name: "chan"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.channel.Channel"
+        fully_qualified_name: "paramiko.channel.Channel"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_connection"
+    fully_qualified_name: "paramiko.agent.AgentRemoteProxy.get_connection"
+    return_annotation {
+      pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentRemoteProxy"
+        fully_qualified_name: "paramiko.agent.AgentRemoteProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentClientProxy"
+  fully_qualified_name: "paramiko.agent.AgentClientProxy"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentClientProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentClientProxy"
+        fully_qualified_name: "paramiko.agent.AgentClientProxy"
+      }
+    }
+    parameters {
+      name: "chanRemote"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.channel.Channel"
+        fully_qualified_name: "paramiko.channel.Channel"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "paramiko.agent.AgentClientProxy.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentClientProxy"
+        fully_qualified_name: "paramiko.agent.AgentClientProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connect"
+    fully_qualified_name: "paramiko.agent.AgentClientProxy.connect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentClientProxy"
+        fully_qualified_name: "paramiko.agent.AgentClientProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "paramiko.agent.AgentClientProxy.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentClientProxy"
+        fully_qualified_name: "paramiko.agent.AgentClientProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "thread"
+    fully_qualified_name: "paramiko.agent.AgentClientProxy.thread"
+    type_annotation {
+      pretty_printed_name: "threading.Thread"
+      fully_qualified_name: "threading.Thread"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AgentServerProxy"
+  fully_qualified_name: "paramiko.agent.AgentServerProxy"
+  super_classes: "paramiko.agent.AgentSSH"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    parameters {
+      name: "t"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.transport.Transport"
+        fully_qualified_name: "paramiko.transport.Transport"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "connect"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.connect"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_env"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.get_env"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentServerProxy"
+        fully_qualified_name: "paramiko.agent.AgentServerProxy"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "thread"
+    fully_qualified_name: "paramiko.agent.AgentServerProxy.thread"
+    type_annotation {
+      pretty_printed_name: "threading.Thread"
+      fully_qualified_name: "threading.Thread"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AgentRequestHandler"
+  fully_qualified_name: "paramiko.agent.AgentRequestHandler"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentRequestHandler.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentRequestHandler"
+        fully_qualified_name: "paramiko.agent.AgentRequestHandler"
+      }
+    }
+    parameters {
+      name: "chanClient"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.channel.Channel"
+        fully_qualified_name: "paramiko.channel.Channel"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "paramiko.agent.AgentRequestHandler.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentRequestHandler"
+        fully_qualified_name: "paramiko.agent.AgentRequestHandler"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "paramiko.agent.AgentRequestHandler.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentRequestHandler"
+        fully_qualified_name: "paramiko.agent.AgentRequestHandler"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Agent"
+  fully_qualified_name: "paramiko.agent.Agent"
+  super_classes: "paramiko.agent.AgentSSH"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.Agent.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.Agent"
+        fully_qualified_name: "paramiko.agent.Agent"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "paramiko.agent.Agent.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.Agent"
+        fully_qualified_name: "paramiko.agent.Agent"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AgentKey"
+  fully_qualified_name: "paramiko.agent.AgentKey"
+  super_classes: "paramiko.pkey.PKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "paramiko.agent.AgentKey.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentKey"
+        fully_qualified_name: "paramiko.agent.AgentKey"
+      }
+    }
+    parameters {
+      name: "agent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentSSH"
+        fully_qualified_name: "paramiko.agent.AgentSSH"
+      }
+    }
+    parameters {
+      name: "blob"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "asbytes"
+    fully_qualified_name: "paramiko.agent.AgentKey.asbytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentKey"
+        fully_qualified_name: "paramiko.agent.AgentKey"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_name"
+    fully_qualified_name: "paramiko.agent.AgentKey.get_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentKey"
+        fully_qualified_name: "paramiko.agent.AgentKey"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "sign_ssh_data"
+    fully_qualified_name: "paramiko.agent.AgentKey.sign_ssh_data"
+    return_annotation {
+      pretty_printed_name: "paramiko.message.Message"
+      fully_qualified_name: "paramiko.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "paramiko.agent.AgentKey"
+        fully_qualified_name: "paramiko.agent.AgentKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "agent"
+    fully_qualified_name: "paramiko.agent.AgentKey.agent"
+    type_annotation {
+      pretty_printed_name: "paramiko.agent.AgentSSH"
+      fully_qualified_name: "paramiko.agent.AgentSSH"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "blob"
+    fully_qualified_name: "paramiko.agent.AgentKey.blob"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "public_blob"
+    fully_qualified_name: "paramiko.agent.AgentKey.public_blob"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "paramiko.agent.AgentKey.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "cSSH2_AGENTC_REQUEST_IDENTITIES"
+  fully_qualified_name: "paramiko.agent.cSSH2_AGENTC_REQUEST_IDENTITIES"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SSH2_AGENT_IDENTITIES_ANSWER"
+  fully_qualified_name: "paramiko.agent.SSH2_AGENT_IDENTITIES_ANSWER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "cSSH2_AGENTC_SIGN_REQUEST"
+  fully_qualified_name: "paramiko.agent.cSSH2_AGENTC_SIGN_REQUEST"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SSH2_AGENT_SIGN_RESPONSE"
+  fully_qualified_name: "paramiko.agent.SSH2_AGENT_SIGN_RESPONSE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

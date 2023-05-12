@@ -1,0 +1,241 @@
+fully_qualified_name: "orjson"
+classes {
+  name: "JSONDecodeError"
+  fully_qualified_name: "orjson.JSONDecodeError"
+  super_classes: "json.decoder.JSONDecodeError"
+}
+classes {
+  name: "JSONEncodeError"
+  fully_qualified_name: "orjson.JSONEncodeError"
+  super_classes: "builtins.TypeError"
+}
+functions {
+  name: "dumps"
+  fully_qualified_name: "orjson.dumps"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "default"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "option"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "loads"
+  fully_qualified_name: "orjson.loads"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,builtins.memoryview,builtins.str]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.bytearray"
+        fully_qualified_name: "builtins.bytearray"
+      }
+      args {
+        pretty_printed_name: "builtins.memoryview"
+        fully_qualified_name: "builtins.memoryview"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "orjson.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "orjson.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__version__"
+  fully_qualified_name: "orjson.__version__"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "OPT_APPEND_NEWLINE"
+  fully_qualified_name: "orjson.OPT_APPEND_NEWLINE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_INDENT_2"
+  fully_qualified_name: "orjson.OPT_INDENT_2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_NAIVE_UTC"
+  fully_qualified_name: "orjson.OPT_NAIVE_UTC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_NON_STR_KEYS"
+  fully_qualified_name: "orjson.OPT_NON_STR_KEYS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_OMIT_MICROSECONDS"
+  fully_qualified_name: "orjson.OPT_OMIT_MICROSECONDS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_PASSTHROUGH_DATACLASS"
+  fully_qualified_name: "orjson.OPT_PASSTHROUGH_DATACLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_PASSTHROUGH_DATETIME"
+  fully_qualified_name: "orjson.OPT_PASSTHROUGH_DATETIME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_PASSTHROUGH_SUBCLASS"
+  fully_qualified_name: "orjson.OPT_PASSTHROUGH_SUBCLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_SERIALIZE_DATACLASS"
+  fully_qualified_name: "orjson.OPT_SERIALIZE_DATACLASS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_SERIALIZE_NUMPY"
+  fully_qualified_name: "orjson.OPT_SERIALIZE_NUMPY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_SERIALIZE_UUID"
+  fully_qualified_name: "orjson.OPT_SERIALIZE_UUID"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_SORT_KEYS"
+  fully_qualified_name: "orjson.OPT_SORT_KEYS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_STRICT_INTEGER"
+  fully_qualified_name: "orjson.OPT_STRICT_INTEGER"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPT_UTC_Z"
+  fully_qualified_name: "orjson.OPT_UTC_Z"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

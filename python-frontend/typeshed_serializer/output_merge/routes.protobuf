@@ -1,0 +1,626 @@
+fully_qualified_name: "routes"
+classes {
+  name: "Mapper"
+  fully_qualified_name: "routes.mapper.Mapper"
+  super_classes: "routes.mapper.SubMapperParent"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "routes.mapper.Mapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "routes.mapper.Mapper"
+        fully_qualified_name: "routes.mapper.Mapper"
+      }
+    }
+    parameters {
+      name: "controller_scan"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "directory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "always_scan"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "register"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "explicit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "routes.mapper.Mapper.extend"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "routes"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path_prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "make_route"
+    fully_qualified_name: "routes.mapper.Mapper.make_route"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "connect"
+    fully_qualified_name: "routes.mapper.Mapper.connect"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "create_regs"
+    fully_qualified_name: "routes.mapper.Mapper.create_regs"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "match"
+    fully_qualified_name: "routes.mapper.Mapper.match"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "routematch"
+    fully_qualified_name: "routes.mapper.Mapper.routematch"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "url"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "generate"
+    fully_qualified_name: "routes.mapper.Mapper.generate"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "resource"
+    fully_qualified_name: "routes.mapper.Mapper.resource"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "member_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "collection_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "redirect"
+    fully_qualified_name: "routes.mapper.Mapper.redirect"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "match_path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "destination_path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "matchlist"
+    fully_qualified_name: "routes.mapper.Mapper.matchlist"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "maxkeys"
+    fully_qualified_name: "routes.mapper.Mapper.maxkeys"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "minkeys"
+    fully_qualified_name: "routes.mapper.Mapper.minkeys"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "urlcache"
+    fully_qualified_name: "routes.mapper.Mapper.urlcache"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "prefix"
+    fully_qualified_name: "routes.mapper.Mapper.prefix"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "req_data"
+    fully_qualified_name: "routes.mapper.Mapper.req_data"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "directory"
+    fully_qualified_name: "routes.mapper.Mapper.directory"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "always_scan"
+    fully_qualified_name: "routes.mapper.Mapper.always_scan"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "controller_scan"
+    fully_qualified_name: "routes.mapper.Mapper.controller_scan"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "debug"
+    fully_qualified_name: "routes.mapper.Mapper.debug"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "append_slash"
+    fully_qualified_name: "routes.mapper.Mapper.append_slash"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "sub_domains"
+    fully_qualified_name: "routes.mapper.Mapper.sub_domains"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "sub_domains_ignore"
+    fully_qualified_name: "routes.mapper.Mapper.sub_domains_ignore"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "domain_match"
+    fully_qualified_name: "routes.mapper.Mapper.domain_match"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "explicit"
+    fully_qualified_name: "routes.mapper.Mapper.explicit"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "encoding"
+    fully_qualified_name: "routes.mapper.Mapper.encoding"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "decode_errors"
+    fully_qualified_name: "routes.mapper.Mapper.decode_errors"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "hardcode_names"
+    fully_qualified_name: "routes.mapper.Mapper.hardcode_names"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "minimization"
+    fully_qualified_name: "routes.mapper.Mapper.minimization"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "create_regs_lock"
+    fully_qualified_name: "routes.mapper.Mapper.create_regs_lock"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "environ"
+    fully_qualified_name: "routes.mapper.Mapper.environ"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "obj"
+    fully_qualified_name: "routes.mapper.Mapper.obj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "URLGenerator"
+  fully_qualified_name: "routes.util.URLGenerator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "routes.util.URLGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "routes.util.URLGenerator"
+        fully_qualified_name: "routes.util.URLGenerator"
+      }
+    }
+    parameters {
+      name: "mapper"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "routes.util.URLGenerator.__call__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "current"
+    fully_qualified_name: "routes.util.URLGenerator.current"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "mapper"
+    fully_qualified_name: "routes.util.URLGenerator.mapper"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "environ"
+    fully_qualified_name: "routes.util.URLGenerator.environ"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "_RequestConfig"
+  fully_qualified_name: "routes._RequestConfig"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "routes._RequestConfig.__getattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "routes._RequestConfig.__setattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "routes._RequestConfig.__delattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "load_wsgi_environ"
+    fully_qualified_name: "routes._RequestConfig.load_wsgi_environ"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+}
+functions {
+  name: "redirect_to"
+  fully_qualified_name: "routes.util.redirect_to"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  parameters {
+    name: "kargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "url_for"
+  fully_qualified_name: "routes.util.url_for"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  parameters {
+    name: "kargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "27"
+}
+functions {
+  name: "request_config"
+  fully_qualified_name: "routes.request_config"
+  parameters {
+    name: "original"
+    kind: POSITIONAL_OR_KEYWORD
+    has_default: true
+  }
+  valid_for: "27"
+}

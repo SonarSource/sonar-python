@@ -1,0 +1,194 @@
+fully_qualified_name: "freezegun"
+functions {
+  name: "freeze_time"
+  fully_qualified_name: "freezegun.api.freeze_time"
+  return_annotation {
+    pretty_printed_name: "freezegun.api._freeze_time"
+    fully_qualified_name: "freezegun.api._freeze_time"
+  }
+  parameters {
+    name: "time_to_freeze"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]],CallableType[builtins.function],typing.Iterator[TypeAlias[Unknown]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "datetime.datetime"
+            fully_qualified_name: "datetime.datetime"
+          }
+          args {
+            pretty_printed_name: "datetime.date"
+            fully_qualified_name: "datetime.date"
+          }
+          args {
+            pretty_printed_name: "datetime.timedelta"
+            fully_qualified_name: "datetime.timedelta"
+          }
+        }
+        fully_qualified_name: "freezegun.api._Freezable"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "typing.Iterator[TypeAlias[Unknown]]"
+        args {
+          pretty_printed_name: "TypeAlias[Unknown]"
+          kind: TYPE_ALIAS
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "tz_offset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "ignore"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "tick"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "as_arg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "as_kwarg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "auto_tick_seconds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "freezegun.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "freezegun.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

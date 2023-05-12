@@ -1,0 +1,1171 @@
+fully_qualified_name: "cryptography.x509.general_name"
+classes {
+  name: "UnsupportedGeneralNameType"
+  fully_qualified_name: "cryptography.x509.general_name.UnsupportedGeneralNameType"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "GeneralName"
+  fully_qualified_name: "cryptography.x509.general_name.GeneralName"
+  super_classes: "builtins.object"
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.GeneralName.value"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.GeneralName"
+        fully_qualified_name: "cryptography.x509.general_name.GeneralName"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "RFC822Name"
+  fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.value"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_init_without_validation"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name._init_without_validation"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+      fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.x509.general_name.RFC822Name]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+          fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RFC822Name"
+        fully_qualified_name: "cryptography.x509.general_name.RFC822Name"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.RFC822Name._value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "DNSName"
+  fully_qualified_name: "cryptography.x509.general_name.DNSName"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.value"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_init_without_validation"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName._init_without_validation"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.general_name.DNSName"
+      fully_qualified_name: "cryptography.x509.general_name.DNSName"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.x509.general_name.DNSName]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.x509.general_name.DNSName"
+          fully_qualified_name: "cryptography.x509.general_name.DNSName"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DNSName"
+        fully_qualified_name: "cryptography.x509.general_name.DNSName"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.DNSName._value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "UniformResourceIdentifier"
+  fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.value"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_init_without_validation"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier._init_without_validation"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.x509.general_name.UniformResourceIdentifier]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+          fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+        fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.UniformResourceIdentifier._value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "DirectoryName"
+  fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.value"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.DirectoryName"
+        fully_qualified_name: "cryptography.x509.general_name.DirectoryName"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.DirectoryName._value"
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+  }
+}
+classes {
+  name: "RegisteredID"
+  fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.value"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.RegisteredID"
+        fully_qualified_name: "cryptography.x509.general_name.RegisteredID"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.RegisteredID._value"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "IPAddress"
+  fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]"
+          kind: UNION
+          args {
+            pretty_printed_name: "ipaddress.IPv4Address"
+            fully_qualified_name: "ipaddress.IPv4Address"
+          }
+          args {
+            pretty_printed_name: "ipaddress.IPv6Address"
+            fully_qualified_name: "ipaddress.IPv6Address"
+          }
+          args {
+            pretty_printed_name: "ipaddress.IPv4Network"
+            fully_qualified_name: "ipaddress.IPv4Network"
+          }
+          args {
+            pretty_printed_name: "ipaddress.IPv6Network"
+            fully_qualified_name: "ipaddress.IPv6Network"
+          }
+        }
+        fully_qualified_name: "cryptography.x509.general_name._IPADDRESS_TYPES"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.value"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]"
+        kind: UNION
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv4Network"
+          fully_qualified_name: "ipaddress.IPv4Network"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Network"
+          fully_qualified_name: "ipaddress.IPv6Network"
+        }
+      }
+      fully_qualified_name: "cryptography.x509.general_name._IPADDRESS_TYPES"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_packed"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress._packed"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.IPAddress"
+        fully_qualified_name: "cryptography.x509.general_name.IPAddress"
+      }
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.IPAddress._value"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[ipaddress.IPv4Address,ipaddress.IPv6Address,ipaddress.IPv4Network,ipaddress.IPv6Network]"
+        kind: UNION
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv4Network"
+          fully_qualified_name: "ipaddress.IPv4Network"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Network"
+          fully_qualified_name: "ipaddress.IPv6Network"
+        }
+      }
+      fully_qualified_name: "cryptography.x509.general_name._IPADDRESS_TYPES"
+    }
+  }
+}
+classes {
+  name: "OtherName"
+  fully_qualified_name: "cryptography.x509.general_name.OtherName"
+  super_classes: "cryptography.x509.general_name.GeneralName"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+    parameters {
+      name: "type_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "type_id"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.type_id"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.value"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.general_name.OtherName"
+        fully_qualified_name: "cryptography.x509.general_name.OtherName"
+      }
+    }
+  }
+  attributes {
+    name: "_type_id"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName._type_id"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.general_name.OtherName._value"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.x509.general_name.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

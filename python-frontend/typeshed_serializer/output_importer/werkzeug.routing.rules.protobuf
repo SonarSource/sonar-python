@@ -1,0 +1,2312 @@
+fully_qualified_name: "werkzeug.routing.rules"
+classes {
+  name: "Weighting"
+  fully_qualified_name: "werkzeug.routing.rules.Weighting"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._replace"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "number_static_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "static_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "number_argument_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "argument_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.__new__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.routing.rules.Weighting._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "number_static_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "static_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "number_argument_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "argument_weights"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._make"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.routing.rules.Weighting._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.Weighting._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "number_static_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.number_static_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "static_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.static_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "number_argument_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.number_argument_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "argument_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.argument_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "number_static_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.number_static_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "static_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.static_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "number_argument_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.number_argument_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "argument_weights"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.argument_weights"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "werkzeug.routing.rules.Weighting.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "RulePart"
+  fully_qualified_name: "werkzeug.routing.rules.RulePart"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RulePart"
+        fully_qualified_name: "werkzeug.routing.rules.RulePart"
+      }
+    }
+    parameters {
+      name: "content"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "final"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "static"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "suffixed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "weight"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.list[Tuple[builtins.int,builtins.int]],builtins.int,builtins.list[builtins.int]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.list[Tuple[builtins.int,builtins.int]],builtins.int,builtins.list[builtins.int]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+            args {
+              pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "builtins.list"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.list[builtins.int]"
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            fully_qualified_name: "builtins.list"
+          }
+        }
+        fully_qualified_name: "werkzeug.routing.rules.Weighting"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "content"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.content"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "final"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.final"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "static"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.static"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "suffixed"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.suffixed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "weight"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.weight"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.list[Tuple[builtins.int,builtins.int]],builtins.int,builtins.list[builtins.int]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.list[Tuple[builtins.int,builtins.int]],builtins.int,builtins.list[builtins.int]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Tuple[builtins.int,builtins.int]]"
+          args {
+            pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "werkzeug.routing.rules.Weighting"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.routing.rules.RulePart.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "RuleFactory"
+  fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.RuleFactory.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+}
+classes {
+  name: "Subdomain"
+  fully_qualified_name: "werkzeug.routing.rules.Subdomain"
+  super_classes: "werkzeug.routing.rules.RuleFactory"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.Subdomain.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Subdomain"
+        fully_qualified_name: "werkzeug.routing.rules.Subdomain"
+      }
+    }
+    parameters {
+      name: "subdomain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+          fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.Subdomain.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Subdomain"
+        fully_qualified_name: "werkzeug.routing.rules.Subdomain"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+  attributes {
+    name: "subdomain"
+    fully_qualified_name: "werkzeug.routing.rules.Subdomain.subdomain"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.rules.Subdomain.rules"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+classes {
+  name: "Submount"
+  fully_qualified_name: "werkzeug.routing.rules.Submount"
+  super_classes: "werkzeug.routing.rules.RuleFactory"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.Submount.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Submount"
+        fully_qualified_name: "werkzeug.routing.rules.Submount"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+          fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.Submount.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Submount"
+        fully_qualified_name: "werkzeug.routing.rules.Submount"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "werkzeug.routing.rules.Submount.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.rules.Submount.rules"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+classes {
+  name: "EndpointPrefix"
+  fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix"
+  super_classes: "werkzeug.routing.rules.RuleFactory"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.EndpointPrefix"
+        fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix"
+      }
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+          fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.EndpointPrefix"
+        fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+  attributes {
+    name: "prefix"
+    fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix.prefix"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.rules.EndpointPrefix.rules"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+classes {
+  name: "RuleTemplate"
+  fully_qualified_name: "werkzeug.routing.rules.RuleTemplate"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplate.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RuleTemplate"
+        fully_qualified_name: "werkzeug.routing.rules.RuleTemplate"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.Rule]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.Rule"
+          fully_qualified_name: "werkzeug.routing.rules.Rule"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplate.__call__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.rules.RuleTemplateFactory"
+      fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RuleTemplate"
+        fully_qualified_name: "werkzeug.routing.rules.RuleTemplate"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplate.rules"
+    type_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "RuleTemplateFactory"
+  fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory"
+  super_classes: "werkzeug.routing.rules.RuleFactory"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RuleTemplateFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+          fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.RuleTemplateFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory.rules"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RuleFactory]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RuleFactory"
+        fully_qualified_name: "werkzeug.routing.rules.RuleFactory"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  attributes {
+    name: "context"
+    fully_qualified_name: "werkzeug.routing.rules.RuleTemplateFactory.context"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Rule"
+  fully_qualified_name: "werkzeug.routing.rules.Rule"
+  super_classes: "werkzeug.routing.rules.RuleFactory"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "defaults"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "subdomain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "methods"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "build_only"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "endpoint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "strict_slashes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "merge_slashes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "redirect_to"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "alias"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "websocket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "empty"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.empty"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.rules.Rule"
+      fully_qualified_name: "werkzeug.routing.rules.Rule"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "get_empty_kwargs"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.get_empty_kwargs"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "get_rules"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.get_rules"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+  }
+  methods {
+    name: "refresh"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.refresh"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "bind"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.bind"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "rebind"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "get_converter"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.get_converter"
+    return_annotation {
+      pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+      fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "variable_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "converter_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "_encode_query_vars"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._encode_query_vars"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "query_vars"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "_parse_rule"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._parse_rule"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[werkzeug.routing.rules.RulePart]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RulePart"
+        fully_qualified_name: "werkzeug.routing.rules.RulePart"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "compile"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.compile"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "_get_func_code"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._get_func_code"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "_compile_builder"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._compile_builder"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "append_unknown"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "build"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.build"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "append_unknown"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "provides_defaults_for"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.provides_defaults_for"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "suitable_for"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.suitable_for"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "build_compare_key"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.build_compare_key"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.__hash__"
+  }
+  attributes {
+    name: "rule"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.rule"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "is_leaf"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.is_leaf"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "is_branch"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.is_branch"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "map"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.map"
+    type_annotation {
+      pretty_printed_name: "werkzeug.routing.map.Map"
+      fully_qualified_name: "werkzeug.routing.map.Map"
+    }
+  }
+  attributes {
+    name: "strict_slashes"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.strict_slashes"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "merge_slashes"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.merge_slashes"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "subdomain"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.subdomain"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "host"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.host"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "defaults"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.defaults"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "build_only"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.build_only"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "alias"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.alias"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "websocket"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.websocket"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "methods"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.methods"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "endpoint"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.endpoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "redirect_to"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.redirect_to"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "arguments"
+    fully_qualified_name: "werkzeug.routing.rules.Rule.arguments"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "_converters"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._converters"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,werkzeug.routing.converters.BaseConverter]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+        fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_trace"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._trace"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.bool,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.bool,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_parts"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._parts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.routing.rules.RulePart]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.RulePart"
+        fully_qualified_name: "werkzeug.routing.rules.RulePart"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_build"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._build"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "_build_unknown"
+    fully_qualified_name: "werkzeug.routing.rules.Rule._build_unknown"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "_find"
+  fully_qualified_name: "werkzeug.routing.rules._find"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "target"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pos"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_pythonize"
+  fully_qualified_name: "werkzeug.routing.rules._pythonize"
+  return_annotation {
+    pretty_printed_name: "Union[None,builtins.bool,builtins.int,builtins.float,builtins.str]"
+    kind: UNION
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "parse_converter_args"
+  fully_qualified_name: "werkzeug.routing.rules.parse_converter_args"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.tuple[Any],builtins.dict[builtins.str,Any]]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "argstr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_prefix_names"
+  fully_qualified_name: "werkzeug.routing.rules._prefix_names"
+  return_annotation {
+    pretty_printed_name: "_ast.stmt"
+    fully_qualified_name: "_ast.stmt"
+  }
+  parameters {
+    name: "src"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.routing.rules.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_part_re"
+  fully_qualified_name: "werkzeug.routing.rules._part_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_simple_rule_re"
+  fully_qualified_name: "werkzeug.routing.rules._simple_rule_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_converter_args_re"
+  fully_qualified_name: "werkzeug.routing.rules._converter_args_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_PYTHON_CONSTANTS"
+  fully_qualified_name: "werkzeug.routing.rules._PYTHON_CONSTANTS"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Union[builtins.bool,None]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_CALL_CONVERTER_CODE_FMT"
+  fully_qualified_name: "werkzeug.routing.rules._CALL_CONVERTER_CODE_FMT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_IF_KWARGS_URL_ENCODE_CODE"
+  fully_qualified_name: "werkzeug.routing.rules._IF_KWARGS_URL_ENCODE_CODE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_IF_KWARGS_URL_ENCODE_AST"
+  fully_qualified_name: "werkzeug.routing.rules._IF_KWARGS_URL_ENCODE_AST"
+  type_annotation {
+    pretty_printed_name: "_ast.stmt"
+    fully_qualified_name: "_ast.stmt"
+  }
+}
+vars {
+  name: "_URL_ENCODE_AST_NAMES"
+  fully_qualified_name: "werkzeug.routing.rules._URL_ENCODE_AST_NAMES"
+  type_annotation {
+    pretty_printed_name: "Tuple[_ast.stmt,_ast.stmt]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "_ast.stmt"
+      fully_qualified_name: "_ast.stmt"
+    }
+    args {
+      pretty_printed_name: "_ast.stmt"
+      fully_qualified_name: "_ast.stmt"
+    }
+  }
+}

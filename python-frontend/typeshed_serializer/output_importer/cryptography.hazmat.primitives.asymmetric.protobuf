@@ -1,0 +1,129 @@
+fully_qualified_name: "cryptography.hazmat.primitives.asymmetric"
+classes {
+  name: "AsymmetricSignatureContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "AsymmetricVerificationContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

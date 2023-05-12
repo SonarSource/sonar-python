@@ -1,0 +1,739 @@
+fully_qualified_name: "werkzeug.routing.converters"
+classes {
+  name: "ValidationError"
+  fully_qualified_name: "werkzeug.routing.converters.ValidationError"
+  super_classes: "builtins.ValueError"
+}
+classes {
+  name: "BaseConverter"
+  fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init_subclass__"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.__init_subclass__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.routing.converters.BaseConverter]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+          fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+        }
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_class_method: true
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+        fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+        fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_url"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.to_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+        fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "regex"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.regex"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "weight"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.weight"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "part_isolating"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.part_isolating"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "map"
+    fully_qualified_name: "werkzeug.routing.converters.BaseConverter.map"
+    type_annotation {
+      pretty_printed_name: "werkzeug.routing.map.Map"
+      fully_qualified_name: "werkzeug.routing.map.Map"
+    }
+  }
+}
+classes {
+  name: "UnicodeConverter"
+  fully_qualified_name: "werkzeug.routing.converters.UnicodeConverter"
+  super_classes: "werkzeug.routing.converters.BaseConverter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.converters.UnicodeConverter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.UnicodeConverter"
+        fully_qualified_name: "werkzeug.routing.converters.UnicodeConverter"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "minlength"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "maxlength"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "AnyConverter"
+  fully_qualified_name: "werkzeug.routing.converters.AnyConverter"
+  super_classes: "werkzeug.routing.converters.BaseConverter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.converters.AnyConverter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.AnyConverter"
+        fully_qualified_name: "werkzeug.routing.converters.AnyConverter"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "items"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_url"
+    fully_qualified_name: "werkzeug.routing.converters.AnyConverter.to_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.AnyConverter"
+        fully_qualified_name: "werkzeug.routing.converters.AnyConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "items"
+    fully_qualified_name: "werkzeug.routing.converters.AnyConverter.items"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+}
+classes {
+  name: "PathConverter"
+  fully_qualified_name: "werkzeug.routing.converters.PathConverter"
+  super_classes: "werkzeug.routing.converters.BaseConverter"
+  attributes {
+    name: "regex"
+    fully_qualified_name: "werkzeug.routing.converters.PathConverter.regex"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "weight"
+    fully_qualified_name: "werkzeug.routing.converters.PathConverter.weight"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "NumberConverter"
+  fully_qualified_name: "werkzeug.routing.converters.NumberConverter"
+  super_classes: "werkzeug.routing.converters.BaseConverter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.NumberConverter"
+        fully_qualified_name: "werkzeug.routing.converters.NumberConverter"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "fixed_digits"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "min"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "max"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "signed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "to_python"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.to_python"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.NumberConverter"
+        fully_qualified_name: "werkzeug.routing.converters.NumberConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_url"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.to_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.NumberConverter"
+        fully_qualified_name: "werkzeug.routing.converters.NumberConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "signed_regex"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.signed_regex"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.NumberConverter"
+        fully_qualified_name: "werkzeug.routing.converters.NumberConverter"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "weight"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.weight"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "num_convert"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.num_convert"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "fixed_digits"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.fixed_digits"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.min"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.max"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "signed"
+    fully_qualified_name: "werkzeug.routing.converters.NumberConverter.signed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "IntegerConverter"
+  fully_qualified_name: "werkzeug.routing.converters.IntegerConverter"
+  super_classes: "werkzeug.routing.converters.NumberConverter"
+  attributes {
+    name: "regex"
+    fully_qualified_name: "werkzeug.routing.converters.IntegerConverter.regex"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "FloatConverter"
+  fully_qualified_name: "werkzeug.routing.converters.FloatConverter"
+  super_classes: "werkzeug.routing.converters.NumberConverter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.converters.FloatConverter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.FloatConverter"
+        fully_qualified_name: "werkzeug.routing.converters.FloatConverter"
+      }
+    }
+    parameters {
+      name: "map"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.map.Map"
+        fully_qualified_name: "werkzeug.routing.map.Map"
+      }
+    }
+    parameters {
+      name: "min"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "max"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "signed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "regex"
+    fully_qualified_name: "werkzeug.routing.converters.FloatConverter.regex"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "num_convert"
+    fully_qualified_name: "werkzeug.routing.converters.FloatConverter.num_convert"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+}
+classes {
+  name: "UUIDConverter"
+  fully_qualified_name: "werkzeug.routing.converters.UUIDConverter"
+  super_classes: "werkzeug.routing.converters.BaseConverter"
+  methods {
+    name: "to_python"
+    fully_qualified_name: "werkzeug.routing.converters.UUIDConverter.to_python"
+    return_annotation {
+      pretty_printed_name: "uuid.UUID"
+      fully_qualified_name: "uuid.UUID"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.UUIDConverter"
+        fully_qualified_name: "werkzeug.routing.converters.UUIDConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_url"
+    fully_qualified_name: "werkzeug.routing.converters.UUIDConverter.to_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.converters.UUIDConverter"
+        fully_qualified_name: "werkzeug.routing.converters.UUIDConverter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "uuid.UUID"
+        fully_qualified_name: "uuid.UUID"
+      }
+    }
+  }
+  attributes {
+    name: "regex"
+    fully_qualified_name: "werkzeug.routing.converters.UUIDConverter.regex"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.routing.converters.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "DEFAULT_CONVERTERS"
+  fully_qualified_name: "werkzeug.routing.converters.DEFAULT_CONVERTERS"
+  type_annotation {
+    pretty_printed_name: "typing.Mapping[builtins.str,Type[werkzeug.routing.converters.BaseConverter]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Type[werkzeug.routing.converters.BaseConverter]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.routing.converters.BaseConverter"
+        fully_qualified_name: "werkzeug.routing.converters.BaseConverter"
+      }
+    }
+    fully_qualified_name: "typing.Mapping"
+  }
+}

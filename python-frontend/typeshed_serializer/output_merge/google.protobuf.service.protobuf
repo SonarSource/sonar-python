@@ -1,0 +1,480 @@
+fully_qualified_name: "google.protobuf.service"
+classes {
+  name: "RpcException"
+  fully_qualified_name: "google.protobuf.service.RpcException"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Service"
+  fully_qualified_name: "google.protobuf.service.Service"
+  super_classes: "builtins.object"
+  methods {
+    name: "GetDescriptor"
+    fully_qualified_name: "google.protobuf.service.Service.GetDescriptor"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.ServiceDescriptor"
+      fully_qualified_name: "google.protobuf.descriptor.ServiceDescriptor"
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "CallMethod"
+    fully_qualified_name: "google.protobuf.service.Service.CallMethod"
+    return_annotation {
+      pretty_printed_name: "Union[concurrent.futures._base.Future[google.protobuf.message.Message],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[google.protobuf.message.Message]"
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.Service"
+        fully_qualified_name: "google.protobuf.service.Service"
+      }
+    }
+    parameters {
+      name: "method_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.MethodDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.MethodDescriptor"
+      }
+    }
+    parameters {
+      name: "rpc_controller"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "done"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetRequestClass"
+    fully_qualified_name: "google.protobuf.service.Service.GetRequestClass"
+    return_annotation {
+      pretty_printed_name: "Type[google.protobuf.message.Message]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.Service"
+        fully_qualified_name: "google.protobuf.service.Service"
+      }
+    }
+    parameters {
+      name: "method_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.MethodDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.MethodDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetResponseClass"
+    fully_qualified_name: "google.protobuf.service.Service.GetResponseClass"
+    return_annotation {
+      pretty_printed_name: "Type[google.protobuf.message.Message]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.Service"
+        fully_qualified_name: "google.protobuf.service.Service"
+      }
+    }
+    parameters {
+      name: "method_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.MethodDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.MethodDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "RpcController"
+  fully_qualified_name: "google.protobuf.service.RpcController"
+  super_classes: "builtins.object"
+  methods {
+    name: "Reset"
+    fully_qualified_name: "google.protobuf.service.RpcController.Reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Failed"
+    fully_qualified_name: "google.protobuf.service.RpcController.Failed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ErrorText"
+    fully_qualified_name: "google.protobuf.service.RpcController.ErrorText"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "StartCancel"
+    fully_qualified_name: "google.protobuf.service.RpcController.StartCancel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "SetFailed"
+    fully_qualified_name: "google.protobuf.service.RpcController.SetFailed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    parameters {
+      name: "reason"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "IsCanceled"
+    fully_qualified_name: "google.protobuf.service.RpcController.IsCanceled"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "NotifyOnCancel"
+    fully_qualified_name: "google.protobuf.service.RpcController.NotifyOnCancel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "RpcChannel"
+  fully_qualified_name: "google.protobuf.service.RpcChannel"
+  super_classes: "builtins.object"
+  methods {
+    name: "CallMethod"
+    fully_qualified_name: "google.protobuf.service.RpcChannel.CallMethod"
+    return_annotation {
+      pretty_printed_name: "Union[concurrent.futures._base.Future[google.protobuf.message.Message],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "concurrent.futures._base.Future[google.protobuf.message.Message]"
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcChannel"
+        fully_qualified_name: "google.protobuf.service.RpcChannel"
+      }
+    }
+    parameters {
+      name: "method_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.MethodDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.MethodDescriptor"
+      }
+    }
+    parameters {
+      name: "rpc_controller"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.service.RpcController"
+        fully_qualified_name: "google.protobuf.service.RpcController"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "response_class"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[google.protobuf.message.Message]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+    }
+    parameters {
+      name: "done"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

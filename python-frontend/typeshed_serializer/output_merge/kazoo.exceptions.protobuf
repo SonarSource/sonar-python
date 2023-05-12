@@ -1,0 +1,379 @@
+fully_qualified_name: "kazoo.exceptions"
+classes {
+  name: "KazooException"
+  fully_qualified_name: "kazoo.exceptions.KazooException"
+  super_classes: "builtins.Exception"
+  valid_for: "27"
+}
+classes {
+  name: "ZookeeperError"
+  fully_qualified_name: "kazoo.exceptions.ZookeeperError"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "CancelledError"
+  fully_qualified_name: "kazoo.exceptions.CancelledError"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "ConfigurationError"
+  fully_qualified_name: "kazoo.exceptions.ConfigurationError"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "ZookeeperStoppedError"
+  fully_qualified_name: "kazoo.exceptions.ZookeeperStoppedError"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "ConnectionDropped"
+  fully_qualified_name: "kazoo.exceptions.ConnectionDropped"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "LockTimeout"
+  fully_qualified_name: "kazoo.exceptions.LockTimeout"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "WriterNotClosedException"
+  fully_qualified_name: "kazoo.exceptions.WriterNotClosedException"
+  super_classes: "kazoo.exceptions.KazooException"
+  valid_for: "27"
+}
+classes {
+  name: "RolledBackError"
+  fully_qualified_name: "kazoo.exceptions.RolledBackError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "SystemZookeeperError"
+  fully_qualified_name: "kazoo.exceptions.SystemZookeeperError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "RuntimeInconsistency"
+  fully_qualified_name: "kazoo.exceptions.RuntimeInconsistency"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "DataInconsistency"
+  fully_qualified_name: "kazoo.exceptions.DataInconsistency"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "ConnectionLoss"
+  fully_qualified_name: "kazoo.exceptions.ConnectionLoss"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "MarshallingError"
+  fully_qualified_name: "kazoo.exceptions.MarshallingError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "UnimplementedError"
+  fully_qualified_name: "kazoo.exceptions.UnimplementedError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "OperationTimeoutError"
+  fully_qualified_name: "kazoo.exceptions.OperationTimeoutError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "BadArgumentsError"
+  fully_qualified_name: "kazoo.exceptions.BadArgumentsError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NewConfigNoQuorumError"
+  fully_qualified_name: "kazoo.exceptions.NewConfigNoQuorumError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "ReconfigInProcessError"
+  fully_qualified_name: "kazoo.exceptions.ReconfigInProcessError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "APIError"
+  fully_qualified_name: "kazoo.exceptions.APIError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NoNodeError"
+  fully_qualified_name: "kazoo.exceptions.NoNodeError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NoAuthError"
+  fully_qualified_name: "kazoo.exceptions.NoAuthError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "BadVersionError"
+  fully_qualified_name: "kazoo.exceptions.BadVersionError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NoChildrenForEphemeralsError"
+  fully_qualified_name: "kazoo.exceptions.NoChildrenForEphemeralsError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NodeExistsError"
+  fully_qualified_name: "kazoo.exceptions.NodeExistsError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NotEmptyError"
+  fully_qualified_name: "kazoo.exceptions.NotEmptyError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "SessionExpiredError"
+  fully_qualified_name: "kazoo.exceptions.SessionExpiredError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "InvalidCallbackError"
+  fully_qualified_name: "kazoo.exceptions.InvalidCallbackError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "InvalidACLError"
+  fully_qualified_name: "kazoo.exceptions.InvalidACLError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "AuthFailedError"
+  fully_qualified_name: "kazoo.exceptions.AuthFailedError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "SessionMovedError"
+  fully_qualified_name: "kazoo.exceptions.SessionMovedError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "NotReadOnlyCallError"
+  fully_qualified_name: "kazoo.exceptions.NotReadOnlyCallError"
+  super_classes: "kazoo.exceptions.ZookeeperError"
+  valid_for: "27"
+}
+classes {
+  name: "ConnectionClosedError"
+  fully_qualified_name: "kazoo.exceptions.ConnectionClosedError"
+  super_classes: "kazoo.exceptions.SessionExpiredError"
+  valid_for: "27"
+}
+vars {
+  name: "EXCEPTIONS"
+  fully_qualified_name: "kazoo.exceptions.EXCEPTIONS"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ConnectionLossException"
+  fully_qualified_name: "kazoo.exceptions.ConnectionLossException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "MarshallingErrorException"
+  fully_qualified_name: "kazoo.exceptions.MarshallingErrorException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SystemErrorException"
+  fully_qualified_name: "kazoo.exceptions.SystemErrorException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "RuntimeInconsistencyException"
+  fully_qualified_name: "kazoo.exceptions.RuntimeInconsistencyException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "DataInconsistencyException"
+  fully_qualified_name: "kazoo.exceptions.DataInconsistencyException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "UnimplementedException"
+  fully_qualified_name: "kazoo.exceptions.UnimplementedException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "OperationTimeoutException"
+  fully_qualified_name: "kazoo.exceptions.OperationTimeoutException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "BadArgumentsException"
+  fully_qualified_name: "kazoo.exceptions.BadArgumentsException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ApiErrorException"
+  fully_qualified_name: "kazoo.exceptions.ApiErrorException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NoNodeException"
+  fully_qualified_name: "kazoo.exceptions.NoNodeException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NoAuthException"
+  fully_qualified_name: "kazoo.exceptions.NoAuthException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "BadVersionException"
+  fully_qualified_name: "kazoo.exceptions.BadVersionException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NoChildrenForEphemeralsException"
+  fully_qualified_name: "kazoo.exceptions.NoChildrenForEphemeralsException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NodeExistsException"
+  fully_qualified_name: "kazoo.exceptions.NodeExistsException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "InvalidACLException"
+  fully_qualified_name: "kazoo.exceptions.InvalidACLException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "AuthFailedException"
+  fully_qualified_name: "kazoo.exceptions.AuthFailedException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "NotEmptyException"
+  fully_qualified_name: "kazoo.exceptions.NotEmptyException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "SessionExpiredException"
+  fully_qualified_name: "kazoo.exceptions.SessionExpiredException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "InvalidCallbackException"
+  fully_qualified_name: "kazoo.exceptions.InvalidCallbackException"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

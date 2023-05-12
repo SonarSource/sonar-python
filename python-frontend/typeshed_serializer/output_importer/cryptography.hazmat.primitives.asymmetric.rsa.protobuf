@@ -1,0 +1,1169 @@
+fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa"
+classes {
+  name: "RSAPrivateKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "signer"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.signer"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "decrypt"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.decrypt"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "ciphertext"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.hazmat.primitives.hashes.HashAlgorithm]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "private_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "RSAPublicKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "verifier"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.verifier"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "encrypt"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    parameters {
+      name: "plaintext"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.hazmat.primitives.hashes.HashAlgorithm]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "recover_data_from_signature"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.recover_data_from_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "RSAPrivateNumbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "d"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "dmp1"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "dmq1"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "iqmp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "public_numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      }
+    }
+  }
+  methods {
+    name: "private_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.__ne__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.__hash__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "p"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.p"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "q"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.q"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "d"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.d"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "dmp1"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.dmp1"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "dmq1"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.dmq1"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "iqmp"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.iqmp"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers.public_numbers"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "_p"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._p"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_q"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._q"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_d"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._d"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_dmp1"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._dmp1"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_dmq1"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._dmq1"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_iqmp"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._iqmp"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateNumbers._public_numbers"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+    }
+  }
+}
+classes {
+  name: "RSAPublicNumbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      }
+    }
+    parameters {
+      name: "e"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.__ne__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.__hash__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "e"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.e"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "n"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers.n"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "_e"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers._e"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_n"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicNumbers._n"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "generate_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+  }
+  parameters {
+    name: "public_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "key_size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "_verify_rsa_parameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa._verify_rsa_parameters"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "public_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "key_size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_check_private_key_components"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa._check_private_key_components"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "q"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "private_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "dmp1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "dmq1"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "iqmp"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "public_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "modulus"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_check_public_key_components"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa._check_public_key_components"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "e"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "n"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_modinv"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa._modinv"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "e"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "m"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "rsa_crt_iqmp"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.rsa_crt_iqmp"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "q"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "rsa_crt_dmp1"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.rsa_crt_dmp1"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "private_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "p"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "rsa_crt_dmq1"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.rsa_crt_dmq1"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "private_exponent"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "q"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "rsa_recover_prime_factors"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.rsa_recover_prime_factors"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "n"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "e"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "d"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "asym_utils"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils"
+  is_imported_module: true
+}
+vars {
+  name: "_MAX_RECOVERY_ATTEMPTS"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa._MAX_RECOVERY_ATTEMPTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

@@ -1,0 +1,1187 @@
+fully_qualified_name: "http.server"
+classes {
+  name: "HTTPServer"
+  fully_qualified_name: "http.server.HTTPServer"
+  super_classes: "socketserver.TCPServer"
+  attributes {
+    name: "server_name"
+    fully_qualified_name: "http.server.HTTPServer.server_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "server_port"
+    fully_qualified_name: "http.server.HTTPServer.server_port"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "ThreadingHTTPServer"
+  fully_qualified_name: "http.server.ThreadingHTTPServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "http.server.HTTPServer"
+}
+classes {
+  name: "BaseHTTPRequestHandler"
+  fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+  super_classes: "socketserver.StreamRequestHandler"
+  methods {
+    name: "handle_one_request"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.handle_one_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "handle_expect_100"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.handle_expect_100"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "send_error"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.send_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "explain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "send_response"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.send_response"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "send_header"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.send_header"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "keyword"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "send_response_only"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.send_response_only"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "end_headers"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.end_headers"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "flush_headers"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.flush_headers"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "log_request"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.log_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  methods {
+    name: "log_error"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.log_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "log_message"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.log_message"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "version_string"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.version_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "date_time_string"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.date_time_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "timestamp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "log_date_time_string"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.log_date_time_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "address_string"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.address_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "parse_request"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.parse_request"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.BaseHTTPRequestHandler"
+        fully_qualified_name: "http.server.BaseHTTPRequestHandler"
+      }
+    }
+  }
+  attributes {
+    name: "client_address"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.client_address"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "close_connection"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.close_connection"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "requestline"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.requestline"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "command"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.command"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "request_version"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.request_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.headers"
+    type_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+  }
+  attributes {
+    name: "server_version"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.server_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "sys_version"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.sys_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "error_message_format"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.error_message_format"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "error_content_type"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.error_content_type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "protocol_version"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.protocol_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "MessageClass"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.MessageClass"
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  attributes {
+    name: "responses"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.responses"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.int,Tuple[builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  attributes {
+    name: "default_request_version"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.default_request_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "weekdayname"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.weekdayname"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  attributes {
+    name: "monthname"
+    fully_qualified_name: "http.server.BaseHTTPRequestHandler.monthname"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[Union[builtins.str,None]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+classes {
+  name: "SimpleHTTPRequestHandler"
+  fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+  super_classes: "http.server.BaseHTTPRequestHandler"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "server"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "directory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "do_GET"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.do_GET"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "do_HEAD"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.do_HEAD"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "send_head"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.send_head"
+    return_annotation {
+      pretty_printed_name: "Union[io.BytesIO,typing.BinaryIO,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+      args {
+        pretty_printed_name: "typing.BinaryIO"
+        fully_qualified_name: "typing.BinaryIO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "list_directory"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.list_directory"
+    return_annotation {
+      pretty_printed_name: "Union[io.BytesIO,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "io.BytesIO"
+        fully_qualified_name: "io.BytesIO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  methods {
+    name: "translate_path"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.translate_path"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "copyfile"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.copyfile"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRead[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    parameters {
+      name: "outputfile"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[typing.AnyStr]"
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+  }
+  methods {
+    name: "guess_type"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.guess_type"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.SimpleHTTPRequestHandler"
+        fully_qualified_name: "http.server.SimpleHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  attributes {
+    name: "extensions_map"
+    fully_qualified_name: "http.server.SimpleHTTPRequestHandler.extensions_map"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "CGIHTTPRequestHandler"
+  fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+  super_classes: "http.server.SimpleHTTPRequestHandler"
+  methods {
+    name: "do_POST"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.do_POST"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.CGIHTTPRequestHandler"
+        fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "is_cgi"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.is_cgi"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.CGIHTTPRequestHandler"
+        fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "is_executable"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.is_executable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.CGIHTTPRequestHandler"
+        fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  methods {
+    name: "is_python"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.is_python"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.CGIHTTPRequestHandler"
+        fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  methods {
+    name: "run_cgi"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.run_cgi"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.server.CGIHTTPRequestHandler"
+        fully_qualified_name: "http.server.CGIHTTPRequestHandler"
+      }
+    }
+  }
+  attributes {
+    name: "cgi_directories"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.cgi_directories"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "have_fork"
+    fully_qualified_name: "http.server.CGIHTTPRequestHandler.have_fork"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "executable"
+  fully_qualified_name: "http.server.executable"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "_typeshed.StrPath"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "http.server.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "email"
+  fully_qualified_name: "email"
+  is_imported_module: true
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "http.server.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

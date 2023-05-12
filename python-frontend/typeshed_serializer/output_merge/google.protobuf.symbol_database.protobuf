@@ -1,0 +1,276 @@
+fully_qualified_name: "google.protobuf.symbol_database"
+classes {
+  name: "SymbolDatabase"
+  fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+  super_classes: "google.protobuf.message_factory.MessageFactory"
+  methods {
+    name: "RegisterMessage"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.RegisterMessage"
+    return_annotation {
+      pretty_printed_name: "Union[Type[google.protobuf.message.Message],google.protobuf.message.Message]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[google.protobuf.message.Message]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+      args {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[google.protobuf.message.Message],google.protobuf.message.Message]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[google.protobuf.message.Message]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "google.protobuf.message.Message"
+            fully_qualified_name: "google.protobuf.message.Message"
+          }
+        }
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "RegisterMessageDescriptor"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.RegisterMessageDescriptor"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "message_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+        fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "RegisterEnumDescriptor"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.RegisterEnumDescriptor"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+      fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "enum_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "RegisterServiceDescriptor"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.RegisterServiceDescriptor"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "service_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.ServiceDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.ServiceDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "RegisterFileDescriptor"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.RegisterFileDescriptor"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "file_descriptor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.FileDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.FileDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetSymbol"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.GetSymbol"
+    return_annotation {
+      pretty_printed_name: "Type[google.protobuf.message.Message]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "symbol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetMessages"
+    fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase.GetMessages"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Type[google.protobuf.message.Message]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Type[google.protobuf.message.Message]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.symbol_database.SymbolDatabase"
+        fully_qualified_name: "google.protobuf.symbol_database.SymbolDatabase"
+      }
+    }
+    parameters {
+      name: "files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Default"
+  fully_qualified_name: "google.protobuf.symbol_database.Default"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

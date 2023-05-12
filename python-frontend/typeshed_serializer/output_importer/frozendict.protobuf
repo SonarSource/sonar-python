@@ -1,0 +1,548 @@
+fully_qualified_name: "frozendict"
+classes {
+  name: "frozendict"
+  fully_qualified_name: "frozendict.frozendict"
+  super_classes: "typing.Mapping"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "frozendict.frozendict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "frozendict.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "frozendict.frozendict.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "frozendict.frozendict.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[frozendict.K]"
+      args {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "frozendict.frozendict.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__reversed__"
+    fully_qualified_name: "frozendict.frozendict.__reversed__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[frozendict.K]"
+      args {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "frozendict.frozendict.copy"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "frozendict.frozendict.__copy__"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "frozendict.frozendict.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "set"
+    fully_qualified_name: "frozendict.frozendict.set"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "frozendict.frozendict.setdefault"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "delete"
+    fully_qualified_name: "frozendict.frozendict.delete"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "key"
+    fully_qualified_name: "frozendict.frozendict.key"
+    return_annotation {
+      pretty_printed_name: "frozendict.K"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "frozendict.frozendict.value"
+    return_annotation {
+      pretty_printed_name: "frozendict.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "item"
+    fully_qualified_name: "frozendict.frozendict.item"
+    return_annotation {
+      pretty_printed_name: "Tuple[frozendict.K,frozendict.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "frozendict.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "frozendict.V"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "frozendict.frozendict.__or__"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[frozendict.K,frozendict.V]"
+        args {
+          pretty_printed_name: "frozendict.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "frozendict.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "fromkeys"
+    fully_qualified_name: "frozendict.frozendict.fromkeys"
+    return_annotation {
+      pretty_printed_name: "frozendict.SelfT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[frozendict.SelfT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "frozendict.SelfT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[frozendict.K]"
+        args {
+          pretty_printed_name: "frozendict.K"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[frozendict.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "frozendict.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "frozendict.frozendict.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "frozendict.frozendict.__new__"
+      return_annotation {
+        pretty_printed_name: "frozendict.frozendict[builtins.str,frozendict.V]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "frozendict.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "frozendict.frozendict"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[frozendict.SelfT]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "frozendict.SelfT"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "frozendict.V"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "frozendict.frozendict.__new__"
+      return_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[frozendict.SelfT]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "frozendict.SelfT"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      parameters {
+        name: "mapping"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Mapping[frozendict.K,frozendict.V]"
+          args {
+            pretty_printed_name: "frozendict.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "frozendict.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "frozendict.frozendict.__new__"
+      return_annotation {
+        pretty_printed_name: "frozendict.SelfT"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[frozendict.SelfT]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "frozendict.SelfT"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Tuple[frozendict.K,frozendict.V]]"
+          args {
+            pretty_printed_name: "Tuple[frozendict.K,frozendict.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "frozendict.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "frozendict.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "frozendict.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "frozendict.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

@@ -1,0 +1,267 @@
+fully_qualified_name: "singledispatch"
+classes {
+  name: "_SingleDispatchCallable"
+  fully_qualified_name: "singledispatch._SingleDispatchCallable"
+  super_classes: "builtins.object"
+  methods {
+    name: "dispatch"
+    fully_qualified_name: "singledispatch._SingleDispatchCallable.dispatch"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+        args {
+          pretty_printed_name: "singledispatch._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "singledispatch._SingleDispatchCallable"
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "_clear_cache"
+    fully_qualified_name: "singledispatch._SingleDispatchCallable._clear_cache"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+        args {
+          pretty_printed_name: "singledispatch._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "singledispatch._SingleDispatchCallable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "singledispatch._SingleDispatchCallable.__call__"
+    return_annotation {
+      pretty_printed_name: "singledispatch._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+        args {
+          pretty_printed_name: "singledispatch._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "singledispatch._SingleDispatchCallable"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "register"
+    fullname: "singledispatch._SingleDispatchCallable.register"
+    definitions {
+      name: "register"
+      fully_qualified_name: "singledispatch._SingleDispatchCallable.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+          args {
+            pretty_printed_name: "singledispatch._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "singledispatch._SingleDispatchCallable"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "register"
+      fully_qualified_name: "singledispatch._SingleDispatchCallable.register"
+      return_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+          args {
+            pretty_printed_name: "singledispatch._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "singledispatch._SingleDispatchCallable"
+        }
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "registry"
+    fully_qualified_name: "singledispatch._SingleDispatchCallable.registry"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[Any,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "singledispatch"
+  fully_qualified_name: "singledispatch.singledispatch"
+  return_annotation {
+    pretty_printed_name: "singledispatch._SingleDispatchCallable[singledispatch._T]"
+    args {
+      pretty_printed_name: "singledispatch._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "singledispatch._SingleDispatchCallable"
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

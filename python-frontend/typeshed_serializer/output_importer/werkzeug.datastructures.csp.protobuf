@@ -1,0 +1,2323 @@
+fully_qualified_name: "werkzeug.datastructures.csp"
+classes {
+  name: "ContentSecurityPolicy"
+  fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+  super_classes: "werkzeug.datastructures.mixins.UpdateDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,builtins.str],typing.Iterable[Tuple[builtins.str,builtins.str]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[builtins.str,builtins.str]]"
+          args {
+            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    parameters {
+      name: "on_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_get_value"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy._get_value"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_set_value"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy._set_value"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_del_value"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy._del_value"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_header"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.to_header"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "base_uri"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.base_uri"
+    definitions {
+      name: "base_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.base_uri"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "base_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.base_uri"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "base_uri.setter"
+    }
+    definitions {
+      name: "base_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.base_uri"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "base_uri.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "child_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.child_src"
+    definitions {
+      name: "child_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.child_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "child_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.child_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "child_src.setter"
+    }
+    definitions {
+      name: "child_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.child_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "child_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "connect_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.connect_src"
+    definitions {
+      name: "connect_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.connect_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "connect_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.connect_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "connect_src.setter"
+    }
+    definitions {
+      name: "connect_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.connect_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "connect_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "default_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.default_src"
+    definitions {
+      name: "default_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.default_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "default_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.default_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "default_src.setter"
+    }
+    definitions {
+      name: "default_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.default_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "default_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "font_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.font_src"
+    definitions {
+      name: "font_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.font_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "font_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.font_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "font_src.setter"
+    }
+    definitions {
+      name: "font_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.font_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "font_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "form_action"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.form_action"
+    definitions {
+      name: "form_action"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.form_action"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "form_action"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.form_action"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "form_action.setter"
+    }
+    definitions {
+      name: "form_action"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.form_action"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "form_action.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "frame_ancestors"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_ancestors"
+    definitions {
+      name: "frame_ancestors"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_ancestors"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "frame_ancestors"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_ancestors"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "frame_ancestors.setter"
+    }
+    definitions {
+      name: "frame_ancestors"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_ancestors"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "frame_ancestors.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "frame_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_src"
+    definitions {
+      name: "frame_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "frame_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "frame_src.setter"
+    }
+    definitions {
+      name: "frame_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.frame_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "frame_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "img_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.img_src"
+    definitions {
+      name: "img_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.img_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "img_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.img_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "img_src.setter"
+    }
+    definitions {
+      name: "img_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.img_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "img_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "manifest_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.manifest_src"
+    definitions {
+      name: "manifest_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.manifest_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "manifest_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.manifest_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "manifest_src.setter"
+    }
+    definitions {
+      name: "manifest_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.manifest_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "manifest_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "media_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.media_src"
+    definitions {
+      name: "media_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.media_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "media_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.media_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "media_src.setter"
+    }
+    definitions {
+      name: "media_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.media_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "media_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "navigate_to"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.navigate_to"
+    definitions {
+      name: "navigate_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.navigate_to"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "navigate_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.navigate_to"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "navigate_to.setter"
+    }
+    definitions {
+      name: "navigate_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.navigate_to"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "navigate_to.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "object_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.object_src"
+    definitions {
+      name: "object_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.object_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "object_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.object_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "object_src.setter"
+    }
+    definitions {
+      name: "object_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.object_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "object_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "prefetch_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.prefetch_src"
+    definitions {
+      name: "prefetch_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.prefetch_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "prefetch_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.prefetch_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "prefetch_src.setter"
+    }
+    definitions {
+      name: "prefetch_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.prefetch_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "prefetch_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "plugin_types"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.plugin_types"
+    definitions {
+      name: "plugin_types"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.plugin_types"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "plugin_types"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.plugin_types"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "plugin_types.setter"
+    }
+    definitions {
+      name: "plugin_types"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.plugin_types"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "plugin_types.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "report_to"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_to"
+    definitions {
+      name: "report_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_to"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "report_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_to"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "report_to.setter"
+    }
+    definitions {
+      name: "report_to"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_to"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "report_to.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "report_uri"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_uri"
+    definitions {
+      name: "report_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_uri"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "report_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_uri"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "report_uri.setter"
+    }
+    definitions {
+      name: "report_uri"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.report_uri"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "report_uri.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "sandbox"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.sandbox"
+    definitions {
+      name: "sandbox"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.sandbox"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "sandbox"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.sandbox"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "sandbox.setter"
+    }
+    definitions {
+      name: "sandbox"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.sandbox"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "sandbox.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "script_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src"
+    definitions {
+      name: "script_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "script_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src.setter"
+    }
+    definitions {
+      name: "script_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "script_src_attr"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_attr"
+    definitions {
+      name: "script_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_attr"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "script_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_attr"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src_attr.setter"
+    }
+    definitions {
+      name: "script_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_attr"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src_attr.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "script_src_elem"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_elem"
+    definitions {
+      name: "script_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_elem"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "script_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_elem"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src_elem.setter"
+    }
+    definitions {
+      name: "script_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.script_src_elem"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "script_src_elem.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "style_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src"
+    definitions {
+      name: "style_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "style_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src.setter"
+    }
+    definitions {
+      name: "style_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "style_src_attr"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_attr"
+    definitions {
+      name: "style_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_attr"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "style_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_attr"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src_attr.setter"
+    }
+    definitions {
+      name: "style_src_attr"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_attr"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src_attr.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "style_src_elem"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_elem"
+    definitions {
+      name: "style_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_elem"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "style_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_elem"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src_elem.setter"
+    }
+    definitions {
+      name: "style_src_elem"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.style_src_elem"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "style_src_elem.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "worker_src"
+    fullname: "werkzeug.datastructures.csp.ContentSecurityPolicy.worker_src"
+    definitions {
+      name: "worker_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.worker_src"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "worker_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.worker_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "worker_src.setter"
+    }
+    definitions {
+      name: "worker_src"
+      fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.worker_src"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+          fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "worker_src.deleter"
+    }
+  }
+  attributes {
+    name: "provided"
+    fully_qualified_name: "werkzeug.datastructures.csp.ContentSecurityPolicy.provided"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "csp_property"
+  fully_qualified_name: "werkzeug.datastructures.csp.csp_property"
+  return_annotation {
+    pretty_printed_name: "builtins.property"
+    fully_qualified_name: "builtins.property"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.datastructures.csp.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

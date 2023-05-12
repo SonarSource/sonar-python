@@ -1,0 +1,140 @@
+fully_qualified_name: "cryptography.x509.certificate_transparency"
+classes {
+  name: "LogEntryType"
+  fully_qualified_name: "cryptography.x509.certificate_transparency.LogEntryType"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "X509_CERTIFICATE"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.LogEntryType.X509_CERTIFICATE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "PRE_CERTIFICATE"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.LogEntryType.PRE_CERTIFICATE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "Version"
+  fully_qualified_name: "cryptography.x509.certificate_transparency.Version"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "v1"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.Version.v1"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SignedCertificateTimestamp"
+  fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+  super_classes: "builtins.object"
+  methods {
+    name: "version"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp.version"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.certificate_transparency.Version"
+      fully_qualified_name: "cryptography.x509.certificate_transparency.Version"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+        fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "log_id"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp.log_id"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+        fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "timestamp"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp.timestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+        fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "entry_type"
+    fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp.entry_type"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.certificate_transparency.LogEntryType"
+      fully_qualified_name: "cryptography.x509.certificate_transparency.LogEntryType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+        fully_qualified_name: "cryptography.x509.certificate_transparency.SignedCertificateTimestamp"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.x509.certificate_transparency.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "rust_x509"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509"
+  is_imported_module: true
+}

@@ -1,0 +1,139 @@
+fully_qualified_name: "importlib_metadata._adapters"
+classes {
+  name: "Message"
+  fully_qualified_name: "importlib_metadata._adapters.Message"
+  super_classes: "email.message.Message"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "importlib_metadata._adapters.Message.__new__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib_metadata._adapters.Message]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib_metadata._adapters.Message"
+          fully_qualified_name: "importlib_metadata._adapters.Message"
+        }
+      }
+    }
+    parameters {
+      name: "orig"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "email.message.Message"
+        fully_qualified_name: "email.message.Message"
+      }
+    }
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib_metadata._adapters.Message.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "importlib_metadata._adapters.Message.__iter__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "importlib_metadata._adapters.Message.__getitem__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "_repair_headers"
+    fully_qualified_name: "importlib_metadata._adapters.Message._repair_headers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "json"
+    fully_qualified_name: "importlib_metadata._adapters.Message.json"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "multiple_use_keys"
+    fully_qualified_name: "importlib_metadata._adapters.Message.multiple_use_keys"
+    type_annotation {
+      pretty_printed_name: "builtins.set[importlib_metadata._text.FoldedCase]"
+      args {
+        pretty_printed_name: "importlib_metadata._text.FoldedCase"
+        fully_qualified_name: "importlib_metadata._text.FoldedCase"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "_headers"
+    fully_qualified_name: "importlib_metadata._adapters.Message._headers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "importlib_metadata._adapters.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "email"
+  fully_qualified_name: "email"
+  is_imported_module: true
+}
+vars {
+  name: "_warn"
+  fully_qualified_name: "importlib_metadata._adapters._warn"
+  type_annotation {
+    pretty_printed_name: "functools.partial[None]"
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "functools.partial"
+  }
+}

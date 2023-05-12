@@ -1,0 +1,423 @@
+fully_qualified_name: "cryptography.hazmat.primitives.serialization"
+functions {
+  name: "load_der_parameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_der_parameters"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_der_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_der_private_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_der_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_der_public_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_parameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_pem_parameters"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dh.DHParameters"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_pem_private_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.base.load_pem_public_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_ssh_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.load_ssh_private_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PRIVATE_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_ssh_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.load_ssh_public_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

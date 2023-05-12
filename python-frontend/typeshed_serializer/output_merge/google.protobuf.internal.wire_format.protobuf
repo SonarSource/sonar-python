@@ -1,0 +1,711 @@
+fully_qualified_name: "google.protobuf.internal.wire_format"
+functions {
+  name: "PackTag"
+  fully_qualified_name: "google.protobuf.internal.wire_format.PackTag"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "wire_type"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "UnpackTag"
+  fully_qualified_name: "google.protobuf.internal.wire_format.UnpackTag"
+  parameters {
+    name: "tag"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ZigZagEncode"
+  fully_qualified_name: "google.protobuf.internal.wire_format.ZigZagEncode"
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ZigZagDecode"
+  fully_qualified_name: "google.protobuf.internal.wire_format.ZigZagDecode"
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Int32ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.Int32ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "int32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Int32ByteSizeNoTag"
+  fully_qualified_name: "google.protobuf.internal.wire_format.Int32ByteSizeNoTag"
+  parameters {
+    name: "int32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Int64ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.Int64ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "int64"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "UInt32ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.UInt32ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "uint32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "UInt64ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.UInt64ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "uint64"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SInt32ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.SInt32ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "int32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SInt64ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.SInt64ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "int64"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Fixed32ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.Fixed32ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "fixed32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "Fixed64ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.Fixed64ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "fixed64"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SFixed32ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.SFixed32ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "sfixed32"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "SFixed64ByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.SFixed64ByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "sfixed64"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "FloatByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.FloatByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "flt"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "DoubleByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.DoubleByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "double"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "BoolByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.BoolByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "EnumByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.EnumByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "enum"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "StringByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.StringByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "BytesByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.BytesByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "b"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "GroupByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.GroupByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "MessageByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.MessageByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "MessageSetItemByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.MessageSetItemByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "TagByteSize"
+  fully_qualified_name: "google.protobuf.internal.wire_format.TagByteSize"
+  parameters {
+    name: "field_number"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "IsTypePackable"
+  fully_qualified_name: "google.protobuf.internal.wire_format.IsTypePackable"
+  parameters {
+    name: "field_type"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TAG_TYPE_BITS"
+  fully_qualified_name: "google.protobuf.internal.wire_format.TAG_TYPE_BITS"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "TAG_TYPE_MASK"
+  fully_qualified_name: "google.protobuf.internal.wire_format.TAG_TYPE_MASK"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_VARINT"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_VARINT"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_FIXED64"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_FIXED64"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_LENGTH_DELIMITED"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_LENGTH_DELIMITED"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_START_GROUP"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_START_GROUP"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_END_GROUP"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_END_GROUP"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "WIRETYPE_FIXED32"
+  fully_qualified_name: "google.protobuf.internal.wire_format.WIRETYPE_FIXED32"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INT32_MAX"
+  fully_qualified_name: "google.protobuf.internal.wire_format.INT32_MAX"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INT32_MIN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.INT32_MIN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "UINT32_MAX"
+  fully_qualified_name: "google.protobuf.internal.wire_format.UINT32_MAX"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INT64_MAX"
+  fully_qualified_name: "google.protobuf.internal.wire_format.INT64_MAX"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "INT64_MIN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.INT64_MIN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "UINT64_MAX"
+  fully_qualified_name: "google.protobuf.internal.wire_format.UINT64_MAX"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FORMAT_UINT32_LITTLE_ENDIAN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.FORMAT_UINT32_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FORMAT_UINT64_LITTLE_ENDIAN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.FORMAT_UINT64_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FORMAT_FLOAT_LITTLE_ENDIAN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.FORMAT_FLOAT_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "FORMAT_DOUBLE_LITTLE_ENDIAN"
+  fully_qualified_name: "google.protobuf.internal.wire_format.FORMAT_DOUBLE_LITTLE_ENDIAN"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NON_PACKABLE_TYPES"
+  fully_qualified_name: "google.protobuf.internal.wire_format.NON_PACKABLE_TYPES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

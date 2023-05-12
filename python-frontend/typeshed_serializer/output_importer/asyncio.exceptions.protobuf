@@ -1,0 +1,183 @@
+fully_qualified_name: "asyncio.exceptions"
+classes {
+  name: "CancelledError"
+  fully_qualified_name: "asyncio.exceptions.CancelledError"
+  super_classes: "builtins.BaseException"
+}
+classes {
+  name: "TimeoutError"
+  fully_qualified_name: "asyncio.exceptions.TimeoutError"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "InvalidStateError"
+  fully_qualified_name: "asyncio.exceptions.InvalidStateError"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "SendfileNotAvailableError"
+  fully_qualified_name: "asyncio.exceptions.SendfileNotAvailableError"
+  super_classes: "builtins.RuntimeError"
+}
+classes {
+  name: "IncompleteReadError"
+  fully_qualified_name: "asyncio.exceptions.IncompleteReadError"
+  super_classes: "builtins.EOFError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.exceptions.IncompleteReadError"
+        fully_qualified_name: "asyncio.exceptions.IncompleteReadError"
+      }
+    }
+    parameters {
+      name: "partial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "expected"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "expected"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.expected"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "partial"
+    fully_qualified_name: "asyncio.exceptions.IncompleteReadError.partial"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+classes {
+  name: "LimitOverrunError"
+  fully_qualified_name: "asyncio.exceptions.LimitOverrunError"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.exceptions.LimitOverrunError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.exceptions.LimitOverrunError"
+        fully_qualified_name: "asyncio.exceptions.LimitOverrunError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "consumed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "consumed"
+    fully_qualified_name: "asyncio.exceptions.LimitOverrunError.consumed"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.exceptions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.exceptions.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

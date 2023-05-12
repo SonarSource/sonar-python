@@ -1,0 +1,728 @@
+fully_qualified_name: "multiprocessing.util"
+classes {
+  name: "Finalize"
+  fully_qualified_name: "multiprocessing.util.Finalize"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.util.Finalize.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Any]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "_typeshed.Incomplete"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exitpriority"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "multiprocessing.util.Finalize.__call__"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Any]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "_typeshed.Incomplete"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+    parameters {
+      name: "wr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    parameters {
+      name: "_finalizer_registry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.MutableMapping[TypeAlias[Any],TypeAlias[Unknown]]"
+        args {
+          pretty_printed_name: "TypeAlias[Any]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "_typeshed.Incomplete"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Unknown]"
+          kind: TYPE_ALIAS
+        }
+        fully_qualified_name: "typing.MutableMapping"
+      }
+    }
+    parameters {
+      name: "sub_debug"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "getpid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "cancel"
+    fully_qualified_name: "multiprocessing.util.Finalize.cancel"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+  }
+  methods {
+    name: "still_active"
+    fully_qualified_name: "multiprocessing.util.Finalize.still_active"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+    }
+  }
+}
+classes {
+  name: "ForkAwareThreadLock"
+  fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock"
+  super_classes: "builtins.object"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock.__enter__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.ForkAwareThreadLock"
+        fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.util.ForkAwareThreadLock"
+        fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  attributes {
+    name: "acquire"
+    fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock.acquire"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "release"
+    fully_qualified_name: "multiprocessing.util.ForkAwareThreadLock.release"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "ForkAwareLocal"
+  fully_qualified_name: "multiprocessing.util.ForkAwareLocal"
+  super_classes: "threading.local"
+}
+functions {
+  name: "sub_debug"
+  fully_qualified_name: "multiprocessing.util.sub_debug"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "debug"
+  fully_qualified_name: "multiprocessing.util.debug"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "info"
+  fully_qualified_name: "multiprocessing.util.info"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "sub_warning"
+  fully_qualified_name: "multiprocessing.util.sub_warning"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "msg"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "get_logger"
+  fully_qualified_name: "multiprocessing.util.get_logger"
+  return_annotation {
+    pretty_printed_name: "logging.Logger"
+    fully_qualified_name: "logging.Logger"
+  }
+}
+functions {
+  name: "log_to_stderr"
+  fully_qualified_name: "multiprocessing.util.log_to_stderr"
+  return_annotation {
+    pretty_printed_name: "logging.Logger"
+    fully_qualified_name: "logging.Logger"
+  }
+  parameters {
+    name: "level"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[builtins.int,builtins.str]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "logging._Level"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "is_abstract_socket_namespace"
+  fully_qualified_name: "multiprocessing.util.is_abstract_socket_namespace"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "address"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "get_temp_dir"
+  fully_qualified_name: "multiprocessing.util.get_temp_dir"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+functions {
+  name: "register_after_fork"
+  fully_qualified_name: "multiprocessing.util.register_after_fork"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Any]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "_typeshed.Incomplete"
+    }
+  }
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "is_exiting"
+  fully_qualified_name: "multiprocessing.util.is_exiting"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+functions {
+  name: "close_all_fds_except"
+  fully_qualified_name: "multiprocessing.util.close_all_fds_except"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "fds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "spawnv_passfds"
+  fully_qualified_name: "multiprocessing.util.spawnv_passfds"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],typing.SupportsInt,typing_extensions.SupportsIndex,_typeshed.SupportsTrunc]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],typing.SupportsInt,typing_extensions.SupportsIndex,_typeshed.SupportsTrunc]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+        args {
+          pretty_printed_name: "typing.SupportsInt"
+          fully_qualified_name: "typing.SupportsInt"
+        }
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "_typeshed.SupportsTrunc"
+          fully_qualified_name: "_typeshed.SupportsTrunc"
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+  parameters {
+    name: "passfds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "multiprocessing.util.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.util.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "NOTSET"
+  fully_qualified_name: "multiprocessing.util.NOTSET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SUBDEBUG"
+  fully_qualified_name: "multiprocessing.util.SUBDEBUG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "DEBUG"
+  fully_qualified_name: "multiprocessing.util.DEBUG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "INFO"
+  fully_qualified_name: "multiprocessing.util.INFO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "SUBWARNING"
+  fully_qualified_name: "multiprocessing.util.SUBWARNING"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "LOGGER_NAME"
+  fully_qualified_name: "multiprocessing.util.LOGGER_NAME"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "DEFAULT_LOGGING_FORMAT"
+  fully_qualified_name: "multiprocessing.util.DEFAULT_LOGGING_FORMAT"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "abstract_sockets_supported"
+  fully_qualified_name: "multiprocessing.util.abstract_sockets_supported"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "MAXFD"
+  fully_qualified_name: "multiprocessing.util.MAXFD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

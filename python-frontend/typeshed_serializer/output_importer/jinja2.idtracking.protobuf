@@ -1,0 +1,1465 @@
+fully_qualified_name: "jinja2.idtracking"
+classes {
+  name: "Symbols"
+  fully_qualified_name: "jinja2.idtracking.Symbols"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.idtracking.Symbols.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.idtracking.Symbols,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.idtracking.Symbols"
+          fully_qualified_name: "jinja2.idtracking.Symbols"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "level"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "analyze_node"
+    fully_qualified_name: "jinja2.idtracking.Symbols.analyze_node"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_define_ref"
+    fully_qualified_name: "jinja2.idtracking.Symbols._define_ref"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "load"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,Union[builtins.str,None]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "find_load"
+    fully_qualified_name: "jinja2.idtracking.Symbols.find_load"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "find_ref"
+    fully_qualified_name: "jinja2.idtracking.Symbols.find_ref"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "ref"
+    fully_qualified_name: "jinja2.idtracking.Symbols.ref"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "jinja2.idtracking.Symbols.copy"
+    return_annotation {
+      pretty_printed_name: "jinja2.idtracking.Symbols"
+      fully_qualified_name: "jinja2.idtracking.Symbols"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+  }
+  methods {
+    name: "store"
+    fully_qualified_name: "jinja2.idtracking.Symbols.store"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "declare_parameter"
+    fully_qualified_name: "jinja2.idtracking.Symbols.declare_parameter"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "jinja2.idtracking.Symbols.load"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "branch_update"
+    fully_qualified_name: "jinja2.idtracking.Symbols.branch_update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+    parameters {
+      name: "branch_symbols"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[jinja2.idtracking.Symbols]"
+        args {
+          pretty_printed_name: "jinja2.idtracking.Symbols"
+          fully_qualified_name: "jinja2.idtracking.Symbols"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+  }
+  methods {
+    name: "dump_stores"
+    fully_qualified_name: "jinja2.idtracking.Symbols.dump_stores"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+  }
+  methods {
+    name: "dump_param_targets"
+    fully_qualified_name: "jinja2.idtracking.Symbols.dump_param_targets"
+    return_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+  }
+  attributes {
+    name: "level"
+    fully_qualified_name: "jinja2.idtracking.Symbols.level"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "parent"
+    fully_qualified_name: "jinja2.idtracking.Symbols.parent"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.idtracking.Symbols,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "refs"
+    fully_qualified_name: "jinja2.idtracking.Symbols.refs"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "loads"
+    fully_qualified_name: "jinja2.idtracking.Symbols.loads"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "stores"
+    fully_qualified_name: "jinja2.idtracking.Symbols.stores"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+}
+classes {
+  name: "RootVisitor"
+  fully_qualified_name: "jinja2.idtracking.RootVisitor"
+  super_classes: "jinja2.visitor.NodeVisitor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "symbols"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+  }
+  methods {
+    name: "_simple_visit"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor._simple_visit"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_AssignBlock"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_AssignBlock"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.AssignBlock"
+        fully_qualified_name: "jinja2.nodes.AssignBlock"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_CallBlock"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_CallBlock"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.CallBlock"
+        fully_qualified_name: "jinja2.nodes.CallBlock"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_OverlayScope"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_OverlayScope"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.OverlayScope"
+        fully_qualified_name: "jinja2.nodes.OverlayScope"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_For"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_For"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.For"
+        fully_qualified_name: "jinja2.nodes.For"
+      }
+    }
+    parameters {
+      name: "for_branch"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_With"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_With"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.With"
+        fully_qualified_name: "jinja2.nodes.With"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "generic_visit"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.generic_visit"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.RootVisitor"
+        fully_qualified_name: "jinja2.idtracking.RootVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "visit_Template"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_Template"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_Block"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_Block"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_Macro"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_Macro"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_FilterBlock"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_FilterBlock"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_Scope"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_Scope"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_If"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_If"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "visit_ScopedEvalContextModifier"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.visit_ScopedEvalContextModifier"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "sym_visitor"
+    fully_qualified_name: "jinja2.idtracking.RootVisitor.sym_visitor"
+    type_annotation {
+      pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+      fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+    }
+  }
+}
+classes {
+  name: "FrameSymbolVisitor"
+  fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+  super_classes: "jinja2.visitor.NodeVisitor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "symbols"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+    }
+  }
+  methods {
+    name: "visit_Name"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Name"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Name"
+        fully_qualified_name: "jinja2.nodes.Name"
+      }
+    }
+    parameters {
+      name: "store_as_param"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_NSRef"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_NSRef"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.NSRef"
+        fully_qualified_name: "jinja2.nodes.NSRef"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_If"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_If"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.If"
+        fully_qualified_name: "jinja2.nodes.If"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_Macro"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Macro"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Macro"
+        fully_qualified_name: "jinja2.nodes.Macro"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_Import"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Import"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Import"
+        fully_qualified_name: "jinja2.nodes.Import"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_FromImport"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_FromImport"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.FromImport"
+        fully_qualified_name: "jinja2.nodes.FromImport"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_Assign"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Assign"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Assign"
+        fully_qualified_name: "jinja2.nodes.Assign"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_For"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_For"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.For"
+        fully_qualified_name: "jinja2.nodes.For"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_CallBlock"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_CallBlock"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.CallBlock"
+        fully_qualified_name: "jinja2.nodes.CallBlock"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_FilterBlock"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_FilterBlock"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.FilterBlock"
+        fully_qualified_name: "jinja2.nodes.FilterBlock"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_With"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_With"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.With"
+        fully_qualified_name: "jinja2.nodes.With"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_AssignBlock"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_AssignBlock"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.AssignBlock"
+        fully_qualified_name: "jinja2.nodes.AssignBlock"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_Scope"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Scope"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Scope"
+        fully_qualified_name: "jinja2.nodes.Scope"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_Block"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_Block"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Block"
+        fully_qualified_name: "jinja2.nodes.Block"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "visit_OverlayScope"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.visit_OverlayScope"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.idtracking.FrameSymbolVisitor"
+        fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.OverlayScope"
+        fully_qualified_name: "jinja2.nodes.OverlayScope"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "symbols"
+    fully_qualified_name: "jinja2.idtracking.FrameSymbolVisitor.symbols"
+    type_annotation {
+      pretty_printed_name: "jinja2.idtracking.Symbols"
+      fully_qualified_name: "jinja2.idtracking.Symbols"
+    }
+  }
+}
+functions {
+  name: "find_symbols"
+  fully_qualified_name: "jinja2.idtracking.find_symbols"
+  return_annotation {
+    pretty_printed_name: "jinja2.idtracking.Symbols"
+    fully_qualified_name: "jinja2.idtracking.Symbols"
+  }
+  parameters {
+    name: "nodes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.nodes.Node]"
+      args {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "parent_symbols"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.idtracking.Symbols,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "symbols_for_node"
+  fully_qualified_name: "jinja2.idtracking.symbols_for_node"
+  return_annotation {
+    pretty_printed_name: "jinja2.idtracking.Symbols"
+    fully_qualified_name: "jinja2.idtracking.Symbols"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  parameters {
+    name: "parent_symbols"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.idtracking.Symbols,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.idtracking.Symbols"
+        fully_qualified_name: "jinja2.idtracking.Symbols"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.idtracking.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "VAR_LOAD_PARAMETER"
+  fully_qualified_name: "jinja2.idtracking.VAR_LOAD_PARAMETER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "VAR_LOAD_RESOLVE"
+  fully_qualified_name: "jinja2.idtracking.VAR_LOAD_RESOLVE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "VAR_LOAD_ALIAS"
+  fully_qualified_name: "jinja2.idtracking.VAR_LOAD_ALIAS"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "VAR_LOAD_UNDEFINED"
+  fully_qualified_name: "jinja2.idtracking.VAR_LOAD_UNDEFINED"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}

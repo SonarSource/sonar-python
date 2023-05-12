@@ -1,0 +1,471 @@
+fully_qualified_name: "asyncio.queues"
+classes {
+  name: "QueueEmpty"
+  fully_qualified_name: "asyncio.queues.QueueEmpty"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "QueueFull"
+  fully_qualified_name: "asyncio.queues.QueueFull"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "Queue"
+  fully_qualified_name: "asyncio.queues.Queue"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.queues.Queue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_init"
+    fully_qualified_name: "asyncio.queues.Queue._init"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    parameters {
+      name: "maxsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_get"
+    fully_qualified_name: "asyncio.queues.Queue._get"
+    return_annotation {
+      pretty_printed_name: "asyncio.queues._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "_put"
+    fully_qualified_name: "asyncio.queues.Queue._put"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_format"
+    fully_qualified_name: "asyncio.queues.Queue._format"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "qsize"
+    fully_qualified_name: "asyncio.queues.Queue.qsize"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "maxsize"
+    fully_qualified_name: "asyncio.queues.Queue.maxsize"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "empty"
+    fully_qualified_name: "asyncio.queues.Queue.empty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "full"
+    fully_qualified_name: "asyncio.queues.Queue.full"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "put"
+    fully_qualified_name: "asyncio.queues.Queue.put"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues._T"
+        kind: TYPE_VAR
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "put_nowait"
+    fully_qualified_name: "asyncio.queues.Queue.put_nowait"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "asyncio.queues.Queue.get"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.queues._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.queues._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "get_nowait"
+    fully_qualified_name: "asyncio.queues.Queue.get_nowait"
+    return_annotation {
+      pretty_printed_name: "asyncio.queues._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "asyncio.queues.Queue.join"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "task_done"
+    fully_qualified_name: "asyncio.queues.Queue.task_done"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.queues.Queue[asyncio.queues._T]"
+        args {
+          pretty_printed_name: "asyncio.queues._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "asyncio.queues.Queue"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "PriorityQueue"
+  fully_qualified_name: "asyncio.queues.PriorityQueue"
+  super_classes: "asyncio.queues.Queue"
+  is_generic: true
+}
+classes {
+  name: "LifoQueue"
+  fully_qualified_name: "asyncio.queues.LifoQueue"
+  super_classes: "asyncio.queues.Queue"
+  is_generic: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.queues.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.queues.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

@@ -1,0 +1,1937 @@
+fully_qualified_name: "werkzeug.datastructures.mixins"
+classes {
+  name: "ImmutableListMixin"
+  fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+  super_classes: "builtins.list"
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.__delitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[typing.SupportsIndex,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.SupportsIndex"
+          fully_qualified_name: "typing.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.__iadd__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.__imul__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.SupportsIndex"
+        fully_qualified_name: "typing.SupportsIndex"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.__setitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.append"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.remove"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.extend"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.insert"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.SupportsIndex"
+        fully_qualified_name: "typing.SupportsIndex"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.pop"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.SupportsIndex"
+        fully_qualified_name: "typing.SupportsIndex"
+      }
+    }
+  }
+  methods {
+    name: "reverse"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.reverse"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+  }
+  methods {
+    name: "sort"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin.sort"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableListMixin[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "reverse"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "_hash_cache"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableListMixin._hash_cache"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "ImmutableDictMixin"
+  fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "fromkeys"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.fromkeys"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+        }
+      }
+    }
+    parameters {
+      name: "keys"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.datastructures.mixins.K]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "_iter_hashitems"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin._iter_hashitems"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[typing.Hashable]"
+      args {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.setdefault"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.update"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.pop"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.popitem"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.__setitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.__delitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin.clear"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "_hash_cache"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableDictMixin._hash_cache"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "ImmutableMultiDictMixin"
+  fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+  methods {
+    name: "_iter_hashitems"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin._iter_hashitems"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[typing.Hashable]"
+      args {
+        pretty_printed_name: "typing.Hashable"
+        fully_qualified_name: "typing.Hashable"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin.add"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "popitemlist"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin.popitemlist"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "poplist"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin.poplist"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "setlist"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin.setlist"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "new_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "setlistdefault"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin.setlistdefault"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.mixins.V],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "ImmutableHeadersMixin"
+  fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+  super_classes: "werkzeug.datastructures.headers.Headers"
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.__delitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.__setitem__"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "set"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.set"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "setlist"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.setlist"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.add"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "add_header"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.add_header"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_kw"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.remove"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.extend"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.update"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.insert"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.pop"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.popitem"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.setdefault"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "setlistdefault"
+    fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin.setlistdefault"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+        fully_qualified_name: "werkzeug.datastructures.mixins.ImmutableHeadersMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}
+classes {
+  name: "UpdateDictMixin"
+  fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.setdefault"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.mixins.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+      }
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.popitem"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.mixins.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "pop"
+    fullname: "werkzeug.datastructures.mixins.UpdateDictMixin.pop"
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.pop"
+      return_annotation {
+        pretty_printed_name: "werkzeug.datastructures.mixins.V"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.pop"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,werkzeug.datastructures.mixins.T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.mixins.T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[werkzeug.datastructures.mixins.V,werkzeug.datastructures.mixins.T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "update"
+    fullname: "werkzeug.datastructures.mixins.UpdateDictMixin.update"
+    definitions {
+      name: "update"
+      fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.update"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "_typeshed.SupportsKeysAndGetItem[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "_typeshed.SupportsKeysAndGetItem"
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "update"
+      fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.update"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]]"
+          args {
+            pretty_printed_name: "Tuple[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "werkzeug.datastructures.mixins.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.mixins.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "update"
+      fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.update"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.UpdateDictMixin[werkzeug.datastructures.mixins.K,werkzeug.datastructures.mixins.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.mixins.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin"
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.mixins.V"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "on_update"
+    fully_qualified_name: "werkzeug.datastructures.mixins.UpdateDictMixin.on_update"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "is_immutable"
+  fully_qualified_name: "werkzeug.datastructures.mixins.is_immutable"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "_calls_update"
+  fully_qualified_name: "werkzeug.datastructures.mixins._calls_update"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.datastructures.mixins.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

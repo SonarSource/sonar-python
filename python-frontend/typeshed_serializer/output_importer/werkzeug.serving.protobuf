@@ -1,0 +1,2824 @@
+fully_qualified_name: "werkzeug.serving"
+classes {
+  name: "dt"
+  fully_qualified_name: "datetime.datetime"
+  super_classes: "datetime.date"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "datetime.datetime.__new__"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "hour"
+    fully_qualified_name: "datetime.datetime.hour"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "minute"
+    fully_qualified_name: "datetime.datetime.minute"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "second"
+    fully_qualified_name: "datetime.datetime.second"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "microsecond"
+    fully_qualified_name: "datetime.datetime.microsecond"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "tzinfo"
+    fully_qualified_name: "datetime.datetime.tzinfo"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.tzinfo,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fold"
+    fully_qualified_name: "datetime.datetime.fold"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fromtimestamp"
+    fully_qualified_name: "datetime.datetime.fromtimestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcfromtimestamp"
+    fully_qualified_name: "datetime.datetime.utcfromtimestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "now"
+    fully_qualified_name: "datetime.datetime.now"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcnow"
+    fully_qualified_name: "datetime.datetime.utcnow"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "combine"
+    fully_qualified_name: "datetime.datetime.combine"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "timestamp"
+    fully_qualified_name: "datetime.datetime.timestamp"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "utctimetuple"
+    fully_qualified_name: "datetime.datetime.utctimetuple"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "time.struct_time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "date"
+    fully_qualified_name: "datetime.datetime.date"
+    return_annotation {
+      pretty_printed_name: "datetime.date"
+      fully_qualified_name: "datetime.date"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "time"
+    fully_qualified_name: "datetime.datetime.time"
+    return_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "timetz"
+    fully_qualified_name: "datetime.datetime.timetz"
+    return_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "datetime.datetime.replace"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "astimezone"
+    fully_qualified_name: "datetime.datetime.astimezone"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "isoformat"
+    fully_qualified_name: "datetime.datetime.isoformat"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "timespec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "strptime"
+    fully_qualified_name: "datetime.datetime.strptime"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "datetime.datetime.utcoffset"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "tzname"
+    fully_qualified_name: "datetime.datetime.tzname"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "datetime.datetime.dst"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "datetime.datetime.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "datetime.datetime.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "datetime.datetime.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "datetime.datetime.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__sub__"
+    fullname: "datetime.datetime.__sub__"
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.datetime.min"
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.datetime.max"
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+}
+classes {
+  name: "_SslDummy"
+  fully_qualified_name: "werkzeug.serving._SslDummy"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.serving._SslDummy.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving._SslDummy"
+        fully_qualified_name: "werkzeug.serving._SslDummy"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+classes {
+  name: "ForkingMixIn-redefinition"
+  fully_qualified_name: "werkzeug.serving.ForkingMixIn"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "DechunkedInput"
+  fully_qualified_name: "werkzeug.serving.DechunkedInput"
+  super_classes: "io.RawIOBase"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.DechunkedInput"
+        fully_qualified_name: "werkzeug.serving.DechunkedInput"
+      }
+    }
+    parameters {
+      name: "rfile"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+  }
+  methods {
+    name: "readable"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput.readable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.DechunkedInput"
+        fully_qualified_name: "werkzeug.serving.DechunkedInput"
+      }
+    }
+  }
+  methods {
+    name: "read_chunk_len"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput.read_chunk_len"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.DechunkedInput"
+        fully_qualified_name: "werkzeug.serving.DechunkedInput"
+      }
+    }
+  }
+  methods {
+    name: "readinto"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput.readinto"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.DechunkedInput"
+        fully_qualified_name: "werkzeug.serving.DechunkedInput"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytearray"
+        fully_qualified_name: "builtins.bytearray"
+      }
+    }
+  }
+  attributes {
+    name: "_rfile"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput._rfile"
+    type_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+  }
+  attributes {
+    name: "_done"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput._done"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_len"
+    fully_qualified_name: "werkzeug.serving.DechunkedInput._len"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "WSGIRequestHandler"
+  fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+  super_classes: "http.server.BaseHTTPRequestHandler"
+  methods {
+    name: "server_version"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.server_version"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "make_environ"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.make_environ"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "run_wsgi"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.run_wsgi"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "handle"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.handle"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "connection_dropped"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.connection_dropped"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "error"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,Any]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+          fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "address_string"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.address_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "port_integer"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.port_integer"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "log_request"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.log_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  methods {
+    name: "log_error"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.log_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "log_message"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.log_message"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "log"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.log"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+        fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "server"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.server"
+    type_annotation {
+      pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+      fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+    }
+  }
+  attributes {
+    name: "_control_char_table"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler._control_char_table"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "environ"
+    fully_qualified_name: "werkzeug.serving.WSGIRequestHandler.environ"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "BaseWSGIServer"
+  fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+  super_classes: "http.server.HTTPServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+        fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[werkzeug.serving.WSGIRequestHandler],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[werkzeug.serving.WSGIRequestHandler]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+            fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "passthrough_errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ssl_context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Union[builtins.str,None]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+                args {
+                  pretty_printed_name: "None"
+                  kind: NONE
+                }
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "werkzeug.serving._TSSLContextArg"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "log"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.log"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+        fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "serve_forever"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.serve_forever"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+        fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+      }
+    }
+    parameters {
+      name: "poll_interval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "handle_error"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.handle_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+        fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  methods {
+    name: "log_startup"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.log_startup"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+        fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+      }
+    }
+  }
+  attributes {
+    name: "multithread"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.multithread"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "multiprocess"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.multiprocess"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "request_queue_size"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.request_queue_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "allow_reuse_address"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.allow_reuse_address"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "host"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.host"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "port"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.port"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.app"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "passthrough_errors"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.passthrough_errors"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "ssl_context"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer.ssl_context"
+    type_annotation {
+      pretty_printed_name: "Union[ssl.SSLContext,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "ssl.SSLContext"
+        fully_qualified_name: "ssl.SSLContext"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "ThreadedWSGIServer"
+  fully_qualified_name: "werkzeug.serving.ThreadedWSGIServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "werkzeug.serving.BaseWSGIServer"
+  attributes {
+    name: "multithread"
+    fully_qualified_name: "werkzeug.serving.ThreadedWSGIServer.multithread"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "daemon_threads"
+    fully_qualified_name: "werkzeug.serving.ThreadedWSGIServer.daemon_threads"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "ForkingWSGIServer"
+  fully_qualified_name: "werkzeug.serving.ForkingWSGIServer"
+  super_classes: "socketserver.ForkingMixIn"
+  super_classes: "werkzeug.serving.BaseWSGIServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.serving.ForkingWSGIServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.serving.ForkingWSGIServer"
+        fully_qualified_name: "werkzeug.serving.ForkingWSGIServer"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+    parameters {
+      name: "processes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[werkzeug.serving.WSGIRequestHandler],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[werkzeug.serving.WSGIRequestHandler]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+            fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "passthrough_errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ssl_context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "Union[builtins.str,None]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+                args {
+                  pretty_printed_name: "None"
+                  kind: NONE
+                }
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "werkzeug.serving._TSSLContextArg"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "multiprocess"
+    fully_qualified_name: "werkzeug.serving.ForkingWSGIServer.multiprocess"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "_ansi_style"
+  fully_qualified_name: "werkzeug.serving._ansi_style"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "styles"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "generate_adhoc_ssl_pair"
+  fully_qualified_name: "werkzeug.serving.generate_adhoc_ssl_pair"
+  return_annotation {
+    pretty_printed_name: "Tuple[cryptography.x509.base.Certificate,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "cryptography.x509.base.Certificate"
+      fully_qualified_name: "cryptography.x509.base.Certificate"
+    }
+    args {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+    }
+  }
+  parameters {
+    name: "cn"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "make_ssl_devcert"
+  fully_qualified_name: "werkzeug.serving.make_ssl_devcert"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "base_path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "cn"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "generate_adhoc_ssl_context"
+  fully_qualified_name: "werkzeug.serving.generate_adhoc_ssl_context"
+  return_annotation {
+    pretty_printed_name: "ssl.SSLContext"
+    fully_qualified_name: "ssl.SSLContext"
+  }
+}
+functions {
+  name: "load_ssl_context"
+  fully_qualified_name: "werkzeug.serving.load_ssl_context"
+  return_annotation {
+    pretty_printed_name: "ssl.SSLContext"
+    fully_qualified_name: "ssl.SSLContext"
+  }
+  parameters {
+    name: "cert_file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "pkey_file"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "protocol"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "is_ssl_error"
+  fully_qualified_name: "werkzeug.serving.is_ssl_error"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "error"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.Exception,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "select_address_family"
+  fully_qualified_name: "werkzeug.serving.select_address_family"
+  return_annotation {
+    pretty_printed_name: "socket.AddressFamily"
+    fully_qualified_name: "socket.AddressFamily"
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "get_sockaddr"
+  fully_qualified_name: "werkzeug.serving.get_sockaddr"
+  return_annotation {
+    pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str]"
+    kind: UNION
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "family"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "socket.AddressFamily"
+      fully_qualified_name: "socket.AddressFamily"
+    }
+  }
+}
+functions {
+  name: "get_interface_ip"
+  fully_qualified_name: "werkzeug.serving.get_interface_ip"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "family"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "socket.AddressFamily"
+      fully_qualified_name: "socket.AddressFamily"
+    }
+  }
+}
+functions {
+  name: "make_server"
+  fully_qualified_name: "werkzeug.serving.make_server"
+  return_annotation {
+    pretty_printed_name: "werkzeug.serving.BaseWSGIServer"
+    fully_qualified_name: "werkzeug.serving.BaseWSGIServer"
+  }
+  parameters {
+    name: "host"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "app"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+  }
+  parameters {
+    name: "threaded"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "processes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "request_handler"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Type[werkzeug.serving.WSGIRequestHandler],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[werkzeug.serving.WSGIRequestHandler]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+          fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "passthrough_errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "ssl_context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "ssl.SSLContext"
+            fully_qualified_name: "ssl.SSLContext"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Union[builtins.str,None]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "werkzeug.serving._TSSLContextArg"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "fd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "is_running_from_reloader"
+  fully_qualified_name: "werkzeug.serving.is_running_from_reloader"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+functions {
+  name: "run_simple"
+  fully_qualified_name: "werkzeug.serving.run_simple"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "hostname"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "port"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "application"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+  }
+  parameters {
+    name: "use_reloader"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "use_debugger"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "use_evalex"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "extra_files"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "exclude_patterns"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "reloader_interval"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "reloader_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "threaded"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "processes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "request_handler"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Type[werkzeug.serving.WSGIRequestHandler],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[werkzeug.serving.WSGIRequestHandler]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.serving.WSGIRequestHandler"
+          fully_qualified_name: "werkzeug.serving.WSGIRequestHandler"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "static_files"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Union[builtins.str,Tuple[builtins.str,builtins.str]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Union[builtins.str,Tuple[builtins.str,builtins.str]]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "passthrough_errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "ssl_context"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[ssl.SSLContext,Tuple[builtins.str,Union[builtins.str,None]],Literal[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "ssl.SSLContext"
+            fully_qualified_name: "ssl.SSLContext"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Union[builtins.str,None]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "werkzeug.serving._TSSLContextArg"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.serving.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_log_add_style"
+  fully_qualified_name: "werkzeug.serving._log_add_style"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "can_fork"
+  fully_qualified_name: "werkzeug.serving.can_fork"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "af_unix"
+  fully_qualified_name: "werkzeug.serving.af_unix"
+  type_annotation {
+    pretty_printed_name: "socket.AddressFamily"
+    fully_qualified_name: "socket.AddressFamily"
+  }
+}
+vars {
+  name: "LISTEN_QUEUE"
+  fully_qualified_name: "werkzeug.serving.LISTEN_QUEUE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

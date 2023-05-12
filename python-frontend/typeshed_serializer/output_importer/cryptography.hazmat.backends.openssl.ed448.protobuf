@@ -1,0 +1,283 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448"
+classes {
+  name: "_Ed448PublicKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+  }
+  methods {
+    name: "_raw_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey._raw_public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PublicKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_Ed448PrivateKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+      }
+    }
+  }
+  methods {
+    name: "_raw_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey._raw_private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._Ed448PrivateKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_ED448_KEY_SIZE"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._ED448_KEY_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_ED448_SIG_SIZE"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ed448._ED448_SIG_SIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

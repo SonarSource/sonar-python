@@ -1,0 +1,811 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.ec"
+classes {
+  name: "_ECDSASignatureContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext._private_key"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+    }
+  }
+  attributes {
+    name: "_digest"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSASignatureContext._digest"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+    }
+  }
+}
+classes {
+  name: "_ECDSAVerificationContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext"
+      }
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext._public_key"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+    }
+  }
+  attributes {
+    name: "_signature"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext._signature"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "_digest"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ECDSAVerificationContext._digest"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+    }
+  }
+}
+classes {
+  name: "_EllipticCurvePrivateKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ec_key_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "signer"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.signer"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      }
+    }
+  }
+  methods {
+    name: "exchange"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.exchange"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.ECDH"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.ECDH"
+      }
+    }
+    parameters {
+      name: "peer_public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+  }
+  methods {
+    name: "private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      }
+    }
+  }
+  attributes {
+    name: "curve"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey.curve"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ec_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey._ec_key"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_curve"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePrivateKey._curve"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_EllipticCurvePublicKey"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+  super_classes: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ec_key_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "verifier"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.verifier"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      }
+    }
+  }
+  methods {
+    name: "public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+  }
+  methods {
+    name: "_encode_point"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey._encode_point"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      }
+    }
+  }
+  attributes {
+    name: "curve"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey.curve"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ec_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey._ec_key"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey._evp_pkey"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_curve"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._EllipticCurvePublicKey._curve"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "_check_signature_algorithm"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._check_signature_algorithm"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "signature_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurveSignatureAlgorithm"
+    }
+  }
+}
+functions {
+  name: "_ec_key_curve_sn"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ec_key_curve_sn"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "ec_key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_mark_asn1_named_ec_curve"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._mark_asn1_named_ec_curve"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "ec_cdata"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_sn_to_elliptic_curve"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._sn_to_elliptic_curve"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "sn"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_ecdsa_sig_sign"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ecdsa_sig_sign"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "private_key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_ecdsa_sig_verify"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec._ecdsa_sig_verify"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "public_key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "signature"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ec.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

@@ -1,0 +1,1212 @@
+fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes"
+classes {
+  name: "Mode"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ModeWithAuthenticationTag"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"
+  super_classes: "builtins.object"
+  methods {
+    name: "tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag.tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ModeWithInitializationVector"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  super_classes: "builtins.object"
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ModeWithNonce"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce"
+  super_classes: "builtins.object"
+  methods {
+    name: "nonce"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce.nonce"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ModeWithTweak"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak"
+  super_classes: "builtins.object"
+  methods {
+    name: "tweak"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak.tweak"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CBC"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+      }
+    }
+    parameters {
+      name: "initialization_vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CBC"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CTR"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+      }
+    }
+    parameters {
+      name: "nonce"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "nonce"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR.nonce"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CTR"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CFB"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+      }
+    }
+    parameters {
+      name: "initialization_vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "CFB8"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+      }
+    }
+    parameters {
+      name: "initialization_vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.CFB8"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ECB"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ECB"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ECB.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ECB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ECB"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ECB.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.ECB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.ECB"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "GCM"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+      }
+    }
+    parameters {
+      name: "initialization_vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "min_tag_length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM.tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.GCM"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "OFB"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+      }
+    }
+    parameters {
+      name: "initialization_vector"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "initialization_vector"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB.initialization_vector"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.OFB"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "XTS"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+  super_classes: "cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+      }
+    }
+    parameters {
+      name: "tweak"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "tweak"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS.tweak"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "validate_for_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS.validate_for_algorithm"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.XTS"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.CipherAlgorithm"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

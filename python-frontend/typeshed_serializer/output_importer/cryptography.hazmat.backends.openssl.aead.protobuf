@@ -1,0 +1,177 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.aead"
+functions {
+  name: "_aead_cipher_name"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._aead_cipher_name"
+  parameters {
+    name: "cipher"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_aead_setup"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._aead_setup"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "cipher_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "nonce"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "tag"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "tag_len"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "operation"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_set_length"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._set_length"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data_len"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_process_aad"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._process_aad"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "associated_data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_process_data"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._process_data"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_encrypt"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._encrypt"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "cipher"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "nonce"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "associated_data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "tag_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_decrypt"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._decrypt"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "cipher"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "nonce"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "associated_data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "tag_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_ENCRYPT"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._ENCRYPT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_DECRYPT"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.aead._DECRYPT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

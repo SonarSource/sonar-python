@@ -1,0 +1,112 @@
+fully_qualified_name: "pyVmomi.vmodl.query"
+classes {
+  name: "PropertyCollector"
+  fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector"
+  super_classes: "builtins.object"
+  methods {
+    name: "RetrievePropertiesEx"
+    fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.RetrievePropertiesEx"
+    return_annotation {
+      pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveResult"
+      fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector"
+        fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector"
+      }
+    }
+    parameters {
+      name: "specSet"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[pyVmomi.vmodl.query.PropertyCollector.FilterSpec]"
+        args {
+          pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector.FilterSpec"
+          fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.FilterSpec"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveOptions"
+        fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveOptions"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ContinueRetrievePropertiesEx"
+    fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.ContinueRetrievePropertiesEx"
+    return_annotation {
+      pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveResult"
+      fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.RetrieveResult"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector"
+        fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector"
+      }
+    }
+    parameters {
+      name: "token"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pyVmomi.vmodl.query.PropertyCollector"
+        fully_qualified_name: "pyVmomi.vmodl.query.PropertyCollector"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

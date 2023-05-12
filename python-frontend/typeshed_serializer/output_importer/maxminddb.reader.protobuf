@@ -1,0 +1,681 @@
+fully_qualified_name: "maxminddb.reader"
+classes {
+  name: "Reader"
+  fully_qualified_name: "maxminddb.reader.Reader"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "maxminddb.reader.Reader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "database"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.AnyStr,builtins.int,os.PathLike[Any],typing.IO[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "metadata"
+    fully_qualified_name: "maxminddb.reader.Reader.metadata"
+    return_annotation {
+      pretty_printed_name: "maxminddb.reader.Metadata"
+      fully_qualified_name: "maxminddb.reader.Metadata"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "maxminddb.reader.Reader.get"
+    return_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.AnyStr"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "maxminddb.types.Primitive"
+      }
+      args {
+        pretty_printed_name: "maxminddb.types.RecordList"
+        fully_qualified_name: "maxminddb.types.RecordList"
+      }
+      args {
+        pretty_printed_name: "maxminddb.types.RecordDict"
+        fully_qualified_name: "maxminddb.types.RecordDict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_with_prefix_len"
+    fully_qualified_name: "maxminddb.reader.Reader.get_with_prefix_len"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict,None],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing.AnyStr"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "builtins.float"
+              fully_qualified_name: "builtins.float"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          fully_qualified_name: "maxminddb.types.Primitive"
+        }
+        args {
+          pretty_printed_name: "maxminddb.types.RecordList"
+          fully_qualified_name: "maxminddb.types.RecordList"
+        }
+        args {
+          pretty_printed_name: "maxminddb.types.RecordDict"
+          fully_qualified_name: "maxminddb.types.RecordDict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "ip_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,ipaddress.IPv6Address,ipaddress.IPv4Address]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv6Address"
+          fully_qualified_name: "ipaddress.IPv6Address"
+        }
+        args {
+          pretty_printed_name: "ipaddress.IPv4Address"
+          fully_qualified_name: "ipaddress.IPv4Address"
+        }
+      }
+    }
+  }
+  methods {
+    name: "_find_address_in_tree"
+    fully_qualified_name: "maxminddb.reader.Reader._find_address_in_tree"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "packed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytearray"
+        fully_qualified_name: "builtins.bytearray"
+      }
+    }
+  }
+  methods {
+    name: "_start_node"
+    fully_qualified_name: "maxminddb.reader.Reader._start_node"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_read_node"
+    fully_qualified_name: "maxminddb.reader.Reader._read_node"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "node_number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_resolve_data_pointer"
+    fully_qualified_name: "maxminddb.reader.Reader._resolve_data_pointer"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing.AnyStr"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "builtins.float"
+              fully_qualified_name: "builtins.float"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          fully_qualified_name: "maxminddb.types.Primitive"
+        }
+        args {
+          pretty_printed_name: "maxminddb.types.RecordList"
+          fully_qualified_name: "maxminddb.types.RecordList"
+        }
+        args {
+          pretty_printed_name: "maxminddb.types.RecordDict"
+          fully_qualified_name: "maxminddb.types.RecordDict"
+        }
+      }
+      fully_qualified_name: "maxminddb.types.Record"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "pointer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "maxminddb.reader.Reader.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "maxminddb.reader.Reader.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "maxminddb.reader.Reader.__enter__"
+    return_annotation {
+      pretty_printed_name: "maxminddb.reader.Reader"
+      fully_qualified_name: "maxminddb.reader.Reader"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Reader"
+        fully_qualified_name: "maxminddb.reader.Reader"
+      }
+    }
+  }
+  attributes {
+    name: "_DATA_SECTION_SEPARATOR_SIZE"
+    fully_qualified_name: "maxminddb.reader.Reader._DATA_SECTION_SEPARATOR_SIZE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_METADATA_START_MARKER"
+    fully_qualified_name: "maxminddb.reader.Reader._METADATA_START_MARKER"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "_buffer"
+    fully_qualified_name: "maxminddb.reader.Reader._buffer"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,maxminddb.file.FileBuffer,mmap.mmap]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+      args {
+        pretty_printed_name: "mmap.mmap"
+        fully_qualified_name: "mmap.mmap"
+      }
+    }
+  }
+  attributes {
+    name: "_ipv4_start"
+    fully_qualified_name: "maxminddb.reader.Reader._ipv4_start"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_buffer_size"
+    fully_qualified_name: "maxminddb.reader.Reader._buffer_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_metadata"
+    fully_qualified_name: "maxminddb.reader.Reader._metadata"
+    type_annotation {
+      pretty_printed_name: "maxminddb.reader.Metadata"
+      fully_qualified_name: "maxminddb.reader.Metadata"
+    }
+  }
+  attributes {
+    name: "_decoder"
+    fully_qualified_name: "maxminddb.reader.Reader._decoder"
+    type_annotation {
+      pretty_printed_name: "maxminddb.decoder.Decoder"
+      fully_qualified_name: "maxminddb.decoder.Decoder"
+    }
+  }
+  attributes {
+    name: "closed"
+    fully_qualified_name: "maxminddb.reader.Reader.closed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Metadata"
+  fully_qualified_name: "maxminddb.reader.Metadata"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "maxminddb.reader.Metadata.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Metadata"
+        fully_qualified_name: "maxminddb.reader.Metadata"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "node_byte_size"
+    fully_qualified_name: "maxminddb.reader.Metadata.node_byte_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Metadata"
+        fully_qualified_name: "maxminddb.reader.Metadata"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "search_tree_size"
+    fully_qualified_name: "maxminddb.reader.Metadata.search_tree_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.reader.Metadata"
+        fully_qualified_name: "maxminddb.reader.Metadata"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "maxminddb.reader.Metadata.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "node_count"
+    fully_qualified_name: "maxminddb.reader.Metadata.node_count"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "record_size"
+    fully_qualified_name: "maxminddb.reader.Metadata.record_size"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "ip_version"
+    fully_qualified_name: "maxminddb.reader.Metadata.ip_version"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "database_type"
+    fully_qualified_name: "maxminddb.reader.Metadata.database_type"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "languages"
+    fully_qualified_name: "maxminddb.reader.Metadata.languages"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "binary_format_major_version"
+    fully_qualified_name: "maxminddb.reader.Metadata.binary_format_major_version"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "binary_format_minor_version"
+    fully_qualified_name: "maxminddb.reader.Metadata.binary_format_minor_version"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "build_epoch"
+    fully_qualified_name: "maxminddb.reader.Metadata.build_epoch"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "description"
+    fully_qualified_name: "maxminddb.reader.Metadata.description"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "maxminddb.reader.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

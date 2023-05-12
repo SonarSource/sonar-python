@@ -1,0 +1,976 @@
+fully_qualified_name: "cryptography.hazmat.backends.interfaces"
+classes {
+  name: "CipherBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "cipher_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.cipher_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "create_symmetric_encryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.create_symmetric_encryption_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "create_symmetric_decryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CipherBackend.create_symmetric_decryption_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "HashBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend.hash_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "create_hash_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HashBackend.create_hash_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "HMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "hmac_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend.hmac_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "create_hmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.HMACBackend.create_hmac_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "CMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "cmac_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend.cmac_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "create_cmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.CMACBackend.create_cmac_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "PBKDF2HMACBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "pbkdf2_hmac_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend.pbkdf2_hmac_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "derive_pbkdf2_hmac"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend.derive_pbkdf2_hmac"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "iterations"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "RSABackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate_rsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.generate_rsa_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "rsa_padding_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.rsa_padding_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_rsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.generate_rsa_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_rsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.load_rsa_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_rsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend.load_rsa_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DSABackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate_dsa_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_dsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_dsa_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.generate_dsa_private_key_and_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "dsa_hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.dsa_hash_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "dsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.dsa_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dsa_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend.load_dsa_parameter_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "EllipticCurveBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "elliptic_curve_signature_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.elliptic_curve_signature_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "elliptic_curve_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.elliptic_curve_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.generate_elliptic_curve_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_elliptic_curve_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.load_elliptic_curve_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_elliptic_curve_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.load_elliptic_curve_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "elliptic_curve_exchange_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.elliptic_curve_exchange_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "derive_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend.derive_elliptic_curve_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "PEMSerializationBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "load_pem_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_pem_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_public_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_pem_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend.load_pem_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DERSerializationBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "load_der_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_der_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_public_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_der_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend.load_der_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DHBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate_dh_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_dh_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "generate_dh_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.generate_dh_private_key_and_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dh_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dh_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_dh_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.load_dh_parameter_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "dh_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.dh_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "dh_x942_serialization_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.DHBackend.dh_x942_serialization_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "ScryptBackend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+  super_classes: "builtins.object"
+  methods {
+    name: "derive_scrypt"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend.derive_scrypt"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "scrypt_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.ScryptBackend.scrypt_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "Backend"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend"
+  super_classes: "cryptography.hazmat.backends.interfaces.CipherBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.CMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DHBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DSABackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.HashBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.HMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.RSABackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+  methods {
+    name: "load_pem_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_pem_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_der_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_der_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "pkcs7_sign"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.pkcs7_sign"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_key_and_certificates_from_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_key_and_certificates_from_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "serialize_key_and_certificates_to_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.serialize_key_and_certificates_to_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cert"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cas"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

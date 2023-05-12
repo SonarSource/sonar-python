@@ -1,0 +1,446 @@
+fully_qualified_name: "marshal"
+functions {
+  name: "dump"
+  fully_qualified_name: "marshal.dump"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[None,Type[builtins.StopIteration],builtins.ellipsis,builtins.bool,builtins.int,builtins.float,builtins.complex,builtins.bytes,builtins.str,builtins.tuple[TypeAlias[Unknown]],builtins.list[Any],builtins.dict[Any,Any],builtins.set[Any],builtins.frozenset[TypeAlias[Unknown]],types.CodeType,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[None,Type[builtins.StopIteration],builtins.ellipsis,builtins.bool,builtins.int,builtins.float,builtins.complex,builtins.bytes,builtins.str,builtins.tuple[TypeAlias[Unknown]],builtins.list[Any],builtins.dict[Any,Any],builtins.set[Any],builtins.frozenset[TypeAlias[Unknown]],types.CodeType,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "Type[builtins.StopIteration]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.StopIteration"
+            fully_qualified_name: "builtins.StopIteration"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.ellipsis"
+          fully_qualified_name: "builtins.ellipsis"
+        }
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "builtins.complex"
+          fully_qualified_name: "builtins.complex"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[TypeAlias[Unknown]]"
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[Any,Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "builtins.set[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.set"
+        }
+        args {
+          pretty_printed_name: "builtins.frozenset[TypeAlias[Unknown]]"
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          fully_qualified_name: "builtins.frozenset"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+      fully_qualified_name: "marshal._Marshallable"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "_typeshed.SupportsWrite[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "_typeshed.SupportsWrite"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "load"
+  fully_qualified_name: "marshal.load"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "_typeshed.SupportsRead"
+    }
+  }
+}
+functions {
+  name: "dumps"
+  fully_qualified_name: "marshal.dumps"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[None,Type[builtins.StopIteration],builtins.ellipsis,builtins.bool,builtins.int,builtins.float,builtins.complex,builtins.bytes,builtins.str,builtins.tuple[TypeAlias[Unknown]],builtins.list[Any],builtins.dict[Any,Any],builtins.set[Any],builtins.frozenset[TypeAlias[Unknown]],types.CodeType,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[None,Type[builtins.StopIteration],builtins.ellipsis,builtins.bool,builtins.int,builtins.float,builtins.complex,builtins.bytes,builtins.str,builtins.tuple[TypeAlias[Unknown]],builtins.list[Any],builtins.dict[Any,Any],builtins.set[Any],builtins.frozenset[TypeAlias[Unknown]],types.CodeType,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "Type[builtins.StopIteration]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.StopIteration"
+            fully_qualified_name: "builtins.StopIteration"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.ellipsis"
+          fully_qualified_name: "builtins.ellipsis"
+        }
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "builtins.complex"
+          fully_qualified_name: "builtins.complex"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[TypeAlias[Unknown]]"
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[Any,Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "builtins.set[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.set"
+        }
+        args {
+          pretty_printed_name: "builtins.frozenset[TypeAlias[Unknown]]"
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          fully_qualified_name: "builtins.frozenset"
+        }
+        args {
+          pretty_printed_name: "types.CodeType"
+          fully_qualified_name: "types.CodeType"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+      fully_qualified_name: "marshal._Marshallable"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "loads"
+  fully_qualified_name: "marshal.loads"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytearray"
+              fully_qualified_name: "builtins.bytearray"
+            }
+            args {
+              pretty_printed_name: "builtins.memoryview"
+              fully_qualified_name: "builtins.memoryview"
+            }
+            args {
+              pretty_printed_name: "array.array[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "array.array"
+            }
+            args {
+              pretty_printed_name: "mmap.mmap"
+              fully_qualified_name: "mmap.mmap"
+            }
+            args {
+              pretty_printed_name: "ctypes._CData"
+              fully_qualified_name: "ctypes._CData"
+            }
+            args {
+              pretty_printed_name: "pickle.PickleBuffer"
+              fully_qualified_name: "pickle.PickleBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.WriteableBuffer"
+        }
+      }
+      fully_qualified_name: "_typeshed.ReadableBuffer"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "marshal.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "version"
+  fully_qualified_name: "marshal.version"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

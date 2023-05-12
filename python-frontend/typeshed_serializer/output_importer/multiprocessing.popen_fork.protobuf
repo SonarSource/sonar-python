@@ -1,0 +1,258 @@
+fully_qualified_name: "multiprocessing.popen_fork"
+classes {
+  name: "Popen"
+  fully_qualified_name: "multiprocessing.popen_fork.Popen"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+    parameters {
+      name: "process_obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "duplicate_for_child"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.duplicate_for_child"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "poll"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.poll"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+    parameters {
+      name: "flag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "wait"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.wait"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "terminate"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.terminate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+  }
+  methods {
+    name: "kill"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.kill"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.popen_fork.Popen"
+        fully_qualified_name: "multiprocessing.popen_fork.Popen"
+      }
+    }
+  }
+  attributes {
+    name: "finalizer"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.finalizer"
+    type_annotation {
+      pretty_printed_name: "Union[multiprocessing.util.Finalize,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "multiprocessing.util.Finalize"
+        fully_qualified_name: "multiprocessing.util.Finalize"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "method"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.method"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "pid"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.pid"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "returncode"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.returncode"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "sentinel"
+    fully_qualified_name: "multiprocessing.popen_fork.Popen.sentinel"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "multiprocessing.popen_fork.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.popen_fork.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

@@ -1,0 +1,1489 @@
+fully_qualified_name: "flask.testing"
+classes {
+  name: "BaseRequest"
+  fully_qualified_name: "werkzeug.wrappers.request.Request"
+  super_classes: "werkzeug.sansio.request.Request"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+    parameters {
+      name: "populate_request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "shallow"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "from_values"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.from_values"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.request.Request"
+      fully_qualified_name: "werkzeug.wrappers.request.Request"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.wrappers.request.Request]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "application"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.application"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.wrappers.request.Request]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "_get_file_stream"
+    fully_qualified_name: "werkzeug.wrappers.request.Request._get_file_stream"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "total_content_length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "content_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "content_length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "want_form_data_parsed"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.want_form_data_parsed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "make_form_data_parser"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.make_form_data_parser"
+    return_annotation {
+      pretty_printed_name: "werkzeug.formparser.FormDataParser"
+      fully_qualified_name: "werkzeug.formparser.FormDataParser"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "_load_form_data"
+    fully_qualified_name: "werkzeug.wrappers.request.Request._load_form_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "_get_stream_for_parsing"
+    fully_qualified_name: "werkzeug.wrappers.request.Request._get_stream_for_parsing"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.__enter__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.request.Request"
+      fully_qualified_name: "werkzeug.wrappers.request.Request"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "stream"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.stream"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "data"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.data"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "form"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.form"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.values"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "files"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.files"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,werkzeug.datastructures.file_storage.FileStorage]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.file_storage.FileStorage"
+        fully_qualified_name: "werkzeug.datastructures.file_storage.FileStorage"
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "script_root"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.script_root"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "url_root"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.url_root"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "json"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.json"
+    return_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "on_json_loading_failed"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.on_json_loading_failed"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "e"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.ValueError,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.ValueError"
+          fully_qualified_name: "builtins.ValueError"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get_data"
+    fullname: "werkzeug.wrappers.request.Request.get_data"
+    definitions {
+      name: "get_data"
+      fully_qualified_name: "werkzeug.wrappers.request.Request.get_data"
+      return_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+      parameters {
+        name: "cache"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "as_text"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      parameters {
+        name: "parse_form_data"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_data"
+      fully_qualified_name: "werkzeug.wrappers.request.Request.get_data"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+      parameters {
+        name: "cache"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "as_text"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      parameters {
+        name: "parse_form_data"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "get_json"
+    fullname: "werkzeug.wrappers.request.Request.get_json"
+    definitions {
+      name: "get_json"
+      fully_qualified_name: "werkzeug.wrappers.request.Request.get_json"
+      return_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+      parameters {
+        name: "force"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "silent"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      parameters {
+        name: "cache"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_json"
+      fully_qualified_name: "werkzeug.wrappers.request.Request.get_json"
+      return_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+      }
+      parameters {
+        name: "force"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "silent"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      parameters {
+        name: "cache"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "max_content_length"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.max_content_length"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max_form_memory_size"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.max_form_memory_size"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max_form_parts"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.max_form_parts"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "form_data_parser_class"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.form_data_parser_class"
+    type_annotation {
+      pretty_printed_name: "Type[werkzeug.formparser.FormDataParser]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.formparser.FormDataParser"
+        fully_qualified_name: "werkzeug.formparser.FormDataParser"
+      }
+    }
+  }
+  attributes {
+    name: "environ"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.environ"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+    }
+  }
+  attributes {
+    name: "shallow"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.shallow"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "input_stream"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.input_stream"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.environ_property[typing.IO[builtins.bytes]]"
+      args {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      fully_qualified_name: "werkzeug.utils.environ_property"
+    }
+  }
+  attributes {
+    name: "remote_user"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.remote_user"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.environ_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.environ_property"
+    }
+  }
+  attributes {
+    name: "is_multithread"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.is_multithread"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.environ_property[builtins.bool]"
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "werkzeug.utils.environ_property"
+    }
+  }
+  attributes {
+    name: "is_multiprocess"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.is_multiprocess"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.environ_property[builtins.bool]"
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "werkzeug.utils.environ_property"
+    }
+  }
+  attributes {
+    name: "is_run_once"
+    fully_qualified_name: "werkzeug.wrappers.request.Request.is_run_once"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.environ_property[builtins.bool]"
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "werkzeug.utils.environ_property"
+    }
+  }
+  attributes {
+    name: "_cached_json"
+    fully_qualified_name: "werkzeug.wrappers.request.Request._cached_json"
+    type_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_cached_data"
+    fully_qualified_name: "werkzeug.wrappers.request.Request._cached_data"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+classes {
+  name: "EnvironBuilder"
+  fully_qualified_name: "flask.testing.EnvironBuilder"
+  super_classes: "werkzeug.test.EnvironBuilder"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.testing.EnvironBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.EnvironBuilder"
+        fully_qualified_name: "flask.testing.EnvironBuilder"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "base_url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "subdomain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "url_scheme"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "json_dumps"
+    fully_qualified_name: "flask.testing.EnvironBuilder.json_dumps"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.EnvironBuilder"
+        fully_qualified_name: "flask.testing.EnvironBuilder"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "flask.testing.EnvironBuilder.app"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+}
+classes {
+  name: "FlaskClient"
+  fully_qualified_name: "flask.testing.FlaskClient"
+  super_classes: "werkzeug.test.Client"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.testing.FlaskClient.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskClient"
+        fully_qualified_name: "flask.testing.FlaskClient"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "session_transaction"
+    fully_qualified_name: "flask.testing.FlaskClient.session_transaction"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[flask.sessions.SessionMixin,None,None]"
+      args {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskClient"
+        fully_qualified_name: "flask.testing.FlaskClient"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "_copy_environ"
+    fully_qualified_name: "flask.testing.FlaskClient._copy_environ"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_request_from_builder_args"
+    fully_qualified_name: "flask.testing.FlaskClient._request_from_builder_args"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "open"
+    fully_qualified_name: "flask.testing.FlaskClient.open"
+    return_annotation {
+      pretty_printed_name: "werkzeug.test.TestResponse"
+      fully_qualified_name: "werkzeug.test.TestResponse"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskClient"
+        fully_qualified_name: "flask.testing.FlaskClient"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "buffered"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "follow_redirects"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "flask.testing.FlaskClient.__enter__"
+    return_annotation {
+      pretty_printed_name: "flask.testing.FlaskClient"
+      fully_qualified_name: "flask.testing.FlaskClient"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskClient"
+        fully_qualified_name: "flask.testing.FlaskClient"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "flask.testing.FlaskClient.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskClient"
+        fully_qualified_name: "flask.testing.FlaskClient"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "application"
+    fully_qualified_name: "flask.testing.FlaskClient.application"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+  attributes {
+    name: "preserve_context"
+    fully_qualified_name: "flask.testing.FlaskClient.preserve_context"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_new_contexts"
+    fully_qualified_name: "flask.testing.FlaskClient._new_contexts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[contextlib.AbstractContextManager[Any]]"
+      args {
+        pretty_printed_name: "contextlib.AbstractContextManager[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "contextlib.AbstractContextManager"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_context_stack"
+    fully_qualified_name: "flask.testing.FlaskClient._context_stack"
+    type_annotation {
+      pretty_printed_name: "contextlib.ExitStack"
+      fully_qualified_name: "contextlib.ExitStack"
+    }
+  }
+  attributes {
+    name: "environ_base"
+    fully_qualified_name: "flask.testing.FlaskClient.environ_base"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "FlaskCliRunner"
+  fully_qualified_name: "flask.testing.FlaskCliRunner"
+  super_classes: "click.testing.CliRunner"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.testing.FlaskCliRunner.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskCliRunner"
+        fully_qualified_name: "flask.testing.FlaskCliRunner"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "invoke"
+    fully_qualified_name: "flask.testing.FlaskCliRunner.invoke"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.testing.FlaskCliRunner"
+        fully_qualified_name: "flask.testing.FlaskCliRunner"
+      }
+    }
+    parameters {
+      name: "cli"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "flask.testing.FlaskCliRunner.app"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.testing.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "werkzeug"
+  fully_qualified_name: "werkzeug"
+  is_imported_module: true
+}

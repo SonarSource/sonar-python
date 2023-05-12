@@ -1,0 +1,139 @@
+fully_qualified_name: "jinja2.optimizer"
+classes {
+  name: "Optimizer"
+  fully_qualified_name: "jinja2.optimizer.Optimizer"
+  super_classes: "jinja2.visitor.NodeTransformer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.optimizer.Optimizer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.optimizer.Optimizer"
+        fully_qualified_name: "jinja2.optimizer.Optimizer"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.environment.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.environment.Environment"
+          fully_qualified_name: "jinja2.environment.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "generic_visit"
+    fully_qualified_name: "jinja2.optimizer.Optimizer.generic_visit"
+    return_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.optimizer.Optimizer"
+        fully_qualified_name: "jinja2.optimizer.Optimizer"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.nodes.Node"
+        fully_qualified_name: "jinja2.nodes.Node"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "environment"
+    fully_qualified_name: "jinja2.optimizer.Optimizer.environment"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.environment.Environment,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "optimize"
+  fully_qualified_name: "jinja2.optimizer.optimize"
+  return_annotation {
+    pretty_printed_name: "jinja2.nodes.Node"
+    fully_qualified_name: "jinja2.nodes.Node"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.Node"
+      fully_qualified_name: "jinja2.nodes.Node"
+    }
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.optimizer.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

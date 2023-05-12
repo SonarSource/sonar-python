@@ -1,0 +1,519 @@
+fully_qualified_name: "jinja2.sandbox"
+classes {
+  name: "SandboxedEnvironment"
+  fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+  super_classes: "jinja2.environment.Environment"
+  methods {
+    name: "intercept_unop"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.intercept_unop"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "operator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_safe_attribute"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.is_safe_attribute"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "attr"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "is_safe_callable"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.is_safe_callable"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "call_binop"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call_binop"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "operator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "left"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "right"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "call_unop"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call_unop"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "operator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "arg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getitem"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.getitem"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "argument"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getattr"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.getattr"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unsafe_undefined"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.unsafe_undefined"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "call"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call"
+    parameters {
+      name: "__self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "__context"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "__obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "sandboxed"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.sandboxed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "default_binop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.default_binop_table"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "default_unop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.default_unop_table"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "intercepted_binops"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.intercepted_binops"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "intercepted_unops"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.intercepted_unops"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "binop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.binop_table"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "unop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.unop_table"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ImmutableSandboxedEnvironment"
+  fully_qualified_name: "jinja2.sandbox.ImmutableSandboxedEnvironment"
+  super_classes: "jinja2.sandbox.SandboxedEnvironment"
+  methods {
+    name: "is_safe_attribute"
+    fully_qualified_name: "jinja2.sandbox.ImmutableSandboxedEnvironment.is_safe_attribute"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "attr"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "safe_range"
+  fully_qualified_name: "jinja2.sandbox.safe_range"
+  parameters {
+    name: "args"
+    kind: VAR_POSITIONAL
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "unsafe"
+  fully_qualified_name: "jinja2.sandbox.unsafe"
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "is_internal_attribute"
+  fully_qualified_name: "jinja2.sandbox.is_internal_attribute"
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "modifies_known_mutable"
+  fully_qualified_name: "jinja2.sandbox.modifies_known_mutable"
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "MAX_RANGE"
+  fully_qualified_name: "jinja2.sandbox.MAX_RANGE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "UNSAFE_FUNCTION_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_FUNCTION_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "UNSAFE_METHOD_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_METHOD_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "UNSAFE_GENERATOR_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_GENERATOR_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,169 @@
+fully_qualified_name: "jinja2.async_utils"
+functions {
+  name: "async_variant"
+  fully_qualified_name: "jinja2.async_utils.async_variant"
+  parameters {
+    name: "normal_func"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "auto_await"
+  fully_qualified_name: "jinja2.async_utils.auto_await"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,jinja2.async_utils.V]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "jinja2.async_utils.V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Awaitable[jinja2.async_utils.V],jinja2.async_utils.V]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Awaitable[jinja2.async_utils.V]"
+        args {
+          pretty_printed_name: "jinja2.async_utils.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Awaitable"
+      }
+      args {
+        pretty_printed_name: "jinja2.async_utils.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_asynchronous: true
+}
+functions {
+  name: "auto_aiter"
+  fully_qualified_name: "jinja2.async_utils.auto_aiter"
+  return_annotation {
+    pretty_printed_name: "typing.AsyncIterator[jinja2.async_utils.V]"
+    args {
+      pretty_printed_name: "jinja2.async_utils.V"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "typing.AsyncIterator"
+  }
+  parameters {
+    name: "iterable"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.AsyncIterable[jinja2.async_utils.V],typing.Iterable[jinja2.async_utils.V]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AsyncIterable[jinja2.async_utils.V]"
+        args {
+          pretty_printed_name: "jinja2.async_utils.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AsyncIterable"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[jinja2.async_utils.V]"
+        args {
+          pretty_printed_name: "jinja2.async_utils.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  is_asynchronous: true
+}
+functions {
+  name: "auto_to_list"
+  fully_qualified_name: "jinja2.async_utils.auto_to_list"
+  return_annotation {
+    pretty_printed_name: "typing.Coroutine[Any,Any,builtins.list[jinja2.async_utils.V]]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "builtins.list[jinja2.async_utils.V]"
+      args {
+        pretty_printed_name: "jinja2.async_utils.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    fully_qualified_name: "typing.Coroutine"
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.AsyncIterable[jinja2.async_utils.V],typing.Iterable[jinja2.async_utils.V]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AsyncIterable[jinja2.async_utils.V]"
+        args {
+          pretty_printed_name: "jinja2.async_utils.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AsyncIterable"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[jinja2.async_utils.V]"
+        args {
+          pretty_printed_name: "jinja2.async_utils.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  is_asynchronous: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.async_utils.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_common_primitives"
+  fully_qualified_name: "jinja2.async_utils._common_primitives"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.type]"
+    args {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}

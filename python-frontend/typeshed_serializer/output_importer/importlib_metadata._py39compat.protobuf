@@ -1,0 +1,65 @@
+fully_qualified_name: "importlib_metadata._py39compat"
+functions {
+  name: "normalized_name"
+  fully_qualified_name: "importlib_metadata._py39compat.normalized_name"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "dist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "importlib_metadata.Distribution"
+      fully_qualified_name: "importlib_metadata.Distribution"
+    }
+  }
+}
+functions {
+  name: "ep_matches"
+  fully_qualified_name: "importlib_metadata._py39compat.ep_matches"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "ep"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "importlib_metadata.EntryPoint"
+      fully_qualified_name: "importlib_metadata.EntryPoint"
+    }
+  }
+  parameters {
+    name: "params"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "importlib_metadata._py39compat.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

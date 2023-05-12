@@ -1,0 +1,182 @@
+fully_qualified_name: "pymysql.err"
+classes {
+  name: "MySQLError"
+  fully_qualified_name: "pymysql.err.MySQLError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Warning"
+  fully_qualified_name: "pymysql.err.Warning"
+  super_classes: "builtins.Warning"
+  super_classes: "pymysql.err.MySQLError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Error"
+  fully_qualified_name: "pymysql.err.Error"
+  super_classes: "pymysql.err.MySQLError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InterfaceError"
+  fully_qualified_name: "pymysql.err.InterfaceError"
+  super_classes: "pymysql.err.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DatabaseError"
+  fully_qualified_name: "pymysql.err.DatabaseError"
+  super_classes: "pymysql.err.Error"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DataError"
+  fully_qualified_name: "pymysql.err.DataError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "OperationalError"
+  fully_qualified_name: "pymysql.err.OperationalError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IntegrityError"
+  fully_qualified_name: "pymysql.err.IntegrityError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "InternalError"
+  fully_qualified_name: "pymysql.err.InternalError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ProgrammingError"
+  fully_qualified_name: "pymysql.err.ProgrammingError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NotSupportedError"
+  fully_qualified_name: "pymysql.err.NotSupportedError"
+  super_classes: "pymysql.err.DatabaseError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "raise_mysql_exception"
+  fully_qualified_name: "pymysql.err.raise_mysql_exception"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ER"
+  fully_qualified_name: "pymysql.constants.ER"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "error_map"
+  fully_qualified_name: "pymysql.err.error_map"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,Type[pymysql.err.DatabaseError]]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "Type[pymysql.err.DatabaseError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "pymysql.err.DatabaseError"
+        fully_qualified_name: "pymysql.err.DatabaseError"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

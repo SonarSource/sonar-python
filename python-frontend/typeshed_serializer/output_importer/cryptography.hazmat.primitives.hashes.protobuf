@@ -1,0 +1,1024 @@
+fully_qualified_name: "cryptography.hazmat.primitives.hashes"
+classes {
+  name: "HashAlgorithm"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm.digest_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm.block_size"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "HashContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext.algorithm"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext.copy"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "ExtendableOutputFunction"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.ExtendableOutputFunction"
+  super_classes: "builtins.object"
+  has_metaclass: true
+}
+classes {
+  name: "Hash"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashContext"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash.algorithm"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash.copy"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.Hash"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash"
+      }
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash._algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.Hash._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "SHA1"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA1"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA1.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA1.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA1.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA512_224"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_224"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_224.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_224.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_224.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA512_256"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_256"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_256.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_256.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512_256.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA224"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA224"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA224.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA224.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA224.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA256"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA256"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA256.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA256.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA256.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA384"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA384"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA384.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA384.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA384.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA512"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHA3_224"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_224"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_224.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_224.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_224.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+classes {
+  name: "SHA3_256"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_256"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_256.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_256.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_256.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+classes {
+  name: "SHA3_384"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_384"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_384.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_384.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_384.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+classes {
+  name: "SHA3_512"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_512"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_512.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_512.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA3_512.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+classes {
+  name: "SHAKE128"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  super_classes: "cryptography.hazmat.primitives.hashes.ExtendableOutputFunction"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHAKE128"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128"
+      }
+    }
+    parameters {
+      name: "digest_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128.digest_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHAKE128"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  attributes {
+    name: "_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE128._digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SHAKE256"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  super_classes: "cryptography.hazmat.primitives.hashes.ExtendableOutputFunction"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHAKE256"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256"
+      }
+    }
+    parameters {
+      name: "digest_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256.digest_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHAKE256"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256.block_size"
+    type_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  attributes {
+    name: "_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHAKE256._digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "MD5"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.MD5"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.MD5.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.MD5.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.MD5.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "BLAKE2b"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.BLAKE2b"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b"
+      }
+    }
+    parameters {
+      name: "digest_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b.digest_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.BLAKE2b"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_max_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b._max_digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_min_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b._min_digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2b._digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "BLAKE2s"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.BLAKE2s"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s"
+      }
+    }
+    parameters {
+      name: "digest_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s.digest_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.BLAKE2s"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_max_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s._max_digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_min_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s._min_digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.BLAKE2s._digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "SM3"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.SM3"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SM3.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SM3.digest_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.hashes.SM3.block_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.hashes.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

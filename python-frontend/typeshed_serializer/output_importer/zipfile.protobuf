@@ -1,0 +1,2908 @@
+fully_qualified_name: "zipfile"
+classes {
+  name: "BadZipFile"
+  fully_qualified_name: "zipfile.BadZipFile"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "LargeZipFile"
+  fully_qualified_name: "zipfile.LargeZipFile"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "_ZipStream"
+  fully_qualified_name: "zipfile._ZipStream"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "zipfile._ZipStream.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._ZipStream"
+        fully_qualified_name: "zipfile._ZipStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "_SupportsReadSeekTell"
+  fully_qualified_name: "zipfile._SupportsReadSeekTell"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "zipfile._SupportsReadSeekTell.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._SupportsReadSeekTell"
+        fully_qualified_name: "zipfile._SupportsReadSeekTell"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "zipfile._SupportsReadSeekTell.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._SupportsReadSeekTell"
+        fully_qualified_name: "zipfile._SupportsReadSeekTell"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "tell"
+    fully_qualified_name: "zipfile._SupportsReadSeekTell.tell"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._SupportsReadSeekTell"
+        fully_qualified_name: "zipfile._SupportsReadSeekTell"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "_ClosableZipStream"
+  fully_qualified_name: "zipfile._ClosableZipStream"
+  super_classes: "zipfile._ZipStream"
+  methods {
+    name: "close"
+    fully_qualified_name: "zipfile._ClosableZipStream.close"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._ClosableZipStream"
+        fully_qualified_name: "zipfile._ClosableZipStream"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "ZipExtFile"
+  fully_qualified_name: "zipfile.ZipExtFile"
+  super_classes: "io.BufferedIOBase"
+  methods {
+    name: "read"
+    fully_qualified_name: "zipfile.ZipExtFile.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipExtFile"
+        fully_qualified_name: "zipfile.ZipExtFile"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "zipfile.ZipExtFile.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipExtFile"
+        fully_qualified_name: "zipfile.ZipExtFile"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "peek"
+    fully_qualified_name: "zipfile.ZipExtFile.peek"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipExtFile"
+        fully_qualified_name: "zipfile.ZipExtFile"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "read1"
+    fully_qualified_name: "zipfile.ZipExtFile.read1"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipExtFile"
+        fully_qualified_name: "zipfile.ZipExtFile"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "seek"
+    fully_qualified_name: "zipfile.ZipExtFile.seek"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipExtFile"
+        fully_qualified_name: "zipfile.ZipExtFile"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "whence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "zipfile.ZipExtFile.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "zipfile.ZipExtFile.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipExtFile"
+          fully_qualified_name: "zipfile.ZipExtFile"
+        }
+      }
+      parameters {
+        name: "fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile._ClosableZipStream"
+          fully_qualified_name: "zipfile._ClosableZipStream"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "zipfile._ReadWriteMode"
+        }
+      }
+      parameters {
+        name: "zipinfo"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+      parameters {
+        name: "pwd"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "close_fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "zipfile.ZipExtFile.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipExtFile"
+          fully_qualified_name: "zipfile.ZipExtFile"
+        }
+      }
+      parameters {
+        name: "fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile._ClosableZipStream"
+          fully_qualified_name: "zipfile._ClosableZipStream"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "zipfile._ReadWriteMode"
+        }
+      }
+      parameters {
+        name: "zipinfo"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+      parameters {
+        name: "pwd"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "close_fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "zipfile.ZipExtFile.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipExtFile"
+          fully_qualified_name: "zipfile.ZipExtFile"
+        }
+      }
+      parameters {
+        name: "fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile._ZipStream"
+          fully_qualified_name: "zipfile._ZipStream"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "zipfile._ReadWriteMode"
+        }
+      }
+      parameters {
+        name: "zipinfo"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+      parameters {
+        name: "pwd"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "close_fileobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "MAX_N"
+    fully_qualified_name: "zipfile.ZipExtFile.MAX_N"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "MIN_READ_SIZE"
+    fully_qualified_name: "zipfile.ZipExtFile.MIN_READ_SIZE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "MAX_SEEK_READ"
+    fully_qualified_name: "zipfile.ZipExtFile.MAX_SEEK_READ"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "newlines"
+    fully_qualified_name: "zipfile.ZipExtFile.newlines"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.bytes],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "zipfile.ZipExtFile.mode"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      fully_qualified_name: "zipfile._ReadWriteMode"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "zipfile.ZipExtFile.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "_Writer"
+  fully_qualified_name: "zipfile._Writer"
+  super_classes: "builtins.object"
+  methods {
+    name: "write"
+    fully_qualified_name: "zipfile._Writer.write"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._Writer"
+        fully_qualified_name: "zipfile._Writer"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "ZipFile"
+  fully_qualified_name: "zipfile.ZipFile"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "zipfile.ZipFile.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],typing.IO[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "typing.IO[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "zipfile._ZipFileMode"
+      }
+    }
+    parameters {
+      name: "compression"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "allowZip64"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "compresslevel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "strict_timestamps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "zipfile.ZipFile.__enter__"
+    return_annotation {
+      pretty_printed_name: "zipfile.ZipFile.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "zipfile.ZipFile.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "zipfile.ZipFile.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+  }
+  methods {
+    name: "getinfo"
+    fully_qualified_name: "zipfile.ZipFile.getinfo"
+    return_annotation {
+      pretty_printed_name: "zipfile.ZipInfo"
+      fully_qualified_name: "zipfile.ZipInfo"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "infolist"
+    fully_qualified_name: "zipfile.ZipFile.infolist"
+    return_annotation {
+      pretty_printed_name: "builtins.list[zipfile.ZipInfo]"
+      args {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+  }
+  methods {
+    name: "namelist"
+    fully_qualified_name: "zipfile.ZipFile.namelist"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+  }
+  methods {
+    name: "open"
+    fully_qualified_name: "zipfile.ZipFile.open"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,zipfile.ZipInfo]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "zipfile._ReadWriteMode"
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "force_zip64"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "extract"
+    fully_qualified_name: "zipfile.ZipFile.extract"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "member"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,zipfile.ZipInfo]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "extractall"
+    fully_qualified_name: "zipfile.ZipFile.extractall"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "members"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[Union[builtins.str,zipfile.ZipInfo]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[Union[builtins.str,zipfile.ZipInfo]]"
+          args {
+            pretty_printed_name: "Union[builtins.str,zipfile.ZipInfo]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "zipfile.ZipInfo"
+              fully_qualified_name: "zipfile.ZipInfo"
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "printdir"
+    fully_qualified_name: "zipfile.ZipFile.printdir"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[zipfile._Writer,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "zipfile._Writer"
+          fully_qualified_name: "zipfile._Writer"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "setpassword"
+    fully_qualified_name: "zipfile.ZipFile.setpassword"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "zipfile.ZipFile.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,zipfile.ZipInfo]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "testzip"
+    fully_qualified_name: "zipfile.ZipFile.testzip"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "zipfile.ZipFile.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+    parameters {
+      name: "arcname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "compress_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "compresslevel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "writestr"
+    fully_qualified_name: "zipfile.ZipFile.writestr"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipFile"
+        fully_qualified_name: "zipfile.ZipFile"
+      }
+    }
+    parameters {
+      name: "zinfo_or_arcname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,zipfile.ZipInfo]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "zipfile.ZipInfo"
+          fully_qualified_name: "zipfile.ZipInfo"
+        }
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                  kind: UNION
+                  args {
+                    pretty_printed_name: "builtins.bytearray"
+                    fully_qualified_name: "builtins.bytearray"
+                  }
+                  args {
+                    pretty_printed_name: "builtins.memoryview"
+                    fully_qualified_name: "builtins.memoryview"
+                  }
+                  args {
+                    pretty_printed_name: "array.array[Any]"
+                    args {
+                      pretty_printed_name: "Any"
+                      kind: ANY
+                    }
+                    fully_qualified_name: "array.array"
+                  }
+                  args {
+                    pretty_printed_name: "mmap.mmap"
+                    fully_qualified_name: "mmap.mmap"
+                  }
+                  args {
+                    pretty_printed_name: "ctypes._CData"
+                    fully_qualified_name: "ctypes._CData"
+                  }
+                  args {
+                    pretty_printed_name: "pickle.PickleBuffer"
+                    fully_qualified_name: "pickle.PickleBuffer"
+                  }
+                }
+                fully_qualified_name: "_typeshed.WriteableBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.ReadableBuffer"
+          }
+          fully_qualified_name: "_typeshed._BufferWithLen"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "compress_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "compresslevel"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "zipfile.ZipFile.filename"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "debug"
+    fully_qualified_name: "zipfile.ZipFile.debug"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "comment"
+    fully_qualified_name: "zipfile.ZipFile.comment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "filelist"
+    fully_qualified_name: "zipfile.ZipFile.filelist"
+    type_annotation {
+      pretty_printed_name: "builtins.list[zipfile.ZipInfo]"
+      args {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "fp"
+    fully_qualified_name: "zipfile.ZipFile.fp"
+    type_annotation {
+      pretty_printed_name: "Union[typing.IO[builtins.bytes],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "NameToInfo"
+    fully_qualified_name: "zipfile.ZipFile.NameToInfo"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,zipfile.ZipInfo]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "start_dir"
+    fully_qualified_name: "zipfile.ZipFile.start_dir"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "compression"
+    fully_qualified_name: "zipfile.ZipFile.compression"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "compresslevel"
+    fully_qualified_name: "zipfile.ZipFile.compresslevel"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "zipfile.ZipFile.mode"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      fully_qualified_name: "zipfile._ZipFileMode"
+    }
+  }
+  attributes {
+    name: "pwd"
+    fully_qualified_name: "zipfile.ZipFile.pwd"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "PyZipFile"
+  fully_qualified_name: "zipfile.PyZipFile"
+  super_classes: "zipfile.ZipFile"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "zipfile.PyZipFile.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.PyZipFile"
+        fully_qualified_name: "zipfile.PyZipFile"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,typing.IO[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.IO[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "zipfile._ZipFileMode"
+      }
+    }
+    parameters {
+      name: "compression"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "allowZip64"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "optimize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "writepy"
+    fully_qualified_name: "zipfile.PyZipFile.writepy"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.PyZipFile"
+        fully_qualified_name: "zipfile.PyZipFile"
+      }
+    }
+    parameters {
+      name: "pathname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "basename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filterfunc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "ZipInfo"
+  fully_qualified_name: "zipfile.ZipInfo"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "zipfile.ZipInfo.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "date_time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "zipfile._DateTuple"
+      }
+    }
+  }
+  methods {
+    name: "from_file"
+    fully_qualified_name: "zipfile.ZipInfo.from_file"
+    return_annotation {
+      pretty_printed_name: "zipfile.ZipInfo.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[zipfile.ZipInfo.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "zipfile.ZipInfo.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+    parameters {
+      name: "arcname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "strict_timestamps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "is_dir"
+    fully_qualified_name: "zipfile.ZipInfo.is_dir"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+    }
+  }
+  methods {
+    name: "FileHeader"
+    fully_qualified_name: "zipfile.ZipInfo.FileHeader"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.ZipInfo"
+        fully_qualified_name: "zipfile.ZipInfo"
+      }
+    }
+    parameters {
+      name: "zip64"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "zipfile.ZipInfo.filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "date_time"
+    fully_qualified_name: "zipfile.ZipInfo.date_time"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "zipfile._DateTuple"
+    }
+  }
+  attributes {
+    name: "compress_type"
+    fully_qualified_name: "zipfile.ZipInfo.compress_type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "comment"
+    fully_qualified_name: "zipfile.ZipInfo.comment"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "extra"
+    fully_qualified_name: "zipfile.ZipInfo.extra"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "create_system"
+    fully_qualified_name: "zipfile.ZipInfo.create_system"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "create_version"
+    fully_qualified_name: "zipfile.ZipInfo.create_version"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "extract_version"
+    fully_qualified_name: "zipfile.ZipInfo.extract_version"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "reserved"
+    fully_qualified_name: "zipfile.ZipInfo.reserved"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "flag_bits"
+    fully_qualified_name: "zipfile.ZipInfo.flag_bits"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "volume"
+    fully_qualified_name: "zipfile.ZipInfo.volume"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "internal_attr"
+    fully_qualified_name: "zipfile.ZipInfo.internal_attr"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "external_attr"
+    fully_qualified_name: "zipfile.ZipInfo.external_attr"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "header_offset"
+    fully_qualified_name: "zipfile.ZipInfo.header_offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "CRC"
+    fully_qualified_name: "zipfile.ZipInfo.CRC"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "compress_size"
+    fully_qualified_name: "zipfile.ZipInfo.compress_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "file_size"
+    fully_qualified_name: "zipfile.ZipInfo.file_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "orig_filename"
+    fully_qualified_name: "zipfile.ZipInfo.orig_filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "_PathOpenProtocol"
+  fully_qualified_name: "zipfile._PathOpenProtocol"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "zipfile._PathOpenProtocol.__call__"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile._PathOpenProtocol"
+        fully_qualified_name: "zipfile._PathOpenProtocol"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "zipfile._ReadWriteMode"
+      }
+    }
+    parameters {
+      name: "pwd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "force_zip64"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "Path"
+  fully_qualified_name: "zipfile.Path"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "zipfile.Path.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "parent"
+    fully_qualified_name: "zipfile.Path.parent"
+    return_annotation {
+      pretty_printed_name: "os.PathLike[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "os.PathLike"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "zipfile.Path.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    parameters {
+      name: "root"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[zipfile.ZipFile,TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],typing.IO[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "zipfile.ZipFile"
+          fully_qualified_name: "zipfile.ZipFile"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "typing.IO[builtins.bytes]"
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          fully_qualified_name: "typing.IO"
+        }
+      }
+    }
+    parameters {
+      name: "at"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "open"
+    fully_qualified_name: "zipfile.Path.open"
+    return_annotation {
+      pretty_printed_name: "zipfile._PathOpenProtocol"
+      fully_qualified_name: "zipfile._PathOpenProtocol"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "iterdir"
+    fully_qualified_name: "zipfile.Path.iterdir"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[zipfile.Path]"
+      args {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+  }
+  methods {
+    name: "is_dir"
+    fully_qualified_name: "zipfile.Path.is_dir"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+  }
+  methods {
+    name: "is_file"
+    fully_qualified_name: "zipfile.Path.is_file"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+  }
+  methods {
+    name: "exists"
+    fully_qualified_name: "zipfile.Path.exists"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+  }
+  methods {
+    name: "read_text"
+    fully_qualified_name: "zipfile.Path.read_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "line_buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "write_through"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "read_bytes"
+    fully_qualified_name: "zipfile.Path.read_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+  }
+  methods {
+    name: "joinpath"
+    fully_qualified_name: "zipfile.Path.joinpath"
+    return_annotation {
+      pretty_printed_name: "zipfile.Path"
+      fully_qualified_name: "zipfile.Path"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    parameters {
+      name: "add"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "zipfile.Path.__truediv__"
+    return_annotation {
+      pretty_printed_name: "zipfile.Path"
+      fully_qualified_name: "zipfile.Path"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "zipfile.Path"
+        fully_qualified_name: "zipfile.Path"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+}
+functions {
+  name: "is_zipfile"
+  fully_qualified_name: "zipfile.is_zipfile"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],zipfile._SupportsReadSeekTell]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+      args {
+        pretty_printed_name: "zipfile._SupportsReadSeekTell"
+        fully_qualified_name: "zipfile._SupportsReadSeekTell"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "zipfile.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "zipfile.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "ZIP_STORED"
+  fully_qualified_name: "zipfile.ZIP_STORED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP_DEFLATED"
+  fully_qualified_name: "zipfile.ZIP_DEFLATED"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP64_LIMIT"
+  fully_qualified_name: "zipfile.ZIP64_LIMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP_FILECOUNT_LIMIT"
+  fully_qualified_name: "zipfile.ZIP_FILECOUNT_LIMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP_MAX_COMMENT"
+  fully_qualified_name: "zipfile.ZIP_MAX_COMMENT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP_BZIP2"
+  fully_qualified_name: "zipfile.ZIP_BZIP2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ZIP_LZMA"
+  fully_qualified_name: "zipfile.ZIP_LZMA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

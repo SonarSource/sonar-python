@@ -1,0 +1,330 @@
+fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7"
+classes {
+  name: "PKCS7Options"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "Text"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.Text"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "Binary"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.Binary"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "DetachedSignature"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.DetachedSignature"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "NoCapabilities"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoCapabilities"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "NoAttributes"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoAttributes"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "NoCerts"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoCerts"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "PKCS7SignatureBuilder"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "signers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "additional_certs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "set_data"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.set_data"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "add_signer"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.add_signer"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      }
+    }
+    parameters {
+      name: "certificate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7._ALLOWED_PRIVATE_KEY_TYPES"
+      }
+    }
+    parameters {
+      name: "hash_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.hashes.SHA1,cryptography.hazmat.primitives.hashes.SHA224,cryptography.hazmat.primitives.hashes.SHA256,cryptography.hazmat.primitives.hashes.SHA384,cryptography.hazmat.primitives.hashes.SHA512]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.SHA1,cryptography.hazmat.primitives.hashes.SHA224,cryptography.hazmat.primitives.hashes.SHA256,cryptography.hazmat.primitives.hashes.SHA384,cryptography.hazmat.primitives.hashes.SHA512]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHA1"
+            fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA1"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHA224"
+            fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA224"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHA256"
+            fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA256"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHA384"
+            fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA384"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.hashes.SHA512"
+            fully_qualified_name: "cryptography.hazmat.primitives.hashes.SHA512"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7._ALLOWED_PKCS7_HASH_TYPES"
+      }
+    }
+  }
+  methods {
+    name: "add_certificate"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.add_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      }
+    }
+    parameters {
+      name: "certificate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options]"
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"
+          fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_data"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._data"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_signers"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._signers"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_additional_certs"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._additional_certs"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_pkcs7_certificates"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.load_pem_pkcs7_certificates"
+  return_annotation {
+    pretty_printed_name: "builtins.list[cryptography.x509.base.Certificate]"
+    args {
+      pretty_printed_name: "cryptography.x509.base.Certificate"
+      fully_qualified_name: "cryptography.x509.base.Certificate"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_der_pkcs7_certificates"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.load_der_pkcs7_certificates"
+  return_annotation {
+    pretty_printed_name: "builtins.list[cryptography.x509.base.Certificate]"
+    args {
+      pretty_printed_name: "cryptography.x509.base.Certificate"
+      fully_qualified_name: "cryptography.x509.base.Certificate"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.pkcs7.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

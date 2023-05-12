@@ -1,0 +1,197 @@
+fully_qualified_name: "emoji.core"
+functions {
+  name: "_normalize"
+  fully_qualified_name: "emoji.core._normalize"
+  parameters {
+    name: "form"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "emojize"
+  fully_qualified_name: "emoji.core.emojize"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "delimiters"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "variant"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "language"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "handle_version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "demojize"
+  fully_qualified_name: "emoji.core.demojize"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "delimiters"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "language"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "handle_version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "replace_emoji"
+  fully_qualified_name: "emoji.core.replace_emoji"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "replace"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "version"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "emoji_list"
+  fully_qualified_name: "emoji.core.emoji_list"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "distinct_emoji_list"
+  fully_qualified_name: "emoji.core.distinct_emoji_list"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "emoji_count"
+  fully_qualified_name: "emoji.core.emoji_count"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "unique"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "is_emoji"
+  fully_qualified_name: "emoji.core.is_emoji"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "version"
+  fully_qualified_name: "emoji.core.version"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_get_search_tree"
+  fully_qualified_name: "emoji.core._get_search_tree"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "emoji.core.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "emoji.core.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "_SEARCH_TREE"
+  fully_qualified_name: "emoji.core._SEARCH_TREE"
+  type_annotation {
+    pretty_printed_name: "Union[Any,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+vars {
+  name: "_DEFAULT_DELIMITER"
+  fully_qualified_name: "emoji.core._DEFAULT_DELIMITER"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_EMOJI_NAME_PATTERN"
+  fully_qualified_name: "emoji.core._EMOJI_NAME_PATTERN"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_PY2"
+  fully_qualified_name: "emoji.core._PY2"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}

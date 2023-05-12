@@ -1,0 +1,314 @@
+fully_qualified_name: "werkzeug.routing.matcher"
+classes {
+  name: "SlashRequired"
+  fully_qualified_name: "werkzeug.routing.matcher.SlashRequired"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "State"
+  fully_qualified_name: "werkzeug.routing.matcher.State"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.matcher.State.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.matcher.State"
+        fully_qualified_name: "werkzeug.routing.matcher.State"
+      }
+    }
+    parameters {
+      name: "dynamic"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[werkzeug.routing.rules.RulePart,werkzeug.routing.matcher.State]]"
+        args {
+          pretty_printed_name: "Tuple[werkzeug.routing.rules.RulePart,werkzeug.routing.matcher.State]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "werkzeug.routing.rules.RulePart"
+            fully_qualified_name: "werkzeug.routing.rules.RulePart"
+          }
+          args {
+            pretty_printed_name: "werkzeug.routing.matcher.State"
+            fully_qualified_name: "werkzeug.routing.matcher.State"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "rules"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.routing.rules.Rule]"
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.Rule"
+          fully_qualified_name: "werkzeug.routing.rules.Rule"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "static"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,werkzeug.routing.matcher.State]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "werkzeug.routing.matcher.State"
+          fully_qualified_name: "werkzeug.routing.matcher.State"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "dynamic"
+    fully_qualified_name: "werkzeug.routing.matcher.State.dynamic"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[werkzeug.routing.rules.RulePart,werkzeug.routing.matcher.State]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.routing.rules.RulePart,werkzeug.routing.matcher.State]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.routing.rules.RulePart"
+          fully_qualified_name: "werkzeug.routing.rules.RulePart"
+        }
+        args {
+          pretty_printed_name: "werkzeug.routing.matcher.State"
+          fully_qualified_name: "werkzeug.routing.matcher.State"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "rules"
+    fully_qualified_name: "werkzeug.routing.matcher.State.rules"
+    type_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.routing.rules.Rule]"
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "static"
+    fully_qualified_name: "werkzeug.routing.matcher.State.static"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,werkzeug.routing.matcher.State]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "werkzeug.routing.matcher.State"
+        fully_qualified_name: "werkzeug.routing.matcher.State"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.routing.matcher.State.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "StateMachineMatcher"
+  fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.matcher.StateMachineMatcher"
+        fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher"
+      }
+    }
+    parameters {
+      name: "merge_slashes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.matcher.StateMachineMatcher"
+        fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher"
+      }
+    }
+    parameters {
+      name: "rule"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.matcher.StateMachineMatcher"
+        fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher"
+      }
+    }
+  }
+  methods {
+    name: "match"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher.match"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.routing.rules.Rule,typing.MutableMapping[builtins.str,Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      args {
+        pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.MutableMapping"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.matcher.StateMachineMatcher"
+        fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "websocket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "_root"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher._root"
+    type_annotation {
+      pretty_printed_name: "werkzeug.routing.matcher.State"
+      fully_qualified_name: "werkzeug.routing.matcher.State"
+    }
+  }
+  attributes {
+    name: "merge_slashes"
+    fully_qualified_name: "werkzeug.routing.matcher.StateMachineMatcher.merge_slashes"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.routing.matcher.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

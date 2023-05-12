@@ -1,0 +1,73 @@
+fully_qualified_name: "asyncio.runners"
+functions {
+  name: "run"
+  fully_qualified_name: "asyncio.runners.run"
+  return_annotation {
+    pretty_printed_name: "asyncio.runners._T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "main"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.runners._T]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.runners._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+  }
+  parameters {
+    name: "debug"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.runners.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.runners.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

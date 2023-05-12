@@ -1,0 +1,740 @@
+fully_qualified_name: "filelock"
+classes {
+  name: "AcquireReturnProxy"
+  fully_qualified_name: "filelock._api.AcquireReturnProxy"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "filelock._api.AcquireReturnProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.AcquireReturnProxy"
+        fully_qualified_name: "filelock._api.AcquireReturnProxy"
+      }
+    }
+    parameters {
+      name: "lock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "filelock._api.AcquireReturnProxy.__enter__"
+    return_annotation {
+      pretty_printed_name: "filelock._api.BaseFileLock"
+      fully_qualified_name: "filelock._api.BaseFileLock"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._api.AcquireReturnProxy"
+        fully_qualified_name: "filelock._api.AcquireReturnProxy"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "filelock._api.AcquireReturnProxy.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._api.AcquireReturnProxy"
+        fully_qualified_name: "filelock._api.AcquireReturnProxy"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "lock"
+    fully_qualified_name: "filelock._api.AcquireReturnProxy.lock"
+    type_annotation {
+      pretty_printed_name: "filelock._api.BaseFileLock"
+      fully_qualified_name: "filelock._api.BaseFileLock"
+    }
+  }
+}
+classes {
+  name: "BaseFileLock"
+  fully_qualified_name: "filelock._api.BaseFileLock"
+  super_classes: "abc.ABC"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "filelock._api.BaseFileLock.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    parameters {
+      name: "lock_file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "lock_file"
+    fully_qualified_name: "filelock._api.BaseFileLock.lock_file"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_acquire"
+    fully_qualified_name: "filelock._api.BaseFileLock._acquire"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "_release"
+    fully_qualified_name: "filelock._api.BaseFileLock._release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "is_locked"
+    fully_qualified_name: "filelock._api.BaseFileLock.is_locked"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "acquire"
+    fully_qualified_name: "filelock._api.BaseFileLock.acquire"
+    return_annotation {
+      pretty_printed_name: "filelock._api.AcquireReturnProxy"
+      fully_qualified_name: "filelock._api.AcquireReturnProxy"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "poll_interval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "poll_intervall"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "release"
+    fully_qualified_name: "filelock._api.BaseFileLock.release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    parameters {
+      name: "force"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "filelock._api.BaseFileLock.__enter__"
+    return_annotation {
+      pretty_printed_name: "filelock._api.BaseFileLock"
+      fully_qualified_name: "filelock._api.BaseFileLock"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "filelock._api.BaseFileLock.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__del__"
+    fully_qualified_name: "filelock._api.BaseFileLock.__del__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._api.BaseFileLock"
+        fully_qualified_name: "filelock._api.BaseFileLock"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "timeout"
+    fullname: "filelock._api.BaseFileLock.timeout"
+    definitions {
+      name: "timeout"
+      fully_qualified_name: "filelock._api.BaseFileLock.timeout"
+      return_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "filelock._api.BaseFileLock"
+          fully_qualified_name: "filelock._api.BaseFileLock"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "timeout"
+      fully_qualified_name: "filelock._api.BaseFileLock.timeout"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "filelock._api.BaseFileLock"
+          fully_qualified_name: "filelock._api.BaseFileLock"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "timeout.setter"
+    }
+  }
+  attributes {
+    name: "_lock_file"
+    fully_qualified_name: "filelock._api.BaseFileLock._lock_file"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_lock_file_fd"
+    fully_qualified_name: "filelock._api.BaseFileLock._lock_file_fd"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_thread_lock"
+    fully_qualified_name: "filelock._api.BaseFileLock._thread_lock"
+    type_annotation {
+      pretty_printed_name: "threading.Lock"
+      fully_qualified_name: "threading.Lock"
+    }
+  }
+  attributes {
+    name: "_lock_counter"
+    fully_qualified_name: "filelock._api.BaseFileLock._lock_counter"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_timeout"
+    fully_qualified_name: "filelock._api.BaseFileLock._timeout"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+}
+classes {
+  name: "Timeout"
+  fully_qualified_name: "filelock._error.Timeout"
+  super_classes: "builtins.TimeoutError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "filelock._error.Timeout.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._error.Timeout"
+        fully_qualified_name: "filelock._error.Timeout"
+      }
+    }
+    parameters {
+      name: "lock_file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "filelock._error.Timeout.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._error.Timeout"
+        fully_qualified_name: "filelock._error.Timeout"
+      }
+    }
+  }
+  attributes {
+    name: "lock_file"
+    fully_qualified_name: "filelock._error.Timeout.lock_file"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "SoftFileLock"
+  fully_qualified_name: "filelock._soft.SoftFileLock"
+  super_classes: "filelock._api.BaseFileLock"
+  methods {
+    name: "_acquire"
+    fully_qualified_name: "filelock._soft.SoftFileLock._acquire"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._soft.SoftFileLock"
+        fully_qualified_name: "filelock._soft.SoftFileLock"
+      }
+    }
+  }
+  methods {
+    name: "_release"
+    fully_qualified_name: "filelock._soft.SoftFileLock._release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._soft.SoftFileLock"
+        fully_qualified_name: "filelock._soft.SoftFileLock"
+      }
+    }
+  }
+}
+classes {
+  name: "UnixFileLock"
+  fully_qualified_name: "filelock._unix.UnixFileLock"
+  super_classes: "filelock._api.BaseFileLock"
+  methods {
+    name: "_acquire"
+    fully_qualified_name: "filelock._unix.UnixFileLock._acquire"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._unix.UnixFileLock"
+        fully_qualified_name: "filelock._unix.UnixFileLock"
+      }
+    }
+  }
+  methods {
+    name: "_release"
+    fully_qualified_name: "filelock._unix.UnixFileLock._release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._unix.UnixFileLock"
+        fully_qualified_name: "filelock._unix.UnixFileLock"
+      }
+    }
+  }
+}
+classes {
+  name: "WindowsFileLock"
+  fully_qualified_name: "filelock._windows.WindowsFileLock"
+  super_classes: "filelock._api.BaseFileLock"
+  super_classes: "abc.ABC"
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "filelock.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "filelock.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "has_fcntl"
+  fully_qualified_name: "filelock._unix.has_fcntl"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "version"
+  fully_qualified_name: "filelock.version.version"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "__version__"
+  fully_qualified_name: "filelock.__version__"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_FileLock"
+  fully_qualified_name: "filelock._FileLock"
+  type_annotation {
+    pretty_printed_name: "Type[filelock._api.BaseFileLock]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "filelock._api.BaseFileLock"
+      fully_qualified_name: "filelock._api.BaseFileLock"
+    }
+  }
+}
+vars {
+  name: "FileLock"
+  fully_qualified_name: "filelock.FileLock"
+  type_annotation {
+    pretty_printed_name: "Type[filelock._api.BaseFileLock]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "filelock._api.BaseFileLock"
+      fully_qualified_name: "filelock._api.BaseFileLock"
+    }
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "filelock.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

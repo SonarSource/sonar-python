@@ -1,0 +1,585 @@
+fully_qualified_name: "_thread"
+classes {
+  name: "LockType"
+  fully_qualified_name: "_thread.LockType"
+  super_classes: "builtins.object"
+  methods {
+    name: "acquire"
+    fully_qualified_name: "_thread.LockType.acquire"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+    parameters {
+      name: "blocking"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "release"
+    fully_qualified_name: "_thread.LockType.release"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+  }
+  methods {
+    name: "locked"
+    fully_qualified_name: "_thread.LockType.locked"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "_thread.LockType.__enter__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "_thread.LockType.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_thread.LockType"
+        fully_qualified_name: "_thread.LockType"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  has_decorators: true
+}
+classes {
+  name: "_ExceptHookArgs"
+  fully_qualified_name: "_thread._ExceptHookArgs"
+  super_classes: "_typeshed.structseq"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "exc_type"
+    fully_qualified_name: "_thread._ExceptHookArgs.exc_type"
+    return_annotation {
+      pretty_printed_name: "Type[builtins.BaseException]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[builtins.BaseException,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[types.TracebackType,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[threading.Thread,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "threading.Thread"
+            fully_qualified_name: "threading.Thread"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "exc_value"
+    fully_qualified_name: "_thread._ExceptHookArgs.exc_value"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.BaseException,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[builtins.BaseException,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[types.TracebackType,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[threading.Thread,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "threading.Thread"
+            fully_qualified_name: "threading.Thread"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "exc_traceback"
+    fully_qualified_name: "_thread._ExceptHookArgs.exc_traceback"
+    return_annotation {
+      pretty_printed_name: "Union[types.TracebackType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[builtins.BaseException,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[types.TracebackType,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[threading.Thread,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "threading.Thread"
+            fully_qualified_name: "threading.Thread"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "thread"
+    fully_qualified_name: "_thread._ExceptHookArgs.thread"
+    return_annotation {
+      pretty_printed_name: "Union[threading.Thread,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "threading.Thread"
+        fully_qualified_name: "threading.Thread"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[Type[builtins.BaseException],Union[builtins.BaseException,None],Union[types.TracebackType,None],Union[threading.Thread,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "Union[builtins.BaseException,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[types.TracebackType,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "types.TracebackType"
+            fully_qualified_name: "types.TracebackType"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "Union[threading.Thread,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "threading.Thread"
+            fully_qualified_name: "threading.Thread"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  has_decorators: true
+}
+functions {
+  name: "_count"
+  fully_qualified_name: "_thread._count"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+functions {
+  name: "start_new_thread"
+  fully_qualified_name: "_thread.start_new_thread"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "function"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+functions {
+  name: "interrupt_main"
+  fully_qualified_name: "_thread.interrupt_main"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "exit"
+  fully_qualified_name: "_thread.exit"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+}
+functions {
+  name: "allocate_lock"
+  fully_qualified_name: "_thread.allocate_lock"
+  return_annotation {
+    pretty_printed_name: "_thread.LockType"
+    fully_qualified_name: "_thread.LockType"
+  }
+}
+functions {
+  name: "get_ident"
+  fully_qualified_name: "_thread.get_ident"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+functions {
+  name: "stack_size"
+  fully_qualified_name: "_thread.stack_size"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "get_native_id"
+  fully_qualified_name: "_thread.get_native_id"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "_thread.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "TIMEOUT_MAX"
+  fully_qualified_name: "_thread.TIMEOUT_MAX"
+  type_annotation {
+    pretty_printed_name: "builtins.float"
+    fully_qualified_name: "builtins.float"
+  }
+}
+vars {
+  name: "_excepthook"
+  fully_qualified_name: "_thread._excepthook"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+}

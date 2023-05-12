@@ -1,0 +1,941 @@
+fully_qualified_name: "colorama.ansitowin32"
+classes {
+  name: "StreamWrapper"
+  fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    parameters {
+      name: "wrapped"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.TextIO"
+        fully_qualified_name: "typing.TextIO"
+      }
+    }
+    parameters {
+      name: "converter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    parameters {
+      name: "name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.__enter__"
+    return_annotation {
+      pretty_printed_name: "typing.TextIO"
+      fully_qualified_name: "typing.TextIO"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "isatty"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.isatty"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "closed"
+    fully_qualified_name: "colorama.ansitowin32.StreamWrapper.closed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+        fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AnsiToWin32"
+  fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "wrapped"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.TextIO"
+        fully_qualified_name: "typing.TextIO"
+      }
+    }
+    parameters {
+      name: "convert"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "strip"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "autoreset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "should_wrap"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.should_wrap"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_win32_calls"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.get_win32_calls"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.int,Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]],builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "colorama.ansitowin32._WinTermCallDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.write"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "reset_all"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.reset_all"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write_and_convert"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.write_and_convert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "write_plain_text"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.write_plain_text"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "end"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "convert_ansi"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.convert_ansi"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "paramstring"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extract_params"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.extract_params"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "paramstring"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "call_win32"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.call_win32"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "params"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "convert_osc"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.convert_osc"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "colorama.ansitowin32.AnsiToWin32"
+        fully_qualified_name: "colorama.ansitowin32.AnsiToWin32"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "ANSI_CSI_RE"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.ANSI_CSI_RE"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ANSI_OSC_RE"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.ANSI_OSC_RE"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "wrapped"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.wrapped"
+    type_annotation {
+      pretty_printed_name: "typing.TextIO"
+      fully_qualified_name: "typing.TextIO"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "autoreset"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.autoreset"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "stream"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.stream"
+    type_annotation {
+      pretty_printed_name: "colorama.ansitowin32.StreamWrapper"
+      fully_qualified_name: "colorama.ansitowin32.StreamWrapper"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "strip"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.strip"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "convert"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.convert"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "win32_calls"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.win32_calls"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.dict[builtins.int,Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.dict[builtins.int,Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Union[Tuple[TypeAlias[CallableType[builtins.function]]],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int],Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]],builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[CallableType[builtins.function]],builtins.int,builtins.bool]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "CallableType[builtins.function]"
+                kind: CALLABLE
+                args {
+                  pretty_printed_name: "builtins.function"
+                  fully_qualified_name: "builtins.function"
+                }
+              }
+              fully_qualified_name: "colorama.ansitowin32._WinTermCall"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+          }
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "colorama.ansitowin32._WinTermCallDict"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "on_stderr"
+    fully_qualified_name: "colorama.ansitowin32.AnsiToWin32.on_stderr"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+vars {
+  name: "winterm"
+  fully_qualified_name: "colorama.ansitowin32.winterm"
+  type_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

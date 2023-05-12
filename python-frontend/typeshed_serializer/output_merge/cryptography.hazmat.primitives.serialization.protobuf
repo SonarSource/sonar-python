@@ -1,0 +1,601 @@
+fully_qualified_name: "cryptography.hazmat.primitives.serialization"
+classes {
+  name: "Encoding"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding"
+  super_classes: "enum.Enum"
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PEM"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.PEM"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "DER"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.DER"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "X962"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.X962"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "SMIME"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.Encoding.SMIME"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "PrivateFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat"
+  super_classes: "enum.Enum"
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PKCS8"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat.PKCS8"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "TraditionalOpenSSL"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat.TraditionalOpenSSL"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PrivateFormat.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "PublicFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat"
+  super_classes: "enum.Enum"
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "SubjectPublicKeyInfo"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.SubjectPublicKeyInfo"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "PKCS1"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.PKCS1"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "CompressedPoint"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.CompressedPoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "UncompressedPoint"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.PublicFormat.UncompressedPoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ParameterFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ParameterFormat"
+  super_classes: "enum.Enum"
+  is_enum: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PKCS3"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ParameterFormat.PKCS3"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "KeySerializationEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+  super_classes: "builtins.object"
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BestAvailableEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.BestAvailableEncryption"
+  super_classes: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.BestAvailableEncryption.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.serialization.BestAvailableEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives.serialization.BestAvailableEncryption"
+      }
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "password"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.BestAvailableEncryption.password"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "NoEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.NoEncryption"
+  super_classes: "cryptography.hazmat.primitives.serialization.KeySerializationEncryption"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_pem_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.load_pem_private_key"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.backends.interfaces.PEMSerializationBackend,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_pem_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.load_pem_public_key"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.backends.interfaces.PEMSerializationBackend,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_der_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.load_der_private_key"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.backends.interfaces.DERSerializationBackend,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_der_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.load_der_public_key"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.backends.interfaces.DERSerializationBackend,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_ssh_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.load_ssh_public_key"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.backends.interfaces.RSABackend,cryptography.hazmat.backends.interfaces.DSABackend,cryptography.hazmat.backends.interfaces.EllipticCurveBackend,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.RSABackend"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.DSABackend"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+        fully_qualified_name: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

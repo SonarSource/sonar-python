@@ -1,0 +1,458 @@
+fully_qualified_name: "jinja2.exceptions"
+classes {
+  name: "TemplateError"
+  fully_qualified_name: "jinja2.exceptions.TemplateError"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.exceptions.TemplateError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateError"
+        fully_qualified_name: "jinja2.exceptions.TemplateError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "message"
+    fully_qualified_name: "jinja2.exceptions.TemplateError.message"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateError"
+        fully_qualified_name: "jinja2.exceptions.TemplateError"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+}
+classes {
+  name: "TemplateNotFound"
+  fully_qualified_name: "jinja2.exceptions.TemplateNotFound"
+  super_classes: "builtins.OSError"
+  super_classes: "builtins.LookupError"
+  super_classes: "jinja2.exceptions.TemplateError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.exceptions.TemplateNotFound.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateNotFound"
+        fully_qualified_name: "jinja2.exceptions.TemplateNotFound"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,jinja2.runtime.Undefined,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "jinja2.runtime.Undefined"
+          fully_qualified_name: "jinja2.runtime.Undefined"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.exceptions.TemplateNotFound.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateNotFound"
+        fully_qualified_name: "jinja2.exceptions.TemplateNotFound"
+      }
+    }
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "jinja2.exceptions.TemplateNotFound.message"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.exceptions.TemplateNotFound.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,jinja2.runtime.Undefined,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "templates"
+    fully_qualified_name: "jinja2.exceptions.TemplateNotFound.templates"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Union[builtins.str,jinja2.runtime.Undefined,None]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,jinja2.runtime.Undefined,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "jinja2.runtime.Undefined"
+          fully_qualified_name: "jinja2.runtime.Undefined"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "TemplatesNotFound"
+  fully_qualified_name: "jinja2.exceptions.TemplatesNotFound"
+  super_classes: "jinja2.exceptions.TemplateNotFound"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.exceptions.TemplatesNotFound.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplatesNotFound"
+        fully_qualified_name: "jinja2.exceptions.TemplatesNotFound"
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Union[builtins.str,jinja2.runtime.Undefined]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,jinja2.runtime.Undefined]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "jinja2.runtime.Undefined"
+            fully_qualified_name: "jinja2.runtime.Undefined"
+          }
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "TemplateSyntaxError"
+  fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError"
+  super_classes: "jinja2.exceptions.TemplateError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateSyntaxError"
+        fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "lineno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.exceptions.TemplateSyntaxError"
+        fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError"
+      }
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.__reduce__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.filename"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "source"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.source"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "translated"
+    fully_qualified_name: "jinja2.exceptions.TemplateSyntaxError.translated"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "TemplateAssertionError"
+  fully_qualified_name: "jinja2.exceptions.TemplateAssertionError"
+  super_classes: "jinja2.exceptions.TemplateSyntaxError"
+}
+classes {
+  name: "TemplateRuntimeError"
+  fully_qualified_name: "jinja2.exceptions.TemplateRuntimeError"
+  super_classes: "jinja2.exceptions.TemplateError"
+}
+classes {
+  name: "UndefinedError"
+  fully_qualified_name: "jinja2.exceptions.UndefinedError"
+  super_classes: "jinja2.exceptions.TemplateRuntimeError"
+}
+classes {
+  name: "SecurityError"
+  fully_qualified_name: "jinja2.exceptions.SecurityError"
+  super_classes: "jinja2.exceptions.TemplateRuntimeError"
+}
+classes {
+  name: "FilterArgumentError"
+  fully_qualified_name: "jinja2.exceptions.FilterArgumentError"
+  super_classes: "jinja2.exceptions.TemplateRuntimeError"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.exceptions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

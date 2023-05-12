@@ -1,0 +1,370 @@
+fully_qualified_name: "abc"
+classes {
+  name: "ABCMeta"
+  fully_qualified_name: "abc.ABCMeta"
+  super_classes: "builtins.type"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "abc.ABCMeta.__new__"
+    return_annotation {
+      pretty_printed_name: "_typeshed.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "mcls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_typeshed.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_typeshed.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bases"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.type]"
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "namespace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__instancecheck__"
+    fully_qualified_name: "abc.ABCMeta.__instancecheck__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__subclasscheck__"
+    fully_qualified_name: "abc.ABCMeta.__subclasscheck__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+    parameters {
+      name: "subclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+  methods {
+    name: "_dump_registry"
+    fully_qualified_name: "abc.ABCMeta._dump_registry"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[_typeshed.SupportsWrite[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "_typeshed.SupportsWrite[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "_typeshed.SupportsWrite"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "abc.ABCMeta.register"
+    return_annotation {
+      pretty_printed_name: "Type[abc._T]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "abc._T"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.ABCMeta"
+        fully_qualified_name: "abc.ABCMeta"
+      }
+    }
+    parameters {
+      name: "subclass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[abc._T]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "abc._T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  attributes {
+    name: "__abstractmethods__"
+    fully_qualified_name: "abc.ABCMeta.__abstractmethods__"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+  }
+}
+classes {
+  name: "abstractclassmethod"
+  fully_qualified_name: "abc.abstractclassmethod"
+  super_classes: "builtins.classmethod"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "abc.abstractclassmethod.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.abstractclassmethod[Unknown]"
+        args {
+          pretty_printed_name: "abc._T"
+          kind: TYPE_VAR
+        }
+        args {
+        }
+        args {
+          pretty_printed_name: "abc._R_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "abc.abstractclassmethod"
+      }
+    }
+    parameters {
+      name: "callable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "abc.abstractclassmethod.__isabstractmethod__"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+}
+classes {
+  name: "abstractstaticmethod"
+  fully_qualified_name: "abc.abstractstaticmethod"
+  super_classes: "builtins.staticmethod"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "abc.abstractstaticmethod.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "abc.abstractstaticmethod[Unknown]"
+        args {
+        }
+        args {
+          pretty_printed_name: "abc._R_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "abc.abstractstaticmethod"
+      }
+    }
+    parameters {
+      name: "callable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "abc.abstractstaticmethod.__isabstractmethod__"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+}
+classes {
+  name: "abstractproperty"
+  fully_qualified_name: "abc.abstractproperty"
+  super_classes: "builtins.property"
+  attributes {
+    name: "__isabstractmethod__"
+    fully_qualified_name: "abc.abstractproperty.__isabstractmethod__"
+    type_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+}
+classes {
+  name: "ABC"
+  fully_qualified_name: "abc.ABC"
+  super_classes: "builtins.object"
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+}
+functions {
+  name: "abstractmethod"
+  fully_qualified_name: "abc.abstractmethod"
+  return_annotation {
+    pretty_printed_name: "abc._FuncT"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "funcobj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "abc._FuncT"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "get_cache_token"
+  fully_qualified_name: "abc.get_cache_token"
+  return_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "abc.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

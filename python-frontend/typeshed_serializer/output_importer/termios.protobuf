@@ -1,0 +1,2210 @@
+fully_qualified_name: "termios"
+classes {
+  name: "error"
+  fully_qualified_name: "termios.error"
+  super_classes: "builtins.Exception"
+}
+functions {
+  name: "tcgetattr"
+  fully_qualified_name: "termios.tcgetattr"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+}
+functions {
+  name: "tcsetattr"
+  fully_qualified_name: "termios.tcsetattr"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[builtins.list[Union[builtins.int,builtins.list[Union[builtins.bytes,builtins.int]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "builtins.list[Union[builtins.int,builtins.list[Union[builtins.bytes,builtins.int]]]]"
+        args {
+          pretty_printed_name: "Union[builtins.int,builtins.list[Union[builtins.bytes,builtins.int]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.list[Union[builtins.bytes,builtins.int]]"
+            args {
+              pretty_printed_name: "Union[builtins.bytes,builtins.int]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "builtins.list"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "termios._Attr"
+    }
+  }
+}
+functions {
+  name: "tcsendbreak"
+  fully_qualified_name: "termios.tcsendbreak"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "tcdrain"
+  fully_qualified_name: "termios.tcdrain"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+}
+functions {
+  name: "tcflush"
+  fully_qualified_name: "termios.tcflush"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "tcflow"
+  fully_qualified_name: "termios.tcflow"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "termios.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "B0"
+  fully_qualified_name: "termios.B0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B1000000"
+  fully_qualified_name: "termios.B1000000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B110"
+  fully_qualified_name: "termios.B110"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B115200"
+  fully_qualified_name: "termios.B115200"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B1152000"
+  fully_qualified_name: "termios.B1152000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B1200"
+  fully_qualified_name: "termios.B1200"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B134"
+  fully_qualified_name: "termios.B134"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B150"
+  fully_qualified_name: "termios.B150"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B1500000"
+  fully_qualified_name: "termios.B1500000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B1800"
+  fully_qualified_name: "termios.B1800"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B19200"
+  fully_qualified_name: "termios.B19200"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B200"
+  fully_qualified_name: "termios.B200"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B2000000"
+  fully_qualified_name: "termios.B2000000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B230400"
+  fully_qualified_name: "termios.B230400"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B2400"
+  fully_qualified_name: "termios.B2400"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B2500000"
+  fully_qualified_name: "termios.B2500000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B300"
+  fully_qualified_name: "termios.B300"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B3000000"
+  fully_qualified_name: "termios.B3000000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B3500000"
+  fully_qualified_name: "termios.B3500000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B38400"
+  fully_qualified_name: "termios.B38400"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B4000000"
+  fully_qualified_name: "termios.B4000000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B460800"
+  fully_qualified_name: "termios.B460800"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B4800"
+  fully_qualified_name: "termios.B4800"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B50"
+  fully_qualified_name: "termios.B50"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B500000"
+  fully_qualified_name: "termios.B500000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B57600"
+  fully_qualified_name: "termios.B57600"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B576000"
+  fully_qualified_name: "termios.B576000"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B600"
+  fully_qualified_name: "termios.B600"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B75"
+  fully_qualified_name: "termios.B75"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B921600"
+  fully_qualified_name: "termios.B921600"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "B9600"
+  fully_qualified_name: "termios.B9600"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "BRKINT"
+  fully_qualified_name: "termios.BRKINT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "BS0"
+  fully_qualified_name: "termios.BS0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "BS1"
+  fully_qualified_name: "termios.BS1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "BSDLY"
+  fully_qualified_name: "termios.BSDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CBAUD"
+  fully_qualified_name: "termios.CBAUD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CBAUDEX"
+  fully_qualified_name: "termios.CBAUDEX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CDEL"
+  fully_qualified_name: "termios.CDEL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CDSUSP"
+  fully_qualified_name: "termios.CDSUSP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CEOF"
+  fully_qualified_name: "termios.CEOF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CEOL"
+  fully_qualified_name: "termios.CEOL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CEOL2"
+  fully_qualified_name: "termios.CEOL2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CEOT"
+  fully_qualified_name: "termios.CEOT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CERASE"
+  fully_qualified_name: "termios.CERASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CESC"
+  fully_qualified_name: "termios.CESC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CFLUSH"
+  fully_qualified_name: "termios.CFLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CIBAUD"
+  fully_qualified_name: "termios.CIBAUD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CINTR"
+  fully_qualified_name: "termios.CINTR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CKILL"
+  fully_qualified_name: "termios.CKILL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CLNEXT"
+  fully_qualified_name: "termios.CLNEXT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CLOCAL"
+  fully_qualified_name: "termios.CLOCAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CNUL"
+  fully_qualified_name: "termios.CNUL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "COMMON"
+  fully_qualified_name: "termios.COMMON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CQUIT"
+  fully_qualified_name: "termios.CQUIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CR0"
+  fully_qualified_name: "termios.CR0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CR1"
+  fully_qualified_name: "termios.CR1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CR2"
+  fully_qualified_name: "termios.CR2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CR3"
+  fully_qualified_name: "termios.CR3"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CRDLY"
+  fully_qualified_name: "termios.CRDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CREAD"
+  fully_qualified_name: "termios.CREAD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CRPRNT"
+  fully_qualified_name: "termios.CRPRNT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CRTSCTS"
+  fully_qualified_name: "termios.CRTSCTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CS5"
+  fully_qualified_name: "termios.CS5"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CS6"
+  fully_qualified_name: "termios.CS6"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CS7"
+  fully_qualified_name: "termios.CS7"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CS8"
+  fully_qualified_name: "termios.CS8"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSIZE"
+  fully_qualified_name: "termios.CSIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSTART"
+  fully_qualified_name: "termios.CSTART"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSTOP"
+  fully_qualified_name: "termios.CSTOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSTOPB"
+  fully_qualified_name: "termios.CSTOPB"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSUSP"
+  fully_qualified_name: "termios.CSUSP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CSWTCH"
+  fully_qualified_name: "termios.CSWTCH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "CWERASE"
+  fully_qualified_name: "termios.CWERASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHO"
+  fully_qualified_name: "termios.ECHO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHOCTL"
+  fully_qualified_name: "termios.ECHOCTL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHOE"
+  fully_qualified_name: "termios.ECHOE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHOK"
+  fully_qualified_name: "termios.ECHOK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHOKE"
+  fully_qualified_name: "termios.ECHOKE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHONL"
+  fully_qualified_name: "termios.ECHONL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ECHOPRT"
+  fully_qualified_name: "termios.ECHOPRT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "EXTA"
+  fully_qualified_name: "termios.EXTA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "EXTB"
+  fully_qualified_name: "termios.EXTB"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FF0"
+  fully_qualified_name: "termios.FF0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FF1"
+  fully_qualified_name: "termios.FF1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FFDLY"
+  fully_qualified_name: "termios.FFDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FIOASYNC"
+  fully_qualified_name: "termios.FIOASYNC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FIOCLEX"
+  fully_qualified_name: "termios.FIOCLEX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FIONBIO"
+  fully_qualified_name: "termios.FIONBIO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FIONCLEX"
+  fully_qualified_name: "termios.FIONCLEX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FIONREAD"
+  fully_qualified_name: "termios.FIONREAD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "FLUSHO"
+  fully_qualified_name: "termios.FLUSHO"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "HUPCL"
+  fully_qualified_name: "termios.HUPCL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IBSHIFT"
+  fully_qualified_name: "termios.IBSHIFT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ICANON"
+  fully_qualified_name: "termios.ICANON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ICRNL"
+  fully_qualified_name: "termios.ICRNL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IEXTEN"
+  fully_qualified_name: "termios.IEXTEN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IGNBRK"
+  fully_qualified_name: "termios.IGNBRK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IGNCR"
+  fully_qualified_name: "termios.IGNCR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IGNPAR"
+  fully_qualified_name: "termios.IGNPAR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IMAXBEL"
+  fully_qualified_name: "termios.IMAXBEL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "INIT_C_CC"
+  fully_qualified_name: "termios.INIT_C_CC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "INLCR"
+  fully_qualified_name: "termios.INLCR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "INPCK"
+  fully_qualified_name: "termios.INPCK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IOCSIZE_MASK"
+  fully_qualified_name: "termios.IOCSIZE_MASK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IOCSIZE_SHIFT"
+  fully_qualified_name: "termios.IOCSIZE_SHIFT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ISIG"
+  fully_qualified_name: "termios.ISIG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ISTRIP"
+  fully_qualified_name: "termios.ISTRIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IUCLC"
+  fully_qualified_name: "termios.IUCLC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IXANY"
+  fully_qualified_name: "termios.IXANY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IXOFF"
+  fully_qualified_name: "termios.IXOFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "IXON"
+  fully_qualified_name: "termios.IXON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "N_MOUSE"
+  fully_qualified_name: "termios.N_MOUSE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "N_PPP"
+  fully_qualified_name: "termios.N_PPP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "N_SLIP"
+  fully_qualified_name: "termios.N_SLIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "N_STRIP"
+  fully_qualified_name: "termios.N_STRIP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "N_TTY"
+  fully_qualified_name: "termios.N_TTY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NCC"
+  fully_qualified_name: "termios.NCC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NCCS"
+  fully_qualified_name: "termios.NCCS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NL0"
+  fully_qualified_name: "termios.NL0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NL1"
+  fully_qualified_name: "termios.NL1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NLDLY"
+  fully_qualified_name: "termios.NLDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NOFLSH"
+  fully_qualified_name: "termios.NOFLSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "NSWTCH"
+  fully_qualified_name: "termios.NSWTCH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OCRNL"
+  fully_qualified_name: "termios.OCRNL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OFDEL"
+  fully_qualified_name: "termios.OFDEL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OFILL"
+  fully_qualified_name: "termios.OFILL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OLCUC"
+  fully_qualified_name: "termios.OLCUC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ONLCR"
+  fully_qualified_name: "termios.ONLCR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ONLRET"
+  fully_qualified_name: "termios.ONLRET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "ONOCR"
+  fully_qualified_name: "termios.ONOCR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "OPOST"
+  fully_qualified_name: "termios.OPOST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "PARENB"
+  fully_qualified_name: "termios.PARENB"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "PARMRK"
+  fully_qualified_name: "termios.PARMRK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "PARODD"
+  fully_qualified_name: "termios.PARODD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "PENDIN"
+  fully_qualified_name: "termios.PENDIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TAB0"
+  fully_qualified_name: "termios.TAB0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TAB1"
+  fully_qualified_name: "termios.TAB1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TAB2"
+  fully_qualified_name: "termios.TAB2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TAB3"
+  fully_qualified_name: "termios.TAB3"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TABDLY"
+  fully_qualified_name: "termios.TABDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCFLSH"
+  fully_qualified_name: "termios.TCFLSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCGETA"
+  fully_qualified_name: "termios.TCGETA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCGETS"
+  fully_qualified_name: "termios.TCGETS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCIFLUSH"
+  fully_qualified_name: "termios.TCIFLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCIOFF"
+  fully_qualified_name: "termios.TCIOFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCIOFLUSH"
+  fully_qualified_name: "termios.TCIOFLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCION"
+  fully_qualified_name: "termios.TCION"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCOFLUSH"
+  fully_qualified_name: "termios.TCOFLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCOOFF"
+  fully_qualified_name: "termios.TCOOFF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCOON"
+  fully_qualified_name: "termios.TCOON"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSADRAIN"
+  fully_qualified_name: "termios.TCSADRAIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSAFLUSH"
+  fully_qualified_name: "termios.TCSAFLUSH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSANOW"
+  fully_qualified_name: "termios.TCSANOW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSASOFT"
+  fully_qualified_name: "termios.TCSASOFT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSBRK"
+  fully_qualified_name: "termios.TCSBRK"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSBRKP"
+  fully_qualified_name: "termios.TCSBRKP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETA"
+  fully_qualified_name: "termios.TCSETA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETAF"
+  fully_qualified_name: "termios.TCSETAF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETAW"
+  fully_qualified_name: "termios.TCSETAW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETS"
+  fully_qualified_name: "termios.TCSETS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETSF"
+  fully_qualified_name: "termios.TCSETSF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCSETSW"
+  fully_qualified_name: "termios.TCSETSW"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TCXONC"
+  fully_qualified_name: "termios.TCXONC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCCONS"
+  fully_qualified_name: "termios.TIOCCONS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCEXCL"
+  fully_qualified_name: "termios.TIOCEXCL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGETD"
+  fully_qualified_name: "termios.TIOCGETD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGICOUNT"
+  fully_qualified_name: "termios.TIOCGICOUNT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGLCKTRMIOS"
+  fully_qualified_name: "termios.TIOCGLCKTRMIOS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGPGRP"
+  fully_qualified_name: "termios.TIOCGPGRP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGSERIAL"
+  fully_qualified_name: "termios.TIOCGSERIAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGSIZE"
+  fully_qualified_name: "termios.TIOCGSIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGSOFTCAR"
+  fully_qualified_name: "termios.TIOCGSOFTCAR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCGWINSZ"
+  fully_qualified_name: "termios.TIOCGWINSZ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCINQ"
+  fully_qualified_name: "termios.TIOCINQ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCLINUX"
+  fully_qualified_name: "termios.TIOCLINUX"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_CAR"
+  fully_qualified_name: "termios.TIOCM_CAR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_CD"
+  fully_qualified_name: "termios.TIOCM_CD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_CTS"
+  fully_qualified_name: "termios.TIOCM_CTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_DSR"
+  fully_qualified_name: "termios.TIOCM_DSR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_DTR"
+  fully_qualified_name: "termios.TIOCM_DTR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_LE"
+  fully_qualified_name: "termios.TIOCM_LE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_RI"
+  fully_qualified_name: "termios.TIOCM_RI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_RNG"
+  fully_qualified_name: "termios.TIOCM_RNG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_RTS"
+  fully_qualified_name: "termios.TIOCM_RTS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_SR"
+  fully_qualified_name: "termios.TIOCM_SR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCM_ST"
+  fully_qualified_name: "termios.TIOCM_ST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCMBIC"
+  fully_qualified_name: "termios.TIOCMBIC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCMBIS"
+  fully_qualified_name: "termios.TIOCMBIS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCMGET"
+  fully_qualified_name: "termios.TIOCMGET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCMIWAIT"
+  fully_qualified_name: "termios.TIOCMIWAIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCMSET"
+  fully_qualified_name: "termios.TIOCMSET"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCNOTTY"
+  fully_qualified_name: "termios.TIOCNOTTY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCNXCL"
+  fully_qualified_name: "termios.TIOCNXCL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCOUTQ"
+  fully_qualified_name: "termios.TIOCOUTQ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_DATA"
+  fully_qualified_name: "termios.TIOCPKT_DATA"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_DOSTOP"
+  fully_qualified_name: "termios.TIOCPKT_DOSTOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_FLUSHREAD"
+  fully_qualified_name: "termios.TIOCPKT_FLUSHREAD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_FLUSHWRITE"
+  fully_qualified_name: "termios.TIOCPKT_FLUSHWRITE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_NOSTOP"
+  fully_qualified_name: "termios.TIOCPKT_NOSTOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_START"
+  fully_qualified_name: "termios.TIOCPKT_START"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT_STOP"
+  fully_qualified_name: "termios.TIOCPKT_STOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCPKT"
+  fully_qualified_name: "termios.TIOCPKT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSCTTY"
+  fully_qualified_name: "termios.TIOCSCTTY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSER_TEMT"
+  fully_qualified_name: "termios.TIOCSER_TEMT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERCONFIG"
+  fully_qualified_name: "termios.TIOCSERCONFIG"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERGETLSR"
+  fully_qualified_name: "termios.TIOCSERGETLSR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERGETMULTI"
+  fully_qualified_name: "termios.TIOCSERGETMULTI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERGSTRUCT"
+  fully_qualified_name: "termios.TIOCSERGSTRUCT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERGWILD"
+  fully_qualified_name: "termios.TIOCSERGWILD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERSETMULTI"
+  fully_qualified_name: "termios.TIOCSERSETMULTI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSERSWILD"
+  fully_qualified_name: "termios.TIOCSERSWILD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSETD"
+  fully_qualified_name: "termios.TIOCSETD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSLCKTRMIOS"
+  fully_qualified_name: "termios.TIOCSLCKTRMIOS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSPGRP"
+  fully_qualified_name: "termios.TIOCSPGRP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSSERIAL"
+  fully_qualified_name: "termios.TIOCSSERIAL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSSIZE"
+  fully_qualified_name: "termios.TIOCSSIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSSOFTCAR"
+  fully_qualified_name: "termios.TIOCSSOFTCAR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSTI"
+  fully_qualified_name: "termios.TIOCSTI"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCSWINSZ"
+  fully_qualified_name: "termios.TIOCSWINSZ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TIOCTTYGSTRUCT"
+  fully_qualified_name: "termios.TIOCTTYGSTRUCT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "TOSTOP"
+  fully_qualified_name: "termios.TOSTOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VDISCARD"
+  fully_qualified_name: "termios.VDISCARD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VEOF"
+  fully_qualified_name: "termios.VEOF"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VEOL"
+  fully_qualified_name: "termios.VEOL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VEOL2"
+  fully_qualified_name: "termios.VEOL2"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VERASE"
+  fully_qualified_name: "termios.VERASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VINTR"
+  fully_qualified_name: "termios.VINTR"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VKILL"
+  fully_qualified_name: "termios.VKILL"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VLNEXT"
+  fully_qualified_name: "termios.VLNEXT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VMIN"
+  fully_qualified_name: "termios.VMIN"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VQUIT"
+  fully_qualified_name: "termios.VQUIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VREPRINT"
+  fully_qualified_name: "termios.VREPRINT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VSTART"
+  fully_qualified_name: "termios.VSTART"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VSTOP"
+  fully_qualified_name: "termios.VSTOP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VSUSP"
+  fully_qualified_name: "termios.VSUSP"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VSWTC"
+  fully_qualified_name: "termios.VSWTC"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VSWTCH"
+  fully_qualified_name: "termios.VSWTCH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VT0"
+  fully_qualified_name: "termios.VT0"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VT1"
+  fully_qualified_name: "termios.VT1"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VTDLY"
+  fully_qualified_name: "termios.VTDLY"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VTIME"
+  fully_qualified_name: "termios.VTIME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "VWERASE"
+  fully_qualified_name: "termios.VWERASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "XCASE"
+  fully_qualified_name: "termios.XCASE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "XTABS"
+  fully_qualified_name: "termios.XTABS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

@@ -1,0 +1,5539 @@
+fully_qualified_name: "pkg_resources"
+classes {
+  name: "WorkingSet"
+  fully_qualified_name: "pkg_resources.WorkingSet"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.WorkingSet.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "entries"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "require"
+    fully_qualified_name: "pkg_resources.WorkingSet.require"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[pkg_resources.Distribution]"
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "requirements"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]"
+            args {
+              pretty_printed_name: "Union[builtins.str,typing.Iterable[Any]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "typing.Iterable[Any]"
+                args {
+                  pretty_printed_name: "Any"
+                  kind: ANY
+                }
+                fully_qualified_name: "typing.Iterable"
+              }
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+        }
+        fully_qualified_name: "pkg_resources._NestedStr"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run_script"
+    fully_qualified_name: "pkg_resources.WorkingSet.run_script"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "requires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "script_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "iter_entry_points"
+    fully_qualified_name: "pkg_resources.WorkingSet.iter_entry_points"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[pkg_resources.EntryPoint,None,None]"
+      args {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_entry"
+    fully_qualified_name: "pkg_resources.WorkingSet.add_entry"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "entry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "pkg_resources.WorkingSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "dist"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "pkg_resources.WorkingSet.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[pkg_resources.Distribution,None,None]"
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "pkg_resources.WorkingSet.find"
+    return_annotation {
+      pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "req"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resolve"
+    fully_qualified_name: "pkg_resources.WorkingSet.resolve"
+    return_annotation {
+      pretty_printed_name: "builtins.list[pkg_resources.Distribution]"
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "requirements"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[pkg_resources.Requirement]"
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "installer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "pkg_resources.WorkingSet.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "entry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "insert"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "replace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "subscribe"
+    fully_qualified_name: "pkg_resources.WorkingSet.subscribe"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "find_plugins"
+    fully_qualified_name: "pkg_resources.WorkingSet.find_plugins"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.list[pkg_resources.Distribution],builtins.dict[pkg_resources.Distribution,builtins.Exception]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.list[pkg_resources.Distribution]"
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[pkg_resources.Distribution,builtins.Exception]"
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.WorkingSet"
+        fully_qualified_name: "pkg_resources.WorkingSet"
+      }
+    }
+    parameters {
+      name: "plugin_env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "full_env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "fallback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "entries"
+    fully_qualified_name: "pkg_resources.WorkingSet.entries"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Environment"
+  fully_qualified_name: "pkg_resources.Environment"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.Environment.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "search_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "platform"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "python"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "pkg_resources.Environment.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[pkg_resources.Distribution]"
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "project_name"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "pkg_resources.Environment.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[builtins.str,None,None]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "pkg_resources.Environment.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "pkg_resources.Environment.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "can_add"
+    fully_qualified_name: "pkg_resources.Environment.can_add"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "pkg_resources.Environment.__add__"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Environment"
+      fully_qualified_name: "pkg_resources.Environment"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Environment]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "pkg_resources.Environment.__iadd__"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Environment"
+      fully_qualified_name: "pkg_resources.Environment"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Environment]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "scan"
+    fully_qualified_name: "pkg_resources.Environment.scan"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Environment"
+        fully_qualified_name: "pkg_resources.Environment"
+      }
+    }
+    parameters {
+      name: "search_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "best_match"
+    fullname: "pkg_resources.Environment.best_match"
+    definitions {
+      name: "best_match"
+      fully_qualified_name: "pkg_resources.Environment.best_match"
+      return_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+      parameters {
+        name: "req"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      parameters {
+        name: "working_set"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.WorkingSet"
+          fully_qualified_name: "pkg_resources.WorkingSet"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "best_match"
+      fully_qualified_name: "pkg_resources.Environment.best_match"
+      return_annotation {
+        pretty_printed_name: "pkg_resources._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+      parameters {
+        name: "req"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      parameters {
+        name: "working_set"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.WorkingSet"
+          fully_qualified_name: "pkg_resources.WorkingSet"
+        }
+      }
+      parameters {
+        name: "installer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "obtain"
+    fullname: "pkg_resources.Environment.obtain"
+    definitions {
+      name: "obtain"
+      fully_qualified_name: "pkg_resources.Environment.obtain"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+      parameters {
+        name: "requirement"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "obtain"
+      fully_qualified_name: "pkg_resources.Environment.obtain"
+      return_annotation {
+        pretty_printed_name: "pkg_resources._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+      }
+      parameters {
+        name: "requirement"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      parameters {
+        name: "installer"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        has_default: true
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Requirement"
+  fully_qualified_name: "pkg_resources.Requirement"
+  super_classes: "builtins.object"
+  methods {
+    name: "parse"
+    fully_qualified_name: "pkg_resources.Requirement.parse"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Requirement"
+      fully_qualified_name: "pkg_resources.Requirement"
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,typing.Iterable[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "pkg_resources.Requirement.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+    }
+    parameters {
+      name: "item"
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,builtins.str,builtins.tuple[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.tuple[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "pkg_resources.Requirement.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+    }
+    parameters {
+      name: "other_requirement"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "unsafe_name"
+    fully_qualified_name: "pkg_resources.Requirement.unsafe_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "project_name"
+    fully_qualified_name: "pkg_resources.Requirement.project_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "pkg_resources.Requirement.key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extras"
+    fully_qualified_name: "pkg_resources.Requirement.extras"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "specs"
+    fully_qualified_name: "pkg_resources.Requirement.specs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "marker"
+    fully_qualified_name: "pkg_resources.Requirement.marker"
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "EntryPoint"
+  fully_qualified_name: "pkg_resources.EntryPoint"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.EntryPoint.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "module_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "attrs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "extras"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse"
+    fully_qualified_name: "pkg_resources.EntryPoint.parse"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.EntryPoint"
+      fully_qualified_name: "pkg_resources.EntryPoint"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[pkg_resources.EntryPoint]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "pkg_resources.EntryPoint"
+          fully_qualified_name: "pkg_resources.EntryPoint"
+        }
+      }
+    }
+    parameters {
+      name: "src"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_group"
+    fully_qualified_name: "pkg_resources.EntryPoint.parse_group"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[pkg_resources.EntryPoint]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "pkg_resources.EntryPoint"
+          fully_qualified_name: "pkg_resources.EntryPoint"
+        }
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "lines"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_map"
+    fully_qualified_name: "pkg_resources.EntryPoint.parse_map"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[pkg_resources.EntryPoint]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "pkg_resources.EntryPoint"
+          fully_qualified_name: "pkg_resources.EntryPoint"
+        }
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Union[builtins.str,typing.Sequence[builtins.str]]],builtins.str,typing.Sequence[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Union[builtins.str,typing.Sequence[builtins.str]]]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "typing.Sequence[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "typing.Sequence"
+            }
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "pkg_resources.EntryPoint.load"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+    }
+    parameters {
+      name: "require"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "installer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "require"
+    fully_qualified_name: "pkg_resources.EntryPoint.require"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+    }
+    parameters {
+      name: "env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[pkg_resources.Environment,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Environment"
+          fully_qualified_name: "pkg_resources.Environment"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "installer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resolve"
+    fully_qualified_name: "pkg_resources.EntryPoint.resolve"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "pkg_resources.EntryPoint.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "module_name"
+    fully_qualified_name: "pkg_resources.EntryPoint.module_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "attrs"
+    fully_qualified_name: "pkg_resources.EntryPoint.attrs"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extras"
+    fully_qualified_name: "pkg_resources.EntryPoint.extras"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "dist"
+    fully_qualified_name: "pkg_resources.EntryPoint.dist"
+    type_annotation {
+      pretty_printed_name: "Union[pkg_resources.Distribution,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Distribution"
+  fully_qualified_name: "pkg_resources.Distribution"
+  super_classes: "pkg_resources.IResourceProvider"
+  super_classes: "pkg_resources.IMetadataProvider"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.Distribution.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "location"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "metadata"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[pkg_resources.IResourceProvider,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[pkg_resources.IResourceProvider,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.IResourceProvider"
+            fully_qualified_name: "pkg_resources.IResourceProvider"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "pkg_resources._MetadataType"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "project_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "py_version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "platform"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "precedence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_location"
+    fully_qualified_name: "pkg_resources.Distribution.from_location"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Distribution"
+      fully_qualified_name: "pkg_resources.Distribution"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[pkg_resources.Distribution]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+      }
+    }
+    parameters {
+      name: "location"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "basename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "metadata"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[pkg_resources.IResourceProvider,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[pkg_resources.IResourceProvider,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.IResourceProvider"
+            fully_qualified_name: "pkg_resources.IResourceProvider"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "pkg_resources._MetadataType"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "from_filename"
+    fully_qualified_name: "pkg_resources.Distribution.from_filename"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Distribution"
+      fully_qualified_name: "pkg_resources.Distribution"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[pkg_resources.Distribution]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "metadata"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[pkg_resources.IResourceProvider,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[pkg_resources.IResourceProvider,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.IResourceProvider"
+            fully_qualified_name: "pkg_resources.IResourceProvider"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "pkg_resources._MetadataType"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "activate"
+    fully_qualified_name: "pkg_resources.Distribution.activate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "as_requirement"
+    fully_qualified_name: "pkg_resources.Distribution.as_requirement"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Requirement"
+      fully_qualified_name: "pkg_resources.Requirement"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "requires"
+    fully_qualified_name: "pkg_resources.Distribution.requires"
+    return_annotation {
+      pretty_printed_name: "builtins.list[pkg_resources.Requirement]"
+      args {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "extras"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "clone"
+    fully_qualified_name: "pkg_resources.Distribution.clone"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Requirement"
+      fully_qualified_name: "pkg_resources.Requirement"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "kw"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "egg_name"
+    fully_qualified_name: "pkg_resources.Distribution.egg_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__cmp__"
+    fully_qualified_name: "pkg_resources.Distribution.__cmp__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_entry_info"
+    fully_qualified_name: "pkg_resources.Distribution.get_entry_info"
+    return_annotation {
+      pretty_printed_name: "Union[pkg_resources.EntryPoint,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "load_entry_point"
+    fully_qualified_name: "pkg_resources.Distribution.load_entry_point"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "get_entry_map"
+    fullname: "pkg_resources.Distribution.get_entry_map"
+    definitions {
+      name: "get_entry_map"
+      fully_qualified_name: "pkg_resources.Distribution.get_entry_map"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.dict[builtins.str,pkg_resources.EntryPoint]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.EntryPoint"
+            fully_qualified_name: "pkg_resources.EntryPoint"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_entry_map"
+      fully_qualified_name: "pkg_resources.Distribution.get_entry_map"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.EntryPoint"
+          fully_qualified_name: "pkg_resources.EntryPoint"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+      }
+      parameters {
+        name: "group"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PKG_INFO"
+    fully_qualified_name: "pkg_resources.Distribution.PKG_INFO"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "location"
+    fully_qualified_name: "pkg_resources.Distribution.location"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "project_name"
+    fully_qualified_name: "pkg_resources.Distribution.project_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "pkg_resources.Distribution.key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extras"
+    fully_qualified_name: "pkg_resources.Distribution.extras"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "version"
+    fully_qualified_name: "pkg_resources.Distribution.version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "parsed_version"
+    fully_qualified_name: "pkg_resources.Distribution.parsed_version"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "py_version"
+    fully_qualified_name: "pkg_resources.Distribution.py_version"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "platform"
+    fully_qualified_name: "pkg_resources.Distribution.platform"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "precedence"
+    fully_qualified_name: "pkg_resources.Distribution.precedence"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "IResourceManager"
+  fully_qualified_name: "pkg_resources.IResourceManager"
+  super_classes: "builtins.object"
+  methods {
+    name: "resource_exists"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_exists"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resource_stream"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_stream"
+    return_annotation {
+      pretty_printed_name: "typing.IO[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.IO"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resource_string"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_string"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resource_isdir"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_isdir"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resource_listdir"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_listdir"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "resource_filename"
+    fully_qualified_name: "pkg_resources.IResourceManager.resource_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+        }
+        fully_qualified_name: "pkg_resources._PkgReqType"
+      }
+    }
+    parameters {
+      name: "resource_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "set_extraction_path"
+    fully_qualified_name: "pkg_resources.IResourceManager.set_extraction_path"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "cleanup_resources"
+    fully_qualified_name: "pkg_resources.IResourceManager.cleanup_resources"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "force"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_cache_path"
+    fully_qualified_name: "pkg_resources.IResourceManager.get_cache_path"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "archive_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "names"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extraction_error"
+    fully_qualified_name: "pkg_resources.IResourceManager.extraction_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "postprocess"
+    fully_qualified_name: "pkg_resources.IResourceManager.postprocess"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IResourceManager"
+        fully_qualified_name: "pkg_resources.IResourceManager"
+      }
+    }
+    parameters {
+      name: "tempname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IMetadataProvider"
+  fully_qualified_name: "pkg_resources.IMetadataProvider"
+  super_classes: "builtins.object"
+  methods {
+    name: "has_metadata"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.has_metadata"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "metadata_isdir"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.metadata_isdir"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "metadata_listdir"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.metadata_listdir"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_metadata"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.get_metadata"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_metadata_lines"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.get_metadata_lines"
+    return_annotation {
+      pretty_printed_name: "typing.Generator[builtins.str,None,None]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Generator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "run_script"
+    fully_qualified_name: "pkg_resources.IMetadataProvider.run_script"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.IMetadataProvider"
+        fully_qualified_name: "pkg_resources.IMetadataProvider"
+      }
+    }
+    parameters {
+      name: "script_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "namespace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ResolutionError"
+  fully_qualified_name: "pkg_resources.ResolutionError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DistributionNotFound"
+  fully_qualified_name: "pkg_resources.DistributionNotFound"
+  super_classes: "pkg_resources.ResolutionError"
+  methods {
+    name: "req"
+    fully_qualified_name: "pkg_resources.DistributionNotFound.req"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Requirement"
+      fully_qualified_name: "pkg_resources.Requirement"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.DistributionNotFound"
+        fully_qualified_name: "pkg_resources.DistributionNotFound"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "requirers"
+    fully_qualified_name: "pkg_resources.DistributionNotFound.requirers"
+    return_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.DistributionNotFound"
+        fully_qualified_name: "pkg_resources.DistributionNotFound"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "requirers_str"
+    fully_qualified_name: "pkg_resources.DistributionNotFound.requirers_str"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.DistributionNotFound"
+        fully_qualified_name: "pkg_resources.DistributionNotFound"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report"
+    fully_qualified_name: "pkg_resources.DistributionNotFound.report"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.DistributionNotFound"
+        fully_qualified_name: "pkg_resources.DistributionNotFound"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "VersionConflict"
+  fully_qualified_name: "pkg_resources.VersionConflict"
+  super_classes: "pkg_resources.ResolutionError"
+  methods {
+    name: "dist"
+    fully_qualified_name: "pkg_resources.VersionConflict.dist"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.VersionConflict"
+        fully_qualified_name: "pkg_resources.VersionConflict"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "req"
+    fully_qualified_name: "pkg_resources.VersionConflict.req"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.VersionConflict"
+        fully_qualified_name: "pkg_resources.VersionConflict"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "report"
+    fully_qualified_name: "pkg_resources.VersionConflict.report"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.VersionConflict"
+        fully_qualified_name: "pkg_resources.VersionConflict"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "with_context"
+    fully_qualified_name: "pkg_resources.VersionConflict.with_context"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.VersionConflict"
+      fully_qualified_name: "pkg_resources.VersionConflict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.VersionConflict"
+        fully_qualified_name: "pkg_resources.VersionConflict"
+      }
+    }
+    parameters {
+      name: "required_by"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.set[Union[pkg_resources.Distribution,builtins.str]]"
+        args {
+          pretty_printed_name: "Union[pkg_resources.Distribution,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.Distribution"
+            fully_qualified_name: "pkg_resources.Distribution"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "builtins.set"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ContextualVersionConflict"
+  fully_qualified_name: "pkg_resources.ContextualVersionConflict"
+  super_classes: "pkg_resources.VersionConflict"
+  methods {
+    name: "required_by"
+    fully_qualified_name: "pkg_resources.ContextualVersionConflict.required_by"
+    return_annotation {
+      pretty_printed_name: "builtins.set[Union[pkg_resources.Distribution,builtins.str]]"
+      args {
+        pretty_printed_name: "Union[pkg_resources.Distribution,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.ContextualVersionConflict"
+        fully_qualified_name: "pkg_resources.ContextualVersionConflict"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "UnknownExtra"
+  fully_qualified_name: "pkg_resources.UnknownExtra"
+  super_classes: "pkg_resources.ResolutionError"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ExtractionError"
+  fully_qualified_name: "pkg_resources.ExtractionError"
+  super_classes: "builtins.Exception"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "manager"
+    fully_qualified_name: "pkg_resources.ExtractionError.manager"
+    type_annotation {
+      pretty_printed_name: "pkg_resources.IResourceManager"
+      fully_qualified_name: "pkg_resources.IResourceManager"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "cache_path"
+    fully_qualified_name: "pkg_resources.ExtractionError.cache_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "original_error"
+    fully_qualified_name: "pkg_resources.ExtractionError.original_error"
+    type_annotation {
+      pretty_printed_name: "builtins.Exception"
+      fully_qualified_name: "builtins.Exception"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "_Importer"
+  fully_qualified_name: "pkg_resources._Importer"
+  super_classes: "importlib.abc.MetaPathFinder"
+  super_classes: "importlib.abc.InspectLoader"
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IResourceProvider"
+  fully_qualified_name: "pkg_resources.IResourceProvider"
+  super_classes: "pkg_resources.IMetadataProvider"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NullProvider"
+  fully_qualified_name: "pkg_resources.NullProvider"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EggProvider"
+  fully_qualified_name: "pkg_resources.EggProvider"
+  super_classes: "pkg_resources.NullProvider"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DefaultProvider"
+  fully_qualified_name: "pkg_resources.DefaultProvider"
+  super_classes: "pkg_resources.EggProvider"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "PathMetadata"
+  fully_qualified_name: "pkg_resources.PathMetadata"
+  super_classes: "pkg_resources.DefaultProvider"
+  super_classes: "pkg_resources.IResourceProvider"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.PathMetadata.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.PathMetadata"
+        fully_qualified_name: "pkg_resources.PathMetadata"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "egg_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ZipProvider"
+  fully_qualified_name: "pkg_resources.ZipProvider"
+  super_classes: "pkg_resources.EggProvider"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EggMetadata"
+  fully_qualified_name: "pkg_resources.EggMetadata"
+  super_classes: "pkg_resources.ZipProvider"
+  super_classes: "pkg_resources.IResourceProvider"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.EggMetadata.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.EggMetadata"
+        fully_qualified_name: "pkg_resources.EggMetadata"
+      }
+    }
+    parameters {
+      name: "zipimporter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EmptyProvider"
+  fully_qualified_name: "pkg_resources.EmptyProvider"
+  super_classes: "pkg_resources.NullProvider"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FileMetadata"
+  fully_qualified_name: "pkg_resources.FileMetadata"
+  super_classes: "pkg_resources.EmptyProvider"
+  super_classes: "pkg_resources.IResourceProvider"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "pkg_resources.FileMetadata.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.FileMetadata"
+        fully_qualified_name: "pkg_resources.FileMetadata"
+      }
+    }
+    parameters {
+      name: "path_to_pkg_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "declare_namespace"
+  fully_qualified_name: "pkg_resources.declare_namespace"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fixup_namespace_packages"
+  fully_qualified_name: "pkg_resources.fixup_namespace_packages"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "path_item"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "parse_requirements"
+  fully_qualified_name: "pkg_resources.parse_requirements"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[pkg_resources.Requirement,None,None]"
+    args {
+      pretty_printed_name: "pkg_resources.Requirement"
+      fully_qualified_name: "pkg_resources.Requirement"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "strs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typing.Iterable[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "load_entry_point"
+  fully_qualified_name: "pkg_resources.load_entry_point"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "dist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "pkg_resources._EPDistType"
+    }
+  }
+  parameters {
+    name: "group"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_entry_info"
+  fully_qualified_name: "pkg_resources.get_entry_info"
+  return_annotation {
+    pretty_printed_name: "Union[pkg_resources.EntryPoint,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "pkg_resources.EntryPoint"
+      fully_qualified_name: "pkg_resources.EntryPoint"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "dist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "pkg_resources.Distribution"
+          fully_qualified_name: "pkg_resources.Distribution"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "pkg_resources._EPDistType"
+    }
+  }
+  parameters {
+    name: "group"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "find_distributions"
+  fully_qualified_name: "pkg_resources.find_distributions"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[pkg_resources.Distribution,None,None]"
+    args {
+      pretty_printed_name: "pkg_resources.Distribution"
+      fully_qualified_name: "pkg_resources.Distribution"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "path_item"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "only"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_distribution"
+  fully_qualified_name: "pkg_resources.get_distribution"
+  return_annotation {
+    pretty_printed_name: "pkg_resources.Distribution"
+    fully_qualified_name: "pkg_resources.Distribution"
+  }
+  parameters {
+    name: "dist"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[pkg_resources.Requirement,builtins.str,pkg_resources.Distribution]"
+      kind: UNION
+      args {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "pkg_resources.Distribution"
+        fully_qualified_name: "pkg_resources.Distribution"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_exists"
+  fully_qualified_name: "pkg_resources.resource_exists"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_stream"
+  fully_qualified_name: "pkg_resources.resource_stream"
+  return_annotation {
+    pretty_printed_name: "typing.IO[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "typing.IO"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_string"
+  fully_qualified_name: "pkg_resources.resource_string"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_isdir"
+  fully_qualified_name: "pkg_resources.resource_isdir"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_listdir"
+  fully_qualified_name: "pkg_resources.resource_listdir"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "resource_filename"
+  fully_qualified_name: "pkg_resources.resource_filename"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "package_or_requirement"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,pkg_resources.Requirement]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,pkg_resources.Requirement]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.Requirement"
+          fully_qualified_name: "pkg_resources.Requirement"
+        }
+      }
+      fully_qualified_name: "pkg_resources._PkgReqType"
+    }
+  }
+  parameters {
+    name: "resource_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "set_extraction_path"
+  fully_qualified_name: "pkg_resources.set_extraction_path"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "cleanup_resources"
+  fully_qualified_name: "pkg_resources.cleanup_resources"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "force"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register_finder"
+  fully_qualified_name: "pkg_resources.register_finder"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "importer_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "distribution_finder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "pkg_resources._DistFinderType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register_loader_type"
+  fully_qualified_name: "pkg_resources.register_loader_type"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "loader_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "provider_factory"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "register_namespace_handler"
+  fully_qualified_name: "pkg_resources.register_namespace_handler"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "importer_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.type"
+      fully_qualified_name: "builtins.type"
+    }
+  }
+  parameters {
+    name: "namespace_handler"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "pkg_resources._NSHandlerType"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "parse_version"
+  fully_qualified_name: "pkg_resources.parse_version"
+  return_annotation {
+    pretty_printed_name: "Union[TypeAlias[Any],TypeAlias[Any]]"
+    kind: UNION
+    args {
+      pretty_printed_name: "TypeAlias[Any]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "pkg_resources.Version"
+    }
+    args {
+      pretty_printed_name: "TypeAlias[Any]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "pkg_resources.LegacyVersion"
+    }
+  }
+  parameters {
+    name: "v"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "yield_lines"
+  fully_qualified_name: "pkg_resources.yield_lines"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[builtins.str,None,None]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "strs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]"
+          args {
+            pretty_printed_name: "Union[builtins.str,typing.Iterable[Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "typing.Iterable[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "typing.Iterable"
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      fully_qualified_name: "pkg_resources._NestedStr"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "split_sections"
+  fully_qualified_name: "pkg_resources.split_sections"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[Tuple[Union[builtins.str,None],builtins.str],None,None]"
+    args {
+      pretty_printed_name: "Tuple[Union[builtins.str,None],builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "strs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Union[builtins.str,typing.Iterable[Any]]]"
+          args {
+            pretty_printed_name: "Union[builtins.str,typing.Iterable[Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "typing.Iterable[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "typing.Iterable"
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      fully_qualified_name: "pkg_resources._NestedStr"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "safe_name"
+  fully_qualified_name: "pkg_resources.safe_name"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "safe_version"
+  fully_qualified_name: "pkg_resources.safe_version"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "version"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "safe_extra"
+  fully_qualified_name: "pkg_resources.safe_extra"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "extra"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "to_filename"
+  fully_qualified_name: "pkg_resources.to_filename"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "name_or_version"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_build_platform"
+  fully_qualified_name: "pkg_resources.get_build_platform"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_platform"
+  fully_qualified_name: "pkg_resources.get_platform"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_supported_platform"
+  fully_qualified_name: "pkg_resources.get_supported_platform"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "compatible_platforms"
+  fully_qualified_name: "pkg_resources.compatible_platforms"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "provided"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "required"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_default_cache"
+  fully_qualified_name: "pkg_resources.get_default_cache"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_importer"
+  fully_qualified_name: "pkg_resources.get_importer"
+  return_annotation {
+    pretty_printed_name: "pkg_resources._Importer"
+    fully_qualified_name: "pkg_resources._Importer"
+  }
+  parameters {
+    name: "path_item"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "ensure_directory"
+  fully_qualified_name: "pkg_resources.ensure_directory"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "normalize_path"
+  fully_qualified_name: "pkg_resources.normalize_path"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "get_entry_map"
+  fullname: "pkg_resources.get_entry_map"
+  definitions {
+    name: "get_entry_map"
+    fully_qualified_name: "pkg_resources.get_entry_map"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.dict[builtins.str,pkg_resources.EntryPoint]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "pkg_resources.EntryPoint"
+          fully_qualified_name: "pkg_resources.EntryPoint"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.Distribution"
+            fully_qualified_name: "pkg_resources.Distribution"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "pkg_resources._EPDistType"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "get_entry_map"
+    fully_qualified_name: "pkg_resources.get_entry_map"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,pkg_resources.EntryPoint]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "pkg_resources.EntryPoint"
+        fully_qualified_name: "pkg_resources.EntryPoint"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "dist"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[pkg_resources.Distribution,pkg_resources.Requirement,builtins.str]"
+          kind: UNION
+          args {
+            pretty_printed_name: "pkg_resources.Distribution"
+            fully_qualified_name: "pkg_resources.Distribution"
+          }
+          args {
+            pretty_printed_name: "pkg_resources.Requirement"
+            fully_qualified_name: "pkg_resources.Requirement"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "pkg_resources._EPDistType"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "get_provider"
+  fullname: "pkg_resources.get_provider"
+  definitions {
+    name: "get_provider"
+    fully_qualified_name: "pkg_resources.get_provider"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.IResourceProvider"
+      fully_qualified_name: "pkg_resources.IResourceProvider"
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "get_provider"
+    fully_qualified_name: "pkg_resources.get_provider"
+    return_annotation {
+      pretty_printed_name: "pkg_resources.Distribution"
+      fully_qualified_name: "pkg_resources.Distribution"
+    }
+    parameters {
+      name: "package_or_requirement"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pkg_resources.Requirement"
+        fully_qualified_name: "pkg_resources.Requirement"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "importlib"
+  fully_qualified_name: "importlib"
+  is_imported_module: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "working_set"
+  fully_qualified_name: "pkg_resources.working_set"
+  type_annotation {
+    pretty_printed_name: "pkg_resources.WorkingSet"
+    fully_qualified_name: "pkg_resources.WorkingSet"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "require"
+  fully_qualified_name: "pkg_resources.require"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "run_script"
+  fully_qualified_name: "pkg_resources.run_script"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "iter_entry_points"
+  fully_qualified_name: "pkg_resources.iter_entry_points"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "add_activation_listener"
+  fully_qualified_name: "pkg_resources.add_activation_listener"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EGG_DIST"
+  fully_qualified_name: "pkg_resources.EGG_DIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BINARY_DIST"
+  fully_qualified_name: "pkg_resources.BINARY_DIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SOURCE_DIST"
+  fully_qualified_name: "pkg_resources.SOURCE_DIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "CHECKOUT_DIST"
+  fully_qualified_name: "pkg_resources.CHECKOUT_DIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DEVELOP_DIST"
+  fully_qualified_name: "pkg_resources.DEVELOP_DIST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "empty_provider"
+  fully_qualified_name: "pkg_resources.empty_provider"
+  type_annotation {
+    pretty_printed_name: "pkg_resources.EmptyProvider"
+    fully_qualified_name: "pkg_resources.EmptyProvider"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

@@ -1,0 +1,954 @@
+fully_qualified_name: "werkzeug._internal"
+classes {
+  name: "_Missing"
+  fully_qualified_name: "werkzeug._internal._Missing"
+  super_classes: "builtins.object"
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug._internal._Missing.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._Missing"
+        fully_qualified_name: "werkzeug._internal._Missing"
+      }
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "werkzeug._internal._Missing.__reduce__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._Missing"
+        fully_qualified_name: "werkzeug._internal._Missing"
+      }
+    }
+  }
+}
+classes {
+  name: "_ColorStreamHandler"
+  fully_qualified_name: "werkzeug._internal._ColorStreamHandler"
+  super_classes: "logging.StreamHandler"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug._internal._ColorStreamHandler.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._ColorStreamHandler"
+        fully_qualified_name: "werkzeug._internal._ColorStreamHandler"
+      }
+    }
+  }
+}
+classes {
+  name: "_DictAccessorProperty"
+  fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug._internal._TAccessorValue,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "load_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "dump_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "read_only"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "doc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "lookup"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.lookup"
+    return_annotation {
+      pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.MutableMapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__set__"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__set__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._TAccessorValue"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__delete__"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__delete__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__get__"
+    fullname: "werkzeug._internal._DictAccessorProperty.__get__"
+    definitions {
+      name: "__get__"
+      fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__get__"
+      return_annotation {
+        pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+        args {
+          pretty_printed_name: "werkzeug._internal._TAccessorValue"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+          args {
+            pretty_printed_name: "werkzeug._internal._TAccessorValue"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+        }
+      }
+      parameters {
+        name: "instance"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "owner"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__get__"
+      fully_qualified_name: "werkzeug._internal._DictAccessorProperty.__get__"
+      return_annotation {
+        pretty_printed_name: "werkzeug._internal._TAccessorValue"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug._internal._DictAccessorProperty[werkzeug._internal._TAccessorValue]"
+          args {
+            pretty_printed_name: "werkzeug._internal._TAccessorValue"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug._internal._DictAccessorProperty"
+        }
+      }
+      parameters {
+        name: "instance"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      parameters {
+        name: "owner"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "t.overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "read_only"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.read_only"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "default"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.default"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug._internal._TAccessorValue,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug._internal._TAccessorValue"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "load_func"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.load_func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "dump_func"
+    fully_qualified_name: "werkzeug._internal._DictAccessorProperty.dump_func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_check_str_tuple"
+  fully_qualified_name: "werkzeug._internal._check_str_tuple"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[typing.AnyStr]"
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+}
+functions {
+  name: "_to_bytes"
+  fully_qualified_name: "werkzeug._internal._to_bytes"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_wsgi_decoding_dance"
+  fully_qualified_name: "werkzeug._internal._wsgi_decoding_dance"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_wsgi_encoding_dance"
+  fully_qualified_name: "werkzeug._internal._wsgi_encoding_dance"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "charset"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "errors"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_get_environ"
+  fully_qualified_name: "werkzeug._internal._get_environ"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+      args {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+}
+functions {
+  name: "_has_level_handler"
+  fully_qualified_name: "werkzeug._internal._has_level_handler"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "logger"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "logging.Logger"
+      fully_qualified_name: "logging.Logger"
+    }
+  }
+}
+functions {
+  name: "_log"
+  fully_qualified_name: "werkzeug._internal._log"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "kwargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "_decode_idna"
+  fully_qualified_name: "werkzeug._internal._decode_idna"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "domain"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+overloaded_functions {
+  name: "_make_encode_wrapper"
+  fullname: "werkzeug._internal._make_encode_wrapper"
+  definitions {
+    name: "_make_encode_wrapper"
+    fully_qualified_name: "werkzeug._internal._make_encode_wrapper"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "reference"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "_make_encode_wrapper"
+    fully_qualified_name: "werkzeug._internal._make_encode_wrapper"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "reference"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "_to_str"
+  fullname: "werkzeug._internal._to_str"
+  definitions {
+    name: "_to_str"
+    fully_qualified_name: "werkzeug._internal._to_str"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "charset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "allow_none_charset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "_to_str"
+    fully_qualified_name: "werkzeug._internal._to_str"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "charset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "allow_none_charset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+}
+overloaded_functions {
+  name: "_dt_as_utc"
+  fullname: "werkzeug._internal._dt_as_utc"
+  definitions {
+    name: "_dt_as_utc"
+    fully_qualified_name: "werkzeug._internal._dt_as_utc"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "dt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+  definitions {
+    name: "_dt_as_utc"
+    fully_qualified_name: "werkzeug._internal._dt_as_utc"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "dt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "t.overload"
+    is_overload: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug._internal.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_logger"
+  fully_qualified_name: "werkzeug._internal._logger"
+  type_annotation {
+    pretty_printed_name: "Union[logging.Logger,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "logging.Logger"
+      fully_qualified_name: "logging.Logger"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+vars {
+  name: "_missing"
+  fully_qualified_name: "werkzeug._internal._missing"
+  type_annotation {
+    pretty_printed_name: "werkzeug._internal._Missing"
+    fully_qualified_name: "werkzeug._internal._Missing"
+  }
+}
+vars {
+  name: "_default_encoding"
+  fully_qualified_name: "werkzeug._internal._default_encoding"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}

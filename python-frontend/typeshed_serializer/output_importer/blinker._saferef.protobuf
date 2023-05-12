@@ -1,0 +1,230 @@
+fully_qualified_name: "blinker._saferef"
+classes {
+  name: "BoundMethodWeakref"
+  fully_qualified_name: "blinker._saferef.BoundMethodWeakref"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "on_delete"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "arguments"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "named"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "on_delete"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "calculate_key"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.calculate_key"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__str__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__hash__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__nonzero__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__nonzero__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__call__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "_all_instances"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref._all_instances"
+    type_annotation {
+      pretty_printed_name: "weakref.WeakValueDictionary[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "weakref.WeakValueDictionary"
+    }
+  }
+  attributes {
+    name: "__repr__"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.__repr__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "deletion_methods"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.deletion_methods"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.key"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "weak_self"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.weak_self"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "weak_func"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.weak_func"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "self_name"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.self_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "func_name"
+    fully_qualified_name: "blinker._saferef.BoundMethodWeakref.func_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "safe_ref"
+  fully_qualified_name: "blinker._saferef.safe_ref"
+  parameters {
+    name: "target"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "on_delete"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "blinker._saferef.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "get_self"
+  fully_qualified_name: "blinker._saferef.get_self"
+  type_annotation {
+    pretty_printed_name: "_operator.attrgetter[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "_operator.attrgetter"
+  }
+}
+vars {
+  name: "get_func"
+  fully_qualified_name: "blinker._saferef.get_func"
+  type_annotation {
+    pretty_printed_name: "_operator.attrgetter[Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "_operator.attrgetter"
+  }
+}

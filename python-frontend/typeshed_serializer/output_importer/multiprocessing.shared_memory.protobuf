@@ -1,0 +1,472 @@
+fully_qualified_name: "multiprocessing.shared_memory"
+classes {
+  name: "SharedMemory"
+  fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "create"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "buf"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.buf"
+    return_annotation {
+      pretty_printed_name: "builtins.memoryview"
+      fully_qualified_name: "builtins.memoryview"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "name"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+  }
+  methods {
+    name: "unlink"
+    fully_qualified_name: "multiprocessing.shared_memory.SharedMemory.unlink"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+        fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+      }
+    }
+  }
+}
+classes {
+  name: "ShareableList"
+  fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__getitem__"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.shared_memory._SLT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Tuple[multiprocessing.shared_memory.ShareableList.Self,builtins.tuple[multiprocessing.shared_memory._SLT]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList.Self"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+  }
+  methods {
+    name: "format"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.format"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.count"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+        args {
+          pretty_printed_name: "multiprocessing.shared_memory._SLT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.shared_memory._SLT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "multiprocessing.shared_memory.ShareableList.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+          args {
+            pretty_printed_name: "multiprocessing.shared_memory._SLT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+        }
+      }
+      parameters {
+        name: "sequence"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "multiprocessing.shared_memory.ShareableList.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "multiprocessing.shared_memory.ShareableList[multiprocessing.shared_memory._SLT]"
+          args {
+            pretty_printed_name: "multiprocessing.shared_memory._SLT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "multiprocessing.shared_memory.ShareableList"
+        }
+      }
+      parameters {
+        name: "sequence"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[multiprocessing.shared_memory._SLT]"
+          args {
+            pretty_printed_name: "multiprocessing.shared_memory._SLT"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "shm"
+    fully_qualified_name: "multiprocessing.shared_memory.ShareableList.shm"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.shared_memory.SharedMemory"
+      fully_qualified_name: "multiprocessing.shared_memory.SharedMemory"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "multiprocessing.shared_memory.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.shared_memory.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

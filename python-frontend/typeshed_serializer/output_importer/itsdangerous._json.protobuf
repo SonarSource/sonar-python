@@ -1,0 +1,86 @@
+fully_qualified_name: "itsdangerous._json"
+classes {
+  name: "_CompactJSON"
+  fully_qualified_name: "itsdangerous._json._CompactJSON"
+  super_classes: "builtins.object"
+  methods {
+    name: "loads"
+    fully_qualified_name: "itsdangerous._json._CompactJSON.loads"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "dumps"
+    fully_qualified_name: "itsdangerous._json._CompactJSON.dumps"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous._json.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_json"
+  fully_qualified_name: "json"
+  is_imported_module: true
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

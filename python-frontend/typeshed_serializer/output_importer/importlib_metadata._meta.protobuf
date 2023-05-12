@@ -1,0 +1,448 @@
+fully_qualified_name: "importlib_metadata._meta"
+classes {
+  name: "PackageMetadata"
+  fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+  super_classes: "builtins.object"
+  methods {
+    name: "__len__"
+    fully_qualified_name: "importlib_metadata._meta.PackageMetadata.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+        fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "importlib_metadata._meta.PackageMetadata.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+        fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "importlib_metadata._meta.PackageMetadata.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+        fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "importlib_metadata._meta.PackageMetadata.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+        fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+      }
+    }
+  }
+  methods {
+    name: "json"
+    fully_qualified_name: "importlib_metadata._meta.PackageMetadata.json"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Union[builtins.str,builtins.list[builtins.str]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,builtins.list[builtins.str]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+        fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  overloaded_methods {
+    name: "get"
+    fullname: "importlib_metadata._meta.PackageMetadata.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "importlib_metadata._meta.PackageMetadata.get"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+          fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "failobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "importlib_metadata._meta.PackageMetadata.get"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,importlib_metadata._meta._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+          fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "failobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "get_all"
+    fullname: "importlib_metadata._meta.PackageMetadata.get_all"
+    definitions {
+      name: "get_all"
+      fully_qualified_name: "importlib_metadata._meta.PackageMetadata.get_all"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.list[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+          fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "failobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_all"
+      fully_qualified_name: "importlib_metadata._meta.PackageMetadata.get_all"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.list[Any],importlib_metadata._meta._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.list[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta.PackageMetadata"
+          fully_qualified_name: "importlib_metadata._meta.PackageMetadata"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "failobj"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "SimplePath"
+  fully_qualified_name: "importlib_metadata._meta.SimplePath"
+  super_classes: "builtins.object"
+  methods {
+    name: "joinpath"
+    fully_qualified_name: "importlib_metadata._meta.SimplePath.joinpath"
+    return_annotation {
+      pretty_printed_name: "importlib_metadata._meta._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.SimplePath[importlib_metadata._meta._T]"
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "importlib_metadata._meta.SimplePath"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,importlib_metadata._meta._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "__truediv__"
+    fully_qualified_name: "importlib_metadata._meta.SimplePath.__truediv__"
+    return_annotation {
+      pretty_printed_name: "importlib_metadata._meta._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.SimplePath[importlib_metadata._meta._T]"
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "importlib_metadata._meta.SimplePath"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,importlib_metadata._meta._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "parent"
+    fully_qualified_name: "importlib_metadata._meta.SimplePath.parent"
+    return_annotation {
+      pretty_printed_name: "importlib_metadata._meta._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.SimplePath[importlib_metadata._meta._T]"
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "importlib_metadata._meta.SimplePath"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "read_text"
+    fully_qualified_name: "importlib_metadata._meta.SimplePath.read_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib_metadata._meta.SimplePath[importlib_metadata._meta._T]"
+        args {
+          pretty_printed_name: "importlib_metadata._meta._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "importlib_metadata._meta.SimplePath"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "importlib_metadata._meta.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

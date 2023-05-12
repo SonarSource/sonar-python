@@ -1,0 +1,207 @@
+fully_qualified_name: "cryptography.exceptions"
+classes {
+  name: "_Reasons"
+  fully_qualified_name: "cryptography.exceptions._Reasons"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "BACKEND_MISSING_INTERFACE"
+    fully_qualified_name: "cryptography.exceptions._Reasons.BACKEND_MISSING_INTERFACE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_HASH"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_HASH"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_CIPHER"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_CIPHER"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_PADDING"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_PADDING"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_MGF"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_MGF"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_PUBLIC_KEY_ALGORITHM"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_PUBLIC_KEY_ALGORITHM"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_ELLIPTIC_CURVE"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_ELLIPTIC_CURVE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_SERIALIZATION"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_SERIALIZATION"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_X509"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_X509"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_EXCHANGE_ALGORITHM"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_EXCHANGE_ALGORITHM"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_DIFFIE_HELLMAN"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_DIFFIE_HELLMAN"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UNSUPPORTED_MAC"
+    fully_qualified_name: "cryptography.exceptions._Reasons.UNSUPPORTED_MAC"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "UnsupportedAlgorithm"
+  fully_qualified_name: "cryptography.exceptions.UnsupportedAlgorithm"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.exceptions.UnsupportedAlgorithm.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "reason"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "_reason"
+    fully_qualified_name: "cryptography.exceptions.UnsupportedAlgorithm._reason"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "AlreadyFinalized"
+  fully_qualified_name: "cryptography.exceptions.AlreadyFinalized"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "AlreadyUpdated"
+  fully_qualified_name: "cryptography.exceptions.AlreadyUpdated"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "NotYetFinalized"
+  fully_qualified_name: "cryptography.exceptions.NotYetFinalized"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "InvalidTag"
+  fully_qualified_name: "cryptography.exceptions.InvalidTag"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "InvalidSignature"
+  fully_qualified_name: "cryptography.exceptions.InvalidSignature"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "InternalError"
+  fully_qualified_name: "cryptography.exceptions.InternalError"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.exceptions.InternalError.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "err_code"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "err_code"
+    fully_qualified_name: "cryptography.exceptions.InternalError.err_code"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "InvalidKey"
+  fully_qualified_name: "cryptography.exceptions.InvalidKey"
+  super_classes: "builtins.Exception"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.exceptions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

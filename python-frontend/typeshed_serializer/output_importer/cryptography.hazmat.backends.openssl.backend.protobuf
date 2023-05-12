@@ -1,0 +1,2642 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.backend"
+classes {
+  name: "BackendInterface"
+  fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend"
+  super_classes: "cryptography.hazmat.backends.interfaces.CipherBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.CMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DERSerializationBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DHBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.DSABackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.EllipticCurveBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.HashBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.HMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.PBKDF2HMACBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.RSABackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.PEMSerializationBackend"
+  super_classes: "cryptography.hazmat.backends.interfaces.ScryptBackend"
+  methods {
+    name: "load_pem_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_pem_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_der_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_der_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "pkcs7_sign"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.pkcs7_sign"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_key_and_certificates_from_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_key_and_certificates_from_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "load_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.load_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "serialize_key_and_certificates_to_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.interfaces.Backend.serialize_key_and_certificates_to_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cert"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cas"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "_MemoryBIO"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._replace"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "bio"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "char_ptr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO.__new__"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "bio"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "char_ptr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._make"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "bio"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO.bio"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "char_ptr"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO.char_ptr"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._MemoryBIO.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "_RC2"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._RC2"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "Backend"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+  super_classes: "cryptography.hazmat.backends.interfaces.Backend"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "openssl_assert"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.openssl_assert"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ok"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_is_fips_enabled"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._is_fips_enabled"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_enable_fips"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._enable_fips"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "activate_builtin_random"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.activate_builtin_random"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_get_osurandom_engine"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._get_osurandom_engine"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextlib.contextmanager"
+  }
+  methods {
+    name: "activate_osrandom_engine"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.activate_osrandom_engine"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "osrandom_engine_implementation"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.osrandom_engine_implementation"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "openssl_version_text"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.openssl_version_text"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "openssl_version_number"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.openssl_version_number"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_hmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_hmac_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_md_from_algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_md_from_algorithm"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_md_non_null_from_algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_md_non_null_from_algorithm"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.hash_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "scrypt_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.scrypt_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "hmac_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.hmac_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_hash_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_hash_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "cipher_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.cipher_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "register_cipher_adapter"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.register_cipher_adapter"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher_cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode_cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "adapter"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_register_default_ciphers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._register_default_ciphers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_symmetric_encryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_symmetric_encryption_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_symmetric_decryption_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_symmetric_decryption_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "pbkdf2_hmac_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.pbkdf2_hmac_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "derive_pbkdf2_hmac"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.derive_pbkdf2_hmac"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "iterations"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_consume_errors"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._consume_errors"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_consume_errors_with_text"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._consume_errors_with_text"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_bn_to_int"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._bn_to_int"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "bn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_int_to_bn"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._int_to_bn"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "num"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "bn"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_rsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_rsa_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_rsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_rsa_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_exponent"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_rsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_rsa_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_rsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_rsa_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_create_evp_pkey_gc"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._create_evp_pkey_gc"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_rsa_cdata_to_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._rsa_cdata_to_evp_pkey"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "rsa_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_bytes_to_bio"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._bytes_to_bio"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_create_mem_bio_gc"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._create_mem_bio_gc"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_read_mem_bio"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._read_mem_bio"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "bio"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_pkey_to_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_pkey_to_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_pkey_to_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_pkey_to_public_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_oaep_hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._oaep_hash_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "rsa_padding_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.rsa_padding_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "padding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dsa_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dsa_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dsa_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dsa_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dsa_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dsa_private_key_and_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_dsa_cdata_set_values"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._dsa_cdata_set_values"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "dsa_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pub_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "priv_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dsa_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dsa_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dsa_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dsa_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dsa_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dsa_parameter_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_dsa_cdata_to_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._dsa_cdata_to_evp_pkey"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "dsa_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "dsa_hash_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.dsa_hash_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "dsa_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.dsa_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "cmac_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.cmac_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_cmac_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_cmac_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_pem_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_pem_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_pem_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_pem_public_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_pem_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_pem_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_der_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_der_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_pkey_from_der_traditional_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_pkey_from_der_traditional_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "bio_data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_der_public_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_der_public_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_der_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_der_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_cert2ossl"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._cert2ossl"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "cert"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+  }
+  methods {
+    name: "_ossl2cert"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ossl2cert"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.Certificate"
+      fully_qualified_name: "cryptography.x509.base.Certificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "x509"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_csr2ossl"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._csr2ossl"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "csr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+  }
+  methods {
+    name: "_ossl2csr"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ossl2csr"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "x509_req"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_crl2ossl"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._crl2ossl"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "crl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+  }
+  methods {
+    name: "_ossl2crl"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ossl2crl"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "x509_crl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_crl_is_signature_valid"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._crl_is_signature_valid"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "crl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES"
+      }
+    }
+  }
+  methods {
+    name: "_csr_is_signature_valid"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._csr_is_signature_valid"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+      }
+    }
+    parameters {
+      name: "csr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+  }
+  methods {
+    name: "_check_keys_correspond"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._check_keys_correspond"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key1"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key2"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_load_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._load_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "openssl_read_func"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "convert_func"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_handle_key_loading_error"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._handle_key_loading_error"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "elliptic_curve_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.elliptic_curve_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "elliptic_curve_signature_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.elliptic_curve_signature_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_elliptic_curve_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_elliptic_curve_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_elliptic_curve_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_elliptic_curve_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_elliptic_curve_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_elliptic_curve_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_elliptic_curve_public_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "point_bytes"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "derive_elliptic_curve_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.derive_elliptic_curve_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_ec_key_new_by_curve"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ec_key_new_by_curve"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_ec_key_new_by_curve_nid"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ec_key_new_by_curve_nid"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve_nid"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "elliptic_curve_exchange_algorithm_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.elliptic_curve_exchange_algorithm_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_ec_cdata_to_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ec_cdata_to_evp_pkey"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ec_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_elliptic_curve_to_nid"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._elliptic_curve_to_nid"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_tmp_bn_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._tmp_bn_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextmanager"
+  }
+  methods {
+    name: "_ec_key_determine_group_get_func"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ec_key_determine_group_get_func"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_ec_key_set_public_key_affine_coordinates"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ec_key_set_public_key_affine_coordinates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "y"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_private_key_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._private_key_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_private_key_bytes_via_bio"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._private_key_bytes_via_bio"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "write_bio"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_bio_func_output"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._bio_func_output"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "write_bio"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_public_key_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._public_key_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "evp_pkey"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_parameter_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._parameter_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "dh_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.dh_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dh_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dh_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_dh_cdata_to_evp_pkey"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._dh_cdata_to_evp_pkey"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "dh_cdata"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dh_private_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dh_private_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "parameters"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "generate_dh_private_key_and_parameters"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.generate_dh_private_key_and_parameters"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "generator"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dh_private_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dh_private_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dh_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dh_public_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_dh_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_dh_parameter_numbers"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "dh_parameters_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.dh_parameters_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "dh_x942_serialization_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.dh_x942_serialization_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x25519_load_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x25519_load_public_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x25519_load_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x25519_load_private_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_evp_pkey_keygen_gc"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._evp_pkey_keygen_gc"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "nid"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x25519_generate_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x25519_generate_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x25519_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x25519_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x448_load_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x448_load_public_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x448_load_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x448_load_private_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x448_generate_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x448_generate_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "x448_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.x448_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed25519_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed25519_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed25519_load_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed25519_load_public_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed25519_load_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed25519_load_private_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed25519_generate_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed25519_generate_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed448_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed448_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed448_load_public_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed448_load_public_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed448_load_private_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed448_load_private_bytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "ed448_generate_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.ed448_generate_key"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "derive_scrypt"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.derive_scrypt"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "aead_cipher_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.aead_cipher_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_zeroed_bytearray"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._zeroed_bytearray"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextlib.contextmanager"
+  }
+  methods {
+    name: "_zero_data"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._zero_data"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_zeroed_null_terminated_buf"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._zeroed_null_terminated_buf"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "contextlib.contextmanager"
+  }
+  methods {
+    name: "load_key_and_certificates_from_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_key_and_certificates_from_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "serialize_key_and_certificates_to_pkcs12"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.serialize_key_and_certificates_to_pkcs12"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cert"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cas"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "poly1305_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.poly1305_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "create_poly1305_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.create_poly1305_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "pkcs7_supported"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.pkcs7_supported"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_pem_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_pem_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_der_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.load_der_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_load_pkcs7_certificates"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._load_pkcs7_certificates"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "p7"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "pkcs7_sign"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.pkcs7_sign"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_fips_aead"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_aead"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "_fips_ciphers"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_ciphers"
+    type_annotation {
+      pretty_printed_name: "Tuple[CallableType[abc.ABCMeta],CallableType[abc.ABCMeta]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "_fips_hashes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_hashes"
+    type_annotation {
+      pretty_printed_name: "Tuple[CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "_fips_ecdh_curves"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_ecdh_curves"
+    type_annotation {
+      pretty_printed_name: "Tuple[CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta],CallableType[abc.ABCMeta]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+    }
+  }
+  attributes {
+    name: "_fips_rsa_min_key_size"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_rsa_min_key_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_fips_rsa_min_public_exponent"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_rsa_min_public_exponent"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_fips_dsa_min_modulus"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_dsa_min_modulus"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_fips_dh_min_key_size"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_dh_min_key_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_fips_dh_min_modulus"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_dh_min_modulus"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_binding"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._binding"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ffi"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._ffi"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_lib"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._lib"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_rsa_skip_check_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._rsa_skip_check_key"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_fips_enabled"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._fips_enabled"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_cipher_registry"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._cipher_registry"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_dh_types"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend._dh_types"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "GetCipherByName"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.GetCipherByName"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.GetCipherByName.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fmt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.GetCipherByName.__call__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "_fmt"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.GetCipherByName._fmt"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "_get_xts_cipher"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend._get_xts_cipher"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "cipher"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "rust_x509"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509"
+  is_imported_module: true
+}
+vars {
+  name: "backend"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.backend"
+  type_annotation {
+    pretty_printed_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.backend.Backend"
+  }
+}

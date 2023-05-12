@@ -1,0 +1,1164 @@
+fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh"
+classes {
+  name: "_FragList"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "init"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "put_raw"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.put_raw"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "put_u32"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.put_u32"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "put_sshstr"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.put_sshstr"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "put_mpint"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.put_mpint"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.size"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "render"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.render"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "dstbuf"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pos"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "tobytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.tobytes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "flist"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._FragList.flist"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_SSHFormatRSA"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA.get_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA.load_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA.load_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pubfields"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA.encode_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_pub"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatRSA.encode_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_priv"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "_SSHFormatDSA"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA.get_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA.load_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA.load_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pubfields"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA.encode_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_pub"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA.encode_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_priv"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_validate"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatDSA._validate"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_numbers"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "_SSHFormatECDSA"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ssh_curve_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "curve"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "get_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.get_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.load_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.load_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pubfields"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.encode_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_pub"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.encode_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_priv"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "ssh_curve_name"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.ssh_curve_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "curve"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatECDSA.curve"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_SSHFormatEd25519"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519.get_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519.load_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "key_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "load_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519.load_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "pubfields"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_public"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519.encode_public"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_pub"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "encode_private"
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSHFormatEd25519.encode_private"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "f_priv"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+functions {
+  name: "_base64_encode"
+  fully_qualified_name: "base64.encodebytes"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytearray"
+              fully_qualified_name: "builtins.bytearray"
+            }
+            args {
+              pretty_printed_name: "builtins.memoryview"
+              fully_qualified_name: "builtins.memoryview"
+            }
+            args {
+              pretty_printed_name: "array.array[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "array.array"
+            }
+            args {
+              pretty_printed_name: "mmap.mmap"
+              fully_qualified_name: "mmap.mmap"
+            }
+            args {
+              pretty_printed_name: "ctypes._CData"
+              fully_qualified_name: "ctypes._CData"
+            }
+            args {
+              pretty_printed_name: "pickle.PickleBuffer"
+              fully_qualified_name: "pickle.PickleBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.WriteableBuffer"
+        }
+      }
+      fully_qualified_name: "_typeshed.ReadableBuffer"
+    }
+  }
+}
+functions {
+  name: "_bcrypt_kdf-redefinition"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._bcrypt_kdf"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "salt"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "desired_key_bytes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "rounds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "ignore_few_rounds"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "_ecdsa_key_type"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ecdsa_key_type"
+  parameters {
+    name: "public_key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_ssh_pem_encode"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ssh_pem_encode"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "prefix"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "suffix"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_check_block_size"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._check_block_size"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "block_len"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_check_empty"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._check_empty"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_init_cipher"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._init_cipher"
+  parameters {
+    name: "ciphername"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "salt"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "rounds"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_get_u32"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._get_u32"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_get_u64"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._get_u64"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_get_sshstr"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._get_sshstr"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_get_mpint"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._get_mpint"
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_to_mpint"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._to_mpint"
+  parameters {
+    name: "val"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_lookup_kformat"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._lookup_kformat"
+  parameters {
+    name: "key_type"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "load_ssh_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.load_ssh_private_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PRIVATE_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "serialize_ssh_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.serialize_ssh_private_key"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "private_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PRIVATE_KEY_TYPES"
+    }
+  }
+  parameters {
+    name: "password"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "load_ssh_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.load_ssh_public_key"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+      }
+    }
+    fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "serialize_ssh_public_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.serialize_ssh_public_key"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "public_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_bcrypt_kdf"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._bcrypt_kdf"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}
+vars {
+  name: "_bcrypt_supported"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._bcrypt_supported"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "_SSH_ED25519"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_ED25519"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_SSH_RSA"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_RSA"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_SSH_DSA"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_DSA"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_ECDSA_NISTP256"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ECDSA_NISTP256"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_ECDSA_NISTP384"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ECDSA_NISTP384"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_ECDSA_NISTP521"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ECDSA_NISTP521"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_CERT_SUFFIX"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._CERT_SUFFIX"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_SSH_PUBKEY_RC"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_PUBKEY_RC"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_SK_MAGIC"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SK_MAGIC"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_SK_START"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SK_START"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_SK_END"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SK_END"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_BCRYPT"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._BCRYPT"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_NONE"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._NONE"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_DEFAULT_CIPHER"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._DEFAULT_CIPHER"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "_DEFAULT_ROUNDS"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._DEFAULT_ROUNDS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_MAX_PASSWORD"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._MAX_PASSWORD"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_PEM_RC"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._PEM_RC"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_PADDING"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._PADDING"
+  type_annotation {
+    pretty_printed_name: "builtins.memoryview"
+    fully_qualified_name: "builtins.memoryview"
+  }
+}
+vars {
+  name: "_SSH_CIPHERS"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._SSH_CIPHERS"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.bytes,Tuple[CallableType[abc.ABCMeta],builtins.int,CallableType[abc.ABCMeta],builtins.int]]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "Tuple[CallableType[abc.ABCMeta],builtins.int,CallableType[abc.ABCMeta],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "CallableType[abc.ABCMeta]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "abc.ABCMeta"
+          fully_qualified_name: "abc.ABCMeta"
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_ECDSA_KEY_TYPE"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._ECDSA_KEY_TYPE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_U32"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._U32"
+  type_annotation {
+    pretty_printed_name: "struct.Struct"
+    fully_qualified_name: "struct.Struct"
+  }
+}
+vars {
+  name: "_U64"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._U64"
+  type_annotation {
+    pretty_printed_name: "struct.Struct"
+    fully_qualified_name: "struct.Struct"
+  }
+}
+vars {
+  name: "_KEY_FORMATS"
+  fully_qualified_name: "cryptography.hazmat.primitives.serialization.ssh._KEY_FORMATS"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.bytes,builtins.object]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

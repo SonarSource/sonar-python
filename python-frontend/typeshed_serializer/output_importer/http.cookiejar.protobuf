@@ -1,0 +1,2250 @@
+fully_qualified_name: "http.cookiejar"
+classes {
+  name: "LoadError"
+  fully_qualified_name: "http.cookiejar.LoadError"
+  super_classes: "builtins.OSError"
+}
+classes {
+  name: "CookieJar"
+  fully_qualified_name: "http.cookiejar.CookieJar"
+  super_classes: "typing.Iterable"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "http.cookiejar.CookieJar.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "policy"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[http.cookiejar.CookiePolicy,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "http.cookiejar.CookiePolicy"
+          fully_qualified_name: "http.cookiejar.CookiePolicy"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "add_cookie_header"
+    fully_qualified_name: "http.cookiejar.CookieJar.add_cookie_header"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "extract_cookies"
+    fully_qualified_name: "http.cookiejar.CookieJar.extract_cookies"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.client.HTTPResponse"
+        fully_qualified_name: "http.client.HTTPResponse"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_policy"
+    fully_qualified_name: "http.cookiejar.CookieJar.set_policy"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "policy"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookiePolicy"
+        fully_qualified_name: "http.cookiejar.CookiePolicy"
+      }
+    }
+  }
+  methods {
+    name: "make_cookies"
+    fully_qualified_name: "http.cookiejar.CookieJar.make_cookies"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[http.cookiejar.Cookie]"
+      args {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.client.HTTPResponse"
+        fully_qualified_name: "http.client.HTTPResponse"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_cookie"
+    fully_qualified_name: "http.cookiejar.CookieJar.set_cookie"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+  }
+  methods {
+    name: "set_cookie_if_ok"
+    fully_qualified_name: "http.cookiejar.CookieJar.set_cookie_if_ok"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "http.cookiejar.CookieJar.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "clear_session_cookies"
+    fully_qualified_name: "http.cookiejar.CookieJar.clear_session_cookies"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+  }
+  methods {
+    name: "clear_expired_cookies"
+    fully_qualified_name: "http.cookiejar.CookieJar.clear_expired_cookies"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "http.cookiejar.CookieJar.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[http.cookiejar.Cookie]"
+      args {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "http.cookiejar.CookieJar.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookieJar"
+        fully_qualified_name: "http.cookiejar.CookieJar"
+      }
+    }
+  }
+  attributes {
+    name: "non_word_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.non_word_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "quote_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.quote_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "strict_domain_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.strict_domain_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "domain_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.domain_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "dots_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.dots_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "magic_re"
+    fully_qualified_name: "http.cookiejar.CookieJar.magic_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+}
+classes {
+  name: "FileCookieJar"
+  fully_qualified_name: "http.cookiejar.FileCookieJar"
+  super_classes: "http.cookiejar.CookieJar"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.FileCookieJar"
+        fully_qualified_name: "http.cookiejar.FileCookieJar"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[builtins.str]"
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "_typeshed.StrPath"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "delayload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "policy"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[http.cookiejar.CookiePolicy,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "http.cookiejar.CookiePolicy"
+          fully_qualified_name: "http.cookiejar.CookiePolicy"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "save"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.save"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.FileCookieJar"
+        fully_qualified_name: "http.cookiejar.FileCookieJar"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ignore_discard"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ignore_expires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.load"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.FileCookieJar"
+        fully_qualified_name: "http.cookiejar.FileCookieJar"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ignore_discard"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ignore_expires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "revert"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.revert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.FileCookieJar"
+        fully_qualified_name: "http.cookiejar.FileCookieJar"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ignore_discard"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ignore_expires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "delayload"
+    fully_qualified_name: "http.cookiejar.FileCookieJar.delayload"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "MozillaCookieJar"
+  fully_qualified_name: "http.cookiejar.MozillaCookieJar"
+  super_classes: "http.cookiejar.FileCookieJar"
+  attributes {
+    name: "header"
+    fully_qualified_name: "http.cookiejar.MozillaCookieJar.header"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "LWPCookieJar"
+  fully_qualified_name: "http.cookiejar.LWPCookieJar"
+  super_classes: "http.cookiejar.FileCookieJar"
+  methods {
+    name: "as_lwp_str"
+    fully_qualified_name: "http.cookiejar.LWPCookieJar.as_lwp_str"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.LWPCookieJar"
+        fully_qualified_name: "http.cookiejar.LWPCookieJar"
+      }
+    }
+    parameters {
+      name: "ignore_discard"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "ignore_expires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+}
+classes {
+  name: "CookiePolicy"
+  fully_qualified_name: "http.cookiejar.CookiePolicy"
+  super_classes: "builtins.object"
+  methods {
+    name: "set_ok"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.set_ok"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookiePolicy"
+        fully_qualified_name: "http.cookiejar.CookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.return_ok"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookiePolicy"
+        fully_qualified_name: "http.cookiejar.CookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "domain_return_ok"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.domain_return_ok"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookiePolicy"
+        fully_qualified_name: "http.cookiejar.CookiePolicy"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "path_return_ok"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.path_return_ok"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.CookiePolicy"
+        fully_qualified_name: "http.cookiejar.CookiePolicy"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  attributes {
+    name: "netscape"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.netscape"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "rfc2965"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.rfc2965"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "hide_cookie2"
+    fully_qualified_name: "http.cookiejar.CookiePolicy.hide_cookie2"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "DefaultCookiePolicy"
+  fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+  super_classes: "http.cookiejar.CookiePolicy"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "blocked_domains"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "allowed_domains"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "netscape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "rfc2965"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "rfc2109_as_netscape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "hide_cookie2"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "strict_domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "strict_rfc2965_unverifiable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "strict_ns_unverifiable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "strict_ns_domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "strict_ns_set_initial_dollar"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "strict_ns_set_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "secure_protocols"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+  }
+  methods {
+    name: "blocked_domains"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.blocked_domains"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+  }
+  methods {
+    name: "set_blocked_domains"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_blocked_domains"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "blocked_domains"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+  }
+  methods {
+    name: "is_blocked"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.is_blocked"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "allowed_domains"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.allowed_domains"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.tuple[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.tuple[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+  }
+  methods {
+    name: "set_allowed_domains"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_allowed_domains"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "allowed_domains"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "is_not_allowed"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.is_not_allowed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_version"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_version"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_verifiability"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_verifiability"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_name"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_name"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_path"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_path"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_domain"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_domain"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "set_ok_port"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.set_ok_port"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_version"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_version"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_verifiability"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_verifiability"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_secure"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_secure"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_expires"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_expires"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_port"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_port"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "return_ok_domain"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.return_ok_domain"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.DefaultCookiePolicy"
+        fully_qualified_name: "http.cookiejar.DefaultCookiePolicy"
+      }
+    }
+    parameters {
+      name: "cookie"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "urllib.request.Request"
+        fully_qualified_name: "urllib.request.Request"
+      }
+    }
+  }
+  attributes {
+    name: "rfc2109_as_netscape"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "strict_domain"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_domain"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "strict_rfc2965_unverifiable"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_rfc2965_unverifiable"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "strict_ns_unverifiable"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_ns_unverifiable"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "strict_ns_domain"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_ns_domain"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "strict_ns_set_initial_dollar"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_ns_set_initial_dollar"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "strict_ns_set_path"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.strict_ns_set_path"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "DomainStrictNoDots"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.DomainStrictNoDots"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "DomainStrictNonDomain"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.DomainStrictNonDomain"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "DomainRFC2965Match"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.DomainRFC2965Match"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "DomainLiberal"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.DomainLiberal"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "DomainStrict"
+    fully_qualified_name: "http.cookiejar.DefaultCookiePolicy.DomainStrict"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "Cookie"
+  fully_qualified_name: "http.cookiejar.Cookie"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "http.cookiejar.Cookie.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "port_specified"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "domain"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "domain_specified"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "domain_initial_dot"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path_specified"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "secure"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "expires"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "discard"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "comment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "comment_url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "rest"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "rfc2109"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "has_nonstandard_attr"
+    fully_qualified_name: "http.cookiejar.Cookie.has_nonstandard_attr"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set_nonstandard_attr"
+    fully_qualified_name: "http.cookiejar.Cookie.set_nonstandard_attr"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "is_expired"
+    fully_qualified_name: "http.cookiejar.Cookie.is_expired"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "http.cookiejar.Cookie"
+        fully_qualified_name: "http.cookiejar.Cookie"
+      }
+    }
+    parameters {
+      name: "now"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get_nonstandard_attr"
+    fullname: "http.cookiejar.Cookie.get_nonstandard_attr"
+    definitions {
+      name: "get_nonstandard_attr"
+      fully_qualified_name: "http.cookiejar.Cookie.get_nonstandard_attr"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "http.cookiejar.Cookie"
+          fully_qualified_name: "http.cookiejar.Cookie"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get_nonstandard_attr"
+      fully_qualified_name: "http.cookiejar.Cookie.get_nonstandard_attr"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,http.cookiejar._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "http.cookiejar._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "http.cookiejar.Cookie"
+          fully_qualified_name: "http.cookiejar.Cookie"
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "http.cookiejar._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "version"
+    fully_qualified_name: "http.cookiejar.Cookie.version"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "http.cookiejar.Cookie.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "http.cookiejar.Cookie.value"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "port"
+    fully_qualified_name: "http.cookiejar.Cookie.port"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "http.cookiejar.Cookie.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "path_specified"
+    fully_qualified_name: "http.cookiejar.Cookie.path_specified"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "secure"
+    fully_qualified_name: "http.cookiejar.Cookie.secure"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "expires"
+    fully_qualified_name: "http.cookiejar.Cookie.expires"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "discard"
+    fully_qualified_name: "http.cookiejar.Cookie.discard"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "comment"
+    fully_qualified_name: "http.cookiejar.Cookie.comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "comment_url"
+    fully_qualified_name: "http.cookiejar.Cookie.comment_url"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "rfc2109"
+    fully_qualified_name: "http.cookiejar.Cookie.rfc2109"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "port_specified"
+    fully_qualified_name: "http.cookiejar.Cookie.port_specified"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "domain"
+    fully_qualified_name: "http.cookiejar.Cookie.domain"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "domain_specified"
+    fully_qualified_name: "http.cookiejar.Cookie.domain_specified"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "domain_initial_dot"
+    fully_qualified_name: "http.cookiejar.Cookie.domain_initial_dot"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "http.cookiejar.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "http.cookiejar.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

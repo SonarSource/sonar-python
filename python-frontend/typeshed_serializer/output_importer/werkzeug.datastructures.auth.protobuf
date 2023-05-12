@@ -1,0 +1,1353 @@
+fully_qualified_name: "werkzeug.datastructures.auth"
+classes {
+  name: "Authorization"
+  fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "auth_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "token"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.get"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "from_header"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.from_header"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.auth.Authorization.Self,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization.Self"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.auth.Authorization.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.auth.Authorization.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "to_header"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.to_header"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+    }
+  }
+  attributes {
+    name: "type"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "parameters"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.parameters"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "token"
+    fully_qualified_name: "werkzeug.datastructures.auth.Authorization.token"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "WWWAuthenticate"
+  fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "auth_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "token"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_trigger_on_update"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate._trigger_on_update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+  }
+  methods {
+    name: "set_basic"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.set_basic"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set_digest"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.set_digest"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "realm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "nonce"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "qop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "opaque"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stale"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__setattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__delattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.get"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "from_header"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.from_header"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.auth.WWWAuthenticate.Self,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate.Self"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.auth.WWWAuthenticate.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "to_header"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.to_header"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+  }
+  methods {
+    name: "qop"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.qop"
+    return_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  overloaded_methods {
+    name: "type"
+    fullname: "werkzeug.datastructures.auth.WWWAuthenticate.type"
+    definitions {
+      name: "type"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.type"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "type"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.type"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "type.setter"
+    }
+  }
+  overloaded_methods {
+    name: "parameters"
+    fullname: "werkzeug.datastructures.auth.WWWAuthenticate.parameters"
+    definitions {
+      name: "parameters"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.parameters"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "parameters"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.parameters"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "parameters.setter"
+    }
+  }
+  overloaded_methods {
+    name: "token"
+    fullname: "werkzeug.datastructures.auth.WWWAuthenticate.token"
+    definitions {
+      name: "token"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.token"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "token"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.token"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "token.setter"
+    }
+  }
+  overloaded_methods {
+    name: "stale"
+    fullname: "werkzeug.datastructures.auth.WWWAuthenticate.stale"
+    definitions {
+      name: "stale"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.stale"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "stale"
+      fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.stale"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+          fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "stale.setter"
+    }
+  }
+  attributes {
+    name: "auth_property"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate.auth_property"
+    type_annotation {
+      pretty_printed_name: "builtins.staticmethod[Unknown]"
+      args {
+      }
+      args {
+        pretty_printed_name: "builtins.property"
+        fully_qualified_name: "builtins.property"
+      }
+      fully_qualified_name: "builtins.staticmethod"
+    }
+  }
+  attributes {
+    name: "_type"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate._type"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_parameters"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate._parameters"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_token"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate._token"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_on_update"
+    fully_qualified_name: "werkzeug.datastructures.auth.WWWAuthenticate._on_update"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "auth_property"
+  fully_qualified_name: "werkzeug.datastructures.auth.auth_property"
+  return_annotation {
+    pretty_printed_name: "builtins.property"
+    fully_qualified_name: "builtins.property"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "doc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_deprecated_dict_method"
+  fully_qualified_name: "werkzeug.datastructures.auth._deprecated_dict_method"
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.datastructures.auth.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "name"
+  fully_qualified_name: "werkzeug.datastructures.auth.name"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "f"
+  fully_qualified_name: "werkzeug.datastructures.auth.f"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}

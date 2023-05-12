@@ -1,0 +1,81 @@
+fully_qualified_name: "importlib_metadata._compat"
+classes {
+  name: "NullFinder"
+  fully_qualified_name: "importlib_metadata._compat.NullFinder"
+  super_classes: "builtins.object"
+  methods {
+    name: "find_spec"
+    fully_qualified_name: "importlib_metadata._compat.NullFinder.find_spec"
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  attributes {
+    name: "find_module"
+    fully_qualified_name: "importlib_metadata._compat.NullFinder.find_module"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "install"
+  fully_qualified_name: "importlib_metadata._compat.install"
+  parameters {
+    name: "cls"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "disable_stdlib_finder"
+  fully_qualified_name: "importlib_metadata._compat.disable_stdlib_finder"
+}
+functions {
+  name: "pypy_partial"
+  fully_qualified_name: "importlib_metadata._compat.pypy_partial"
+  parameters {
+    name: "val"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "importlib_metadata._compat.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "importlib_metadata._compat.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

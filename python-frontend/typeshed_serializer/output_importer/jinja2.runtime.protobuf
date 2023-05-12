@@ -1,0 +1,3371 @@
+fully_qualified_name: "jinja2.runtime"
+classes {
+  name: "LoopRenderFunc"
+  fully_qualified_name: "jinja2.runtime.LoopRenderFunc"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "jinja2.runtime.LoopRenderFunc.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopRenderFunc"
+        fully_qualified_name: "jinja2.runtime.LoopRenderFunc"
+      }
+    }
+    parameters {
+      name: "reciter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+        args {
+          pretty_printed_name: "jinja2.runtime.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "loop_render_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopRenderFunc"
+        fully_qualified_name: "jinja2.runtime.LoopRenderFunc"
+      }
+    }
+    parameters {
+      name: "depth"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "TemplateReference"
+  fully_qualified_name: "jinja2.runtime.TemplateReference"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.TemplateReference.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.TemplateReference"
+        fully_qualified_name: "jinja2.runtime.TemplateReference"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "jinja2.runtime.TemplateReference.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.TemplateReference"
+        fully_qualified_name: "jinja2.runtime.TemplateReference"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.runtime.TemplateReference.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.TemplateReference"
+        fully_qualified_name: "jinja2.runtime.TemplateReference"
+      }
+    }
+  }
+  attributes {
+    name: "__context"
+    fully_qualified_name: "jinja2.runtime.TemplateReference.__context"
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+}
+classes {
+  name: "Context"
+  fully_qualified_name: "jinja2.runtime.Context"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.Context.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "blocks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "super"
+    fully_qualified_name: "jinja2.runtime.Context.super"
+    return_annotation {
+      pretty_printed_name: "Union[jinja2.runtime.BlockReference,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "current"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "jinja2.runtime.Context.get"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "resolve"
+    fully_qualified_name: "jinja2.runtime.Context.resolve"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "resolve_or_missing"
+    fully_qualified_name: "jinja2.runtime.Context.resolve_or_missing"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_exported"
+    fully_qualified_name: "jinja2.runtime.Context.get_exported"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+  }
+  methods {
+    name: "get_all"
+    fully_qualified_name: "jinja2.runtime.Context.get_all"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+  }
+  methods {
+    name: "call"
+    fully_qualified_name: "jinja2.runtime.Context.call"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "derived"
+    fully_qualified_name: "jinja2.runtime.Context.derived"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "locals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "jinja2.runtime.Context.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "jinja2.runtime.Context.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.runtime.Context.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "keys"
+    fully_qualified_name: "jinja2.runtime.Context.keys"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "jinja2.runtime.Context.values"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "items"
+    fully_qualified_name: "jinja2.runtime.Context.items"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "parent"
+    fully_qualified_name: "jinja2.runtime.Context.parent"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "vars"
+    fully_qualified_name: "jinja2.runtime.Context.vars"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "environment"
+    fully_qualified_name: "jinja2.runtime.Context.environment"
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  attributes {
+    name: "eval_ctx"
+    fully_qualified_name: "jinja2.runtime.Context.eval_ctx"
+    type_annotation {
+      pretty_printed_name: "jinja2.nodes.EvalContext"
+      fully_qualified_name: "jinja2.nodes.EvalContext"
+    }
+  }
+  attributes {
+    name: "exported_vars"
+    fully_qualified_name: "jinja2.runtime.Context.exported_vars"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.runtime.Context.name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "globals_keys"
+    fully_qualified_name: "jinja2.runtime.Context.globals_keys"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "blocks"
+    fully_qualified_name: "jinja2.runtime.Context.blocks"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.list[CallableType[builtins.function]]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.list[CallableType[builtins.function]]"
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "BlockReference"
+  fully_qualified_name: "jinja2.runtime.BlockReference"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.BlockReference.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "stack"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[CallableType[builtins.function]]"
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "depth"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "super"
+    fully_qualified_name: "jinja2.runtime.BlockReference.super"
+    return_annotation {
+      pretty_printed_name: "Union[jinja2.runtime.BlockReference,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_async_call"
+    fully_qualified_name: "jinja2.runtime.BlockReference._async_call"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.str]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+    is_asynchronous: true
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "jinja2.runtime.BlockReference.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.BlockReference"
+        fully_qualified_name: "jinja2.runtime.BlockReference"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.runtime.BlockReference.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_context"
+    fully_qualified_name: "jinja2.runtime.BlockReference._context"
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.Context"
+      fully_qualified_name: "jinja2.runtime.Context"
+    }
+  }
+  attributes {
+    name: "_stack"
+    fully_qualified_name: "jinja2.runtime.BlockReference._stack"
+    type_annotation {
+      pretty_printed_name: "builtins.list[CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_depth"
+    fully_qualified_name: "jinja2.runtime.BlockReference._depth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "LoopContext"
+  fully_qualified_name: "jinja2.runtime.LoopContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+        args {
+          pretty_printed_name: "jinja2.runtime.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "undefined"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.runtime.Undefined]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.runtime.Undefined"
+          fully_qualified_name: "jinja2.runtime.Undefined"
+        }
+      }
+    }
+    parameters {
+      name: "recurse"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[jinja2.runtime.LoopRenderFunc,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "jinja2.runtime.LoopRenderFunc"
+          fully_qualified_name: "jinja2.runtime.LoopRenderFunc"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "depth0"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_to_iterator"
+    fully_qualified_name: "jinja2.runtime.LoopContext._to_iterator"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[jinja2.runtime.V]"
+      args {
+        pretty_printed_name: "jinja2.runtime.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+        args {
+          pretty_printed_name: "jinja2.runtime.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "length"
+    fully_qualified_name: "jinja2.runtime.LoopContext.length"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+  }
+  methods {
+    name: "depth"
+    fully_qualified_name: "jinja2.runtime.LoopContext.depth"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "jinja2.runtime.LoopContext.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "revindex0"
+    fully_qualified_name: "jinja2.runtime.LoopContext.revindex0"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "revindex"
+    fully_qualified_name: "jinja2.runtime.LoopContext.revindex"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "first"
+    fully_qualified_name: "jinja2.runtime.LoopContext.first"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_peek_next"
+    fully_qualified_name: "jinja2.runtime.LoopContext._peek_next"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+  }
+  methods {
+    name: "last"
+    fully_qualified_name: "jinja2.runtime.LoopContext.last"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "previtem"
+    fully_qualified_name: "jinja2.runtime.LoopContext.previtem"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "nextitem"
+    fully_qualified_name: "jinja2.runtime.LoopContext.nextitem"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "cycle"
+    fully_qualified_name: "jinja2.runtime.LoopContext.cycle"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "changed"
+    fully_qualified_name: "jinja2.runtime.LoopContext.changed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__iter__"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.LoopContext"
+      fully_qualified_name: "jinja2.runtime.LoopContext"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__next__"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,jinja2.runtime.LoopContext]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+        args {
+          pretty_printed_name: "jinja2.runtime.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.runtime.LoopContext.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoopContext"
+        fully_qualified_name: "jinja2.runtime.LoopContext"
+      }
+    }
+  }
+  attributes {
+    name: "index0"
+    fully_qualified_name: "jinja2.runtime.LoopContext.index0"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_length"
+    fully_qualified_name: "jinja2.runtime.LoopContext._length"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_after"
+    fully_qualified_name: "jinja2.runtime.LoopContext._after"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_current"
+    fully_qualified_name: "jinja2.runtime.LoopContext._current"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_before"
+    fully_qualified_name: "jinja2.runtime.LoopContext._before"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_last_changed_value"
+    fully_qualified_name: "jinja2.runtime.LoopContext._last_changed_value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_iterable"
+    fully_qualified_name: "jinja2.runtime.LoopContext._iterable"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+      args {
+        pretty_printed_name: "jinja2.runtime.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  attributes {
+    name: "_iterator"
+    fully_qualified_name: "jinja2.runtime.LoopContext._iterator"
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[jinja2.runtime.V]"
+      args {
+        pretty_printed_name: "jinja2.runtime.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+  }
+  attributes {
+    name: "_undefined"
+    fully_qualified_name: "jinja2.runtime.LoopContext._undefined"
+    type_annotation {
+      pretty_printed_name: "Type[jinja2.runtime.Undefined]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  attributes {
+    name: "_recurse"
+    fully_qualified_name: "jinja2.runtime.LoopContext._recurse"
+    type_annotation {
+      pretty_printed_name: "Union[jinja2.runtime.LoopRenderFunc,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "jinja2.runtime.LoopRenderFunc"
+        fully_qualified_name: "jinja2.runtime.LoopRenderFunc"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "depth0"
+    fully_qualified_name: "jinja2.runtime.LoopContext.depth0"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "AsyncLoopContext"
+  fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+  super_classes: "jinja2.runtime.LoopContext"
+  methods {
+    name: "_to_iterator"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext._to_iterator"
+    return_annotation {
+      pretty_printed_name: "typing.AsyncIterator[jinja2.runtime.V]"
+      args {
+        pretty_printed_name: "jinja2.runtime.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AsyncIterator"
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[jinja2.runtime.V],typing.AsyncIterable[jinja2.runtime.V]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[jinja2.runtime.V]"
+          args {
+            pretty_printed_name: "jinja2.runtime.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "typing.AsyncIterable[jinja2.runtime.V]"
+          args {
+            pretty_printed_name: "jinja2.runtime.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.AsyncIterable"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "length"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.length"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_asynchronous: true
+    is_property: true
+  }
+  methods {
+    name: "revindex0"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.revindex0"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_asynchronous: true
+    is_property: true
+  }
+  methods {
+    name: "revindex"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.revindex"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_asynchronous: true
+    is_property: true
+  }
+  methods {
+    name: "_peek_next"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext._peek_next"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "last"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.last"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bool]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_asynchronous: true
+    is_property: true
+  }
+  methods {
+    name: "nextitem"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.nextitem"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Union[Any,jinja2.runtime.Undefined]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "jinja2.runtime.Undefined"
+          fully_qualified_name: "jinja2.runtime.Undefined"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_asynchronous: true
+    is_property: true
+  }
+  methods {
+    name: "__aiter__"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.__aiter__"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+      fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+  }
+  methods {
+    name: "__anext__"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext.__anext__"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[Any,jinja2.runtime.AsyncLoopContext]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[Any,jinja2.runtime.AsyncLoopContext]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+          fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.AsyncLoopContext"
+        fully_qualified_name: "jinja2.runtime.AsyncLoopContext"
+      }
+    }
+    is_asynchronous: true
+  }
+  attributes {
+    name: "_iterator"
+    fully_qualified_name: "jinja2.runtime.AsyncLoopContext._iterator"
+    type_annotation {
+      pretty_printed_name: "typing.AsyncIterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.AsyncIterator"
+    }
+  }
+}
+classes {
+  name: "Macro"
+  fully_qualified_name: "jinja2.runtime.Macro"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.Macro.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Macro"
+        fully_qualified_name: "jinja2.runtime.Macro"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "arguments"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "catch_kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "catch_varargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "caller"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "default_autoescape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "jinja2.runtime.Macro.__call__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Macro"
+        fully_qualified_name: "jinja2.runtime.Macro"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+    resolved_decorator_names: "pass_eval_context"
+  }
+  methods {
+    name: "_async_invoke"
+    fully_qualified_name: "jinja2.runtime.Macro._async_invoke"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.str]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Macro"
+        fully_qualified_name: "jinja2.runtime.Macro"
+      }
+    }
+    parameters {
+      name: "arguments"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "autoescape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "_invoke"
+    fully_qualified_name: "jinja2.runtime.Macro._invoke"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Macro"
+        fully_qualified_name: "jinja2.runtime.Macro"
+      }
+    }
+    parameters {
+      name: "arguments"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "autoescape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.runtime.Macro.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Macro"
+        fully_qualified_name: "jinja2.runtime.Macro"
+      }
+    }
+  }
+  attributes {
+    name: "_environment"
+    fully_qualified_name: "jinja2.runtime.Macro._environment"
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  attributes {
+    name: "_func"
+    fully_qualified_name: "jinja2.runtime.Macro._func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "_argument_count"
+    fully_qualified_name: "jinja2.runtime.Macro._argument_count"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "jinja2.runtime.Macro.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "arguments"
+    fully_qualified_name: "jinja2.runtime.Macro.arguments"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "catch_kwargs"
+    fully_qualified_name: "jinja2.runtime.Macro.catch_kwargs"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "catch_varargs"
+    fully_qualified_name: "jinja2.runtime.Macro.catch_varargs"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "caller"
+    fully_qualified_name: "jinja2.runtime.Macro.caller"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "explicit_caller"
+    fully_qualified_name: "jinja2.runtime.Macro.explicit_caller"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_default_autoescape"
+    fully_qualified_name: "jinja2.runtime.Macro._default_autoescape"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "Undefined"
+  fully_qualified_name: "jinja2.runtime.Undefined"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "hint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[jinja2.exceptions.TemplateRuntimeError]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "jinja2.exceptions.TemplateRuntimeError"
+          fully_qualified_name: "jinja2.exceptions.TemplateRuntimeError"
+        }
+      }
+    }
+  }
+  methods {
+    name: "_undefined_message"
+    fully_qualified_name: "jinja2.runtime.Undefined._undefined_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "_fail_with_undefined_error"
+    fully_qualified_name: "jinja2.runtime.Undefined._fail_with_undefined_error"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  methods {
+    name: "__aiter__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__aiter__"
+    return_annotation {
+      pretty_printed_name: "typing.AsyncIterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.AsyncIterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__add__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__add__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__radd__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__radd__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__sub__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__sub__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rsub__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rsub__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__mul__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__mul__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rmul__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rmul__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__div__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__div__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rdiv__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rdiv__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__truediv__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__truediv__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rtruediv__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rtruediv__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__floordiv__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__floordiv__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rfloordiv__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rfloordiv__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__mod__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__mod__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rmod__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rmod__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__pos__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__pos__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__neg__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__neg__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__call__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__call__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__getitem__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__getitem__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__lt__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__lt__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__le__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__le__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__gt__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__gt__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__ge__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__ge__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__int__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__int__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__float__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__float__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__complex__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__complex__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__pow__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__pow__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__rpow__"
+    fully_qualified_name: "jinja2.runtime.Undefined.__rpow__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "_undefined_hint"
+    fully_qualified_name: "jinja2.runtime.Undefined._undefined_hint"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_undefined_obj"
+    fully_qualified_name: "jinja2.runtime.Undefined._undefined_obj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_undefined_name"
+    fully_qualified_name: "jinja2.runtime.Undefined._undefined_name"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_undefined_exception"
+    fully_qualified_name: "jinja2.runtime.Undefined._undefined_exception"
+    type_annotation {
+      pretty_printed_name: "Type[jinja2.exceptions.TemplateRuntimeError]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "jinja2.exceptions.TemplateRuntimeError"
+        fully_qualified_name: "jinja2.exceptions.TemplateRuntimeError"
+      }
+    }
+  }
+}
+classes {
+  name: "ChainableUndefined"
+  fully_qualified_name: "jinja2.runtime.ChainableUndefined"
+  super_classes: "jinja2.runtime.Undefined"
+  methods {
+    name: "__html__"
+    fully_qualified_name: "jinja2.runtime.ChainableUndefined.__html__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.ChainableUndefined"
+        fully_qualified_name: "jinja2.runtime.ChainableUndefined"
+      }
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "jinja2.runtime.ChainableUndefined.__getattr__"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.ChainableUndefined"
+      fully_qualified_name: "jinja2.runtime.ChainableUndefined"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.ChainableUndefined"
+        fully_qualified_name: "jinja2.runtime.ChainableUndefined"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.runtime.ChainableUndefined.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "__getitem__"
+    fully_qualified_name: "jinja2.runtime.ChainableUndefined.__getitem__"
+  }
+}
+classes {
+  name: "DebugUndefined"
+  fully_qualified_name: "jinja2.runtime.DebugUndefined"
+  super_classes: "jinja2.runtime.Undefined"
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.runtime.DebugUndefined.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.DebugUndefined"
+        fully_qualified_name: "jinja2.runtime.DebugUndefined"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.runtime.DebugUndefined.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+}
+classes {
+  name: "StrictUndefined"
+  fully_qualified_name: "jinja2.runtime.StrictUndefined"
+  super_classes: "jinja2.runtime.Undefined"
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__iter__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__str__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__str__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__len__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__len__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__eq__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__eq__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__ne__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__ne__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__bool__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__bool__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__hash__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__contains__"
+    fully_qualified_name: "jinja2.runtime.StrictUndefined.__contains__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "LoggingUndefined@934"
+  fully_qualified_name: "jinja2.runtime.LoggingUndefined@934"
+  super_classes: "builtins.object"
+  methods {
+    name: "_fail_with_undefined_error"
+    fully_qualified_name: "jinja2.runtime.LoggingUndefined@934._fail_with_undefined_error"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoggingUndefined@934"
+        fully_qualified_name: "jinja2.runtime.LoggingUndefined@934"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "jinja2.runtime.LoggingUndefined@934.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoggingUndefined@934"
+        fully_qualified_name: "jinja2.runtime.LoggingUndefined@934"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "jinja2.runtime.LoggingUndefined@934.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoggingUndefined@934"
+        fully_qualified_name: "jinja2.runtime.LoggingUndefined@934"
+      }
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "jinja2.runtime.LoggingUndefined@934.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.LoggingUndefined@934"
+        fully_qualified_name: "jinja2.runtime.LoggingUndefined@934"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "jinja2.runtime.LoggingUndefined@934.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+}
+functions {
+  name: "identity"
+  fully_qualified_name: "jinja2.runtime.identity"
+  return_annotation {
+    pretty_printed_name: "jinja2.runtime.V"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "x"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.V"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "markup_join"
+  fully_qualified_name: "jinja2.runtime.markup_join"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "seq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "str_join"
+  fully_qualified_name: "jinja2.runtime.str_join"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "seq"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "new_context"
+  fully_qualified_name: "jinja2.runtime.new_context"
+  return_annotation {
+    pretty_printed_name: "jinja2.runtime.Context"
+    fully_qualified_name: "jinja2.runtime.Context"
+  }
+  parameters {
+    name: "environment"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  parameters {
+    name: "template_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "blocks"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  parameters {
+    name: "vars"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "shared"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "globals"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.MutableMapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "locals"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_dict_method_all"
+  fully_qualified_name: "jinja2.runtime._dict_method_all"
+  return_annotation {
+    pretty_printed_name: "jinja2.runtime.F"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "dict_method"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.runtime.F"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "make_logging_undefined"
+  fully_qualified_name: "jinja2.runtime.make_logging_undefined"
+  return_annotation {
+    pretty_printed_name: "Type[jinja2.runtime.Undefined]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "jinja2.runtime.Undefined"
+      fully_qualified_name: "jinja2.runtime.Undefined"
+    }
+  }
+  parameters {
+    name: "logger"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[logging.Logger,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "logging.Logger"
+        fully_qualified_name: "logging.Logger"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "base"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[jinja2.runtime.Undefined]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.runtime.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "exported"
+  fully_qualified_name: "jinja2.runtime.exported"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "async_exported"
+  fully_qualified_name: "jinja2.runtime.async_exported"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

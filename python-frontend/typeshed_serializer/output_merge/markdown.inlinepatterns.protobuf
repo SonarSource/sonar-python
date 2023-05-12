@@ -1,0 +1,1445 @@
+fully_qualified_name: "markdown.inlinepatterns"
+classes {
+  name: "EmStrongItem"
+  fully_qualified_name: "markdown.inlinepatterns.EmStrongItem"
+  super_classes: "builtins.object"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Pattern"
+  fully_qualified_name: "markdown.inlinepatterns.Pattern"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.Pattern"
+        fully_qualified_name: "markdown.inlinepatterns.Pattern"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "md"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "markdown"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.markdown"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getCompiledRegExp"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.getCompiledRegExp"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "handleMatch"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.handleMatch"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,xml.etree.ElementTree.Element,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "xml.etree.ElementTree.Element"
+        fully_qualified_name: "xml.etree.ElementTree.Element"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.Pattern"
+        fully_qualified_name: "markdown.inlinepatterns.Pattern"
+      }
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Match[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Match"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "type"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.type"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "unescape"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.unescape"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "ANCESTOR_EXCLUDES"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.ANCESTOR_EXCLUDES"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.pattern"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "compiled_re"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.compiled_re"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "md"
+    fully_qualified_name: "markdown.inlinepatterns.Pattern.md"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "InlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.InlineProcessor"
+  super_classes: "markdown.inlinepatterns.Pattern"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.inlinepatterns.InlineProcessor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.InlineProcessor"
+        fully_qualified_name: "markdown.inlinepatterns.InlineProcessor"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "md"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "handleMatch"
+    fully_qualified_name: "markdown.inlinepatterns.InlineProcessor.handleMatch"
+    return_annotation {
+      pretty_printed_name: "Union[Tuple[xml.etree.ElementTree.Element,builtins.int,builtins.int],Tuple[None,None,None]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[xml.etree.ElementTree.Element,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "xml.etree.ElementTree.Element"
+          fully_qualified_name: "xml.etree.ElementTree.Element"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      args {
+        pretty_printed_name: "Tuple[None,None,None]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.InlineProcessor"
+        fully_qualified_name: "markdown.inlinepatterns.InlineProcessor"
+      }
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Match[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Match"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "safe_mode"
+    fully_qualified_name: "markdown.inlinepatterns.InlineProcessor.safe_mode"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SimpleTextPattern"
+  fully_qualified_name: "markdown.inlinepatterns.SimpleTextPattern"
+  super_classes: "markdown.inlinepatterns.Pattern"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SimpleTextInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.SimpleTextInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "EscapeInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.EscapeInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SimpleTagPattern"
+  fully_qualified_name: "markdown.inlinepatterns.SimpleTagPattern"
+  super_classes: "markdown.inlinepatterns.Pattern"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.inlinepatterns.SimpleTagPattern.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.SimpleTagPattern"
+        fully_qualified_name: "markdown.inlinepatterns.SimpleTagPattern"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "tag"
+    fully_qualified_name: "markdown.inlinepatterns.SimpleTagPattern.tag"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SimpleTagInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.SimpleTagInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.inlinepatterns.SimpleTagInlineProcessor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.SimpleTagInlineProcessor"
+        fully_qualified_name: "markdown.inlinepatterns.SimpleTagInlineProcessor"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "tag"
+    fully_qualified_name: "markdown.inlinepatterns.SimpleTagInlineProcessor.tag"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SubstituteTagPattern"
+  fully_qualified_name: "markdown.inlinepatterns.SubstituteTagPattern"
+  super_classes: "markdown.inlinepatterns.SimpleTagPattern"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "SubstituteTagInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.SubstituteTagInlineProcessor"
+  super_classes: "markdown.inlinepatterns.SimpleTagInlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BacktickInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.BacktickInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markdown.inlinepatterns.BacktickInlineProcessor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.BacktickInlineProcessor"
+        fully_qualified_name: "markdown.inlinepatterns.BacktickInlineProcessor"
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "ESCAPED_BSLASH"
+    fully_qualified_name: "markdown.inlinepatterns.BacktickInlineProcessor.ESCAPED_BSLASH"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tag"
+    fully_qualified_name: "markdown.inlinepatterns.BacktickInlineProcessor.tag"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DoubleTagPattern"
+  fully_qualified_name: "markdown.inlinepatterns.DoubleTagPattern"
+  super_classes: "markdown.inlinepatterns.SimpleTagPattern"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "DoubleTagInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.DoubleTagInlineProcessor"
+  super_classes: "markdown.inlinepatterns.SimpleTagInlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "HtmlInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.HtmlInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AsteriskProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  methods {
+    name: "build_single"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.build_single"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "idx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "build_double"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.build_double"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tags"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "idx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "build_double2"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.build_double2"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tags"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "idx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "parse_sub_patterns"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.parse_sub_patterns"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markdown.inlinepatterns.AsteriskProcessor"
+        fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "last"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "idx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "build_element"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.build_element"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "m"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "builder"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "tags"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PATTERNS"
+    fully_qualified_name: "markdown.inlinepatterns.AsteriskProcessor.PATTERNS"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnderscoreProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.UnderscoreProcessor"
+  super_classes: "markdown.inlinepatterns.AsteriskProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "PATTERNS"
+    fully_qualified_name: "markdown.inlinepatterns.UnderscoreProcessor.PATTERNS"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "LinkInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.LinkInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  methods {
+    name: "getLink"
+    fully_qualified_name: "markdown.inlinepatterns.LinkInlineProcessor.getLink"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getText"
+    fully_qualified_name: "markdown.inlinepatterns.LinkInlineProcessor.getText"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "RE_LINK"
+    fully_qualified_name: "markdown.inlinepatterns.LinkInlineProcessor.RE_LINK"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "RE_TITLE_CLEAN"
+    fully_qualified_name: "markdown.inlinepatterns.LinkInlineProcessor.RE_TITLE_CLEAN"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ImageInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.ImageInlineProcessor"
+  super_classes: "markdown.inlinepatterns.LinkInlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ReferenceInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.ReferenceInlineProcessor"
+  super_classes: "markdown.inlinepatterns.LinkInlineProcessor"
+  methods {
+    name: "evalId"
+    fully_qualified_name: "markdown.inlinepatterns.ReferenceInlineProcessor.evalId"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "index"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "makeTag"
+    fully_qualified_name: "markdown.inlinepatterns.ReferenceInlineProcessor.makeTag"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "href"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "title"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "NEWLINE_CLEANUP_RE"
+    fully_qualified_name: "markdown.inlinepatterns.ReferenceInlineProcessor.NEWLINE_CLEANUP_RE"
+    type_annotation {
+      pretty_printed_name: "markdown.inlinepatterns.Pattern"
+      fully_qualified_name: "markdown.inlinepatterns.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ShortReferenceInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.ShortReferenceInlineProcessor"
+  super_classes: "markdown.inlinepatterns.ReferenceInlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "ImageReferenceInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.ImageReferenceInlineProcessor"
+  super_classes: "markdown.inlinepatterns.ReferenceInlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AutolinkInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.AutolinkInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AutomailInlineProcessor"
+  fully_qualified_name: "markdown.inlinepatterns.AutomailInlineProcessor"
+  super_classes: "markdown.inlinepatterns.InlineProcessor"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "build_inlinepatterns"
+  fully_qualified_name: "markdown.inlinepatterns.build_inlinepatterns"
+  parameters {
+    name: "md"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dequote"
+  fully_qualified_name: "markdown.inlinepatterns.dequote"
+  parameters {
+    name: "string"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NOIMG"
+  fully_qualified_name: "markdown.inlinepatterns.NOIMG"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "BACKTICK_RE"
+  fully_qualified_name: "markdown.inlinepatterns.BACKTICK_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ESCAPE_RE"
+  fully_qualified_name: "markdown.inlinepatterns.ESCAPE_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EMPHASIS_RE"
+  fully_qualified_name: "markdown.inlinepatterns.EMPHASIS_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_RE"
+  fully_qualified_name: "markdown.inlinepatterns.STRONG_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SMART_STRONG_RE"
+  fully_qualified_name: "markdown.inlinepatterns.SMART_STRONG_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SMART_EMPHASIS_RE"
+  fully_qualified_name: "markdown.inlinepatterns.SMART_EMPHASIS_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "SMART_STRONG_EM_RE"
+  fully_qualified_name: "markdown.inlinepatterns.SMART_STRONG_EM_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EM_STRONG_RE"
+  fully_qualified_name: "markdown.inlinepatterns.EM_STRONG_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "EM_STRONG2_RE"
+  fully_qualified_name: "markdown.inlinepatterns.EM_STRONG2_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_EM_RE"
+  fully_qualified_name: "markdown.inlinepatterns.STRONG_EM_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_EM2_RE"
+  fully_qualified_name: "markdown.inlinepatterns.STRONG_EM2_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "STRONG_EM3_RE"
+  fully_qualified_name: "markdown.inlinepatterns.STRONG_EM3_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LINK_RE"
+  fully_qualified_name: "markdown.inlinepatterns.LINK_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IMAGE_LINK_RE"
+  fully_qualified_name: "markdown.inlinepatterns.IMAGE_LINK_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "REFERENCE_RE"
+  fully_qualified_name: "markdown.inlinepatterns.REFERENCE_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "IMAGE_REFERENCE_RE"
+  fully_qualified_name: "markdown.inlinepatterns.IMAGE_REFERENCE_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NOT_STRONG_RE"
+  fully_qualified_name: "markdown.inlinepatterns.NOT_STRONG_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUTOLINK_RE"
+  fully_qualified_name: "markdown.inlinepatterns.AUTOLINK_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "AUTOMAIL_RE"
+  fully_qualified_name: "markdown.inlinepatterns.AUTOMAIL_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HTML_RE"
+  fully_qualified_name: "markdown.inlinepatterns.HTML_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "ENTITY_RE"
+  fully_qualified_name: "markdown.inlinepatterns.ENTITY_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "LINE_BREAK_RE"
+  fully_qualified_name: "markdown.inlinepatterns.LINE_BREAK_RE"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

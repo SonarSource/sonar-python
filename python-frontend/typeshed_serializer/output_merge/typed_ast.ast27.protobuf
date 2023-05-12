@@ -1,0 +1,4025 @@
+fully_qualified_name: "typed_ast.ast27"
+classes {
+  name: "NodeVisitor"
+  fully_qualified_name: "typed_ast.ast27.NodeVisitor"
+  super_classes: "builtins.object"
+  methods {
+    name: "visit"
+    fully_qualified_name: "typed_ast.ast27.NodeVisitor.visit"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.NodeVisitor"
+        fully_qualified_name: "typed_ast.ast27.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.AST"
+        fully_qualified_name: "typed_ast.ast27.AST"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "generic_visit"
+    fully_qualified_name: "typed_ast.ast27.NodeVisitor.generic_visit"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.NodeVisitor"
+        fully_qualified_name: "typed_ast.ast27.NodeVisitor"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.AST"
+        fully_qualified_name: "typed_ast.ast27.AST"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NodeTransformer"
+  fully_qualified_name: "typed_ast.ast27.NodeTransformer"
+  super_classes: "typed_ast.ast27.NodeVisitor"
+  methods {
+    name: "generic_visit"
+    fully_qualified_name: "typed_ast.ast27.NodeTransformer.generic_visit"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.NodeTransformer"
+        fully_qualified_name: "typed_ast.ast27.NodeTransformer"
+      }
+    }
+    parameters {
+      name: "node"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.AST"
+        fully_qualified_name: "typed_ast.ast27.AST"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AST"
+  fully_qualified_name: "typed_ast.ast27.AST"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "typed_ast.ast27.AST.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typed_ast.ast27.AST"
+        fully_qualified_name: "typed_ast.ast27.AST"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: VAR_POSITIONAL
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "typed_ast.ast27.AST._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "typed_ast.ast27.AST._fields"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "mod"
+  fully_qualified_name: "typed_ast.ast27.mod"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Module"
+  fully_qualified_name: "typed_ast.ast27.Module"
+  super_classes: "typed_ast.ast27.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Module.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_ignores"
+    fully_qualified_name: "typed_ast.ast27.Module.type_ignores"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.TypeIgnore]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.TypeIgnore"
+        fully_qualified_name: "typed_ast.ast27.TypeIgnore"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Interactive"
+  fully_qualified_name: "typed_ast.ast27.Interactive"
+  super_classes: "typed_ast.ast27.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Interactive.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Expression"
+  fully_qualified_name: "typed_ast.ast27.Expression"
+  super_classes: "typed_ast.ast27.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Expression.body"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "FunctionType"
+  fully_qualified_name: "typed_ast.ast27.FunctionType"
+  super_classes: "typed_ast.ast27.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "argtypes"
+    fully_qualified_name: "typed_ast.ast27.FunctionType.argtypes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "returns"
+    fully_qualified_name: "typed_ast.ast27.FunctionType.returns"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Suite"
+  fully_qualified_name: "typed_ast.ast27.Suite"
+  super_classes: "typed_ast.ast27.mod"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Suite.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "stmt"
+  fully_qualified_name: "typed_ast.ast27.stmt"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "typed_ast.ast27.stmt.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "col_offset"
+    fully_qualified_name: "typed_ast.ast27.stmt.col_offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "FunctionDef"
+  fully_qualified_name: "typed_ast.ast27.FunctionDef"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "typed_ast.ast27.FunctionDef.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "typed_ast.ast27.FunctionDef.args"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.arguments"
+      fully_qualified_name: "typed_ast.ast27.arguments"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.FunctionDef.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "decorator_list"
+    fully_qualified_name: "typed_ast.ast27.FunctionDef.decorator_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comment"
+    fully_qualified_name: "typed_ast.ast27.FunctionDef.type_comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ClassDef"
+  fully_qualified_name: "typed_ast.ast27.ClassDef"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "typed_ast.ast27.ClassDef.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "bases"
+    fully_qualified_name: "typed_ast.ast27.ClassDef.bases"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.ClassDef.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "decorator_list"
+    fully_qualified_name: "typed_ast.ast27.ClassDef.decorator_list"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Return"
+  fully_qualified_name: "typed_ast.ast27.Return"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Return.value"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Delete"
+  fully_qualified_name: "typed_ast.ast27.Delete"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "targets"
+    fully_qualified_name: "typed_ast.ast27.Delete.targets"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Assign"
+  fully_qualified_name: "typed_ast.ast27.Assign"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "targets"
+    fully_qualified_name: "typed_ast.ast27.Assign.targets"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Assign.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comment"
+    fully_qualified_name: "typed_ast.ast27.Assign.type_comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "AugAssign"
+  fully_qualified_name: "typed_ast.ast27.AugAssign"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "target"
+    fully_qualified_name: "typed_ast.ast27.AugAssign.target"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "op"
+    fully_qualified_name: "typed_ast.ast27.AugAssign.op"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.operator"
+      fully_qualified_name: "typed_ast.ast27.operator"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.AugAssign.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Print"
+  fully_qualified_name: "typed_ast.ast27.Print"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "dest"
+    fully_qualified_name: "typed_ast.ast27.Print.dest"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "typed_ast.ast27.Print.values"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nl"
+    fully_qualified_name: "typed_ast.ast27.Print.nl"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "For"
+  fully_qualified_name: "typed_ast.ast27.For"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "target"
+    fully_qualified_name: "typed_ast.ast27.For.target"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "iter"
+    fully_qualified_name: "typed_ast.ast27.For.iter"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.For.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "typed_ast.ast27.For.orelse"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comment"
+    fully_qualified_name: "typed_ast.ast27.For.type_comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "While"
+  fully_qualified_name: "typed_ast.ast27.While"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "typed_ast.ast27.While.test"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.While.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "typed_ast.ast27.While.orelse"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "If"
+  fully_qualified_name: "typed_ast.ast27.If"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "typed_ast.ast27.If.test"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.If.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "typed_ast.ast27.If.orelse"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "With"
+  fully_qualified_name: "typed_ast.ast27.With"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "context_expr"
+    fully_qualified_name: "typed_ast.ast27.With.context_expr"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "optional_vars"
+    fully_qualified_name: "typed_ast.ast27.With.optional_vars"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.With.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comment"
+    fully_qualified_name: "typed_ast.ast27.With.type_comment"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Raise"
+  fully_qualified_name: "typed_ast.ast27.Raise"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "type"
+    fully_qualified_name: "typed_ast.ast27.Raise.type"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "inst"
+    fully_qualified_name: "typed_ast.ast27.Raise.inst"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "tback"
+    fully_qualified_name: "typed_ast.ast27.Raise.tback"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TryExcept"
+  fully_qualified_name: "typed_ast.ast27.TryExcept"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.TryExcept.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "handlers"
+    fully_qualified_name: "typed_ast.ast27.TryExcept.handlers"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.ExceptHandler]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.ExceptHandler"
+        fully_qualified_name: "typed_ast.ast27.ExceptHandler"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "typed_ast.ast27.TryExcept.orelse"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TryFinally"
+  fully_qualified_name: "typed_ast.ast27.TryFinally"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.TryFinally.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "finalbody"
+    fully_qualified_name: "typed_ast.ast27.TryFinally.finalbody"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Assert"
+  fully_qualified_name: "typed_ast.ast27.Assert"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "typed_ast.ast27.Assert.test"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "msg"
+    fully_qualified_name: "typed_ast.ast27.Assert.msg"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Import"
+  fully_qualified_name: "typed_ast.ast27.Import"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "names"
+    fully_qualified_name: "typed_ast.ast27.Import.names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.alias]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.alias"
+        fully_qualified_name: "typed_ast.ast27.alias"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ImportFrom"
+  fully_qualified_name: "typed_ast.ast27.ImportFrom"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "module"
+    fully_qualified_name: "typed_ast.ast27.ImportFrom.module"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "names"
+    fully_qualified_name: "typed_ast.ast27.ImportFrom.names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.alias]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.alias"
+        fully_qualified_name: "typed_ast.ast27.alias"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "level"
+    fully_qualified_name: "typed_ast.ast27.ImportFrom.level"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Exec"
+  fully_qualified_name: "typed_ast.ast27.Exec"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Exec.body"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "globals"
+    fully_qualified_name: "typed_ast.ast27.Exec.globals"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "locals"
+    fully_qualified_name: "typed_ast.ast27.Exec.locals"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Global"
+  fully_qualified_name: "typed_ast.ast27.Global"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "names"
+    fully_qualified_name: "typed_ast.ast27.Global.names"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Expr"
+  fully_qualified_name: "typed_ast.ast27.Expr"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Expr.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Pass"
+  fully_qualified_name: "typed_ast.ast27.Pass"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Break"
+  fully_qualified_name: "typed_ast.ast27.Break"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Continue"
+  fully_qualified_name: "typed_ast.ast27.Continue"
+  super_classes: "typed_ast.ast27.stmt"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "slice"
+  fully_qualified_name: "typed_ast.ast27.slice"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Slice"
+  fully_qualified_name: "typed_ast.ast27.Slice"
+  super_classes: "typed_ast.ast27.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "lower"
+    fully_qualified_name: "typed_ast.ast27.Slice.lower"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "upper"
+    fully_qualified_name: "typed_ast.ast27.Slice.upper"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "step"
+    fully_qualified_name: "typed_ast.ast27.Slice.step"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ExtSlice"
+  fully_qualified_name: "typed_ast.ast27.ExtSlice"
+  super_classes: "typed_ast.ast27.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "dims"
+    fully_qualified_name: "typed_ast.ast27.ExtSlice.dims"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.slice]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.slice"
+        fully_qualified_name: "typed_ast.ast27.slice"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Index"
+  fully_qualified_name: "typed_ast.ast27.Index"
+  super_classes: "typed_ast.ast27.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Index.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Ellipsis"
+  fully_qualified_name: "typed_ast.ast27.Ellipsis"
+  super_classes: "typed_ast.ast27.slice"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "expr"
+  fully_qualified_name: "typed_ast.ast27.expr"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "typed_ast.ast27.expr.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "col_offset"
+    fully_qualified_name: "typed_ast.ast27.expr.col_offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BoolOp"
+  fully_qualified_name: "typed_ast.ast27.BoolOp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "op"
+    fully_qualified_name: "typed_ast.ast27.BoolOp.op"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.boolop"
+      fully_qualified_name: "typed_ast.ast27.boolop"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "typed_ast.ast27.BoolOp.values"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "BinOp"
+  fully_qualified_name: "typed_ast.ast27.BinOp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "left"
+    fully_qualified_name: "typed_ast.ast27.BinOp.left"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "op"
+    fully_qualified_name: "typed_ast.ast27.BinOp.op"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.operator"
+      fully_qualified_name: "typed_ast.ast27.operator"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "right"
+    fully_qualified_name: "typed_ast.ast27.BinOp.right"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "UnaryOp"
+  fully_qualified_name: "typed_ast.ast27.UnaryOp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "op"
+    fully_qualified_name: "typed_ast.ast27.UnaryOp.op"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.unaryop"
+      fully_qualified_name: "typed_ast.ast27.unaryop"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "operand"
+    fully_qualified_name: "typed_ast.ast27.UnaryOp.operand"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Lambda"
+  fully_qualified_name: "typed_ast.ast27.Lambda"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "args"
+    fully_qualified_name: "typed_ast.ast27.Lambda.args"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.arguments"
+      fully_qualified_name: "typed_ast.ast27.arguments"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.Lambda.body"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "IfExp"
+  fully_qualified_name: "typed_ast.ast27.IfExp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "test"
+    fully_qualified_name: "typed_ast.ast27.IfExp.test"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.IfExp.body"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "orelse"
+    fully_qualified_name: "typed_ast.ast27.IfExp.orelse"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Dict"
+  fully_qualified_name: "typed_ast.ast27.Dict"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "keys"
+    fully_qualified_name: "typed_ast.ast27.Dict.keys"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "typed_ast.ast27.Dict.values"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Set"
+  fully_qualified_name: "typed_ast.ast27.Set"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elts"
+    fully_qualified_name: "typed_ast.ast27.Set.elts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ListComp"
+  fully_qualified_name: "typed_ast.ast27.ListComp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elt"
+    fully_qualified_name: "typed_ast.ast27.ListComp.elt"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "generators"
+    fully_qualified_name: "typed_ast.ast27.ListComp.generators"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.comprehension]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.comprehension"
+        fully_qualified_name: "typed_ast.ast27.comprehension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "SetComp"
+  fully_qualified_name: "typed_ast.ast27.SetComp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elt"
+    fully_qualified_name: "typed_ast.ast27.SetComp.elt"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "generators"
+    fully_qualified_name: "typed_ast.ast27.SetComp.generators"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.comprehension]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.comprehension"
+        fully_qualified_name: "typed_ast.ast27.comprehension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "DictComp"
+  fully_qualified_name: "typed_ast.ast27.DictComp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "key"
+    fully_qualified_name: "typed_ast.ast27.DictComp.key"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.DictComp.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "generators"
+    fully_qualified_name: "typed_ast.ast27.DictComp.generators"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.comprehension]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.comprehension"
+        fully_qualified_name: "typed_ast.ast27.comprehension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "GeneratorExp"
+  fully_qualified_name: "typed_ast.ast27.GeneratorExp"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elt"
+    fully_qualified_name: "typed_ast.ast27.GeneratorExp.elt"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "generators"
+    fully_qualified_name: "typed_ast.ast27.GeneratorExp.generators"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.comprehension]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.comprehension"
+        fully_qualified_name: "typed_ast.ast27.comprehension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Yield"
+  fully_qualified_name: "typed_ast.ast27.Yield"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Yield.value"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Compare"
+  fully_qualified_name: "typed_ast.ast27.Compare"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "left"
+    fully_qualified_name: "typed_ast.ast27.Compare.left"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ops"
+    fully_qualified_name: "typed_ast.ast27.Compare.ops"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.cmpop]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.cmpop"
+        fully_qualified_name: "typed_ast.ast27.cmpop"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "comparators"
+    fully_qualified_name: "typed_ast.ast27.Compare.comparators"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Call"
+  fully_qualified_name: "typed_ast.ast27.Call"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "func"
+    fully_qualified_name: "typed_ast.ast27.Call.func"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "typed_ast.ast27.Call.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "keywords"
+    fully_qualified_name: "typed_ast.ast27.Call.keywords"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.keyword]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.keyword"
+        fully_qualified_name: "typed_ast.ast27.keyword"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "starargs"
+    fully_qualified_name: "typed_ast.ast27.Call.starargs"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "typed_ast.ast27.Call.kwargs"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Repr"
+  fully_qualified_name: "typed_ast.ast27.Repr"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Repr.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Num"
+  fully_qualified_name: "typed_ast.ast27.Num"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "n"
+    fully_qualified_name: "typed_ast.ast27.Num.n"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.float,builtins.complex]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.complex"
+        fully_qualified_name: "builtins.complex"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Str"
+  fully_qualified_name: "typed_ast.ast27.Str"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "s"
+    fully_qualified_name: "typed_ast.ast27.Str.s"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "kind"
+    fully_qualified_name: "typed_ast.ast27.Str.kind"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Attribute"
+  fully_qualified_name: "typed_ast.ast27.Attribute"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Attribute.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "attr"
+    fully_qualified_name: "typed_ast.ast27.Attribute.attr"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "typed_ast.ast27.Attribute.ctx"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr_context"
+      fully_qualified_name: "typed_ast.ast27.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Subscript"
+  fully_qualified_name: "typed_ast.ast27.Subscript"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.Subscript.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "slice"
+    fully_qualified_name: "typed_ast.ast27.Subscript.slice"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.slice"
+      fully_qualified_name: "typed_ast.ast27.slice"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "typed_ast.ast27.Subscript.ctx"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr_context"
+      fully_qualified_name: "typed_ast.ast27.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Name"
+  fully_qualified_name: "typed_ast.ast27.Name"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "id"
+    fully_qualified_name: "typed_ast.ast27.Name.id"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "typed_ast.ast27.Name.ctx"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr_context"
+      fully_qualified_name: "typed_ast.ast27.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "List"
+  fully_qualified_name: "typed_ast.ast27.List"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elts"
+    fully_qualified_name: "typed_ast.ast27.List.elts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "typed_ast.ast27.List.ctx"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr_context"
+      fully_qualified_name: "typed_ast.ast27.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Tuple"
+  fully_qualified_name: "typed_ast.ast27.Tuple"
+  super_classes: "typed_ast.ast27.expr"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "elts"
+    fully_qualified_name: "typed_ast.ast27.Tuple.elts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "typed_ast.ast27.Tuple.ctx"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr_context"
+      fully_qualified_name: "typed_ast.ast27.expr_context"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "expr_context"
+  fully_qualified_name: "typed_ast.ast27.expr_context"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AugLoad"
+  fully_qualified_name: "typed_ast.ast27.AugLoad"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AugStore"
+  fully_qualified_name: "typed_ast.ast27.AugStore"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Del"
+  fully_qualified_name: "typed_ast.ast27.Del"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Load"
+  fully_qualified_name: "typed_ast.ast27.Load"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Param"
+  fully_qualified_name: "typed_ast.ast27.Param"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Store"
+  fully_qualified_name: "typed_ast.ast27.Store"
+  super_classes: "typed_ast.ast27.expr_context"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "boolop"
+  fully_qualified_name: "typed_ast.ast27.boolop"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "And"
+  fully_qualified_name: "typed_ast.ast27.And"
+  super_classes: "typed_ast.ast27.boolop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Or"
+  fully_qualified_name: "typed_ast.ast27.Or"
+  super_classes: "typed_ast.ast27.boolop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "operator"
+  fully_qualified_name: "typed_ast.ast27.operator"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Add"
+  fully_qualified_name: "typed_ast.ast27.Add"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BitAnd"
+  fully_qualified_name: "typed_ast.ast27.BitAnd"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BitOr"
+  fully_qualified_name: "typed_ast.ast27.BitOr"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "BitXor"
+  fully_qualified_name: "typed_ast.ast27.BitXor"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Div"
+  fully_qualified_name: "typed_ast.ast27.Div"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "FloorDiv"
+  fully_qualified_name: "typed_ast.ast27.FloorDiv"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "LShift"
+  fully_qualified_name: "typed_ast.ast27.LShift"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Mod"
+  fully_qualified_name: "typed_ast.ast27.Mod"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Mult"
+  fully_qualified_name: "typed_ast.ast27.Mult"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Pow"
+  fully_qualified_name: "typed_ast.ast27.Pow"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "RShift"
+  fully_qualified_name: "typed_ast.ast27.RShift"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Sub"
+  fully_qualified_name: "typed_ast.ast27.Sub"
+  super_classes: "typed_ast.ast27.operator"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "unaryop"
+  fully_qualified_name: "typed_ast.ast27.unaryop"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Invert"
+  fully_qualified_name: "typed_ast.ast27.Invert"
+  super_classes: "typed_ast.ast27.unaryop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Not"
+  fully_qualified_name: "typed_ast.ast27.Not"
+  super_classes: "typed_ast.ast27.unaryop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "UAdd"
+  fully_qualified_name: "typed_ast.ast27.UAdd"
+  super_classes: "typed_ast.ast27.unaryop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "USub"
+  fully_qualified_name: "typed_ast.ast27.USub"
+  super_classes: "typed_ast.ast27.unaryop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "cmpop"
+  fully_qualified_name: "typed_ast.ast27.cmpop"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Eq"
+  fully_qualified_name: "typed_ast.ast27.Eq"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Gt"
+  fully_qualified_name: "typed_ast.ast27.Gt"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "GtE"
+  fully_qualified_name: "typed_ast.ast27.GtE"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "In"
+  fully_qualified_name: "typed_ast.ast27.In"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Is"
+  fully_qualified_name: "typed_ast.ast27.Is"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "IsNot"
+  fully_qualified_name: "typed_ast.ast27.IsNot"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "Lt"
+  fully_qualified_name: "typed_ast.ast27.Lt"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "LtE"
+  fully_qualified_name: "typed_ast.ast27.LtE"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NotEq"
+  fully_qualified_name: "typed_ast.ast27.NotEq"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NotIn"
+  fully_qualified_name: "typed_ast.ast27.NotIn"
+  super_classes: "typed_ast.ast27.cmpop"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "comprehension"
+  fully_qualified_name: "typed_ast.ast27.comprehension"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "target"
+    fully_qualified_name: "typed_ast.ast27.comprehension.target"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "iter"
+    fully_qualified_name: "typed_ast.ast27.comprehension.iter"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "ifs"
+    fully_qualified_name: "typed_ast.ast27.comprehension.ifs"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ExceptHandler"
+  fully_qualified_name: "typed_ast.ast27.ExceptHandler"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "type"
+    fully_qualified_name: "typed_ast.ast27.ExceptHandler.type"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "typed_ast.ast27.ExceptHandler.name"
+    type_annotation {
+      pretty_printed_name: "Union[typed_ast.ast27.expr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "body"
+    fully_qualified_name: "typed_ast.ast27.ExceptHandler.body"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.stmt]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.stmt"
+        fully_qualified_name: "typed_ast.ast27.stmt"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "typed_ast.ast27.ExceptHandler.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "col_offset"
+    fully_qualified_name: "typed_ast.ast27.ExceptHandler.col_offset"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "arguments"
+  fully_qualified_name: "typed_ast.ast27.arguments"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "args"
+    fully_qualified_name: "typed_ast.ast27.arguments.args"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "vararg"
+    fully_qualified_name: "typed_ast.ast27.arguments.vararg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "kwarg"
+    fully_qualified_name: "typed_ast.ast27.arguments.kwarg"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "defaults"
+    fully_qualified_name: "typed_ast.ast27.arguments.defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.list[typed_ast.ast27.expr]"
+      args {
+        pretty_printed_name: "typed_ast.ast27.expr"
+        fully_qualified_name: "typed_ast.ast27.expr"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type_comments"
+    fully_qualified_name: "typed_ast.ast27.arguments.type_comments"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Union[builtins.str,None]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "keyword"
+  fully_qualified_name: "typed_ast.ast27.keyword"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "arg"
+    fully_qualified_name: "typed_ast.ast27.keyword.arg"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "typed_ast.ast27.keyword.value"
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.expr"
+      fully_qualified_name: "typed_ast.ast27.expr"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "alias"
+  fully_qualified_name: "typed_ast.ast27.alias"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "name"
+    fully_qualified_name: "typed_ast.ast27.alias.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "asname"
+    fully_qualified_name: "typed_ast.ast27.alias.asname"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "TypeIgnore"
+  fully_qualified_name: "typed_ast.ast27.TypeIgnore"
+  super_classes: "typed_ast.ast27.AST"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "lineno"
+    fully_qualified_name: "typed_ast.ast27.TypeIgnore.lineno"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "parse"
+  fully_qualified_name: "typed_ast.ast27.parse"
+  return_annotation {
+    pretty_printed_name: "typed_ast.ast27.AST"
+    fully_qualified_name: "typed_ast.ast27.AST"
+  }
+  parameters {
+    name: "source"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  parameters {
+    name: "filename"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_default: true
+  }
+  parameters {
+    name: "mode"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "copy_location"
+  fully_qualified_name: "typed_ast.ast27.copy_location"
+  return_annotation {
+    pretty_printed_name: "typed_ast.ast27.AST"
+    fully_qualified_name: "typed_ast.ast27.AST"
+  }
+  parameters {
+    name: "new_node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  parameters {
+    name: "old_node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "dump"
+  fully_qualified_name: "typed_ast.ast27.dump"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  parameters {
+    name: "annotate_fields"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  parameters {
+    name: "include_attributes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "fix_missing_locations"
+  fully_qualified_name: "typed_ast.ast27.fix_missing_locations"
+  return_annotation {
+    pretty_printed_name: "typed_ast.ast27.AST"
+    fully_qualified_name: "typed_ast.ast27.AST"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "get_docstring"
+  fully_qualified_name: "typed_ast.ast27.get_docstring"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.bytes,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  parameters {
+    name: "clean"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "increment_lineno"
+  fully_qualified_name: "typed_ast.ast27.increment_lineno"
+  return_annotation {
+    pretty_printed_name: "typed_ast.ast27.AST"
+    fully_qualified_name: "typed_ast.ast27.AST"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  parameters {
+    name: "n"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    has_default: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iter_child_nodes"
+  fully_qualified_name: "typed_ast.ast27.iter_child_nodes"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[typed_ast.ast27.AST]"
+    args {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "iter_fields"
+  fully_qualified_name: "typed_ast.ast27.iter_fields"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[builtins.str,Any]]"
+    args {
+      pretty_printed_name: "Tuple[builtins.str,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "literal_eval"
+  fully_qualified_name: "typed_ast.ast27.literal_eval"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "node_or_string"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,typed_ast.ast27.AST]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "typed_ast.ast27.AST"
+        fully_qualified_name: "typed_ast.ast27.AST"
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "walk"
+  fully_qualified_name: "typed_ast.ast27.walk"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[typed_ast.ast27.AST]"
+    args {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "node"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typed_ast.ast27.AST"
+      fully_qualified_name: "typed_ast.ast27.AST"
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "PyCF_ONLY_AST"
+  fully_qualified_name: "typed_ast.ast27.PyCF_ONLY_AST"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

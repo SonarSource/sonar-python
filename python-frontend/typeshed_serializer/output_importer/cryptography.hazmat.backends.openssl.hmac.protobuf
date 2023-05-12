@@ -1,0 +1,201 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac"
+classes {
+  name: "_HMACContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.algorithm"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.copy"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext._algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_key"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac._HMACContext._key"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.hmac.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

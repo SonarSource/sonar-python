@@ -1,0 +1,3178 @@
+fully_qualified_name: "socketserver"
+classes {
+  name: "_socket"
+  fully_qualified_name: "socket.socket"
+  super_classes: "_socket.socket"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socket.socket.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "family"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[socket.AddressFamily,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "socket.AddressFamily"
+          fully_qualified_name: "socket.AddressFamily"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[socket.SocketKind,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "socket.SocketKind"
+          fully_qualified_name: "socket.SocketKind"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "fileno"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "socket.socket.__enter__"
+    return_annotation {
+      pretty_printed_name: "socket.socket.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "socket.socket.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "socket.socket.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "dup"
+    fully_qualified_name: "socket.socket.dup"
+    return_annotation {
+      pretty_printed_name: "socket.socket.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "accept"
+    fully_qualified_name: "socket.socket.accept"
+    return_annotation {
+      pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+  }
+  methods {
+    name: "sendfile"
+    fully_qualified_name: "socket.socket.sendfile"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket._SendableFile"
+        fully_qualified_name: "socket._SendableFile"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "family"
+    fully_qualified_name: "socket.socket.family"
+    return_annotation {
+      pretty_printed_name: "socket.AddressFamily"
+      fully_qualified_name: "socket.AddressFamily"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "type"
+    fully_qualified_name: "socket.socket.type"
+    return_annotation {
+      pretty_printed_name: "socket.SocketKind"
+      fully_qualified_name: "socket.SocketKind"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "get_inheritable"
+    fully_qualified_name: "socket.socket.get_inheritable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+  }
+  methods {
+    name: "set_inheritable"
+    fully_qualified_name: "socket.socket.set_inheritable"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "inheritable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "makefile"
+    fullname: "socket.socket.makefile"
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "socket.SocketIO"
+        fully_qualified_name: "socket.SocketIO"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "io.BufferedRWPair"
+        fully_qualified_name: "io.BufferedRWPair"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.int],Literal[builtins.int],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "io.BufferedReader"
+        fully_qualified_name: "io.BufferedReader"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.int],Literal[builtins.int],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "io.BufferedWriter"
+        fully_qualified_name: "io.BufferedWriter"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.int],Literal[builtins.int],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.int]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "io.IOBase"
+        fully_qualified_name: "io.IOBase"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "makefile"
+      fully_qualified_name: "socket.socket.makefile"
+      return_annotation {
+        pretty_printed_name: "io.TextIOWrapper"
+        fully_qualified_name: "io.TextIOWrapper"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "mode"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+      }
+      parameters {
+        name: "buffering"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "encoding"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "errors"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "newline"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+}
+classes {
+  name: "BaseServer"
+  fully_qualified_name: "socketserver.BaseServer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socketserver.BaseServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "server_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.tuple[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.tuple"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                  kind: UNION
+                  args {
+                    pretty_printed_name: "builtins.bytearray"
+                    fully_qualified_name: "builtins.bytearray"
+                  }
+                  args {
+                    pretty_printed_name: "builtins.memoryview"
+                    fully_qualified_name: "builtins.memoryview"
+                  }
+                  args {
+                    pretty_printed_name: "array.array[Any]"
+                    args {
+                      pretty_printed_name: "Any"
+                      kind: ANY
+                    }
+                    fully_qualified_name: "array.array"
+                  }
+                  args {
+                    pretty_printed_name: "mmap.mmap"
+                    fully_qualified_name: "mmap.mmap"
+                  }
+                  args {
+                    pretty_printed_name: "ctypes._CData"
+                    fully_qualified_name: "ctypes._CData"
+                  }
+                  args {
+                    pretty_printed_name: "pickle.PickleBuffer"
+                    fully_qualified_name: "pickle.PickleBuffer"
+                  }
+                }
+                fully_qualified_name: "_typeshed.WriteableBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.ReadableBuffer"
+          }
+        }
+        fully_qualified_name: "_socket._Address"
+      }
+    }
+    parameters {
+      name: "RequestHandlerClass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "socketserver.BaseServer.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "handle_request"
+    fully_qualified_name: "socketserver.BaseServer.handle_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "serve_forever"
+    fully_qualified_name: "socketserver.BaseServer.serve_forever"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "poll_interval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "shutdown"
+    fully_qualified_name: "socketserver.BaseServer.shutdown"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "server_close"
+    fully_qualified_name: "socketserver.BaseServer.server_close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "finish_request"
+    fully_qualified_name: "socketserver.BaseServer.finish_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "get_request"
+    fully_qualified_name: "socketserver.BaseServer.get_request"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "handle_error"
+    fully_qualified_name: "socketserver.BaseServer.handle_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "handle_timeout"
+    fully_qualified_name: "socketserver.BaseServer.handle_timeout"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "process_request"
+    fully_qualified_name: "socketserver.BaseServer.process_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "server_activate"
+    fully_qualified_name: "socketserver.BaseServer.server_activate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "server_bind"
+    fully_qualified_name: "socketserver.BaseServer.server_bind"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "verify_request"
+    fully_qualified_name: "socketserver.BaseServer.verify_request"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "socketserver.BaseServer.__enter__"
+    return_annotation {
+      pretty_printed_name: "socketserver.BaseServer.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "socketserver.BaseServer.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "service_actions"
+    fully_qualified_name: "socketserver.BaseServer.service_actions"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "shutdown_request"
+    fully_qualified_name: "socketserver.BaseServer.shutdown_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+  }
+  methods {
+    name: "close_request"
+    fully_qualified_name: "socketserver.BaseServer.close_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+  }
+  attributes {
+    name: "address_family"
+    fully_qualified_name: "socketserver.BaseServer.address_family"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "server_address"
+    fully_qualified_name: "socketserver.BaseServer.server_address"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+      fully_qualified_name: "_socket._Address"
+    }
+  }
+  attributes {
+    name: "socket"
+    fully_qualified_name: "socketserver.BaseServer.socket"
+    type_annotation {
+      pretty_printed_name: "socket.socket"
+      fully_qualified_name: "socket.socket"
+    }
+  }
+  attributes {
+    name: "allow_reuse_address"
+    fully_qualified_name: "socketserver.BaseServer.allow_reuse_address"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "request_queue_size"
+    fully_qualified_name: "socketserver.BaseServer.request_queue_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "socket_type"
+    fully_qualified_name: "socketserver.BaseServer.socket_type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "socketserver.BaseServer.timeout"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "RequestHandlerClass"
+    fully_qualified_name: "socketserver.BaseServer.RequestHandlerClass"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "TCPServer"
+  fully_qualified_name: "socketserver.TCPServer"
+  super_classes: "socketserver.BaseServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socketserver.TCPServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.TCPServer.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "server_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.bytes,builtins.bytearray]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "builtins.bytearray"
+              fully_qualified_name: "builtins.bytearray"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "socketserver._AfInetAddress"
+      }
+    }
+    parameters {
+      name: "RequestHandlerClass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "bind_and_activate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "get_request"
+    fully_qualified_name: "socketserver.TCPServer.get_request"
+    return_annotation {
+      pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.TCPServer"
+        fully_qualified_name: "socketserver.TCPServer"
+      }
+    }
+  }
+  attributes {
+    name: "server_address"
+    fully_qualified_name: "socketserver.TCPServer.server_address"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[Union[builtins.str,builtins.bytes,builtins.bytearray],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,builtins.bytearray]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "socketserver._AfInetAddress"
+    }
+  }
+}
+classes {
+  name: "UDPServer"
+  fully_qualified_name: "socketserver.UDPServer"
+  super_classes: "socketserver.TCPServer"
+  methods {
+    name: "get_request"
+    fully_qualified_name: "socketserver.UDPServer.get_request"
+    return_annotation {
+      pretty_printed_name: "Tuple[Tuple[builtins.bytes,socket.socket],TypeAlias[Any]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.UDPServer"
+        fully_qualified_name: "socketserver.UDPServer"
+      }
+    }
+  }
+  attributes {
+    name: "max_packet_size"
+    fully_qualified_name: "socketserver.UDPServer.max_packet_size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "UnixStreamServer"
+  fully_qualified_name: "socketserver.UnixStreamServer"
+  super_classes: "socketserver.BaseServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socketserver.UnixStreamServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.UnixStreamServer.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "server_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                  kind: UNION
+                  args {
+                    pretty_printed_name: "builtins.bytearray"
+                    fully_qualified_name: "builtins.bytearray"
+                  }
+                  args {
+                    pretty_printed_name: "builtins.memoryview"
+                    fully_qualified_name: "builtins.memoryview"
+                  }
+                  args {
+                    pretty_printed_name: "array.array[Any]"
+                    args {
+                      pretty_printed_name: "Any"
+                      kind: ANY
+                    }
+                    fully_qualified_name: "array.array"
+                  }
+                  args {
+                    pretty_printed_name: "mmap.mmap"
+                    fully_qualified_name: "mmap.mmap"
+                  }
+                  args {
+                    pretty_printed_name: "ctypes._CData"
+                    fully_qualified_name: "ctypes._CData"
+                  }
+                  args {
+                    pretty_printed_name: "pickle.PickleBuffer"
+                    fully_qualified_name: "pickle.PickleBuffer"
+                  }
+                }
+                fully_qualified_name: "_typeshed.WriteableBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.ReadableBuffer"
+          }
+        }
+        fully_qualified_name: "socketserver._AfUnixAddress"
+      }
+    }
+    parameters {
+      name: "RequestHandlerClass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "bind_and_activate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "server_address"
+    fully_qualified_name: "socketserver.UnixStreamServer.server_address"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+      fully_qualified_name: "socketserver._AfUnixAddress"
+    }
+  }
+}
+classes {
+  name: "UnixDatagramServer"
+  fully_qualified_name: "socketserver.UnixDatagramServer"
+  super_classes: "socketserver.BaseServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socketserver.UnixDatagramServer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.UnixDatagramServer.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "server_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                  kind: UNION
+                  args {
+                    pretty_printed_name: "builtins.bytearray"
+                    fully_qualified_name: "builtins.bytearray"
+                  }
+                  args {
+                    pretty_printed_name: "builtins.memoryview"
+                    fully_qualified_name: "builtins.memoryview"
+                  }
+                  args {
+                    pretty_printed_name: "array.array[Any]"
+                    args {
+                      pretty_printed_name: "Any"
+                      kind: ANY
+                    }
+                    fully_qualified_name: "array.array"
+                  }
+                  args {
+                    pretty_printed_name: "mmap.mmap"
+                    fully_qualified_name: "mmap.mmap"
+                  }
+                  args {
+                    pretty_printed_name: "ctypes._CData"
+                    fully_qualified_name: "ctypes._CData"
+                  }
+                  args {
+                    pretty_printed_name: "pickle.PickleBuffer"
+                    fully_qualified_name: "pickle.PickleBuffer"
+                  }
+                }
+                fully_qualified_name: "_typeshed.WriteableBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.ReadableBuffer"
+          }
+        }
+        fully_qualified_name: "socketserver._AfUnixAddress"
+      }
+    }
+    parameters {
+      name: "RequestHandlerClass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "bind_and_activate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "server_address"
+    fully_qualified_name: "socketserver.UnixDatagramServer.server_address"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+      fully_qualified_name: "socketserver._AfUnixAddress"
+    }
+  }
+}
+classes {
+  name: "ForkingMixIn"
+  fully_qualified_name: "socketserver.ForkingMixIn"
+  super_classes: "builtins.object"
+  methods {
+    name: "collect_children"
+    fully_qualified_name: "socketserver.ForkingMixIn.collect_children"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ForkingMixIn"
+        fully_qualified_name: "socketserver.ForkingMixIn"
+      }
+    }
+    parameters {
+      name: "blocking"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "handle_timeout"
+    fully_qualified_name: "socketserver.ForkingMixIn.handle_timeout"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ForkingMixIn"
+        fully_qualified_name: "socketserver.ForkingMixIn"
+      }
+    }
+  }
+  methods {
+    name: "service_actions"
+    fully_qualified_name: "socketserver.ForkingMixIn.service_actions"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ForkingMixIn"
+        fully_qualified_name: "socketserver.ForkingMixIn"
+      }
+    }
+  }
+  methods {
+    name: "process_request"
+    fully_qualified_name: "socketserver.ForkingMixIn.process_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ForkingMixIn"
+        fully_qualified_name: "socketserver.ForkingMixIn"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "server_close"
+    fully_qualified_name: "socketserver.ForkingMixIn.server_close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ForkingMixIn"
+        fully_qualified_name: "socketserver.ForkingMixIn"
+      }
+    }
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "socketserver.ForkingMixIn.timeout"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "active_children"
+    fully_qualified_name: "socketserver.ForkingMixIn.active_children"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.set[builtins.int],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.set[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max_children"
+    fully_qualified_name: "socketserver.ForkingMixIn.max_children"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "block_on_close"
+    fully_qualified_name: "socketserver.ForkingMixIn.block_on_close"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "ThreadingMixIn"
+  fully_qualified_name: "socketserver.ThreadingMixIn"
+  super_classes: "builtins.object"
+  methods {
+    name: "process_request_thread"
+    fully_qualified_name: "socketserver.ThreadingMixIn.process_request_thread"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ThreadingMixIn"
+        fully_qualified_name: "socketserver.ThreadingMixIn"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "process_request"
+    fully_qualified_name: "socketserver.ThreadingMixIn.process_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ThreadingMixIn"
+        fully_qualified_name: "socketserver.ThreadingMixIn"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+  }
+  methods {
+    name: "server_close"
+    fully_qualified_name: "socketserver.ThreadingMixIn.server_close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.ThreadingMixIn"
+        fully_qualified_name: "socketserver.ThreadingMixIn"
+      }
+    }
+  }
+  attributes {
+    name: "daemon_threads"
+    fully_qualified_name: "socketserver.ThreadingMixIn.daemon_threads"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "block_on_close"
+    fully_qualified_name: "socketserver.ThreadingMixIn.block_on_close"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "ForkingTCPServer"
+  fully_qualified_name: "socketserver.ForkingTCPServer"
+  super_classes: "socketserver.ForkingMixIn"
+  super_classes: "socketserver.TCPServer"
+}
+classes {
+  name: "ForkingUDPServer"
+  fully_qualified_name: "socketserver.ForkingUDPServer"
+  super_classes: "socketserver.ForkingMixIn"
+  super_classes: "socketserver.UDPServer"
+}
+classes {
+  name: "ThreadingTCPServer"
+  fully_qualified_name: "socketserver.ThreadingTCPServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "socketserver.TCPServer"
+}
+classes {
+  name: "ThreadingUDPServer"
+  fully_qualified_name: "socketserver.ThreadingUDPServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "socketserver.UDPServer"
+}
+classes {
+  name: "ThreadingUnixStreamServer"
+  fully_qualified_name: "socketserver.ThreadingUnixStreamServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "socketserver.UnixStreamServer"
+}
+classes {
+  name: "ThreadingUnixDatagramServer"
+  fully_qualified_name: "socketserver.ThreadingUnixDatagramServer"
+  super_classes: "socketserver.ThreadingMixIn"
+  super_classes: "socketserver.UnixDatagramServer"
+}
+classes {
+  name: "BaseRequestHandler"
+  fully_qualified_name: "socketserver.BaseRequestHandler"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "socketserver.BaseRequestHandler.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseRequestHandler"
+        fully_qualified_name: "socketserver.BaseRequestHandler"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[socket.socket,Tuple[builtins.bytes,socket.socket]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "socket.socket"
+            fully_qualified_name: "socket.socket"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.bytes,socket.socket]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "socket.socket"
+              fully_qualified_name: "socket.socket"
+            }
+          }
+        }
+        fully_qualified_name: "socketserver._RequestType"
+      }
+    }
+    parameters {
+      name: "client_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Any]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "_socket._RetAddress"
+      }
+    }
+    parameters {
+      name: "server"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseServer"
+        fully_qualified_name: "socketserver.BaseServer"
+      }
+    }
+  }
+  methods {
+    name: "setup"
+    fully_qualified_name: "socketserver.BaseRequestHandler.setup"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseRequestHandler"
+        fully_qualified_name: "socketserver.BaseRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "handle"
+    fully_qualified_name: "socketserver.BaseRequestHandler.handle"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseRequestHandler"
+        fully_qualified_name: "socketserver.BaseRequestHandler"
+      }
+    }
+  }
+  methods {
+    name: "finish"
+    fully_qualified_name: "socketserver.BaseRequestHandler.finish"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socketserver.BaseRequestHandler"
+        fully_qualified_name: "socketserver.BaseRequestHandler"
+      }
+    }
+  }
+  attributes {
+    name: "request"
+    fully_qualified_name: "socketserver.BaseRequestHandler.request"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "client_address"
+    fully_qualified_name: "socketserver.BaseRequestHandler.client_address"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Any]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "_socket._RetAddress"
+    }
+  }
+  attributes {
+    name: "server"
+    fully_qualified_name: "socketserver.BaseRequestHandler.server"
+    type_annotation {
+      pretty_printed_name: "socketserver.BaseServer"
+      fully_qualified_name: "socketserver.BaseServer"
+    }
+  }
+}
+classes {
+  name: "StreamRequestHandler"
+  fully_qualified_name: "socketserver.StreamRequestHandler"
+  super_classes: "socketserver.BaseRequestHandler"
+  attributes {
+    name: "rbufsize"
+    fully_qualified_name: "socketserver.StreamRequestHandler.rbufsize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "wbufsize"
+    fully_qualified_name: "socketserver.StreamRequestHandler.wbufsize"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "socketserver.StreamRequestHandler.timeout"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "disable_nagle_algorithm"
+    fully_qualified_name: "socketserver.StreamRequestHandler.disable_nagle_algorithm"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "connection"
+    fully_qualified_name: "socketserver.StreamRequestHandler.connection"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "rfile"
+    fully_qualified_name: "socketserver.StreamRequestHandler.rfile"
+    type_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+  }
+  attributes {
+    name: "wfile"
+    fully_qualified_name: "socketserver.StreamRequestHandler.wfile"
+    type_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+  }
+}
+classes {
+  name: "DatagramRequestHandler"
+  fully_qualified_name: "socketserver.DatagramRequestHandler"
+  super_classes: "socketserver.BaseRequestHandler"
+  attributes {
+    name: "packet"
+    fully_qualified_name: "socketserver.DatagramRequestHandler.packet"
+    type_annotation {
+      pretty_printed_name: "socket.socket"
+      fully_qualified_name: "socket.socket"
+    }
+  }
+  attributes {
+    name: "socket"
+    fully_qualified_name: "socketserver.DatagramRequestHandler.socket"
+    type_annotation {
+      pretty_printed_name: "socket.socket"
+      fully_qualified_name: "socket.socket"
+    }
+  }
+  attributes {
+    name: "rfile"
+    fully_qualified_name: "socketserver.DatagramRequestHandler.rfile"
+    type_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+  }
+  attributes {
+    name: "wfile"
+    fully_qualified_name: "socketserver.DatagramRequestHandler.wfile"
+    type_annotation {
+      pretty_printed_name: "typing.BinaryIO"
+      fully_qualified_name: "typing.BinaryIO"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "socketserver.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "socketserver.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

@@ -1,0 +1,990 @@
+fully_qualified_name: "cryptography.x509.name"
+classes {
+  name: "_ASN1Type"
+  fully_qualified_name: "cryptography.x509.name._ASN1Type"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "UTF8String"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.UTF8String"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "NumericString"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.NumericString"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "PrintableString"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.PrintableString"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "T61String"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.T61String"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "IA5String"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.IA5String"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UTCTime"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.UTCTime"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "GeneralizedTime"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.GeneralizedTime"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "VisibleString"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.VisibleString"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "UniversalString"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.UniversalString"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "BMPString"
+    fully_qualified_name: "cryptography.x509.name._ASN1Type.BMPString"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "NameAttribute"
+  fully_qualified_name: "cryptography.x509.name.NameAttribute"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "_validate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "oid"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.value"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "rfc4514_attribute_name"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.rfc4514_attribute_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "rfc4514_string"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.rfc4514_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    parameters {
+      name: "attr_name_overrides"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]"
+            args {
+              pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+              fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Mapping"
+          }
+          fully_qualified_name: "cryptography.x509.name._OidNameMap"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+    }
+  }
+  attributes {
+    name: "_oid"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute._oid"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute._value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_type"
+    fully_qualified_name: "cryptography.x509.name.NameAttribute._type"
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.name._ASN1Type"
+      fully_qualified_name: "cryptography.x509.name._ASN1Type"
+    }
+  }
+}
+classes {
+  name: "RelativeDistinguishedName"
+  fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+    parameters {
+      name: "attributes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[cryptography.x509.name.NameAttribute]"
+        args {
+          pretty_printed_name: "cryptography.x509.name.NameAttribute"
+          fully_qualified_name: "cryptography.x509.name.NameAttribute"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "get_attributes_for_oid"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.get_attributes_for_oid"
+    return_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "rfc4514_string"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.rfc4514_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+    parameters {
+      name: "attr_name_overrides"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]"
+            args {
+              pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+              fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Mapping"
+          }
+          fully_qualified_name: "cryptography.x509.name._OidNameMap"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+    }
+  }
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_attribute_set"
+    fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName._attribute_set"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+  }
+}
+classes {
+  name: "Name"
+  fully_qualified_name: "cryptography.x509.name.Name"
+  super_classes: "builtins.object"
+  methods {
+    name: "rfc4514_string"
+    fully_qualified_name: "cryptography.x509.name.Name.rfc4514_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    parameters {
+      name: "attr_name_overrides"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]"
+            args {
+              pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+              fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+            }
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Mapping"
+          }
+          fully_qualified_name: "cryptography.x509.name._OidNameMap"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_attributes_for_oid"
+    fully_qualified_name: "cryptography.x509.name.Name.get_attributes_for_oid"
+    return_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  methods {
+    name: "rdns"
+    fully_qualified_name: "cryptography.x509.name.Name.rdns"
+    return_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.name.RelativeDistinguishedName]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.x509.name.Name.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.name.Name.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.name.Name.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.name.Name.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "cryptography.x509.name.Name.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[cryptography.x509.name.NameAttribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.NameAttribute"
+        fully_qualified_name: "cryptography.x509.name.NameAttribute"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "cryptography.x509.name.Name.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.name.Name.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "cryptography.x509.name.Name.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "cryptography.x509.name.Name.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+      }
+      parameters {
+        name: "attributes"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[cryptography.x509.name.NameAttribute]"
+          args {
+            pretty_printed_name: "cryptography.x509.name.NameAttribute"
+            fully_qualified_name: "cryptography.x509.name.NameAttribute"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "cryptography.x509.name.Name.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+      }
+      parameters {
+        name: "attributes"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[cryptography.x509.name.RelativeDistinguishedName]"
+          args {
+            pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+            fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "cryptography.x509.name.Name._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.name.RelativeDistinguishedName]"
+      args {
+        pretty_printed_name: "cryptography.x509.name.RelativeDistinguishedName"
+        fully_qualified_name: "cryptography.x509.name.RelativeDistinguishedName"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "_escape_dn_value"
+  fully_qualified_name: "cryptography.x509.name._escape_dn_value"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "val"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.x509.name.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "rust_x509"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509"
+  is_imported_module: true
+}
+vars {
+  name: "_ASN1_TYPE_TO_ENUM"
+  fully_qualified_name: "cryptography.x509.name._ASN1_TYPE_TO_ENUM"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.int,cryptography.x509.name._ASN1Type]"
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "cryptography.x509.name._ASN1Type"
+      fully_qualified_name: "cryptography.x509.name._ASN1Type"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_SENTINEL"
+  fully_qualified_name: "cryptography.x509.name._SENTINEL"
+  type_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+}
+vars {
+  name: "_NAMEOID_DEFAULT_TYPE"
+  fully_qualified_name: "cryptography.x509.name._NAMEOID_DEFAULT_TYPE"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[cryptography.hazmat._oid.ObjectIdentifier,cryptography.x509.name._ASN1Type]"
+    args {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    args {
+      pretty_printed_name: "cryptography.x509.name._ASN1Type"
+      fully_qualified_name: "cryptography.x509.name._ASN1Type"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_NAMEOID_TO_NAME"
+  fully_qualified_name: "cryptography.x509.name._NAMEOID_TO_NAME"
+  type_annotation {
+    pretty_printed_name: "TypeAlias[typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "typing.Mapping[cryptography.hazmat._oid.ObjectIdentifier,builtins.str]"
+      args {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    fully_qualified_name: "cryptography.x509.name._OidNameMap"
+  }
+}

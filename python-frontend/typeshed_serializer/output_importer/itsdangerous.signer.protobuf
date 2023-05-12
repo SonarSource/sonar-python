@@ -1,0 +1,750 @@
+fully_qualified_name: "itsdangerous.signer"
+classes {
+  name: "SigningAlgorithm"
+  fully_qualified_name: "itsdangerous.signer.SigningAlgorithm"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_signature"
+    fully_qualified_name: "itsdangerous.signer.SigningAlgorithm.get_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.SigningAlgorithm"
+        fully_qualified_name: "itsdangerous.signer.SigningAlgorithm"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "verify_signature"
+    fully_qualified_name: "itsdangerous.signer.SigningAlgorithm.verify_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.SigningAlgorithm"
+        fully_qualified_name: "itsdangerous.signer.SigningAlgorithm"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "sig"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+}
+classes {
+  name: "NoneAlgorithm"
+  fully_qualified_name: "itsdangerous.signer.NoneAlgorithm"
+  super_classes: "itsdangerous.signer.SigningAlgorithm"
+  methods {
+    name: "get_signature"
+    fully_qualified_name: "itsdangerous.signer.NoneAlgorithm.get_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.NoneAlgorithm"
+        fully_qualified_name: "itsdangerous.signer.NoneAlgorithm"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+}
+classes {
+  name: "HMACAlgorithm"
+  fully_qualified_name: "itsdangerous.signer.HMACAlgorithm"
+  super_classes: "itsdangerous.signer.SigningAlgorithm"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.signer.HMACAlgorithm.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.HMACAlgorithm"
+        fully_qualified_name: "itsdangerous.signer.HMACAlgorithm"
+      }
+    }
+    parameters {
+      name: "digest_method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "get_signature"
+    fully_qualified_name: "itsdangerous.signer.HMACAlgorithm.get_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.HMACAlgorithm"
+        fully_qualified_name: "itsdangerous.signer.HMACAlgorithm"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "default_digest_method"
+    fully_qualified_name: "itsdangerous.signer.HMACAlgorithm.default_digest_method"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "digest_method"
+    fully_qualified_name: "itsdangerous.signer.HMACAlgorithm.digest_method"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "Signer"
+  fully_qualified_name: "itsdangerous.signer.Signer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.signer.Signer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "secret_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]"
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+                args {
+                  pretty_printed_name: "builtins.bytes"
+                  fully_qualified_name: "builtins.bytes"
+                }
+              }
+              fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_secret_key"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_opt_str_bytes"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "key_derivation"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "digest_method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[itsdangerous.signer.SigningAlgorithm,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "itsdangerous.signer.SigningAlgorithm"
+          fully_qualified_name: "itsdangerous.signer.SigningAlgorithm"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "secret_key"
+    fully_qualified_name: "itsdangerous.signer.Signer.secret_key"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "derive_key"
+    fully_qualified_name: "itsdangerous.signer.Signer.derive_key"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "secret_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "get_signature"
+    fully_qualified_name: "itsdangerous.signer.Signer.get_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "itsdangerous.signer.Signer.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "verify_signature"
+    fully_qualified_name: "itsdangerous.signer.Signer.verify_signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "sig"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "unsign"
+    fully_qualified_name: "itsdangerous.signer.Signer.unsign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "signed_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "validate"
+    fully_qualified_name: "itsdangerous.signer.Signer.validate"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.signer.Signer"
+        fully_qualified_name: "itsdangerous.signer.Signer"
+      }
+    }
+    parameters {
+      name: "signed_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+      }
+    }
+  }
+  attributes {
+    name: "default_digest_method"
+    fully_qualified_name: "itsdangerous.signer.Signer.default_digest_method"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "default_key_derivation"
+    fully_qualified_name: "itsdangerous.signer.Signer.default_key_derivation"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "secret_keys"
+    fully_qualified_name: "itsdangerous.signer.Signer.secret_keys"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "sep"
+    fully_qualified_name: "itsdangerous.signer.Signer.sep"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "salt"
+    fully_qualified_name: "itsdangerous.signer.Signer.salt"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "key_derivation"
+    fully_qualified_name: "itsdangerous.signer.Signer.key_derivation"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "digest_method"
+    fully_qualified_name: "itsdangerous.signer.Signer.digest_method"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "algorithm"
+    fully_qualified_name: "itsdangerous.signer.Signer.algorithm"
+    type_annotation {
+      pretty_printed_name: "itsdangerous.signer.SigningAlgorithm"
+      fully_qualified_name: "itsdangerous.signer.SigningAlgorithm"
+    }
+  }
+}
+functions {
+  name: "_make_keys_list"
+  fully_qualified_name: "itsdangerous.signer._make_keys_list"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "secret_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]],TypeAlias[Unknown]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[TypeAlias[Union[builtins.str,builtins.bytes]]]"
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+            }
+            fully_qualified_name: "itsdangerous.signer._t_str_bytes"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Unknown]"
+          kind: TYPE_ALIAS
+        }
+      }
+      fully_qualified_name: "itsdangerous.signer._t_secret_key"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous.signer.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

@@ -1,0 +1,763 @@
+fully_qualified_name: "werkzeug.debug.repr"
+classes {
+  name: "_Helper"
+  fully_qualified_name: "werkzeug.debug.repr._Helper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.debug.repr._Helper.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr._Helper"
+        fully_qualified_name: "werkzeug.debug.repr._Helper"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.debug.repr._Helper.__call__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr._Helper"
+        fully_qualified_name: "werkzeug.debug.repr._Helper"
+      }
+    }
+    parameters {
+      name: "topic"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "DebugReprGenerator"
+  fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+  }
+  methods {
+    name: "regex_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.regex_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "re.Pattern[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "re.Pattern"
+      }
+    }
+  }
+  methods {
+    name: "string_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.string_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "dict_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.dict_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "d"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.int,None],builtins.dict[builtins.str,builtins.int],builtins.dict[Union[builtins.str,builtins.int],builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.int,None]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,builtins.int]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "builtins.dict[Union[builtins.str,builtins.int],builtins.int]"
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.int]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+      }
+    }
+    parameters {
+      name: "recursive"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "limit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "object_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.object_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.dict[Any,Any]],CallableType[builtins.function],Type[builtins.list[Any]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.dict[Any,Any]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.dict[Any,Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "Type[builtins.list[Any]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.list[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.list"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "dispatch_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.dispatch_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "recursive"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "fallback_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.fallback_repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+  }
+  methods {
+    name: "repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.repr"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "dump_object"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.dump_object"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "dump_locals"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.dump_locals"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "d"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  methods {
+    name: "render_object_dump"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.render_object_dump"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.repr.DebugReprGenerator"
+        fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator"
+      }
+    }
+    parameters {
+      name: "items"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "title"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "repr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "list_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.list_repr"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "tuple_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.tuple_repr"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "set_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.set_repr"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "frozenset_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.frozenset_repr"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "deque_repr"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator.deque_repr"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "_stack"
+    fully_qualified_name: "werkzeug.debug.repr.DebugReprGenerator._stack"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "debug_repr"
+  fully_qualified_name: "werkzeug.debug.repr.debug_repr"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "dump"
+  fully_qualified_name: "werkzeug.debug.repr.dump"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "_add_subclass_info"
+  fully_qualified_name: "werkzeug.debug.repr._add_subclass_info"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "inner"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  parameters {
+    name: "base"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Type[Any],builtins.tuple[Type[Any]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[Type[Any]]"
+        args {
+          pretty_printed_name: "Type[Any]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+  }
+}
+functions {
+  name: "_sequence_repr_maker"
+  fully_qualified_name: "werkzeug.debug.repr._sequence_repr_maker"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "left"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "right"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "base"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[Any]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  parameters {
+    name: "limit"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.debug.repr.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "missing"
+  fully_qualified_name: "werkzeug.debug.repr.missing"
+  type_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+}
+vars {
+  name: "_paragraph_re"
+  fully_qualified_name: "werkzeug.debug.repr._paragraph_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "RegexType"
+  fully_qualified_name: "werkzeug.debug.repr.RegexType"
+  type_annotation {
+    pretty_printed_name: "Type[re.Pattern[builtins.str]]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+}
+vars {
+  name: "HELP_HTML"
+  fully_qualified_name: "werkzeug.debug.repr.HELP_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "OBJECT_DUMP_HTML"
+  fully_qualified_name: "werkzeug.debug.repr.OBJECT_DUMP_HTML"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "helper"
+  fully_qualified_name: "werkzeug.debug.repr.helper"
+  type_annotation {
+    pretty_printed_name: "werkzeug.debug.repr._Helper"
+    fully_qualified_name: "werkzeug.debug.repr._Helper"
+  }
+}

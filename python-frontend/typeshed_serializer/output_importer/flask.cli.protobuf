@@ -1,0 +1,908 @@
+fully_qualified_name: "flask.cli"
+classes {
+  name: "NoAppException"
+  fully_qualified_name: "flask.cli.NoAppException"
+  super_classes: "click.exceptions.UsageError"
+}
+classes {
+  name: "ScriptInfo"
+  fully_qualified_name: "flask.cli.ScriptInfo"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.cli.ScriptInfo.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.cli.ScriptInfo"
+        fully_qualified_name: "flask.cli.ScriptInfo"
+      }
+    }
+    parameters {
+      name: "app_import_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "create_app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "set_debug_flag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "load_app"
+    fully_qualified_name: "flask.cli.ScriptInfo.load_app"
+    return_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.cli.ScriptInfo"
+        fully_qualified_name: "flask.cli.ScriptInfo"
+      }
+    }
+  }
+  attributes {
+    name: "app_import_path"
+    fully_qualified_name: "flask.cli.ScriptInfo.app_import_path"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "create_app"
+    fully_qualified_name: "flask.cli.ScriptInfo.create_app"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "data"
+    fully_qualified_name: "flask.cli.ScriptInfo.data"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "set_debug_flag"
+    fully_qualified_name: "flask.cli.ScriptInfo.set_debug_flag"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_loaded_app"
+    fully_qualified_name: "flask.cli.ScriptInfo._loaded_app"
+    type_annotation {
+      pretty_printed_name: "Union[flask.app.Flask,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "AppGroup"
+  fully_qualified_name: "flask.cli.AppGroup"
+  super_classes: "click.core.Group"
+  methods {
+    name: "command"
+    fully_qualified_name: "flask.cli.AppGroup.command"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "group"
+    fully_qualified_name: "flask.cli.AppGroup.group"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "FlaskGroup"
+  fully_qualified_name: "flask.cli.FlaskGroup"
+  super_classes: "flask.cli.AppGroup"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.cli.FlaskGroup.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.cli.FlaskGroup"
+        fully_qualified_name: "flask.cli.FlaskGroup"
+      }
+    }
+    parameters {
+      name: "add_default_commands"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "create_app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "add_version_option"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "load_dotenv"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "set_debug_flag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "extra"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_load_plugin_commands"
+    fully_qualified_name: "flask.cli.FlaskGroup._load_plugin_commands"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "get_command"
+    fully_qualified_name: "flask.cli.FlaskGroup.get_command"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "list_commands"
+    fully_qualified_name: "flask.cli.FlaskGroup.list_commands"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "make_context"
+    fully_qualified_name: "flask.cli.FlaskGroup.make_context"
+    return_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.cli.FlaskGroup"
+        fully_qualified_name: "flask.cli.FlaskGroup"
+      }
+    }
+    parameters {
+      name: "info_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "parent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extra"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "parse_args"
+    fully_qualified_name: "flask.cli.FlaskGroup.parse_args"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.cli.FlaskGroup"
+        fully_qualified_name: "flask.cli.FlaskGroup"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  attributes {
+    name: "create_app"
+    fully_qualified_name: "flask.cli.FlaskGroup.create_app"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "load_dotenv"
+    fully_qualified_name: "flask.cli.FlaskGroup.load_dotenv"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "set_debug_flag"
+    fully_qualified_name: "flask.cli.FlaskGroup.set_debug_flag"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_loaded_plugin_commands"
+    fully_qualified_name: "flask.cli.FlaskGroup._loaded_plugin_commands"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "CertParamType"
+  fully_qualified_name: "flask.cli.CertParamType"
+  super_classes: "click.types.ParamType"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.cli.CertParamType.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "convert"
+    fully_qualified_name: "flask.cli.CertParamType.convert"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "param"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "flask.cli.CertParamType.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "path_type"
+    fully_qualified_name: "flask.cli.CertParamType.path_type"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "SeparatedPathType"
+  fully_qualified_name: "flask.cli.SeparatedPathType"
+  super_classes: "click.types.Path"
+  methods {
+    name: "convert"
+    fully_qualified_name: "flask.cli.SeparatedPathType.convert"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "param"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+functions {
+  name: "find_best_app"
+  fully_qualified_name: "flask.cli.find_best_app"
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_called_with_wrong_args"
+  fully_qualified_name: "flask.cli._called_with_wrong_args"
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "find_app_by_string"
+  fully_qualified_name: "flask.cli.find_app_by_string"
+  parameters {
+    name: "module"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "app_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "prepare_import"
+  fully_qualified_name: "flask.cli.prepare_import"
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "locate_app"
+  fully_qualified_name: "flask.cli.locate_app"
+  parameters {
+    name: "module_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "app_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "raise_if_not_found"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "get_version"
+  fully_qualified_name: "flask.cli.get_version"
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "param"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "with_appcontext"
+  fully_qualified_name: "flask.cli.with_appcontext"
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_set_app"
+  fully_qualified_name: "flask.cli._set_app"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+  }
+  parameters {
+    name: "param"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Option"
+      fully_qualified_name: "click.core.Option"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_set_debug"
+  fully_qualified_name: "flask.cli._set_debug"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+  }
+  parameters {
+    name: "param"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Option"
+      fully_qualified_name: "click.core.Option"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "_env_file_callback"
+  fully_qualified_name: "flask.cli._env_file_callback"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Context"
+      fully_qualified_name: "click.core.Context"
+    }
+  }
+  parameters {
+    name: "param"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "click.core.Option"
+      fully_qualified_name: "click.core.Option"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_path_is_ancestor"
+  fully_qualified_name: "flask.cli._path_is_ancestor"
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "other"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "load_dotenv"
+  fully_qualified_name: "flask.cli.load_dotenv"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "path"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,os.PathLike[Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "os.PathLike[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "os.PathLike"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "show_server_banner"
+  fully_qualified_name: "flask.cli.show_server_banner"
+  parameters {
+    name: "debug"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "app_import_path"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_validate_key"
+  fully_qualified_name: "flask.cli._validate_key"
+  parameters {
+    name: "ctx"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "param"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "main"
+  fully_qualified_name: "flask.cli.main"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.cli.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "version_option"
+  fully_qualified_name: "flask.cli.version_option"
+  type_annotation {
+    pretty_printed_name: "click.core.Option"
+    fully_qualified_name: "click.core.Option"
+  }
+}
+vars {
+  name: "pass_script_info"
+  fully_qualified_name: "flask.cli.pass_script_info"
+  type_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+}
+vars {
+  name: "_app_option"
+  fully_qualified_name: "flask.cli._app_option"
+  type_annotation {
+    pretty_printed_name: "click.core.Option"
+    fully_qualified_name: "click.core.Option"
+  }
+}
+vars {
+  name: "_debug_option"
+  fully_qualified_name: "flask.cli._debug_option"
+  type_annotation {
+    pretty_printed_name: "click.core.Option"
+    fully_qualified_name: "click.core.Option"
+  }
+}
+vars {
+  name: "_env_file_option"
+  fully_qualified_name: "flask.cli._env_file_option"
+  type_annotation {
+    pretty_printed_name: "click.core.Option"
+    fully_qualified_name: "click.core.Option"
+  }
+}
+vars {
+  name: "cli"
+  fully_qualified_name: "flask.cli.cli"
+  type_annotation {
+    pretty_printed_name: "flask.cli.FlaskGroup"
+    fully_qualified_name: "flask.cli.FlaskGroup"
+  }
+}

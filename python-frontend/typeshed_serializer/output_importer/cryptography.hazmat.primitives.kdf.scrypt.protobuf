@@ -1,0 +1,198 @@
+fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt"
+classes {
+  name: "Scrypt"
+  fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+  super_classes: "cryptography.hazmat.primitives.kdf.KeyDerivationFunction"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+        fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "n"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "derive"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt.derive"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+        fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+      }
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+        fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt"
+      }
+    }
+    parameters {
+      name: "key_material"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "expected_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "_length"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._length"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_used"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._used"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_salt"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._salt"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "_n"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._n"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_r"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._r"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_p"
+    fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.Scrypt._p"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_MEM_LIMIT"
+  fully_qualified_name: "cryptography.hazmat.primitives.kdf.scrypt._MEM_LIMIT"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

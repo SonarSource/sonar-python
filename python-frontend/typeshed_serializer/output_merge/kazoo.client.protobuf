@@ -1,0 +1,1297 @@
+fully_qualified_name: "kazoo.client"
+classes {
+  name: "KazooClient"
+  fully_qualified_name: "kazoo.client.KazooClient"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "kazoo.client.KazooClient.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "kazoo.client.KazooClient"
+        fully_qualified_name: "kazoo.client.KazooClient"
+      }
+    }
+    parameters {
+      name: "hosts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "client_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "default_acl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "auth_data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "read_only"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "randomize_hosts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "connection_retry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "command_retry"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "logger"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "client_state"
+    fully_qualified_name: "kazoo.client.KazooClient.client_state"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "client_id"
+    fully_qualified_name: "kazoo.client.KazooClient.client_id"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "connected"
+    fully_qualified_name: "kazoo.client.KazooClient.connected"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "27"
+  }
+  methods {
+    name: "set_hosts"
+    fully_qualified_name: "kazoo.client.KazooClient.set_hosts"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "hosts"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "randomize_hosts"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_listener"
+    fully_qualified_name: "kazoo.client.KazooClient.add_listener"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "listener"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "remove_listener"
+    fully_qualified_name: "kazoo.client.KazooClient.remove_listener"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "listener"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "start"
+    fully_qualified_name: "kazoo.client.KazooClient.start"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "start_async"
+    fully_qualified_name: "kazoo.client.KazooClient.start_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "stop"
+    fully_qualified_name: "kazoo.client.KazooClient.stop"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "restart"
+    fully_qualified_name: "kazoo.client.KazooClient.restart"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "kazoo.client.KazooClient.close"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "command"
+    fully_qualified_name: "kazoo.client.KazooClient.command"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cmd"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "server_version"
+    fully_qualified_name: "kazoo.client.KazooClient.server_version"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "retries"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_auth"
+    fully_qualified_name: "kazoo.client.KazooClient.add_auth"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "scheme"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "credential"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "add_auth_async"
+    fully_qualified_name: "kazoo.client.KazooClient.add_auth_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "scheme"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "credential"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "unchroot"
+    fully_qualified_name: "kazoo.client.KazooClient.unchroot"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "sync_async"
+    fully_qualified_name: "kazoo.client.KazooClient.sync_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "sync"
+    fully_qualified_name: "kazoo.client.KazooClient.sync"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "create"
+    fully_qualified_name: "kazoo.client.KazooClient.create"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "acl"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "ephemeral"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "makepath"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "create_async"
+    fully_qualified_name: "kazoo.client.KazooClient.create_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "acl"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "ephemeral"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "makepath"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "ensure_path"
+    fully_qualified_name: "kazoo.client.KazooClient.ensure_path"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "acl"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "ensure_path_async"
+    fully_qualified_name: "kazoo.client.KazooClient.ensure_path_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "acl"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exists"
+    fully_qualified_name: "kazoo.client.KazooClient.exists"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "exists_async"
+    fully_qualified_name: "kazoo.client.KazooClient.exists_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "kazoo.client.KazooClient.get"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_async"
+    fully_qualified_name: "kazoo.client.KazooClient.get_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_children"
+    fully_qualified_name: "kazoo.client.KazooClient.get_children"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "include_data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_children_async"
+    fully_qualified_name: "kazoo.client.KazooClient.get_children_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "watch"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "include_data"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_acls"
+    fully_qualified_name: "kazoo.client.KazooClient.get_acls"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "get_acls_async"
+    fully_qualified_name: "kazoo.client.KazooClient.get_acls_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_acls"
+    fully_qualified_name: "kazoo.client.KazooClient.set_acls"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "acls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_acls_async"
+    fully_qualified_name: "kazoo.client.KazooClient.set_acls_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "acls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set"
+    fully_qualified_name: "kazoo.client.KazooClient.set"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_async"
+    fully_qualified_name: "kazoo.client.KazooClient.set_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "transaction"
+    fully_qualified_name: "kazoo.client.KazooClient.transaction"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "delete"
+    fully_qualified_name: "kazoo.client.KazooClient.delete"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "recursive"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "delete_async"
+    fully_qualified_name: "kazoo.client.KazooClient.delete_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "reconfig"
+    fully_qualified_name: "kazoo.client.KazooClient.reconfig"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "joining"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "leaving"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "new_members"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "from_config"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "reconfig_async"
+    fully_qualified_name: "kazoo.client.KazooClient.reconfig_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "joining"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "leaving"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "new_members"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "from_config"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "logger"
+    fully_qualified_name: "kazoo.client.KazooClient.logger"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "handler"
+    fully_qualified_name: "kazoo.client.KazooClient.handler"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "auth_data"
+    fully_qualified_name: "kazoo.client.KazooClient.auth_data"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "default_acl"
+    fully_qualified_name: "kazoo.client.KazooClient.default_acl"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "randomize_hosts"
+    fully_qualified_name: "kazoo.client.KazooClient.randomize_hosts"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "hosts"
+    fully_qualified_name: "kazoo.client.KazooClient.hosts"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "chroot"
+    fully_qualified_name: "kazoo.client.KazooClient.chroot"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "state"
+    fully_qualified_name: "kazoo.client.KazooClient.state"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "state_listeners"
+    fully_qualified_name: "kazoo.client.KazooClient.state_listeners"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "read_only"
+    fully_qualified_name: "kazoo.client.KazooClient.read_only"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "retry"
+    fully_qualified_name: "kazoo.client.KazooClient.retry"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Barrier"
+    fully_qualified_name: "kazoo.client.KazooClient.Barrier"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Counter"
+    fully_qualified_name: "kazoo.client.KazooClient.Counter"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "DoubleBarrier"
+    fully_qualified_name: "kazoo.client.KazooClient.DoubleBarrier"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "ChildrenWatch"
+    fully_qualified_name: "kazoo.client.KazooClient.ChildrenWatch"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "DataWatch"
+    fully_qualified_name: "kazoo.client.KazooClient.DataWatch"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Election"
+    fully_qualified_name: "kazoo.client.KazooClient.Election"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "NonBlockingLease"
+    fully_qualified_name: "kazoo.client.KazooClient.NonBlockingLease"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "MultiNonBlockingLease"
+    fully_qualified_name: "kazoo.client.KazooClient.MultiNonBlockingLease"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Lock"
+    fully_qualified_name: "kazoo.client.KazooClient.Lock"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Party"
+    fully_qualified_name: "kazoo.client.KazooClient.Party"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Queue"
+    fully_qualified_name: "kazoo.client.KazooClient.Queue"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "LockingQueue"
+    fully_qualified_name: "kazoo.client.KazooClient.LockingQueue"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "SetPartitioner"
+    fully_qualified_name: "kazoo.client.KazooClient.SetPartitioner"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "Semaphore"
+    fully_qualified_name: "kazoo.client.KazooClient.Semaphore"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "ShallowParty"
+    fully_qualified_name: "kazoo.client.KazooClient.ShallowParty"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "TransactionRequest"
+  fully_qualified_name: "kazoo.client.TransactionRequest"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "kazoo.client.TransactionRequest.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "kazoo.client.TransactionRequest"
+        fully_qualified_name: "kazoo.client.TransactionRequest"
+      }
+    }
+    parameters {
+      name: "client"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "create"
+    fully_qualified_name: "kazoo.client.TransactionRequest.create"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "acl"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "ephemeral"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "delete"
+    fully_qualified_name: "kazoo.client.TransactionRequest.delete"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "set_data"
+    fully_qualified_name: "kazoo.client.TransactionRequest.set_data"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "check"
+    fully_qualified_name: "kazoo.client.TransactionRequest.check"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "version"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "commit_async"
+    fully_qualified_name: "kazoo.client.TransactionRequest.commit_async"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "commit"
+    fully_qualified_name: "kazoo.client.TransactionRequest.commit"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "kazoo.client.TransactionRequest.__enter__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "kazoo.client.TransactionRequest.__exit__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "exc_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "exc_value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "exc_tb"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "client"
+    fully_qualified_name: "kazoo.client.TransactionRequest.client"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "operations"
+    fully_qualified_name: "kazoo.client.TransactionRequest.operations"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "committed"
+    fully_qualified_name: "kazoo.client.TransactionRequest.committed"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "KazooState"
+  fully_qualified_name: "kazoo.client.KazooState"
+  super_classes: "builtins.object"
+  valid_for: "27"
+}
+vars {
+  name: "string_types"
+  fully_qualified_name: "kazoo.client.string_types"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "bytes_types"
+  fully_qualified_name: "kazoo.client.bytes_types"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "LOST_STATES"
+  fully_qualified_name: "kazoo.client.LOST_STATES"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ENVI_VERSION"
+  fully_qualified_name: "kazoo.client.ENVI_VERSION"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "ENVI_VERSION_KEY"
+  fully_qualified_name: "kazoo.client.ENVI_VERSION_KEY"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}
+vars {
+  name: "log"
+  fully_qualified_name: "kazoo.client.log"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

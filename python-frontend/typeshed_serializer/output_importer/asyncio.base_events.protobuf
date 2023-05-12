@@ -1,0 +1,3876 @@
+fully_qualified_name: "asyncio.base_events"
+classes {
+  name: "Server"
+  fully_qualified_name: "asyncio.base_events.Server"
+  super_classes: "asyncio.events.AbstractServer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "asyncio.base_events.Server.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+    parameters {
+      name: "loop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.events.AbstractEventLoop"
+        fully_qualified_name: "asyncio.events.AbstractEventLoop"
+      }
+    }
+    parameters {
+      name: "sockets"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[socket.socket]"
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "asyncio.base_events._ProtocolFactory"
+      }
+    }
+    parameters {
+      name: "ssl_context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "ssl.SSLContext"
+            fully_qualified_name: "ssl.SSLContext"
+          }
+        }
+        fully_qualified_name: "asyncio.base_events._SSLContext"
+      }
+    }
+    parameters {
+      name: "backlog"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "ssl_handshake_timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_loop"
+    fully_qualified_name: "asyncio.base_events.Server.get_loop"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.AbstractEventLoop"
+      fully_qualified_name: "asyncio.events.AbstractEventLoop"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+  }
+  methods {
+    name: "is_serving"
+    fully_qualified_name: "asyncio.base_events.Server.is_serving"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+  }
+  methods {
+    name: "start_serving"
+    fully_qualified_name: "asyncio.base_events.Server.start_serving"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "serve_forever"
+    fully_qualified_name: "asyncio.base_events.Server.serve_forever"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sockets"
+    fully_qualified_name: "asyncio.base_events.Server.sockets"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[socket.socket]"
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.base_events.Server.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+  }
+  methods {
+    name: "wait_closed"
+    fully_qualified_name: "asyncio.base_events.Server.wait_closed"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.Server"
+        fully_qualified_name: "asyncio.base_events.Server"
+      }
+    }
+    is_asynchronous: true
+  }
+}
+classes {
+  name: "BaseEventLoop"
+  fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+  super_classes: "asyncio.events.AbstractEventLoop"
+  methods {
+    name: "run_forever"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.run_forever"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "stop"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.stop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "is_running"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.is_running"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "is_closed"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.is_closed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "shutdown_asyncgens"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.shutdown_asyncgens"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "call_soon"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.call_soon"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.Handle"
+      fully_qualified_name: "asyncio.events.Handle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "call_later"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.call_later"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.TimerHandle"
+      fully_qualified_name: "asyncio.events.TimerHandle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "delay"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "call_at"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.call_at"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.TimerHandle"
+      fully_qualified_name: "asyncio.events.TimerHandle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "when"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "time"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.time"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "create_future"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_future"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "create_task"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_task"
+    return_annotation {
+      pretty_printed_name: "asyncio.tasks.Task[asyncio.base_events._T]"
+      args {
+        pretty_printed_name: "asyncio.base_events._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "asyncio.tasks.Task"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "coro"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Coroutine[Any,Any,asyncio.base_events._T],typing.Generator[Any,None,asyncio.base_events._T]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "asyncio.base_events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Coroutine"
+        }
+        args {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.base_events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.base_events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "set_task_factory"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.set_task_factory"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events._TaskFactory,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events._TaskFactory"
+          fully_qualified_name: "asyncio.events._TaskFactory"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_task_factory"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.get_task_factory"
+    return_annotation {
+      pretty_printed_name: "Union[asyncio.events._TaskFactory,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "asyncio.events._TaskFactory"
+        fully_qualified_name: "asyncio.events._TaskFactory"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "call_soon_threadsafe"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.call_soon_threadsafe"
+    return_annotation {
+      pretty_printed_name: "asyncio.events.Handle"
+      fully_qualified_name: "asyncio.events.Handle"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.Context"
+          fully_qualified_name: "contextvars.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "run_in_executor"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.run_in_executor"
+    return_annotation {
+      pretty_printed_name: "asyncio.futures.Future[asyncio.base_events._T]"
+      args {
+        pretty_printed_name: "asyncio.base_events._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "asyncio.futures.Future"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "executor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "set_default_executor"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.set_default_executor"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "executor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "getaddrinfo"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.getaddrinfo"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]"
+        args {
+          pretty_printed_name: "Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "socket.AddressFamily"
+            fully_qualified_name: "socket.AddressFamily"
+          }
+          args {
+            pretty_printed_name: "socket.SocketKind"
+            fully_qualified_name: "socket.SocketKind"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "host"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.str,builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "family"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "flags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "getnameinfo"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.getnameinfo"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[builtins.str,builtins.str]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sockaddr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int,builtins.int,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "flags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "start_tls"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.start_tls"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.transports.Transport]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "asyncio.transports.Transport"
+        fully_qualified_name: "asyncio.transports.Transport"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.BaseTransport"
+        fully_qualified_name: "asyncio.transports.BaseTransport"
+      }
+    }
+    parameters {
+      name: "protocol"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.protocols.BaseProtocol"
+        fully_qualified_name: "asyncio.protocols.BaseProtocol"
+      }
+    }
+    parameters {
+      name: "sslcontext"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "ssl.SSLContext"
+        fully_qualified_name: "ssl.SSLContext"
+      }
+    }
+    parameters {
+      name: "server_side"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "server_hostname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ssl_handshake_timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "connect_accepted_socket"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.connect_accepted_socket"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.Transport"
+          fully_qualified_name: "asyncio.transports.Transport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "ssl"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "ssl.SSLContext"
+            fully_qualified_name: "ssl.SSLContext"
+          }
+        }
+        fully_qualified_name: "asyncio.base_events._SSLContext"
+      }
+    }
+    parameters {
+      name: "ssl_handshake_timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sock_sendfile"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_sendfile"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fallback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sendfile"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sendfile"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "transport"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.transports.WriteTransport"
+        fully_qualified_name: "asyncio.transports.WriteTransport"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "count"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fallback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "create_datagram_endpoint"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_datagram_endpoint"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.DatagramTransport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.DatagramTransport"
+          fully_qualified_name: "asyncio.transports.DatagramTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "local_addr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "remote_addr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "family"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "flags"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "reuse_address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "reuse_port"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "allow_broadcast"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[socket.socket,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "connect_read_pipe"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.connect_read_pipe"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.ReadTransport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.ReadTransport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.ReadTransport"
+          fully_qualified_name: "asyncio.transports.ReadTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "pipe"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "connect_write_pipe"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.connect_write_pipe"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.WriteTransport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.WriteTransport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.WriteTransport"
+          fully_qualified_name: "asyncio.transports.WriteTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "pipe"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "subprocess_shell"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.subprocess_shell"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.SubprocessTransport"
+          fully_qualified_name: "asyncio.transports.SubprocessTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "cmd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,builtins.str]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "stdin"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stdout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stderr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "universal_newlines"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "shell"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.bool],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "subprocess_exec"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.subprocess_exec"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[asyncio.transports.SubprocessTransport,asyncio.base_events._ProtocolT]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "asyncio.transports.SubprocessTransport"
+          fully_qualified_name: "asyncio.transports.SubprocessTransport"
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events._ProtocolT"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "protocol_factory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "program"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "stdin"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stdout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "stderr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "universal_newlines"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "shell"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.bool]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+    }
+    parameters {
+      name: "bufsize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "add_reader"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.add_reader"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_reader"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.remove_reader"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "add_writer"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.add_writer"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_writer"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.remove_writer"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "sock_recv"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_recv"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.bytes]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "nbytes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sock_recv_into"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_recv_into"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,builtins.int]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "builtins.memoryview"
+            fully_qualified_name: "builtins.memoryview"
+          }
+          args {
+            pretty_printed_name: "array.array[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "array.array"
+          }
+          args {
+            pretty_printed_name: "mmap.mmap"
+            fully_qualified_name: "mmap.mmap"
+          }
+          args {
+            pretty_printed_name: "ctypes._CData"
+            fully_qualified_name: "ctypes._CData"
+          }
+          args {
+            pretty_printed_name: "pickle.PickleBuffer"
+            fully_qualified_name: "pickle.PickleBuffer"
+          }
+        }
+        fully_qualified_name: "_typeshed.WriteableBuffer"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sock_sendall"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_sendall"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytearray"
+                fully_qualified_name: "builtins.bytearray"
+              }
+              args {
+                pretty_printed_name: "builtins.memoryview"
+                fully_qualified_name: "builtins.memoryview"
+              }
+              args {
+                pretty_printed_name: "array.array[Any]"
+                args {
+                  pretty_printed_name: "Any"
+                  kind: ANY
+                }
+                fully_qualified_name: "array.array"
+              }
+              args {
+                pretty_printed_name: "mmap.mmap"
+                fully_qualified_name: "mmap.mmap"
+              }
+              args {
+                pretty_printed_name: "ctypes._CData"
+                fully_qualified_name: "ctypes._CData"
+              }
+              args {
+                pretty_printed_name: "pickle.PickleBuffer"
+                fully_qualified_name: "pickle.PickleBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.WriteableBuffer"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sock_connect"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_connect"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,None]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.tuple[Any]"
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.tuple"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytes"
+                fully_qualified_name: "builtins.bytes"
+              }
+              args {
+                pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+                kind: TYPE_ALIAS
+                args {
+                  pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                  kind: UNION
+                  args {
+                    pretty_printed_name: "builtins.bytearray"
+                    fully_qualified_name: "builtins.bytearray"
+                  }
+                  args {
+                    pretty_printed_name: "builtins.memoryview"
+                    fully_qualified_name: "builtins.memoryview"
+                  }
+                  args {
+                    pretty_printed_name: "array.array[Any]"
+                    args {
+                      pretty_printed_name: "Any"
+                      kind: ANY
+                    }
+                    fully_qualified_name: "array.array"
+                  }
+                  args {
+                    pretty_printed_name: "mmap.mmap"
+                    fully_qualified_name: "mmap.mmap"
+                  }
+                  args {
+                    pretty_printed_name: "ctypes._CData"
+                    fully_qualified_name: "ctypes._CData"
+                  }
+                  args {
+                    pretty_printed_name: "pickle.PickleBuffer"
+                    fully_qualified_name: "pickle.PickleBuffer"
+                  }
+                }
+                fully_qualified_name: "_typeshed.WriteableBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.ReadableBuffer"
+          }
+        }
+        fully_qualified_name: "_socket._Address"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "sock_accept"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.sock_accept"
+    return_annotation {
+      pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[socket.socket,TypeAlias[Any]]]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Tuple[socket.socket,TypeAlias[Any]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Any]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "_socket._RetAddress"
+        }
+      }
+      fully_qualified_name: "typing.Coroutine"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sock"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+    }
+    is_asynchronous: true
+  }
+  methods {
+    name: "add_signal_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.add_signal_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sig"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "callback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "remove_signal_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.remove_signal_handler"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "sig"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "set_exception_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.set_exception_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "handler"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[CallableType[builtins.function]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._ExceptionHandler"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_exception_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.get_exception_handler"
+    return_annotation {
+      pretty_printed_name: "Union[TypeAlias[CallableType[builtins.function]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "asyncio.base_events._ExceptionHandler"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "default_exception_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.default_exception_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "asyncio.base_events._Context"
+      }
+    }
+  }
+  methods {
+    name: "call_exception_handler"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.call_exception_handler"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "asyncio.base_events._Context"
+      }
+    }
+  }
+  methods {
+    name: "get_debug"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.get_debug"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+  }
+  methods {
+    name: "set_debug"
+    fully_qualified_name: "asyncio.base_events.BaseEventLoop.set_debug"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+        fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+      }
+    }
+    parameters {
+      name: "enabled"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "run_until_complete"
+    fullname: "asyncio.base_events.BaseEventLoop.run_until_complete"
+    definitions {
+      name: "run_until_complete"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.run_until_complete"
+      return_annotation {
+        pretty_printed_name: "asyncio.base_events._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "future"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Generator[Any,None,asyncio.base_events._T]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          args {
+            pretty_printed_name: "asyncio.base_events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Generator"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "run_until_complete"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.run_until_complete"
+      return_annotation {
+        pretty_printed_name: "asyncio.base_events._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "future"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Awaitable[asyncio.base_events._T]"
+          args {
+            pretty_printed_name: "asyncio.base_events._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Awaitable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "create_connection"
+    fullname: "asyncio.base_events.BaseEventLoop.create_connection"
+    definitions {
+      name: "create_connection"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_connection"
+      return_annotation {
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
+          }
+          args {
+            pretty_printed_name: "asyncio.base_events._ProtocolT"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "typing.Coroutine"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "protocol_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "host"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "ssl"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._SSLContext"
+        }
+      }
+      parameters {
+        name: "family"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "proto"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "flags"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "sock"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "local_addr"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[Tuple[builtins.str,builtins.int],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "server_hostname"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "happy_eyeballs_delay"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "interleave"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_asynchronous: true
+      is_overload: true
+    }
+    definitions {
+      name: "create_connection"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_connection"
+      return_annotation {
+        pretty_printed_name: "typing.Coroutine[Any,Any,Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Tuple[asyncio.transports.Transport,asyncio.base_events._ProtocolT]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "asyncio.transports.Transport"
+            fully_qualified_name: "asyncio.transports.Transport"
+          }
+          args {
+            pretty_printed_name: "asyncio.base_events._ProtocolT"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "typing.Coroutine"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "protocol_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "host"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "ssl"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._SSLContext"
+        }
+      }
+      parameters {
+        name: "family"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "proto"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "flags"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "sock"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "local_addr"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "server_hostname"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "happy_eyeballs_delay"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "interleave"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_asynchronous: true
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "create_server"
+    fullname: "asyncio.base_events.BaseEventLoop.create_server"
+    definitions {
+      name: "create_server"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_server"
+      return_annotation {
+        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events.Server"
+          fully_qualified_name: "asyncio.base_events.Server"
+        }
+        fully_qualified_name: "typing.Coroutine"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "protocol_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._ProtocolFactory"
+        }
+      }
+      parameters {
+        name: "host"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,typing.Sequence[builtins.str],None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "typing.Sequence[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Sequence"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "family"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "flags"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "sock"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "backlog"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "ssl"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._SSLContext"
+        }
+      }
+      parameters {
+        name: "reuse_address"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "reuse_port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "start_serving"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_asynchronous: true
+      is_overload: true
+    }
+    definitions {
+      name: "create_server"
+      fully_qualified_name: "asyncio.base_events.BaseEventLoop.create_server"
+      return_annotation {
+        pretty_printed_name: "typing.Coroutine[Any,Any,asyncio.base_events.Server]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "asyncio.base_events.Server"
+          fully_qualified_name: "asyncio.base_events.Server"
+        }
+        fully_qualified_name: "typing.Coroutine"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "asyncio.base_events.BaseEventLoop"
+          fully_qualified_name: "asyncio.base_events.BaseEventLoop"
+        }
+      }
+      parameters {
+        name: "protocol_factory"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._ProtocolFactory"
+        }
+      }
+      parameters {
+        name: "host"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "family"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "flags"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "sock"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+      }
+      parameters {
+        name: "backlog"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      parameters {
+        name: "ssl"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bool,None,ssl.SSLContext]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bool"
+              fully_qualified_name: "builtins.bool"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+            args {
+              pretty_printed_name: "ssl.SSLContext"
+              fully_qualified_name: "ssl.SSLContext"
+            }
+          }
+          fully_qualified_name: "asyncio.base_events._SSLContext"
+        }
+      }
+      parameters {
+        name: "reuse_address"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "reuse_port"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "ssl_handshake_timeout"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.float,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "start_serving"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_asynchronous: true
+      is_overload: true
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "asyncio.base_events.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "asyncio.base_events.__all__"
+  type_annotation {
+    pretty_printed_name: "Tuple[builtins.str]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}

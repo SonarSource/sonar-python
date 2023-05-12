@@ -1,0 +1,4225 @@
+fully_qualified_name: "werkzeug.datastructures.structures"
+classes {
+  name: "ImmutableList"
+  fully_qualified_name: "werkzeug.datastructures.structures.ImmutableList"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableListMixin"
+  is_generic: true
+}
+classes {
+  name: "TypeConversionDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+  super_classes: "builtins.dict"
+  overloaded_methods {
+    name: "get"
+    fullname: "werkzeug.datastructures.structures.TypeConversionDict.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.TypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.D,werkzeug.datastructures.structures.V]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.D"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.TypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.D,werkzeug.datastructures.structures.T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.D"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.TypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.TypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "ImmutableTypeConversionDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+  super_classes: "werkzeug.datastructures.structures.TypeConversionDict"
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict.copy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.TypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.TypeConversionDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict.__copy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict[Any,Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableTypeConversionDict"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "MultiDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+  super_classes: "werkzeug.datastructures.structures.TypeConversionDict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]],typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+              args {
+                pretty_printed_name: "werkzeug.datastructures.structures.V"
+                kind: TYPE_VAR
+              }
+              fully_qualified_name: "typing.Iterable"
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "setlist"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.setlist"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "new_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.setdefault"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "setlistdefault"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.setlistdefault"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.structures.V],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.items"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "multi"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "lists"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.lists"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.values"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "listvalues"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.listvalues"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.list[werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.copy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "deepcopy"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.deepcopy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "memo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]],typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.structures.V],werkzeug.datastructures.structures.V]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+              args {
+                pretty_printed_name: "werkzeug.datastructures.structures.V"
+                kind: TYPE_VAR
+              }
+              fully_qualified_name: "typing.Iterable"
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.popitem"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "poplist"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.poplist"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "popitemlist"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.popitemlist"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.__copy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+    parameters {
+      name: "memo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  overloaded_methods {
+    name: "getlist"
+    fullname: "werkzeug.datastructures.structures.MultiDict.getlist"
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.T]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "to_dict"
+    fullname: "werkzeug.datastructures.structures.MultiDict.to_dict"
+    definitions {
+      name: "to_dict"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.to_dict"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "to_dict"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.to_dict"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      parameters {
+        name: "flat"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "pop"
+    fullname: "werkzeug.datastructures.structures.MultiDict.pop"
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.pop"
+      return_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict.pop"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "_omd_bucket"
+  fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+    }
+    parameters {
+      name: "omd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "unlink"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.unlink"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+    }
+    parameters {
+      name: "omd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "prev"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.prev"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.structures._omd_bucket[Any,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "next"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.next"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.structures._omd_bucket[Any,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.key"
+    type_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.K"
+      kind: TYPE_VAR
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket.value"
+    type_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.V"
+      kind: TYPE_VAR
+    }
+  }
+}
+classes {
+  name: "OrderedMultiDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+  super_classes: "werkzeug.datastructures.structures.MultiDict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.keys"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.datastructures.structures.K]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.datastructures.structures.K]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.values"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.items"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "multi"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "lists"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.lists"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "listvalues"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.listvalues"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.list[werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "setlist"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.setlist"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "new_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "setlistdefault"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.setlistdefault"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "default_list"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.structures.V],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V],typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+  }
+  methods {
+    name: "poplist"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.poplist"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "popitem"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.popitem"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "popitemlist"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.popitemlist"
+    return_annotation {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "getlist"
+    fullname: "werkzeug.datastructures.structures.OrderedMultiDict.getlist"
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.T]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "pop"
+    fullname: "werkzeug.datastructures.structures.OrderedMultiDict.pop"
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.pop"
+      return_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "pop"
+      fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict.pop"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "_first_bucket"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict._first_bucket"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.structures._omd_bucket[Any,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_last_bucket"
+    fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict._last_bucket"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.structures._omd_bucket[Any,Any],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures._omd_bucket[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures._omd_bucket"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "CombinedMultiDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+  super_classes: "werkzeug.datastructures.structures.MultiDict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+    parameters {
+      name: "dicts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "fromkeys"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.fromkeys"
+    return_annotation {
+      pretty_printed_name: "NoReturn"
+      kind: UNINHABITED
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+    }
+    parameters {
+      name: "keys"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.__getitem__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_keys_impl"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict._keys_impl"
+    return_annotation {
+      pretty_printed_name: "builtins.set[werkzeug.datastructures.structures.K]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.keys"
+    return_annotation {
+      pretty_printed_name: "builtins.set[werkzeug.datastructures.structures.K]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.__iter__"
+    return_annotation {
+      pretty_printed_name: "builtins.set[werkzeug.datastructures.structures.K]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.items"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+    parameters {
+      name: "multi"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.values"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "lists"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.lists"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]]"
+      args {
+        pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "listvalues"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.listvalues"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.list[werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.copy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "has_key"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.has_key"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  overloaded_methods {
+    name: "get"
+    fullname: "werkzeug.datastructures.structures.CombinedMultiDict.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[werkzeug.datastructures.structures.V,werkzeug.datastructures.structures.T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.get"
+      return_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.structures.T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[werkzeug.datastructures.structures.T,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "getlist"
+    fullname: "werkzeug.datastructures.structures.CombinedMultiDict.getlist"
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "getlist"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.getlist"
+      return_annotation {
+        pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.T]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "type"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "to_dict"
+    fullname: "werkzeug.datastructures.structures.CombinedMultiDict.to_dict"
+    definitions {
+      name: "to_dict"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.to_dict"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "to_dict"
+      fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.to_dict"
+      return_annotation {
+        pretty_printed_name: "builtins.dict[werkzeug.datastructures.structures.K,builtins.list[werkzeug.datastructures.structures.V]]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.list"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.structures.CombinedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict"
+        }
+      }
+      parameters {
+        name: "flat"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "dicts"
+    fully_qualified_name: "werkzeug.datastructures.structures.CombinedMultiDict.dicts"
+    type_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "ImmutableDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict.copy"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict.__copy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableDict"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "ImmutableMultiDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+  super_classes: "werkzeug.datastructures.structures.MultiDict"
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict.copy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict.__copy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "ImmutableOrderedMultiDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableMultiDictMixin"
+  super_classes: "werkzeug.datastructures.structures.OrderedMultiDict"
+  methods {
+    name: "_iter_hashitems"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict._iter_hashitems"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.int,Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.int,Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict.copy"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.OrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.OrderedMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict.__copy__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.ImmutableOrderedMultiDict"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "CallbackDict"
+  fully_qualified_name: "werkzeug.datastructures.structures.CallbackDict"
+  super_classes: "werkzeug.datastructures.mixins.UpdateDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures.CallbackDict.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.CallbackDict[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.CallbackDict"
+      }
+    }
+    parameters {
+      name: "initial"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V],typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+          args {
+            pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.K"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "on_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "HeaderSet"
+  fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+  super_classes: "builtins.set"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "on_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.add"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "discard"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.discard"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "find"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.find"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+  }
+  methods {
+    name: "as_set"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.as_set"
+    return_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "preserve_casing"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "to_header"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.to_header"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__getitem__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+    }
+  }
+  attributes {
+    name: "_headers"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet._headers"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_set"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet._set"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "on_update"
+    fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet.on_update"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "is_immutable"
+  fully_qualified_name: "werkzeug.datastructures.structures.is_immutable"
+  return_annotation {
+    pretty_printed_name: "NoReturn"
+    kind: UNINHABITED
+  }
+  parameters {
+    name: "self"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+}
+functions {
+  name: "iter_multi_items"
+  fully_qualified_name: "werkzeug.datastructures.structures.iter_multi_items"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+    args {
+      pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.K"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.V"
+        kind: TYPE_VAR
+      }
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+  parameters {
+    name: "mapping"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[werkzeug.datastructures.structures.K,Union[werkzeug.datastructures.structures.V,typing.Iterable[werkzeug.datastructures.structures.V]]],typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[werkzeug.datastructures.structures.K,Union[werkzeug.datastructures.structures.V,typing.Iterable[werkzeug.datastructures.structures.V]]]"
+        args {
+          pretty_printed_name: "werkzeug.datastructures.structures.K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "Union[werkzeug.datastructures.structures.V,typing.Iterable[werkzeug.datastructures.structures.V]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[werkzeug.datastructures.structures.V]"
+            args {
+              pretty_printed_name: "werkzeug.datastructures.structures.V"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "typing.Iterable[Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]]"
+        args {
+          pretty_printed_name: "Tuple[werkzeug.datastructures.structures.K,werkzeug.datastructures.structures.V]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.K"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "werkzeug.datastructures.structures.V"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.datastructures.structures.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

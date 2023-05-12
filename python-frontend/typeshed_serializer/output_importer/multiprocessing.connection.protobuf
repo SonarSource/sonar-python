@@ -1,0 +1,979 @@
+fully_qualified_name: "multiprocessing.connection"
+classes {
+  name: "_ConnectionBase"
+  fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "handle"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+    parameters {
+      name: "readable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "writable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "closed"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.closed"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "readable"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.readable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "writable"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.writable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fileno"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+  }
+  methods {
+    name: "send_bytes"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.send_bytes"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytearray"
+                fully_qualified_name: "builtins.bytearray"
+              }
+              args {
+                pretty_printed_name: "builtins.memoryview"
+                fully_qualified_name: "builtins.memoryview"
+              }
+              args {
+                pretty_printed_name: "array.array[Any]"
+                args {
+                  pretty_printed_name: "Any"
+                  kind: ANY
+                }
+                fully_qualified_name: "array.array"
+              }
+              args {
+                pretty_printed_name: "mmap.mmap"
+                fully_qualified_name: "mmap.mmap"
+              }
+              args {
+                pretty_printed_name: "ctypes._CData"
+                fully_qualified_name: "ctypes._CData"
+              }
+              args {
+                pretty_printed_name: "pickle.PickleBuffer"
+                fully_qualified_name: "pickle.PickleBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.WriteableBuffer"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "send"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.send"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "recv_bytes"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.recv_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "maxlength"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "recv_bytes_into"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.recv_bytes_into"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "recv"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.recv"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+  }
+  methods {
+    name: "poll"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.poll"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.__enter__"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.connection._ConnectionBase.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.connection._ConnectionBase.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection._ConnectionBase"
+        fully_qualified_name: "multiprocessing.connection._ConnectionBase"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+classes {
+  name: "Connection"
+  fully_qualified_name: "multiprocessing.connection.Connection"
+  super_classes: "multiprocessing.connection._ConnectionBase"
+}
+classes {
+  name: "Listener"
+  fully_qualified_name: "multiprocessing.connection.Listener"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.connection.Listener.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+    parameters {
+      name: "address"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+          }
+          fully_qualified_name: "multiprocessing.connection._Address"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "family"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "backlog"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "authkey"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "accept"
+    fully_qualified_name: "multiprocessing.connection.Listener.accept"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.connection.Listener.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+  }
+  methods {
+    name: "address"
+    fully_qualified_name: "multiprocessing.connection.Listener.address"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      fully_qualified_name: "multiprocessing.connection._Address"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "last_accepted"
+    fully_qualified_name: "multiprocessing.connection.Listener.last_accepted"
+    return_annotation {
+      pretty_printed_name: "Union[TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+          }
+        }
+        fully_qualified_name: "multiprocessing.connection._Address"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "multiprocessing.connection.Listener.__enter__"
+    return_annotation {
+      pretty_printed_name: "multiprocessing.connection.Listener.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "multiprocessing.connection.Listener.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "multiprocessing.connection.Listener"
+        fully_qualified_name: "multiprocessing.connection.Listener"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.BaseException],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.BaseException]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.BaseException"
+            fully_qualified_name: "builtins.BaseException"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+}
+functions {
+  name: "deliver_challenge"
+  fully_qualified_name: "multiprocessing.connection.deliver_challenge"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "connection"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+  }
+  parameters {
+    name: "authkey"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "answer_challenge"
+  fully_qualified_name: "multiprocessing.connection.answer_challenge"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "connection"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+  }
+  parameters {
+    name: "authkey"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "wait"
+  fully_qualified_name: "multiprocessing.connection.wait"
+  return_annotation {
+    pretty_printed_name: "builtins.list[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]"
+    args {
+      pretty_printed_name: "Union[multiprocessing.connection.Connection,socket.socket,builtins.int]"
+      kind: UNION
+      args {
+        pretty_printed_name: "multiprocessing.connection.Connection"
+        fully_qualified_name: "multiprocessing.connection.Connection"
+      }
+      args {
+        pretty_printed_name: "socket.socket"
+        fully_qualified_name: "socket.socket"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "object_list"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]"
+      args {
+        pretty_printed_name: "Union[multiprocessing.connection.Connection,socket.socket,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.connection.Connection"
+          fully_qualified_name: "multiprocessing.connection.Connection"
+        }
+        args {
+          pretty_printed_name: "socket.socket"
+          fully_qualified_name: "socket.socket"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "timeout"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.float,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "Client"
+  fully_qualified_name: "multiprocessing.connection.Client"
+  return_annotation {
+    pretty_printed_name: "multiprocessing.connection.Connection"
+    fully_qualified_name: "multiprocessing.connection.Connection"
+  }
+  parameters {
+    name: "address"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,Tuple[builtins.str,builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      fully_qualified_name: "multiprocessing.connection._Address"
+    }
+  }
+  parameters {
+    name: "family"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "authkey"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "Pipe"
+  fully_qualified_name: "multiprocessing.connection.Pipe"
+  return_annotation {
+    pretty_printed_name: "Tuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+    args {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+  }
+  parameters {
+    name: "duplex"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "multiprocessing.connection.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.connection.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

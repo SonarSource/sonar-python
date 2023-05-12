@@ -1,0 +1,841 @@
+fully_qualified_name: "jinja2.bccache"
+classes {
+  name: "_MemcachedClient"
+  fully_qualified_name: "jinja2.bccache._MemcachedClient"
+  super_classes: "builtins.object"
+  methods {
+    name: "get"
+    fully_qualified_name: "jinja2.bccache._MemcachedClient.get"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache._MemcachedClient"
+        fully_qualified_name: "jinja2.bccache._MemcachedClient"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set"
+    fully_qualified_name: "jinja2.bccache._MemcachedClient.set"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache._MemcachedClient"
+        fully_qualified_name: "jinja2.bccache._MemcachedClient"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "Bucket"
+  fully_qualified_name: "jinja2.bccache.Bucket"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.bccache.Bucket.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "checksum"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "reset"
+    fully_qualified_name: "jinja2.bccache.Bucket.reset"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "load_bytecode"
+    fully_qualified_name: "jinja2.bccache.Bucket.load_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.BinaryIO"
+        fully_qualified_name: "typing.BinaryIO"
+      }
+    }
+  }
+  methods {
+    name: "write_bytecode"
+    fully_qualified_name: "jinja2.bccache.Bucket.write_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.IO[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "typing.IO"
+      }
+    }
+  }
+  methods {
+    name: "bytecode_from_string"
+    fully_qualified_name: "jinja2.bccache.Bucket.bytecode_from_string"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+    parameters {
+      name: "string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "bytecode_to_string"
+    fully_qualified_name: "jinja2.bccache.Bucket.bytecode_to_string"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  attributes {
+    name: "environment"
+    fully_qualified_name: "jinja2.bccache.Bucket.environment"
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+  attributes {
+    name: "key"
+    fully_qualified_name: "jinja2.bccache.Bucket.key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "checksum"
+    fully_qualified_name: "jinja2.bccache.Bucket.checksum"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "code"
+    fully_qualified_name: "jinja2.bccache.Bucket.code"
+    type_annotation {
+      pretty_printed_name: "Union[types.CodeType,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "types.CodeType"
+        fully_qualified_name: "types.CodeType"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "BytecodeCache"
+  fully_qualified_name: "jinja2.bccache.BytecodeCache"
+  super_classes: "builtins.object"
+  methods {
+    name: "load_bytecode"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.load_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "dump_bytecode"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.dump_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+  }
+  methods {
+    name: "get_cache_key"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.get_cache_key"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_source_checksum"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.get_source_checksum"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_bucket"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.get_bucket"
+    return_annotation {
+      pretty_printed_name: "jinja2.bccache.Bucket"
+      fully_qualified_name: "jinja2.bccache.Bucket"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "source"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "set_bucket"
+    fully_qualified_name: "jinja2.bccache.BytecodeCache.set_bucket"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.BytecodeCache"
+        fully_qualified_name: "jinja2.bccache.BytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+}
+classes {
+  name: "FileSystemBytecodeCache"
+  fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+  super_classes: "jinja2.bccache.BytecodeCache"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+    parameters {
+      name: "directory"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "pattern"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_get_default_cache_dir"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache._get_default_cache_dir"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+  }
+  methods {
+    name: "_get_cache_filename"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache._get_cache_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "load_bytecode"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.load_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "dump_bytecode"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.dump_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.FileSystemBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache"
+      }
+    }
+  }
+  attributes {
+    name: "directory"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.directory"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "jinja2.bccache.FileSystemBytecodeCache.pattern"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "MemcachedBytecodeCache"
+  fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache"
+  super_classes: "jinja2.bccache.BytecodeCache"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.MemcachedBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache"
+      }
+    }
+    parameters {
+      name: "client"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache._MemcachedClient"
+        fully_qualified_name: "jinja2.bccache._MemcachedClient"
+      }
+    }
+    parameters {
+      name: "prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ignore_memcache_errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "load_bytecode"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.load_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.MemcachedBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  methods {
+    name: "dump_bytecode"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.dump_bytecode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.MemcachedBytecodeCache"
+        fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache"
+      }
+    }
+    parameters {
+      name: "bucket"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.bccache.Bucket"
+        fully_qualified_name: "jinja2.bccache.Bucket"
+      }
+    }
+  }
+  attributes {
+    name: "client"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.client"
+    type_annotation {
+      pretty_printed_name: "jinja2.bccache._MemcachedClient"
+      fully_qualified_name: "jinja2.bccache._MemcachedClient"
+    }
+  }
+  attributes {
+    name: "prefix"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.prefix"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "timeout"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.timeout"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "ignore_memcache_errors"
+    fully_qualified_name: "jinja2.bccache.MemcachedBytecodeCache.ignore_memcache_errors"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.bccache.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "bc_version"
+  fully_qualified_name: "jinja2.bccache.bc_version"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "bc_magic"
+  fully_qualified_name: "jinja2.bccache.bc_magic"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}

@@ -1,0 +1,225 @@
+fully_qualified_name: "cryptography.hazmat.primitives._serialization"
+classes {
+  name: "Encoding"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "PEM"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.PEM"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "DER"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.DER"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "X962"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.X962"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "SMIME"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding.SMIME"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "PrivateFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "PKCS8"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat.PKCS8"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "TraditionalOpenSSL"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat.TraditionalOpenSSL"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "PublicFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "SubjectPublicKeyInfo"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.SubjectPublicKeyInfo"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "PKCS1"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.PKCS1"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "OpenSSH"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.OpenSSH"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "Raw"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.Raw"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "CompressedPoint"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.CompressedPoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "UncompressedPoint"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat.UncompressedPoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "ParameterFormat"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.ParameterFormat"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "PKCS3"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.ParameterFormat.PKCS3"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "KeySerializationEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+  super_classes: "builtins.object"
+  has_metaclass: true
+}
+classes {
+  name: "BestAvailableEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.BestAvailableEncryption"
+  super_classes: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.BestAvailableEncryption.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.BestAvailableEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.BestAvailableEncryption"
+      }
+    }
+    parameters {
+      name: "password"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "password"
+    fully_qualified_name: "cryptography.hazmat.primitives._serialization.BestAvailableEncryption.password"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+classes {
+  name: "NoEncryption"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.NoEncryption"
+  super_classes: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives._serialization.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

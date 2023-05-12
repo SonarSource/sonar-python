@@ -1,0 +1,2771 @@
+fully_qualified_name: "selectors"
+classes {
+  name: "SelectorKey"
+  fully_qualified_name: "selectors.SelectorKey"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "selectors.SelectorKey._replace"
+    return_annotation {
+      pretty_printed_name: "selectors.SelectorKey._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectorKey._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "selectors.SelectorKey.__new__"
+    return_annotation {
+      pretty_printed_name: "selectors.SelectorKey._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[selectors.SelectorKey._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "selectors.SelectorKey._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "fd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "selectors.SelectorKey._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectorKey._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "selectors.SelectorKey._make"
+    return_annotation {
+      pretty_printed_name: "selectors.SelectorKey._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[selectors.SelectorKey._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "selectors.SelectorKey._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "fileobj"
+    fully_qualified_name: "selectors.SelectorKey.fileobj"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  attributes {
+    name: "fd"
+    fully_qualified_name: "selectors.SelectorKey.fd"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "events"
+    fully_qualified_name: "selectors.SelectorKey.events"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "data"
+    fully_qualified_name: "selectors.SelectorKey.data"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "fileobj"
+    fully_qualified_name: "selectors.SelectorKey.fileobj"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "_typeshed.HasFileno"
+          fully_qualified_name: "_typeshed.HasFileno"
+        }
+      }
+      fully_qualified_name: "_typeshed.FileDescriptorLike"
+    }
+  }
+  attributes {
+    name: "fd"
+    fully_qualified_name: "selectors.SelectorKey.fd"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "events"
+    fully_qualified_name: "selectors.SelectorKey.events"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "data"
+    fully_qualified_name: "selectors.SelectorKey.data"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "selectors.SelectorKey._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "selectors.SelectorKey._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "selectors.SelectorKey._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "selectors.SelectorKey._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "selectors.SelectorKey.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "BaseSelector"
+  fully_qualified_name: "selectors.BaseSelector"
+  super_classes: "builtins.object"
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.BaseSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.BaseSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "modify"
+    fully_qualified_name: "selectors.BaseSelector.modify"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.BaseSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "selectors.BaseSelector.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+  }
+  methods {
+    name: "get_key"
+    fully_qualified_name: "selectors.BaseSelector.get_key"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.BaseSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "selectors.BaseSelector.__enter__"
+    return_annotation {
+      pretty_printed_name: "selectors.BaseSelector.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "selectors.BaseSelector.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "selectors.BaseSelector"
+        fully_qualified_name: "selectors.BaseSelector"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+  }
+  has_metaclass: true
+  metaclass_name: "abc.ABCMeta"
+}
+classes {
+  name: "SelectSelector"
+  fully_qualified_name: "selectors.SelectSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.SelectSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectSelector"
+        fully_qualified_name: "selectors.SelectSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.SelectSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectSelector"
+        fully_qualified_name: "selectors.SelectSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.SelectSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectSelector"
+        fully_qualified_name: "selectors.SelectSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.SelectSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.SelectSelector"
+        fully_qualified_name: "selectors.SelectSelector"
+      }
+    }
+  }
+}
+classes {
+  name: "PollSelector"
+  fully_qualified_name: "selectors.PollSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.PollSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.PollSelector"
+        fully_qualified_name: "selectors.PollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.PollSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.PollSelector"
+        fully_qualified_name: "selectors.PollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.PollSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.PollSelector"
+        fully_qualified_name: "selectors.PollSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.PollSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.PollSelector"
+        fully_qualified_name: "selectors.PollSelector"
+      }
+    }
+  }
+}
+classes {
+  name: "EpollSelector"
+  fully_qualified_name: "selectors.EpollSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "fileno"
+    fully_qualified_name: "selectors.EpollSelector.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.EpollSelector"
+        fully_qualified_name: "selectors.EpollSelector"
+      }
+    }
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.EpollSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.EpollSelector"
+        fully_qualified_name: "selectors.EpollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.EpollSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.EpollSelector"
+        fully_qualified_name: "selectors.EpollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.EpollSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.EpollSelector"
+        fully_qualified_name: "selectors.EpollSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.EpollSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.EpollSelector"
+        fully_qualified_name: "selectors.EpollSelector"
+      }
+    }
+  }
+}
+classes {
+  name: "DevpollSelector"
+  fully_qualified_name: "selectors.DevpollSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "fileno"
+    fully_qualified_name: "selectors.DevpollSelector.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DevpollSelector"
+        fully_qualified_name: "selectors.DevpollSelector"
+      }
+    }
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.DevpollSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DevpollSelector"
+        fully_qualified_name: "selectors.DevpollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.DevpollSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DevpollSelector"
+        fully_qualified_name: "selectors.DevpollSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.DevpollSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DevpollSelector"
+        fully_qualified_name: "selectors.DevpollSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.DevpollSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DevpollSelector"
+        fully_qualified_name: "selectors.DevpollSelector"
+      }
+    }
+  }
+}
+classes {
+  name: "KqueueSelector"
+  fully_qualified_name: "selectors.KqueueSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "fileno"
+    fully_qualified_name: "selectors.KqueueSelector.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.KqueueSelector"
+        fully_qualified_name: "selectors.KqueueSelector"
+      }
+    }
+  }
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.KqueueSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.KqueueSelector"
+        fully_qualified_name: "selectors.KqueueSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.KqueueSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.KqueueSelector"
+        fully_qualified_name: "selectors.KqueueSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.KqueueSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.KqueueSelector"
+        fully_qualified_name: "selectors.KqueueSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.KqueueSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.KqueueSelector"
+        fully_qualified_name: "selectors.KqueueSelector"
+      }
+    }
+  }
+}
+classes {
+  name: "DefaultSelector"
+  fully_qualified_name: "selectors.DefaultSelector"
+  super_classes: "selectors.BaseSelector"
+  methods {
+    name: "register"
+    fully_qualified_name: "selectors.DefaultSelector.register"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DefaultSelector"
+        fully_qualified_name: "selectors.DefaultSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+    parameters {
+      name: "events"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "unregister"
+    fully_qualified_name: "selectors.DefaultSelector.unregister"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "_typeshed.HasFileno"
+              fully_qualified_name: "_typeshed.HasFileno"
+            }
+          }
+          fully_qualified_name: "_typeshed.FileDescriptorLike"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "selectors.SelectorKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DefaultSelector"
+        fully_qualified_name: "selectors.DefaultSelector"
+      }
+    }
+    parameters {
+      name: "fileobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+    }
+  }
+  methods {
+    name: "select"
+    fully_qualified_name: "selectors.DefaultSelector.select"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]]"
+      args {
+        pretty_printed_name: "Tuple[TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]],builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Tuple[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],builtins.int,builtins.int,Any]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+                args {
+                  pretty_printed_name: "_typeshed.HasFileno"
+                  fully_qualified_name: "_typeshed.HasFileno"
+                }
+              }
+              fully_qualified_name: "_typeshed.FileDescriptorLike"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "selectors.SelectorKey"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DefaultSelector"
+        fully_qualified_name: "selectors.DefaultSelector"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_map"
+    fully_qualified_name: "selectors.DefaultSelector.get_map"
+    return_annotation {
+      pretty_printed_name: "typing.Mapping[TypeAlias[Union[builtins.int,_typeshed.HasFileno]],TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,_typeshed.HasFileno]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,_typeshed.HasFileno]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "_typeshed.HasFileno"
+            fully_qualified_name: "_typeshed.HasFileno"
+          }
+        }
+        fully_qualified_name: "_typeshed.FileDescriptorLike"
+      }
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[TypeAlias[Unknown],builtins.int,builtins.int,Any]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "TypeAlias[Unknown]"
+            kind: TYPE_ALIAS
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+        }
+        fully_qualified_name: "selectors.SelectorKey"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "selectors.DefaultSelector"
+        fully_qualified_name: "selectors.DefaultSelector"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "selectors.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "EVENT_READ"
+  fully_qualified_name: "selectors.EVENT_READ"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "EVENT_WRITE"
+  fully_qualified_name: "selectors.EVENT_WRITE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

@@ -1,0 +1,228 @@
+fully_qualified_name: "maxminddb.file"
+classes {
+  name: "FileBuffer"
+  fully_qualified_name: "maxminddb.file.FileBuffer"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "maxminddb.file.FileBuffer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+    parameters {
+      name: "database"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "maxminddb.file.FileBuffer.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.slice,builtins.int]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+  }
+  methods {
+    name: "rfind"
+    fully_qualified_name: "maxminddb.file.FileBuffer.rfind"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+    parameters {
+      name: "needle"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "size"
+    fully_qualified_name: "maxminddb.file.FileBuffer.size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "maxminddb.file.FileBuffer.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+  }
+  methods {
+    name: "_read"
+    fully_qualified_name: "maxminddb.file.FileBuffer._read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+    parameters {
+      name: "buffersize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_read"
+    fully_qualified_name: "maxminddb.file.FileBuffer._read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+    }
+    parameters {
+      name: "buffersize"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "_handle"
+    fully_qualified_name: "maxminddb.file.FileBuffer._handle"
+    type_annotation {
+      pretty_printed_name: "io.BufferedReader"
+      fully_qualified_name: "io.BufferedReader"
+    }
+  }
+  attributes {
+    name: "_size"
+    fully_qualified_name: "maxminddb.file.FileBuffer._size"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_lock"
+    fully_qualified_name: "maxminddb.file.FileBuffer._lock"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.synchronize.Lock"
+      fully_qualified_name: "multiprocessing.synchronize.Lock"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "maxminddb.file.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

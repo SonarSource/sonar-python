@@ -1,0 +1,183 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes"
+classes {
+  name: "_HashContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashContext"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext.algorithm"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext.copy"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+  }
+  methods {
+    name: "_finalize_xof"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext._finalize_xof"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext"
+      }
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext._algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes._HashContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "<subclass of \"HashAlgorithm\" and \"ExtendableOutputFunction\">"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes.<subclass of \"HashAlgorithm\" and \"ExtendableOutputFunction\">"
+  super_classes: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+  super_classes: "cryptography.hazmat.primitives.hashes.ExtendableOutputFunction"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.hashes.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

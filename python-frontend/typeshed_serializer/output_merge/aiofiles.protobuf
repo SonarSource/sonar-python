@@ -1,0 +1,2285 @@
+fully_qualified_name: "aiofiles"
+overloaded_functions {
+  name: "open"
+  fullname: "aiofiles.threadpool.open"
+  definitions {
+    name: "open"
+    fully_qualified_name: "aiofiles.threadpool.open"
+    return_annotation {
+      pretty_printed_name: "aiofiles.base.AiofilesContextManager[None,None,aiofiles.threadpool.text.AsyncTextIOWrapper]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "aiofiles.threadpool.text.AsyncTextIOWrapper"
+        fully_qualified_name: "aiofiles.threadpool.text.AsyncTextIOWrapper"
+      }
+      fully_qualified_name: "aiofiles.base.AiofilesContextManager"
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "aiofiles.threadpool._OpenFile"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenTextModeUpdating"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenTextModeWriting"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenTextModeReading"
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenTextMode"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "executor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "open"
+    fully_qualified_name: "aiofiles.threadpool.open"
+    return_annotation {
+      pretty_printed_name: "aiofiles.base.AiofilesContextManager[None,None,aiofiles.threadpool.binary.AsyncFileIO]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "aiofiles.threadpool.binary.AsyncFileIO"
+        fully_qualified_name: "aiofiles.threadpool.binary.AsyncFileIO"
+      }
+      fully_qualified_name: "aiofiles.base.AiofilesContextManager"
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "aiofiles.threadpool._OpenFile"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeUpdating"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeReading"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeWriting"
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenBinaryMode"
+      }
+    }
+    parameters {
+      name: "buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Literal[builtins.int]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "executor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "open"
+    fully_qualified_name: "aiofiles.threadpool.open"
+    return_annotation {
+      pretty_printed_name: "aiofiles.base.AiofilesContextManager[None,None,aiofiles.threadpool.binary.AsyncBufferedReader]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "aiofiles.threadpool.binary.AsyncBufferedReader"
+        fully_qualified_name: "aiofiles.threadpool.binary.AsyncBufferedReader"
+      }
+      fully_qualified_name: "aiofiles.base.AiofilesContextManager"
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "aiofiles.threadpool._OpenFile"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "_typeshed.OpenBinaryModeReading"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "_typeshed.OpenBinaryModeUpdating"
+        }
+      }
+    }
+    parameters {
+      name: "buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.int],Literal[builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "executor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "open"
+    fully_qualified_name: "aiofiles.threadpool.open"
+    return_annotation {
+      pretty_printed_name: "aiofiles.base.AiofilesContextManager[None,None,aiofiles.threadpool.binary.AsyncBufferedIOBase]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "aiofiles.threadpool.binary.AsyncBufferedIOBase"
+        fully_qualified_name: "aiofiles.threadpool.binary.AsyncBufferedIOBase"
+      }
+      fully_qualified_name: "aiofiles.base.AiofilesContextManager"
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "aiofiles.threadpool._OpenFile"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenBinaryModeWriting"
+      }
+    }
+    parameters {
+      name: "buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.int],Literal[builtins.int]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "executor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "open"
+    fully_qualified_name: "aiofiles.threadpool.open"
+    return_annotation {
+      pretty_printed_name: "aiofiles.base.AiofilesContextManager[None,None,aiofiles.threadpool.binary._UnknownAsyncBinaryIO]"
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "aiofiles.threadpool.binary._UnknownAsyncBinaryIO"
+        fully_qualified_name: "aiofiles.threadpool.binary._UnknownAsyncBinaryIO"
+      }
+      fully_qualified_name: "aiofiles.base.AiofilesContextManager"
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,builtins.int]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,builtins.int]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+        fully_qualified_name: "aiofiles.threadpool._OpenFile"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeUpdating"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeReading"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+              kind: UNION
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+              args {
+                pretty_printed_name: "Literal[builtins.str]"
+                kind: LITERAL
+                args {
+                  pretty_printed_name: "builtins.str"
+                  fully_qualified_name: "builtins.str"
+                }
+              }
+            }
+            fully_qualified_name: "_typeshed.OpenBinaryModeWriting"
+          }
+        }
+        fully_qualified_name: "_typeshed.OpenBinaryMode"
+      }
+    }
+    parameters {
+      name: "buffering"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "newline"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      has_default: true
+    }
+    parameters {
+      name: "closefd"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "opener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "loop"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[asyncio.events.AbstractEventLoop,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "asyncio.events.AbstractEventLoop"
+          fully_qualified_name: "asyncio.events.AbstractEventLoop"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "executor"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

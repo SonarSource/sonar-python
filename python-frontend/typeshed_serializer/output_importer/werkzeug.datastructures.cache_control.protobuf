@@ -1,0 +1,1464 @@
+fully_qualified_name: "werkzeug.datastructures.cache_control"
+classes {
+  name: "_CacheControl"
+  fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+  super_classes: "werkzeug.datastructures.mixins.UpdateDictMixin"
+  super_classes: "builtins.dict"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+        fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,TypeAlias[Union[werkzeug.datastructures.cache_control._CPT,None]]],typing.Iterable[Tuple[builtins.str,TypeAlias[Unknown]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,TypeAlias[Union[werkzeug.datastructures.cache_control._CPT,None]]]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[werkzeug.datastructures.cache_control._CPT,None]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[werkzeug.datastructures.cache_control._CPT,None]"
+              kind: UNION
+              args {
+                pretty_printed_name: "werkzeug.datastructures.cache_control._CPT"
+                kind: TYPE_VAR
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+            fully_qualified_name: "werkzeug.datastructures.cache_control._OptCPT"
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Tuple[builtins.str,TypeAlias[Unknown]]]"
+          args {
+            pretty_printed_name: "Tuple[builtins.str,TypeAlias[Unknown]]"
+            kind: TUPLE
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Unknown]"
+              kind: TYPE_ALIAS
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+    parameters {
+      name: "on_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "_get_cache_value"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl._get_cache_value"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.cache_control.T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+        fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "empty"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.cache_control.T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.cache_control.T]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "_set_cache_value"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl._set_cache_value"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+        fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.datastructures.cache_control.T,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.cache_control.T]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+  }
+  methods {
+    name: "_del_cache_value"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl._del_cache_value"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+        fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "to_header"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.to_header"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+        fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+      }
+    }
+  }
+  methods {
+    name: "cache_property"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.cache_property"
+    return_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "empty"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[werkzeug.datastructures.cache_control._CPT,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[werkzeug.datastructures.cache_control._CPT,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "werkzeug.datastructures.cache_control._CPT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "werkzeug.datastructures.cache_control._OptCPT"
+      }
+    }
+    parameters {
+      name: "type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[werkzeug.datastructures.cache_control._CPT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CPT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  overloaded_methods {
+    name: "no_cache"
+    fullname: "werkzeug.datastructures.cache_control._CacheControl.no_cache"
+    definitions {
+      name: "no_cache"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_cache"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "no_cache"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_cache"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_cache.setter"
+    }
+    definitions {
+      name: "no_cache"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_cache"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_cache.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "no_store"
+    fullname: "werkzeug.datastructures.cache_control._CacheControl.no_store"
+    definitions {
+      name: "no_store"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_store"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "no_store"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_store"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_store.setter"
+    }
+    definitions {
+      name: "no_store"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_store"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_store.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "max_age"
+    fullname: "werkzeug.datastructures.cache_control._CacheControl.max_age"
+    definitions {
+      name: "max_age"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.max_age"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "max_age"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.max_age"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "max_age.setter"
+    }
+    definitions {
+      name: "max_age"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.max_age"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "max_age.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "no_transform"
+    fullname: "werkzeug.datastructures.cache_control._CacheControl.no_transform"
+    definitions {
+      name: "no_transform"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_transform"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "no_transform"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_transform"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_transform.setter"
+    }
+    definitions {
+      name: "no_transform"
+      fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.no_transform"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "no_transform.deleter"
+    }
+  }
+  attributes {
+    name: "provided"
+    fully_qualified_name: "werkzeug.datastructures.cache_control._CacheControl.provided"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "RequestCacheControl"
+  fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+  super_classes: "werkzeug.datastructures.mixins.ImmutableDictMixin"
+  super_classes: "werkzeug.datastructures.cache_control._CacheControl"
+  overloaded_methods {
+    name: "max_stale"
+    fullname: "werkzeug.datastructures.cache_control.RequestCacheControl.max_stale"
+    definitions {
+      name: "max_stale"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.max_stale"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "max_stale"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.max_stale"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "max_stale.setter"
+    }
+    definitions {
+      name: "max_stale"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.max_stale"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "max_stale.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "min_fresh"
+    fullname: "werkzeug.datastructures.cache_control.RequestCacheControl.min_fresh"
+    definitions {
+      name: "min_fresh"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.min_fresh"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "min_fresh"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.min_fresh"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "min_fresh.setter"
+    }
+    definitions {
+      name: "min_fresh"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.min_fresh"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "min_fresh.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "only_if_cached"
+    fullname: "werkzeug.datastructures.cache_control.RequestCacheControl.only_if_cached"
+    definitions {
+      name: "only_if_cached"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.only_if_cached"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "only_if_cached"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.only_if_cached"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "only_if_cached.setter"
+    }
+    definitions {
+      name: "only_if_cached"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl.only_if_cached"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "only_if_cached.deleter"
+    }
+  }
+}
+classes {
+  name: "ResponseCacheControl"
+  fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+  super_classes: "werkzeug.datastructures.cache_control._CacheControl"
+  overloaded_methods {
+    name: "public"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.public"
+    definitions {
+      name: "public"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.public"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "public"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.public"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "public.setter"
+    }
+    definitions {
+      name: "public"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.public"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "public.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "private"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.private"
+    definitions {
+      name: "private"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.private"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "private"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.private"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "private.setter"
+    }
+    definitions {
+      name: "private"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.private"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "private.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "must_revalidate"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.must_revalidate"
+    definitions {
+      name: "must_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.must_revalidate"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "must_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.must_revalidate"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "must_revalidate.setter"
+    }
+    definitions {
+      name: "must_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.must_revalidate"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "must_revalidate.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "proxy_revalidate"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.proxy_revalidate"
+    definitions {
+      name: "proxy_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.proxy_revalidate"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "proxy_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.proxy_revalidate"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "proxy_revalidate.setter"
+    }
+    definitions {
+      name: "proxy_revalidate"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.proxy_revalidate"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "proxy_revalidate.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "s_maxage"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.s_maxage"
+    definitions {
+      name: "s_maxage"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.s_maxage"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "s_maxage"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.s_maxage"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "s_maxage.setter"
+    }
+    definitions {
+      name: "s_maxage"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.s_maxage"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "s_maxage.deleter"
+    }
+  }
+  overloaded_methods {
+    name: "immutable"
+    fullname: "werkzeug.datastructures.cache_control.ResponseCacheControl.immutable"
+    definitions {
+      name: "immutable"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.immutable"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "immutable"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.immutable"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bool,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "immutable.setter"
+    }
+    definitions {
+      name: "immutable"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl.immutable"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+          fully_qualified_name: "werkzeug.datastructures.cache_control.ResponseCacheControl"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "immutable.deleter"
+    }
+  }
+}
+functions {
+  name: "cache_control_property"
+  fully_qualified_name: "werkzeug.datastructures.cache_control.cache_control_property"
+  return_annotation {
+    pretty_printed_name: "builtins.property"
+    fully_qualified_name: "builtins.property"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "empty"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[werkzeug.datastructures.cache_control._CPT,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[werkzeug.datastructures.cache_control._CPT,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.datastructures.cache_control._CPT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "werkzeug.datastructures.cache_control._OptCPT"
+    }
+  }
+  parameters {
+    name: "type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[werkzeug.datastructures.cache_control._CPT]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.cache_control._CPT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.datastructures.cache_control.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

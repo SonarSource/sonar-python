@@ -1,0 +1,109 @@
+fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm"
+classes {
+  name: "CipherAlgorithm"
+  fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "key_sizes"
+    fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm.key_sizes"
+    return_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "BlockCipherAlgorithm"
+  fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.BlockCipherAlgorithm"
+  super_classes: "builtins.object"
+  methods {
+    name: "block_size"
+    fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.BlockCipherAlgorithm.block_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.BlockCipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.BlockCipherAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

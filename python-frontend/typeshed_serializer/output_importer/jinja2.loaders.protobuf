@@ -1,0 +1,1412 @@
+fully_qualified_name: "jinja2.loaders"
+classes {
+  name: "BaseLoader"
+  fully_qualified_name: "jinja2.loaders.BaseLoader"
+  super_classes: "builtins.object"
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.BaseLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],Union[CallableType[builtins.function],None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.BaseLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "jinja2.loaders.BaseLoader.load"
+    return_annotation {
+      pretty_printed_name: "jinja2.environment.Template"
+      fully_qualified_name: "jinja2.environment.Template"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  attributes {
+    name: "has_source_access"
+    fully_qualified_name: "jinja2.loaders.BaseLoader.has_source_access"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "FileSystemLoader"
+  fully_qualified_name: "jinja2.loaders.FileSystemLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.FileSystemLoader"
+        fully_qualified_name: "jinja2.loaders.FileSystemLoader"
+      }
+    }
+    parameters {
+      name: "searchpath"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],typing.Sequence[Union[builtins.str,os.PathLike[Any]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Union[builtins.str,os.PathLike[Any]]]"
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "followlinks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,CallableType[builtins.function]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.FileSystemLoader"
+        fully_qualified_name: "jinja2.loaders.FileSystemLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.FileSystemLoader"
+        fully_qualified_name: "jinja2.loaders.FileSystemLoader"
+      }
+    }
+  }
+  attributes {
+    name: "searchpath"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.searchpath"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Union[builtins.str,Any]]"
+      args {
+        pretty_printed_name: "Union[builtins.str,Any]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "encoding"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.encoding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "followlinks"
+    fully_qualified_name: "jinja2.loaders.FileSystemLoader.followlinks"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+classes {
+  name: "PackageLoader"
+  fully_qualified_name: "jinja2.loaders.PackageLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PackageLoader"
+        fully_qualified_name: "jinja2.loaders.PackageLoader"
+      }
+    }
+    parameters {
+      name: "package_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "package_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,Union[CallableType[builtins.function],None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PackageLoader"
+        fully_qualified_name: "jinja2.loaders.PackageLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PackageLoader"
+        fully_qualified_name: "jinja2.loaders.PackageLoader"
+      }
+    }
+  }
+  attributes {
+    name: "package_path"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.package_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "package_name"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.package_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "encoding"
+    fully_qualified_name: "jinja2.loaders.PackageLoader.encoding"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_loader"
+    fully_qualified_name: "jinja2.loaders.PackageLoader._loader"
+    type_annotation {
+      pretty_printed_name: "importlib.abc.Loader"
+      fully_qualified_name: "importlib.abc.Loader"
+    }
+  }
+  attributes {
+    name: "_archive"
+    fully_qualified_name: "jinja2.loaders.PackageLoader._archive"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_template_root"
+    fully_qualified_name: "jinja2.loaders.PackageLoader._template_root"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "DictLoader"
+  fully_qualified_name: "jinja2.loaders.DictLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.DictLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.DictLoader"
+        fully_qualified_name: "jinja2.loaders.DictLoader"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.DictLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,None,CallableType[builtins.function]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.DictLoader"
+        fully_qualified_name: "jinja2.loaders.DictLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.DictLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.DictLoader"
+        fully_qualified_name: "jinja2.loaders.DictLoader"
+      }
+    }
+  }
+  attributes {
+    name: "mapping"
+    fully_qualified_name: "jinja2.loaders.DictLoader.mapping"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+}
+classes {
+  name: "FunctionLoader"
+  fully_qualified_name: "jinja2.loaders.FunctionLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.FunctionLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.FunctionLoader"
+        fully_qualified_name: "jinja2.loaders.FunctionLoader"
+      }
+    }
+    parameters {
+      name: "load_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.FunctionLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],Union[CallableType[builtins.function],None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.FunctionLoader"
+        fully_qualified_name: "jinja2.loaders.FunctionLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "load_func"
+    fully_qualified_name: "jinja2.loaders.FunctionLoader.load_func"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "PrefixLoader"
+  fully_qualified_name: "jinja2.loaders.PrefixLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PrefixLoader"
+        fully_qualified_name: "jinja2.loaders.PrefixLoader"
+      }
+    }
+    parameters {
+      name: "mapping"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,jinja2.loaders.BaseLoader]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "jinja2.loaders.BaseLoader"
+          fully_qualified_name: "jinja2.loaders.BaseLoader"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "delimiter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_loader"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.get_loader"
+    return_annotation {
+      pretty_printed_name: "Tuple[jinja2.loaders.BaseLoader,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PrefixLoader"
+        fully_qualified_name: "jinja2.loaders.PrefixLoader"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],Union[CallableType[builtins.function],None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PrefixLoader"
+        fully_qualified_name: "jinja2.loaders.PrefixLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.load"
+    return_annotation {
+      pretty_printed_name: "jinja2.environment.Template"
+      fully_qualified_name: "jinja2.environment.Template"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PrefixLoader"
+        fully_qualified_name: "jinja2.loaders.PrefixLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.PrefixLoader"
+        fully_qualified_name: "jinja2.loaders.PrefixLoader"
+      }
+    }
+  }
+  attributes {
+    name: "mapping"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.mapping"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,jinja2.loaders.BaseLoader]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  attributes {
+    name: "delimiter"
+    fully_qualified_name: "jinja2.loaders.PrefixLoader.delimiter"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "ChoiceLoader"
+  fully_qualified_name: "jinja2.loaders.ChoiceLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.ChoiceLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ChoiceLoader"
+        fully_qualified_name: "jinja2.loaders.ChoiceLoader"
+      }
+    }
+    parameters {
+      name: "loaders"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[jinja2.loaders.BaseLoader]"
+        args {
+          pretty_printed_name: "jinja2.loaders.BaseLoader"
+          fully_qualified_name: "jinja2.loaders.BaseLoader"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "jinja2.loaders.ChoiceLoader.get_source"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,Union[builtins.str,None],Union[CallableType[builtins.function],None]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ChoiceLoader"
+        fully_qualified_name: "jinja2.loaders.ChoiceLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "jinja2.loaders.ChoiceLoader.load"
+    return_annotation {
+      pretty_printed_name: "jinja2.environment.Template"
+      fully_qualified_name: "jinja2.environment.Template"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ChoiceLoader"
+        fully_qualified_name: "jinja2.loaders.ChoiceLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  methods {
+    name: "list_templates"
+    fully_qualified_name: "jinja2.loaders.ChoiceLoader.list_templates"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ChoiceLoader"
+        fully_qualified_name: "jinja2.loaders.ChoiceLoader"
+      }
+    }
+  }
+  attributes {
+    name: "loaders"
+    fully_qualified_name: "jinja2.loaders.ChoiceLoader.loaders"
+    type_annotation {
+      pretty_printed_name: "typing.Sequence[jinja2.loaders.BaseLoader]"
+      args {
+        pretty_printed_name: "jinja2.loaders.BaseLoader"
+        fully_qualified_name: "jinja2.loaders.BaseLoader"
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+  }
+}
+classes {
+  name: "_TemplateModule"
+  fully_qualified_name: "jinja2.loaders._TemplateModule"
+  super_classes: "types.ModuleType"
+}
+classes {
+  name: "ModuleLoader"
+  fully_qualified_name: "jinja2.loaders.ModuleLoader"
+  super_classes: "jinja2.loaders.BaseLoader"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ModuleLoader"
+        fully_qualified_name: "jinja2.loaders.ModuleLoader"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any],typing.Sequence[Union[builtins.str,os.PathLike[Any]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+        args {
+          pretty_printed_name: "typing.Sequence[Union[builtins.str,os.PathLike[Any]]]"
+          args {
+            pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "os.PathLike[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "os.PathLike"
+            }
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_template_key"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.get_template_key"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "get_module_filename"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.get_module_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "load"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.load"
+    return_annotation {
+      pretty_printed_name: "jinja2.environment.Template"
+      fully_qualified_name: "jinja2.environment.Template"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.loaders.ModuleLoader"
+        fully_qualified_name: "jinja2.loaders.ModuleLoader"
+      }
+    }
+    parameters {
+      name: "environment"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.MutableMapping[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.MutableMapping[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.MutableMapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "internalcode"
+  }
+  attributes {
+    name: "has_source_access"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.has_source_access"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "module"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.module"
+    type_annotation {
+      pretty_printed_name: "jinja2.loaders._TemplateModule"
+      fully_qualified_name: "jinja2.loaders._TemplateModule"
+    }
+  }
+  attributes {
+    name: "package_name"
+    fully_qualified_name: "jinja2.loaders.ModuleLoader.package_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "<subclass of \"Loader\" and \"zipimporter\">"
+  fully_qualified_name: "jinja2.loaders.<subclass of \"Loader\" and \"zipimporter\">"
+  super_classes: "importlib.abc.Loader"
+  super_classes: "zipimport.zipimporter"
+}
+functions {
+  name: "split_template_path"
+  fully_qualified_name: "jinja2.loaders.split_template_path"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "template"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.loaders.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "importlib"
+  fully_qualified_name: "importlib"
+  is_imported_module: true
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

@@ -1,0 +1,1407 @@
+fully_qualified_name: "importlib.metadata"
+classes {
+  name: "PackageNotFoundError"
+  fully_qualified_name: "importlib.metadata.PackageNotFoundError"
+  super_classes: "builtins.ModuleNotFoundError"
+  methods {
+    name: "name"
+    fully_qualified_name: "importlib.metadata.PackageNotFoundError.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PackageNotFoundError"
+        fully_qualified_name: "importlib.metadata.PackageNotFoundError"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+}
+classes {
+  name: "_EntryPointBase"
+  fully_qualified_name: "importlib.metadata._EntryPointBase"
+  super_classes: "builtins.tuple"
+  methods {
+    name: "_replace"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._replace"
+    return_annotation {
+      pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__new__"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.__new__"
+    return_annotation {
+      pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.metadata._EntryPointBase._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "_asdict"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._asdict"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "_self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "_make"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._make"
+    return_annotation {
+      pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "_cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.metadata._EntryPointBase._NT]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.metadata._EntryPointBase._NT"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "new"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "len"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "group"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.group"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "group"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.group"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_fields"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._fields"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_field_types"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._field_types"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_field_defaults"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._field_defaults"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_source"
+    fully_qualified_name: "importlib.metadata._EntryPointBase._source"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "__annotations__"
+    fully_qualified_name: "importlib.metadata._EntryPointBase.__annotations__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "EntryPoint"
+  fully_qualified_name: "importlib.metadata.EntryPoint"
+  super_classes: "importlib.metadata._EntryPointBase"
+  methods {
+    name: "load"
+    fully_qualified_name: "importlib.metadata.EntryPoint.load"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+  }
+  methods {
+    name: "extras"
+    fully_qualified_name: "importlib.metadata.EntryPoint.extras"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "pattern"
+    fully_qualified_name: "importlib.metadata.EntryPoint.pattern"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+}
+classes {
+  name: "PackagePath"
+  fully_qualified_name: "importlib.metadata.PackagePath"
+  super_classes: "pathlib.PurePosixPath"
+  methods {
+    name: "read_text"
+    fully_qualified_name: "importlib.metadata.PackagePath.read_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PackagePath"
+        fully_qualified_name: "importlib.metadata.PackagePath"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "read_binary"
+    fully_qualified_name: "importlib.metadata.PackagePath.read_binary"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PackagePath"
+        fully_qualified_name: "importlib.metadata.PackagePath"
+      }
+    }
+  }
+  methods {
+    name: "locate"
+    fully_qualified_name: "importlib.metadata.PackagePath.locate"
+    return_annotation {
+      pretty_printed_name: "os.PathLike[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "os.PathLike"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PackagePath"
+        fully_qualified_name: "importlib.metadata.PackagePath"
+      }
+    }
+  }
+  attributes {
+    name: "hash"
+    fully_qualified_name: "importlib.metadata.PackagePath.hash"
+    type_annotation {
+      pretty_printed_name: "Union[importlib.metadata.FileHash,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.metadata.FileHash"
+        fully_qualified_name: "importlib.metadata.FileHash"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "size"
+    fully_qualified_name: "importlib.metadata.PackagePath.size"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "dist"
+    fully_qualified_name: "importlib.metadata.PackagePath.dist"
+    type_annotation {
+      pretty_printed_name: "importlib.metadata.Distribution"
+      fully_qualified_name: "importlib.metadata.Distribution"
+    }
+  }
+}
+classes {
+  name: "FileHash"
+  fully_qualified_name: "importlib.metadata.FileHash"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.metadata.FileHash.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.FileHash"
+        fully_qualified_name: "importlib.metadata.FileHash"
+      }
+    }
+    parameters {
+      name: "spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "importlib.metadata.FileHash.mode"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "importlib.metadata.FileHash.value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Distribution"
+  fully_qualified_name: "importlib.metadata.Distribution"
+  super_classes: "builtins.object"
+  methods {
+    name: "read_text"
+    fully_qualified_name: "importlib.metadata.Distribution.read_text"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "locate_file"
+    fully_qualified_name: "importlib.metadata.Distribution.locate_file"
+    return_annotation {
+      pretty_printed_name: "os.PathLike[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "os.PathLike"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "from_name"
+    fully_qualified_name: "importlib.metadata.Distribution.from_name"
+    return_annotation {
+      pretty_printed_name: "importlib.metadata.Distribution"
+      fully_qualified_name: "importlib.metadata.Distribution"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.metadata.Distribution]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.metadata.Distribution"
+          fully_qualified_name: "importlib.metadata.Distribution"
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "at"
+    fully_qualified_name: "importlib.metadata.Distribution.at"
+    return_annotation {
+      pretty_printed_name: "importlib.metadata.PathDistribution"
+      fully_qualified_name: "importlib.metadata.PathDistribution"
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "metadata"
+    fully_qualified_name: "importlib.metadata.Distribution.metadata"
+    return_annotation {
+      pretty_printed_name: "email.message.Message"
+      fully_qualified_name: "email.message.Message"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "entry_points"
+    fully_qualified_name: "importlib.metadata.Distribution.entry_points"
+    return_annotation {
+      pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "importlib.metadata.EntryPoint"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "version"
+    fully_qualified_name: "importlib.metadata.Distribution.version"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "files"
+    fully_qualified_name: "importlib.metadata.Distribution.files"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.list[importlib.metadata.PackagePath],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[importlib.metadata.PackagePath]"
+        args {
+          pretty_printed_name: "importlib.metadata.PackagePath"
+          fully_qualified_name: "importlib.metadata.PackagePath"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "requires"
+    fully_qualified_name: "importlib.metadata.Distribution.requires"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  overloaded_methods {
+    name: "discover"
+    fullname: "importlib.metadata.Distribution.discover"
+    definitions {
+      name: "discover"
+      fully_qualified_name: "importlib.metadata.Distribution.discover"
+      return_annotation {
+        pretty_printed_name: "typing.Iterable[importlib.metadata.Distribution]"
+        args {
+          pretty_printed_name: "importlib.metadata.Distribution"
+          fully_qualified_name: "importlib.metadata.Distribution"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[importlib.metadata.Distribution]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "importlib.metadata.Distribution"
+            fully_qualified_name: "importlib.metadata.Distribution"
+          }
+        }
+      }
+      parameters {
+        name: "context"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+          fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      resolved_decorator_names: "classmethod"
+      is_overload: true
+      is_class_method: true
+    }
+    definitions {
+      name: "discover"
+      fully_qualified_name: "importlib.metadata.Distribution.discover"
+      return_annotation {
+        pretty_printed_name: "typing.Iterable[importlib.metadata.Distribution]"
+        args {
+          pretty_printed_name: "importlib.metadata.Distribution"
+          fully_qualified_name: "importlib.metadata.Distribution"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[importlib.metadata.Distribution]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "importlib.metadata.Distribution"
+            fully_qualified_name: "importlib.metadata.Distribution"
+          }
+        }
+      }
+      parameters {
+        name: "context"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "name"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "path"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.list[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "builtins.list"
+        }
+      }
+      parameters {
+        name: "kwargs"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      resolved_decorator_names: "classmethod"
+      is_overload: true
+      is_class_method: true
+    }
+  }
+}
+classes {
+  name: "DistributionFinder"
+  fully_qualified_name: "importlib.metadata.DistributionFinder"
+  super_classes: "importlib.abc.MetaPathFinder"
+  methods {
+    name: "find_distributions"
+    fully_qualified_name: "importlib.metadata.DistributionFinder.find_distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.Distribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder"
+        fully_qualified_name: "importlib.metadata.DistributionFinder"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+        fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+}
+classes {
+  name: "MetadataPathFinder"
+  fully_qualified_name: "importlib.metadata.MetadataPathFinder"
+  super_classes: "importlib.metadata.DistributionFinder"
+  methods {
+    name: "find_distributions"
+    fully_qualified_name: "importlib.metadata.MetadataPathFinder.find_distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.PathDistribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[importlib.metadata.MetadataPathFinder]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "importlib.metadata.MetadataPathFinder"
+          fully_qualified_name: "importlib.metadata.MetadataPathFinder"
+        }
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+        fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+}
+classes {
+  name: "PathDistribution"
+  fully_qualified_name: "importlib.metadata.PathDistribution"
+  super_classes: "importlib.metadata.Distribution"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "importlib.metadata.PathDistribution.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "pathlib.Path"
+        fully_qualified_name: "pathlib.Path"
+      }
+    }
+  }
+  methods {
+    name: "read_text"
+    fully_qualified_name: "importlib.metadata.PathDistribution.read_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+  methods {
+    name: "locate_file"
+    fully_qualified_name: "importlib.metadata.PathDistribution.locate_file"
+    return_annotation {
+      pretty_printed_name: "os.PathLike[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "os.PathLike"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.PathDistribution"
+        fully_qualified_name: "importlib.metadata.PathDistribution"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,os.PathLike[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrPath"
+      }
+    }
+  }
+}
+functions {
+  name: "distribution"
+  fully_qualified_name: "importlib.metadata.distribution"
+  return_annotation {
+    pretty_printed_name: "importlib.metadata.Distribution"
+    fully_qualified_name: "importlib.metadata.Distribution"
+  }
+  parameters {
+    name: "distribution_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "metadata"
+  fully_qualified_name: "importlib.metadata.metadata"
+  return_annotation {
+    pretty_printed_name: "email.message.Message"
+    fully_qualified_name: "email.message.Message"
+  }
+  parameters {
+    name: "distribution_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "entry_points"
+  fully_qualified_name: "importlib.metadata.entry_points"
+  return_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,builtins.str]]]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,builtins.str]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Tuple[builtins.str,builtins.str,builtins.str]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "importlib.metadata.EntryPoint"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+functions {
+  name: "version"
+  fully_qualified_name: "importlib.metadata.version"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "distribution_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "files"
+  fully_qualified_name: "importlib.metadata.files"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.list[importlib.metadata.PackagePath],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.list[importlib.metadata.PackagePath]"
+      args {
+        pretty_printed_name: "importlib.metadata.PackagePath"
+        fully_qualified_name: "importlib.metadata.PackagePath"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "distribution_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "requires"
+  fully_qualified_name: "importlib.metadata.requires"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "distribution_name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+overloaded_functions {
+  name: "distributions"
+  fullname: "importlib.metadata.distributions"
+  definitions {
+    name: "distributions"
+    fully_qualified_name: "importlib.metadata.distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.Distribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "importlib.metadata.DistributionFinder.Context"
+        fully_qualified_name: "importlib.metadata.DistributionFinder.Context"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "distributions"
+    fully_qualified_name: "importlib.metadata.distributions"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[importlib.metadata.Distribution]"
+      args {
+        pretty_printed_name: "importlib.metadata.Distribution"
+        fully_qualified_name: "importlib.metadata.Distribution"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "importlib.metadata.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "importlib.metadata.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "importlib.metadata.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

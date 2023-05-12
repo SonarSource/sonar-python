@@ -1,0 +1,61 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.utils"
+functions {
+  name: "_evp_pkey_derive"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.utils._evp_pkey_derive"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "evp_pkey"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "peer_public_key"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_calculate_digest_and_algorithm"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.utils._calculate_digest_and_algorithm"
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_check_not_prehashed"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.utils._check_not_prehashed"
+  parameters {
+    name: "signature_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "_warn_sign_verify_deprecated"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.utils._warn_sign_verify_deprecated"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.utils.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

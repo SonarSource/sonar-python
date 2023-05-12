@@ -1,0 +1,142 @@
+fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1"
+classes {
+  name: "TestCertificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate"
+  super_classes: "builtins.object"
+  attributes {
+    name: "not_after_tag"
+    fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate.not_after_tag"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "not_before_tag"
+    fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate.not_before_tag"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "issuer_value_tags"
+    fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate.issuer_value_tags"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "subject_value_tags"
+    fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate.subject_value_tags"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "decode_dss_signature"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.decode_dss_signature"
+  return_annotation {
+    pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+    kind: TUPLE
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "signature"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "encode_dss_signature"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.encode_dss_signature"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "r"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "parse_spki_for_data"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.parse_spki_for_data"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "test_parse_certificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.test_parse_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate"
+    fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.TestCertificate"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.asn1.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

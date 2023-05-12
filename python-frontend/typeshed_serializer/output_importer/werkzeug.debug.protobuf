@@ -1,0 +1,1462 @@
+fully_qualified_name: "werkzeug.debug"
+classes {
+  name: "Console"
+  fully_qualified_name: "werkzeug.debug.console.Console"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.console.Console.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.console.Console"
+        fully_qualified_name: "werkzeug.debug.console.Console"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "locals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[builtins.str,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "eval"
+    fully_qualified_name: "werkzeug.debug.console.Console.eval"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.console.Console"
+        fully_qualified_name: "werkzeug.debug.console.Console"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_ipy"
+    fully_qualified_name: "werkzeug.debug.console.Console._ipy"
+    type_annotation {
+      pretty_printed_name: "werkzeug.debug.console._InteractiveConsole"
+      fully_qualified_name: "werkzeug.debug.console._InteractiveConsole"
+    }
+  }
+}
+classes {
+  name: "DebugFrameSummary"
+  fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+  super_classes: "traceback.FrameSummary"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "locals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "globals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "info"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.info"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "is_library"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.is_library"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "console"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.console"
+    return_annotation {
+      pretty_printed_name: "werkzeug.debug.console.Console"
+      fully_qualified_name: "werkzeug.debug.console.Console"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "eval"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.eval"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "render_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.render_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+    }
+    parameters {
+      name: "mark_library"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "local_ns"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.local_ns"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "global_ns"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary.global_ns"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "DebugTraceback"
+  fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "te"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[traceback.TracebackException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "traceback.TracebackException"
+          fully_qualified_name: "traceback.TracebackException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "skip"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hide"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+  }
+  methods {
+    name: "all_tracebacks"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.all_tracebacks"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[Union[builtins.str,None],traceback.TracebackException]]"
+      args {
+        pretty_printed_name: "Tuple[Union[builtins.str,None],traceback.TracebackException]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "Union[builtins.str,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        args {
+          pretty_printed_name: "traceback.TracebackException"
+          fully_qualified_name: "traceback.TracebackException"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "all_frames"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.all_frames"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.debug.tbtools.DebugFrameSummary]"
+      args {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "render_traceback_text"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_traceback_text"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+  }
+  methods {
+    name: "render_traceback_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_traceback_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "include_title"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "render_debugger_html"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.render_debugger_html"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.tbtools.DebugTraceback"
+        fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback"
+      }
+    }
+    parameters {
+      name: "evalex"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "secret"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "evalex_trusted"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_te"
+    fully_qualified_name: "werkzeug.debug.tbtools.DebugTraceback._te"
+    type_annotation {
+      pretty_printed_name: "traceback.TracebackException"
+      fully_qualified_name: "traceback.TracebackException"
+    }
+  }
+}
+classes {
+  name: "_ConsoleFrame"
+  fully_qualified_name: "werkzeug.debug._ConsoleFrame"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug._ConsoleFrame.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug._ConsoleFrame"
+        fully_qualified_name: "werkzeug.debug._ConsoleFrame"
+      }
+    }
+    parameters {
+      name: "namespace"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  methods {
+    name: "eval"
+    fully_qualified_name: "werkzeug.debug._ConsoleFrame.eval"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug._ConsoleFrame"
+        fully_qualified_name: "werkzeug.debug._ConsoleFrame"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "console"
+    fully_qualified_name: "werkzeug.debug._ConsoleFrame.console"
+    type_annotation {
+      pretty_printed_name: "werkzeug.debug.console.Console"
+      fully_qualified_name: "werkzeug.debug.console.Console"
+    }
+  }
+  attributes {
+    name: "id"
+    fully_qualified_name: "werkzeug.debug._ConsoleFrame.id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "DebuggedApplication"
+  fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+    parameters {
+      name: "evalex"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "request_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "console_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "console_init_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "show_hidden_frames"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "pin_security"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "pin_logging"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "pin_cookie_name"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.pin_cookie_name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "debug_application"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.debug_application"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+    parameters {
+      name: "start_response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.StartResponse"
+        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+      }
+    }
+  }
+  methods {
+    name: "execute_command"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.execute_command"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "command"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "frame"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.debug.tbtools.DebugFrameSummary,werkzeug.debug._ConsoleFrame]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+          fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        }
+        args {
+          pretty_printed_name: "werkzeug.debug._ConsoleFrame"
+          fully_qualified_name: "werkzeug.debug._ConsoleFrame"
+        }
+      }
+    }
+  }
+  methods {
+    name: "display_console"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.display_console"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "get_resource"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.get_resource"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "check_pin_trust"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.check_pin_trust"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+  }
+  methods {
+    name: "_fail_pin_auth"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication._fail_pin_auth"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+  }
+  methods {
+    name: "pin_auth"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.pin_auth"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.wrappers.request.Request"
+        fully_qualified_name: "werkzeug.wrappers.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "log_pin_request"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.log_pin_request"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.__call__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+        fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "builtins.dict[builtins.str,Any]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+      }
+    }
+    parameters {
+      name: "start_response"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.StartResponse"
+        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "pin"
+    fullname: "werkzeug.debug.DebuggedApplication.pin"
+    definitions {
+      name: "pin"
+      fully_qualified_name: "werkzeug.debug.DebuggedApplication.pin"
+      return_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+          fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "pin"
+      fully_qualified_name: "werkzeug.debug.DebuggedApplication.pin"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.debug.DebuggedApplication"
+          fully_qualified_name: "werkzeug.debug.DebuggedApplication"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "pin.setter"
+    }
+  }
+  attributes {
+    name: "_pin"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication._pin"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_pin_cookie"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication._pin_cookie"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.app"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "evalex"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.evalex"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "frames"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.frames"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,Union[werkzeug.debug.tbtools.DebugFrameSummary,werkzeug.debug._ConsoleFrame]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "Union[werkzeug.debug.tbtools.DebugFrameSummary,werkzeug.debug._ConsoleFrame]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+          fully_qualified_name: "werkzeug.debug.tbtools.DebugFrameSummary"
+        }
+        args {
+          pretty_printed_name: "werkzeug.debug._ConsoleFrame"
+          fully_qualified_name: "werkzeug.debug._ConsoleFrame"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "frame_contexts"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.frame_contexts"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,builtins.list[contextlib.AbstractContextManager[None]]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.list[contextlib.AbstractContextManager[None]]"
+        args {
+          pretty_printed_name: "contextlib.AbstractContextManager[None]"
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+          fully_qualified_name: "contextlib.AbstractContextManager"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "request_key"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.request_key"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "console_path"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.console_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "console_init_func"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.console_init_func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "show_hidden_frames"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.show_hidden_frames"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "secret"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.secret"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_failed_pin_auth"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication._failed_pin_auth"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "pin_logging"
+    fully_qualified_name: "werkzeug.debug.DebuggedApplication.pin_logging"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "render_console_html"
+  fully_qualified_name: "werkzeug.debug.tbtools.render_console_html"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "secret"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "evalex_trusted"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "hash_pin"
+  fully_qualified_name: "werkzeug.debug.hash_pin"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "pin"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "get_machine_id"
+  fully_qualified_name: "werkzeug.debug.get_machine_id"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+functions {
+  name: "get_pin_and_cookie_name"
+  fully_qualified_name: "werkzeug.debug.get_pin_and_cookie_name"
+  return_annotation {
+    pretty_printed_name: "Union[Tuple[builtins.str,builtins.str],Tuple[None,None]]"
+    kind: UNION
+    args {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    args {
+      pretty_printed_name: "Tuple[None,None]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "app"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "werkzeug.debug.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.debug.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "PIN_TIME"
+  fully_qualified_name: "werkzeug.debug.PIN_TIME"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_machine_id"
+  fully_qualified_name: "werkzeug.debug._machine_id"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}

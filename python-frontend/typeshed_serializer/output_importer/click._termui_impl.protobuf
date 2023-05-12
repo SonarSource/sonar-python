@@ -1,0 +1,1432 @@
+fully_qualified_name: "click._termui_impl"
+classes {
+  name: "ProgressBar"
+  fully_qualified_name: "click._termui_impl.ProgressBar"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click._termui_impl.ProgressBar.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[click._termui_impl.V],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[click._termui_impl.V]"
+          args {
+            pretty_printed_name: "click._termui_impl.V"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "length"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fill_char"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "empty_char"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "bar_template"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "info_sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "show_eta"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "show_percent"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "show_pos"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "item_show_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.TextIO,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.TextIO"
+          fully_qualified_name: "typing.TextIO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "color"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "update_min_steps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "width"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "click._termui_impl.ProgressBar.__enter__"
+    return_annotation {
+      pretty_printed_name: "click._termui_impl.ProgressBar[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "click._termui_impl.ProgressBar"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "click._termui_impl.ProgressBar.__exit__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "click._termui_impl.ProgressBar.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[click._termui_impl.V]"
+      args {
+        pretty_printed_name: "click._termui_impl.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "click._termui_impl.ProgressBar.__next__"
+    return_annotation {
+      pretty_printed_name: "click._termui_impl.V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "render_finish"
+    fully_qualified_name: "click._termui_impl.ProgressBar.render_finish"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "pct"
+    fully_qualified_name: "click._termui_impl.ProgressBar.pct"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "time_per_iteration"
+    fully_qualified_name: "click._termui_impl.ProgressBar.time_per_iteration"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "eta"
+    fully_qualified_name: "click._termui_impl.ProgressBar.eta"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "format_eta"
+    fully_qualified_name: "click._termui_impl.ProgressBar.format_eta"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "format_pos"
+    fully_qualified_name: "click._termui_impl.ProgressBar.format_pos"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "format_pct"
+    fully_qualified_name: "click._termui_impl.ProgressBar.format_pct"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "format_bar"
+    fully_qualified_name: "click._termui_impl.ProgressBar.format_bar"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "format_progress_line"
+    fully_qualified_name: "click._termui_impl.ProgressBar.format_progress_line"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "render_progress"
+    fully_qualified_name: "click._termui_impl.ProgressBar.render_progress"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "make_step"
+    fully_qualified_name: "click._termui_impl.ProgressBar.make_step"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    parameters {
+      name: "n_steps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "click._termui_impl.ProgressBar.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+    parameters {
+      name: "n_steps"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "current_item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click._termui_impl.V,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "finish"
+    fully_qualified_name: "click._termui_impl.ProgressBar.finish"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  methods {
+    name: "generator"
+    fully_qualified_name: "click._termui_impl.ProgressBar.generator"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[click._termui_impl.V]"
+      args {
+        pretty_printed_name: "click._termui_impl.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.ProgressBar[click._termui_impl.V]"
+        args {
+          pretty_printed_name: "click._termui_impl.V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "click._termui_impl.ProgressBar"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "fill_char"
+    fully_qualified_name: "click._termui_impl.ProgressBar.fill_char"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "empty_char"
+    fully_qualified_name: "click._termui_impl.ProgressBar.empty_char"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "bar_template"
+    fully_qualified_name: "click._termui_impl.ProgressBar.bar_template"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "info_sep"
+    fully_qualified_name: "click._termui_impl.ProgressBar.info_sep"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "show_eta"
+    fully_qualified_name: "click._termui_impl.ProgressBar.show_eta"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "show_percent"
+    fully_qualified_name: "click._termui_impl.ProgressBar.show_percent"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "show_pos"
+    fully_qualified_name: "click._termui_impl.ProgressBar.show_pos"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "item_show_func"
+    fully_qualified_name: "click._termui_impl.ProgressBar.item_show_func"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "label"
+    fully_qualified_name: "click._termui_impl.ProgressBar.label"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "file"
+    fully_qualified_name: "click._termui_impl.ProgressBar.file"
+    type_annotation {
+      pretty_printed_name: "typing.TextIO"
+      fully_qualified_name: "typing.TextIO"
+    }
+  }
+  attributes {
+    name: "color"
+    fully_qualified_name: "click._termui_impl.ProgressBar.color"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "update_min_steps"
+    fully_qualified_name: "click._termui_impl.ProgressBar.update_min_steps"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_completed_intervals"
+    fully_qualified_name: "click._termui_impl.ProgressBar._completed_intervals"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "width"
+    fully_qualified_name: "click._termui_impl.ProgressBar.width"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "autowidth"
+    fully_qualified_name: "click._termui_impl.ProgressBar.autowidth"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "iter"
+    fully_qualified_name: "click._termui_impl.ProgressBar.iter"
+    type_annotation {
+      pretty_printed_name: "typing.Iterator[click._termui_impl.V]"
+      args {
+        pretty_printed_name: "click._termui_impl.V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+  }
+  attributes {
+    name: "length"
+    fully_qualified_name: "click._termui_impl.ProgressBar.length"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "pos"
+    fully_qualified_name: "click._termui_impl.ProgressBar.pos"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "avg"
+    fully_qualified_name: "click._termui_impl.ProgressBar.avg"
+    type_annotation {
+      pretty_printed_name: "builtins.list[builtins.float]"
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "start"
+    fully_qualified_name: "click._termui_impl.ProgressBar.start"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  attributes {
+    name: "last_eta"
+    fully_qualified_name: "click._termui_impl.ProgressBar.last_eta"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+  }
+  attributes {
+    name: "eta_known"
+    fully_qualified_name: "click._termui_impl.ProgressBar.eta_known"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "finished"
+    fully_qualified_name: "click._termui_impl.ProgressBar.finished"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "max_width"
+    fully_qualified_name: "click._termui_impl.ProgressBar.max_width"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "entered"
+    fully_qualified_name: "click._termui_impl.ProgressBar.entered"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "current_item"
+    fully_qualified_name: "click._termui_impl.ProgressBar.current_item"
+    type_annotation {
+      pretty_printed_name: "Union[click._termui_impl.V,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click._termui_impl.V"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "is_hidden"
+    fully_qualified_name: "click._termui_impl.ProgressBar.is_hidden"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_last_line"
+    fully_qualified_name: "click._termui_impl.ProgressBar._last_line"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "Editor"
+  fully_qualified_name: "click._termui_impl.Editor"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click._termui_impl.Editor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.Editor"
+        fully_qualified_name: "click._termui_impl.Editor"
+      }
+    }
+    parameters {
+      name: "editor"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "require_save"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "extension"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_editor"
+    fully_qualified_name: "click._termui_impl.Editor.get_editor"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.Editor"
+        fully_qualified_name: "click._termui_impl.Editor"
+      }
+    }
+  }
+  methods {
+    name: "edit_file"
+    fully_qualified_name: "click._termui_impl.Editor.edit_file"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.Editor"
+        fully_qualified_name: "click._termui_impl.Editor"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "edit"
+    fully_qualified_name: "click._termui_impl.Editor.edit"
+    return_annotation {
+      pretty_printed_name: "Union[typing.AnyStr,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.AnyStr"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click._termui_impl.Editor"
+        fully_qualified_name: "click._termui_impl.Editor"
+      }
+    }
+    parameters {
+      name: "text"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.AnyStr,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.AnyStr"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "editor"
+    fully_qualified_name: "click._termui_impl.Editor.editor"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "env"
+    fully_qualified_name: "click._termui_impl.Editor.env"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Mapping[builtins.str,builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Mapping[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "require_save"
+    fully_qualified_name: "click._termui_impl.Editor.require_save"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "extension"
+    fully_qualified_name: "click._termui_impl.Editor.extension"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_"
+  fully_qualified_name: "gettext.gettext"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "pager"
+  fully_qualified_name: "click._termui_impl.pager"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "generator"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "color"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_pipepager"
+  fully_qualified_name: "click._termui_impl._pipepager"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "generator"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "cmd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "color"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_tempfilepager"
+  fully_qualified_name: "click._termui_impl._tempfilepager"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "generator"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "cmd"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "color"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_nullpager"
+  fully_qualified_name: "click._termui_impl._nullpager"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "stream"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.TextIO"
+      fully_qualified_name: "typing.TextIO"
+    }
+  }
+  parameters {
+    name: "generator"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "color"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bool,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "open_url"
+  fully_qualified_name: "click._termui_impl.open_url"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "url"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "wait"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  parameters {
+    name: "locate"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "_translate_ch_to_exc"
+  fully_qualified_name: "click._termui_impl._translate_ch_to_exc"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.BaseException,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.BaseException"
+      fully_qualified_name: "builtins.BaseException"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "ch"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "getchar"
+  fully_qualified_name: "click._termui_impl.getchar"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "echo"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+functions {
+  name: "getchar-redefinition"
+  fully_qualified_name: "click._termui_impl.getchar"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "echo"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "click._termui_impl.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "BEFORE_BAR"
+  fully_qualified_name: "click._termui_impl.BEFORE_BAR"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "AFTER_BAR"
+  fully_qualified_name: "click._termui_impl.AFTER_BAR"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}

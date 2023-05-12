@@ -1,0 +1,4122 @@
+fully_qualified_name: "itertools"
+classes {
+  name: "count"
+  fully_qualified_name: "itertools.count"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.count.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._N"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.count[itertools._N]"
+        args {
+          pretty_printed_name: "itertools._N"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.count"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.count.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.count.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.count.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "itertools.count.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.count.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.count[builtins.int]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        fully_qualified_name: "itertools.count"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.count[itertools._N]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.count[itertools._N]"
+            args {
+              pretty_printed_name: "itertools._N"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.count"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.count.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.count[itertools._N]"
+        args {
+          pretty_printed_name: "itertools._N"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.count"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.count[itertools._N]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.count[itertools._N]"
+            args {
+              pretty_printed_name: "itertools._N"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.count"
+          }
+        }
+      }
+      parameters {
+        name: "start"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._N"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "step"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[typing.SupportsFloat,typing.SupportsInt,typing_extensions.SupportsIndex,typing.SupportsComplex]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[typing.SupportsFloat,typing.SupportsInt,typing_extensions.SupportsIndex,typing.SupportsComplex]"
+            kind: UNION
+            args {
+              pretty_printed_name: "typing.SupportsFloat"
+              fully_qualified_name: "typing.SupportsFloat"
+            }
+            args {
+              pretty_printed_name: "typing.SupportsInt"
+              fully_qualified_name: "typing.SupportsInt"
+            }
+            args {
+              pretty_printed_name: "typing_extensions.SupportsIndex"
+              fully_qualified_name: "typing_extensions.SupportsIndex"
+            }
+            args {
+              pretty_printed_name: "typing.SupportsComplex"
+              fully_qualified_name: "typing.SupportsComplex"
+            }
+          }
+          fully_qualified_name: "itertools._Step"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.count.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.count[itertools._N]"
+        args {
+          pretty_printed_name: "itertools._N"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.count"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.count[itertools._N]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.count[itertools._N]"
+            args {
+              pretty_printed_name: "itertools._N"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.count"
+          }
+        }
+      }
+      parameters {
+        name: "step"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._N"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "cycle"
+  fully_qualified_name: "itertools.cycle"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.cycle.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.cycle[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.cycle"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.cycle.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.cycle[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.cycle"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.cycle.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.cycle.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.cycle.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "repeat"
+  fully_qualified_name: "itertools.repeat"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.repeat.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.repeat[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.repeat"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.repeat.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.repeat.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.repeat.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__length_hint__"
+    fully_qualified_name: "itertools.repeat.__length_hint__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.repeat[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.repeat"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "itertools.repeat.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.repeat.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.repeat[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.repeat"
+        }
+      }
+      parameters {
+        name: "object"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.repeat.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.repeat[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.repeat"
+        }
+      }
+      parameters {
+        name: "object"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "times"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "accumulate"
+  fully_qualified_name: "itertools.accumulate"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.accumulate.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.accumulate.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.accumulate.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.accumulate.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.accumulate[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.accumulate"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "itertools.accumulate.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.accumulate.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.accumulate[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.accumulate"
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "initial"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[itertools._T,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.accumulate.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.accumulate[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.accumulate"
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._S]"
+          args {
+            pretty_printed_name: "itertools._S"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "func"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      parameters {
+        name: "initial"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[itertools._T,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "chain"
+  fully_qualified_name: "itertools.chain"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.chain.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.chain[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.chain"
+      }
+    }
+    parameters {
+      name: "iterables"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.chain.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.chain[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.chain"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.chain.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.chain.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.chain.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "from_iterable"
+    fully_qualified_name: "itertools.chain.from_iterable"
+    return_annotation {
+      pretty_printed_name: "itertools.chain[itertools._S]"
+      args {
+        pretty_printed_name: "itertools._S"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "itertools.chain"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.Iterable[itertools._S]]"
+        args {
+          pretty_printed_name: "typing.Iterable[itertools._S]"
+          args {
+            pretty_printed_name: "itertools._S"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  is_generic: true
+}
+classes {
+  name: "compress"
+  fully_qualified_name: "itertools.compress"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.compress.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.compress[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.compress"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "selectors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.compress.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.compress.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.compress.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.compress.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.compress[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.compress"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "dropwhile"
+  fully_qualified_name: "itertools.dropwhile"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.dropwhile.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.dropwhile[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.dropwhile"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "itertools._Predicate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.dropwhile.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.dropwhile.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.dropwhile.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.dropwhile.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.dropwhile[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.dropwhile"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "filterfalse"
+  fully_qualified_name: "itertools.filterfalse"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.filterfalse.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.filterfalse[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.filterfalse"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[CallableType[builtins.function]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          fully_qualified_name: "itertools._Predicate"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.filterfalse.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.filterfalse.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.filterfalse.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.filterfalse.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.filterfalse[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.filterfalse"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "groupby"
+  fully_qualified_name: "itertools.groupby"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.groupby.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.groupby.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.groupby.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.groupby.__next__"
+    return_annotation {
+      pretty_printed_name: "Tuple[itertools._T,typing.Iterator[itertools._S]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "itertools._T"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "typing.Iterator[itertools._S]"
+        args {
+          pretty_printed_name: "itertools._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterator"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.groupby[itertools._T,itertools._S]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "itertools._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.groupby"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "itertools.groupby.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.groupby.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.groupby[itertools._T1,itertools._T1]"
+        args {
+          pretty_printed_name: "itertools._T1"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "itertools._T1"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.groupby"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.groupby[itertools._T,itertools._S]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.groupby[itertools._T,itertools._S]"
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._S"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.groupby"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.groupby.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.groupby[itertools._T2,itertools._T1]"
+        args {
+          pretty_printed_name: "itertools._T2"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "itertools._T1"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.groupby"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.groupby[itertools._T,itertools._S]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.groupby[itertools._T,itertools._S]"
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._S"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.groupby"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "islice"
+  fully_qualified_name: "itertools.islice"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.islice.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.islice.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.islice.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.islice.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.islice[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.islice"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "itertools.islice.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.islice.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.islice[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.islice"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "itertools.islice.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools.islice[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "itertools.islice"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "starmap"
+  fully_qualified_name: "itertools.starmap"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.starmap.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.starmap[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.starmap"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing.Iterable[Any]]"
+        args {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.starmap.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.starmap.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.starmap.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.starmap.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.starmap[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.starmap"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "takewhile"
+  fully_qualified_name: "itertools.takewhile"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.takewhile.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.takewhile[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.takewhile"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "itertools._Predicate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.takewhile.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.takewhile.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.takewhile.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.takewhile.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.takewhile[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.takewhile"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "zip_longest"
+  fully_qualified_name: "itertools.zip_longest"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.zip_longest.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.zip_longest.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.zip_longest.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.zip_longest.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+        args {
+          pretty_printed_name: "itertools._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "itertools.zip_longest.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[itertools._T1]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.object"
+          fully_qualified_name: "builtins.object"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any],Union[itertools._T4,Any]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any],Union[itertools._T4,Any]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T4,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T4"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T],Union[itertools._T4,itertools._T]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T],Union[itertools._T4,itertools._T]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T4,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T4"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any],Union[itertools._T4,Any],Union[itertools._T5,Any]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,Any],Union[itertools._T2,Any],Union[itertools._T3,Any],Union[itertools._T4,Any],Union[itertools._T5,Any]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T4,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T4"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T5,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T5"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T5]"
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T],Union[itertools._T4,itertools._T],Union[itertools._T5,itertools._T]]]"
+        args {
+          pretty_printed_name: "Tuple[Union[itertools._T1,itertools._T],Union[itertools._T2,itertools._T],Union[itertools._T3,itertools._T],Union[itertools._T4,itertools._T],Union[itertools._T5,itertools._T]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "Union[itertools._T1,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T1"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T2,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T2"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T3,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T3"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T4,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T4"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+          args {
+            pretty_printed_name: "Union[itertools._T5,itertools._T]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T5"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+          }
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T5]"
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[builtins.tuple[Union[itertools._T,Any]]]"
+        args {
+          pretty_printed_name: "builtins.tuple[Union[itertools._T,Any]]"
+          args {
+            pretty_printed_name: "Union[itertools._T,Any]"
+            kind: UNION
+            args {
+              pretty_printed_name: "itertools._T"
+              kind: TYPE_VAR
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "iterables"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.zip_longest.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.zip_longest[builtins.tuple[itertools._T]]"
+        args {
+          pretty_printed_name: "builtins.tuple[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.zip_longest"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.zip_longest[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.zip_longest[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.zip_longest"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "iterables"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "fillvalue"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "product"
+  fully_qualified_name: "itertools.product"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.product.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.product.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.product.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.product.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.product[itertools._T_co]"
+        args {
+          pretty_printed_name: "itertools._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.product"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "itertools.product.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1,itertools._T2]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1,itertools._T2]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1,itertools._T2,itertools._T3]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1,itertools._T2,itertools._T3]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4,itertools._T5]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4,itertools._T5]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T5]"
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4,itertools._T5,itertools._T6]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T1,itertools._T2,itertools._T3,itertools._T4,itertools._T5,itertools._T6]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T6"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T2]"
+          args {
+            pretty_printed_name: "itertools._T2"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T3]"
+          args {
+            pretty_printed_name: "itertools._T3"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T4]"
+          args {
+            pretty_printed_name: "itertools._T4"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T5]"
+          args {
+            pretty_printed_name: "itertools._T5"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T6]"
+          args {
+            pretty_printed_name: "itertools._T6"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[builtins.tuple[Any]]"
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "iterables"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[builtins.tuple[itertools._T1]]"
+        args {
+          pretty_printed_name: "builtins.tuple[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "iterables"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T1]"
+          args {
+            pretty_printed_name: "itertools._T1"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "repeat"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.product.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.product[builtins.tuple[Any]]"
+        args {
+          pretty_printed_name: "builtins.tuple[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.product"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.product[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.product[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.product"
+          }
+        }
+      }
+      parameters {
+        name: "iterables"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "repeat"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "permutations"
+  fully_qualified_name: "itertools.permutations"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.permutations.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.permutations[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.permutations"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.permutations.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.permutations.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.permutations.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.permutations.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[itertools._T]"
+      args {
+        pretty_printed_name: "itertools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.permutations[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.permutations"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "combinations"
+  fully_qualified_name: "itertools.combinations"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.combinations.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.combinations.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.combinations.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.combinations.__next__"
+    return_annotation {
+      pretty_printed_name: "itertools._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.combinations[itertools._T_co]"
+        args {
+          pretty_printed_name: "itertools._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__new__"
+    fullname: "itertools.combinations.__new__"
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.combinations.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.combinations[Tuple[itertools._T,itertools._T]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T,itertools._T]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.combinations[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.combinations[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.combinations"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "r"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.combinations.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.combinations[Tuple[itertools._T,itertools._T,itertools._T]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T,itertools._T,itertools._T]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.combinations[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.combinations[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.combinations"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "r"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.combinations.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.combinations[Tuple[itertools._T,itertools._T,itertools._T,itertools._T]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T,itertools._T,itertools._T,itertools._T]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.combinations[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.combinations[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.combinations"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "r"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.combinations.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.combinations[Tuple[itertools._T,itertools._T,itertools._T,itertools._T,itertools._T]]"
+        args {
+          pretty_printed_name: "Tuple[itertools._T,itertools._T,itertools._T,itertools._T,itertools._T]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.combinations[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.combinations[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.combinations"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "r"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.int]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__new__"
+      fully_qualified_name: "itertools.combinations.__new__"
+      return_annotation {
+        pretty_printed_name: "itertools.combinations[builtins.tuple[itertools._T]]"
+        args {
+          pretty_printed_name: "builtins.tuple[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "builtins.tuple"
+        }
+        fully_qualified_name: "itertools.combinations"
+      }
+      parameters {
+        name: "cls"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Type[itertools.combinations[itertools._T_co]]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "itertools.combinations[itertools._T_co]"
+            args {
+              pretty_printed_name: "itertools._T_co"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "itertools.combinations"
+          }
+        }
+      }
+      parameters {
+        name: "iterable"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[itertools._T]"
+          args {
+            pretty_printed_name: "itertools._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      parameters {
+        name: "r"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "combinations_with_replacement"
+  fully_qualified_name: "itertools.combinations_with_replacement"
+  super_classes: "typing.Iterator"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itertools.combinations_with_replacement.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.combinations_with_replacement[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.combinations_with_replacement"
+      }
+    }
+    parameters {
+      name: "iterable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "r"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "itertools.combinations_with_replacement.__iter__"
+    return_annotation {
+      pretty_printed_name: "itertools.combinations_with_replacement.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itertools.combinations_with_replacement.Self"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__next__"
+    fully_qualified_name: "itertools.combinations_with_replacement.__next__"
+    return_annotation {
+      pretty_printed_name: "builtins.tuple[itertools._T]"
+      args {
+        pretty_printed_name: "itertools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itertools.combinations_with_replacement[itertools._T]"
+        args {
+          pretty_printed_name: "itertools._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "itertools.combinations_with_replacement"
+      }
+    }
+  }
+  is_generic: true
+}
+functions {
+  name: "tee"
+  fully_qualified_name: "itertools.tee"
+  return_annotation {
+    pretty_printed_name: "builtins.tuple[typing.Iterator[itertools._T]]"
+    args {
+      pretty_printed_name: "typing.Iterator[itertools._T]"
+      args {
+        pretty_printed_name: "itertools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[itertools._T]"
+      args {
+        pretty_printed_name: "itertools._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "__"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itertools.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

@@ -1,0 +1,3483 @@
+fully_qualified_name: "cryptography.x509.base"
+classes {
+  name: "AttributeNotFound"
+  fully_qualified_name: "cryptography.x509.base.AttributeNotFound"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.AttributeNotFound.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.AttributeNotFound"
+        fully_qualified_name: "cryptography.x509.base.AttributeNotFound"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  attributes {
+    name: "oid"
+    fully_qualified_name: "cryptography.x509.base.AttributeNotFound.oid"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+}
+classes {
+  name: "Attribute"
+  fully_qualified_name: "cryptography.x509.base.Attribute"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.Attribute.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "oid"
+    fully_qualified_name: "cryptography.x509.base.Attribute.oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "value"
+    fully_qualified_name: "cryptography.x509.base.Attribute.value"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.base.Attribute.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.base.Attribute.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.base.Attribute.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.base.Attribute.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+    }
+  }
+  attributes {
+    name: "_oid"
+    fully_qualified_name: "cryptography.x509.base.Attribute._oid"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  attributes {
+    name: "_value"
+    fully_qualified_name: "cryptography.x509.base.Attribute._value"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "_type"
+    fully_qualified_name: "cryptography.x509.base.Attribute._type"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "Attributes"
+  fully_qualified_name: "cryptography.x509.base.Attributes"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.Attributes.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attributes"
+        fully_qualified_name: "cryptography.x509.base.Attributes"
+      }
+    }
+    parameters {
+      name: "attributes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[cryptography.x509.base.Attribute]"
+        args {
+          pretty_printed_name: "cryptography.x509.base.Attribute"
+          fully_qualified_name: "cryptography.x509.base.Attribute"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.x509.base.Attributes.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "get_attribute_for_oid"
+    fully_qualified_name: "cryptography.x509.base.Attributes.get_attribute_for_oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.Attribute"
+      fully_qualified_name: "cryptography.x509.base.Attribute"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Attributes"
+        fully_qualified_name: "cryptography.x509.base.Attributes"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+  }
+  attributes {
+    name: "__len__"
+    fully_qualified_name: "cryptography.x509.base.Attributes.__len__"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "__iter__"
+    fully_qualified_name: "cryptography.x509.base.Attributes.__iter__"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "__getitem__"
+    fully_qualified_name: "cryptography.x509.base.Attributes.__getitem__"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "cryptography.x509.base.Attributes._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.base.Attribute]"
+      args {
+        pretty_printed_name: "cryptography.x509.base.Attribute"
+        fully_qualified_name: "cryptography.x509.base.Attribute"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "Version"
+  fully_qualified_name: "cryptography.x509.base.Version"
+  super_classes: "cryptography.utils.Enum"
+  is_enum: true
+  attributes {
+    name: "v1"
+    fully_qualified_name: "cryptography.x509.base.Version.v1"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "v3"
+    fully_qualified_name: "cryptography.x509.base.Version.v3"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "InvalidVersion"
+  fully_qualified_name: "cryptography.x509.base.InvalidVersion"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.InvalidVersion.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.InvalidVersion"
+        fully_qualified_name: "cryptography.x509.base.InvalidVersion"
+      }
+    }
+    parameters {
+      name: "msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "parsed_version"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "parsed_version"
+    fully_qualified_name: "cryptography.x509.base.InvalidVersion.parsed_version"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "Certificate"
+  fully_qualified_name: "cryptography.x509.base.Certificate"
+  super_classes: "builtins.object"
+  methods {
+    name: "fingerprint"
+    fully_qualified_name: "cryptography.x509.base.Certificate.fingerprint"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "serial_number"
+    fully_qualified_name: "cryptography.x509.base.Certificate.serial_number"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "version"
+    fully_qualified_name: "cryptography.x509.base.Certificate.version"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.Version"
+      fully_qualified_name: "cryptography.x509.base.Version"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.x509.base.Certificate.public_key"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.CERTIFICATE_PUBLIC_KEY_TYPES"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "not_valid_before"
+    fully_qualified_name: "cryptography.x509.base.Certificate.not_valid_before"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "not_valid_after"
+    fully_qualified_name: "cryptography.x509.base.Certificate.not_valid_after"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "issuer"
+    fully_qualified_name: "cryptography.x509.base.Certificate.issuer"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "subject"
+    fully_qualified_name: "cryptography.x509.base.Certificate.subject"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature_hash_algorithm"
+    fully_qualified_name: "cryptography.x509.base.Certificate.signature_hash_algorithm"
+    return_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature_algorithm_oid"
+    fully_qualified_name: "cryptography.x509.base.Certificate.signature_algorithm_oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "extensions"
+    fully_qualified_name: "cryptography.x509.base.Certificate.extensions"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature"
+    fully_qualified_name: "cryptography.x509.base.Certificate.signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "tbs_certificate_bytes"
+    fully_qualified_name: "cryptography.x509.base.Certificate.tbs_certificate_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.base.Certificate.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.base.Certificate.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.base.Certificate.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.x509.base.Certificate.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.Certificate"
+        fully_qualified_name: "cryptography.x509.base.Certificate"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "RevokedCertificate"
+  fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+  super_classes: "builtins.object"
+  methods {
+    name: "serial_number"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificate.serial_number"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "revocation_date"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificate.revocation_date"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "extensions"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificate.extensions"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "_RawRevokedCertificate"
+  fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate"
+  super_classes: "cryptography.x509.base.RevokedCertificate"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base._RawRevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate"
+      }
+    }
+    parameters {
+      name: "serial_number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "revocation_date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.extensions.Extensions"
+        fully_qualified_name: "cryptography.x509.extensions.Extensions"
+      }
+    }
+  }
+  methods {
+    name: "serial_number"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate.serial_number"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base._RawRevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "revocation_date"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate.revocation_date"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base._RawRevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "extensions"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate.extensions"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base._RawRevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "_serial_number"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate._serial_number"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_revocation_date"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate._revocation_date"
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+  attributes {
+    name: "_extensions"
+    fully_qualified_name: "cryptography.x509.base._RawRevokedCertificate._extensions"
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+  }
+}
+classes {
+  name: "CertificateRevocationList"
+  fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  super_classes: "builtins.object"
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "fingerprint"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.fingerprint"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "get_revoked_certificate_by_serial_number"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.get_revoked_certificate_by_serial_number"
+    return_annotation {
+      pretty_printed_name: "Union[cryptography.x509.base.RevokedCertificate,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "serial_number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "signature_hash_algorithm"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.signature_hash_algorithm"
+    return_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature_algorithm_oid"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.signature_algorithm_oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "issuer"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.issuer"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "next_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.next_update"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "last_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.last_update"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "extensions"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.extensions"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "tbs_certlist_bytes"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.tbs_certlist_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[cryptography.x509.base.RevokedCertificate]"
+      args {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "is_signature_valid"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.is_signature_valid"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+      }
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "cryptography.x509.base.CertificateRevocationList.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__getitem__"
+      return_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+          fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationList.__getitem__"
+      return_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.base.RevokedCertificate]"
+        args {
+          pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+          fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+          fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+  }
+  has_metaclass: true
+}
+classes {
+  name: "CertificateSigningRequest"
+  fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  super_classes: "builtins.object"
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.__ne__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "__hash__"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.__hash__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.public_key"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "subject"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.subject"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature_hash_algorithm"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.signature_hash_algorithm"
+    return_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "signature_algorithm_oid"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.signature_algorithm_oid"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "extensions"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.extensions"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extensions"
+      fully_qualified_name: "cryptography.x509.extensions.Extensions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "attributes"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.attributes"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.Attributes"
+      fully_qualified_name: "cryptography.x509.base.Attributes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "signature"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.signature"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "tbs_certrequest_bytes"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.tbs_certrequest_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "is_signature_valid"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.is_signature_valid"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "get_attribute_for_oid"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest.get_attribute_for_oid"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "CertificateSigningRequestBuilder"
+  fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "subject_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+          args {
+            pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+            fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+          }
+          fully_qualified_name: "cryptography.x509.extensions.Extension"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "attributes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]]"
+        args {
+          pretty_printed_name: "Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+            fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "subject_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder.subject_name"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "add_extension"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder.add_extension"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "extval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+        fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+      }
+    }
+    parameters {
+      name: "critical"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "add_attribute"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder.add_attribute"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "oid"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder.sign"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_subject_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder._subject_name"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_extensions"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder._extensions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+          fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+        }
+        fully_qualified_name: "cryptography.x509.extensions.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_attributes"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder._attributes"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]]"
+      args {
+        pretty_printed_name: "Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+          fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "CertificateBuilder"
+  fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "issuer_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "subject_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "public_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "serial_number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "not_valid_before"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "not_valid_after"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+          args {
+            pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+            fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+          }
+          fully_qualified_name: "cryptography.x509.extensions.Extension"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "issuer_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.issuer_name"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "subject_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.subject_name"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.CERTIFICATE_PUBLIC_KEY_TYPES"
+      }
+    }
+  }
+  methods {
+    name: "serial_number"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.serial_number"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "not_valid_before"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.not_valid_before"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "not_valid_after"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.not_valid_after"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "add_extension"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.add_extension"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "extval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+        fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+      }
+    }
+    parameters {
+      name: "critical"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder.sign"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.Certificate"
+      fully_qualified_name: "cryptography.x509.base.Certificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_extensions"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._extensions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+          fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+        }
+        fully_qualified_name: "cryptography.x509.extensions.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_version"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._version"
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.base.Version"
+      fully_qualified_name: "cryptography.x509.base.Version"
+    }
+  }
+  attributes {
+    name: "_issuer_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._issuer_name"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_subject_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._subject_name"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_public_key"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._public_key"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_serial_number"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._serial_number"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_not_valid_before"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._not_valid_before"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_not_valid_after"
+    fully_qualified_name: "cryptography.x509.base.CertificateBuilder._not_valid_after"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "CertificateRevocationListBuilder"
+  fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "issuer_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.x509.name.Name"
+          fully_qualified_name: "cryptography.x509.name.Name"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "last_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "next_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+          args {
+            pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+            fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+          }
+          fully_qualified_name: "cryptography.x509.extensions.Extension"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "revoked_certificates"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.base.RevokedCertificate]"
+        args {
+          pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+          fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "issuer_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.issuer_name"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "issuer_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+    }
+  }
+  methods {
+    name: "last_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.last_update"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "last_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "next_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.next_update"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "next_update"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "add_extension"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.add_extension"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "extval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+        fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+      }
+    }
+    parameters {
+      name: "critical"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "add_revoked_certificate"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.add_revoked_certificate"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "revoked_certificate"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder.sign"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+        fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      }
+    }
+    parameters {
+      name: "private_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+          kind: UNION
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          }
+          args {
+            pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+            fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          }
+        }
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_extensions"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder._extensions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+          fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+        }
+        fully_qualified_name: "cryptography.x509.extensions.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_revoked_certificates"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder._revoked_certificates"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.base.RevokedCertificate]"
+      args {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_issuer_name"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder._issuer_name"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.x509.name.Name,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.x509.name.Name"
+        fully_qualified_name: "cryptography.x509.name.Name"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_last_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder._last_update"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_next_update"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder._next_update"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "RevokedCertificateBuilder"
+  fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      }
+    }
+    parameters {
+      name: "serial_number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "revocation_date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+          args {
+            pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+            fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+          }
+          fully_qualified_name: "cryptography.x509.extensions.Extension"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "serial_number"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder.serial_number"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      }
+    }
+    parameters {
+      name: "number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "revocation_date"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder.revocation_date"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      }
+    }
+    parameters {
+      name: "time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "add_extension"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder.add_extension"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      }
+    }
+    parameters {
+      name: "extval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+        fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+      }
+    }
+    parameters {
+      name: "critical"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "build"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder.build"
+    return_annotation {
+      pretty_printed_name: "cryptography.x509.base.RevokedCertificate"
+      fully_qualified_name: "cryptography.x509.base.RevokedCertificate"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.x509.base.RevokedCertificateBuilder"
+        fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "_serial_number"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder._serial_number"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_revocation_date"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder._revocation_date"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_extensions"
+    fully_qualified_name: "cryptography.x509.base.RevokedCertificateBuilder._extensions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+          fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+        }
+        fully_qualified_name: "cryptography.x509.extensions.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "_reject_duplicate_extension"
+  fully_qualified_name: "cryptography.x509.base._reject_duplicate_extension"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "extension"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+        fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+      }
+      fully_qualified_name: "cryptography.x509.extensions.Extension"
+    }
+  }
+  parameters {
+    name: "extensions"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.list[cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]]"
+      args {
+        pretty_printed_name: "cryptography.x509.extensions.Extension[cryptography.x509.extensions.ExtensionType]"
+        args {
+          pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+          fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+        }
+        fully_qualified_name: "cryptography.x509.extensions.Extension"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "_reject_duplicate_attribute"
+  fully_qualified_name: "cryptography.x509.base._reject_duplicate_attribute"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "oid"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+      fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+    }
+  }
+  parameters {
+    name: "attributes"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]]"
+      args {
+        pretty_printed_name: "Tuple[cryptography.hazmat._oid.ObjectIdentifier,builtins.bytes]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "cryptography.hazmat._oid.ObjectIdentifier"
+          fully_qualified_name: "cryptography.hazmat._oid.ObjectIdentifier"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "_convert_to_naive_utc_time"
+  fully_qualified_name: "cryptography.x509.base._convert_to_naive_utc_time"
+  return_annotation {
+    pretty_printed_name: "datetime.datetime"
+    fully_qualified_name: "datetime.datetime"
+  }
+  parameters {
+    name: "time"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+}
+functions {
+  name: "load_pem_x509_certificate"
+  fully_qualified_name: "cryptography.x509.base.load_pem_x509_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.Certificate"
+    fully_qualified_name: "cryptography.x509.base.Certificate"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_der_x509_certificate"
+  fully_qualified_name: "cryptography.x509.base.load_der_x509_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.Certificate"
+    fully_qualified_name: "cryptography.x509.base.Certificate"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_x509_csr"
+  fully_qualified_name: "cryptography.x509.base.load_pem_x509_csr"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_der_x509_csr"
+  fully_qualified_name: "cryptography.x509.base.load_der_x509_csr"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_pem_x509_crl"
+  fully_qualified_name: "cryptography.x509.base.load_pem_x509_crl"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "load_der_x509_crl"
+  fully_qualified_name: "cryptography.x509.base.load_der_x509_crl"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "random_serial_number"
+  fully_qualified_name: "cryptography.x509.base.random_serial_number"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.x509.base.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "rust_x509"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509"
+  is_imported_module: true
+}
+vars {
+  name: "_EARLIEST_UTC_TIME"
+  fully_qualified_name: "cryptography.x509.base._EARLIEST_UTC_TIME"
+  type_annotation {
+    pretty_printed_name: "datetime.datetime"
+    fully_qualified_name: "datetime.datetime"
+  }
+}

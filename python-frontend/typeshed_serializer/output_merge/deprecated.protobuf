@@ -1,0 +1,100 @@
+fully_qualified_name: "deprecated"
+overloaded_functions {
+  name: "deprecated"
+  fullname: "deprecated.classic.deprecated"
+  definitions {
+    name: "deprecated"
+    fully_qualified_name: "deprecated.classic.deprecated"
+    return_annotation {
+      pretty_printed_name: "deprecated.classic._F"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__wrapped"
+      type_annotation {
+        pretty_printed_name: "deprecated.classic._F"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "deprecated"
+    fully_qualified_name: "deprecated.classic.deprecated"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "reason"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "version"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      has_default: true
+    }
+    parameters {
+      name: "action"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "category"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[Type[builtins.DeprecationWarning],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Type[builtins.DeprecationWarning]"
+          kind: TYPE
+          args {
+            pretty_printed_name: "builtins.DeprecationWarning"
+            fully_qualified_name: "builtins.DeprecationWarning"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

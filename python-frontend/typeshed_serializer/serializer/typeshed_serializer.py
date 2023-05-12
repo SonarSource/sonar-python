@@ -152,10 +152,10 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 
 def main():
-    save_merged_symbols()
+    #save_merged_symbols()
     #save_merged_symbols(is_third_parties=True, is_debug=True)
-    serialize_custom_stubs()
-    serialize_importer()
+    #serialize_custom_stubs()
+    serialize_importer(is_debug=True)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1020 @@
+fully_qualified_name: "markupsafe"
+classes {
+  name: "HasHTML"
+  fully_qualified_name: "markupsafe.HasHTML"
+  super_classes: "builtins.object"
+  methods {
+    name: "__html__"
+    fully_qualified_name: "markupsafe.HasHTML.__html__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.HasHTML"
+        fully_qualified_name: "markupsafe.HasHTML"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "Markup"
+  fully_qualified_name: "markupsafe.Markup"
+  super_classes: "builtins.str"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "markupsafe.Markup.__new__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[markupsafe.Markup]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "markupsafe.Markup"
+          fully_qualified_name: "markupsafe.Markup"
+        }
+      }
+    }
+    parameters {
+      name: "base"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "errors"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__html__"
+    fully_qualified_name: "markupsafe.Markup.__html__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "markupsafe.Markup.__add__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,markupsafe.HasHTML]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "markupsafe.HasHTML"
+          fully_qualified_name: "markupsafe.HasHTML"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "markupsafe.Markup.__radd__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,markupsafe.HasHTML]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "markupsafe.HasHTML"
+          fully_qualified_name: "markupsafe.HasHTML"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "markupsafe.Markup.__mul__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing_extensions.SupportsIndex"
+        fully_qualified_name: "typing_extensions.SupportsIndex"
+      }
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "markupsafe.Markup.__mod__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "markupsafe.Markup.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "markupsafe.Markup.join"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Union[builtins.str,markupsafe.HasHTML]]"
+        args {
+          pretty_printed_name: "Union[builtins.str,markupsafe.HasHTML]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "markupsafe.HasHTML"
+            fully_qualified_name: "markupsafe.HasHTML"
+          }
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "split"
+    fully_qualified_name: "markupsafe.Markup.split"
+    return_annotation {
+      pretty_printed_name: "builtins.list[markupsafe.Markup]"
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "rsplit"
+    fully_qualified_name: "markupsafe.Markup.rsplit"
+    return_annotation {
+      pretty_printed_name: "builtins.list[markupsafe.Markup]"
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "maxsplit"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "splitlines"
+    fully_qualified_name: "markupsafe.Markup.splitlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[markupsafe.Markup]"
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "keepends"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "unescape"
+    fully_qualified_name: "markupsafe.Markup.unescape"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+  }
+  methods {
+    name: "striptags"
+    fully_qualified_name: "markupsafe.Markup.striptags"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+  }
+  methods {
+    name: "escape"
+    fully_qualified_name: "markupsafe.Markup.escape"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[markupsafe.Markup]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "markupsafe.Markup"
+          fully_qualified_name: "markupsafe.Markup"
+        }
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "partition"
+    fully_qualified_name: "markupsafe.Markup.partition"
+    return_annotation {
+      pretty_printed_name: "Tuple[markupsafe.Markup,markupsafe.Markup,markupsafe.Markup]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "rpartition"
+    fully_qualified_name: "markupsafe.Markup.rpartition"
+    return_annotation {
+      pretty_printed_name: "Tuple[markupsafe.Markup,markupsafe.Markup,markupsafe.Markup]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+      args {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "format"
+    fully_qualified_name: "markupsafe.Markup.format"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__html_format__"
+    fully_qualified_name: "markupsafe.Markup.__html_format__"
+    return_annotation {
+      pretty_printed_name: "markupsafe.Markup"
+      fully_qualified_name: "markupsafe.Markup"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.Markup"
+        fully_qualified_name: "markupsafe.Markup"
+      }
+    }
+    parameters {
+      name: "format_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "markupsafe.Markup.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+  attributes {
+    name: "__rmul__"
+    fully_qualified_name: "markupsafe.Markup.__rmul__"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "method"
+    fully_qualified_name: "markupsafe.Markup.method"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "EscapeFormatter"
+  fully_qualified_name: "markupsafe.EscapeFormatter"
+  super_classes: "string.Formatter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markupsafe.EscapeFormatter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.EscapeFormatter"
+        fully_qualified_name: "markupsafe.EscapeFormatter"
+      }
+    }
+    parameters {
+      name: "escape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "format_field"
+    fully_qualified_name: "markupsafe.EscapeFormatter.format_field"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe.EscapeFormatter"
+        fully_qualified_name: "markupsafe.EscapeFormatter"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "format_spec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "markupsafe.EscapeFormatter.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "escape"
+    fully_qualified_name: "markupsafe.EscapeFormatter.escape"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+classes {
+  name: "_MarkupEscapeHelper"
+  fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "escape"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__getitem__"
+    return_annotation {
+      pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+      fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+  }
+  methods {
+    name: "__int__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__int__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+  }
+  methods {
+    name: "__float__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__float__"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "markupsafe._MarkupEscapeHelper"
+        fully_qualified_name: "markupsafe._MarkupEscapeHelper"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "obj"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.obj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "escape"
+    fully_qualified_name: "markupsafe._MarkupEscapeHelper.escape"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "_simple_escaping_wrapper"
+  fully_qualified_name: "markupsafe._simple_escaping_wrapper"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_escape_argspec"
+  fully_qualified_name: "markupsafe._escape_argspec"
+  return_annotation {
+    pretty_printed_name: "markupsafe._ListOrDict"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "markupsafe._ListOrDict"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "iterable"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  parameters {
+    name: "escape"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "escape"
+  fully_qualified_name: "markupsafe._speedups.escape"
+  return_annotation {
+    pretty_printed_name: "markupsafe.Markup"
+    fully_qualified_name: "markupsafe.Markup"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "escape_silent"
+  fully_qualified_name: "markupsafe._speedups.escape_silent"
+  return_annotation {
+    pretty_printed_name: "markupsafe.Markup"
+    fully_qualified_name: "markupsafe.Markup"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "soft_str"
+  fully_qualified_name: "markupsafe._speedups.soft_str"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "s"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "markupsafe.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "markupsafe.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}
+vars {
+  name: "__version__"
+  fully_qualified_name: "markupsafe.__version__"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "_strip_comments_re"
+  fully_qualified_name: "markupsafe._strip_comments_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "_strip_tags_re"
+  fully_qualified_name: "markupsafe._strip_tags_re"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}

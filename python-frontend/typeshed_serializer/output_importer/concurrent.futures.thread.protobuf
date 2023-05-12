@@ -1,0 +1,851 @@
+fully_qualified_name: "concurrent.futures.thread"
+classes {
+  name: "AbstractSet"
+  fully_qualified_name: "typing.AbstractSet"
+  super_classes: "typing.Collection"
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "typing.AbstractSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "_hash"
+    fully_qualified_name: "typing.AbstractSet._hash"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "typing.AbstractSet.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "typing.AbstractSet.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "typing.AbstractSet.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "typing.AbstractSet.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "typing.AbstractSet.__and__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing.AbstractSet.__or__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "typing.AbstractSet.__sub__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "typing.AbstractSet.__xor__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "typing.AbstractSet.isdisjoint"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "_WorkItem"
+  fully_qualified_name: "concurrent.futures.thread._WorkItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread._WorkItem[concurrent.futures.thread._S]"
+        args {
+          pretty_printed_name: "concurrent.futures.thread._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures.thread._WorkItem"
+      }
+    }
+    parameters {
+      name: "future"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures.thread._S]"
+        args {
+          pretty_printed_name: "concurrent.futures.thread._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.run"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread._WorkItem[concurrent.futures.thread._S]"
+        args {
+          pretty_printed_name: "concurrent.futures.thread._S"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures.thread._WorkItem"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "future"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.future"
+    type_annotation {
+      pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures.thread._S]"
+      args {
+        pretty_printed_name: "concurrent.futures.thread._S"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "concurrent.futures._base.Future"
+    }
+  }
+  attributes {
+    name: "fn"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.fn"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.args"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "concurrent.futures.thread._WorkItem.kwargs"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+}
+classes {
+  name: "BrokenThreadPool"
+  fully_qualified_name: "concurrent.futures.thread.BrokenThreadPool"
+  super_classes: "concurrent.futures._base.BrokenExecutor"
+}
+classes {
+  name: "ThreadPoolExecutor"
+  fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+  super_classes: "concurrent.futures._base.Executor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread.ThreadPoolExecutor"
+        fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+      }
+    }
+    parameters {
+      name: "max_workers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "thread_name_prefix"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "initargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+  }
+  methods {
+    name: "_adjust_thread_count"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._adjust_thread_count"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread.ThreadPoolExecutor"
+        fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+      }
+    }
+  }
+  methods {
+    name: "_initializer_failed"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._initializer_failed"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.thread.ThreadPoolExecutor"
+        fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor"
+      }
+    }
+  }
+  attributes {
+    name: "_max_workers"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._max_workers"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_idle_semaphore"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._idle_semaphore"
+    type_annotation {
+      pretty_printed_name: "threading.Semaphore"
+      fully_qualified_name: "threading.Semaphore"
+    }
+  }
+  attributes {
+    name: "_threads"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._threads"
+    type_annotation {
+      pretty_printed_name: "typing.AbstractSet[threading.Thread]"
+      args {
+        pretty_printed_name: "threading.Thread"
+        fully_qualified_name: "threading.Thread"
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+  }
+  attributes {
+    name: "_broken"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._broken"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_shutdown"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._shutdown"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_shutdown_lock"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._shutdown_lock"
+    type_annotation {
+      pretty_printed_name: "threading.Lock"
+      fully_qualified_name: "threading.Lock"
+    }
+  }
+  attributes {
+    name: "_thread_name_prefix"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._thread_name_prefix"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_initializer"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._initializer"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_initargs"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._initargs"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  attributes {
+    name: "_work_queue"
+    fully_qualified_name: "concurrent.futures.thread.ThreadPoolExecutor._work_queue"
+    type_annotation {
+      pretty_printed_name: "queue.SimpleQueue[concurrent.futures.thread._WorkItem[Any]]"
+      args {
+        pretty_printed_name: "concurrent.futures.thread._WorkItem[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "concurrent.futures.thread._WorkItem"
+      }
+      fully_qualified_name: "queue.SimpleQueue"
+    }
+  }
+}
+functions {
+  name: "_python_exit"
+  fully_qualified_name: "concurrent.futures.thread._python_exit"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "_worker"
+  fully_qualified_name: "concurrent.futures.thread._worker"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "executor_reference"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "_weakref.ReferenceType[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "_weakref.ReferenceType"
+    }
+  }
+  parameters {
+    name: "work_queue"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "queue.SimpleQueue[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "queue.SimpleQueue"
+    }
+  }
+  parameters {
+    name: "initializer"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "initargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "concurrent.futures.thread.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_threads_queues"
+  fully_qualified_name: "concurrent.futures.thread._threads_queues"
+  type_annotation {
+    pretty_printed_name: "typing.Mapping[Any,Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.Mapping"
+  }
+}
+vars {
+  name: "_shutdown"
+  fully_qualified_name: "concurrent.futures.thread._shutdown"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "_global_shutdown_lock"
+  fully_qualified_name: "concurrent.futures.thread._global_shutdown_lock"
+  type_annotation {
+    pretty_printed_name: "threading.Lock"
+    fully_qualified_name: "threading.Lock"
+  }
+}

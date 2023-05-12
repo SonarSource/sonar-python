@@ -1,0 +1,370 @@
+fully_qualified_name: "_typeshed.wsgi"
+classes {
+  name: "_Readable"
+  fully_qualified_name: "_typeshed.wsgi._Readable"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "_typeshed.wsgi._Readable.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi._Readable"
+        fully_qualified_name: "_typeshed.wsgi._Readable"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "StartResponse"
+  fully_qualified_name: "_typeshed.wsgi.StartResponse"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_typeshed.wsgi.StartResponse.__call__"
+    return_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.StartResponse"
+        fully_qualified_name: "_typeshed.wsgi.StartResponse"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]],Tuple[None,None,None]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "TypeAlias[Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Tuple[Type[builtins.BaseException],builtins.BaseException,types.TracebackType]"
+                kind: TUPLE
+                args {
+                  pretty_printed_name: "Type[builtins.BaseException]"
+                  kind: TYPE
+                  args {
+                    pretty_printed_name: "builtins.BaseException"
+                    fully_qualified_name: "builtins.BaseException"
+                  }
+                }
+                args {
+                  pretty_printed_name: "builtins.BaseException"
+                  fully_qualified_name: "builtins.BaseException"
+                }
+                args {
+                  pretty_printed_name: "types.TracebackType"
+                  fully_qualified_name: "types.TracebackType"
+                }
+              }
+              fully_qualified_name: "_typeshed.ExcInfo"
+            }
+            args {
+              pretty_printed_name: "Tuple[None,None,None]"
+              kind: TUPLE
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+              args {
+                pretty_printed_name: "None"
+                kind: NONE
+              }
+            }
+          }
+          fully_qualified_name: "_typeshed.OptExcInfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "InputStream"
+  fully_qualified_name: "_typeshed.wsgi.InputStream"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "_typeshed.wsgi.InputStream.read"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.InputStream"
+        fully_qualified_name: "_typeshed.wsgi.InputStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "readline"
+    fully_qualified_name: "_typeshed.wsgi.InputStream.readline"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.InputStream"
+        fully_qualified_name: "_typeshed.wsgi.InputStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "readlines"
+    fully_qualified_name: "_typeshed.wsgi.InputStream.readlines"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.InputStream"
+        fully_qualified_name: "_typeshed.wsgi.InputStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "_typeshed.wsgi.InputStream.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.InputStream"
+        fully_qualified_name: "_typeshed.wsgi.InputStream"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "ErrorStream"
+  fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+  super_classes: "builtins.object"
+  methods {
+    name: "flush"
+    fully_qualified_name: "_typeshed.wsgi.ErrorStream.flush"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
+        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+      }
+    }
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "_typeshed.wsgi.ErrorStream.write"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
+        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "writelines"
+    fully_qualified_name: "_typeshed.wsgi.ErrorStream.writelines"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.ErrorStream"
+        fully_qualified_name: "_typeshed.wsgi.ErrorStream"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "FileWrapper"
+  fully_qualified_name: "_typeshed.wsgi.FileWrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_typeshed.wsgi.FileWrapper.__call__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi.FileWrapper"
+        fully_qualified_name: "_typeshed.wsgi.FileWrapper"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.wsgi._Readable"
+        fully_qualified_name: "_typeshed.wsgi._Readable"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_protocol: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "_typeshed.wsgi.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

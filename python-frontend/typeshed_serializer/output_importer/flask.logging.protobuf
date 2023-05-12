@@ -1,0 +1,62 @@
+fully_qualified_name: "flask.logging"
+functions {
+  name: "has_level_handler"
+  fully_qualified_name: "flask.logging.has_level_handler"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "logger"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "logging.Logger"
+      fully_qualified_name: "logging.Logger"
+    }
+  }
+}
+functions {
+  name: "create_logger"
+  fully_qualified_name: "flask.logging.create_logger"
+  return_annotation {
+    pretty_printed_name: "logging.Logger"
+    fully_qualified_name: "logging.Logger"
+  }
+  parameters {
+    name: "app"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.logging.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "default_handler"
+  fully_qualified_name: "flask.logging.default_handler"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}

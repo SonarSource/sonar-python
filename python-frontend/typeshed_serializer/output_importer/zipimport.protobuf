@@ -1,0 +1,400 @@
+fully_qualified_name: "zipimport"
+classes {
+  name: "ZipImportError"
+  fully_qualified_name: "zipimport.ZipImportError"
+  super_classes: "builtins.ImportError"
+}
+classes {
+  name: "zipimporter"
+  fully_qualified_name: "zipimport.zipimporter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "zipimport.zipimporter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+          args {
+            pretty_printed_name: "os.PathLike[builtins.bytes]"
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            fully_qualified_name: "os.PathLike"
+          }
+        }
+        fully_qualified_name: "_typeshed.StrOrBytesPath"
+      }
+    }
+  }
+  methods {
+    name: "find_loader"
+    fully_qualified_name: "zipimport.zipimporter.find_loader"
+    return_annotation {
+      pretty_printed_name: "Tuple[Union[zipimport.zipimporter,None],builtins.list[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Union[zipimport.zipimporter,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "zipimport.zipimporter"
+          fully_qualified_name: "zipimport.zipimporter"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "find_module"
+    fully_qualified_name: "zipimport.zipimporter.find_module"
+    return_annotation {
+      pretty_printed_name: "Union[zipimport.zipimporter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "get_code"
+    fully_qualified_name: "zipimport.zipimporter.get_code"
+    return_annotation {
+      pretty_printed_name: "types.CodeType"
+      fully_qualified_name: "types.CodeType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_data"
+    fully_qualified_name: "zipimport.zipimporter.get_data"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "pathname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_filename"
+    fully_qualified_name: "zipimport.zipimporter.get_filename"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_resource_reader"
+    fully_qualified_name: "zipimport.zipimporter.get_resource_reader"
+    return_annotation {
+      pretty_printed_name: "Union[importlib.abc.ResourceReader,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "importlib.abc.ResourceReader"
+        fully_qualified_name: "importlib.abc.ResourceReader"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_source"
+    fully_qualified_name: "zipimport.zipimporter.get_source"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "is_package"
+    fully_qualified_name: "zipimport.zipimporter.is_package"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "load_module"
+    fully_qualified_name: "zipimport.zipimporter.load_module"
+    return_annotation {
+      pretty_printed_name: "types.ModuleType"
+      fully_qualified_name: "types.ModuleType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "zipimport.zipimporter"
+        fully_qualified_name: "zipimport.zipimporter"
+      }
+    }
+    parameters {
+      name: "fullname"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "archive"
+    fully_qualified_name: "zipimport.zipimporter.archive"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "prefix"
+    fully_qualified_name: "zipimport.zipimporter.prefix"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "zipimport.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "zipimport.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

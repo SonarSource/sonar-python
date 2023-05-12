@@ -1,0 +1,1702 @@
+fully_qualified_name: "array"
+classes {
+  name: "array"
+  fully_qualified_name: "array.array"
+  super_classes: "typing.MutableSequence"
+  methods {
+    name: "typecode"
+    fully_qualified_name: "array.array.typecode"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Literal[builtins.str]]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Literal[builtins.str]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "array._IntTypeCode"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "array._FloatTypeCode"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Literal[builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          fully_qualified_name: "array._UnicodeTypeCode"
+        }
+      }
+      fully_qualified_name: "array._TypeCode"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "itemsize"
+    fully_qualified_name: "array.array.itemsize"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "array.array.append"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "buffer_info"
+    fully_qualified_name: "array.array.buffer_info"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "byteswap"
+    fully_qualified_name: "array.array.byteswap"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "count"
+    fully_qualified_name: "array.array.count"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "array.array.extend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  methods {
+    name: "frombytes"
+    fully_qualified_name: "array.array.frombytes"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+              kind: UNION
+              args {
+                pretty_printed_name: "builtins.bytearray"
+                fully_qualified_name: "builtins.bytearray"
+              }
+              args {
+                pretty_printed_name: "builtins.memoryview"
+                fully_qualified_name: "builtins.memoryview"
+              }
+              args {
+                pretty_printed_name: "array.array[Any]"
+                args {
+                  pretty_printed_name: "Any"
+                  kind: ANY
+                }
+                fully_qualified_name: "array.array"
+              }
+              args {
+                pretty_printed_name: "mmap.mmap"
+                fully_qualified_name: "mmap.mmap"
+              }
+              args {
+                pretty_printed_name: "ctypes._CData"
+                fully_qualified_name: "ctypes._CData"
+              }
+              args {
+                pretty_printed_name: "pickle.PickleBuffer"
+                fully_qualified_name: "pickle.PickleBuffer"
+              }
+            }
+            fully_qualified_name: "_typeshed.WriteableBuffer"
+          }
+        }
+        fully_qualified_name: "_typeshed.ReadableBuffer"
+      }
+    }
+  }
+  methods {
+    name: "fromfile"
+    fully_qualified_name: "array.array.fromfile"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRead[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "fromlist"
+    fully_qualified_name: "array.array.fromlist"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.list[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  methods {
+    name: "fromunicode"
+    fully_qualified_name: "array.array.fromunicode"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "index"
+    fully_qualified_name: "array.array.index"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "array.array.insert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "array.array.pop"
+    return_annotation {
+      pretty_printed_name: "array._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "array.array.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "tobytes"
+    fully_qualified_name: "array.array.tobytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "tofile"
+    fully_qualified_name: "array.array.tofile"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[builtins.bytes]"
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+  }
+  methods {
+    name: "tolist"
+    fully_qualified_name: "array.array.tolist"
+    return_annotation {
+      pretty_printed_name: "builtins.list[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "tounicode"
+    fully_qualified_name: "array.array.tounicode"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "fromstring"
+    fully_qualified_name: "array.array.fromstring"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+            args {
+              pretty_printed_name: "TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "builtins.bytearray"
+                  fully_qualified_name: "builtins.bytearray"
+                }
+                args {
+                  pretty_printed_name: "builtins.memoryview"
+                  fully_qualified_name: "builtins.memoryview"
+                }
+                args {
+                  pretty_printed_name: "array.array[Any]"
+                  args {
+                    pretty_printed_name: "Any"
+                    kind: ANY
+                  }
+                  fully_qualified_name: "array.array"
+                }
+                args {
+                  pretty_printed_name: "mmap.mmap"
+                  fully_qualified_name: "mmap.mmap"
+                }
+                args {
+                  pretty_printed_name: "ctypes._CData"
+                  fully_qualified_name: "ctypes._CData"
+                }
+                args {
+                  pretty_printed_name: "pickle.PickleBuffer"
+                  fully_qualified_name: "pickle.PickleBuffer"
+                }
+              }
+              fully_qualified_name: "_typeshed.WriteableBuffer"
+            }
+          }
+          fully_qualified_name: "_typeshed.ReadableBuffer"
+        }
+      }
+    }
+  }
+  methods {
+    name: "tostring"
+    fully_qualified_name: "array.array.tostring"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "array.array.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "array.array.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[typing_extensions.SupportsIndex,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "array.array.__add__"
+    return_annotation {
+      pretty_printed_name: "array.array[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "array.array"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "array.array.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "array.array.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__iadd__"
+    fully_qualified_name: "array.array.__iadd__"
+    return_annotation {
+      pretty_printed_name: "array.array.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__imul__"
+    fully_qualified_name: "array.array.__imul__"
+    return_annotation {
+      pretty_printed_name: "array.array.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "array.array.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "array.array.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "array.array.__mul__"
+    return_annotation {
+      pretty_printed_name: "array.array[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "array.array"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "array.array.__rmul__"
+    return_annotation {
+      pretty_printed_name: "array.array[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "array.array"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__copy__"
+    fully_qualified_name: "array.array.__copy__"
+    return_annotation {
+      pretty_printed_name: "array.array[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "array.array"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+  }
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "array.array.__deepcopy__"
+    return_annotation {
+      pretty_printed_name: "array.array[array._T]"
+      args {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "array.array"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__init__"
+    fullname: "array.array.__init__"
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "array.array.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "array.array[builtins.int]"
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "array._IntTypeCode"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,typing.Iterable[builtins.int]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[builtins.int]"
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "array.array.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "array.array[builtins.float]"
+          args {
+            pretty_printed_name: "builtins.float"
+            fully_qualified_name: "builtins.float"
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+            args {
+              pretty_printed_name: "Literal[builtins.str]"
+              kind: LITERAL
+              args {
+                pretty_printed_name: "builtins.str"
+                fully_qualified_name: "builtins.str"
+              }
+            }
+          }
+          fully_qualified_name: "array._FloatTypeCode"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,typing.Iterable[builtins.float]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[builtins.float]"
+            args {
+              pretty_printed_name: "builtins.float"
+              fully_qualified_name: "builtins.float"
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "array.array.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "array.array[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Literal[builtins.str]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Literal[builtins.str]"
+            kind: LITERAL
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+          }
+          fully_qualified_name: "array._UnicodeTypeCode"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray,typing.Iterable[builtins.str]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+          args {
+            pretty_printed_name: "typing.Iterable[builtins.str]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            fully_qualified_name: "typing.Iterable"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "array.array.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing.Iterable[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__init__"
+      fully_qualified_name: "array.array.__init__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "Union[builtins.bytes,builtins.bytearray]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "builtins.bytearray"
+            fully_qualified_name: "builtins.bytearray"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "__getitem__"
+    fullname: "array.array.__getitem__"
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "array.array.__getitem__"
+      return_annotation {
+        pretty_printed_name: "array._T"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__getitem__"
+      fully_qualified_name: "array.array.__getitem__"
+      return_annotation {
+        pretty_printed_name: "array.array[array._T]"
+        args {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "array.array"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "__setitem__"
+    fullname: "array.array.__setitem__"
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "array.array.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "typing_extensions.SupportsIndex"
+          fully_qualified_name: "typing_extensions.SupportsIndex"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array._T"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__setitem__"
+      fully_qualified_name: "array.array.__setitem__"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "array.array[array._T]"
+          args {
+            pretty_printed_name: "array._T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "array.array"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  is_generic: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "array.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "typecodes"
+  fully_qualified_name: "array.typecodes"
+  type_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}

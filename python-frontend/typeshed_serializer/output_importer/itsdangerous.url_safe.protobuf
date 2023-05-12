@@ -1,0 +1,131 @@
+fully_qualified_name: "itsdangerous.url_safe"
+classes {
+  name: "URLSafeSerializerMixin"
+  fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin"
+  super_classes: "itsdangerous.serializer.Serializer"
+  methods {
+    name: "load_payload"
+    fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin.load_payload"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.url_safe.URLSafeSerializerMixin"
+        fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin"
+      }
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "serializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "dump_payload"
+    fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin.dump_payload"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.url_safe.URLSafeSerializerMixin"
+        fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "default_serializer"
+    fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializerMixin.default_serializer"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+  }
+}
+classes {
+  name: "URLSafeSerializer"
+  fully_qualified_name: "itsdangerous.url_safe.URLSafeSerializer"
+  super_classes: "itsdangerous.url_safe.URLSafeSerializerMixin"
+  super_classes: "itsdangerous.serializer.Serializer"
+}
+classes {
+  name: "URLSafeTimedSerializer"
+  fully_qualified_name: "itsdangerous.url_safe.URLSafeTimedSerializer"
+  super_classes: "itsdangerous.url_safe.URLSafeSerializerMixin"
+  super_classes: "itsdangerous.timed.TimedSerializer"
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous.url_safe.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

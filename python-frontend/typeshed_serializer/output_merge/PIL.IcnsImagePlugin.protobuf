@@ -1,0 +1,450 @@
+fully_qualified_name: "PIL.IcnsImagePlugin"
+classes {
+  name: "IcnsFile"
+  fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "PIL.IcnsImagePlugin.IcnsFile"
+        fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile"
+      }
+    }
+    parameters {
+      name: "fobj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "itersizes"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.itersizes"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "bestsize"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.bestsize"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "dataforsize"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.dataforsize"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "getimage"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.getimage"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "PIL.IcnsImagePlugin.IcnsFile"
+        fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "SIZES"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.SIZES"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "dct"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.dct"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "fobj"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsFile.fobj"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "IcnsImageFile"
+  fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile"
+  super_classes: "PIL.ImageFile.ImageFile"
+  methods {
+    name: "load"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.load"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "PIL.IcnsImagePlugin.IcnsImageFile"
+        fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "size"
+    fullname: "PIL.IcnsImagePlugin.IcnsImageFile.size"
+    definitions {
+      name: "size"
+      fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.size"
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "size"
+      fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.size"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "PIL.IcnsImagePlugin.IcnsImageFile"
+          fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "size.setter"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "format"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.format"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "format_description"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.format_description"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "best_size"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.best_size"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "im"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.im"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "PIL.IcnsImagePlugin.IcnsImageFile.mode"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "nextheader"
+  fully_qualified_name: "PIL.IcnsImagePlugin.nextheader"
+  parameters {
+    name: "fobj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_32t"
+  fully_qualified_name: "PIL.IcnsImagePlugin.read_32t"
+  parameters {
+    name: "fobj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "start_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_32"
+  fully_qualified_name: "PIL.IcnsImagePlugin.read_32"
+  parameters {
+    name: "fobj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "start_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_mk"
+  fully_qualified_name: "PIL.IcnsImagePlugin.read_mk"
+  parameters {
+    name: "fobj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "start_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+functions {
+  name: "read_png_or_jpeg2000"
+  fully_qualified_name: "PIL.IcnsImagePlugin.read_png_or_jpeg2000"
+  parameters {
+    name: "fobj"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "start_length"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "size"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "enable_jpeg2k"
+  fully_qualified_name: "PIL.IcnsImagePlugin.enable_jpeg2k"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "HEADERSIZE"
+  fully_qualified_name: "PIL.IcnsImagePlugin.HEADERSIZE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

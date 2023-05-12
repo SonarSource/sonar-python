@@ -1,0 +1,928 @@
+fully_qualified_name: "jinja2.sandbox"
+classes {
+  name: "SandboxedEnvironment"
+  fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+  super_classes: "jinja2.environment.Environment"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "is_safe_attribute"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.is_safe_attribute"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "is_safe_callable"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.is_safe_callable"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "call_binop"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call_binop"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "operator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "left"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "right"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "call_unop"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call_unop"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "operator"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "arg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "getitem"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.getitem"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "argument"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,Any]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+    }
+  }
+  methods {
+    name: "getattr"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.getattr"
+    return_annotation {
+      pretty_printed_name: "Union[Any,jinja2.runtime.Undefined]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "jinja2.runtime.Undefined"
+        fully_qualified_name: "jinja2.runtime.Undefined"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "unsafe_undefined"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.unsafe_undefined"
+    return_annotation {
+      pretty_printed_name: "jinja2.runtime.Undefined"
+      fully_qualified_name: "jinja2.runtime.Undefined"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attribute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "format_string"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.format_string"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "format_func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "call"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.call"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "jinja2.runtime.Context"
+        fully_qualified_name: "jinja2.runtime.Context"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "sandboxed"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.sandboxed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "default_binop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.default_binop_table"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "default_unop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.default_unop_table"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "intercepted_binops"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.intercepted_binops"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+  }
+  attributes {
+    name: "intercepted_unops"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.intercepted_unops"
+    type_annotation {
+      pretty_printed_name: "builtins.frozenset[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.frozenset"
+    }
+  }
+  attributes {
+    name: "binop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.binop_table"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "unop_table"
+    fully_qualified_name: "jinja2.sandbox.SandboxedEnvironment.unop_table"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "ImmutableSandboxedEnvironment"
+  fully_qualified_name: "jinja2.sandbox.ImmutableSandboxedEnvironment"
+  super_classes: "jinja2.sandbox.SandboxedEnvironment"
+  methods {
+    name: "is_safe_attribute"
+    fully_qualified_name: "jinja2.sandbox.ImmutableSandboxedEnvironment.is_safe_attribute"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.ImmutableSandboxedEnvironment"
+        fully_qualified_name: "jinja2.sandbox.ImmutableSandboxedEnvironment"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "attr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}
+classes {
+  name: "SandboxedFormatter"
+  fully_qualified_name: "jinja2.sandbox.SandboxedFormatter"
+  super_classes: "string.Formatter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "jinja2.sandbox.SandboxedFormatter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedFormatter"
+        fully_qualified_name: "jinja2.sandbox.SandboxedFormatter"
+      }
+    }
+    parameters {
+      name: "env"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.environment.Environment"
+        fully_qualified_name: "jinja2.environment.Environment"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "get_field"
+    fully_qualified_name: "jinja2.sandbox.SandboxedFormatter.get_field"
+    return_annotation {
+      pretty_printed_name: "Tuple[Any,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "jinja2.sandbox.SandboxedFormatter"
+        fully_qualified_name: "jinja2.sandbox.SandboxedFormatter"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Sequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  attributes {
+    name: "_env"
+    fully_qualified_name: "jinja2.sandbox.SandboxedFormatter._env"
+    type_annotation {
+      pretty_printed_name: "jinja2.environment.Environment"
+      fully_qualified_name: "jinja2.environment.Environment"
+    }
+  }
+}
+classes {
+  name: "SandboxedEscapeFormatter"
+  fully_qualified_name: "jinja2.sandbox.SandboxedEscapeFormatter"
+  super_classes: "jinja2.sandbox.SandboxedFormatter"
+  super_classes: "markupsafe.EscapeFormatter"
+}
+functions {
+  name: "inspect_format_method"
+  fully_qualified_name: "jinja2.sandbox.inspect_format_method"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "callable"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "safe_range"
+  fully_qualified_name: "jinja2.sandbox.safe_range"
+  return_annotation {
+    pretty_printed_name: "builtins.range"
+    fully_qualified_name: "builtins.range"
+  }
+  parameters {
+    name: "args"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "unsafe"
+  fully_qualified_name: "jinja2.sandbox.unsafe"
+  return_annotation {
+    pretty_printed_name: "jinja2.sandbox.F"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "jinja2.sandbox.F"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "is_internal_attribute"
+  fully_qualified_name: "jinja2.sandbox.is_internal_attribute"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "modifies_known_mutable"
+  fully_qualified_name: "jinja2.sandbox.modifies_known_mutable"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+  parameters {
+    name: "obj"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "attr"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "jinja2.sandbox.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "formatter_field_name_split"
+  fully_qualified_name: "jinja2.sandbox.formatter_field_name_split"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}
+vars {
+  name: "MAX_RANGE"
+  fully_qualified_name: "jinja2.sandbox.MAX_RANGE"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "UNSAFE_FUNCTION_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_FUNCTION_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "UNSAFE_METHOD_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_METHOD_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "UNSAFE_GENERATOR_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_GENERATOR_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "UNSAFE_COROUTINE_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_COROUTINE_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "UNSAFE_ASYNC_GENERATOR_ATTRIBUTES"
+  fully_qualified_name: "jinja2.sandbox.UNSAFE_ASYNC_GENERATOR_ATTRIBUTES"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "_mutable_spec"
+  fully_qualified_name: "jinja2.sandbox._mutable_spec"
+  type_annotation {
+    pretty_printed_name: "builtins.tuple[Tuple[Type[Any],builtins.frozenset[builtins.str]]]"
+    args {
+      pretty_printed_name: "Tuple[Type[Any],builtins.frozenset[builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "Type[Any]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      args {
+        pretty_printed_name: "builtins.frozenset[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.frozenset"
+      }
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+}

@@ -1,0 +1,255 @@
+fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers"
+classes {
+  name: "_CipherContext"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "cipher"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "operation"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.update"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "update_into"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.update_into"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+      }
+    }
+  }
+  methods {
+    name: "finalize_with_tag"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.finalize_with_tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "authenticate_additional_data"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.authenticate_additional_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "_ENCRYPT"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._ENCRYPT"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_DECRYPT"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._DECRYPT"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_MAX_CHUNK_SIZE"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._MAX_CHUNK_SIZE"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "tag"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext.tag"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_backend"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._backend"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_cipher"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._cipher"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_mode"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._mode"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_operation"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._operation"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_tag"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._tag"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_block_size_bytes"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._block_size_bytes"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers._CipherContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.backends.openssl.ciphers.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

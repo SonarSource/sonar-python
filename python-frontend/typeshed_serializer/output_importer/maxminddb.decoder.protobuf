@@ -1,0 +1,833 @@
+fully_qualified_name: "maxminddb.decoder"
+classes {
+  name: "Decoder"
+  fully_qualified_name: "maxminddb.decoder.Decoder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "maxminddb.decoder.Decoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "database_buffer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[maxminddb.file.FileBuffer,mmap.mmap,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "maxminddb.file.FileBuffer"
+          fully_qualified_name: "maxminddb.file.FileBuffer"
+        }
+        args {
+          pretty_printed_name: "mmap.mmap"
+          fully_qualified_name: "mmap.mmap"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+    }
+    parameters {
+      name: "pointer_base"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "pointer_test"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "_decode_array"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_array"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.list[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.list[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]]"
+        args {
+          pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]"
+            kind: UNION
+            args {
+              pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "typing.AnyStr"
+                  kind: TYPE_VAR
+                }
+                args {
+                  pretty_printed_name: "builtins.bool"
+                  fully_qualified_name: "builtins.bool"
+                }
+                args {
+                  pretty_printed_name: "builtins.float"
+                  fully_qualified_name: "builtins.float"
+                }
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+              }
+              fully_qualified_name: "maxminddb.types.Primitive"
+            }
+            args {
+              pretty_printed_name: "maxminddb.types.RecordList"
+              fully_qualified_name: "maxminddb.types.RecordList"
+            }
+            args {
+              pretty_printed_name: "maxminddb.types.RecordDict"
+              fully_qualified_name: "maxminddb.types.RecordDict"
+            }
+          }
+          fully_qualified_name: "maxminddb.types.Record"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_boolean"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_boolean"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.bool,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_bytes"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_bytes"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.bytes,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_double"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_double"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.float,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_float"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_float"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.float,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_int32"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_int32"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_map"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_map"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]"
+            kind: UNION
+            args {
+              pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+              kind: TYPE_ALIAS
+              args {
+                pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+                kind: UNION
+                args {
+                  pretty_printed_name: "typing.AnyStr"
+                  kind: TYPE_VAR
+                }
+                args {
+                  pretty_printed_name: "builtins.bool"
+                  fully_qualified_name: "builtins.bool"
+                }
+                args {
+                  pretty_printed_name: "builtins.float"
+                  fully_qualified_name: "builtins.float"
+                }
+                args {
+                  pretty_printed_name: "builtins.int"
+                  fully_qualified_name: "builtins.int"
+                }
+              }
+              fully_qualified_name: "maxminddb.types.Primitive"
+            }
+            args {
+              pretty_printed_name: "maxminddb.types.RecordList"
+              fully_qualified_name: "maxminddb.types.RecordList"
+            }
+            args {
+              pretty_printed_name: "maxminddb.types.RecordDict"
+              fully_qualified_name: "maxminddb.types.RecordDict"
+            }
+          }
+          fully_qualified_name: "maxminddb.types.Record"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_pointer"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_pointer"
+    return_annotation {
+      pretty_printed_name: "Tuple[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+              kind: UNION
+              args {
+                pretty_printed_name: "typing.AnyStr"
+                kind: TYPE_VAR
+              }
+              args {
+                pretty_printed_name: "builtins.bool"
+                fully_qualified_name: "builtins.bool"
+              }
+              args {
+                pretty_printed_name: "builtins.float"
+                fully_qualified_name: "builtins.float"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "maxminddb.types.Primitive"
+          }
+          args {
+            pretty_printed_name: "maxminddb.types.RecordList"
+            fully_qualified_name: "maxminddb.types.RecordList"
+          }
+          args {
+            pretty_printed_name: "maxminddb.types.RecordDict"
+            fully_qualified_name: "maxminddb.types.RecordDict"
+          }
+        }
+        fully_qualified_name: "maxminddb.types.Record"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_uint"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_uint"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_decode_utf8_string"
+    fully_qualified_name: "maxminddb.decoder.Decoder._decode_utf8_string"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "decode"
+    fully_qualified_name: "maxminddb.decoder.Decoder.decode"
+    return_annotation {
+      pretty_printed_name: "Tuple[TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]],builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "TypeAlias[Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]],maxminddb.types.RecordList,maxminddb.types.RecordDict]"
+          kind: UNION
+          args {
+            pretty_printed_name: "TypeAlias[Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]]"
+            kind: TYPE_ALIAS
+            args {
+              pretty_printed_name: "Union[typing.AnyStr,builtins.bool,builtins.float,builtins.int]"
+              kind: UNION
+              args {
+                pretty_printed_name: "typing.AnyStr"
+                kind: TYPE_VAR
+              }
+              args {
+                pretty_printed_name: "builtins.bool"
+                fully_qualified_name: "builtins.bool"
+              }
+              args {
+                pretty_printed_name: "builtins.float"
+                fully_qualified_name: "builtins.float"
+              }
+              args {
+                pretty_printed_name: "builtins.int"
+                fully_qualified_name: "builtins.int"
+              }
+            }
+            fully_qualified_name: "maxminddb.types.Primitive"
+          }
+          args {
+            pretty_printed_name: "maxminddb.types.RecordList"
+            fully_qualified_name: "maxminddb.types.RecordList"
+          }
+          args {
+            pretty_printed_name: "maxminddb.types.RecordDict"
+            fully_qualified_name: "maxminddb.types.RecordDict"
+          }
+        }
+        fully_qualified_name: "maxminddb.types.Record"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_read_extended"
+    fully_qualified_name: "maxminddb.decoder.Decoder._read_extended"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "_verify_size"
+    fully_qualified_name: "maxminddb.decoder.Decoder._verify_size"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "expected"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "actual"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "staticmethod"
+    is_static: true
+  }
+  methods {
+    name: "_size_from_ctrl_byte"
+    fully_qualified_name: "maxminddb.decoder.Decoder._size_from_ctrl_byte"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "maxminddb.decoder.Decoder"
+        fully_qualified_name: "maxminddb.decoder.Decoder"
+      }
+    }
+    parameters {
+      name: "ctrl_byte"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "type_num"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "_type_decoder"
+    fully_qualified_name: "maxminddb.decoder.Decoder._type_decoder"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,CallableType[builtins.function]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_pointer_test"
+    fully_qualified_name: "maxminddb.decoder.Decoder._pointer_test"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_buffer"
+    fully_qualified_name: "maxminddb.decoder.Decoder._buffer"
+    type_annotation {
+      pretty_printed_name: "Union[maxminddb.file.FileBuffer,mmap.mmap,builtins.bytes]"
+      kind: UNION
+      args {
+        pretty_printed_name: "maxminddb.file.FileBuffer"
+        fully_qualified_name: "maxminddb.file.FileBuffer"
+      }
+      args {
+        pretty_printed_name: "mmap.mmap"
+        fully_qualified_name: "mmap.mmap"
+      }
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  attributes {
+    name: "_pointer_base"
+    fully_qualified_name: "maxminddb.decoder.Decoder._pointer_base"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "maxminddb.decoder.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

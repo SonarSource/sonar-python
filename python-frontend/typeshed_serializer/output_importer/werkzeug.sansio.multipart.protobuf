@@ -1,0 +1,874 @@
+fully_qualified_name: "werkzeug.sansio.multipart"
+classes {
+  name: "Event"
+  fully_qualified_name: "werkzeug.sansio.multipart.Event"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "Preamble"
+  fully_qualified_name: "werkzeug.sansio.multipart.Preamble"
+  super_classes: "werkzeug.sansio.multipart.Event"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Preamble.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.Preamble"
+        fully_qualified_name: "werkzeug.sansio.multipart.Preamble"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "data"
+    fully_qualified_name: "werkzeug.sansio.multipart.Preamble.data"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Preamble.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Field"
+  fully_qualified_name: "werkzeug.sansio.multipart.Field"
+  super_classes: "werkzeug.sansio.multipart.Event"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Field.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.Field"
+        fully_qualified_name: "werkzeug.sansio.multipart.Field"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+        fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug.sansio.multipart.Field.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "werkzeug.sansio.multipart.Field.headers"
+    type_annotation {
+      pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+      fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Field.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "File"
+  fully_qualified_name: "werkzeug.sansio.multipart.File"
+  super_classes: "werkzeug.sansio.multipart.Event"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.File.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.File"
+        fully_qualified_name: "werkzeug.sansio.multipart.File"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+        fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug.sansio.multipart.File.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "werkzeug.sansio.multipart.File.filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "werkzeug.sansio.multipart.File.headers"
+    type_annotation {
+      pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+      fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.sansio.multipart.File.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Data"
+  fully_qualified_name: "werkzeug.sansio.multipart.Data"
+  super_classes: "werkzeug.sansio.multipart.Event"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Data.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.Data"
+        fully_qualified_name: "werkzeug.sansio.multipart.Data"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "more_data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "data"
+    fully_qualified_name: "werkzeug.sansio.multipart.Data.data"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "more_data"
+    fully_qualified_name: "werkzeug.sansio.multipart.Data.more_data"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Data.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "Epilogue"
+  fully_qualified_name: "werkzeug.sansio.multipart.Epilogue"
+  super_classes: "werkzeug.sansio.multipart.Event"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Epilogue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.Epilogue"
+        fully_qualified_name: "werkzeug.sansio.multipart.Epilogue"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "data"
+    fully_qualified_name: "werkzeug.sansio.multipart.Epilogue.data"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "werkzeug.sansio.multipart.Epilogue.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "NeedData"
+  fully_qualified_name: "werkzeug.sansio.multipart.NeedData"
+  super_classes: "werkzeug.sansio.multipart.Event"
+}
+classes {
+  name: "State"
+  fully_qualified_name: "werkzeug.sansio.multipart.State"
+  super_classes: "enum.Enum"
+  is_enum: true
+  attributes {
+    name: "PREAMBLE"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.PREAMBLE"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "PART"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.PART"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "DATA"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.DATA"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "DATA_START"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.DATA_START"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "EPILOGUE"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.EPILOGUE"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+  attributes {
+    name: "COMPLETE"
+    fully_qualified_name: "werkzeug.sansio.multipart.State.COMPLETE"
+    type_annotation {
+      pretty_printed_name: "enum.auto"
+      fully_qualified_name: "enum.auto"
+    }
+  }
+}
+classes {
+  name: "MultipartDecoder"
+  fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+    parameters {
+      name: "boundary"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "max_form_memory_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "max_parts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "last_newline"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.last_newline"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "receive_data"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.receive_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "next_event"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.next_event"
+    return_annotation {
+      pretty_printed_name: "werkzeug.sansio.multipart.Event"
+      fully_qualified_name: "werkzeug.sansio.multipart.Event"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+  }
+  methods {
+    name: "_parse_headers"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder._parse_headers"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+      fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "_parse_data"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder._parse_data"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.bytes,builtins.int,builtins.bool]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartDecoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "buffer"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.buffer"
+    type_annotation {
+      pretty_printed_name: "builtins.bytearray"
+      fully_qualified_name: "builtins.bytearray"
+    }
+  }
+  attributes {
+    name: "complete"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.complete"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "max_form_memory_size"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.max_form_memory_size"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "max_parts"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.max_parts"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "state"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.state"
+    type_annotation {
+      pretty_printed_name: "werkzeug.sansio.multipart.State"
+      fully_qualified_name: "werkzeug.sansio.multipart.State"
+    }
+  }
+  attributes {
+    name: "boundary"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.boundary"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "preamble_re"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.preamble_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "boundary_re"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder.boundary_re"
+    type_annotation {
+      pretty_printed_name: "re.Pattern[builtins.bytes]"
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      fully_qualified_name: "re.Pattern"
+    }
+  }
+  attributes {
+    name: "_search_position"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder._search_position"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_parts_decoded"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartDecoder._parts_decoded"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "MultipartEncoder"
+  fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartEncoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder"
+      }
+    }
+    parameters {
+      name: "boundary"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "send_event"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder.send_event"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.MultipartEncoder"
+        fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder"
+      }
+    }
+    parameters {
+      name: "event"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.multipart.Event"
+        fully_qualified_name: "werkzeug.sansio.multipart.Event"
+      }
+    }
+  }
+  attributes {
+    name: "boundary"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder.boundary"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "state"
+    fully_qualified_name: "werkzeug.sansio.multipart.MultipartEncoder.state"
+    type_annotation {
+      pretty_printed_name: "werkzeug.sansio.multipart.State"
+      fully_qualified_name: "werkzeug.sansio.multipart.State"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.sansio.multipart.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "NEED_DATA"
+  fully_qualified_name: "werkzeug.sansio.multipart.NEED_DATA"
+  type_annotation {
+    pretty_printed_name: "werkzeug.sansio.multipart.NeedData"
+    fully_qualified_name: "werkzeug.sansio.multipart.NeedData"
+  }
+}
+vars {
+  name: "LINE_BREAK"
+  fully_qualified_name: "werkzeug.sansio.multipart.LINE_BREAK"
+  type_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+}
+vars {
+  name: "BLANK_LINE_RE"
+  fully_qualified_name: "werkzeug.sansio.multipart.BLANK_LINE_RE"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "LINE_BREAK_RE"
+  fully_qualified_name: "werkzeug.sansio.multipart.LINE_BREAK_RE"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "HEADER_CONTINUATION_RE"
+  fully_qualified_name: "werkzeug.sansio.multipart.HEADER_CONTINUATION_RE"
+  type_annotation {
+    pretty_printed_name: "re.Pattern[builtins.bytes]"
+    args {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    fully_qualified_name: "re.Pattern"
+  }
+}
+vars {
+  name: "SEARCH_EXTRA_LENGTH"
+  fully_qualified_name: "werkzeug.sansio.multipart.SEARCH_EXTRA_LENGTH"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}

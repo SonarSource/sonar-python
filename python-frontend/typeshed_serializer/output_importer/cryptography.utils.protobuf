@@ -1,0 +1,367 @@
+fully_qualified_name: "cryptography.utils"
+classes {
+  name: "CryptographyDeprecationWarning"
+  fully_qualified_name: "cryptography.utils.CryptographyDeprecationWarning"
+  super_classes: "builtins.UserWarning"
+}
+classes {
+  name: "_RegisterDecoratorType"
+  fully_qualified_name: "cryptography.utils._RegisterDecoratorType"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "cryptography.utils._RegisterDecoratorType.__call__"
+    return_annotation {
+      pretty_printed_name: "cryptography.utils._T_class"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.utils._RegisterDecoratorType"
+        fully_qualified_name: "cryptography.utils._RegisterDecoratorType"
+      }
+    }
+    parameters {
+      name: "klass"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.utils._T_class"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "check_annotations"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "InterfaceNotImplemented"
+  fully_qualified_name: "cryptography.utils.InterfaceNotImplemented"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "_DeprecatedValue"
+  fully_qualified_name: "cryptography.utils._DeprecatedValue"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.utils._DeprecatedValue.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "warning_class"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "value"
+    fully_qualified_name: "cryptography.utils._DeprecatedValue.value"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "cryptography.utils._DeprecatedValue.message"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "warning_class"
+    fully_qualified_name: "cryptography.utils._DeprecatedValue.warning_class"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_ModuleWithDeprecations"
+  fully_qualified_name: "cryptography.utils._ModuleWithDeprecations"
+  super_classes: "types.ModuleType"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.utils._ModuleWithDeprecations.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "module"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "cryptography.utils._ModuleWithDeprecations.__getattr__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "cryptography.utils._ModuleWithDeprecations.__setattr__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "attr"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "cryptography.utils._ModuleWithDeprecations.__delattr__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__dir__"
+    fully_qualified_name: "cryptography.utils._ModuleWithDeprecations.__dir__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+}
+classes {
+  name: "Enum"
+  fully_qualified_name: "cryptography.utils.Enum"
+  super_classes: "enum.Enum"
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.utils.Enum.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "cryptography.utils.Enum.__str__"
+    parameters {
+      name: "__"
+    }
+  }
+  is_enum: true
+}
+functions {
+  name: "_check_bytes"
+  fully_qualified_name: "cryptography.utils._check_bytes"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "_check_byteslike"
+  fully_qualified_name: "cryptography.utils._check_byteslike"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "read_only_property"
+  fully_qualified_name: "cryptography.utils.read_only_property"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "register_interface"
+  fully_qualified_name: "cryptography.utils.register_interface"
+  return_annotation {
+    pretty_printed_name: "cryptography.utils._RegisterDecoratorType"
+    fully_qualified_name: "cryptography.utils._RegisterDecoratorType"
+  }
+  parameters {
+    name: "iface"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "abc.ABCMeta"
+      fully_qualified_name: "abc.ABCMeta"
+    }
+  }
+}
+functions {
+  name: "int_to_bytes"
+  fully_qualified_name: "cryptography.utils.int_to_bytes"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "integer"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "length"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "strip_annotation"
+  fully_qualified_name: "cryptography.utils.strip_annotation"
+  parameters {
+    name: "signature"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "verify_interface"
+  fully_qualified_name: "cryptography.utils.verify_interface"
+  parameters {
+    name: "iface"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "klass"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "check_annotations"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "deprecated"
+  fully_qualified_name: "cryptography.utils.deprecated"
+  parameters {
+    name: "value"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "module_name"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+  parameters {
+    name: "warning_class"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+functions {
+  name: "cached_property"
+  fully_qualified_name: "cryptography.utils.cached_property"
+  parameters {
+    name: "func"
+    kind: POSITIONAL_OR_KEYWORD
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.utils.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "int_from_bytes"
+  fully_qualified_name: "cryptography.utils.int_from_bytes"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+}

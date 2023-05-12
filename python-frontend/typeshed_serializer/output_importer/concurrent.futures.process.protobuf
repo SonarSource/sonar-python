@@ -1,0 +1,1291 @@
+fully_qualified_name: "concurrent.futures.process"
+classes {
+  name: "_ThreadWakeup"
+  fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+  super_classes: "builtins.object"
+  methods {
+    name: "close"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+        fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+      }
+    }
+  }
+  methods {
+    name: "wakeup"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup.wakeup"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+        fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+      }
+    }
+  }
+  methods {
+    name: "clear"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup.clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+        fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+      }
+    }
+  }
+  attributes {
+    name: "_closed"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup._closed"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_reader"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup._reader"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+  }
+  attributes {
+    name: "_writer"
+    fully_qualified_name: "concurrent.futures.process._ThreadWakeup._writer"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.connection.Connection"
+      fully_qualified_name: "multiprocessing.connection.Connection"
+    }
+  }
+}
+classes {
+  name: "_RemoteTraceback"
+  fully_qualified_name: "concurrent.futures.process._RemoteTraceback"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._RemoteTraceback.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._RemoteTraceback"
+        fully_qualified_name: "concurrent.futures.process._RemoteTraceback"
+      }
+    }
+    parameters {
+      name: "tb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+    }
+  }
+  attributes {
+    name: "tb"
+    fully_qualified_name: "concurrent.futures.process._RemoteTraceback.tb"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "_ExceptionWithTraceback"
+  fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ExceptionWithTraceback"
+        fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.BaseException"
+        fully_qualified_name: "builtins.BaseException"
+      }
+    }
+    parameters {
+      name: "tb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "types.TracebackType"
+        fully_qualified_name: "types.TracebackType"
+      }
+    }
+  }
+  methods {
+    name: "__reduce__"
+    fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback.__reduce__"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,builtins.tuple[Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ExceptionWithTraceback"
+        fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback"
+      }
+    }
+  }
+  attributes {
+    name: "exc"
+    fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback.exc"
+    type_annotation {
+      pretty_printed_name: "builtins.BaseException"
+      fully_qualified_name: "builtins.BaseException"
+    }
+  }
+  attributes {
+    name: "tb"
+    fully_qualified_name: "concurrent.futures.process._ExceptionWithTraceback.tb"
+    type_annotation {
+      pretty_printed_name: "types.TracebackType"
+      fully_qualified_name: "types.TracebackType"
+    }
+  }
+}
+classes {
+  name: "_WorkItem"
+  fully_qualified_name: "concurrent.futures.process._WorkItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._WorkItem.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._WorkItem[concurrent.futures.process._T]"
+        args {
+          pretty_printed_name: "concurrent.futures.process._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures.process._WorkItem"
+      }
+    }
+    parameters {
+      name: "future"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures.process._T]"
+        args {
+          pretty_printed_name: "concurrent.futures.process._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "concurrent.futures._base.Future"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "future"
+    fully_qualified_name: "concurrent.futures.process._WorkItem.future"
+    type_annotation {
+      pretty_printed_name: "concurrent.futures._base.Future[concurrent.futures.process._T]"
+      args {
+        pretty_printed_name: "concurrent.futures.process._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "concurrent.futures._base.Future"
+    }
+  }
+  attributes {
+    name: "fn"
+    fully_qualified_name: "concurrent.futures.process._WorkItem.fn"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "concurrent.futures.process._WorkItem.args"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "concurrent.futures.process._WorkItem.kwargs"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+}
+classes {
+  name: "_ResultItem"
+  fully_qualified_name: "concurrent.futures.process._ResultItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._ResultItem.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._ResultItem"
+        fully_qualified_name: "concurrent.futures.process._ResultItem"
+      }
+    }
+    parameters {
+      name: "work_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "exception"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "result"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "work_id"
+    fully_qualified_name: "concurrent.futures.process._ResultItem.work_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "exception"
+    fully_qualified_name: "concurrent.futures.process._ResultItem.exception"
+    type_annotation {
+      pretty_printed_name: "builtins.Exception"
+      fully_qualified_name: "builtins.Exception"
+    }
+  }
+  attributes {
+    name: "result"
+    fully_qualified_name: "concurrent.futures.process._ResultItem.result"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_CallItem"
+  fully_qualified_name: "concurrent.futures.process._CallItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._CallItem.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._CallItem"
+        fully_qualified_name: "concurrent.futures.process._CallItem"
+      }
+    }
+    parameters {
+      name: "work_id"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "fn"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+  }
+  attributes {
+    name: "work_id"
+    fully_qualified_name: "concurrent.futures.process._CallItem.work_id"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "fn"
+    fully_qualified_name: "concurrent.futures.process._CallItem.fn"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "args"
+    fully_qualified_name: "concurrent.futures.process._CallItem.args"
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+  attributes {
+    name: "kwargs"
+    fully_qualified_name: "concurrent.futures.process._CallItem.kwargs"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+}
+classes {
+  name: "_SafeQueue"
+  fully_qualified_name: "concurrent.futures.process._SafeQueue"
+  super_classes: "multiprocessing.queues.Queue"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process._SafeQueue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._SafeQueue"
+        fully_qualified_name: "concurrent.futures.process._SafeQueue"
+      }
+    }
+    parameters {
+      name: "max_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.context.BaseContext"
+        fully_qualified_name: "multiprocessing.context.BaseContext"
+      }
+    }
+    parameters {
+      name: "pending_work_items"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]"
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "concurrent.futures.process._WorkItem[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "concurrent.futures.process._WorkItem"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  methods {
+    name: "_on_queue_feeder_error"
+    fully_qualified_name: "concurrent.futures.process._SafeQueue._on_queue_feeder_error"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._SafeQueue"
+        fully_qualified_name: "concurrent.futures.process._SafeQueue"
+      }
+    }
+    parameters {
+      name: "e"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process._CallItem"
+        fully_qualified_name: "concurrent.futures.process._CallItem"
+      }
+    }
+  }
+  attributes {
+    name: "pending_work_items"
+    fully_qualified_name: "concurrent.futures.process._SafeQueue.pending_work_items"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "concurrent.futures.process._WorkItem[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "concurrent.futures.process._WorkItem"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "shutdown_lock"
+    fully_qualified_name: "concurrent.futures.process._SafeQueue.shutdown_lock"
+    type_annotation {
+      pretty_printed_name: "threading.Lock"
+      fully_qualified_name: "threading.Lock"
+    }
+  }
+  attributes {
+    name: "thread_wakeup"
+    fully_qualified_name: "concurrent.futures.process._SafeQueue.thread_wakeup"
+    type_annotation {
+      pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+      fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+    }
+  }
+}
+classes {
+  name: "BrokenProcessPool"
+  fully_qualified_name: "concurrent.futures.process.BrokenProcessPool"
+  super_classes: "concurrent.futures._base.BrokenExecutor"
+}
+classes {
+  name: "ProcessPoolExecutor"
+  fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+  super_classes: "concurrent.futures._base.Executor"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process.ProcessPoolExecutor"
+        fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+      }
+    }
+    parameters {
+      name: "max_workers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "mp_context"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "multiprocessing.context.BaseContext"
+          fully_qualified_name: "multiprocessing.context.BaseContext"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "initializer"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "initargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+    }
+  }
+  methods {
+    name: "_adjust_process_count"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._adjust_process_count"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "concurrent.futures.process.ProcessPoolExecutor"
+        fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor"
+      }
+    }
+  }
+  attributes {
+    name: "_mp_context"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._mp_context"
+    type_annotation {
+      pretty_printed_name: "Union[multiprocessing.context.BaseContext,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "multiprocessing.context.BaseContext"
+        fully_qualified_name: "multiprocessing.context.BaseContext"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_initializer"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._initializer"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_initargs"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._initargs"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+  attributes {
+    name: "_executor_manager_thread"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._executor_manager_thread"
+    type_annotation {
+      pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+      fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+    }
+  }
+  attributes {
+    name: "_processes"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._processes"
+    type_annotation {
+      pretty_printed_name: "typing.MutableMapping[builtins.int,multiprocessing.context.Process]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "multiprocessing.context.Process"
+        fully_qualified_name: "multiprocessing.context.Process"
+      }
+      fully_qualified_name: "typing.MutableMapping"
+    }
+  }
+  attributes {
+    name: "_shutdown_thread"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._shutdown_thread"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_shutdown_lock"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._shutdown_lock"
+    type_annotation {
+      pretty_printed_name: "threading.Lock"
+      fully_qualified_name: "threading.Lock"
+    }
+  }
+  attributes {
+    name: "_idle_worker_semaphore"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._idle_worker_semaphore"
+    type_annotation {
+      pretty_printed_name: "threading.Semaphore"
+      fully_qualified_name: "threading.Semaphore"
+    }
+  }
+  attributes {
+    name: "_broken"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._broken"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_queue_count"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._queue_count"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_pending_work_items"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._pending_work_items"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "concurrent.futures.process._WorkItem[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "concurrent.futures.process._WorkItem"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+  attributes {
+    name: "_cancel_pending_futures"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._cancel_pending_futures"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "_executor_manager_thread_wakeup"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._executor_manager_thread_wakeup"
+    type_annotation {
+      pretty_printed_name: "concurrent.futures.process._ThreadWakeup"
+      fully_qualified_name: "concurrent.futures.process._ThreadWakeup"
+    }
+  }
+  attributes {
+    name: "_result_queue"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._result_queue"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.queues.SimpleQueue[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "multiprocessing.queues.SimpleQueue"
+    }
+  }
+  attributes {
+    name: "_work_ids"
+    fully_qualified_name: "concurrent.futures.process.ProcessPoolExecutor._work_ids"
+    type_annotation {
+      pretty_printed_name: "multiprocessing.queues.Queue[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "multiprocessing.queues.Queue"
+    }
+  }
+}
+functions {
+  name: "_python_exit"
+  fully_qualified_name: "concurrent.futures.process._python_exit"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "_rebuild_exc"
+  fully_qualified_name: "concurrent.futures.process._rebuild_exc"
+  return_annotation {
+    pretty_printed_name: "builtins.Exception"
+    fully_qualified_name: "builtins.Exception"
+  }
+  parameters {
+    name: "exc"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.Exception"
+      fully_qualified_name: "builtins.Exception"
+    }
+  }
+  parameters {
+    name: "tb"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_get_chunks"
+  fully_qualified_name: "concurrent.futures.process._get_chunks"
+  return_annotation {
+    pretty_printed_name: "typing.Generator[builtins.tuple[Any],None,None]"
+    args {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    fully_qualified_name: "typing.Generator"
+  }
+  parameters {
+    name: "iterables"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  parameters {
+    name: "chunksize"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_process_chunk"
+  fully_qualified_name: "concurrent.futures.process._process_chunk"
+  return_annotation {
+    pretty_printed_name: "builtins.list[concurrent.futures.process._T]"
+    args {
+      pretty_printed_name: "concurrent.futures.process._T"
+      kind: TYPE_VAR
+    }
+    fully_qualified_name: "builtins.list"
+  }
+  parameters {
+    name: "fn"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "chunk"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.tuple[Any]]"
+      args {
+        pretty_printed_name: "builtins.tuple[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.tuple"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "_sendback_result"
+  fully_qualified_name: "concurrent.futures.process._sendback_result"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "result_queue"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "multiprocessing.queues.SimpleQueue[concurrent.futures.process._WorkItem[Any]]"
+      args {
+        pretty_printed_name: "concurrent.futures.process._WorkItem[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "concurrent.futures.process._WorkItem"
+      }
+      fully_qualified_name: "multiprocessing.queues.SimpleQueue"
+    }
+  }
+  parameters {
+    name: "work_id"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "result"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "exception"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.Exception,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.Exception"
+        fully_qualified_name: "builtins.Exception"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "_process_worker"
+  fully_qualified_name: "concurrent.futures.process._process_worker"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "call_queue"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "multiprocessing.queues.Queue[concurrent.futures.process._CallItem]"
+      args {
+        pretty_printed_name: "concurrent.futures.process._CallItem"
+        fully_qualified_name: "concurrent.futures.process._CallItem"
+      }
+      fully_qualified_name: "multiprocessing.queues.Queue"
+    }
+  }
+  parameters {
+    name: "result_queue"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "multiprocessing.queues.SimpleQueue[concurrent.futures.process._ResultItem]"
+      args {
+        pretty_printed_name: "concurrent.futures.process._ResultItem"
+        fully_qualified_name: "concurrent.futures.process._ResultItem"
+      }
+      fully_qualified_name: "multiprocessing.queues.SimpleQueue"
+    }
+  }
+  parameters {
+    name: "initializer"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "initargs"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+}
+functions {
+  name: "_check_system_limits"
+  fully_qualified_name: "concurrent.futures.process._check_system_limits"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "_chain_from_iterable_of_lists"
+  fully_qualified_name: "concurrent.futures.process._chain_from_iterable_of_lists"
+  return_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  parameters {
+    name: "iterable"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[typing.MutableSequence[Any]]"
+      args {
+        pretty_printed_name: "typing.MutableSequence[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.MutableSequence"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "concurrent.futures.process.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_threads_wakeups"
+  fully_qualified_name: "concurrent.futures.process._threads_wakeups"
+  type_annotation {
+    pretty_printed_name: "typing.MutableMapping[Any,Any]"
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "typing.MutableMapping"
+  }
+}
+vars {
+  name: "_global_shutdown"
+  fully_qualified_name: "concurrent.futures.process._global_shutdown"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "EXTRA_QUEUED_CALLS"
+  fully_qualified_name: "concurrent.futures.process.EXTRA_QUEUED_CALLS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_MAX_WINDOWS_WORKERS"
+  fully_qualified_name: "concurrent.futures.process._MAX_WINDOWS_WORKERS"
+  type_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+}
+vars {
+  name: "_system_limits_checked"
+  fully_qualified_name: "concurrent.futures.process._system_limits_checked"
+  type_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "_system_limited"
+  fully_qualified_name: "concurrent.futures.process._system_limited"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.bool,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}

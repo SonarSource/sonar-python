@@ -1,0 +1,624 @@
+fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base"
+classes {
+  name: "CipherContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext.update"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "update_into"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext.update_into"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.CipherContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "AEADCipherContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "authenticate_additional_data"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADCipherContext.authenticate_additional_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "AEADDecryptionContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "finalize_with_tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext.finalize_with_tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "AEADEncryptionContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext.tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "Cipher"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base.Cipher"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+      }
+    }
+    parameters {
+      name: "mode"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.ciphers.modes.Mode,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+          fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "encryptor"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher.encryptor"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "decryptor"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher.decryptor"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_wrap_ctx"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher._wrap_ctx"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "encrypt"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher.algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"
+    }
+  }
+  attributes {
+    name: "mode"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.Cipher.mode"
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.ciphers.modes.Mode,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.modes.Mode"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "_CipherContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext.update"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "update_into"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext.update_into"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._CipherContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_AEADCipherContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  methods {
+    name: "_check_limit"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._check_limit"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "data_size"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.update"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "update_into"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.update_into"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "buf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "finalize"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.finalize"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+  }
+  methods {
+    name: "finalize_with_tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.finalize_with_tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "tag"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  methods {
+    name: "authenticate_additional_data"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext.authenticate_additional_data"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "_ctx"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._ctx"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_bytes_processed"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._bytes_processed"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_aad_bytes_processed"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._aad_bytes_processed"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._tag"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_updated"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext._updated"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "_AEADEncryptionContext"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADEncryptionContext"
+  super_classes: "cryptography.hazmat.primitives.ciphers.base._AEADCipherContext"
+  methods {
+    name: "tag"
+    fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADEncryptionContext.tag"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.ciphers.base._AEADEncryptionContext"
+        fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base._AEADEncryptionContext"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  has_decorators: true
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.ciphers.base.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

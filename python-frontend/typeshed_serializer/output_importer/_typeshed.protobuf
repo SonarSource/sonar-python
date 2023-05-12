@@ -1,0 +1,1495 @@
+fully_qualified_name: "_typeshed"
+classes {
+  name: "AbstractSet"
+  fully_qualified_name: "typing.AbstractSet"
+  super_classes: "typing.Collection"
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "typing.AbstractSet.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "_hash"
+    fully_qualified_name: "typing.AbstractSet._hash"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "typing.AbstractSet.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "typing.AbstractSet.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "typing.AbstractSet.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "typing.AbstractSet.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__and__"
+    fully_qualified_name: "typing.AbstractSet.__and__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__or__"
+    fully_qualified_name: "typing.AbstractSet.__or__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "typing.AbstractSet.__sub__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "__xor__"
+    fully_qualified_name: "typing.AbstractSet.__xor__"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Union[typing._T_co,typing._T]]"
+      args {
+        pretty_printed_name: "Union[typing._T_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T]"
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+  }
+  methods {
+    name: "isdisjoint"
+    fully_qualified_name: "typing.AbstractSet.isdisjoint"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.AbstractSet[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.AbstractSet"
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+  }
+  is_generic: true
+}
+classes {
+  name: "IdentityFunction"
+  fully_qualified_name: "_typeshed.IdentityFunction"
+  super_classes: "builtins.object"
+  methods {
+    name: "__call__"
+    fully_qualified_name: "_typeshed.IdentityFunction.__call__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.IdentityFunction"
+        fully_qualified_name: "_typeshed.IdentityFunction"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "SupportsNext"
+  fully_qualified_name: "_typeshed.SupportsNext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__next__"
+    fully_qualified_name: "_typeshed.SupportsNext.__next__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsNext[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsNext"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsAnext"
+  fully_qualified_name: "_typeshed.SupportsAnext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__anext__"
+    fully_qualified_name: "_typeshed.SupportsAnext.__anext__"
+    return_annotation {
+      pretty_printed_name: "typing.Awaitable[_typeshed._T_co]"
+      args {
+        pretty_printed_name: "_typeshed._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Awaitable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsAnext[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsAnext"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsDunderLT"
+  fully_qualified_name: "_typeshed.SupportsDunderLT"
+  super_classes: "builtins.object"
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "_typeshed.SupportsDunderLT.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsDunderLT[_typeshed._T_contra]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsDunderLT"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsDunderGT"
+  fully_qualified_name: "_typeshed.SupportsDunderGT"
+  super_classes: "builtins.object"
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "_typeshed.SupportsDunderGT.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsDunderGT[_typeshed._T_contra]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsDunderGT"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsDunderLE"
+  fully_qualified_name: "_typeshed.SupportsDunderLE"
+  super_classes: "builtins.object"
+  methods {
+    name: "__le__"
+    fully_qualified_name: "_typeshed.SupportsDunderLE.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsDunderLE[_typeshed._T_contra]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsDunderLE"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsDunderGE"
+  fully_qualified_name: "_typeshed.SupportsDunderGE"
+  super_classes: "builtins.object"
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "_typeshed.SupportsDunderGE.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsDunderGE[_typeshed._T_contra]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsDunderGE"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsAllComparisons"
+  fully_qualified_name: "_typeshed.SupportsAllComparisons"
+  super_classes: "_typeshed.SupportsDunderLT"
+  super_classes: "_typeshed.SupportsDunderGT"
+  super_classes: "_typeshed.SupportsDunderLE"
+  super_classes: "_typeshed.SupportsDunderGE"
+  is_protocol: true
+}
+classes {
+  name: "SupportsAdd"
+  fully_qualified_name: "_typeshed.SupportsAdd"
+  super_classes: "builtins.object"
+  methods {
+    name: "__add__"
+    fully_qualified_name: "_typeshed.SupportsAdd.__add__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsAdd[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsAdd"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsRAdd"
+  fully_qualified_name: "_typeshed.SupportsRAdd"
+  super_classes: "builtins.object"
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "_typeshed.SupportsRAdd.__radd__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRAdd[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsRAdd"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsSub"
+  fully_qualified_name: "_typeshed.SupportsSub"
+  super_classes: "builtins.object"
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "_typeshed.SupportsSub.__sub__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsSub[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsSub"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsRSub"
+  fully_qualified_name: "_typeshed.SupportsRSub"
+  super_classes: "builtins.object"
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "_typeshed.SupportsRSub.__rsub__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRSub[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsRSub"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsDivMod"
+  fully_qualified_name: "_typeshed.SupportsDivMod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "_typeshed.SupportsDivMod.__divmod__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsDivMod[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsDivMod"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsRDivMod"
+  fully_qualified_name: "_typeshed.SupportsRDivMod"
+  super_classes: "builtins.object"
+  methods {
+    name: "__rdivmod__"
+    fully_qualified_name: "_typeshed.SupportsRDivMod.__rdivmod__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRDivMod[_typeshed._T_contra,_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsRDivMod"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsIter"
+  fully_qualified_name: "_typeshed.SupportsIter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "_typeshed.SupportsIter.__iter__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsIter[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsIter"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsAiter"
+  fully_qualified_name: "_typeshed.SupportsAiter"
+  super_classes: "builtins.object"
+  methods {
+    name: "__aiter__"
+    fully_qualified_name: "_typeshed.SupportsAiter.__aiter__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsAiter[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsAiter"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsLenAndGetItem"
+  fully_qualified_name: "_typeshed.SupportsLenAndGetItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__len__"
+    fully_qualified_name: "_typeshed.SupportsLenAndGetItem.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsLenAndGetItem[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsLenAndGetItem"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "_typeshed.SupportsLenAndGetItem.__getitem__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsLenAndGetItem[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsLenAndGetItem"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsTrunc"
+  fully_qualified_name: "_typeshed.SupportsTrunc"
+  super_classes: "builtins.object"
+  methods {
+    name: "__trunc__"
+    fully_qualified_name: "_typeshed.SupportsTrunc.__trunc__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsTrunc"
+        fully_qualified_name: "_typeshed.SupportsTrunc"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "SupportsItems"
+  fully_qualified_name: "_typeshed.SupportsItems"
+  super_classes: "builtins.object"
+  methods {
+    name: "items"
+    fully_qualified_name: "_typeshed.SupportsItems.items"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Tuple[_typeshed._KT_co,_typeshed._VT_co]]"
+      args {
+        pretty_printed_name: "Tuple[_typeshed._KT_co,_typeshed._VT_co]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "_typeshed._KT_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsItems[_typeshed._KT_co,_typeshed._VT_co]"
+        args {
+          pretty_printed_name: "_typeshed._KT_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsItems"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsKeysAndGetItem"
+  fully_qualified_name: "_typeshed.SupportsKeysAndGetItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "keys"
+    fully_qualified_name: "_typeshed.SupportsKeysAndGetItem.keys"
+    return_annotation {
+      pretty_printed_name: "typing.Iterable[_typeshed._KT]"
+      args {
+        pretty_printed_name: "_typeshed._KT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsKeysAndGetItem[_typeshed._KT,_typeshed._VT_co]"
+        args {
+          pretty_printed_name: "_typeshed._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsKeysAndGetItem"
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "_typeshed.SupportsKeysAndGetItem.__getitem__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._VT_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsKeysAndGetItem[_typeshed._KT,_typeshed._VT_co]"
+        args {
+          pretty_printed_name: "_typeshed._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsKeysAndGetItem"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._KT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsGetItem"
+  fully_qualified_name: "_typeshed.SupportsGetItem"
+  super_classes: "builtins.object"
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "_typeshed.SupportsGetItem.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsGetItem[_typeshed._KT_contra,_typeshed._VT_co]"
+        args {
+          pretty_printed_name: "_typeshed._KT_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsGetItem"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "_typeshed.SupportsGetItem.__getitem__"
+    return_annotation {
+      pretty_printed_name: "_typeshed._VT_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsGetItem[_typeshed._KT_contra,_typeshed._VT_co]"
+        args {
+          pretty_printed_name: "_typeshed._KT_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsGetItem"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._KT_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsItemAccess"
+  fully_qualified_name: "_typeshed.SupportsItemAccess"
+  super_classes: "_typeshed.SupportsGetItem"
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "_typeshed.SupportsItemAccess.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsItemAccess[_typeshed._KT_contra,_typeshed._VT]"
+        args {
+          pretty_printed_name: "_typeshed._KT_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsItemAccess"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._KT_contra"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._VT"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "_typeshed.SupportsItemAccess.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsItemAccess[_typeshed._KT_contra,_typeshed._VT]"
+        args {
+          pretty_printed_name: "_typeshed._KT_contra"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "_typeshed._VT"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsItemAccess"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._KT_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "HasFileno"
+  fully_qualified_name: "_typeshed.HasFileno"
+  super_classes: "builtins.object"
+  methods {
+    name: "fileno"
+    fully_qualified_name: "_typeshed.HasFileno.fileno"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.HasFileno"
+        fully_qualified_name: "_typeshed.HasFileno"
+      }
+    }
+  }
+  is_protocol: true
+}
+classes {
+  name: "SupportsRead"
+  fully_qualified_name: "_typeshed.SupportsRead"
+  super_classes: "builtins.object"
+  methods {
+    name: "read"
+    fully_qualified_name: "_typeshed.SupportsRead.read"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsRead[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsRead"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsReadline"
+  fully_qualified_name: "_typeshed.SupportsReadline"
+  super_classes: "builtins.object"
+  methods {
+    name: "readline"
+    fully_qualified_name: "_typeshed.SupportsReadline.readline"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsReadline[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsReadline"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsNoArgReadline"
+  fully_qualified_name: "_typeshed.SupportsNoArgReadline"
+  super_classes: "builtins.object"
+  methods {
+    name: "readline"
+    fully_qualified_name: "_typeshed.SupportsNoArgReadline.readline"
+    return_annotation {
+      pretty_printed_name: "_typeshed._T_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsNoArgReadline[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsNoArgReadline"
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "SupportsWrite"
+  fully_qualified_name: "_typeshed.SupportsWrite"
+  super_classes: "builtins.object"
+  methods {
+    name: "write"
+    fully_qualified_name: "_typeshed.SupportsWrite.write"
+    return_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.SupportsWrite[_typeshed._T_contra]"
+        args {
+          pretty_printed_name: "_typeshed._T_contra"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "_typeshed.SupportsWrite"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "_typeshed._T_contra"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  is_generic: true
+  is_protocol: true
+}
+classes {
+  name: "NoneType"
+  fully_qualified_name: "_typeshed.NoneType"
+  super_classes: "builtins.object"
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "_typeshed.NoneType.__bool__"
+    return_annotation {
+      pretty_printed_name: "Literal[builtins.bool]"
+      kind: LITERAL
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "_typeshed.NoneType"
+        fully_qualified_name: "_typeshed.NoneType"
+      }
+    }
+  }
+  has_decorators: true
+}
+classes {
+  name: "structseq"
+  fully_qualified_name: "_typeshed.structseq"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "_typeshed.structseq.__new__"
+    return_annotation {
+      pretty_printed_name: "_typeshed.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[_typeshed.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "_typeshed.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "sequence"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[_typeshed._T_co]"
+        args {
+          pretty_printed_name: "_typeshed._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "dict"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "n_fields"
+    fully_qualified_name: "_typeshed.structseq.n_fields"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "n_unnamed_fields"
+    fully_qualified_name: "_typeshed.structseq.n_unnamed_fields"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "n_sequence_fields"
+    fully_qualified_name: "_typeshed.structseq.n_sequence_fields"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "DataclassInstance"
+  fully_qualified_name: "_typeshed.DataclassInstance"
+  super_classes: "builtins.object"
+  is_protocol: true
+  attributes {
+    name: "__dataclass_fields__"
+    fully_qualified_name: "_typeshed.DataclassInstance.__dataclass_fields__"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,dataclasses.Field[Any]]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "dataclasses.Field[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "dataclasses.Field"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+vars {
+  name: "__path__"
+  fully_qualified_name: "_typeshed.__path__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "_typeshed.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

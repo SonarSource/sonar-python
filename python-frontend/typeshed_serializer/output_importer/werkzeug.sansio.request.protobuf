@@ -1,0 +1,1244 @@
+fully_qualified_name: "werkzeug.sansio.request"
+classes {
+  name: "Request"
+  fully_qualified_name: "werkzeug.sansio.request.Request"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.sansio.request.Request.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    parameters {
+      name: "method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "scheme"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "server"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Tuple[builtins.str,Union[builtins.int,None]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Tuple[builtins.str,Union[builtins.int,None]]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "Union[builtins.int,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "root_path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "path"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "query_string"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "headers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+        fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+      }
+    }
+    parameters {
+      name: "remote_addr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.sansio.request.Request.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "args"
+    fully_qualified_name: "werkzeug.sansio.request.Request.args"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "access_route"
+    fully_qualified_name: "werkzeug.sansio.request.Request.access_route"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "full_path"
+    fully_qualified_name: "werkzeug.sansio.request.Request.full_path"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "is_secure"
+    fully_qualified_name: "werkzeug.sansio.request.Request.is_secure"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "url"
+    fully_qualified_name: "werkzeug.sansio.request.Request.url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "base_url"
+    fully_qualified_name: "werkzeug.sansio.request.Request.base_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "root_url"
+    fully_qualified_name: "werkzeug.sansio.request.Request.root_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "host_url"
+    fully_qualified_name: "werkzeug.sansio.request.Request.host_url"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "host"
+    fully_qualified_name: "werkzeug.sansio.request.Request.host"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "cookies"
+    fully_qualified_name: "werkzeug.sansio.request.Request.cookies"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.ImmutableMultiDict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.datastructures.structures.ImmutableMultiDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "content_length"
+    fully_qualified_name: "werkzeug.sansio.request.Request.content_length"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "_parse_content_type"
+    fully_qualified_name: "werkzeug.sansio.request.Request._parse_content_type"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+  }
+  methods {
+    name: "mimetype"
+    fully_qualified_name: "werkzeug.sansio.request.Request.mimetype"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "mimetype_params"
+    fully_qualified_name: "werkzeug.sansio.request.Request.mimetype_params"
+    return_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "pragma"
+    fully_qualified_name: "werkzeug.sansio.request.Request.pragma"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+      fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "accept_mimetypes"
+    fully_qualified_name: "werkzeug.sansio.request.Request.accept_mimetypes"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.accept.MIMEAccept"
+      fully_qualified_name: "werkzeug.datastructures.accept.MIMEAccept"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "accept_charsets"
+    fully_qualified_name: "werkzeug.sansio.request.Request.accept_charsets"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.accept.CharsetAccept"
+      fully_qualified_name: "werkzeug.datastructures.accept.CharsetAccept"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "accept_encodings"
+    fully_qualified_name: "werkzeug.sansio.request.Request.accept_encodings"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.accept.Accept"
+      fully_qualified_name: "werkzeug.datastructures.accept.Accept"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "accept_languages"
+    fully_qualified_name: "werkzeug.sansio.request.Request.accept_languages"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.accept.LanguageAccept"
+      fully_qualified_name: "werkzeug.datastructures.accept.LanguageAccept"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "cache_control"
+    fully_qualified_name: "werkzeug.sansio.request.Request.cache_control"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+      fully_qualified_name: "werkzeug.datastructures.cache_control.RequestCacheControl"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "if_match"
+    fully_qualified_name: "werkzeug.sansio.request.Request.if_match"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.etag.ETags"
+      fully_qualified_name: "werkzeug.datastructures.etag.ETags"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "if_none_match"
+    fully_qualified_name: "werkzeug.sansio.request.Request.if_none_match"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.etag.ETags"
+      fully_qualified_name: "werkzeug.datastructures.etag.ETags"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "if_modified_since"
+    fully_qualified_name: "werkzeug.sansio.request.Request.if_modified_since"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "if_unmodified_since"
+    fully_qualified_name: "werkzeug.sansio.request.Request.if_unmodified_since"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "if_range"
+    fully_qualified_name: "werkzeug.sansio.request.Request.if_range"
+    return_annotation {
+      pretty_printed_name: "werkzeug.datastructures.range.IfRange"
+      fully_qualified_name: "werkzeug.datastructures.range.IfRange"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "range"
+    fully_qualified_name: "werkzeug.sansio.request.Request.range"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.range.Range,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.range.Range"
+        fully_qualified_name: "werkzeug.datastructures.range.Range"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "user_agent"
+    fully_qualified_name: "werkzeug.sansio.request.Request.user_agent"
+    return_annotation {
+      pretty_printed_name: "werkzeug.user_agent.UserAgent"
+      fully_qualified_name: "werkzeug.user_agent.UserAgent"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "authorization"
+    fully_qualified_name: "werkzeug.sansio.request.Request.authorization"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.datastructures.auth.Authorization,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.datastructures.auth.Authorization"
+        fully_qualified_name: "werkzeug.datastructures.auth.Authorization"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "is_json"
+    fully_qualified_name: "werkzeug.sansio.request.Request.is_json"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.sansio.request.Request"
+        fully_qualified_name: "werkzeug.sansio.request.Request"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  overloaded_methods {
+    name: "charset"
+    fullname: "werkzeug.sansio.request.Request.charset"
+    definitions {
+      name: "charset"
+      fully_qualified_name: "werkzeug.sansio.request.Request.charset"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "charset"
+      fully_qualified_name: "werkzeug.sansio.request.Request.charset"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "charset.setter"
+    }
+  }
+  overloaded_methods {
+    name: "encoding_errors"
+    fullname: "werkzeug.sansio.request.Request.encoding_errors"
+    definitions {
+      name: "encoding_errors"
+      fully_qualified_name: "werkzeug.sansio.request.Request.encoding_errors"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "encoding_errors"
+      fully_qualified_name: "werkzeug.sansio.request.Request.encoding_errors"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "encoding_errors.setter"
+    }
+  }
+  overloaded_methods {
+    name: "url_charset"
+    fullname: "werkzeug.sansio.request.Request.url_charset"
+    definitions {
+      name: "url_charset"
+      fully_qualified_name: "werkzeug.sansio.request.Request.url_charset"
+      return_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "property"
+      is_overload: true
+      is_property: true
+    }
+    definitions {
+      name: "url_charset"
+      fully_qualified_name: "werkzeug.sansio.request.Request.url_charset"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "werkzeug.sansio.request.Request"
+          fully_qualified_name: "werkzeug.sansio.request.Request"
+        }
+      }
+      parameters {
+        name: "value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "url_charset.setter"
+    }
+  }
+  attributes {
+    name: "_charset"
+    fully_qualified_name: "werkzeug.sansio.request.Request._charset"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_encoding_errors"
+    fully_qualified_name: "werkzeug.sansio.request.Request._encoding_errors"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_url_charset"
+    fully_qualified_name: "werkzeug.sansio.request.Request._url_charset"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "parameter_storage_class"
+    fully_qualified_name: "werkzeug.sansio.request.Request.parameter_storage_class"
+    type_annotation {
+      pretty_printed_name: "Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  attributes {
+    name: "dict_storage_class"
+    fully_qualified_name: "werkzeug.sansio.request.Request.dict_storage_class"
+    type_annotation {
+      pretty_printed_name: "Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.MultiDict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.datastructures.structures.MultiDict"
+      }
+    }
+  }
+  attributes {
+    name: "list_storage_class"
+    fully_qualified_name: "werkzeug.sansio.request.Request.list_storage_class"
+    type_annotation {
+      pretty_printed_name: "Type[builtins.list[Any]]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "builtins.list[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.list"
+      }
+    }
+  }
+  attributes {
+    name: "user_agent_class"
+    fully_qualified_name: "werkzeug.sansio.request.Request.user_agent_class"
+    type_annotation {
+      pretty_printed_name: "Type[werkzeug.user_agent.UserAgent]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug.user_agent.UserAgent"
+        fully_qualified_name: "werkzeug.user_agent.UserAgent"
+      }
+    }
+  }
+  attributes {
+    name: "trusted_hosts"
+    fully_qualified_name: "werkzeug.sansio.request.Request.trusted_hosts"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "content_type"
+    fully_qualified_name: "werkzeug.sansio.request.Request.content_type"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "content_encoding"
+    fully_qualified_name: "werkzeug.sansio.request.Request.content_encoding"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "content_md5"
+    fully_qualified_name: "werkzeug.sansio.request.Request.content_md5"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "referrer"
+    fully_qualified_name: "werkzeug.sansio.request.Request.referrer"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "date"
+    fully_qualified_name: "werkzeug.sansio.request.Request.date"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[Union[datetime.datetime,None]]"
+      args {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "max_forwards"
+    fully_qualified_name: "werkzeug.sansio.request.Request.max_forwards"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "origin"
+    fully_qualified_name: "werkzeug.sansio.request.Request.origin"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "access_control_request_headers"
+    fully_qualified_name: "werkzeug.sansio.request.Request.access_control_request_headers"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[werkzeug.datastructures.structures.HeaderSet]"
+      args {
+        pretty_printed_name: "werkzeug.datastructures.structures.HeaderSet"
+        fully_qualified_name: "werkzeug.datastructures.structures.HeaderSet"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "access_control_request_method"
+    fully_qualified_name: "werkzeug.sansio.request.Request.access_control_request_method"
+    type_annotation {
+      pretty_printed_name: "werkzeug.utils.header_property[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "werkzeug.utils.header_property"
+    }
+  }
+  attributes {
+    name: "method"
+    fully_qualified_name: "werkzeug.sansio.request.Request.method"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "scheme"
+    fully_qualified_name: "werkzeug.sansio.request.Request.scheme"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "server"
+    fully_qualified_name: "werkzeug.sansio.request.Request.server"
+    type_annotation {
+      pretty_printed_name: "Union[Tuple[builtins.str,Union[builtins.int,None]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Tuple[builtins.str,Union[builtins.int,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "root_path"
+    fully_qualified_name: "werkzeug.sansio.request.Request.root_path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "path"
+    fully_qualified_name: "werkzeug.sansio.request.Request.path"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "query_string"
+    fully_qualified_name: "werkzeug.sansio.request.Request.query_string"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "headers"
+    fully_qualified_name: "werkzeug.sansio.request.Request.headers"
+    type_annotation {
+      pretty_printed_name: "werkzeug.datastructures.headers.Headers"
+      fully_qualified_name: "werkzeug.datastructures.headers.Headers"
+    }
+  }
+  attributes {
+    name: "remote_addr"
+    fully_qualified_name: "werkzeug.sansio.request.Request.remote_addr"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_parsed_content_type"
+    fully_qualified_name: "werkzeug.sansio.request.Request._parsed_content_type"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.dict[builtins.str,builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.sansio.request.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

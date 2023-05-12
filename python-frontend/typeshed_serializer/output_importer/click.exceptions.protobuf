@@ -1,0 +1,906 @@
+fully_qualified_name: "click.exceptions"
+classes {
+  name: "ClickException"
+  fully_qualified_name: "click.exceptions.ClickException"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.ClickException.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.ClickException"
+        fully_qualified_name: "click.exceptions.ClickException"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "format_message"
+    fully_qualified_name: "click.exceptions.ClickException.format_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.ClickException"
+        fully_qualified_name: "click.exceptions.ClickException"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "click.exceptions.ClickException.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.exceptions.ClickException"
+        fully_qualified_name: "click.exceptions.ClickException"
+      }
+    }
+  }
+  methods {
+    name: "show"
+    fully_qualified_name: "click.exceptions.ClickException.show"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.ClickException"
+        fully_qualified_name: "click.exceptions.ClickException"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "exit_code"
+    fully_qualified_name: "click.exceptions.ClickException.exit_code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "click.exceptions.ClickException.message"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "UsageError"
+  fully_qualified_name: "click.exceptions.UsageError"
+  super_classes: "click.exceptions.ClickException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.UsageError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.UsageError"
+        fully_qualified_name: "click.exceptions.UsageError"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "show"
+    fully_qualified_name: "click.exceptions.UsageError.show"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.UsageError"
+        fully_qualified_name: "click.exceptions.UsageError"
+      }
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.IO[Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.IO[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "typing.IO"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "exit_code"
+    fully_qualified_name: "click.exceptions.UsageError.exit_code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "ctx"
+    fully_qualified_name: "click.exceptions.UsageError.ctx"
+    type_annotation {
+      pretty_printed_name: "Union[click.core.Context,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Context"
+        fully_qualified_name: "click.core.Context"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "cmd"
+    fully_qualified_name: "click.exceptions.UsageError.cmd"
+    type_annotation {
+      pretty_printed_name: "Union[click.core.Command,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Command"
+        fully_qualified_name: "click.core.Command"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "BadParameter"
+  fully_qualified_name: "click.exceptions.BadParameter"
+  super_classes: "click.exceptions.UsageError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.BadParameter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.BadParameter"
+        fully_qualified_name: "click.exceptions.BadParameter"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "param"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Parameter,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Parameter"
+          fully_qualified_name: "click.core.Parameter"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "param_hint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "format_message"
+    fully_qualified_name: "click.exceptions.BadParameter.format_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.BadParameter"
+        fully_qualified_name: "click.exceptions.BadParameter"
+      }
+    }
+  }
+  attributes {
+    name: "param"
+    fully_qualified_name: "click.exceptions.BadParameter.param"
+    type_annotation {
+      pretty_printed_name: "Union[click.core.Parameter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "click.core.Parameter"
+        fully_qualified_name: "click.core.Parameter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "param_hint"
+    fully_qualified_name: "click.exceptions.BadParameter.param_hint"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "MissingParameter"
+  fully_qualified_name: "click.exceptions.MissingParameter"
+  super_classes: "click.exceptions.BadParameter"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.MissingParameter.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.MissingParameter"
+        fully_qualified_name: "click.exceptions.MissingParameter"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "param"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Parameter,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Parameter"
+          fully_qualified_name: "click.core.Parameter"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "param_hint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "param_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "format_message"
+    fully_qualified_name: "click.exceptions.MissingParameter.format_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.MissingParameter"
+        fully_qualified_name: "click.exceptions.MissingParameter"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "click.exceptions.MissingParameter.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "click.exceptions.MissingParameter"
+        fully_qualified_name: "click.exceptions.MissingParameter"
+      }
+    }
+  }
+  attributes {
+    name: "param_type"
+    fully_qualified_name: "click.exceptions.MissingParameter.param_type"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "NoSuchOption"
+  fully_qualified_name: "click.exceptions.NoSuchOption"
+  super_classes: "click.exceptions.UsageError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.NoSuchOption.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.NoSuchOption"
+        fully_qualified_name: "click.exceptions.NoSuchOption"
+      }
+    }
+    parameters {
+      name: "option_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "possibilities"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Sequence[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Sequence"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "format_message"
+    fully_qualified_name: "click.exceptions.NoSuchOption.format_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.NoSuchOption"
+        fully_qualified_name: "click.exceptions.NoSuchOption"
+      }
+    }
+  }
+  attributes {
+    name: "option_name"
+    fully_qualified_name: "click.exceptions.NoSuchOption.option_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "possibilities"
+    fully_qualified_name: "click.exceptions.NoSuchOption.possibilities"
+    type_annotation {
+      pretty_printed_name: "Union[typing.Sequence[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "BadOptionUsage"
+  fully_qualified_name: "click.exceptions.BadOptionUsage"
+  super_classes: "click.exceptions.UsageError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.BadOptionUsage.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.BadOptionUsage"
+        fully_qualified_name: "click.exceptions.BadOptionUsage"
+      }
+    }
+    parameters {
+      name: "option_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "ctx"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[click.core.Context,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "click.core.Context"
+          fully_qualified_name: "click.core.Context"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "option_name"
+    fully_qualified_name: "click.exceptions.BadOptionUsage.option_name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "BadArgumentUsage"
+  fully_qualified_name: "click.exceptions.BadArgumentUsage"
+  super_classes: "click.exceptions.UsageError"
+}
+classes {
+  name: "FileError"
+  fully_qualified_name: "click.exceptions.FileError"
+  super_classes: "click.exceptions.ClickException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.FileError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.FileError"
+        fully_qualified_name: "click.exceptions.FileError"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "hint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "format_message"
+    fully_qualified_name: "click.exceptions.FileError.format_message"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.FileError"
+        fully_qualified_name: "click.exceptions.FileError"
+      }
+    }
+  }
+  attributes {
+    name: "ui_filename"
+    fully_qualified_name: "click.exceptions.FileError.ui_filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "filename"
+    fully_qualified_name: "click.exceptions.FileError.filename"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "Abort"
+  fully_qualified_name: "click.exceptions.Abort"
+  super_classes: "builtins.RuntimeError"
+}
+classes {
+  name: "Exit"
+  fully_qualified_name: "click.exceptions.Exit"
+  super_classes: "builtins.RuntimeError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "click.exceptions.Exit.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "click.exceptions.Exit"
+        fully_qualified_name: "click.exceptions.Exit"
+      }
+    }
+    parameters {
+      name: "code"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "click.exceptions.Exit.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "exit_code"
+    fully_qualified_name: "click.exceptions.Exit.exit_code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "_"
+  fully_qualified_name: "gettext.gettext"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+  parameters {
+    name: "message"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+functions {
+  name: "_join_param_hints"
+  fully_qualified_name: "click.exceptions._join_param_hints"
+  return_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+  parameters {
+    name: "param_hint"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Sequence[builtins.str],builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Sequence[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Sequence"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "click.exceptions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

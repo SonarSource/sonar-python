@@ -1,0 +1,81 @@
+fully_qualified_name: "filelock._error"
+classes {
+  name: "Timeout"
+  fully_qualified_name: "filelock._error.Timeout"
+  super_classes: "builtins.TimeoutError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "filelock._error.Timeout.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "filelock._error.Timeout"
+        fully_qualified_name: "filelock._error.Timeout"
+      }
+    }
+    parameters {
+      name: "lock_file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "filelock._error.Timeout.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "filelock._error.Timeout"
+        fully_qualified_name: "filelock._error.Timeout"
+      }
+    }
+  }
+  attributes {
+    name: "lock_file"
+    fully_qualified_name: "filelock._error.Timeout.lock_file"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "filelock._error.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "filelock._error.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

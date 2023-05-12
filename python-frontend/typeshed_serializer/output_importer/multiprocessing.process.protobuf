@@ -1,0 +1,438 @@
+fully_qualified_name: "multiprocessing.process"
+classes {
+  name: "BaseProcess"
+  fully_qualified_name: "multiprocessing.process.BaseProcess"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    parameters {
+      name: "group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "target"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "daemon"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.run"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "start"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.start"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "terminate"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.terminate"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "kill"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.kill"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "close"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.close"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "join"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.join"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    parameters {
+      name: "timeout"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "is_alive"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.is_alive"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+  }
+  methods {
+    name: "exitcode"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.exitcode"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "ident"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.ident"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "pid"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.pid"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.int,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "sentinel"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.sentinel"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "multiprocessing.process.BaseProcess"
+        fully_qualified_name: "multiprocessing.process.BaseProcess"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "daemon"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.daemon"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "authkey"
+    fully_qualified_name: "multiprocessing.process.BaseProcess.authkey"
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+  attributes {
+    name: "_identity"
+    fully_qualified_name: "multiprocessing.process.BaseProcess._identity"
+    type_annotation {
+      pretty_printed_name: "builtins.tuple[builtins.int]"
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      fully_qualified_name: "builtins.tuple"
+    }
+  }
+}
+functions {
+  name: "current_process"
+  fully_qualified_name: "multiprocessing.process.current_process"
+  return_annotation {
+    pretty_printed_name: "multiprocessing.process.BaseProcess"
+    fully_qualified_name: "multiprocessing.process.BaseProcess"
+  }
+}
+functions {
+  name: "active_children"
+  fully_qualified_name: "multiprocessing.process.active_children"
+  return_annotation {
+    pretty_printed_name: "builtins.list[multiprocessing.process.BaseProcess]"
+    args {
+      pretty_printed_name: "multiprocessing.process.BaseProcess"
+      fully_qualified_name: "multiprocessing.process.BaseProcess"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+functions {
+  name: "parent_process"
+  fully_qualified_name: "multiprocessing.process.parent_process"
+  return_annotation {
+    pretty_printed_name: "Union[multiprocessing.process.BaseProcess,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "multiprocessing.process.BaseProcess"
+      fully_qualified_name: "multiprocessing.process.BaseProcess"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "multiprocessing.process.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "__all__"
+  fully_qualified_name: "multiprocessing.process.__all__"
+  type_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}

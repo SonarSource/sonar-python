@@ -1,0 +1,5071 @@
+fully_qualified_name: "google.protobuf.struct_pb2"
+classes {
+  name: "google___protobuf___descriptor___Descriptor"
+  fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+  super_classes: "google.protobuf.descriptor._NestedDescriptorBase"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "full_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "containing_type"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "fields"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "nested_types"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "enum_types"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "is_extendable"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "extension_ranges"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "oneofs"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_start"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_end"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "syntax"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+        fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "full_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "containing_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "fields"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "nested_types"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "enum_types"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "extensions"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "is_extendable"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "extension_ranges"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "oneofs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_end"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "syntax"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "EnumValueName"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.EnumValueName"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "enum"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "CopyToProto"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.CopyToProto"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetOptions"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.GetOptions"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.descriptor_pb2.MessageOptions"
+      fully_qualified_name: "google.protobuf.descriptor_pb2.MessageOptions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+        fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "fields"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.fields"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "fields_by_number"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.fields_by_number"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "fields_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.fields_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nested_types"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.nested_types"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "nested_types_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.nested_types_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "enum_types"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.enum_types"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "enum_types_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.enum_types_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "enum_values_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.enum_values_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extensions"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.extensions"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extensions_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.extensions_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "is_extendable"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.is_extendable"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extension_ranges"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.extension_ranges"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "oneofs"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.oneofs"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "oneofs_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.oneofs_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "syntax"
+    fully_qualified_name: "google.protobuf.descriptor.Descriptor.syntax"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "google___protobuf___descriptor___EnumDescriptor"
+  fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+  super_classes: "google.protobuf.descriptor._NestedDescriptorBase"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "full_name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "containing_type"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_start"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_end"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "full_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "containing_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "file"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_end"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "CopyToProto"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.CopyToProto"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetOptions"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.GetOptions"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.descriptor_pb2.EnumOptions"
+      fully_qualified_name: "google.protobuf.descriptor_pb2.EnumOptions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "values"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.values"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "values_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.values_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "values_by_number"
+    fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor.values_by_number"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "google___protobuf___descriptor___FileDescriptor"
+  fully_qualified_name: "google.protobuf.descriptor.FileDescriptor"
+  super_classes: "google.protobuf.descriptor.DescriptorBase"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.__new__"
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "package"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "serialized_pb"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "dependencies"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "public_dependencies"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "syntax"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.FileDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.FileDescriptor"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "package"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_options"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "serialized_pb"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "dependencies"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "public_dependencies"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "syntax"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "pool"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "create_key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "CopyToProto"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.CopyToProto"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "proto"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetOptions"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.GetOptions"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.descriptor_pb2.FileOptions"
+      fully_qualified_name: "google.protobuf.descriptor_pb2.FileOptions"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.FileDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.FileDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "_options"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor._options"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "pool"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.pool"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "message_types_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.message_types_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "package"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.package"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "syntax"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.syntax"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "serialized_pb"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.serialized_pb"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "enum_types_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.enum_types_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "extensions_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.extensions_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "services_by_name"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.services_by_name"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "dependencies"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.dependencies"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "public_dependencies"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor.public_dependencies"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "google___protobuf___internal___containers___MessageMap"
+  fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+  super_classes: "typing.MutableMapping"
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    parameters {
+      name: "k"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._K"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "v"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._V"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    parameters {
+      name: "v"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._K"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__getitem__"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers._V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    parameters {
+      name: "k"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._K"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__len__"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[google.protobuf.internal.containers._K]"
+      args {
+        pretty_printed_name: "google.protobuf.internal.containers._K"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_or_create"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.get_or_create"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers._V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._K"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "MergeFrom"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.MergeFrom"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._M"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._M"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "InvalidateIterators"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.InvalidateIterators"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "GetEntryClass"
+    fully_qualified_name: "google.protobuf.internal.containers.MessageMap.GetEntryClass"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.python_message.GeneratedProtocolMessageType"
+      fully_qualified_name: "google.protobuf.internal.python_message.GeneratedProtocolMessageType"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.MessageMap[google.protobuf.internal.containers._K,google.protobuf.internal.containers._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._K"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "google___protobuf___internal___containers___RepeatedCompositeFieldContainer"
+  fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+  super_classes: "google.protobuf.internal.containers.BaseContainer"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "message_listener"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.message_listener.MessageListener"
+        fully_qualified_name: "google.protobuf.internal.message_listener.MessageListener"
+      }
+    }
+    parameters {
+      name: "type_checker"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.add"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.append"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "insert"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.insert"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.extend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "elem_seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "MergeFrom"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.MergeFrom"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._M"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._M"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "remove"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.remove"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "elem"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers._T"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.pop"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getslice__"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.__getslice__"
+    return_annotation {
+      pretty_printed_name: "builtins.list[google.protobuf.internal.containers._T]"
+      args {
+        pretty_printed_name: "google.protobuf.internal.containers._T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "stop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.slice]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.slice"
+          fully_qualified_name: "builtins.slice"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delslice__"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.__delslice__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "start"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "stop"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer.__eq__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.internal.containers._T]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.containers._T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+      }
+    }
+    parameters {
+      name: "other"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper"
+  fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    parameters {
+      name: "enum_type"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+        fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Name"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.Name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    parameters {
+      name: "number"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Value"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.Value"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.keys"
+    return_annotation {
+      pretty_printed_name: "builtins.list[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.values"
+    return_annotation {
+      pretty_printed_name: "builtins.list[google.protobuf.internal.enum_type_wrapper._V]"
+      args {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.items"
+    return_annotation {
+      pretty_printed_name: "builtins.list[Tuple[builtins.str,google.protobuf.internal.enum_type_wrapper._V]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,google.protobuf.internal.enum_type_wrapper._V]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[google.protobuf.internal.enum_type_wrapper._V]"
+        args {
+          pretty_printed_name: "google.protobuf.internal.enum_type_wrapper._V"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+      fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "google___protobuf___internal___well_known_types___ListValue"
+  fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+  super_classes: "builtins.object"
+  methods {
+    name: "__len__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.__len__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "append"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.append"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "extend"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.extend"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    parameters {
+      name: "elem_seq"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    parameters {
+      name: "index"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    parameters {
+      name: "index"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.items"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.ListValue"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_struct"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.add_struct"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "add_list"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.ListValue.add_list"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "google___protobuf___internal___well_known_types___Struct"
+  fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__getitem__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__contains__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "item"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__setitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__setitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "value"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__delitem__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__delitem__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "key"
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__len__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__len__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.__iter__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.keys"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.values"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.items"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_or_create_list"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.get_or_create_list"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "get_or_create_struct"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.get_or_create_struct"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "key"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "update"
+    fully_qualified_name: "google.protobuf.internal.well_known_types.Struct.update"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.internal.well_known_types.Struct"
+        fully_qualified_name: "google.protobuf.internal.well_known_types.Struct"
+      }
+    }
+    parameters {
+      name: "dictionary"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "google___protobuf___message___Message"
+  fully_qualified_name: "google.protobuf.message.Message"
+  super_classes: "builtins.object"
+  methods {
+    name: "__deepcopy__"
+    fully_qualified_name: "google.protobuf.message.Message.__deepcopy__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "memo"
+      kind: POSITIONAL_OR_KEYWORD
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "google.protobuf.message.Message.__eq__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other_msg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "google.protobuf.message.Message.__ne__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other_msg"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "MergeFrom"
+    fully_qualified_name: "google.protobuf.message.Message.MergeFrom"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "other_msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "CopyFrom"
+    fully_qualified_name: "google.protobuf.message.Message.CopyFrom"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "other_msg"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Clear"
+    fully_qualified_name: "google.protobuf.message.Message.Clear"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "SetInParent"
+    fully_qualified_name: "google.protobuf.message.Message.SetInParent"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "IsInitialized"
+    fully_qualified_name: "google.protobuf.message.Message.IsInitialized"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "MergeFromString"
+    fully_qualified_name: "google.protobuf.message.Message.MergeFromString"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "serialized"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.ByteString"
+        fully_qualified_name: "typing.ByteString"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ParseFromString"
+    fully_qualified_name: "google.protobuf.message.Message.ParseFromString"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "serialized"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.ByteString"
+        fully_qualified_name: "typing.ByteString"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "SerializeToString"
+    fully_qualified_name: "google.protobuf.message.Message.SerializeToString"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "deterministic"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "SerializePartialToString"
+    fully_qualified_name: "google.protobuf.message.Message.SerializePartialToString"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "deterministic"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ListFields"
+    fully_qualified_name: "google.protobuf.message.Message.ListFields"
+    return_annotation {
+      pretty_printed_name: "typing.Sequence[Tuple[google.protobuf.descriptor.FieldDescriptor,Any]]"
+      args {
+        pretty_printed_name: "Tuple[google.protobuf.descriptor.FieldDescriptor,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "google.protobuf.descriptor.FieldDescriptor"
+          fully_qualified_name: "google.protobuf.descriptor.FieldDescriptor"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "typing.Sequence"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ByteSize"
+    fully_qualified_name: "google.protobuf.message.Message.ByteSize"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "FromString"
+    fully_qualified_name: "google.protobuf.message.Message.FromString"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.message._M"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[google.protobuf.message._M]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "google.protobuf.message._M"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.ByteString"
+        fully_qualified_name: "typing.ByteString"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "Extensions"
+    fully_qualified_name: "google.protobuf.message.Message.Extensions"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.extension_dict._ExtensionDict[google.protobuf.message._M]"
+      args {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "google.protobuf.internal.extension_dict._ExtensionDict"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message._M"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "HasField"
+    fully_qualified_name: "google.protobuf.message.Message.HasField"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ClearField"
+    fully_qualified_name: "google.protobuf.message.Message.ClearField"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "WhichOneof"
+    fully_qualified_name: "google.protobuf.message.Message.WhichOneof"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "oneof_group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.message.Message.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.message.Message"
+        fully_qualified_name: "google.protobuf.message.Message"
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: VAR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "HasExtension"
+    fullname: "google.protobuf.message.Message.HasExtension"
+    definitions {
+      name: "HasExtension"
+      fully_qualified_name: "google.protobuf.message.Message.HasExtension"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.message._M"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "extension_handle"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.message._M,Any]"
+          args {
+            pretty_printed_name: "google.protobuf.message._M"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "google.protobuf.internal.extension_dict._ExtensionFieldDescriptor"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "HasExtension"
+      fully_qualified_name: "google.protobuf.message.Message.HasExtension"
+      return_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+      parameters {
+        name: "extension_handle"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.descriptor.FieldDescriptor"
+          fully_qualified_name: "google.protobuf.descriptor.FieldDescriptor"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "ClearExtension"
+    fullname: "google.protobuf.message.Message.ClearExtension"
+    definitions {
+      name: "ClearExtension"
+      fully_qualified_name: "google.protobuf.message.Message.ClearExtension"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.message._M"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "extension_handle"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.message._M,Any]"
+          args {
+            pretty_printed_name: "google.protobuf.message._M"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "google.protobuf.internal.extension_dict._ExtensionFieldDescriptor"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "ClearExtension"
+      fully_qualified_name: "google.protobuf.message.Message.ClearExtension"
+      return_annotation {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.message.Message"
+          fully_qualified_name: "google.protobuf.message.Message"
+        }
+      }
+      parameters {
+        name: "extension_handle"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "google.protobuf.descriptor.FieldDescriptor"
+          fully_qualified_name: "google.protobuf.descriptor.FieldDescriptor"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.message.Message.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+      fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "typing___Iterable"
+  fully_qualified_name: "typing.Iterable"
+  super_classes: "builtins.object"
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "typing.Iterable.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[typing._T_co]"
+      args {
+        pretty_printed_name: "typing._T_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.Iterable[typing._T_co]"
+        args {
+          pretty_printed_name: "typing._T_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  has_decorators: true
+  is_generic: true
+  is_protocol: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "typing___Mapping"
+  fully_qualified_name: "typing.Mapping"
+  super_classes: "typing.Collection"
+  methods {
+    name: "__getitem__"
+    fully_qualified_name: "typing.Mapping.__getitem__"
+    return_annotation {
+      pretty_printed_name: "typing._VT_co"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "k"
+      type_annotation {
+        pretty_printed_name: "typing._KT"
+        kind: TYPE_VAR
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+    is_abstract: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "items"
+    fully_qualified_name: "typing.Mapping.items"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[Tuple[typing._KT,typing._VT_co]]"
+      args {
+        pretty_printed_name: "Tuple[typing._KT,typing._VT_co]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "keys"
+    fully_qualified_name: "typing.Mapping.keys"
+    return_annotation {
+      pretty_printed_name: "typing.AbstractSet[typing._KT]"
+      args {
+        pretty_printed_name: "typing._KT"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.AbstractSet"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "values"
+    fully_qualified_name: "typing.Mapping.values"
+    return_annotation {
+      pretty_printed_name: "typing.ValuesView[typing._VT_co]"
+      args {
+        pretty_printed_name: "typing._VT_co"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "typing.ValuesView"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "typing.Mapping.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+        args {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "o"
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  overloaded_methods {
+    name: "get"
+    fullname: "typing.Mapping.get"
+    definitions {
+      name: "get"
+      fully_qualified_name: "typing.Mapping.get"
+      return_annotation {
+        pretty_printed_name: "Union[typing._VT_co,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+          args {
+            pretty_printed_name: "typing._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing._VT_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "get"
+      fully_qualified_name: "typing.Mapping.get"
+      return_annotation {
+        pretty_printed_name: "Union[typing._VT_co,typing._T]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing._VT_co"
+          kind: TYPE_VAR
+        }
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing.Mapping[typing._KT,typing._VT_co]"
+          args {
+            pretty_printed_name: "typing._KT"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing._VT_co"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+      }
+      parameters {
+        name: "key"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "typing._KT"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "default"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Union[typing._VT_co,typing._T]"
+          kind: UNION
+          args {
+            pretty_printed_name: "typing._VT_co"
+            kind: TYPE_VAR
+          }
+          args {
+            pretty_printed_name: "typing._T"
+            kind: TYPE_VAR
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  is_generic: true
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "NullValueValue"
+  fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+  super_classes: "builtins.int"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.NullValueValue"
+        fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+      }
+    }
+    parameters {
+      name: "item"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "_NullValue"
+  fully_qualified_name: "google.protobuf.struct_pb2._NullValue"
+  super_classes: "google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.struct_pb2._NullValue.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.EnumDescriptor"
+      fully_qualified_name: "google.protobuf.descriptor.EnumDescriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "NULL_VALUE"
+    fully_qualified_name: "google.protobuf.struct_pb2._NullValue.NULL_VALUE"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.struct_pb2.NullValueValue"
+      fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Struct"
+  fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+  super_classes: "google.protobuf.message.Message"
+  super_classes: "google.protobuf.internal.well_known_types.Struct"
+  methods {
+    name: "fields"
+    fully_qualified_name: "google.protobuf.struct_pb2.Struct.fields"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers.MessageMap[builtins.str,google.protobuf.struct_pb2.Value]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+      fully_qualified_name: "google.protobuf.internal.containers.MessageMap"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Struct"
+        fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.struct_pb2.Struct.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Struct"
+        fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+      }
+    }
+    parameters {
+      name: "fields"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[typing.Mapping[builtins.str,google.protobuf.struct_pb2.Value],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Mapping[builtins.str,google.protobuf.struct_pb2.Value]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "google.protobuf.struct_pb2.Value"
+            fully_qualified_name: "google.protobuf.struct_pb2.Value"
+          }
+          fully_qualified_name: "typing.Mapping"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ClearField"
+    fully_qualified_name: "google.protobuf.struct_pb2.Struct.ClearField"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Struct"
+        fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.struct_pb2.Struct.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+      fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "type___FieldsEntry"
+    fully_qualified_name: "google.protobuf.struct_pb2.Struct.type___FieldsEntry"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.type]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.type"
+        fully_qualified_name: "builtins.type"
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "Value"
+  fully_qualified_name: "google.protobuf.struct_pb2.Value"
+  super_classes: "google.protobuf.message.Message"
+  methods {
+    name: "struct_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.struct_value"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.struct_pb2.Struct"
+      fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "list_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.list_value"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.struct_pb2.ListValue"
+      fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    parameters {
+      name: "null_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[google.protobuf.struct_pb2.NullValueValue,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "google.protobuf.struct_pb2.NullValueValue"
+          fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "number_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.float,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "string_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "bool_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bool,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bool"
+          fully_qualified_name: "builtins.bool"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "struct_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[google.protobuf.struct_pb2.Struct,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "google.protobuf.struct_pb2.Struct"
+          fully_qualified_name: "google.protobuf.struct_pb2.Struct"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    parameters {
+      name: "list_value"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[google.protobuf.struct_pb2.ListValue,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "google.protobuf.struct_pb2.ListValue"
+          fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "HasField"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.HasField"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ClearField"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.ClearField"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes],Literal[builtins.str],Literal[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "WhichOneof"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.WhichOneof"
+    return_annotation {
+      pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+      args {
+        pretty_printed_name: "Literal[builtins.str]"
+        kind: LITERAL
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+    }
+    parameters {
+      name: "oneof_group"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+      fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "null_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.null_value"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.struct_pb2.NullValueValue"
+      fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "number_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.number_value"
+    type_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "string_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.string_value"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "bool_value"
+    fully_qualified_name: "google.protobuf.struct_pb2.Value.bool_value"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+classes {
+  name: "ListValue"
+  fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+  super_classes: "google.protobuf.message.Message"
+  super_classes: "google.protobuf.internal.well_known_types.ListValue"
+  methods {
+    name: "values"
+    fully_qualified_name: "google.protobuf.struct_pb2.ListValue.values"
+    return_annotation {
+      pretty_printed_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Value]"
+      args {
+        pretty_printed_name: "google.protobuf.struct_pb2.Value"
+        fully_qualified_name: "google.protobuf.struct_pb2.Value"
+      }
+      fully_qualified_name: "google.protobuf.internal.containers.RepeatedCompositeFieldContainer"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.ListValue"
+        fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "__init__"
+    fully_qualified_name: "google.protobuf.struct_pb2.ListValue.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.ListValue"
+        fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: KEYWORD_ONLY
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[google.protobuf.struct_pb2.Value],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[google.protobuf.struct_pb2.Value]"
+          args {
+            pretty_printed_name: "google.protobuf.struct_pb2.Value"
+            fully_qualified_name: "google.protobuf.struct_pb2.Value"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      has_default: true
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  methods {
+    name: "ClearField"
+    fully_qualified_name: "google.protobuf.struct_pb2.ListValue.ClearField"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "google.protobuf.struct_pb2.ListValue"
+        fully_qualified_name: "google.protobuf.struct_pb2.ListValue"
+      }
+    }
+    parameters {
+      name: "field_name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Literal[builtins.str],Literal[builtins.bytes]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Literal[builtins.str]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        args {
+          pretty_printed_name: "Literal[builtins.bytes]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+      }
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "DESCRIPTOR"
+    fully_qualified_name: "google.protobuf.struct_pb2.ListValue.DESCRIPTOR"
+    type_annotation {
+      pretty_printed_name: "google.protobuf.descriptor.Descriptor"
+      fully_qualified_name: "google.protobuf.descriptor.Descriptor"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "typing___NewType"
+  fully_qualified_name: "typing.NewType"
+  return_annotation {
+    pretty_printed_name: "Type[typing._T]"
+    kind: TYPE
+    args {
+      pretty_printed_name: "typing._T"
+      kind: TYPE_VAR
+    }
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  parameters {
+    name: "tp"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Type[typing._T]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "typing._T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+overloaded_functions {
+  name: "typing___cast"
+  fullname: "typing.cast"
+  definitions {
+    name: "cast"
+    fully_qualified_name: "typing.cast"
+    return_annotation {
+      pretty_printed_name: "typing._T"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[typing._T]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "typing._T"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "cast"
+    fully_qualified_name: "typing.cast"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  definitions {
+    name: "cast"
+    fully_qualified_name: "typing.cast"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "typ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.object"
+        fully_qualified_name: "builtins.object"
+      }
+    }
+    parameters {
+      name: "val"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "overload"
+    is_overload: true
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "typing___Optional"
+  fully_qualified_name: "typing.Optional"
+  type_annotation {
+    pretty_printed_name: "typing._SpecialForm"
+    fully_qualified_name: "typing._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "typing_extensions___Literal"
+  fully_qualified_name: "typing_extensions.Literal"
+  type_annotation {
+    pretty_printed_name: "typing_extensions._SpecialForm"
+    fully_qualified_name: "typing_extensions._SpecialForm"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "DESCRIPTOR"
+  fully_qualified_name: "google.protobuf.struct_pb2.DESCRIPTOR"
+  type_annotation {
+    pretty_printed_name: "google.protobuf.descriptor.FileDescriptor"
+    fully_qualified_name: "google.protobuf.descriptor.FileDescriptor"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+vars {
+  name: "NULL_VALUE"
+  fully_qualified_name: "google.protobuf.struct_pb2.NULL_VALUE"
+  type_annotation {
+    pretty_printed_name: "google.protobuf.struct_pb2.NullValueValue"
+    fully_qualified_name: "google.protobuf.struct_pb2.NullValueValue"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

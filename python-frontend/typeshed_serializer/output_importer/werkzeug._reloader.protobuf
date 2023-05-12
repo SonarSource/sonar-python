@@ -1,0 +1,839 @@
+fully_qualified_name: "werkzeug._reloader"
+classes {
+  name: "ReloaderLoop"
+  fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+    parameters {
+      name: "extra_files"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "exclude_patterns"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "typing.Iterable[builtins.str]"
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "interval"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.int,builtins.float]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.__enter__"
+    return_annotation {
+      pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+      fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.__exit__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.run"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "run_step"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.run_step"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "restart_with_reloader"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.restart_with_reloader"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "trigger_reload"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.trigger_reload"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "log_reload"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.log_reload"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "extra_files"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.extra_files"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "exclude_patterns"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.exclude_patterns"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "interval"
+    fully_qualified_name: "werkzeug._reloader.ReloaderLoop.interval"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.float]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+}
+classes {
+  name: "StatReloaderLoop"
+  fully_qualified_name: "werkzeug._reloader.StatReloaderLoop"
+  super_classes: "werkzeug._reloader.ReloaderLoop"
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "werkzeug._reloader.StatReloaderLoop.__enter__"
+    return_annotation {
+      pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+      fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.StatReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.StatReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "run_step"
+    fully_qualified_name: "werkzeug._reloader.StatReloaderLoop.run_step"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.StatReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.StatReloaderLoop"
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug._reloader.StatReloaderLoop.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "mtimes"
+    fully_qualified_name: "werkzeug._reloader.StatReloaderLoop.mtimes"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,builtins.float]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "WatchdogReloaderLoop"
+  fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+  super_classes: "werkzeug._reloader.ReloaderLoop"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.WatchdogReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "trigger_reload"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.trigger_reload"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.WatchdogReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+      }
+    }
+    parameters {
+      name: "filename"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.__enter__"
+    return_annotation {
+      pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+      fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.WatchdogReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.__exit__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "run"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.run"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.WatchdogReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+      }
+    }
+  }
+  methods {
+    name: "run_step"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.run_step"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.WatchdogReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop"
+      }
+    }
+  }
+  attributes {
+    name: "observer"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.observer"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "event_handler"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.event_handler"
+    type_annotation {
+      pretty_printed_name: "werkzeug._reloader.EventHandler@321"
+      fully_qualified_name: "werkzeug._reloader.EventHandler@321"
+    }
+  }
+  attributes {
+    name: "should_reload"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.should_reload"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "watches"
+    fully_qualified_name: "werkzeug._reloader.WatchdogReloaderLoop.watches"
+    type_annotation {
+      pretty_printed_name: "builtins.dict[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "builtins.dict"
+    }
+  }
+}
+classes {
+  name: "EventHandler@321"
+  fully_qualified_name: "werkzeug._reloader.EventHandler@321"
+  super_classes: "builtins.object"
+  methods {
+    name: "on_any_event"
+    fully_qualified_name: "werkzeug._reloader.EventHandler@321.on_any_event"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug._reloader.EventHandler@321"
+        fully_qualified_name: "werkzeug._reloader.EventHandler@321"
+      }
+    }
+    parameters {
+      name: "event"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+}
+functions {
+  name: "_iter_module_paths"
+  fully_qualified_name: "werkzeug._reloader._iter_module_paths"
+  return_annotation {
+    pretty_printed_name: "typing.Iterator[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Iterator"
+  }
+}
+functions {
+  name: "_remove_by_pattern"
+  fully_qualified_name: "werkzeug._reloader._remove_by_pattern"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  parameters {
+    name: "exclude_patterns"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+}
+functions {
+  name: "_find_stat_paths"
+  fully_qualified_name: "werkzeug._reloader._find_stat_paths"
+  return_annotation {
+    pretty_printed_name: "typing.Iterable[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Iterable"
+  }
+  parameters {
+    name: "extra_files"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  parameters {
+    name: "exclude_patterns"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+}
+functions {
+  name: "_find_watchdog_paths"
+  fully_qualified_name: "werkzeug._reloader._find_watchdog_paths"
+  return_annotation {
+    pretty_printed_name: "typing.Iterable[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Iterable"
+  }
+  parameters {
+    name: "extra_files"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  parameters {
+    name: "exclude_patterns"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+}
+functions {
+  name: "_find_common_roots"
+  fully_qualified_name: "werkzeug._reloader._find_common_roots"
+  return_annotation {
+    pretty_printed_name: "typing.Iterable[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "typing.Iterable"
+  }
+  parameters {
+    name: "paths"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "typing.Iterable[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterable"
+    }
+  }
+}
+functions {
+  name: "_get_args_for_reloading"
+  fully_qualified_name: "werkzeug._reloader._get_args_for_reloading"
+  return_annotation {
+    pretty_printed_name: "builtins.list[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.list"
+  }
+}
+functions {
+  name: "ensure_echo_on"
+  fully_qualified_name: "werkzeug._reloader.ensure_echo_on"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+}
+functions {
+  name: "run_with_reloader"
+  fully_qualified_name: "werkzeug._reloader.run_with_reloader"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "main_func"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  parameters {
+    name: "extra_files"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "exclude_patterns"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[typing.Iterable[builtins.str],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "typing.Iterable[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "typing.Iterable"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  parameters {
+    name: "interval"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[builtins.int,builtins.float]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  parameters {
+    name: "reloader_type"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug._reloader.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_ignore_always"
+  fully_qualified_name: "werkzeug._reloader._ignore_always"
+  type_annotation {
+    pretty_printed_name: "builtins.tuple[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+}
+vars {
+  name: "prefix"
+  fully_qualified_name: "werkzeug._reloader.prefix"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "_stat_ignore_scan"
+  fully_qualified_name: "werkzeug._reloader._stat_ignore_scan"
+  type_annotation {
+    pretty_printed_name: "builtins.tuple[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.tuple"
+  }
+}
+vars {
+  name: "_ignore_common_dirs"
+  fully_qualified_name: "werkzeug._reloader._ignore_common_dirs"
+  type_annotation {
+    pretty_printed_name: "builtins.set[builtins.str]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    fully_qualified_name: "builtins.set"
+  }
+}
+vars {
+  name: "reloader_loops"
+  fully_qualified_name: "werkzeug._reloader.reloader_loops"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Type[werkzeug._reloader.ReloaderLoop]]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Type[werkzeug._reloader.ReloaderLoop]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "werkzeug._reloader.ReloaderLoop"
+        fully_qualified_name: "werkzeug._reloader.ReloaderLoop"
+      }
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

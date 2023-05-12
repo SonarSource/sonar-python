@@ -1,0 +1,278 @@
+fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding"
+classes {
+  name: "AsymmetricPadding"
+  fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+  super_classes: "builtins.object"
+  methods {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding.name"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+        fully_qualified_name: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  has_metaclass: true
+}
+classes {
+  name: "PKCS1v15"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15"
+  super_classes: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "PSS"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS"
+  super_classes: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS.__init__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "mgf"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "salt_length"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+  }
+  attributes {
+    name: "MAX_LENGTH"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS.MAX_LENGTH"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_mgf"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS._mgf"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+  attributes {
+    name: "_salt_length"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.PSS._salt_length"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+classes {
+  name: "OAEP"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP"
+  super_classes: "cryptography.hazmat.primitives._asymmetric.AsymmetricPadding"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP"
+      }
+    }
+    parameters {
+      name: "mgf"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    parameters {
+      name: "label"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.bytes,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "_mgf"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP._mgf"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP._algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+  attributes {
+    name: "_label"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.OAEP._label"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.bytes,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "MGF1"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+  }
+  attributes {
+    name: "MAX_LENGTH"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1.MAX_LENGTH"
+    type_annotation {
+      pretty_printed_name: "builtins.object"
+      fully_qualified_name: "builtins.object"
+    }
+  }
+  attributes {
+    name: "_algorithm"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.MGF1._algorithm"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+}
+functions {
+  name: "calculate_max_pss_salt_length"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.calculate_max_pss_salt_length"
+  return_annotation {
+    pretty_printed_name: "builtins.int"
+    fully_qualified_name: "builtins.int"
+  }
+  parameters {
+    name: "key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+      }
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey"
+      }
+    }
+  }
+  parameters {
+    name: "hash_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.padding.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}

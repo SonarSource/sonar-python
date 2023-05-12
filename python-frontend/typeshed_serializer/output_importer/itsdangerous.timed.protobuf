@@ -1,0 +1,569 @@
+fully_qualified_name: "itsdangerous.timed"
+classes {
+  name: "TimestampSigner"
+  fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+  super_classes: "itsdangerous.signer.Signer"
+  methods {
+    name: "get_timestamp"
+    fully_qualified_name: "itsdangerous.timed.TimestampSigner.get_timestamp"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+    }
+  }
+  methods {
+    name: "timestamp_to_datetime"
+    fully_qualified_name: "itsdangerous.timed.TimestampSigner.timestamp_to_datetime"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+    }
+    parameters {
+      name: "ts"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "itsdangerous.timed.TimestampSigner.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "validate"
+    fully_qualified_name: "itsdangerous.timed.TimestampSigner.validate"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+    }
+    parameters {
+      name: "signed_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "max_age"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_int"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "unsign"
+    fullname: "itsdangerous.timed.TimestampSigner.unsign"
+    definitions {
+      name: "unsign"
+      fully_qualified_name: "itsdangerous.timed.TimestampSigner.unsign"
+      return_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+          fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+        }
+      }
+      parameters {
+        name: "signed_value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+          }
+          fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+        }
+      }
+      parameters {
+        name: "max_age"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,None]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "itsdangerous.timed._t_opt_int"
+        }
+      }
+      parameters {
+        name: "return_timestamp"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+    definitions {
+      name: "unsign"
+      fully_qualified_name: "itsdangerous.timed.TimestampSigner.unsign"
+      return_annotation {
+        pretty_printed_name: "Tuple[builtins.bytes,datetime.datetime]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.bytes"
+          fully_qualified_name: "builtins.bytes"
+        }
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+      parameters {
+        name: "self"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+          fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+        }
+      }
+      parameters {
+        name: "signed_value"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "builtins.bytes"
+              fully_qualified_name: "builtins.bytes"
+            }
+          }
+          fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+        }
+      }
+      parameters {
+        name: "max_age"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "TypeAlias[Union[builtins.int,None]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "Union[builtins.int,None]"
+            kind: UNION
+            args {
+              pretty_printed_name: "builtins.int"
+              fully_qualified_name: "builtins.int"
+            }
+            args {
+              pretty_printed_name: "None"
+              kind: NONE
+            }
+          }
+          fully_qualified_name: "itsdangerous.timed._t_opt_int"
+        }
+      }
+      parameters {
+        name: "return_timestamp"
+        kind: POSITIONAL_OR_KEYWORD
+        type_annotation {
+          pretty_printed_name: "Literal[builtins.bool]"
+          kind: LITERAL
+          args {
+            pretty_printed_name: "builtins.bool"
+            fully_qualified_name: "builtins.bool"
+          }
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "typing.overload"
+      is_overload: true
+    }
+  }
+}
+classes {
+  name: "TimedSerializer"
+  fully_qualified_name: "itsdangerous.timed.TimedSerializer"
+  super_classes: "itsdangerous.serializer.Serializer"
+  methods {
+    name: "iter_unsigners"
+    fully_qualified_name: "itsdangerous.timed.TimedSerializer.iter_unsigners"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[itsdangerous.timed.TimestampSigner]"
+      args {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimedSerializer"
+        fully_qualified_name: "itsdangerous.timed.TimedSerializer"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "loads"
+    fully_qualified_name: "itsdangerous.timed.TimedSerializer.loads"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimedSerializer"
+        fully_qualified_name: "itsdangerous.timed.TimedSerializer"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "max_age"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_int"
+      }
+    }
+    parameters {
+      name: "return_timestamp"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_str_bytes"
+      }
+    }
+  }
+  methods {
+    name: "loads_unsafe"
+    fully_qualified_name: "itsdangerous.timed.TimedSerializer.loads_unsafe"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.bool,Any]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.timed.TimedSerializer"
+        fully_qualified_name: "itsdangerous.timed.TimedSerializer"
+      }
+    }
+    parameters {
+      name: "s"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_str_bytes"
+      }
+    }
+    parameters {
+      name: "max_age"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.int,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.int,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.int"
+            fully_qualified_name: "builtins.int"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_int"
+      }
+    }
+    parameters {
+      name: "salt"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.str,builtins.bytes,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.str,builtins.bytes,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.bytes"
+            fully_qualified_name: "builtins.bytes"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.timed._t_opt_str_bytes"
+      }
+    }
+  }
+  attributes {
+    name: "default_signer"
+    fully_qualified_name: "itsdangerous.timed.TimedSerializer.default_signer"
+    type_annotation {
+      pretty_printed_name: "Type[itsdangerous.timed.TimestampSigner]"
+      kind: TYPE
+      args {
+        pretty_printed_name: "itsdangerous.timed.TimestampSigner"
+        fully_qualified_name: "itsdangerous.timed.TimestampSigner"
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous.timed.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "_te"
+  fully_qualified_name: "typing_extensions"
+  is_imported_module: true
+}

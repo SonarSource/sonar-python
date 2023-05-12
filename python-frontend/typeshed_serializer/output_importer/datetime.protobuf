@@ -1,0 +1,3245 @@
+fully_qualified_name: "datetime"
+classes {
+  name: "tzinfo"
+  fully_qualified_name: "datetime.tzinfo"
+  super_classes: "builtins.object"
+  methods {
+    name: "tzname"
+    fully_qualified_name: "datetime.tzinfo.tzname"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "datetime.tzinfo.utcoffset"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "datetime.tzinfo.dst"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abstractmethod"
+  }
+  methods {
+    name: "fromutc"
+    fully_qualified_name: "datetime.tzinfo.fromutc"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+}
+classes {
+  name: "timezone"
+  fully_qualified_name: "datetime.timezone"
+  super_classes: "datetime.tzinfo"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "datetime.timezone.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timezone"
+        fully_qualified_name: "datetime.timezone"
+      }
+    }
+    parameters {
+      name: "offset"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "tzname"
+    fully_qualified_name: "datetime.timezone.tzname"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timezone"
+        fully_qualified_name: "datetime.timezone"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "datetime.timezone.utcoffset"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timezone"
+        fully_qualified_name: "datetime.timezone"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "datetime.timezone.dst"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timezone"
+        fully_qualified_name: "datetime.timezone"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  has_decorators: true
+  attributes {
+    name: "utc"
+    fully_qualified_name: "datetime.timezone.utc"
+    type_annotation {
+      pretty_printed_name: "datetime.timezone"
+      fully_qualified_name: "datetime.timezone"
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.timezone.min"
+    type_annotation {
+      pretty_printed_name: "datetime.timezone"
+      fully_qualified_name: "datetime.timezone"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.timezone.max"
+    type_annotation {
+      pretty_printed_name: "datetime.timezone"
+      fully_qualified_name: "datetime.timezone"
+    }
+  }
+}
+classes {
+  name: "date"
+  fully_qualified_name: "datetime.date"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "datetime.date.__new__"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "fromtimestamp"
+    fully_qualified_name: "datetime.date.fromtimestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "today"
+    fully_qualified_name: "datetime.date.today"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "fromordinal"
+    fully_qualified_name: "datetime.date.fromordinal"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "fromisoformat"
+    fully_qualified_name: "datetime.date.fromisoformat"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "fromisocalendar"
+    fully_qualified_name: "datetime.date.fromisocalendar"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.date.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "week"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "year"
+    fully_qualified_name: "datetime.date.year"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "month"
+    fully_qualified_name: "datetime.date.month"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "day"
+    fully_qualified_name: "datetime.date.day"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "ctime"
+    fully_qualified_name: "datetime.date.ctime"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "strftime"
+    fully_qualified_name: "datetime.date.strftime"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__format__"
+    fully_qualified_name: "datetime.date.__format__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "isoformat"
+    fully_qualified_name: "datetime.date.isoformat"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "timetuple"
+    fully_qualified_name: "datetime.date.timetuple"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "time.struct_time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "toordinal"
+    fully_qualified_name: "datetime.date.toordinal"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "datetime.date.replace"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "datetime.date.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "datetime.date.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "datetime.date.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "datetime.date.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "datetime.date.__add__"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "datetime.date.__radd__"
+    return_annotation {
+      pretty_printed_name: "datetime.date.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.date.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "weekday"
+    fully_qualified_name: "datetime.date.weekday"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "isoweekday"
+    fully_qualified_name: "datetime.date.isoweekday"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  methods {
+    name: "isocalendar"
+    fully_qualified_name: "datetime.date.isocalendar"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__sub__"
+    fullname: "datetime.date.__sub__"
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.date.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.date.Self"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.date.Self"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.date.__sub__"
+      return_annotation {
+        pretty_printed_name: "NoReturn"
+        kind: UNINHABITED
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.date"
+          fully_qualified_name: "datetime.date"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.date.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.date.min"
+    type_annotation {
+      pretty_printed_name: "datetime.date"
+      fully_qualified_name: "datetime.date"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.date.max"
+    type_annotation {
+      pretty_printed_name: "datetime.date"
+      fully_qualified_name: "datetime.date"
+    }
+  }
+  attributes {
+    name: "resolution"
+    fully_qualified_name: "datetime.date.resolution"
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+}
+classes {
+  name: "time"
+  fully_qualified_name: "datetime.time"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "datetime.time.__new__"
+    return_annotation {
+      pretty_printed_name: "datetime.time.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.time.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.time.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "hour"
+    fully_qualified_name: "datetime.time.hour"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "minute"
+    fully_qualified_name: "datetime.time.minute"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "second"
+    fully_qualified_name: "datetime.time.second"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "microsecond"
+    fully_qualified_name: "datetime.time.microsecond"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "tzinfo"
+    fully_qualified_name: "datetime.time.tzinfo"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.tzinfo,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fold"
+    fully_qualified_name: "datetime.time.fold"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "datetime.time.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "datetime.time.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "datetime.time.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "datetime.time.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "isoformat"
+    fully_qualified_name: "datetime.time.isoformat"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "timespec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "fromisoformat"
+    fully_qualified_name: "datetime.time.fromisoformat"
+    return_annotation {
+      pretty_printed_name: "datetime.time.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.time.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.time.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "strftime"
+    fully_qualified_name: "datetime.time.strftime"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__format__"
+    fully_qualified_name: "datetime.time.__format__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "datetime.time.utcoffset"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "tzname"
+    fully_qualified_name: "datetime.time.tzname"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "datetime.time.dst"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "datetime.time.replace"
+    return_annotation {
+      pretty_printed_name: "datetime.time.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.time.min"
+    type_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.time.max"
+    type_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+  }
+  attributes {
+    name: "resolution"
+    fully_qualified_name: "datetime.time.resolution"
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+}
+classes {
+  name: "timedelta"
+  fully_qualified_name: "datetime.timedelta"
+  super_classes: "builtins.object"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "datetime.timedelta.__new__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.timedelta.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.timedelta.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "days"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "seconds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "microseconds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "milliseconds"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "minutes"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "hours"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "weeks"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "days"
+    fully_qualified_name: "datetime.timedelta.days"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "seconds"
+    fully_qualified_name: "datetime.timedelta.seconds"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "microseconds"
+    fully_qualified_name: "datetime.timedelta.microseconds"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "total_seconds"
+    fully_qualified_name: "datetime.timedelta.total_seconds"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__add__"
+    fully_qualified_name: "datetime.timedelta.__add__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__radd__"
+    fully_qualified_name: "datetime.timedelta.__radd__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__sub__"
+    fully_qualified_name: "datetime.timedelta.__sub__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__rsub__"
+    fully_qualified_name: "datetime.timedelta.__rsub__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__neg__"
+    fully_qualified_name: "datetime.timedelta.__neg__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__pos__"
+    fully_qualified_name: "datetime.timedelta.__pos__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__abs__"
+    fully_qualified_name: "datetime.timedelta.__abs__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__mul__"
+    fully_qualified_name: "datetime.timedelta.__mul__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "__rmul__"
+    fully_qualified_name: "datetime.timedelta.__rmul__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+  }
+  methods {
+    name: "__mod__"
+    fully_qualified_name: "datetime.timedelta.__mod__"
+    return_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__divmod__"
+    fully_qualified_name: "datetime.timedelta.__divmod__"
+    return_annotation {
+      pretty_printed_name: "Tuple[builtins.int,datetime.timedelta]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "datetime.timedelta.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "datetime.timedelta.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "datetime.timedelta.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "datetime.timedelta.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  methods {
+    name: "__bool__"
+    fully_qualified_name: "datetime.timedelta.__bool__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__floordiv__"
+    fullname: "datetime.timedelta.__floordiv__"
+    definitions {
+      name: "__floordiv__"
+      fully_qualified_name: "datetime.timedelta.__floordiv__"
+      return_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__floordiv__"
+      fully_qualified_name: "datetime.timedelta.__floordiv__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  overloaded_methods {
+    name: "__truediv__"
+    fullname: "datetime.timedelta.__truediv__"
+    definitions {
+      name: "__truediv__"
+      fully_qualified_name: "datetime.timedelta.__truediv__"
+      return_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__truediv__"
+      fully_qualified_name: "datetime.timedelta.__truediv__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "builtins.float"
+          fully_qualified_name: "builtins.float"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.timedelta.min"
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.timedelta.max"
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+  attributes {
+    name: "resolution"
+    fully_qualified_name: "datetime.timedelta.resolution"
+    type_annotation {
+      pretty_printed_name: "datetime.timedelta"
+      fully_qualified_name: "datetime.timedelta"
+    }
+  }
+}
+classes {
+  name: "datetime"
+  fully_qualified_name: "datetime.datetime"
+  super_classes: "datetime.date"
+  methods {
+    name: "__new__"
+    fully_qualified_name: "datetime.datetime.__new__"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "hour"
+    fully_qualified_name: "datetime.datetime.hour"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "minute"
+    fully_qualified_name: "datetime.datetime.minute"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "second"
+    fully_qualified_name: "datetime.datetime.second"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "microsecond"
+    fully_qualified_name: "datetime.datetime.microsecond"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "tzinfo"
+    fully_qualified_name: "datetime.datetime.tzinfo"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.tzinfo,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.tzinfo"
+        fully_qualified_name: "datetime.tzinfo"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fold"
+    fully_qualified_name: "datetime.datetime.fold"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "fromtimestamp"
+    fully_qualified_name: "datetime.datetime.fromtimestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcfromtimestamp"
+    fully_qualified_name: "datetime.datetime.utcfromtimestamp"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.float"
+        fully_qualified_name: "builtins.float"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "now"
+    fully_qualified_name: "datetime.datetime.now"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcnow"
+    fully_qualified_name: "datetime.datetime.utcnow"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "combine"
+    fully_qualified_name: "datetime.datetime.combine"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "date"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.date"
+        fully_qualified_name: "datetime.date"
+      }
+    }
+    parameters {
+      name: "time"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.time"
+        fully_qualified_name: "datetime.time"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "timestamp"
+    fully_qualified_name: "datetime.datetime.timestamp"
+    return_annotation {
+      pretty_printed_name: "builtins.float"
+      fully_qualified_name: "builtins.float"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "utctimetuple"
+    fully_qualified_name: "datetime.datetime.utctimetuple"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+        args {
+          pretty_printed_name: "builtins.int"
+          fully_qualified_name: "builtins.int"
+        }
+      }
+      fully_qualified_name: "time.struct_time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "date"
+    fully_qualified_name: "datetime.datetime.date"
+    return_annotation {
+      pretty_printed_name: "datetime.date"
+      fully_qualified_name: "datetime.date"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "time"
+    fully_qualified_name: "datetime.datetime.time"
+    return_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "timetz"
+    fully_qualified_name: "datetime.datetime.timetz"
+    return_annotation {
+      pretty_printed_name: "datetime.time"
+      fully_qualified_name: "datetime.time"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "replace"
+    fully_qualified_name: "datetime.datetime.replace"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "year"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "month"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "day"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "hour"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "minute"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "second"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "microsecond"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "tzinfo"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fold"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "astimezone"
+    fully_qualified_name: "datetime.datetime.astimezone"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+    }
+    parameters {
+      name: "tz"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.tzinfo,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.tzinfo"
+          fully_qualified_name: "datetime.tzinfo"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "isoformat"
+    fully_qualified_name: "datetime.datetime.isoformat"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "sep"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "timespec"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "strptime"
+    fully_qualified_name: "datetime.datetime.strptime"
+    return_annotation {
+      pretty_printed_name: "datetime.datetime.Self"
+      kind: TYPE_VAR
+    }
+    parameters {
+      name: "cls"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Type[datetime.datetime.Self]"
+        kind: TYPE
+        args {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "classmethod"
+    is_class_method: true
+  }
+  methods {
+    name: "utcoffset"
+    fully_qualified_name: "datetime.datetime.utcoffset"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "tzname"
+    fully_qualified_name: "datetime.datetime.tzname"
+    return_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "dst"
+    fully_qualified_name: "datetime.datetime.dst"
+    return_annotation {
+      pretty_printed_name: "Union[datetime.timedelta,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__le__"
+    fully_qualified_name: "datetime.datetime.__le__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__lt__"
+    fully_qualified_name: "datetime.datetime.__lt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__ge__"
+    fully_qualified_name: "datetime.datetime.__ge__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  methods {
+    name: "__gt__"
+    fully_qualified_name: "datetime.datetime.__gt__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+    }
+  }
+  overloaded_methods {
+    name: "__sub__"
+    fullname: "datetime.datetime.__sub__"
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.datetime.Self"
+        kind: TYPE_VAR
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.datetime.Self"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime.timedelta"
+          fully_qualified_name: "datetime.timedelta"
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+    definitions {
+      name: "__sub__"
+      fully_qualified_name: "datetime.datetime.__sub__"
+      return_annotation {
+        pretty_printed_name: "datetime.timedelta"
+        fully_qualified_name: "datetime.timedelta"
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      parameters {
+        name: "__"
+        type_annotation {
+          pretty_printed_name: "datetime._D"
+          kind: TYPE_VAR
+        }
+      }
+      has_decorators: true
+      resolved_decorator_names: "overload"
+      is_overload: true
+    }
+  }
+  attributes {
+    name: "min"
+    fully_qualified_name: "datetime.datetime.min"
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+  attributes {
+    name: "max"
+    fully_qualified_name: "datetime.datetime.max"
+    type_annotation {
+      pretty_printed_name: "datetime.datetime"
+      fully_qualified_name: "datetime.datetime"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "datetime.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "MINYEAR"
+  fully_qualified_name: "datetime.MINYEAR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+vars {
+  name: "MAXYEAR"
+  fully_qualified_name: "datetime.MAXYEAR"
+  type_annotation {
+    pretty_printed_name: "Literal[builtins.int]"
+    kind: LITERAL
+    args {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}

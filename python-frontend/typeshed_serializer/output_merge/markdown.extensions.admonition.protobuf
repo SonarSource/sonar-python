@@ -1,0 +1,115 @@
+fully_qualified_name: "markdown.extensions.admonition"
+classes {
+  name: "AdmonitionExtension"
+  fully_qualified_name: "markdown.extensions.admonition.AdmonitionExtension"
+  super_classes: "markdown.extensions.Extension"
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}
+classes {
+  name: "AdmonitionProcessor"
+  fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor"
+  super_classes: "markdown.blockprocessors.BlockProcessor"
+  methods {
+    name: "get_class_and_title"
+    fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor.get_class_and_title"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "match"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+  attributes {
+    name: "CLASSNAME"
+    fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor.CLASSNAME"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "CLASSNAME_TITLE"
+    fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor.CLASSNAME_TITLE"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "RE"
+    fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor.RE"
+    type_annotation {
+      pretty_printed_name: "typing.Pattern[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Pattern"
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+  attributes {
+    name: "RE_SPACES"
+    fully_qualified_name: "markdown.extensions.admonition.AdmonitionProcessor.RE_SPACES"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "35"
+    valid_for: "36"
+    valid_for: "37"
+    valid_for: "38"
+    valid_for: "39"
+    valid_for: "310"
+  }
+}
+functions {
+  name: "makeExtension"
+  fully_qualified_name: "markdown.extensions.admonition.makeExtension"
+  parameters {
+    name: "kwargs"
+    kind: VAR_KEYWORD
+  }
+  valid_for: "35"
+  valid_for: "36"
+  valid_for: "37"
+  valid_for: "38"
+  valid_for: "39"
+  valid_for: "310"
+}

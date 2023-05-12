@@ -1,0 +1,1966 @@
+fully_qualified_name: "werkzeug.local"
+classes {
+  name: "Local"
+  fully_qualified_name: "werkzeug.local.Local"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local.Local.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+    parameters {
+      name: "context_var"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.ContextVar[builtins.dict[builtins.str,Any]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.ContextVar[builtins.dict[builtins.str,Any]]"
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,Any]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "werkzeug.local.Local.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[Tuple[builtins.str,Any]]"
+      args {
+        pretty_printed_name: "Tuple[builtins.str,Any]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.local.Local.__call__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.local.LocalProxy[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "werkzeug.local.LocalProxy"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "unbound_message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__release_local__"
+    fully_qualified_name: "werkzeug.local.Local.__release_local__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+  }
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.local.Local.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "werkzeug.local.Local.__setattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "werkzeug.local.Local.__delattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local.Local.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+}
+classes {
+  name: "LocalStack"
+  fully_qualified_name: "werkzeug.local.LocalStack"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local.LocalStack.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+    parameters {
+      name: "context_var"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.ContextVar[builtins.list[werkzeug.local.T]],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.ContextVar[builtins.list[werkzeug.local.T]]"
+          args {
+            pretty_printed_name: "builtins.list[werkzeug.local.T]"
+            args {
+              pretty_printed_name: "werkzeug.local.T"
+              kind: TYPE_VAR
+            }
+            fully_qualified_name: "builtins.list"
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__release_local__"
+    fully_qualified_name: "werkzeug.local.LocalStack.__release_local__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "werkzeug.local.LocalStack.push"
+    return_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.local.T]"
+      args {
+        pretty_printed_name: "werkzeug.local.T"
+        kind: TYPE_VAR
+      }
+      fully_qualified_name: "builtins.list"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+    parameters {
+      name: "obj"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.T"
+        kind: TYPE_VAR
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "werkzeug.local.LocalStack.pop"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.local.T,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.local.T"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+  }
+  methods {
+    name: "top"
+    fully_qualified_name: "werkzeug.local.LocalStack.top"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.local.T,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.local.T"
+        kind: TYPE_VAR
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "property"
+    is_property: true
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.local.LocalStack.__call__"
+    return_annotation {
+      pretty_printed_name: "werkzeug.local.LocalProxy[Any]"
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "werkzeug.local.LocalProxy"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "unbound_message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local.LocalStack.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_storage"
+    fully_qualified_name: "werkzeug.local.LocalStack._storage"
+    type_annotation {
+      pretty_printed_name: "contextvars.ContextVar[builtins.list[werkzeug.local.T]]"
+      args {
+        pretty_printed_name: "builtins.list[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      fully_qualified_name: "contextvars.ContextVar"
+    }
+  }
+}
+classes {
+  name: "LocalManager"
+  fully_qualified_name: "werkzeug.local.LocalManager"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local.LocalManager.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalManager"
+        fully_qualified_name: "werkzeug.local.LocalManager"
+      }
+    }
+    parameters {
+      name: "locals"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[None,werkzeug.local.Local,werkzeug.local.LocalStack[Any],typing.Iterable[Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+        args {
+          pretty_printed_name: "werkzeug.local.Local"
+          fully_qualified_name: "werkzeug.local.Local"
+        }
+        args {
+          pretty_printed_name: "werkzeug.local.LocalStack[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "werkzeug.local.LocalStack"
+        }
+        args {
+          pretty_printed_name: "typing.Iterable[Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]]"
+          args {
+            pretty_printed_name: "Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]"
+            kind: UNION
+            args {
+              pretty_printed_name: "werkzeug.local.Local"
+              fully_qualified_name: "werkzeug.local.Local"
+            }
+            args {
+              pretty_printed_name: "werkzeug.local.LocalStack[Any]"
+              args {
+                pretty_printed_name: "Any"
+                kind: ANY
+              }
+              fully_qualified_name: "werkzeug.local.LocalStack"
+            }
+          }
+          fully_qualified_name: "typing.Iterable"
+        }
+      }
+    }
+  }
+  methods {
+    name: "cleanup"
+    fully_qualified_name: "werkzeug.local.LocalManager.cleanup"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalManager"
+        fully_qualified_name: "werkzeug.local.LocalManager"
+      }
+    }
+  }
+  methods {
+    name: "make_middleware"
+    fully_qualified_name: "werkzeug.local.LocalManager.make_middleware"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalManager"
+        fully_qualified_name: "werkzeug.local.LocalManager"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+  }
+  methods {
+    name: "middleware"
+    fully_qualified_name: "werkzeug.local.LocalManager.middleware"
+    return_annotation {
+      pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalManager"
+        fully_qualified_name: "werkzeug.local.LocalManager"
+      }
+    }
+    parameters {
+      name: "func"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[CallableType[builtins.function]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        fully_qualified_name: "_typeshed.wsgi.WSGIApplication"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.local.LocalManager.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalManager"
+        fully_qualified_name: "werkzeug.local.LocalManager"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local.LocalManager.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "locals"
+    fully_qualified_name: "werkzeug.local.LocalManager.locals"
+    type_annotation {
+      pretty_printed_name: "builtins.list[werkzeug.local.Local]"
+      args {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "_ProxyLookup"
+  fully_qualified_name: "werkzeug.local._ProxyLookup"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyLookup"
+        fully_qualified_name: "werkzeug.local._ProxyLookup"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fallback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "class_value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "is_attr"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  methods {
+    name: "__set_name__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__set_name__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyLookup"
+        fully_qualified_name: "werkzeug.local._ProxyLookup"
+      }
+    }
+    parameters {
+      name: "owner"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalProxy[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.local.LocalProxy"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__get__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__get__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyLookup"
+        fully_qualified_name: "werkzeug.local._ProxyLookup"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalProxy[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.local.LocalProxy"
+      }
+    }
+    parameters {
+      name: "owner"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyLookup"
+        fully_qualified_name: "werkzeug.local._ProxyLookup"
+      }
+    }
+  }
+  methods {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__call__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyLookup"
+        fully_qualified_name: "werkzeug.local._ProxyLookup"
+      }
+    }
+    parameters {
+      name: "instance"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalProxy[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.local.LocalProxy"
+      }
+    }
+    parameters {
+      name: "args"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+    parameters {
+      name: "kwargs"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "bind_f"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.bind_f"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "fallback"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.fallback"
+    type_annotation {
+      pretty_printed_name: "Union[CallableType[builtins.function],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "class_value"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.class_value"
+    type_annotation {
+      pretty_printed_name: "Union[Any,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "is_attr"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.is_attr"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+  attributes {
+    name: "name"
+    fully_qualified_name: "werkzeug.local._ProxyLookup.name"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "_ProxyIOp"
+  fully_qualified_name: "werkzeug.local._ProxyIOp"
+  super_classes: "werkzeug.local._ProxyLookup"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local._ProxyIOp.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local._ProxyIOp"
+        fully_qualified_name: "werkzeug.local._ProxyIOp"
+      }
+    }
+    parameters {
+      name: "f"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "fallback"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[CallableType[builtins.function],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local._ProxyIOp.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[]"
+      kind: TUPLE
+    }
+  }
+}
+classes {
+  name: "LocalProxy"
+  fully_qualified_name: "werkzeug.local.LocalProxy"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.local.LocalProxy[werkzeug.local.T]"
+        args {
+          pretty_printed_name: "werkzeug.local.T"
+          kind: TYPE_VAR
+        }
+        fully_qualified_name: "werkzeug.local.LocalProxy"
+      }
+    }
+    parameters {
+      name: "local"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[contextvars.ContextVar[werkzeug.local.T],werkzeug.local.Local,werkzeug.local.LocalStack[werkzeug.local.T],CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "contextvars.ContextVar[werkzeug.local.T]"
+          args {
+            pretty_printed_name: "werkzeug.local.T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "contextvars.ContextVar"
+        }
+        args {
+          pretty_printed_name: "werkzeug.local.Local"
+          fully_qualified_name: "werkzeug.local.Local"
+        }
+        args {
+          pretty_printed_name: "werkzeug.local.LocalStack[werkzeug.local.T]"
+          args {
+            pretty_printed_name: "werkzeug.local.T"
+            kind: TYPE_VAR
+          }
+          fully_qualified_name: "werkzeug.local.LocalStack"
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "unbound_message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  is_generic: true
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "_get_current_object"
+    fully_qualified_name: "werkzeug.local.LocalProxy._get_current_object"
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+  attributes {
+    name: "__wrapped__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__wrapped__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__repr__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__repr__"
+  }
+  attributes {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__str__"
+  }
+  attributes {
+    name: "__bytes__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__bytes__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__format__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__format__"
+  }
+  attributes {
+    name: "__lt__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__lt__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__le__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__le__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__eq__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__eq__"
+  }
+  attributes {
+    name: "__ne__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ne__"
+  }
+  attributes {
+    name: "__gt__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__gt__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__ge__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ge__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__hash__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__hash__"
+  }
+  attributes {
+    name: "__bool__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__bool__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__getattr__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__getattr__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__setattr__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__setattr__"
+  }
+  attributes {
+    name: "__delattr__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__delattr__"
+  }
+  attributes {
+    name: "__dir__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__dir__"
+  }
+  attributes {
+    name: "__class__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__class__"
+  }
+  attributes {
+    name: "__instancecheck__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__instancecheck__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__subclasscheck__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__subclasscheck__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__call__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__call__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__len__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__len__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__length_hint__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__length_hint__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__getitem__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__getitem__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__setitem__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__setitem__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__delitem__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__delitem__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__iter__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__iter__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__next__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__next__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__reversed__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__reversed__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__contains__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__contains__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__add__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__add__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__sub__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__sub__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__mul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__mul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__matmul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__matmul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__truediv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__truediv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__floordiv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__floordiv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__mod__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__mod__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__divmod__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__divmod__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__pow__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__pow__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__lshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__lshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__and__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__and__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__xor__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__xor__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__or__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__or__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__radd__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__radd__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rsub__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rsub__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rmul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rmul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rmatmul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rmatmul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rtruediv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rtruediv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rfloordiv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rfloordiv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rmod__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rmod__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rdivmod__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rdivmod__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rpow__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rpow__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rlshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rlshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rrshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rrshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rand__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rand__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__rxor__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__rxor__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__ror__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ror__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__iadd__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__iadd__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__isub__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__isub__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__imul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__imul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__imatmul__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__imatmul__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__itruediv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__itruediv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__ifloordiv__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ifloordiv__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__imod__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__imod__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__ipow__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ipow__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__ilshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ilshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__irshift__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__irshift__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__iand__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__iand__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__ixor__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ixor__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__ior__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ior__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyIOp"
+      fully_qualified_name: "werkzeug.local._ProxyIOp"
+    }
+  }
+  attributes {
+    name: "__neg__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__neg__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__pos__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__pos__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__abs__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__abs__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__invert__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__invert__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__complex__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__complex__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__int__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__int__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__float__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__float__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__index__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__index__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__round__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__round__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__trunc__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__trunc__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__floor__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__floor__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__ceil__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__ceil__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__enter__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__enter__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__exit__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__exit__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__await__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__await__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__aiter__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__aiter__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__anext__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__anext__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__aenter__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__aenter__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__aexit__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__aexit__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__copy__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__copy__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+  attributes {
+    name: "__deepcopy__"
+    fully_qualified_name: "werkzeug.local.LocalProxy.__deepcopy__"
+    type_annotation {
+      pretty_printed_name: "werkzeug.local._ProxyLookup"
+      fully_qualified_name: "werkzeug.local._ProxyLookup"
+    }
+  }
+}
+functions {
+  name: "release_local"
+  fully_qualified_name: "werkzeug.local.release_local"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "local"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.local.Local"
+        fully_qualified_name: "werkzeug.local.Local"
+      }
+      args {
+        pretty_printed_name: "werkzeug.local.LocalStack[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "werkzeug.local.LocalStack"
+      }
+    }
+  }
+}
+functions {
+  name: "_l_to_r_op"
+  fully_qualified_name: "werkzeug.local._l_to_r_op"
+  return_annotation {
+    pretty_printed_name: "werkzeug.local.F"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "op"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "werkzeug.local.F"
+      kind: TYPE_VAR
+    }
+  }
+}
+functions {
+  name: "_identity"
+  fully_qualified_name: "werkzeug.local._identity"
+  return_annotation {
+    pretty_printed_name: "werkzeug.local.T"
+    kind: TYPE_VAR
+  }
+  parameters {
+    name: "o"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "werkzeug.local.T"
+      kind: TYPE_VAR
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.local.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

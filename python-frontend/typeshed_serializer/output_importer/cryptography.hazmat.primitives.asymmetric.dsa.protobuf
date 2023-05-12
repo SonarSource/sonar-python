@@ -1,0 +1,889 @@
+fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa"
+classes {
+  name: "DSAParameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+  super_classes: "builtins.object"
+  methods {
+    name: "generate_private_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters.generate_private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters.parameter_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DSAPrivateKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "parameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "signer"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.signer"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "sign"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.sign"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.hazmat.primitives.hashes.HashAlgorithm]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "private_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.private_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "private_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.private_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PrivateFormat"
+      }
+    }
+    parameters {
+      name: "encryption_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.KeySerializationEncryption"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DSAPublicKey"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+  super_classes: "builtins.object"
+  methods {
+    name: "key_size"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.key_size"
+    return_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractproperty"
+    is_property: true
+  }
+  methods {
+    name: "parameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "verifier"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.verifier"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "signature_algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.public_numbers"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "public_bytes"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.public_bytes"
+    return_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    parameters {
+      name: "encoding"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.Encoding"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.Encoding"
+      }
+    }
+    parameters {
+      name: "format"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+        fully_qualified_name: "cryptography.hazmat.primitives._serialization.PublicFormat"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  methods {
+    name: "verify"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.verify"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      }
+    }
+    parameters {
+      name: "signature"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "data"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bytes"
+        fully_qualified_name: "builtins.bytes"
+      }
+    }
+    parameters {
+      name: "algorithm"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.hazmat.primitives.hashes.HashAlgorithm]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils.Prehashed"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+          fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        }
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "abc.abstractmethod"
+  }
+  has_metaclass: true
+}
+classes {
+  name: "DSAParameterNumbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      }
+    }
+    parameters {
+      name: "p"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "q"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "g"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+  }
+  methods {
+    name: "parameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.parameters"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__ne__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "p"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.p"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "q"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.q"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "g"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.g"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "_p"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._p"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_q"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._q"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_g"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._g"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+classes {
+  name: "DSAPublicNumbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      }
+    }
+    parameters {
+      name: "y"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "parameter_numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      }
+    }
+  }
+  methods {
+    name: "public_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.public_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__ne__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__repr__"
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "y"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.y"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.parameter_numbers"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "_y"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers._y"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "_parameter_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers._parameter_numbers"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+    }
+  }
+}
+classes {
+  name: "DSAPrivateNumbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+      }
+    }
+    parameters {
+      name: "x"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.int"
+        fully_qualified_name: "builtins.int"
+      }
+    }
+    parameters {
+      name: "public_numbers"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      }
+    }
+  }
+  methods {
+    name: "private_key"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.private_key"
+    return_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+        fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+      }
+    }
+    parameters {
+      name: "backend"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__eq__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__ne__"
+    parameters {
+      name: "__"
+    }
+    parameters {
+      name: "__"
+    }
+  }
+  attributes {
+    name: "x"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.x"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.public_numbers"
+    type_annotation {
+      pretty_printed_name: "builtins.property"
+      fully_qualified_name: "builtins.property"
+    }
+  }
+  attributes {
+    name: "_public_numbers"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers._public_numbers"
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"
+    }
+  }
+  attributes {
+    name: "_x"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers._x"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+}
+functions {
+  name: "generate_parameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.generate_parameters"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters"
+  }
+  parameters {
+    name: "key_size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "generate_private_key"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key"
+  return_annotation {
+    pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+    fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+  }
+  parameters {
+    name: "key_size"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  parameters {
+    name: "backend"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+  }
+}
+functions {
+  name: "_check_dsa_parameters"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa._check_dsa_parameters"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "parameters"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"
+    }
+  }
+}
+functions {
+  name: "_check_dsa_private_numbers"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa._check_dsa_private_numbers"
+  return_annotation {
+    pretty_printed_name: "None"
+    kind: NONE
+  }
+  parameters {
+    name: "numbers"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "asym_utils"
+  fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.utils"
+  is_imported_module: true
+}

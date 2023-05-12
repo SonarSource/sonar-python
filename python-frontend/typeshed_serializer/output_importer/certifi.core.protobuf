@@ -1,0 +1,127 @@
+fully_qualified_name: "certifi.core"
+functions {
+  name: "get_path"
+  fully_qualified_name: "importlib.resources.path"
+  return_annotation {
+    pretty_printed_name: "contextlib.AbstractContextManager[pathlib.Path]"
+    args {
+      pretty_printed_name: "pathlib.Path"
+      fully_qualified_name: "pathlib.Path"
+    }
+    fully_qualified_name: "contextlib.AbstractContextManager"
+  }
+  parameters {
+    name: "package"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,types.ModuleType]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,types.ModuleType]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "types.ModuleType"
+          fully_qualified_name: "types.ModuleType"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Package"
+    }
+  }
+  parameters {
+    name: "resource"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.str,os.PathLike[Any]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.str,os.PathLike[Any]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "os.PathLike[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "os.PathLike"
+        }
+      }
+      fully_qualified_name: "importlib.resources.Resource"
+    }
+  }
+}
+functions {
+  name: "where"
+  fully_qualified_name: "certifi.core.where"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+functions {
+  name: "contents"
+  fully_qualified_name: "certifi.core.contents"
+  return_annotation {
+    pretty_printed_name: "builtins.str"
+    fully_qualified_name: "builtins.str"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "certifi.core.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_CACERT_CTX"
+  fully_qualified_name: "certifi.core._CACERT_CTX"
+  type_annotation {
+    pretty_printed_name: "Union[contextlib.AbstractContextManager[pathlib.Path],None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "contextlib.AbstractContextManager[pathlib.Path]"
+      args {
+        pretty_printed_name: "pathlib.Path"
+        fully_qualified_name: "pathlib.Path"
+      }
+      fully_qualified_name: "contextlib.AbstractContextManager"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}
+vars {
+  name: "_CACERT_PATH"
+  fully_qualified_name: "certifi.core._CACERT_PATH"
+  type_annotation {
+    pretty_printed_name: "Union[builtins.str,None]"
+    kind: UNION
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+  }
+}

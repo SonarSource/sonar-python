@@ -1,0 +1,962 @@
+fully_qualified_name: "flask.ctx"
+classes {
+  name: "_AppCtxGlobals"
+  fully_qualified_name: "flask.ctx._AppCtxGlobals"
+  super_classes: "builtins.object"
+  methods {
+    name: "__getattr__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__getattr__"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__setattr__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__setattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "value"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__delattr__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__delattr__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.get"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.pop"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "setdefault"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.setdefault"
+    return_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "name"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "default"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+    }
+  }
+  methods {
+    name: "__contains__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__contains__"
+    return_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__iter__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__iter__"
+    return_annotation {
+      pretty_printed_name: "typing.Iterator[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "typing.Iterator"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "flask.ctx._AppCtxGlobals.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx._AppCtxGlobals"
+        fully_qualified_name: "flask.ctx._AppCtxGlobals"
+      }
+    }
+  }
+}
+classes {
+  name: "AppContext"
+  fully_qualified_name: "flask.ctx.AppContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.ctx.AppContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.AppContext"
+        fully_qualified_name: "flask.ctx.AppContext"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "flask.ctx.AppContext.push"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.AppContext"
+        fully_qualified_name: "flask.ctx.AppContext"
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "flask.ctx.AppContext.pop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.AppContext"
+        fully_qualified_name: "flask.ctx.AppContext"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "flask.ctx.AppContext.__enter__"
+    return_annotation {
+      pretty_printed_name: "flask.ctx.AppContext"
+      fully_qualified_name: "flask.ctx.AppContext"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx.AppContext"
+        fully_qualified_name: "flask.ctx.AppContext"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "flask.ctx.AppContext.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx.AppContext"
+        fully_qualified_name: "flask.ctx.AppContext"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "flask.ctx.AppContext.app"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+  attributes {
+    name: "url_adapter"
+    fully_qualified_name: "flask.ctx.AppContext.url_adapter"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.routing.map.MapAdapter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.routing.map.MapAdapter"
+        fully_qualified_name: "werkzeug.routing.map.MapAdapter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "g"
+    fully_qualified_name: "flask.ctx.AppContext.g"
+    type_annotation {
+      pretty_printed_name: "flask.ctx._AppCtxGlobals"
+      fully_qualified_name: "flask.ctx._AppCtxGlobals"
+    }
+  }
+  attributes {
+    name: "_cv_tokens"
+    fully_qualified_name: "flask.ctx.AppContext._cv_tokens"
+    type_annotation {
+      pretty_printed_name: "builtins.list[contextvars.Token[Any]]"
+      args {
+        pretty_printed_name: "contextvars.Token[Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "contextvars.Token"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+classes {
+  name: "RequestContext"
+  fully_qualified_name: "flask.ctx.RequestContext"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "flask.ctx.RequestContext.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+    parameters {
+      name: "app"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.app.Flask"
+        fully_qualified_name: "flask.app.Flask"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.dict[Any,Any]"
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "builtins.dict"
+      }
+    }
+    parameters {
+      name: "request"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[flask.wrappers.Request,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "flask.wrappers.Request"
+          fully_qualified_name: "flask.wrappers.Request"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "session"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[flask.sessions.SessionMixin,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "flask.sessions.SessionMixin"
+          fully_qualified_name: "flask.sessions.SessionMixin"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "copy"
+    fully_qualified_name: "flask.ctx.RequestContext.copy"
+    return_annotation {
+      pretty_printed_name: "flask.ctx.RequestContext"
+      fully_qualified_name: "flask.ctx.RequestContext"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+  }
+  methods {
+    name: "match_request"
+    fully_qualified_name: "flask.ctx.RequestContext.match_request"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+  }
+  methods {
+    name: "push"
+    fully_qualified_name: "flask.ctx.RequestContext.push"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+  }
+  methods {
+    name: "pop"
+    fully_qualified_name: "flask.ctx.RequestContext.pop"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+    parameters {
+      name: "exc"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__enter__"
+    fully_qualified_name: "flask.ctx.RequestContext.__enter__"
+    return_annotation {
+      pretty_printed_name: "flask.ctx.RequestContext"
+      fully_qualified_name: "flask.ctx.RequestContext"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+  }
+  methods {
+    name: "__exit__"
+    fully_qualified_name: "flask.ctx.RequestContext.__exit__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.type,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.type"
+          fully_qualified_name: "builtins.type"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[builtins.BaseException,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.BaseException"
+          fully_qualified_name: "builtins.BaseException"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "Union[types.TracebackType,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "types.TracebackType"
+          fully_qualified_name: "types.TracebackType"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__repr__"
+    fully_qualified_name: "flask.ctx.RequestContext.__repr__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "flask.ctx.RequestContext"
+        fully_qualified_name: "flask.ctx.RequestContext"
+      }
+    }
+  }
+  attributes {
+    name: "app"
+    fully_qualified_name: "flask.ctx.RequestContext.app"
+    type_annotation {
+      pretty_printed_name: "flask.app.Flask"
+      fully_qualified_name: "flask.app.Flask"
+    }
+  }
+  attributes {
+    name: "request"
+    fully_qualified_name: "flask.ctx.RequestContext.request"
+    type_annotation {
+      pretty_printed_name: "flask.wrappers.Request"
+      fully_qualified_name: "flask.wrappers.Request"
+    }
+  }
+  attributes {
+    name: "url_adapter"
+    fully_qualified_name: "flask.ctx.RequestContext.url_adapter"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.routing.map.MapAdapter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.routing.map.MapAdapter"
+        fully_qualified_name: "werkzeug.routing.map.MapAdapter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "flashes"
+    fully_qualified_name: "flask.ctx.RequestContext.flashes"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.list[Tuple[builtins.str,builtins.str]],None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.list[Tuple[builtins.str,builtins.str]]"
+        args {
+          pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+          kind: TUPLE
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+          args {
+            pretty_printed_name: "builtins.str"
+            fully_qualified_name: "builtins.str"
+          }
+        }
+        fully_qualified_name: "builtins.list"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "session"
+    fully_qualified_name: "flask.ctx.RequestContext.session"
+    type_annotation {
+      pretty_printed_name: "Union[flask.sessions.SessionMixin,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "flask.sessions.SessionMixin"
+        fully_qualified_name: "flask.sessions.SessionMixin"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "_after_request_functions"
+    fully_qualified_name: "flask.ctx.RequestContext._after_request_functions"
+    type_annotation {
+      pretty_printed_name: "builtins.list[TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]]"
+      args {
+        pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function]]"
+          kind: UNION
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+          args {
+            pretty_printed_name: "CallableType[builtins.function]"
+            kind: CALLABLE
+            args {
+              pretty_printed_name: "builtins.function"
+              fully_qualified_name: "builtins.function"
+            }
+          }
+        }
+        fully_qualified_name: "flask.typing.AfterRequestCallable"
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+  attributes {
+    name: "_cv_tokens"
+    fully_qualified_name: "flask.ctx.RequestContext._cv_tokens"
+    type_annotation {
+      pretty_printed_name: "builtins.list[Tuple[contextvars.Token[Any],Union[flask.ctx.AppContext,None]]]"
+      args {
+        pretty_printed_name: "Tuple[contextvars.Token[Any],Union[flask.ctx.AppContext,None]]"
+        kind: TUPLE
+        args {
+          pretty_printed_name: "contextvars.Token[Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "contextvars.Token"
+        }
+        args {
+          pretty_printed_name: "Union[flask.ctx.AppContext,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "flask.ctx.AppContext"
+            fully_qualified_name: "flask.ctx.AppContext"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+      }
+      fully_qualified_name: "builtins.list"
+    }
+  }
+}
+functions {
+  name: "after_this_request"
+  fully_qualified_name: "flask.ctx.after_this_request"
+  return_annotation {
+    pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]"
+    kind: TYPE_ALIAS
+    args {
+      pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function]]"
+      kind: UNION
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+      args {
+        pretty_printed_name: "CallableType[builtins.function]"
+        kind: CALLABLE
+        args {
+          pretty_printed_name: "builtins.function"
+          fully_qualified_name: "builtins.function"
+        }
+      }
+    }
+    fully_qualified_name: "flask.typing.AfterRequestCallable"
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[CallableType[builtins.function],CallableType[builtins.function]]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[CallableType[builtins.function],CallableType[builtins.function]]"
+        kind: UNION
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+        args {
+          pretty_printed_name: "CallableType[builtins.function]"
+          kind: CALLABLE
+          args {
+            pretty_printed_name: "builtins.function"
+            fully_qualified_name: "builtins.function"
+          }
+        }
+      }
+      fully_qualified_name: "flask.typing.AfterRequestCallable"
+    }
+  }
+}
+functions {
+  name: "copy_current_request_context"
+  fully_qualified_name: "flask.ctx.copy_current_request_context"
+  return_annotation {
+    pretty_printed_name: "CallableType[builtins.function]"
+    kind: CALLABLE
+    args {
+      pretty_printed_name: "builtins.function"
+      fully_qualified_name: "builtins.function"
+    }
+  }
+  parameters {
+    name: "f"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "CallableType[builtins.function]"
+      kind: CALLABLE
+      args {
+        pretty_printed_name: "builtins.function"
+        fully_qualified_name: "builtins.function"
+      }
+    }
+  }
+}
+functions {
+  name: "has_request_context"
+  fully_qualified_name: "flask.ctx.has_request_context"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+functions {
+  name: "has_app_context"
+  fully_qualified_name: "flask.ctx.has_app_context"
+  return_annotation {
+    pretty_printed_name: "builtins.bool"
+    fully_qualified_name: "builtins.bool"
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "flask.ctx.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}
+vars {
+  name: "ft"
+  fully_qualified_name: "flask.typing"
+  is_imported_module: true
+}
+vars {
+  name: "_sentinel"
+  fully_qualified_name: "flask.ctx._sentinel"
+  type_annotation {
+    pretty_printed_name: "builtins.object"
+    fully_qualified_name: "builtins.object"
+  }
+}

@@ -1,0 +1,163 @@
+fully_qualified_name: "scribe.ttypes"
+classes {
+  name: "ResultCode"
+  fully_qualified_name: "scribe.ttypes.ResultCode"
+  super_classes: "builtins.object"
+  valid_for: "27"
+  attributes {
+    name: "OK"
+    fully_qualified_name: "scribe.ttypes.ResultCode.OK"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "TRY_LATER"
+    fully_qualified_name: "scribe.ttypes.ResultCode.TRY_LATER"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+classes {
+  name: "LogEntry"
+  fully_qualified_name: "scribe.ttypes.LogEntry"
+  super_classes: "builtins.object"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "scribe.ttypes.LogEntry.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "scribe.ttypes.LogEntry"
+        fully_qualified_name: "scribe.ttypes.LogEntry"
+      }
+    }
+    parameters {
+      name: "category"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      has_default: true
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "read"
+    fully_qualified_name: "scribe.ttypes.LogEntry.read"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "iprot"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "write"
+    fully_qualified_name: "scribe.ttypes.LogEntry.write"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "oprot"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "validate"
+    fully_qualified_name: "scribe.ttypes.LogEntry.validate"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__eq__"
+    fully_qualified_name: "scribe.ttypes.LogEntry.__eq__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  methods {
+    name: "__ne__"
+    fully_qualified_name: "scribe.ttypes.LogEntry.__ne__"
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    parameters {
+      name: "other"
+      kind: POSITIONAL_OR_KEYWORD
+    }
+    valid_for: "27"
+  }
+  valid_for: "27"
+  attributes {
+    name: "thrift_spec"
+    fully_qualified_name: "scribe.ttypes.LogEntry.thrift_spec"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "category"
+    fully_qualified_name: "scribe.ttypes.LogEntry.category"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "scribe.ttypes.LogEntry.message"
+    type_annotation {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    valid_for: "27"
+  }
+}
+vars {
+  name: "fastbinary"
+  fully_qualified_name: "scribe.ttypes.fastbinary"
+  type_annotation {
+    pretty_printed_name: "Any"
+    kind: ANY
+  }
+  valid_for: "27"
+}

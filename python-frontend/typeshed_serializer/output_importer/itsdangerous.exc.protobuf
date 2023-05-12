@@ -1,0 +1,437 @@
+fully_qualified_name: "itsdangerous.exc"
+classes {
+  name: "BadData"
+  fully_qualified_name: "itsdangerous.exc.BadData"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.exc.BadData.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadData"
+        fully_qualified_name: "itsdangerous.exc.BadData"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "itsdangerous.exc.BadData.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadData"
+        fully_qualified_name: "itsdangerous.exc.BadData"
+      }
+    }
+  }
+  attributes {
+    name: "message"
+    fully_qualified_name: "itsdangerous.exc.BadData.message"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "BadSignature"
+  fully_qualified_name: "itsdangerous.exc.BadSignature"
+  super_classes: "itsdangerous.exc.BadData"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.exc.BadSignature.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadSignature"
+        fully_qualified_name: "itsdangerous.exc.BadSignature"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_any"
+      }
+    }
+  }
+  attributes {
+    name: "payload"
+    fully_qualified_name: "itsdangerous.exc.BadSignature.payload"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[Any,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "itsdangerous.exc._t_opt_any"
+    }
+  }
+}
+classes {
+  name: "BadTimeSignature"
+  fully_qualified_name: "itsdangerous.exc.BadTimeSignature"
+  super_classes: "itsdangerous.exc.BadSignature"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.exc.BadTimeSignature.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadTimeSignature"
+        fully_qualified_name: "itsdangerous.exc.BadTimeSignature"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_any"
+      }
+    }
+    parameters {
+      name: "date_signed"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[datetime.datetime,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "datetime.datetime"
+          fully_qualified_name: "datetime.datetime"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "date_signed"
+    fully_qualified_name: "itsdangerous.exc.BadTimeSignature.date_signed"
+    type_annotation {
+      pretty_printed_name: "Union[datetime.datetime,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "datetime.datetime"
+        fully_qualified_name: "datetime.datetime"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "SignatureExpired"
+  fully_qualified_name: "itsdangerous.exc.SignatureExpired"
+  super_classes: "itsdangerous.exc.BadTimeSignature"
+}
+classes {
+  name: "BadHeader"
+  fully_qualified_name: "itsdangerous.exc.BadHeader"
+  super_classes: "itsdangerous.exc.BadSignature"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.exc.BadHeader.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadHeader"
+        fully_qualified_name: "itsdangerous.exc.BadHeader"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "payload"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_any"
+      }
+    }
+    parameters {
+      name: "header"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[Any,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[Any,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_any"
+      }
+    }
+    parameters {
+      name: "original_error"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.Exception,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.Exception,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.Exception"
+            fully_qualified_name: "builtins.Exception"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_exc"
+      }
+    }
+  }
+  attributes {
+    name: "header"
+    fully_qualified_name: "itsdangerous.exc.BadHeader.header"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[Any,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[Any,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "itsdangerous.exc._t_opt_any"
+    }
+  }
+  attributes {
+    name: "original_error"
+    fully_qualified_name: "itsdangerous.exc.BadHeader.original_error"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.Exception,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "itsdangerous.exc._t_opt_exc"
+    }
+  }
+}
+classes {
+  name: "BadPayload"
+  fully_qualified_name: "itsdangerous.exc.BadPayload"
+  super_classes: "itsdangerous.exc.BadData"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "itsdangerous.exc.BadPayload.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "itsdangerous.exc.BadPayload"
+        fully_qualified_name: "itsdangerous.exc.BadPayload"
+      }
+    }
+    parameters {
+      name: "message"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "original_error"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "TypeAlias[Union[builtins.Exception,None]]"
+        kind: TYPE_ALIAS
+        args {
+          pretty_printed_name: "Union[builtins.Exception,None]"
+          kind: UNION
+          args {
+            pretty_printed_name: "builtins.Exception"
+            fully_qualified_name: "builtins.Exception"
+          }
+          args {
+            pretty_printed_name: "None"
+            kind: NONE
+          }
+        }
+        fully_qualified_name: "itsdangerous.exc._t_opt_exc"
+      }
+    }
+  }
+  attributes {
+    name: "original_error"
+    fully_qualified_name: "itsdangerous.exc.BadPayload.original_error"
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[builtins.Exception,None]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[builtins.Exception,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.Exception"
+          fully_qualified_name: "builtins.Exception"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+      fully_qualified_name: "itsdangerous.exc._t_opt_exc"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "itsdangerous.exc.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "_t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

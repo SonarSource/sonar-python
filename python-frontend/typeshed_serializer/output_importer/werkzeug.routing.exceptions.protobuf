@@ -1,0 +1,561 @@
+fully_qualified_name: "werkzeug.routing.exceptions"
+classes {
+  name: "RoutingException"
+  fully_qualified_name: "werkzeug.routing.exceptions.RoutingException"
+  super_classes: "builtins.Exception"
+}
+classes {
+  name: "RequestRedirect"
+  fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect"
+  super_classes: "werkzeug.exceptions.HTTPException"
+  super_classes: "werkzeug.routing.exceptions.RoutingException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.RequestRedirect"
+        fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect"
+      }
+    }
+    parameters {
+      name: "new_url"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  methods {
+    name: "get_response"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect.get_response"
+    return_annotation {
+      pretty_printed_name: "werkzeug.wrappers.response.Response"
+      fully_qualified_name: "werkzeug.wrappers.response.Response"
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.RequestRedirect"
+        fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect"
+      }
+    }
+    parameters {
+      name: "environ"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "TypeAlias[builtins.dict[builtins.str,Any]]"
+          kind: TYPE_ALIAS
+          args {
+            pretty_printed_name: "builtins.dict[builtins.str,Any]"
+            args {
+              pretty_printed_name: "builtins.str"
+              fully_qualified_name: "builtins.str"
+            }
+            args {
+              pretty_printed_name: "Any"
+              kind: ANY
+            }
+            fully_qualified_name: "builtins.dict"
+          }
+          fully_qualified_name: "_typeshed.wsgi.WSGIEnvironment"
+        }
+        args {
+          pretty_printed_name: "werkzeug.wrappers.request.Request"
+          fully_qualified_name: "werkzeug.wrappers.request.Request"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "scope"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.dict[Any,Any],None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.dict[Any,Any]"
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          args {
+            pretty_printed_name: "Any"
+            kind: ANY
+          }
+          fully_qualified_name: "builtins.dict"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  attributes {
+    name: "code"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect.code"
+    type_annotation {
+      pretty_printed_name: "builtins.int"
+      fully_qualified_name: "builtins.int"
+    }
+  }
+  attributes {
+    name: "new_url"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestRedirect.new_url"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "RequestPath"
+  fully_qualified_name: "werkzeug.routing.exceptions.RequestPath"
+  super_classes: "werkzeug.routing.exceptions.RoutingException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestPath.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.RequestPath"
+        fully_qualified_name: "werkzeug.routing.exceptions.RequestPath"
+      }
+    }
+    parameters {
+      name: "path_info"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestPath.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "path_info"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestPath.path_info"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "RequestAliasRedirect"
+  fully_qualified_name: "werkzeug.routing.exceptions.RequestAliasRedirect"
+  super_classes: "werkzeug.routing.exceptions.RoutingException"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestAliasRedirect.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.RequestAliasRedirect"
+        fully_qualified_name: "werkzeug.routing.exceptions.RequestAliasRedirect"
+      }
+    }
+    parameters {
+      name: "matched_values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "endpoint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "matched_values"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestAliasRedirect.matched_values"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  attributes {
+    name: "endpoint"
+    fully_qualified_name: "werkzeug.routing.exceptions.RequestAliasRedirect.endpoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+}
+classes {
+  name: "BuildError"
+  fully_qualified_name: "werkzeug.routing.exceptions.BuildError"
+  super_classes: "werkzeug.routing.exceptions.RoutingException"
+  super_classes: "builtins.LookupError"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.BuildError"
+        fully_qualified_name: "werkzeug.routing.exceptions.BuildError"
+      }
+    }
+    parameters {
+      name: "endpoint"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+    parameters {
+      name: "values"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "Any"
+          kind: ANY
+        }
+        fully_qualified_name: "typing.Mapping"
+      }
+    }
+    parameters {
+      name: "method"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[builtins.str,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+    parameters {
+      name: "adapter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.routing.map.MapAdapter,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.routing.map.MapAdapter"
+          fully_qualified_name: "werkzeug.routing.map.MapAdapter"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "suggested"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.suggested"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.routing.rules.Rule,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.BuildError"
+        fully_qualified_name: "werkzeug.routing.exceptions.BuildError"
+      }
+    }
+    has_decorators: true
+    resolved_decorator_names: "cached_property"
+  }
+  methods {
+    name: "closest_rule"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.closest_rule"
+    return_annotation {
+      pretty_printed_name: "Union[werkzeug.routing.rules.Rule,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.routing.rules.Rule"
+        fully_qualified_name: "werkzeug.routing.rules.Rule"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.BuildError"
+        fully_qualified_name: "werkzeug.routing.exceptions.BuildError"
+      }
+    }
+    parameters {
+      name: "adapter"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "Union[werkzeug.routing.map.MapAdapter,None]"
+        kind: UNION
+        args {
+          pretty_printed_name: "werkzeug.routing.map.MapAdapter"
+          fully_qualified_name: "werkzeug.routing.map.MapAdapter"
+        }
+        args {
+          pretty_printed_name: "None"
+          kind: NONE
+        }
+      }
+    }
+  }
+  methods {
+    name: "__str__"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.__str__"
+    return_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    parameters {
+      name: "__"
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.BuildError"
+        fully_qualified_name: "werkzeug.routing.exceptions.BuildError"
+      }
+    }
+  }
+  attributes {
+    name: "endpoint"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.endpoint"
+    type_annotation {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+  }
+  attributes {
+    name: "values"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.values"
+    type_annotation {
+      pretty_printed_name: "typing.Mapping[builtins.str,Any]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "Any"
+        kind: ANY
+      }
+      fully_qualified_name: "typing.Mapping"
+    }
+  }
+  attributes {
+    name: "method"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.method"
+    type_annotation {
+      pretty_printed_name: "Union[builtins.str,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+  attributes {
+    name: "adapter"
+    fully_qualified_name: "werkzeug.routing.exceptions.BuildError.adapter"
+    type_annotation {
+      pretty_printed_name: "Union[werkzeug.routing.map.MapAdapter,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "werkzeug.routing.map.MapAdapter"
+        fully_qualified_name: "werkzeug.routing.map.MapAdapter"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+classes {
+  name: "WebsocketMismatch"
+  fully_qualified_name: "werkzeug.routing.exceptions.WebsocketMismatch"
+  super_classes: "werkzeug.exceptions.BadRequest"
+}
+classes {
+  name: "NoMatch"
+  fully_qualified_name: "werkzeug.routing.exceptions.NoMatch"
+  super_classes: "builtins.Exception"
+  methods {
+    name: "__init__"
+    fully_qualified_name: "werkzeug.routing.exceptions.NoMatch.__init__"
+    return_annotation {
+      pretty_printed_name: "None"
+      kind: NONE
+    }
+    parameters {
+      name: "self"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "werkzeug.routing.exceptions.NoMatch"
+        fully_qualified_name: "werkzeug.routing.exceptions.NoMatch"
+      }
+    }
+    parameters {
+      name: "have_match_for"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.set[builtins.str]"
+        args {
+          pretty_printed_name: "builtins.str"
+          fully_qualified_name: "builtins.str"
+        }
+        fully_qualified_name: "builtins.set"
+      }
+    }
+    parameters {
+      name: "websocket_mismatch"
+      kind: POSITIONAL_OR_KEYWORD
+      type_annotation {
+        pretty_printed_name: "builtins.bool"
+        fully_qualified_name: "builtins.bool"
+      }
+    }
+  }
+  attributes {
+    name: "__slots__"
+    fully_qualified_name: "werkzeug.routing.exceptions.NoMatch.__slots__"
+    type_annotation {
+      pretty_printed_name: "Tuple[builtins.str,builtins.str]"
+      kind: TUPLE
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+    }
+  }
+  attributes {
+    name: "have_match_for"
+    fully_qualified_name: "werkzeug.routing.exceptions.NoMatch.have_match_for"
+    type_annotation {
+      pretty_printed_name: "builtins.set[builtins.str]"
+      args {
+        pretty_printed_name: "builtins.str"
+        fully_qualified_name: "builtins.str"
+      }
+      fully_qualified_name: "builtins.set"
+    }
+  }
+  attributes {
+    name: "websocket_mismatch"
+    fully_qualified_name: "werkzeug.routing.exceptions.NoMatch.websocket_mismatch"
+    type_annotation {
+      pretty_printed_name: "builtins.bool"
+      fully_qualified_name: "builtins.bool"
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "werkzeug.routing.exceptions.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
+vars {
+  name: "t"
+  fully_qualified_name: "typing"
+  is_imported_module: true
+}

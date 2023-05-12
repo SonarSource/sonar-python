@@ -1,0 +1,365 @@
+fully_qualified_name: "cryptography.hazmat.bindings._rust.x509"
+classes {
+  name: "Sct"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.Sct"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "Certificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.Certificate"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "RevokedCertificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.RevokedCertificate"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "CertificateRevocationList"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.CertificateRevocationList"
+  super_classes: "builtins.object"
+}
+classes {
+  name: "CertificateSigningRequest"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.CertificateSigningRequest"
+  super_classes: "builtins.object"
+}
+functions {
+  name: "load_pem_x509_certificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_pem_x509_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.Certificate"
+    fully_qualified_name: "cryptography.x509.base.Certificate"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_der_x509_certificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_der_x509_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.Certificate"
+    fully_qualified_name: "cryptography.x509.base.Certificate"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_pem_x509_crl"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_pem_x509_crl"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_der_x509_crl"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_der_x509_crl"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_pem_x509_csr"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_pem_x509_csr"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "load_der_x509_csr"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.load_der_x509_csr"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  }
+  parameters {
+    name: "data"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "builtins.bytes"
+      fully_qualified_name: "builtins.bytes"
+    }
+  }
+}
+functions {
+  name: "encode_name_bytes"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.encode_name_bytes"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "name"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.name.Name"
+      fully_qualified_name: "cryptography.x509.name.Name"
+    }
+  }
+}
+functions {
+  name: "encode_extension_value"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.encode_extension_value"
+  return_annotation {
+    pretty_printed_name: "builtins.bytes"
+    fully_qualified_name: "builtins.bytes"
+  }
+  parameters {
+    name: "extension"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.extensions.ExtensionType"
+      fully_qualified_name: "cryptography.x509.extensions.ExtensionType"
+    }
+  }
+}
+functions {
+  name: "create_x509_certificate"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.create_x509_certificate"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.Certificate"
+    fully_qualified_name: "cryptography.x509.base.Certificate"
+  }
+  parameters {
+    name: "builder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateBuilder"
+    }
+  }
+  parameters {
+    name: "private_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+    }
+  }
+  parameters {
+    name: "hash_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "create_x509_csr"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.create_x509_csr"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateSigningRequest"
+    fully_qualified_name: "cryptography.x509.base.CertificateSigningRequest"
+  }
+  parameters {
+    name: "builder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateSigningRequestBuilder"
+    }
+  }
+  parameters {
+    name: "private_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+    }
+  }
+  parameters {
+    name: "hash_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+functions {
+  name: "create_x509_crl"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.create_x509_crl"
+  return_annotation {
+    pretty_printed_name: "cryptography.x509.base.CertificateRevocationList"
+    fully_qualified_name: "cryptography.x509.base.CertificateRevocationList"
+  }
+  parameters {
+    name: "builder"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+      fully_qualified_name: "cryptography.x509.base.CertificateRevocationListBuilder"
+    }
+  }
+  parameters {
+    name: "private_key"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]"
+      kind: TYPE_ALIAS
+      args {
+        pretty_printed_name: "Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]"
+        kind: UNION
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"
+        }
+        args {
+          pretty_printed_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+          fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"
+        }
+      }
+      fully_qualified_name: "cryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES"
+    }
+  }
+  parameters {
+    name: "hash_algorithm"
+    kind: POSITIONAL_OR_KEYWORD
+    type_annotation {
+      pretty_printed_name: "Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]"
+      kind: UNION
+      args {
+        pretty_printed_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+        fully_qualified_name: "cryptography.hazmat.primitives.hashes.HashAlgorithm"
+      }
+      args {
+        pretty_printed_name: "None"
+        kind: NONE
+      }
+    }
+  }
+}
+vars {
+  name: "__annotations__"
+  fully_qualified_name: "cryptography.hazmat.bindings._rust.x509.__annotations__"
+  type_annotation {
+    pretty_printed_name: "builtins.dict[builtins.str,Any]"
+    args {
+      pretty_printed_name: "builtins.str"
+      fully_qualified_name: "builtins.str"
+    }
+    args {
+      pretty_printed_name: "Any"
+      kind: ANY
+    }
+    fully_qualified_name: "builtins.dict"
+  }
+}
