@@ -1,0 +1,807 @@
+
+requests.adapters√
+SOCKSProxyManager'urllib3.contrib.socks.SOCKSProxyManager"urllib3.poolmanager.PoolManager*ú
+__init__0urllib3.contrib.socks.SOCKSProxyManager.__init__"
+None*\
+selfR
+'urllib3.contrib.socks.SOCKSProxyManager"'urllib3.contrib.socks.SOCKSProxyManager*+
+	proxy_url
+builtins.str"builtins.str*T
+usernameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+passwordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *-
+	num_pools
+builtins.int"builtins.int *Ã
+headersº
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *
+connection_pool_kw
+Anyrg
+pool_classes_by_scheme>urllib3.contrib.socks.SOCKSProxyManager.pool_classes_by_scheme
+	TypedDictr\
+	proxy_url1urllib3.contrib.socks.SOCKSProxyManager.proxy_url
+builtins.str"builtins.str^
+ConnectTimeoutError&urllib3.exceptions.ConnectTimeoutError"urllib3.exceptions.TimeoutError◊
+MaxRetryError urllib3.exceptions.MaxRetryError"urllib3.exceptions.RequestError*ˆ
+__init__)urllib3.exceptions.MaxRetryError.__init__"
+None*N
+selfD
+ urllib3.exceptions.MaxRetryError" urllib3.exceptions.MaxRetryError*X
+poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*%
+url
+builtins.str"builtins.str*d
+reasonV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None râ
+reason'urllib3.exceptions.MaxRetryError.reasonV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+NoneO
+ProtocolError urllib3.exceptions.ProtocolError"urllib3.exceptions.HTTPErrory
+ReadTimeoutError#urllib3.exceptions.ReadTimeoutError"urllib3.exceptions.TimeoutError"urllib3.exceptions.RequestErrorè
+ResponseError urllib3.exceptions.ResponseError"urllib3.exceptions.HTTPErrorr]
+GENERIC_ERROR.urllib3.exceptions.ResponseError.GENERIC_ERROR
+builtins.str"builtins.strr_
+SPECIFIC_ERROR/urllib3.exceptions.ResponseError.SPECIFIC_ERROR
+builtins.str"builtins.str¢
+PoolManagerurllib3.poolmanager.PoolManager"urllib3.request.RequestMethods*ﬂ
+__init__(urllib3.poolmanager.PoolManager.__init__"
+None*L
+selfB
+urllib3.poolmanager.PoolManager"urllib3.poolmanager.PoolManager*
+	num_pools
+Any *
+headers
+Any *
+connection_pool_kw
+Any*@
+	__enter__)urllib3.poolmanager.PoolManager.__enter__*
+self*™
+__exit__(urllib3.poolmanager.PoolManager.__exit__":
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*J
+selfB
+urllib3.poolmanager.PoolManager"urllib3.poolmanager.PoolManager*ó
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*m
+exc_valb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*c
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*8
+clear%urllib3.poolmanager.PoolManager.clear*
+self*z
+connection_from_host4urllib3.poolmanager.PoolManager.connection_from_host*
+self*
+host*
+
+port *
+scheme *]
+connection_from_url3urllib3.poolmanager.PoolManager.connection_from_url*
+self*
+url*¶
+urlopen'urllib3.poolmanager.PoolManager.urlopen*
+self*
+
+method*
+url*
+
+body *
+headers *
+encode_multipart *
+multipart_boundary *
+kwr7
+proxy%urllib3.poolmanager.PoolManager.proxy
+AnyrQ
+connection_pool_kw2urllib3.poolmanager.PoolManager.connection_pool_kw
+Anyr7
+pools%urllib3.poolmanager.PoolManager.pools
+Any∑G
+Retryurllib3.util.retry.Retry"builtins.object*Ô
+__init__!urllib3.util.retry.Retry.__init__"
+None*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*
+totalr
+&Union[builtins.bool,builtins.int,None]
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+None *S
+connectD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *P
+readD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ç
+redirectr
+&Union[builtins.bool,builtins.int,None]
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+None *R
+statusD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Q
+otherD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¯
+allowed_methods‡
+BUnion[typing.Collection[builtins.str],Literal[builtins.bool],None]R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+None *¶
+status_forcelistç
++Union[typing.Collection[builtins.int],None]R
+typing.Collection[builtins.int]
+builtins.int"builtins.int"typing.Collection
+None *6
+backoff_factor 
+builtins.float"builtins.float *7
+raise_on_redirect
+builtins.bool"builtins.bool *5
+raise_on_status
+builtins.bool"builtins.bool *Ù
+history‰
+•Union[builtins.tuple[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.Exception,None],Union[builtins.int,None],Union[builtins.str,None]]],None]≠
+ôbuiltins.tuple[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.Exception,None],Union[builtins.int,None],Union[builtins.str,None]]]˛
+âTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.Exception,None],Union[builtins.int,None],Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.tuple
+None *@
+respect_retry_after_header
+builtins.bool"builtins.bool *t
+remove_headers_on_redirectR
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection *¶
+method_whitelistç
++Union[typing.Collection[builtins.str],None]R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection
+None *}
+newurllib3.util.retry.Retry.new"
+Any*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*
+kw
+Any*Ç
+from_int!urllib3.util.retry.Retry.from_int"4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*a
+clsX
+Type[urllib3.util.retry.Retry]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*œ
+retries¡
+?Union[urllib3.util.retry.Retry,builtins.bool,builtins.int,None]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+None*Ç
+redirectr
+&Union[builtins.bool,builtins.int,None]
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+None *—
+default¡
+?Union[urllib3.util.retry.Retry,builtins.bool,builtins.int,None]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+None 0:classmethodp*ü
+get_backoff_time)urllib3.util.retry.Retry.get_backoff_time" 
+builtins.float"builtins.float*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*–
+parse_retry_after*urllib3.util.retry.Retry.parse_retry_after" 
+builtins.float"builtins.float*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*-
+retry_after
+builtins.str"builtins.str*ï
+get_retry_after(urllib3.util.retry.Retry.get_retry_after"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*L
+response>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse*•
+sleep_for_retry(urllib3.util.retry.Retry.sleep_for_retry"
+builtins.bool"builtins.bool*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*á
+responsew
+)Union[urllib3.response.HTTPResponse,None]>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse
+None *˚
+sleepurllib3.util.retry.Retry.sleep"
+None*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*á
+responsew
+)Union[urllib3.response.HTTPResponse,None]>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse
+None *ù
+is_retry!urllib3.util.retry.Retry.is_retry"
+builtins.bool"builtins.bool*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*(
+method
+builtins.str"builtins.str*-
+status_code
+builtins.int"builtins.int*5
+has_retry_after
+builtins.bool"builtins.bool *ï
+is_exhausted%urllib3.util.retry.Retry.is_exhausted"
+builtins.bool"builtins.bool*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*«
+	increment"urllib3.util.retry.Retry.increment"4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*>
+self4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry*R
+methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *O
+urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *á
+responsew
+)Union[urllib3.response.HTTPResponse,None]>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse
+None *c
+errorV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None *ù
+_poolè
+1Union[urllib3.connectionpool.ConnectionPool,None]N
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool
+None *l
+_stacktraceY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None r°
+DEFAULT_ALLOWED_METHODS0urllib3.util.retry.Retry.DEFAULT_ALLOWED_METHODST
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozensetr£
+RETRY_AFTER_STATUS_CODES1urllib3.util.retry.Retry.RETRY_AFTER_STATUS_CODEST
+ builtins.frozenset[builtins.int]
+builtins.int"builtins.int"builtins.frozensetr∑
+"DEFAULT_REMOVE_HEADERS_ON_REDIRECT;urllib3.util.retry.Retry.DEFAULT_REMOVE_HEADERS_ON_REDIRECTT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozensetra
+DEFAULT_BACKOFF_MAX,urllib3.util.retry.Retry.DEFAULT_BACKOFF_MAX
+builtins.int"builtins.intrõ
+totalurllib3.util.retry.Retry.totalr
+&Union[builtins.bool,builtins.int,None]
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+Nonerq
+connect urllib3.util.retry.Retry.connectD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerk
+readurllib3.util.retry.Retry.readD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner«
+redirect!urllib3.util.retry.Retry.redirectó
+/Union[Literal[builtins.bool],builtins.int,None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+Nonero
+statusurllib3.util.retry.Retry.statusD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerm
+otherurllib3.util.retry.Retry.otherD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerû
+allowed_methods(urllib3.util.retry.Retry.allowed_methods‡
+BUnion[typing.Collection[builtins.str],Literal[builtins.bool],None]R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+Nonerë
+status_forcelist)urllib3.util.retry.Retry.status_forcelistR
+typing.Collection[builtins.int]
+builtins.int"builtins.int"typing.Collectionr[
+backoff_factor'urllib3.util.retry.Retry.backoff_factor 
+builtins.float"builtins.floatr_
+raise_on_redirect*urllib3.util.retry.Retry.raise_on_redirect
+builtins.bool"builtins.boolr[
+raise_on_status(urllib3.util.retry.Retry.raise_on_status
+builtins.bool"builtins.boolr€
+history urllib3.util.retry.Retry.history≠
+ôbuiltins.tuple[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.Exception,None],Union[builtins.int,None],Union[builtins.str,None]]]˛
+âTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.Exception,None],Union[builtins.int,None],Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.tuplerq
+respect_retry_after_header3urllib3.util.retry.Retry.respect_retry_after_header
+builtins.bool"builtins.boolrß
+remove_headers_on_redirect3urllib3.util.retry.Retry.remove_headers_on_redirectT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset\
+ConnectionError#requests.exceptions.ConnectionError"$requests.exceptions.RequestExceptionv
+ConnectTimeout"requests.exceptions.ConnectTimeout"#requests.exceptions.ConnectionError"requests.exceptions.TimeoutQ
+
+ProxyErrorrequests.exceptions.ProxyError"#requests.exceptions.ConnectionErrorK
+ReadTimeoutrequests.exceptions.ReadTimeout"requests.exceptions.TimeoutR
+
+RetryErrorrequests.exceptions.RetryError"$requests.exceptions.RequestExceptionM
+SSLErrorrequests.exceptions.SSLError"#requests.exceptions.ConnectionErrorÄ,
+Responserequests.models.Response"builtins.object*w
+__init__!requests.models.Response.__init__"
+None*>
+self4
+requests.models.Response"requests.models.Response*ç
+__bool__!requests.models.Response.__bool__"
+builtins.bool"builtins.bool*>
+self4
+requests.models.Response"requests.models.Response*ë
+__nonzero__$requests.models.Response.__nonzero__"
+builtins.bool"builtins.bool*<
+self4
+requests.models.Response"requests.models.Response*¡
+__iter__!requests.models.Response.__iter__"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*<
+self4
+requests.models.Response"requests.models.Response*v
+	__enter__"requests.models.Response.__enter__"
+Any*<
+self4
+requests.models.Response"requests.models.Response*à
+__exit__!requests.models.Response.__exit__"
+None*<
+self4
+requests.models.Response"requests.models.Response*
+args
+Any*Ú
+nextrequests.models.Response.next"}
++Union[requests.models.PreparedRequest,None]B
+requests.models.PreparedRequest"requests.models.PreparedRequest
+None*>
+self4
+requests.models.Response"requests.models.Response0:property`*è
+okrequests.models.Response.ok"
+builtins.bool"builtins.bool*>
+self4
+requests.models.Response"requests.models.Response0:property`*°
+is_redirect$requests.models.Response.is_redirect"
+builtins.bool"builtins.bool*>
+self4
+requests.models.Response"requests.models.Response0:property`*µ
+is_permanent_redirect.requests.models.Response.is_permanent_redirect"
+builtins.bool"builtins.bool*>
+self4
+requests.models.Response"requests.models.Response0:property`*´
+apparent_encoding*requests.models.Response.apparent_encoding"
+builtins.str"builtins.str*>
+self4
+requests.models.Response"requests.models.Response0:property`*µ
+iter_content%requests.models.Response.iter_content"0
+typing.Iterator[Any]
+Any"typing.Iterator*>
+self4
+requests.models.Response"requests.models.Response*V
+
+chunk_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *4
+decode_unicode
+builtins.bool"builtins.bool *∫
+
+iter_lines#requests.models.Response.iter_lines"0
+typing.Iterator[Any]
+Any"typing.Iterator*>
+self4
+requests.models.Response"requests.models.Response*V
+
+chunk_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *4
+decode_unicode
+builtins.bool"builtins.bool *Ü
+	delimiteru
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None *õ
+content requests.models.Response.content" 
+builtins.bytes"builtins.bytes*>
+self4
+requests.models.Response"requests.models.Response0:property`*ë
+textrequests.models.Response.text"
+builtins.str"builtins.str*>
+self4
+requests.models.Response"requests.models.Response0:property`*∫
+jsonrequests.models.Response.json"
+Any*>
+self4
+requests.models.Response"requests.models.Response*û
+clsí
+*Union[Type[json.decoder.JSONDecoder],None]X
+Type[json.decoder.JSONDecoder]4
+json.decoder.JSONDecoder"json.decoder.JSONDecoder
+None *ö
+object_hookÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ö
+parse_floatÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ò
+	parse_intÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ù
+parse_constantÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *†
+object_pairs_hookÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+kwds
+Any*∞
+linksrequests.models.Response.links"9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*>
+self4
+requests.models.Response"requests.models.Response0:property`*á
+raise_for_status)requests.models.Response.raise_for_status"
+None*>
+self4
+requests.models.Response"requests.models.Response*q
+closerequests.models.Response.close"
+None*>
+self4
+requests.models.Response"requests.models.Responser8
+	__attrs__"requests.models.Response.__attrs__
+Anyry
+_content!requests.models.Response._contentJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+NonerQ
+status_code$requests.models.Response.status_code
+builtins.int"builtins.intr´
+headers requests.models.Response.headers~
+5requests.structures.CaseInsensitiveDict[builtins.str]
+builtins.str"builtins.str"'requests.structures.CaseInsensitiveDictr,
+rawrequests.models.Response.raw
+AnyrA
+urlrequests.models.Response.url
+builtins.str"builtins.strrs
+encoding!requests.models.Response.encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerõ
+history requests.models.Response.historyn
+'builtins.list[requests.models.Response]4
+requests.models.Response"requests.models.Response"builtins.listrG
+reasonrequests.models.Response.reason
+builtins.str"builtins.strru
+cookies requests.models.Response.cookiesH
+"requests.cookies.RequestsCookieJar""requests.cookies.RequestsCookieJarrU
+elapsed requests.models.Response.elapsed(
+datetime.timedelta"datetime.timedeltaro
+request requests.models.Response.requestB
+requests.models.PreparedRequest"requests.models.PreparedRequestê
+CaseInsensitiveDict'requests.structures.CaseInsensitiveDict"typing.MutableMapping*‚
+__init__0requests.structures.CaseInsensitiveDict.__init__"
+None*ì
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*⁄
+dataÕ
+}Union[typing.Mapping[builtins.str,requests.structures._VT],typing.Iterable[Tuple[builtins.str,requests.structures._VT]],None]Å
+4typing.Mapping[builtins.str,requests.structures._VT]
+builtins.str"builtins.str
+requests.structures._VT"typing.Mappingª
+<typing.Iterable[Tuple[builtins.str,requests.structures._VT]]j
++Tuple[builtins.str,requests.structures._VT]
+builtins.str"builtins.str
+requests.structures._VT"typing.Iterable
+None *'
+kwargs
+requests.structures._VT*ñ
+lower_items3requests.structures.CaseInsensitiveDict.lower_items"ª
+<typing.Iterator[Tuple[builtins.str,requests.structures._VT]]j
++Tuple[builtins.str,requests.structures._VT]
+builtins.str"builtins.str
+requests.structures._VT"typing.Iterator*ì
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*´
+__setitem__3requests.structures.CaseInsensitiveDict.__setitem__"
+None*ë
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*#
+key
+builtins.str"builtins.str*$
+value
+requests.structures._VT*ò
+__getitem__3requests.structures.CaseInsensitiveDict.__getitem__"
+requests.structures._VT*ë
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*#
+key
+builtins.str"builtins.str*Ö
+__delitem__3requests.structures.CaseInsensitiveDict.__delitem__"
+None*ë
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*#
+key
+builtins.str"builtins.str*†
+__iter__0requests.structures.CaseInsensitiveDict.__iter__"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*ë
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*Ï
+__len__/requests.structures.CaseInsensitiveDict.__len__"
+builtins.int"builtins.int*ë
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*’
+copy,requests.structures.CaseInsensitiveDict.copy"à
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDict*ì
+selfà
+@requests.structures.CaseInsensitiveDict[requests.structures._VT]
+requests.structures._VT"'requests.structures.CaseInsensitiveDictPÉ
+BaseAdapterrequests.adapters.BaseAdapter"builtins.object*Ü
+__init__&requests.adapters.BaseAdapter.__init__"
+None*H
+self>
+requests.adapters.BaseAdapter"requests.adapters.BaseAdapter*∑
+send"requests.adapters.BaseAdapter.send"4
+requests.models.Response"requests.models.Response*H
+self>
+requests.adapters.BaseAdapter"requests.adapters.BaseAdapter*O
+requestB
+requests.models.PreparedRequest"requests.models.PreparedRequest*,
+stream
+builtins.bool"builtins.bool *‘
+timeoutƒ
+ZUnion[None,builtins.float,Tuple[builtins.float,builtins.float],Tuple[builtins.float,None]]
+None 
+builtins.float"builtins.floatl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.floatJ
+Tuple[builtins.float,None] 
+builtins.float"builtins.float
+None *q
+verifyc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *Ú
+certÂ
+tUnion[None,builtins.bytes,builtins.str,Tuple[Union[builtins.bytes,builtins.str],Union[builtins.bytes,builtins.str]]]
+None 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str†
+LTuple[Union[builtins.bytes,builtins.str],Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str *Ã
+proxiesº
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *Ä
+close#requests.adapters.BaseAdapter.close"
+None*H
+self>
+requests.adapters.BaseAdapter"requests.adapters.BaseAdapterÆ
+HTTPAdapterrequests.adapters.HTTPAdapter"requests.adapters.BaseAdapter* 
+__init__&requests.adapters.HTTPAdapter.__init__"
+None*H
+self>
+requests.adapters.HTTPAdapter"requests.adapters.HTTPAdapter*4
+pool_connections
+builtins.int"builtins.int *0
+pool_maxsize
+builtins.int"builtins.int *ß
+max_retriesì
+1Union[urllib3.util.retry.Retry,builtins.int,None]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.int"builtins.int
+None *0
+
+pool_block
+builtins.bool"builtins.bool *à
+init_poolmanager.requests.adapters.HTTPAdapter.init_poolmanager*
+self*
+connections*
+maxsize*
+block *
+pool_kwargs*k
+proxy_manager_for/requests.adapters.HTTPAdapter.proxy_manager_for*
+self*	
+proxy*
+proxy_kwargs*k
+cert_verify)requests.adapters.HTTPAdapter.cert_verify*
+self*
+conn*
+url*
+
+verify*
+cert*[
+build_response,requests.adapters.HTTPAdapter.build_response*
+self*
+req*
+resp*`
+get_connection,requests.adapters.HTTPAdapter.get_connection*
+self*
+url*
+proxies *6
+close#requests.adapters.HTTPAdapter.close*
+self*\
+request_url)requests.adapters.HTTPAdapter.request_url*
+self*
+request*
+proxies*[
+add_headers)requests.adapters.HTTPAdapter.add_headers*
+self*
+request*
+
+kwargs*Q
+proxy_headers+requests.adapters.HTTPAdapter.proxy_headers*
+self*	
+proxy*∑
+send"requests.adapters.HTTPAdapter.send"4
+requests.models.Response"requests.models.Response*H
+self>
+requests.adapters.HTTPAdapter"requests.adapters.HTTPAdapter*O
+requestB
+requests.models.PreparedRequest"requests.models.PreparedRequest*,
+stream
+builtins.bool"builtins.bool *‘
+timeoutƒ
+ZUnion[None,builtins.float,Tuple[builtins.float,builtins.float],Tuple[builtins.float,None]]
+None 
+builtins.float"builtins.floatl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.floatJ
+Tuple[builtins.float,None] 
+builtins.float"builtins.float
+None *q
+verifyc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *Ú
+certÂ
+tUnion[None,builtins.bytes,builtins.str,Tuple[Union[builtins.bytes,builtins.str],Union[builtins.bytes,builtins.str]]]
+None 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str†
+LTuple[Union[builtins.bytes,builtins.str],Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str *Ã
+proxiesº
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None r=
+	__attrs__'requests.adapters.HTTPAdapter.__attrs__
+Anyrn
+max_retries)requests.adapters.HTTPAdapter.max_retries4
+urllib3.util.retry.Retry"urllib3.util.retry.Retryr7
+config$requests.adapters.HTTPAdapter.config
+AnyrE
+proxy_manager+requests.adapters.HTTPAdapter.proxy_manager
+AnyrA
+poolmanager)requests.adapters.HTTPAdapter.poolmanager
+AnyE
+proxy_from_url"urllib3.poolmanager.proxy_from_url*
+url*
+kwe
+extract_cookies_to_jar'requests.cookies.extract_cookies_to_jar*
+jar*
+request*
+response∑
+get_auth_from_url requests.utils.get_auth_from_url"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*
+url
+UnboundType[_Uri]R
+get_encoding_from_headers(requests.utils.get_encoding_from_headers*
+headers\
+prepend_scheme_if_needed'requests.utils.prepend_scheme_if_needed*
+url*
+
+new_schemeV
+urldefragauthrequests.utils.urldefragauth"
+Any*
+url
+UnboundType[_Uri]*H
+DEFAULT_CA_BUNDLE_PATH%requests.utils.DEFAULT_CA_BUNDLE_PATH
+Any*X
+DEFAULT_POOLBLOCK#requests.adapters.DEFAULT_POOLBLOCK
+builtins.bool"builtins.bool*T
+DEFAULT_POOLSIZE"requests.adapters.DEFAULT_POOLSIZE
+builtins.int"builtins.int*R
+DEFAULT_RETRIES!requests.adapters.DEFAULT_RETRIES
+builtins.int"builtins.int*ä
+DEFAULT_POOL_TIMEOUT&requests.adapters.DEFAULT_POOL_TIMEOUTJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None

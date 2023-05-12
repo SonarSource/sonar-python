@@ -1,0 +1,1111 @@
+
+asyncio.events˙
+Handleasyncio.events.Handle"builtins.object*ø
+__init__asyncio.events.Handle.__init__"
+None*8
+self.
+asyncio.events.Handle"asyncio.events.Handle*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*N
+loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*h
+contextY
+Union[contextvars.Context,None]*
+contextvars.Context"contextvars.Context
+None *Ä
+__repr__asyncio.events.Handle.__repr__"
+builtins.str"builtins.str*6
+self.
+asyncio.events.Handle"asyncio.events.Handle*j
+cancelasyncio.events.Handle.cancel"
+None*8
+self.
+asyncio.events.Handle"asyncio.events.Handle*f
+_runasyncio.events.Handle._run"
+None*8
+self.
+asyncio.events.Handle"asyncio.events.Handle*Ü
+	cancelledasyncio.events.Handle.cancelled"
+builtins.bool"builtins.bool*8
+self.
+asyncio.events.Handle"asyncio.events.HandlerN
+
+_cancelled asyncio.events.Handle._cancelled
+builtins.bool"builtins.boolrV
+_argsasyncio.events.Handle._args0
+typing.Sequence[Any]
+Any"typing.Sequence·
+TimerHandleasyncio.events.TimerHandle"asyncio.events.Handle*˙
+__init__#asyncio.events.TimerHandle.__init__"
+None*B
+self8
+asyncio.events.TimerHandle"asyncio.events.TimerHandle**
+when 
+builtins.float"builtins.float*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*N
+loopD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*h
+contextY
+Union[contextvars.Context,None]*
+contextvars.Context"contextvars.Context
+None *ë
+__hash__#asyncio.events.TimerHandle.__hash__"
+builtins.int"builtins.int*B
+self8
+asyncio.events.TimerHandle"asyncio.events.TimerHandle*ç
+whenasyncio.events.TimerHandle.when" 
+builtins.float"builtins.float*B
+self8
+asyncio.events.TimerHandle"asyncio.events.TimerHandleû
+AbstractServerasyncio.events.AbstractServer"builtins.object*Ä
+close#asyncio.events.AbstractServer.close"
+None*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer*√
+
+__aenter__(asyncio.events.AbstractServer.__aenter__"h
++typing.Coroutine[Any,Any,asyncio.events._T]
+Any
+Any
+asyncio.events._T"typing.Coroutine*
+self
+asyncio.events._TH*‚
+	__aexit__'asyncio.events.AbstractServer.__aexit__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer*
+exc
+AnyH*¬
+get_loop&asyncio.events.AbstractServer.get_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer*†
+
+is_serving(asyncio.events.AbstractServer.is_serving"
+builtins.bool"builtins.bool*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer*ÿ
+start_serving+asyncio.events.AbstractServer.start_serving"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServerH*ÿ
+serve_forever+asyncio.events.AbstractServer.serve_forever"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServerH*‘
+wait_closed)asyncio.events.AbstractServer.wait_closed"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*H
+self>
+asyncio.events.AbstractServer"asyncio.events.AbstractServerHr∏
+sockets%asyncio.events.AbstractServer.socketsÖ
+(Union[builtins.list[socket.socket],None]M
+builtins.list[socket.socket]
+socket.socket"socket.socket"builtins.list
+None…˚
+AbstractEventLoop asyncio.events.AbstractEventLoop"builtins.object*©
+run_forever,asyncio.events.AbstractEventLoop.run_forever"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*õ
+stop%asyncio.events.AbstractEventLoop.stop"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*Ω
+
+is_running+asyncio.events.AbstractEventLoop.is_running"
+builtins.bool"builtins.bool*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*ª
+	is_closed*asyncio.events.AbstractEventLoop.is_closed"
+builtins.bool"builtins.bool*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*ù
+close&asyncio.events.AbstractEventLoop.close"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*ˇ
+shutdown_asyncgens3asyncio.events.AbstractEventLoop.shutdown_asyncgens"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@H*π
+	call_soon*asyncio.events.AbstractEventLoop.call_soon".
+asyncio.events.Handle"asyncio.events.Handle*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*Ú
+
+call_later+asyncio.events.AbstractEventLoop.call_later"8
+asyncio.events.TimerHandle"asyncio.events.TimerHandle*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*+
+delay 
+builtins.float"builtins.float*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*Î
+call_at(asyncio.events.AbstractEventLoop.call_at"8
+asyncio.events.TimerHandle"asyncio.events.TimerHandle*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop**
+when 
+builtins.float"builtins.float*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*≥
+time%asyncio.events.AbstractEventLoop.time" 
+builtins.float"builtins.float*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*„
+create_future.asyncio.events.AbstractEventLoop.create_future">
+asyncio.futures.Future[Any]
+Any"asyncio.futures.Future*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*Í
+create_task,asyncio.events.AbstractEventLoop.create_task"R
+%asyncio.tasks.Task[asyncio.events._T]
+asyncio.events._T"asyncio.tasks.Task*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*¢
+coroó
+WUnion[typing.Awaitable[asyncio.events._T],typing.Generator[Any,None,asyncio.events._T]]N
+#typing.Awaitable[asyncio.events._T]
+asyncio.events._T"typing.Awaitablej
+,typing.Generator[Any,None,asyncio.events._T]
+Any
+None
+asyncio.events._T"typing.Generator*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:abstractmethod@* 
+set_task_factory1asyncio.events.AbstractEventLoop.set_task_factory"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*î
+factoryÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None0:abstractmethod@*≤
+get_task_factory1asyncio.events.AbstractEventLoop.get_task_factory"Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*œ
+call_soon_threadsafe5asyncio.events.AbstractEventLoop.call_soon_threadsafe".
+asyncio.events.Handle"asyncio.events.Handle*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*¯
+run_in_executor0asyncio.events.AbstractEventLoop.run_in_executor"N
+#typing.Awaitable[asyncio.events._T]
+asyncio.events._T"typing.Awaitable*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*
+executor
+Any*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*“
+set_default_executor5asyncio.events.AbstractEventLoop.set_default_executor"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*
+executor
+Any0:abstractmethod@*´
+getaddrinfo,asyncio.events.AbstractEventLoop.getaddrinfo"ê	
+”typing.Coroutine[Any,Any,builtins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]]
+Any
+Anyì
+πbuiltins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]≈
+™Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]],
+socket.AddressFamily"socket.AddressFamily&
+socket.SocketKind"socket.SocketKind
+builtins.int"builtins.int
+builtins.str"builtins.strÅ
+bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int∂
+:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*N
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*y
+porto
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None**
+family
+builtins.int"builtins.int *(
+type
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int 0:abstractmethod@H*§
+getnameinfo,asyncio.events.AbstractEventLoop.getnameinfo"¬
+:typing.Coroutine[Any,Any,Tuple[builtins.str,builtins.str]]
+Any
+Any`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*ê
+sockaddrÅ
+bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int∂
+:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*)
+flags
+builtins.int"builtins.int 0:abstractmethod@H*Á
+sock_sendfile.asyncio.events.AbstractEventLoop.sock_sendfile"j
+&typing.Coroutine[Any,Any,builtins.int]
+Any
+Any
+builtins.int"builtins.int"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+offset
+builtins.int"builtins.int *Q
+countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+fallbackG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 0:abstractmethod@H*Ç
+create_unix_connection7asyncio.events.AbstractEventLoop.create_unix_connection"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext *S
+sockG
+Union[socket.socket,None]
+socket.socket"socket.socket
+None *[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None H*ø
+create_unix_server3asyncio.events.AbstractEventLoop.create_unix_server"ù
+7typing.Coroutine[Any,Any,asyncio.events.AbstractServer]
+Any
+Any>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+sockG
+Union[socket.socket,None]
+socket.socket"socket.socket
+None *+
+backlog
+builtins.int"builtins.int *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *3
+start_serving
+builtins.bool"builtins.bool H*ﬂ
+sendfile)asyncio.events.AbstractEventLoop.sendfile"j
+&typing.Coroutine[Any,Any,builtins.int]
+Any
+Any
+builtins.int"builtins.int"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*S
+	transportD
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO**
+offset
+builtins.int"builtins.int *Q
+countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *.
+fallback
+builtins.bool"builtins.bool 0:abstractmethod@H*ñ
+	start_tls*asyncio.events.AbstractEventLoop.start_tls"¶
+:typing.Coroutine[Any,Any,asyncio.transports.BaseTransport]
+Any
+AnyD
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*S
+	transportD
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport*N
+protocol@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol*0
+
+sslcontext 
+ssl.SSLContext"ssl.SSLContext*1
+server_side
+builtins.bool"builtins.bool *[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None 0:abstractmethod@H*¶
+create_datagram_endpoint9asyncio.events.AbstractEventLoop.create_datagram_endpoint"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*Ø
+
+local_addrú
+,Union[Tuple[builtins.str,builtins.int],None]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *∞
+remote_addrú
+,Union[Tuple[builtins.str,builtins.int],None]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None **
+family
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int *\
+reuse_addressG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Y
+
+reuse_portG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *^
+allow_broadcastG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *S
+sockG
+Union[socket.socket,None]
+socket.socket"socket.socket
+None 0:abstractmethod@H*÷
+connect_read_pipe2asyncio.events.AbstractEventLoop.connect_read_pipe"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*
+pipe
+Any0:abstractmethod@H*ÿ
+connect_write_pipe3asyncio.events.AbstractEventLoop.connect_write_pipe"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*
+pipe
+Any0:abstractmethod@H*˜
+subprocess_shell1asyncio.events.AbstractEventLoop.subprocess_shell"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*o
+cmdf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*Ü
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *T
+universal_newlines:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *G
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *F
+bufsize7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *x
+textl
+"Union[Literal[builtins.bool],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+None *
+kwargs
+Any0:abstractmethod@H*≥
+subprocess_exec0asyncio.events.AbstractEventLoop.subprocess_exec"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*
+program
+Any*
+args
+Any*Ü
+stdiny
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stdouty
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *á
+stderry
+'Union[builtins.int,typing.IO[Any],None]
+builtins.int"builtins.int$
+typing.IO[Any]
+Any"	typing.IO
+None *T
+universal_newlines:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *G
+shell:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *F
+bufsize7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *
+kwargs
+Any0:abstractmethod@H*Ï
+
+add_reader+asyncio.events.AbstractEventLoop.add_reader"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*‘
+fdÀ
+2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
+'Union[builtins.int,_typeshed.HasFileno]
+builtins.int"builtins.int*
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*Ñ
+remove_reader.asyncio.events.AbstractEventLoop.remove_reader"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*‘
+fdÀ
+2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
+'Union[builtins.int,_typeshed.HasFileno]
+builtins.int"builtins.int*
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike0:abstractmethod@*Ï
+
+add_writer+asyncio.events.AbstractEventLoop.add_writer"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*‘
+fdÀ
+2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
+'Union[builtins.int,_typeshed.HasFileno]
+builtins.int"builtins.int*
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*Ñ
+remove_writer.asyncio.events.AbstractEventLoop.remove_writer"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*‘
+fdÀ
+2TypeAlias[Union[builtins.int,_typeshed.HasFileno]]u
+'Union[builtins.int,_typeshed.HasFileno]
+builtins.int"builtins.int*
+_typeshed.HasFileno"_typeshed.HasFileno"_typeshed.FileDescriptorLike0:abstractmethod@*„
+	sock_recv*asyncio.events.AbstractEventLoop.sock_recv"p
+(typing.Coroutine[Any,Any,builtins.bytes]
+Any
+Any 
+builtins.bytes"builtins.bytes"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket*(
+nbytes
+builtins.int"builtins.int0:abstractmethod@H*
+sock_recv_into/asyncio.events.AbstractEventLoop.sock_recv_into"j
+&typing.Coroutine[Any,Any,builtins.int]
+Any
+Any
+builtins.int"builtins.int"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket*1
+buf(
+builtins.bytearray"builtins.bytearray0:abstractmethod@H*…
+sock_sendall-asyncio.events.AbstractEventLoop.sock_sendall"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket**
+data 
+builtins.bytes"builtins.bytes0:abstractmethod@H*
+sock_connect-asyncio.events.AbstractEventLoop.sock_connect"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket*–
+address¬
+2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
+'Union[builtins.tuple[Any],builtins.str].
+builtins.tuple[Any]
+Any"builtins.tuple
+builtins.str"builtins.str"socket._Address0:abstractmethod@H*´
+sock_accept,asyncio.events.AbstractEventLoop.sock_accept"›
+=typing.Coroutine[Any,Any,Tuple[socket.socket,TypeAlias[Any]]]
+Any
+Anyx
+#Tuple[socket.socket,TypeAlias[Any]]
+socket.socket"socket.socket/
+TypeAlias[Any]
+Any"socket._RetAddress"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*(
+sock
+socket.socket"socket.socket0:abstractmethod@H*Ã
+add_signal_handler3asyncio.events.AbstractEventLoop.add_signal_handler"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*%
+sig
+builtins.int"builtins.int*Y
+callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any0:abstractmethod@*˙
+remove_signal_handler6asyncio.events.AbstractEventLoop.remove_signal_handler"
+builtins.bool"builtins.bool*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*%
+sig
+builtins.int"builtins.int0:abstractmethod@*‘
+set_exception_handler6asyncio.events.AbstractEventLoop.set_exception_handler"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*î
+handlerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None0:abstractmethod@*º
+get_exception_handler6asyncio.events.AbstractEventLoop.get_exception_handler"Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*ˆ
+default_exception_handler:asyncio.events.AbstractEventLoop.default_exception_handler"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Æ
+context†
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"asyncio.events._Context0:abstractmethod@*
+call_exception_handler7asyncio.events.AbstractEventLoop.call_exception_handler"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Æ
+context†
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"asyncio.events._Context0:abstractmethod@*ª
+	get_debug*asyncio.events.AbstractEventLoop.get_debug"
+builtins.bool"builtins.bool*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop0:abstractmethod@*“
+	set_debug*asyncio.events.AbstractEventLoop.set_debug"
+None*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*+
+enabled
+builtins.bool"builtins.bool0:abstractmethod@2√
+run_until_complete3asyncio.events.AbstractEventLoop.run_until_complete»
+run_until_complete3asyncio.events.AbstractEventLoop.run_until_complete"
+asyncio.events._T*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*v
+futurej
+,typing.Generator[Any,None,asyncio.events._T]
+Any
+None
+asyncio.events._T"typing.Generator0:overload:abstractmethod@X¨
+run_until_complete3asyncio.events.AbstractEventLoop.run_until_complete"
+asyncio.events._T*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Z
+futureN
+#typing.Awaitable[asyncio.events._T]
+asyncio.events._T"typing.Awaitable0:overload:abstractmethod@X2¡
+create_connection2asyncio.events.AbstractEventLoop.create_connectionœ
+create_connection2asyncio.events.AbstractEventLoop.create_connection"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*(
+host
+builtins.str"builtins.str *(
+port
+builtins.int"builtins.int *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext **
+family
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int *
+sock
+None *Ø
+
+local_addrú
+,Union[Tuple[builtins.str,builtins.int],None]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *f
+happy_eyeballs_delayJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+
+interleaveD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:overload:abstractmethod@HX•
+create_connection2asyncio.events.AbstractEventLoop.create_connection"›
+ktyping.Coroutine[Any,Any,TypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]]
+Any
+Any…
+QTypeAlias[Tuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]]“
+FTuple[asyncio.transports.BaseTransport,asyncio.protocols.BaseProtocol]D
+ asyncio.transports.BaseTransport" asyncio.transports.BaseTransport@
+asyncio.protocols.BaseProtocol"asyncio.protocols.BaseProtocol"asyncio.events._TransProtPair"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*
+host
+None *
+port
+None *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext **
+family
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int *(
+sock
+socket.socket"socket.socket*
+
+local_addr
+None *[
+server_hostnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *f
+happy_eyeballs_delayJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+
+interleaveD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:overload:abstractmethod@HX2õ
+create_server.asyncio.events.AbstractEventLoop.create_server¿
+create_server.asyncio.events.AbstractEventLoop.create_server"ù
+7typing.Coroutine[Any,Any,asyncio.events.AbstractServer]
+Any
+Any>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*ø
+host≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *(
+port
+builtins.int"builtins.int **
+family
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int *
+sock
+None *+
+backlog
+builtins.int"builtins.int *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext *\
+reuse_addressG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Y
+
+reuse_portG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *3
+start_serving
+builtins.bool"builtins.bool 0:overload:abstractmethod@HXñ
+
+create_server.asyncio.events.AbstractEventLoop.create_server"ù
+7typing.Coroutine[Any,Any,asyncio.events.AbstractServer]
+Any
+Any>
+asyncio.events.AbstractServer"asyncio.events.AbstractServer"typing.Coroutine*N
+selfD
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*≥
+protocol_factoryú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"asyncio.events._ProtocolFactory*
+host
+None *
+port
+None **
+family
+builtins.int"builtins.int *)
+flags
+builtins.int"builtins.int **
+sock
+socket.socket"socket.socket *+
+backlog
+builtins.int"builtins.int *Ÿ
+sslÕ
+3TypeAlias[Union[builtins.bool,None,ssl.SSLContext]]x
+(Union[builtins.bool,None,ssl.SSLContext]
+builtins.bool"builtins.bool
+None 
+ssl.SSLContext"ssl.SSLContext"asyncio.events._SSLContext *\
+reuse_addressG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Y
+
+reuse_portG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *g
+ssl_handshake_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *3
+start_serving
+builtins.bool"builtins.bool 0:overload:abstractmethod@HX@babc.ABCMetars
+slow_callback_duration7asyncio.events.AbstractEventLoop.slow_callback_duration 
+builtins.float"builtins.floatˆ
+AbstractEventLoopPolicy&asyncio.events.AbstractEventLoopPolicy"builtins.object*˝
+get_event_loop5asyncio.events.AbstractEventLoopPolicy.get_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Z
+selfP
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy0:abstractmethod@*œ
+set_event_loop5asyncio.events.AbstractEventLoopPolicy.set_event_loop"
+None*Z
+selfP
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy*ã
+loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+None0:abstractmethod@*˝
+new_event_loop5asyncio.events.AbstractEventLoopPolicy.new_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*Z
+selfP
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy0:abstractmethod@*ì
+get_child_watcher8asyncio.events.AbstractEventLoopPolicy.get_child_watcher"T
+(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher*Z
+selfP
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy0:abstractmethod@*™
+set_child_watcher8asyncio.events.AbstractEventLoopPolicy.set_child_watcher"
+None*Z
+selfP
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy*a
+watcherT
+(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher0:abstractmethod@@babc.ABCMeta‹
+BaseDefaultEventLoopPolicy)asyncio.events.BaseDefaultEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy*™
+__init__2asyncio.events.BaseDefaultEventLoopPolicy.__init__"
+None*`
+selfV
+)asyncio.events.BaseDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*Ú
+get_event_loop8asyncio.events.BaseDefaultEventLoopPolicy.get_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*`
+selfV
+)asyncio.events.BaseDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*ƒ
+set_event_loop8asyncio.events.BaseDefaultEventLoopPolicy.set_event_loop"
+None*`
+selfV
+)asyncio.events.BaseDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy*ã
+loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+None*Ú
+new_event_loop8asyncio.events.BaseDefaultEventLoopPolicy.new_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop*`
+selfV
+)asyncio.events.BaseDefaultEventLoopPolicy")asyncio.events.BaseDefaultEventLoopPolicy@babc.ABCMetaè
+get_event_loop_policy$asyncio.events.get_event_loop_policy"P
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicyÈ
+set_event_loop_policy$asyncio.events.set_event_loop_policy"
+None*ü
+policyí
+2Union[asyncio.events.AbstractEventLoopPolicy,None]P
+&asyncio.events.AbstractEventLoopPolicy"&asyncio.events.AbstractEventLoopPolicy
+Noneu
+get_event_loopasyncio.events.get_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop«
+set_event_loopasyncio.events.set_event_loop"
+None*ã
+loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+Noneu
+new_event_loopasyncio.events.new_event_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoopã
+get_child_watcher asyncio.events.get_child_watcher"T
+(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcher¢
+set_child_watcher asyncio.events.set_child_watcher"
+None*a
+watcherT
+(asyncio.unix_events.AbstractChildWatcher"(asyncio.unix_events.AbstractChildWatcherÕ
+_set_running_loop asyncio.events._set_running_loop"
+None*ã
+__loopÄ
+,Union[asyncio.events.AbstractEventLoop,None]D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop
+None{
+_get_running_loop asyncio.events._get_running_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoopy
+get_running_loopasyncio.events.get_running_loop"D
+ asyncio.events.AbstractEventLoop" asyncio.events.AbstractEventLoop

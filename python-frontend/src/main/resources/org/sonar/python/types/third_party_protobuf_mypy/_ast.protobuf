@@ -1,0 +1,618 @@
+
+_ast∞
+AST_ast.AST"builtins.object*o
+__init___ast.AST.__init__"
+None*
+self
+_ast.AST"_ast.AST*
+args
+Any*
+kwargs
+Anyrq
+_attributes_ast.AST._attributesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleri
+_fields_ast.AST._fieldsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupler7
+lineno_ast.AST.lineno
+builtins.int"builtins.intr?
+
+col_offset_ast.AST.col_offset
+builtins.int"builtins.intrg
+
+end_lineno_ast.AST.end_linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonero
+end_col_offset_ast.AST.end_col_offsetD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerk
+type_comment_ast.AST.type_commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+mod_ast.mod"_ast.AST)
+type_ignore_ast.type_ignore"_ast.ASTi
+
+TypeIgnore_ast.TypeIgnore"_ast.type_ignorer8
+tag_ast.TypeIgnore.tag
+builtins.str"builtins.str‘
+FunctionType_ast.FunctionType"_ast.modri
+argtypes_ast.FunctionType.argtypesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listr<
+returns_ast.FunctionType.returns
+	_ast.expr"	_ast.expr˚
+Module_ast.Module"_ast.modr[
+body_ast.Module.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listr}
+type_ignores_ast.Module.type_ignoresS
+builtins.list[_ast.TypeIgnore]"
+_ast.TypeIgnore"_ast.TypeIgnore"builtins.listã
+Interactive_ast.Interactive"_ast.modr`
+body_ast.Interactive.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list]
+
+Expression_ast.Expression"_ast.modr4
+body_ast.Expression.body
+	_ast.expr"	_ast.expr
+stmt	_ast.stmt"_ast.AST‚
+FunctionDef_ast.FunctionDef"	_ast.stmtr;
+name_ast.FunctionDef.name
+builtins.str"builtins.strr?
+args_ast.FunctionDef.args 
+_ast.arguments"_ast.argumentsr`
+body_ast.FunctionDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listrt
+decorator_list_ast.FunctionDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listr`
+returns_ast.FunctionDef.returns;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NoneÖ
+AsyncFunctionDef_ast.AsyncFunctionDef"	_ast.stmtr@
+name_ast.AsyncFunctionDef.name
+builtins.str"builtins.strrD
+args_ast.AsyncFunctionDef.args 
+_ast.arguments"_ast.argumentsre
+body_ast.AsyncFunctionDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listry
+decorator_list$_ast.AsyncFunctionDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listre
+returns_ast.AsyncFunctionDef.returns;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NoneÅ
+ClassDef_ast.ClassDef"	_ast.stmtr8
+name_ast.ClassDef.name
+builtins.str"builtins.strr_
+bases_ast.ClassDef.basesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listrn
+keywords_ast.ClassDef.keywordsJ
+builtins.list[_ast.keyword]
+_ast.keyword"_ast.keyword"builtins.listr]
+body_ast.ClassDef.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listrq
+decorator_list_ast.ClassDef.decorator_listA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listy
+Return_ast.Return"	_ast.stmtrW
+value_ast.Return.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NoneÉ
+Delete_ast.Delete"	_ast.stmtra
+targets_ast.Delete.targetsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list∑
+Assign_ast.Assign"	_ast.stmtra
+targets_ast.Assign.targetsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listr2
+value_ast.Assign.value
+	_ast.expr"	_ast.exprœ
+	AugAssign_ast.AugAssign"	_ast.stmtr7
+target_ast.AugAssign.target
+	_ast.expr"	_ast.exprr7
+op_ast.AugAssign.op
+_ast.operator"_ast.operatorr5
+value_ast.AugAssign.value
+	_ast.expr"	_ast.exprª
+	AnnAssign_ast.AnnAssign"	_ast.stmtr7
+target_ast.AnnAssign.target
+	_ast.expr"	_ast.exprr?
+
+annotation_ast.AnnAssign.annotation
+	_ast.expr"	_ast.exprrZ
+value_ast.AnnAssign.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+Noner=
+simple_ast.AnnAssign.simple
+builtins.int"builtins.int¥
+For_ast.For"	_ast.stmtr1
+target_ast.For.target
+	_ast.expr"	_ast.exprr-
+iter_ast.For.iter
+	_ast.expr"	_ast.exprrX
+body_ast.For.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listr\
+orelse_ast.For.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list“
+AsyncFor_ast.AsyncFor"	_ast.stmtr6
+target_ast.AsyncFor.target
+	_ast.expr"	_ast.exprr2
+iter_ast.AsyncFor.iter
+	_ast.expr"	_ast.exprr]
+body_ast.AsyncFor.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listra
+orelse_ast.AsyncFor.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listã
+While
+_ast.While"	_ast.stmtr/
+test_ast.While.test
+	_ast.expr"	_ast.exprrZ
+body_ast.While.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listr^
+orelse_ast.While.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list¸
+If_ast.If"	_ast.stmtr,
+test_ast.If.test
+	_ast.expr"	_ast.exprrW
+body_ast.If.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listr[
+orelse_ast.If.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list‡
+With	_ast.With"	_ast.stmtrg
+items_ast.With.itemsM
+builtins.list[_ast.withitem]
+_ast.withitem"_ast.withitem"builtins.listrY
+body_ast.With.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listÙ
+	AsyncWith_ast.AsyncWith"	_ast.stmtrl
+items_ast.AsyncWith.itemsM
+builtins.list[_ast.withitem]
+_ast.withitem"_ast.withitem"builtins.listr^
+body_ast.AsyncWith.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list 
+Raise
+_ast.Raise"	_ast.stmtrR
+exc_ast.Raise.exc;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NonerV
+cause_ast.Raise.cause;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None≥
+Try_ast.Try"	_ast.stmtrX
+body_ast.Try.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listr{
+handlers_ast.Try.handlers\
+!builtins.list[_ast.ExceptHandler](
+_ast.ExceptHandler"_ast.ExceptHandler"builtins.listr\
+orelse_ast.Try.orelseA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listrb
+	finalbody_ast.Try.finalbodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listß
+Assert_ast.Assert"	_ast.stmtr0
+test_ast.Assert.test
+	_ast.expr"	_ast.exprrS
+msg_ast.Assert.msg;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NoneÇ
+Import_ast.Import"	_ast.stmtr`
+names_ast.Import.namesD
+builtins.list[_ast.alias]
+
+_ast.alias"
+_ast.alias"builtins.list¥
+
+ImportFrom_ast.ImportFrom"	_ast.stmtrf
+module_ast.ImportFrom.moduleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerd
+names_ast.ImportFrom.namesD
+builtins.list[_ast.alias]
+
+_ast.alias"
+_ast.alias"builtins.listr<
+level_ast.ImportFrom.level
+builtins.int"builtins.intà
+Global_ast.Global"	_ast.stmtrf
+names_ast.Global.namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listé
+Nonlocal_ast.Nonlocal"	_ast.stmtrh
+names_ast.Nonlocal.namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listN
+Expr	_ast.Expr"	_ast.stmtr0
+value_ast.Expr.value
+	_ast.expr"	_ast.expr
+Pass	_ast.Pass"	_ast.stmt
+Break
+_ast.Break"	_ast.stmt$
+Continue_ast.Continue"	_ast.stmt
+expr	_ast.expr"_ast.AST≥
+BoolOp_ast.BoolOp"	_ast.exprr0
+op_ast.BoolOp.op
+_ast.boolop"_ast.boolopr_
+values_ast.BoolOp.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list∑
+BinOp
+_ast.BinOp"	_ast.exprr/
+left_ast.BinOp.left
+	_ast.expr"	_ast.exprr3
+op_ast.BinOp.op
+_ast.operator"_ast.operatorr1
+right_ast.BinOp.right
+	_ast.expr"	_ast.exprê
+UnaryOp_ast.UnaryOp"	_ast.exprr3
+op_ast.UnaryOp.op
+_ast.unaryop"_ast.unaryopr7
+operand_ast.UnaryOp.operand
+	_ast.expr"	_ast.expré
+Lambda_ast.Lambda"	_ast.exprr:
+args_ast.Lambda.args 
+_ast.arguments"_ast.argumentsr0
+body_ast.Lambda.body
+	_ast.expr"	_ast.exprµ
+IfExp
+_ast.IfExp"	_ast.exprr/
+test_ast.IfExp.test
+	_ast.expr"	_ast.exprr/
+body_ast.IfExp.body
+	_ast.expr"	_ast.exprr3
+orelse_ast.IfExp.orelse
+	_ast.expr"	_ast.exprà
+Dict	_ast.Dict"	_ast.exprrä
+keys_ast.Dict.keysr
+$builtins.list[Union[_ast.expr,None]];
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None"builtins.listr]
+values_ast.Dict.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listt
+Set_ast.Set"	_ast.exprrX
+elts_ast.Set.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list›
+ListComp_ast.ListComp"	_ast.exprr0
+elt_ast.ListComp.elt
+	_ast.expr"	_ast.exprrÑ
+
+generators_ast.ListComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.listŸ
+SetComp_ast.SetComp"	_ast.exprr/
+elt_ast.SetComp.elt
+	_ast.expr"	_ast.exprrÉ
+
+generators_ast.SetComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.listì
+DictComp_ast.DictComp"	_ast.exprr0
+key_ast.DictComp.key
+	_ast.expr"	_ast.exprr4
+value_ast.DictComp.value
+	_ast.expr"	_ast.exprrÑ
+
+generators_ast.DictComp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.listÌ
+GeneratorExp_ast.GeneratorExp"	_ast.exprr4
+elt_ast.GeneratorExp.elt
+	_ast.expr"	_ast.exprrà
+
+generators_ast.GeneratorExp.generators\
+!builtins.list[_ast.comprehension](
+_ast.comprehension"_ast.comprehension"builtins.listQ
+Await
+_ast.Await"	_ast.exprr1
+value_ast.Await.value
+	_ast.expr"	_ast.exprv
+Yield
+_ast.Yield"	_ast.exprrV
+value_ast.Yield.value;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None]
+	YieldFrom_ast.YieldFrom"	_ast.exprr5
+value_ast.YieldFrom.value
+	_ast.expr"	_ast.expr†
+Compare_ast.Compare"	_ast.exprr1
+left_ast.Compare.left
+	_ast.expr"	_ast.exprr]
+ops_ast.Compare.opsD
+builtins.list[_ast.cmpop]
+
+_ast.cmpop"
+_ast.cmpop"builtins.listrj
+comparators_ast.Compare.comparatorsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listì
+Call	_ast.Call"	_ast.exprr.
+func_ast.Call.func
+	_ast.expr"	_ast.exprrY
+args_ast.Call.argsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listrj
+keywords_ast.Call.keywordsJ
+builtins.list[_ast.keyword]
+_ast.keyword"_ast.keyword"builtins.listÕ
+FormattedValue_ast.FormattedValue"	_ast.exprr:
+value_ast.FormattedValue.value
+	_ast.expr"	_ast.exprrr
+
+conversion_ast.FormattedValue.conversionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerk
+format_spec_ast.FormattedValue.format_spec;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+Noneä
+	JoinedStr_ast.JoinedStr"	_ast.exprrb
+values_ast.JoinedStr.valuesA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listà
+Constant_ast.Constant"	_ast.exprr%
+value_ast.Constant.value
+Anyr`
+kind_ast.Constant.kindD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner
+s_ast.Constant.s
+Anyr:
+n_ast.Constant.n$
+builtins.complex"builtins.complexñ
+	NamedExpr_ast.NamedExpr"	_ast.exprr7
+target_ast.NamedExpr.target
+	_ast.expr"	_ast.exprr5
+value_ast.NamedExpr.value
+	_ast.expr"	_ast.expr€
+	Attribute_ast.Attribute"	_ast.exprr5
+value_ast.Attribute.value
+	_ast.expr"	_ast.exprr9
+attr_ast.Attribute.attr
+builtins.str"builtins.strrA
+ctx_ast.Attribute.ctx&
+_ast.expr_context"_ast.expr_context
+slice
+_ast.slice"_ast.AST•
+Slice
+_ast.Slice"
+_ast.slicerV
+lower_ast.Slice.lower;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NonerV
+upper_ast.Slice.upper;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+NonerT
+step_ast.Slice.step;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+Noneá
+ExtSlice_ast.ExtSlice"
+_ast.slicer`
+dims_ast.ExtSlice.dimsD
+builtins.list[_ast.slice]
+
+_ast.slice"
+_ast.slice"builtins.listR
+Index
+_ast.Index"
+_ast.slicer1
+value_ast.Index.value
+	_ast.expr"	_ast.exprŸ
+	Subscript_ast.Subscript"	_ast.exprr5
+value_ast.Subscript.value
+	_ast.expr"	_ast.exprr7
+slice_ast.Subscript.slice
+
+_ast.slice"
+_ast.slicerA
+ctx_ast.Subscript.ctx&
+_ast.expr_context"_ast.expr_contextò
+Starred_ast.Starred"	_ast.exprr3
+value_ast.Starred.value
+	_ast.expr"	_ast.exprr?
+ctx_ast.Starred.ctx&
+_ast.expr_context"_ast.expr_contextå
+Name	_ast.Name"	_ast.exprr0
+id_ast.Name.id
+builtins.str"builtins.strr<
+ctx_ast.Name.ctx&
+_ast.expr_context"_ast.expr_contextµ
+List	_ast.List"	_ast.exprrY
+elts_ast.List.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listr<
+ctx_ast.List.ctx&
+_ast.expr_context"_ast.expr_contextπ
+Tuple
+_ast.Tuple"	_ast.exprrZ
+elts_ast.Tuple.eltsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listr=
+ctx_ast.Tuple.ctx&
+_ast.expr_context"_ast.expr_context+
+expr_context_ast.expr_context"_ast.AST*
+AugLoad_ast.AugLoad"_ast.expr_context,
+AugStore_ast.AugStore"_ast.expr_context&
+Param
+_ast.Param"_ast.expr_contexty
+Suite
+_ast.Suite"_ast.modrZ
+body_ast.Suite.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.list"
+Del_ast.Del"_ast.expr_context$
+Load	_ast.Load"_ast.expr_context&
+Store
+_ast.Store"_ast.expr_context
+boolop_ast.boolop"_ast.AST
+And_ast.And"_ast.boolop
+Or_ast.Or"_ast.boolop#
+operator_ast.operator"_ast.AST
+Add_ast.Add"_ast.operator$
+BitAnd_ast.BitAnd"_ast.operator"
+BitOr
+_ast.BitOr"_ast.operator$
+BitXor_ast.BitXor"_ast.operator
+Div_ast.Div"_ast.operator(
+FloorDiv_ast.FloorDiv"_ast.operator$
+LShift_ast.LShift"_ast.operator
+Mod_ast.Mod"_ast.operator 
+Mult	_ast.Mult"_ast.operator&
+MatMult_ast.MatMult"_ast.operator
+Pow_ast.Pow"_ast.operator$
+RShift_ast.RShift"_ast.operator
+Sub_ast.Sub"_ast.operator!
+unaryop_ast.unaryop"_ast.AST#
+Invert_ast.Invert"_ast.unaryop
+Not_ast.Not"_ast.unaryop
+UAdd	_ast.UAdd"_ast.unaryop
+USub	_ast.USub"_ast.unaryop
+cmpop
+_ast.cmpop"_ast.AST
+Eq_ast.Eq"
+_ast.cmpop
+Gt_ast.Gt"
+_ast.cmpop
+GtE_ast.GtE"
+_ast.cmpop
+In_ast.In"
+_ast.cmpop
+Is_ast.Is"
+_ast.cmpop
+IsNot
+_ast.IsNot"
+_ast.cmpop
+Lt_ast.Lt"
+_ast.cmpop
+LtE_ast.LtE"
+_ast.cmpop
+NotEq
+_ast.NotEq"
+_ast.cmpop
+NotIn
+_ast.NotIn"
+_ast.cmpopÃ
+comprehension_ast.comprehension"_ast.ASTr;
+target_ast.comprehension.target
+	_ast.expr"	_ast.exprr7
+iter_ast.comprehension.iter
+	_ast.expr"	_ast.exprr`
+ifs_ast.comprehension.ifsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.listrE
+is_async_ast.comprehension.is_async
+builtins.int"builtins.int-
+excepthandler_ast.excepthandler"_ast.AST‡
+ExceptHandler_ast.ExceptHandler"_ast.excepthandlerr\
+type_ast.ExceptHandler.type;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+Nonere
+name_ast.ExceptHandler.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerb
+body_ast.ExceptHandler.bodyA
+builtins.list[_ast.stmt]
+	_ast.stmt"	_ast.stmt"builtins.listí
+	arguments_ast.arguments"_ast.ASTri
+posonlyargs_ast.arguments.posonlyargs>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.listr[
+args_ast.arguments.args>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.listrY
+vararg_ast.arguments.vararg8
+Union[_ast.arg,None]
+_ast.arg"_ast.arg
+Nonerg
+
+kwonlyargs_ast.arguments.kwonlyargs>
+builtins.list[_ast.arg]
+_ast.arg"_ast.arg"builtins.listrù
+kw_defaults_ast.arguments.kw_defaultsr
+$builtins.list[Union[_ast.expr,None]];
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None"builtins.listrW
+kwarg_ast.arguments.kwarg8
+Union[_ast.arg,None]
+_ast.arg"_ast.arg
+Nonerf
+defaults_ast.arguments.defaultsA
+builtins.list[_ast.expr]
+	_ast.expr"	_ast.expr"builtins.list¨
+arg_ast.arg"_ast.ASTr1
+arg_ast.arg.arg
+builtins.str"builtins.strr^
+
+annotation_ast.arg.annotation;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+Noneµ
+keyword_ast.keyword"_ast.ASTr]
+arg_ast.keyword.argD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner3
+value_ast.keyword.value
+	_ast.expr"	_ast.expr∑
+alias
+_ast.alias"_ast.ASTr5
+name_ast.alias.name
+builtins.str"builtins.strra
+asname_ast.alias.asnameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None“
+withitem_ast.withitem"_ast.ASTrB
+context_expr_ast.withitem.context_expr
+	_ast.expr"	_ast.exprri
+optional_vars_ast.withitem.optional_vars;
+Union[_ast.expr,None]
+	_ast.expr"	_ast.expr
+None*A
+PyCF_ONLY_AST_ast.PyCF_ONLY_AST
+builtins.int"builtins.int*K
+PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS
+builtins.int"builtins.int*[
+PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT
+builtins.int"builtins.int

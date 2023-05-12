@@ -1,0 +1,209 @@
+
+jinja2.bccache¸
+_MemcachedClientjinja2.bccache._MemcachedClient"builtins.object*Á
+get#jinja2.bccache._MemcachedClient.get" 
+builtins.bytes"builtins.bytes*L
+selfB
+jinja2.bccache._MemcachedClient"jinja2.bccache._MemcachedClient*%
+key
+builtins.str"builtins.str*«
+set#jinja2.bccache._MemcachedClient.set"
+None*L
+selfB
+jinja2.bccache._MemcachedClient"jinja2.bccache._MemcachedClient*%
+key
+builtins.str"builtins.str*+
+value 
+builtins.bytes"builtins.bytes*S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Xç
+Bucketjinja2.bccache.Bucket"builtins.object*”
+__init__jinja2.bccache.Bucket.__init__"
+None*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*%
+key
+builtins.str"builtins.str**
+checksum
+builtins.str"builtins.str*h
+resetjinja2.bccache.Bucket.reset"
+None*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*£
+load_bytecode#jinja2.bccache.Bucket.load_bytecode"
+None*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*)
+f"
+typing.BinaryIO"typing.BinaryIO*Ë
+write_bytecode$jinja2.bccache.Bucket.write_bytecode"
+None*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*´
+bytecode_from_string*jinja2.bccache.Bucket.bytecode_from_string"
+None*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*,
+string 
+builtins.bytes"builtins.bytes*š
+bytecode_to_string(jinja2.bccache.Bucket.bytecode_to_string" 
+builtins.bytes"builtins.bytes*8
+self.
+jinja2.bccache.Bucket"jinja2.bccache.Bucketrr
+environment!jinja2.bccache.Bucket.environment@
+jinja2.environment.Environment"jinja2.environment.Environmentr>
+keyjinja2.bccache.Bucket.key
+builtins.str"builtins.strrH
+checksumjinja2.bccache.Bucket.checksum
+builtins.str"builtins.strrn
+codejinja2.bccache.Bucket.codeJ
+Union[types.CodeType,None] 
+types.CodeType"types.CodeType
+NoneÀ
+BytecodeCachejinja2.bccache.BytecodeCache"builtins.object*É
+load_bytecode*jinja2.bccache.BytecodeCache.load_bytecode"
+None*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*É
+dump_bytecode*jinja2.bccache.BytecodeCache.dump_bytecode"
+None*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*}
+clear"jinja2.bccache.BytecodeCache.clear"
+None*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*Ÿ
+get_cache_key*jinja2.bccache.BytecodeCache.get_cache_key"
+builtins.str"builtins.str*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*&
+name
+builtins.str"builtins.str*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *×
+get_source_checksum0jinja2.bccache.BytecodeCache.get_source_checksum"
+builtins.str"builtins.str*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*(
+source
+builtins.str"builtins.str*¦
+
+get_bucket'jinja2.bccache.BytecodeCache.get_bucket".
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*&
+name
+builtins.str"builtins.str*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*(
+source
+builtins.str"builtins.str*Ã
+
+set_bucket'jinja2.bccache.BytecodeCache.set_bucket"
+None*F
+self<
+jinja2.bccache.BytecodeCache"jinja2.bccache.BytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket
+FileSystemBytecodeCache&jinja2.bccache.FileSystemBytecodeCache"jinja2.bccache.BytecodeCache*¥
+__init__/jinja2.bccache.FileSystemBytecodeCache.__init__"
+None*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCache*U
+	directoryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+pattern
+builtins.str"builtins.str *Ñ
+_get_default_cache_dir=jinja2.bccache.FileSystemBytecodeCache._get_default_cache_dir"
+builtins.str"builtins.str*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCache*‡
+_get_cache_filename:jinja2.bccache.FileSystemBytecodeCache._get_cache_filename"
+builtins.str"builtins.str*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*ç
+load_bytecode4jinja2.bccache.FileSystemBytecodeCache.load_bytecode"
+None*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*ç
+dump_bytecode4jinja2.bccache.FileSystemBytecodeCache.dump_bytecode"
+None*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*›
+clear,jinja2.bccache.FileSystemBytecodeCache.clear"
+None*Z
+selfP
+&jinja2.bccache.FileSystemBytecodeCache"&jinja2.bccache.FileSystemBytecodeCacher[
+	directory0jinja2.bccache.FileSystemBytecodeCache.directory
+builtins.str"builtins.strrW
+pattern.jinja2.bccache.FileSystemBytecodeCache.pattern
+builtins.str"builtins.str¥
+MemcachedBytecodeCache%jinja2.bccache.MemcachedBytecodeCache"jinja2.bccache.BytecodeCache*­
+__init__.jinja2.bccache.MemcachedBytecodeCache.__init__"
+None*X
+selfN
+%jinja2.bccache.MemcachedBytecodeCache"%jinja2.bccache.MemcachedBytecodeCache*N
+clientB
+jinja2.bccache._MemcachedClient"jinja2.bccache._MemcachedClient**
+prefix
+builtins.str"builtins.str *S
+timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *<
+ignore_memcache_errors
+builtins.bool"builtins.bool *ä
+load_bytecode3jinja2.bccache.MemcachedBytecodeCache.load_bytecode"
+None*X
+selfN
+%jinja2.bccache.MemcachedBytecodeCache"%jinja2.bccache.MemcachedBytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucket*ä
+dump_bytecode3jinja2.bccache.MemcachedBytecodeCache.dump_bytecode"
+None*X
+selfN
+%jinja2.bccache.MemcachedBytecodeCache"%jinja2.bccache.MemcachedBytecodeCache*:
+bucket.
+jinja2.bccache.Bucket"jinja2.bccache.Bucketrz
+client,jinja2.bccache.MemcachedBytecodeCache.clientB
+jinja2.bccache._MemcachedClient"jinja2.bccache._MemcachedClientrT
+prefix,jinja2.bccache.MemcachedBytecodeCache.prefix
+builtins.str"builtins.strr~
+timeout-jinja2.bccache.MemcachedBytecodeCache.timeoutD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerv
+ignore_memcache_errors<jinja2.bccache.MemcachedBytecodeCache.ignore_memcache_errors
+builtins.bool"builtins.bool*
+ttyping *
+tetyping_extensions *E
+
+bc_versionjinja2.bccache.bc_version
+builtins.int"builtins.int*E
+bc_magicjinja2.bccache.bc_magic 
+builtins.bytes"builtins.bytes

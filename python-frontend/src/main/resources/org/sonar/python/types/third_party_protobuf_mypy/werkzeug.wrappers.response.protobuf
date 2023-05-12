@@ -1,0 +1,739 @@
+
+werkzeug.wrappers.responseý€
+_SansIOResponse!werkzeug.sansio.response.Response"builtins.object*õ
+__init__*werkzeug.sansio.response.Response.__init__"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*²
+status£
+5Union[builtins.int,builtins.str,http.HTTPStatus,None]
+builtins.int"builtins.int
+builtins.str"builtins.str"
+http.HTTPStatus"http.HTTPStatus
+None *û
+headersë
+ŒUnion[typing.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]],typing.Iterable[Tuple[builtins.str,builtins.str]],None]¤
+Ntyping.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]]
+builtins.str"builtins.str£
+1Union[builtins.str,typing.Iterable[builtins.str]]
+builtins.str"builtins.strN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable"typing.Mapping¦
+1typing.Iterable[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable
+None *T
+mimetypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¤
+__repr__*werkzeug.sansio.response.Response.__repr__"
+builtins.str"builtins.str*N
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*—
+_clean_status/werkzeug.sansio.response.Response._clean_status"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response* 
+value”
+0Union[builtins.str,builtins.int,http.HTTPStatus]
+builtins.str"builtins.str
+builtins.int"builtins.int"
+http.HTTPStatus"http.HTTPStatus*Ã
+
+set_cookie,werkzeug.sansio.response.Response.set_cookie"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*%
+key
+builtins.str"builtins.str*)
+value
+builtins.str"builtins.str *‘
+max_age
++Union[datetime.timedelta,builtins.int,None](
+datetime.timedelta"datetime.timedelta
+builtins.int"builtins.int
+None *ê
+expiresÚ
+FUnion[builtins.str,datetime.datetime,builtins.int,builtins.float,None]
+builtins.str"builtins.str&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+secure
+builtins.bool"builtins.bool *.
+httponly
+builtins.bool"builtins.bool *T
+samesiteD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+delete_cookie/werkzeug.sansio.response.Response.delete_cookie"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*%
+key
+builtins.str"builtins.str*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+secure
+builtins.bool"builtins.bool *.
+httponly
+builtins.bool"builtins.bool *T
+samesiteD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *´
+is_json)werkzeug.sansio.response.Response.is_json"
+builtins.bool"builtins.bool*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:property`*›
+mimetype_params1werkzeug.sansio.response.Response.mimetype_params"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:property`*š
+cache_control/werkzeug.sansio.response.Response.cache_control"x
+:werkzeug.datastructures.cache_control.ResponseCacheControl":werkzeug.datastructures.cache_control.ResponseCacheControl*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:property`*æ
+set_etag*werkzeug.sansio.response.Response.set_etag"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*&
+etag
+builtins.str"builtins.str**
+weak
+builtins.bool"builtins.bool *×
+get_etag*werkzeug.sansio.response.Response.get_etag"Ì
+9Union[Tuple[builtins.str,builtins.bool],Tuple[None,None]]c
+!Tuple[builtins.str,builtins.bool]
+builtins.str"builtins.str
+builtins.bool"builtins.bool(
+Tuple[None,None]
+None
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response2¹
+charset)werkzeug.sansio.response.Response.charset´
+charset)werkzeug.sansio.response.Response.charset"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Ë
+charset)werkzeug.sansio.response.Response.charset"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*'
+value
+builtins.str"builtins.str0:charset.setter2Ô
+status_code-werkzeug.sansio.response.Response.status_code¼
+status_code-werkzeug.sansio.response.Response.status_code"
+builtins.int"builtins.int*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Ö
+status_code-werkzeug.sansio.response.Response.status_code"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*&
+code
+builtins.int"builtins.int0:status_code.setter2¬
+status(werkzeug.sansio.response.Response.status²
+status(werkzeug.sansio.response.Response.status"
+builtins.str"builtins.str*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Â
+status(werkzeug.sansio.response.Response.status"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response* 
+value”
+0Union[builtins.str,builtins.int,http.HTTPStatus]
+builtins.str"builtins.str
+builtins.int"builtins.int"
+http.HTTPStatus"http.HTTPStatus0:status.setter2è
+mimetype*werkzeug.sansio.response.Response.mimetypeÞ
+mimetype*werkzeug.sansio.response.Response.mimetype"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Î
+mimetype*werkzeug.sansio.response.Response.mimetype"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*'
+value
+builtins.str"builtins.str0:mimetype.setter2›
+retry_after-werkzeug.sansio.response.Response.retry_afteró
+retry_after-werkzeug.sansio.response.Response.retry_after"S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`æ
+retry_after-werkzeug.sansio.response.Response.retry_after"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*µ
+value©
+7Union[datetime.datetime,builtins.int,builtins.str,None]&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int
+builtins.str"builtins.str
+None0:retry_after.setter2Î
+content_range/werkzeug.sansio.response.Response.content_rangeü
+content_range/werkzeug.sansio.response.Response.content_range"X
+*werkzeug.datastructures.range.ContentRange"*werkzeug.datastructures.range.ContentRange*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Œ
+content_range/werkzeug.sansio.response.Response.content_range"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*Õ
+valueÉ
+CUnion[werkzeug.datastructures.range.ContentRange,builtins.str,None]X
+*werkzeug.datastructures.range.ContentRange"*werkzeug.datastructures.range.ContentRange
+builtins.str"builtins.str
+None0:content_range.setter2ì
+www_authenticate2werkzeug.sansio.response.Response.www_authenticate†
+www_authenticate2werkzeug.sansio.response.Response.www_authenticate"\
+,werkzeug.datastructures.auth.WWWAuthenticate",werkzeug.datastructures.auth.WWWAuthenticate*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Ù
+www_authenticate2werkzeug.sansio.response.Response.www_authenticate"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*™
+value
+tUnion[werkzeug.datastructures.auth.WWWAuthenticate,builtins.list[werkzeug.datastructures.auth.WWWAuthenticate],None]\
+,werkzeug.datastructures.auth.WWWAuthenticate",werkzeug.datastructures.auth.WWWAuthenticateª
+;builtins.list[werkzeug.datastructures.auth.WWWAuthenticate]\
+,werkzeug.datastructures.auth.WWWAuthenticate",werkzeug.datastructures.auth.WWWAuthenticate"builtins.list
+None0:www_authenticate.setter¾
+www_authenticate2werkzeug.sansio.response.Response.www_authenticate"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:www_authenticate.deleter2·
+content_security_policy9werkzeug.sansio.response.Response.content_security_policyž
+content_security_policy9werkzeug.sansio.response.Response.content_security_policy"f
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`¿
+content_security_policy9werkzeug.sansio.response.Response.content_security_policy"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*ê
+valueÞ
+JUnion[werkzeug.datastructures.csp.ContentSecurityPolicy,builtins.str,None]f
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy
+builtins.str"builtins.str
+None0:content_security_policy.setter2‹
+#content_security_policy_report_onlyEwerkzeug.sansio.response.Response.content_security_policy_report_only¶
+#content_security_policy_report_onlyEwerkzeug.sansio.response.Response.content_security_policy_report_only"f
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`ã
+#content_security_policy_report_onlyEwerkzeug.sansio.response.Response.content_security_policy_report_only"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*ê
+valueÞ
+JUnion[werkzeug.datastructures.csp.ContentSecurityPolicy,builtins.str,None]f
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy
+builtins.str"builtins.str
+None0:*content_security_policy_report_only.setter2•
+ access_control_allow_credentialsBwerkzeug.sansio.response.Response.access_control_allow_credentialsè
+ access_control_allow_credentialsBwerkzeug.sansio.response.Response.access_control_allow_credentials"
+builtins.bool"builtins.bool*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response0:propertyX`Á
+ access_control_allow_credentialsBwerkzeug.sansio.response.Response.access_control_allow_credentials"
+None*P
+selfF
+!werkzeug.sansio.response.Response"!werkzeug.sansio.response.Response*R
+valueG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None0:'access_control_allow_credentials.setterrT
+_charset*werkzeug.sansio.response.Response._charset
+builtins.str"builtins.strr`
+default_status0werkzeug.sansio.response.Response.default_status
+builtins.int"builtins.intrŒ
+default_mimetype2werkzeug.sansio.response.Response.default_mimetypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerb
+max_cookie_size1werkzeug.sansio.response.Response.max_cookie_size
+builtins.int"builtins.intrˆ
+headers)werkzeug.sansio.response.Response.headersR
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headersr¤
+location*werkzeug.sansio.response.Response.locationl
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyrç
+age%werkzeug.sansio.response.Response.age¸
+>werkzeug.utils.header_property[Union[datetime.timedelta,None]]V
+Union[datetime.timedelta,None](
+datetime.timedelta"datetime.timedelta
+None"werkzeug.utils.header_propertyr¬
+content_type.werkzeug.sansio.response.Response.content_typel
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyr°
+content_length0werkzeug.sansio.response.Response.content_lengthl
+,werkzeug.utils.header_property[builtins.int]
+builtins.int"builtins.int"werkzeug.utils.header_propertyr´
+content_location2werkzeug.sansio.response.Response.content_locationl
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyr´
+content_encoding2werkzeug.sansio.response.Response.content_encodingl
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyrª
+content_md5-werkzeug.sansio.response.Response.content_md5l
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyrå
+date&werkzeug.sansio.response.Response.date´
+=werkzeug.utils.header_property[Union[datetime.datetime,None]]S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None"werkzeug.utils.header_propertyrë
+expires)werkzeug.sansio.response.Response.expires´
+=werkzeug.utils.header_property[Union[datetime.datetime,None]]S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None"werkzeug.utils.header_propertyr÷
+last_modified/werkzeug.sansio.response.Response.last_modified´
+=werkzeug.utils.header_property[Union[datetime.datetime,None]]S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None"werkzeug.utils.header_propertyrV
+vary&werkzeug.sansio.response.Response.vary&
+builtins.property"builtins.propertyrn
+content_language2werkzeug.sansio.response.Response.content_language&
+builtins.property"builtins.propertyrX
+allow'werkzeug.sansio.response.Response.allow&
+builtins.property"builtins.propertyr®
+accept_ranges/werkzeug.sansio.response.Response.accept_rangesl
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyr­
+access_control_allow_headers>werkzeug.sansio.response.Response.access_control_allow_headersÌ
+Lwerkzeug.utils.header_property[werkzeug.datastructures.structures.HeaderSet]\
+,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet"werkzeug.utils.header_propertyr­
+access_control_allow_methods>werkzeug.sansio.response.Response.access_control_allow_methodsÌ
+Lwerkzeug.utils.header_property[werkzeug.datastructures.structures.HeaderSet]\
+,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet"werkzeug.utils.header_propertyrÊ
+access_control_allow_origin=werkzeug.sansio.response.Response.access_control_allow_originl
+,werkzeug.utils.header_property[builtins.str]
+builtins.str"builtins.str"werkzeug.utils.header_propertyr¯
+access_control_expose_headers?werkzeug.sansio.response.Response.access_control_expose_headersÌ
+Lwerkzeug.utils.header_property[werkzeug.datastructures.structures.HeaderSet]\
+,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet"werkzeug.utils.header_propertyrÀ
+access_control_max_age8werkzeug.sansio.response.Response.access_control_max_agel
+,werkzeug.utils.header_property[builtins.int]
+builtins.int"builtins.int"werkzeug.utils.header_propertyrÚ
+cross_origin_opener_policy<werkzeug.sansio.response.Response.cross_origin_opener_policy~
+2werkzeug.utils.header_property[werkzeug.http.COOP](
+werkzeug.http.COOP"werkzeug.http.COOP"werkzeug.utils.header_propertyrÞ
+cross_origin_embedder_policy>werkzeug.sansio.response.Response.cross_origin_embedder_policy~
+2werkzeug.utils.header_property[werkzeug.http.COEP](
+werkzeug.http.COEP"werkzeug.http.COEP"werkzeug.utils.header_propertyrR
+_status)werkzeug.sansio.response.Response._status
+builtins.str"builtins.strr\
+_status_code.werkzeug.sansio.response.Response._status_code
+builtins.int"builtins.int†d
+Response#werkzeug.wrappers.response.Response"!werkzeug.sansio.response.Response*¢
+__init__,werkzeug.wrappers.response.Response.__init__"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ê
+responseÙ
+eUnion[typing.Iterable[builtins.bytes],builtins.bytes,typing.Iterable[builtins.str],builtins.str,None]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable 
+builtins.bytes"builtins.bytesN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str
+None *²
+status£
+5Union[builtins.int,builtins.str,http.HTTPStatus,None]
+builtins.int"builtins.int
+builtins.str"builtins.str"
+http.HTTPStatus"http.HTTPStatus
+None *û
+headersë
+ŒUnion[typing.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]],typing.Iterable[Tuple[builtins.str,builtins.str]],None]¤
+Ntyping.Mapping[builtins.str,Union[builtins.str,typing.Iterable[builtins.str]]]
+builtins.str"builtins.str£
+1Union[builtins.str,typing.Iterable[builtins.str]]
+builtins.str"builtins.strN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable"typing.Mapping¦
+1typing.Iterable[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable
+None *T
+mimetypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *8
+direct_passthrough
+builtins.bool"builtins.bool *¼
+call_on_close1werkzeug.wrappers.response.Response.call_on_close"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ª
+__repr__,werkzeug.wrappers.response.Response.__repr__"
+builtins.str"builtins.str*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ù
+
+force_type.werkzeug.wrappers.response.Response.force_type"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*‚
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*X
+responseJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*þ
+environî
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment
+None 0:classmethodp*ª
+from_app,werkzeug.wrappers.response.Response.from_app"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*‚
+clsy
+)Type[werkzeug.wrappers.response.Response]J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*¥
+app›
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*.
+buffered
+builtins.bool"builtins.bool 0:classmethodp*‹
+set_data,werkzeug.wrappers.response.Response.set_data"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*q
+valuef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*ô
+calculate_content_length<werkzeug.wrappers.response.Response.calculate_content_length"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*×
+_ensure_sequence4werkzeug.wrappers.response.Response._ensure_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*-
+mutable
+builtins.bool"builtins.bool *¢
+make_sequence1werkzeug.wrappers.response.Response.make_sequence"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ì
+iter_encoded0werkzeug.wrappers.response.Response.iter_encoded"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Â
+is_streamed/werkzeug.wrappers.response.Response.is_streamed"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*Â
+is_sequence/werkzeug.wrappers.response.Response.is_sequence"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*’
+close)werkzeug.wrappers.response.Response.close"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*Ú
+	__enter__-werkzeug.wrappers.response.Response.__enter__"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*R
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*g
+__exit__,werkzeug.wrappers.response.Response.__exit__*
+self*
+exc_type*
+	exc_value*
+tb*”
+freeze*werkzeug.wrappers.response.Response.freeze"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*ª
+get_wsgi_headers4werkzeug.wrappers.response.Response.get_wsgi_headers"R
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*¤
+get_app_iter0werkzeug.wrappers.response.Response.get_app_iter"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Û
+get_wsgi_response5werkzeug.wrappers.response.Response.get_wsgi_response"€
+cTuple[typing.Iterable[builtins.bytes],builtins.str,builtins.list[Tuple[builtins.str,builtins.str]]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*î
+__call__,werkzeug.wrappers.response.Response.__call__"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponse*¼
+json(werkzeug.wrappers.response.Response.json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:property`*õ
+stream*werkzeug.wrappers.response.Response.stream"V
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response0:cached_property*ƒ
+_wrap_range_response8werkzeug.wrappers.response.Response._wrap_range_response"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*'
+start
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.int*
+_is_range_request_processableAwerkzeug.wrappers.response.Response._is_range_request_processable"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Õ
+_process_range_request:werkzeug.wrappers.response.Response._process_range_request"
+builtins.bool"builtins.bool*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*Y
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*v
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str*¦
+make_conditional4werkzeug.wrappers.response.Response.make_conditional"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*â
+request_or_environÉ
+SUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request]§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request*x
+accept_rangesc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *[
+complete_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *õ
+add_etag,werkzeug.wrappers.response.Response.add_etag"
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*/
+	overwrite
+builtins.bool"builtins.bool **
+weak
+builtins.bool"builtins.bool 2Î
+get_data,werkzeug.wrappers.response.Response.get_data‹
+get_data,werkzeug.wrappers.response.Response.get_data" 
+builtins.bytes"builtins.bytes*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*I
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX…
+get_data,werkzeug.wrappers.response.Response.get_data"
+builtins.str"builtins.str*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*G
+as_text:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:
+t.overloadX2ý
+get_json,werkzeug.wrappers.response.Response.get_jsonž
+get_json,werkzeug.wrappers.response.Response.get_json"
+Any*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *H
+silent:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:
+t.overloadX¡
+get_json,werkzeug.wrappers.response.Response.get_json"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*+
+force
+builtins.bool"builtins.bool *,
+silent
+builtins.bool"builtins.bool 0:
+t.overloadXr€
+implicit_sequence_conversion@werkzeug.wrappers.response.Response.implicit_sequence_conversion
+builtins.bool"builtins.boolr~
+autocorrect_location_header?werkzeug.wrappers.response.Response.autocorrect_location_header
+builtins.bool"builtins.boolrˆ
+ automatically_set_content_lengthDwerkzeug.wrappers.response.Response.automatically_set_content_length
+builtins.bool"builtins.boolr©
+response,werkzeug.wrappers.response.Response.responseî
+DUnion[typing.Iterable[builtins.str],typing.Iterable[builtins.bytes]]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.IterableT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterablerX
+data(werkzeug.wrappers.response.Response.data&
+builtins.property"builtins.propertyrl
+direct_passthrough6werkzeug.wrappers.response.Response.direct_passthrough
+builtins.bool"builtins.boolrÉ
+	_on_close-werkzeug.wrappers.response.Response._on_closeŒ
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listŸ
+ResponseStream)werkzeug.wrappers.response.ResponseStream"builtins.object*„
+__init__2werkzeug.wrappers.response.ResponseStream.__init__"
+None*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*X
+responseJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*å
+write/werkzeug.wrappers.response.ResponseStream.write"
+builtins.int"builtins.int*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*+
+value 
+builtins.bytes"builtins.bytes*
+
+writelines4werkzeug.wrappers.response.ResponseStream.writelines"
+None*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*]
+seqT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*¤
+close/werkzeug.wrappers.response.ResponseStream.close"
+None*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*¤
+flush/werkzeug.wrappers.response.ResponseStream.flush"
+None*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*¼
+isatty0werkzeug.wrappers.response.ResponseStream.isatty"
+builtins.bool"builtins.bool*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*¶
+tell.werkzeug.wrappers.response.ResponseStream.tell"
+builtins.int"builtins.int*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream*Ì
+encoding2werkzeug.wrappers.response.ResponseStream.encoding"
+builtins.str"builtins.str*`
+selfV
+)werkzeug.wrappers.response.ResponseStream")werkzeug.wrappers.response.ResponseStream0:property`rT
+mode.werkzeug.wrappers.response.ResponseStream.mode
+builtins.str"builtins.strrŠ
+response2werkzeug.wrappers.response.ResponseStream.responseJ
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.ResponserZ
+closed0werkzeug.wrappers.response.ResponseStream.closed
+builtins.bool"builtins.boolú
+_iter_encoded(werkzeug.wrappers.response._iter_encoded"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*½
+iterable®
+3typing.Iterable[Union[builtins.str,builtins.bytes]]f
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes"typing.Iterable*)
+charset
+builtins.str"builtins.str*
+ttyping 

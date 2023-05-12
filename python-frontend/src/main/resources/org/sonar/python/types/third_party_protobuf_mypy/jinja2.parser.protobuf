@@ -1,0 +1,412 @@
+
+jinja2.parser›e
+Parserjinja2.parser.Parser"builtins.object*ã
+__init__jinja2.parser.Parser.__init__"
+None*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*(
+source
+builtins.str"builtins.str*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+stateD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ï
+failjinja2.parser.Parser.fail"
+NoReturn
+*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*%
+msg
+builtins.str"builtins.str*R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Š
+exc
++Type[jinja2.exceptions.TemplateSyntaxError]N
+%jinja2.exceptions.TemplateSyntaxError"%jinja2.exceptions.TemplateSyntaxError *¼
+_fail_ut_eof!jinja2.parser.Parser._fail_ut_eof"
+NoReturn
+*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None* 
+end_token_stackŠ
++builtins.list[builtins.tuple[builtins.str]]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple"builtins.list*P
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*û
+fail_unknown_tag%jinja2.parser.Parser.fail_unknown_tag"
+NoReturn
+*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*&
+name
+builtins.str"builtins.str*R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ý
+fail_eofjinja2.parser.Parser.fail_eof"
+NoReturn
+*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*—
+
+end_tokens„
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¨
+is_tuple_end!jinja2.parser.Parser.is_tuple_end"
+builtins.bool"builtins.bool*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*œ
+extra_end_rules„
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *û
+free_identifier$jinja2.parser.Parser.free_identifier"6
+jinja2.nodes.InternalName"jinja2.nodes.InternalName*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *²
+parse_statement$jinja2.parser.Parser.parse_statement"À
+9Union[jinja2.nodes.Node,builtins.list[jinja2.nodes.Node]]&
+jinja2.nodes.Node"jinja2.nodes.NodeY
+ builtins.list[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"builtins.list*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Ý
+parse_statements%jinja2.parser.Parser.parse_statements"Y
+ builtins.list[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"builtins.list*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*\
+
+end_tokensL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*1
+drop_needle
+builtins.bool"builtins.bool *ÿ
+	parse_setjinja2.parser.Parser.parse_set"™
+3Union[jinja2.nodes.Assign,jinja2.nodes.AssignBlock]*
+jinja2.nodes.Assign"jinja2.nodes.Assign4
+jinja2.nodes.AssignBlock"jinja2.nodes.AssignBlock*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‰
+	parse_forjinja2.parser.Parser.parse_for"$
+jinja2.nodes.For"jinja2.nodes.For*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*…
+parse_ifjinja2.parser.Parser.parse_if""
+jinja2.nodes.If"jinja2.nodes.If*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*
+
+parse_withjinja2.parser.Parser.parse_with"&
+jinja2.nodes.With"jinja2.nodes.With*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*›
+parse_autoescape%jinja2.parser.Parser.parse_autoescape"(
+jinja2.nodes.Scope"jinja2.nodes.Scope*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‘
+parse_block jinja2.parser.Parser.parse_block"(
+jinja2.nodes.Block"jinja2.nodes.Block*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*™
+parse_extends"jinja2.parser.Parser.parse_extends",
+jinja2.nodes.Extends"jinja2.nodes.Extends*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*ô
+parse_import_context)jinja2.parser.Parser.parse_import_context" 
+jinja2.parser._ImportInclude*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser**
+node 
+jinja2.parser._ImportInclude*+
+default
+builtins.bool"builtins.bool*™
+parse_include"jinja2.parser.Parser.parse_include",
+jinja2.nodes.Include"jinja2.nodes.Include*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*•
+parse_import!jinja2.parser.Parser.parse_import"*
+jinja2.nodes.Import"jinja2.nodes.Import*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*™
+
+parse_fromjinja2.parser.Parser.parse_from"2
+jinja2.nodes.FromImport"jinja2.nodes.FromImport*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*¡
+parse_signature$jinja2.parser.Parser.parse_signature"
+None*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*&
+node
+jinja2.parser._MacroCall*£
+parse_call_block%jinja2.parser.Parser.parse_call_block"0
+jinja2.nodes.CallBlock"jinja2.nodes.CallBlock*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*«
+parse_filter_block'jinja2.parser.Parser.parse_filter_block"4
+jinja2.nodes.FilterBlock"jinja2.nodes.FilterBlock*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‘
+parse_macro jinja2.parser.Parser.parse_macro"(
+jinja2.nodes.Macro"jinja2.nodes.Macro*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*“
+parse_print jinja2.parser.Parser.parse_print"*
+jinja2.nodes.Output"jinja2.nodes.Output*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Î
+parse_expression%jinja2.parser.Parser.parse_expression"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*3
+with_condexpr
+builtins.bool"builtins.bool *•
+parse_condexpr#jinja2.parser.Parser.parse_condexpr"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‰
+parse_orjinja2.parser.Parser.parse_or"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‹
+	parse_andjinja2.parser.Parser.parse_and"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‹
+	parse_notjinja2.parser.Parser.parse_not"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*“
+parse_compare"jinja2.parser.Parser.parse_compare"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*
+parse_math1 jinja2.parser.Parser.parse_math1"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‘
+parse_concat!jinja2.parser.Parser.parse_concat"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*
+parse_math2 jinja2.parser.Parser.parse_math2"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*‹
+	parse_powjinja2.parser.Parser.parse_pow"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Â
+parse_unary jinja2.parser.Parser.parse_unary"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*1
+with_filter
+builtins.bool"builtins.bool *“
+parse_primary"jinja2.parser.Parser.parse_primary"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*­
+parse_tuple jinja2.parser.Parser.parse_tuple"
++Union[jinja2.nodes.Tuple,jinja2.nodes.Expr](
+jinja2.nodes.Tuple"jinja2.nodes.Tuple&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+
+simplified
+builtins.bool"builtins.bool *3
+with_condexpr
+builtins.bool"builtins.bool *œ
+extra_end_rules„
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *:
+explicit_parentheses
+builtins.bool"builtins.bool *
+
+parse_listjinja2.parser.Parser.parse_list"&
+jinja2.nodes.List"jinja2.nodes.List*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*
+
+parse_dictjinja2.parser.Parser.parse_dict"&
+jinja2.nodes.Dict"jinja2.nodes.Dict*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Å
+parse_postfix"jinja2.parser.Parser.parse_postfix"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*Í
+parse_filter_expr&jinja2.parser.Parser.parse_filter_expr"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*´
+parse_subscript$jinja2.parser.Parser.parse_subscript"
+0Union[jinja2.nodes.Getattr,jinja2.nodes.Getitem],
+jinja2.nodes.Getattr"jinja2.nodes.Getattr,
+jinja2.nodes.Getitem"jinja2.nodes.Getitem*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*™
+parse_subscribed%jinja2.parser.Parser.parse_subscribed"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*Ÿ
+parse_call_args$jinja2.parser.Parser.parse_call_args".
+builtins.tuple[Any]
+Any"builtins.tuple*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*¿
+
+parse_calljinja2.parser.Parser.parse_call"&
+jinja2.nodes.Call"jinja2.nodes.Call*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*Ñ
+parse_filter!jinja2.parser.Parser.parse_filter"S
+Union[jinja2.nodes.Expr,None]&
+jinja2.nodes.Expr"jinja2.nodes.Expr
+None*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*]
+nodeS
+Union[jinja2.nodes.Expr,None]&
+jinja2.nodes.Expr"jinja2.nodes.Expr
+None*2
+start_inline
+builtins.bool"builtins.bool *¿
+
+parse_testjinja2.parser.Parser.parse_test"&
+jinja2.nodes.Expr"jinja2.nodes.Expr*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*Ö
+subparsejinja2.parser.Parser.subparse"Y
+ builtins.list[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"builtins.list*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*—
+
+end_tokens„
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *‹
+parsejinja2.parser.Parser.parse".
+jinja2.nodes.Template"jinja2.nodes.Template*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser2ý
+parse_assign_target(jinja2.parser.Parser.parse_assign_target³
+parse_assign_target(jinja2.parser.Parser.parse_assign_target"&
+jinja2.nodes.Name"jinja2.nodes.Name*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+
+with_tuple
+builtins.bool"builtins.bool *K
+	name_only:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:typing.overloadX…
+parse_assign_target(jinja2.parser.Parser.parse_assign_target"¾
+>Union[jinja2.nodes.NSRef,jinja2.nodes.Name,jinja2.nodes.Tuple](
+jinja2.nodes.NSRef"jinja2.nodes.NSRef&
+jinja2.nodes.Name"jinja2.nodes.Name(
+jinja2.nodes.Tuple"jinja2.nodes.Tuple*6
+self,
+jinja2.parser.Parser"jinja2.parser.Parser*0
+
+with_tuple
+builtins.bool"builtins.bool */
+	name_only
+builtins.bool"builtins.bool *œ
+extra_end_rules„
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *4
+with_namespace
+builtins.bool"builtins.bool 0:typing.overloadXrq
+environment jinja2.parser.Parser.environment@
+jinja2.environment.Environment"jinja2.environment.Environmentr[
+streamjinja2.parser.Parser.stream4
+jinja2.lexer.TokenStream"jinja2.lexer.TokenStreamrg
+namejinja2.parser.Parser.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonero
+filenamejinja2.parser.Parser.filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerE
+closedjinja2.parser.Parser.closed
+builtins.bool"builtins.boolrç
+
+extensionsjinja2.parser.Parser.extensions·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrW
+_last_identifier%jinja2.parser.Parser._last_identifier
+builtins.int"builtins.intry
+
+_tag_stackjinja2.parser.Parser._tag_stackJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrÆ
+_end_token_stack%jinja2.parser.Parser._end_token_stackŠ
++builtins.list[builtins.tuple[builtins.str]]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple"builtins.list*
+ttyping *
+tetyping_extensions *Ž
+_statement_keywords!jinja2.parser._statement_keywordsT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*Œ
+_compare_operators jinja2.parser._compare_operatorsT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*Ò
+_math_nodesjinja2.parser._math_nodes§
+3builtins.dict[builtins.str,Type[jinja2.nodes.Expr]]
+builtins.str"builtins.strC
+Type[jinja2.nodes.Expr]&
+jinja2.nodes.Expr"jinja2.nodes.Expr"builtins.dict

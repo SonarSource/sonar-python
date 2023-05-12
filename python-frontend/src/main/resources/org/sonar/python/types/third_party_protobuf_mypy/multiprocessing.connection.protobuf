@@ -1,0 +1,226 @@
+
+multiprocessing.connection¢
+_ConnectionBase*multiprocessing.connection._ConnectionBase"builtins.object*«
+__init__3multiprocessing.connection._ConnectionBase.__init__"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*8
+handle,
+typing.SupportsIndex"typing.SupportsIndex*.
+readable
+builtins.bool"builtins.bool *.
+writable
+builtins.bool"builtins.bool *Õ
+closed1multiprocessing.connection._ConnectionBase.closed"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`*—
+readable3multiprocessing.connection._ConnectionBase.readable"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`*—
+writable3multiprocessing.connection._ConnectionBase.writable"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase0:property`*Ω
+fileno1multiprocessing.connection._ConnectionBase.fileno"
+builtins.int"builtins.int*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*ß
+close0multiprocessing.connection._ConnectionBase.close"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*⁄
+
+send_bytes5multiprocessing.connection._ConnectionBase.send_bytes"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*)
+buf 
+builtins.bytes"builtins.bytes**
+offset
+builtins.int"builtins.int *P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∑
+send/multiprocessing.connection._ConnectionBase.send"
+None*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*
+obj
+Any*†
+
+recv_bytes5multiprocessing.connection._ConnectionBase.recv_bytes" 
+builtins.bytes"builtins.bytes*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*U
+	maxlengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ç
+recv_bytes_into:multiprocessing.connection._ConnectionBase.recv_bytes_into"
+builtins.int"builtins.int*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*
+buf
+Any**
+offset
+builtins.int"builtins.int *§
+recv/multiprocessing.connection._ConnectionBase.recv"
+Any*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*ñ
+poll/multiprocessing.connection._ConnectionBase.poll"
+builtins.bool"builtins.bool*b
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *˝
+	__enter__4multiprocessing.connection._ConnectionBase.__enter__"X
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*`
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*õ
+__exit__3multiprocessing.connection._ConnectionBase.__exit__"
+None*`
+selfX
+*multiprocessing.connection._ConnectionBase"*multiprocessing.connection._ConnectionBase*ó
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*c
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None_
+
+Connection%multiprocessing.connection.Connection"*multiprocessing.connection._ConnectionBaseü
+Listener#multiprocessing.connection.Listener"builtins.object*Œ
+__init__,multiprocessing.connection.Listener.__init__"
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*◊
+address«
+9Union[builtins.str,Tuple[builtins.str,builtins.int],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *R
+familyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+backlog
+builtins.int"builtins.int *Y
+authkeyJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *⁄
+accept*multiprocessing.connection.Listener.accept"N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*í
+close)multiprocessing.connection.Listener.close"
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*¿
+address+multiprocessing.connection.Listener.address"£
+?TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"#multiprocessing.connection._Address*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener0:property`*
+last_accepted1multiprocessing.connection.Listener.last_accepted"«
+9Union[builtins.str,Tuple[builtins.str,builtins.int],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None*T
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener0:property`*⁄
+	__enter__-multiprocessing.connection.Listener.__enter__"J
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*R
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*Ü
+__exit__,multiprocessing.connection.Listener.__exit__"
+None*R
+selfJ
+#multiprocessing.connection.Listener"#multiprocessing.connection.Listener*ó
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*c
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None⁄
+deliver_challenge,multiprocessing.connection.deliver_challenge"
+None*^
+
+connectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*-
+authkey 
+builtins.bytes"builtins.bytesÿ
+answer_challenge+multiprocessing.connection.answer_challenge"
+None*^
+
+connectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*-
+authkey 
+builtins.bytes"builtins.bytes§
+waitmultiprocessing.connection.wait"√
+Vbuiltins.list[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]Ÿ
+GUnion[multiprocessing.connection.Connection,socket.socket,builtins.int]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection
+socket.socket"socket.socket
+builtins.int"builtins.int"builtins.list*Ÿ
+object_list«
+Xtyping.Iterable[Union[multiprocessing.connection.Connection,socket.socket,builtins.int]]Ÿ
+GUnion[multiprocessing.connection.Connection,socket.socket,builtins.int]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection
+socket.socket"socket.socket
+builtins.int"builtins.int"typing.Iterable*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None ﬁ
+Client!multiprocessing.connection.Client"N
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*±
+address£
+?TypeAlias[Union[builtins.str,Tuple[builtins.str,builtins.int]]]∏
+4Union[builtins.str,Tuple[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"#multiprocessing.connection._Address*R
+familyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Y
+authkeyJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None Œ
+Pipemultiprocessing.connection.Pipe"ˆ
+RTuple[multiprocessing.connection.Connection,multiprocessing.connection.Connection]N
+%multiprocessing.connection.Connection"%multiprocessing.connection.ConnectionN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connection*,
+duplex
+builtins.bool"builtins.bool 

@@ -12,7 +12,7 @@ PyJWTErrorjwt.PyJWTError"builtins.Exceptionj35j36j37j38j39j310S
 InvalidKeyErrorjwt.InvalidKeyError"jwt.PyJWTErrorj35j36j37j38j39j310b
 InvalidAlgorithmErrorjwt.InvalidAlgorithmError"jwt.InvalidTokenErrorj35j36j37j38j39j310j
 MissingRequiredClaimErrorjwt.MissingRequiredClaimError"jwt.InvalidTokenErrorj35j36j37j38j39j310\
-InvalidSignatureErrorjwt.InvalidSignatureError"jwt.DecodeErrorj35j36j37j38j39j310Ç
+InvalidSignatureErrorjwt.InvalidSignatureError"jwt.DecodeErrorj35j36j37j38j39j310÷
 decode
 jwt.decode"W
 builtins.dict[builtins.str,Any]
@@ -21,13 +21,13 @@ jwt.decode"W
 jwtf
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*å
-keyÄ
-*Union[builtins.str,builtins.bytes,Any,Any]
+builtins.bytes"builtins.bytes*‡
+key‘
+ôUnion[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-Any
-Any *,
+builtins.bytes"builtins.bytesx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyz
+;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey *,
 verify
 builtins.bool"builtins.bool *8
 
@@ -42,20 +42,20 @@ algorithms&
 Any"typing.Mapping
 None *
 kwargs
-Anyz35z36z37z38z39z310◊
+Anyz35z36z37z38z39z310´
 encode
 jwt.encode" 
 builtins.bytes"builtins.bytes*f
 payloadY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping*ä
-keyÄ
-*Union[builtins.str,builtins.bytes,Any,Any]
+Any"typing.Mapping*ﬁ
+key‘
+ôUnion[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-Any
-Any*-
+builtins.bytes"builtins.bytesx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyz
+;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey*-
 	algorithm
 builtins.str"builtins.str *•
 headersï
@@ -67,13 +67,14 @@ jwt.encode"
 json_encoder&
 Union[Any,None]
 Any
-None z35z36z37z38z39z310è
+None z35z36z37z38z39z310 
 register_algorithmjwt.register_algorithm"
 None*(
 alg_id
-builtins.str"builtins.str*
-alg_obj
-Anyz35z36z37z38z39z310}
+builtins.str"builtins.str*O
+alg_objB
+jwt.algorithms.Algorithm[Any]
+Any"jwt.algorithms.Algorithmz35z36z37z38z39z310}
 unregister_algorithmjwt.unregister_algorithm"
 None*(
 alg_id

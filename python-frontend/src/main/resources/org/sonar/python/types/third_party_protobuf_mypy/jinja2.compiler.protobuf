@@ -1,0 +1,1096 @@
+
+jinja2.compiler°
+MacroRefjinja2.compiler.MacroRef"builtins.object*ï
+__init__!jinja2.compiler.MacroRef.__init__"
+None*>
+self4
+jinja2.compiler.MacroRef"jinja2.compiler.MacroRef*õ
+nodeê
+0Union[jinja2.nodes.Macro,jinja2.nodes.CallBlock](
+jinja2.nodes.Macro"jinja2.nodes.Macro0
+jinja2.nodes.CallBlock"jinja2.nodes.CallBlockr∏
+nodejinja2.compiler.MacroRef.nodeê
+0Union[jinja2.nodes.Macro,jinja2.nodes.CallBlock](
+jinja2.nodes.Macro"jinja2.nodes.Macro0
+jinja2.nodes.CallBlock"jinja2.nodes.CallBlockr[
+accesses_caller(jinja2.compiler.MacroRef.accesses_caller
+builtins.bool"builtins.boolr[
+accesses_kwargs(jinja2.compiler.MacroRef.accesses_kwargs
+builtins.bool"builtins.boolr]
+accesses_varargs)jinja2.compiler.MacroRef.accesses_varargs
+builtins.bool"builtins.boolñ
+Framejinja2.compiler.Frame"builtins.object*Ù
+__init__jinja2.compiler.Frame.__init__"
+None*8
+self.
+jinja2.compiler.Frame"jinja2.compiler.Frame*B
+eval_ctx4
+jinja2.nodes.EvalContext"jinja2.nodes.EvalContext*m
+parent_
+!Union[jinja2.compiler.Frame,None].
+jinja2.compiler.Frame"jinja2.compiler.Frame
+None *Q
+levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *å
+copyjinja2.compiler.Frame.copy".
+jinja2.compiler.Frame"jinja2.compiler.Frame*8
+self.
+jinja2.compiler.Frame"jinja2.compiler.Frame*æ
+innerjinja2.compiler.Frame.inner".
+jinja2.compiler.Frame"jinja2.compiler.Frame*8
+self.
+jinja2.compiler.Frame"jinja2.compiler.Frame*.
+isolated
+builtins.bool"builtins.bool *å
+softjinja2.compiler.Frame.soft".
+jinja2.compiler.Frame"jinja2.compiler.Frame*8
+self.
+jinja2.compiler.Frame"jinja2.compiler.Framerw
+__copy__jinja2.compiler.Frame.__copy__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionr`
+eval_ctxjinja2.compiler.Frame.eval_ctx4
+jinja2.nodes.EvalContext"jinja2.nodes.EvalContextrá
+parentjinja2.compiler.Frame.parent_
+!Union[jinja2.compiler.Frame,None].
+jinja2.compiler.Frame"jinja2.compiler.Frame
+Noner`
+symbolsjinja2.compiler.Frame.symbols6
+jinja2.idtracking.Symbols"jinja2.idtracking.Symbolsrb
+require_output_check*jinja2.compiler.Frame.require_output_check
+builtins.bool"builtins.boolrl
+bufferjinja2.compiler.Frame.bufferD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerj
+blockjinja2.compiler.Frame.blockD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerJ
+topleveljinja2.compiler.Frame.toplevel
+builtins.bool"builtins.boolrL
+	rootleveljinja2.compiler.Frame.rootlevel
+builtins.bool"builtins.boolrN
+
+loop_frame jinja2.compiler.Frame.loop_frame
+builtins.bool"builtins.boolrP
+block_frame!jinja2.compiler.Frame.block_frame
+builtins.bool"builtins.boolrN
+
+soft_frame jinja2.compiler.Frame.soft_frame
+builtins.bool"builtins.boolA
+VisitorExitjinja2.compiler.VisitorExit"builtins.RuntimeError≤	
+DependencyFinderVisitor'jinja2.compiler.DependencyFinderVisitor"jinja2.visitor.NodeVisitor*§
+__init__0jinja2.compiler.DependencyFinderVisitor.__init__"
+None*\
+selfR
+'jinja2.compiler.DependencyFinderVisitor"'jinja2.compiler.DependencyFinderVisitor*‚
+visit_Filter4jinja2.compiler.DependencyFinderVisitor.visit_Filter"
+None*\
+selfR
+'jinja2.compiler.DependencyFinderVisitor"'jinja2.compiler.DependencyFinderVisitor*4
+node*
+jinja2.nodes.Filter"jinja2.nodes.Filter*⁄
+
+visit_Test2jinja2.compiler.DependencyFinderVisitor.visit_Test"
+None*\
+selfR
+'jinja2.compiler.DependencyFinderVisitor"'jinja2.compiler.DependencyFinderVisitor*0
+node&
+jinja2.nodes.Test"jinja2.nodes.Test*ﬁ
+visit_Block3jinja2.compiler.DependencyFinderVisitor.visit_Block"
+None*\
+selfR
+'jinja2.compiler.DependencyFinderVisitor"'jinja2.compiler.DependencyFinderVisitor*2
+node(
+jinja2.nodes.Block"jinja2.nodes.BlockrÑ
+filters/jinja2.compiler.DependencyFinderVisitor.filtersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrÄ
+tests-jinja2.compiler.DependencyFinderVisitor.testsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setì
+UndeclaredNameVisitor%jinja2.compiler.UndeclaredNameVisitor"jinja2.visitor.NodeVisitor*˘
+__init__.jinja2.compiler.UndeclaredNameVisitor.__init__"
+None*X
+selfN
+%jinja2.compiler.UndeclaredNameVisitor"%jinja2.compiler.UndeclaredNameVisitor*Y
+namesN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*‘
+
+visit_Name0jinja2.compiler.UndeclaredNameVisitor.visit_Name"
+None*X
+selfN
+%jinja2.compiler.UndeclaredNameVisitor"%jinja2.compiler.UndeclaredNameVisitor*0
+node&
+jinja2.nodes.Name"jinja2.nodes.Name*ÿ
+visit_Block1jinja2.compiler.UndeclaredNameVisitor.visit_Block"
+None*X
+selfN
+%jinja2.compiler.UndeclaredNameVisitor"%jinja2.compiler.UndeclaredNameVisitor*2
+node(
+jinja2.nodes.Block"jinja2.nodes.Blockr~
+names+jinja2.compiler.UndeclaredNameVisitor.namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrà
+
+undeclared0jinja2.compiler.UndeclaredNameVisitor.undeclaredH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set@
+CompilerExitjinja2.compiler.CompilerExit"builtins.Exception™Ò
+CodeGeneratorjinja2.compiler.CodeGenerator"jinja2.visitor.NodeVisitor*∑
+__init__&jinja2.compiler.CodeGenerator.__init__"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+streamG
+Union[typing.TextIO,None]
+typing.TextIO"typing.TextIO
+None *0
+
+defer_init
+builtins.bool"builtins.bool */
+	optimized
+builtins.bool"builtins.bool *¨
+	optimized'jinja2.compiler.CodeGenerator.optimized"
+builtins.bool"builtins.bool*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator0:property`*”
+fail"jinja2.compiler.CodeGenerator.fail"
+NoReturn
+*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*%
+msg
+builtins.str"builtins.str*(
+lineno
+builtins.int"builtins.int*≤
+temporary_identifier2jinja2.compiler.CodeGenerator.temporary_identifier"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Ω
+buffer$jinja2.compiler.CodeGenerator.buffer"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*î
+return_buffer_contents4jinja2.compiler.CodeGenerator.return_buffer_contents"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*5
+force_unescaped
+builtins.bool"builtins.bool *Ç
+indent$jinja2.compiler.CodeGenerator.indent"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Æ
+outdent%jinja2.compiler.CodeGenerator.outdent"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*(
+step
+builtins.int"builtins.int *®
+start_write)jinja2.compiler.CodeGenerator.start_write"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*_
+nodeS
+Union[jinja2.nodes.Node,None]&
+jinja2.nodes.Node"jinja2.nodes.Node
+None *√
+	end_write'jinja2.compiler.CodeGenerator.end_write"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*œ
+simple_write*jinja2.compiler.CodeGenerator.simple_write"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*#
+s
+builtins.str"builtins.str*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*_
+nodeS
+Union[jinja2.nodes.Node,None]&
+jinja2.nodes.Node"jinja2.nodes.Node
+None *Ø
+
+blockvisit(jinja2.compiler.CodeGenerator.blockvisit"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*h
+nodes]
+"typing.Iterable[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"typing.Iterable*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*•
+write#jinja2.compiler.CodeGenerator.write"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*#
+x
+builtins.str"builtins.str*π
+	writeline'jinja2.compiler.CodeGenerator.writeline"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*#
+x
+builtins.str"builtins.str*_
+nodeS
+Union[jinja2.nodes.Node,None]&
+jinja2.nodes.Node"jinja2.nodes.Node
+None *)
+extra
+builtins.int"builtins.int *ê
+newline%jinja2.compiler.CodeGenerator.newline"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*_
+nodeS
+Union[jinja2.nodes.Node,None]&
+jinja2.nodes.Node"jinja2.nodes.Node
+None *)
+extra
+builtins.int"builtins.int *º
+	signature'jinja2.compiler.CodeGenerator.signature"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*…
+nodeæ
+>Union[jinja2.nodes.Call,jinja2.nodes.Filter,jinja2.nodes.Test]&
+jinja2.nodes.Call"jinja2.nodes.Call*
+jinja2.nodes.Filter"jinja2.nodes.Filter&
+jinja2.nodes.Test"jinja2.nodes.Test*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*™
+extra_kwargsï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *Ç
+pull_dependencies/jinja2.compiler.CodeGenerator.pull_dependencies"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*h
+nodes]
+"typing.Iterable[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"typing.Iterable*«
+enter_frame)jinja2.compiler.CodeGenerator.enter_frame"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Ä
+leave_frame)jinja2.compiler.CodeGenerator.leave_frame"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*7
+with_python_scope
+builtins.bool"builtins.bool *É
+choose_async*jinja2.compiler.CodeGenerator.choose_async"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*/
+async_value
+builtins.str"builtins.str *.
+
+sync_value
+builtins.str"builtins.str *∫
+func"jinja2.compiler.CodeGenerator.func"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*&
+name
+builtins.str"builtins.str*˚
+
+macro_body(jinja2.compiler.CodeGenerator.macro_body"ü
+5Tuple[jinja2.compiler.Frame,jinja2.compiler.MacroRef].
+jinja2.compiler.Frame"jinja2.compiler.Frame4
+jinja2.compiler.MacroRef"jinja2.compiler.MacroRef*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*õ
+nodeê
+0Union[jinja2.nodes.Macro,jinja2.nodes.CallBlock](
+jinja2.nodes.Macro"jinja2.nodes.Macro0
+jinja2.nodes.CallBlock"jinja2.nodes.CallBlock*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*à
+	macro_def'jinja2.compiler.CodeGenerator.macro_def"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*C
+	macro_ref4
+jinja2.compiler.MacroRef"jinja2.compiler.MacroRef*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Ã
+position&jinja2.compiler.CodeGenerator.position"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Node"jinja2.nodes.Node*È
+dump_local_context0jinja2.compiler.CodeGenerator.dump_local_context"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ê
+write_commons+jinja2.compiler.CodeGenerator.write_commons"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Â
+push_parameter_definitions8jinja2.compiler.CodeGenerator.push_parameter_definitions"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*®
+pop_parameter_definitions7jinja2.compiler.CodeGenerator.pop_parameter_definitions"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator* 
+mark_parameter_stored3jinja2.compiler.CodeGenerator.mark_parameter_stored"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*(
+target
+builtins.str"builtins.str*Ã
+push_context_reference4jinja2.compiler.CodeGenerator.push_context_reference"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*(
+target
+builtins.str"builtins.str*†
+pop_context_reference3jinja2.compiler.CodeGenerator.pop_context_reference"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*®
+get_context_ref-jinja2.compiler.CodeGenerator.get_context_ref"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*™
+get_resolve_func.jinja2.compiler.CodeGenerator.get_resolve_func"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*·
+derive_context,jinja2.compiler.CodeGenerator.derive_context"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*‰
+parameter_is_undeclared5jinja2.compiler.CodeGenerator.parameter_is_undeclared"
+builtins.bool"builtins.bool*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*(
+target
+builtins.str"builtins.str*û
+push_assign_tracking2jinja2.compiler.CodeGenerator.push_assign_tracking"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*◊
+pop_assign_tracking1jinja2.compiler.CodeGenerator.pop_assign_tracking"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*∫
+visit_Template,jinja2.compiler.CodeGenerator.visit_Template"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*8
+node.
+jinja2.nodes.Template"jinja2.nodes.Template*l
+frame_
+!Union[jinja2.compiler.Frame,None].
+jinja2.compiler.Frame"jinja2.compiler.Frame
+None *˚
+visit_Block)jinja2.compiler.CodeGenerator.visit_Block"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Block"jinja2.nodes.Block*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*É
+visit_Extends+jinja2.compiler.CodeGenerator.visit_Extends"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Extends"jinja2.nodes.Extends*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*É
+visit_Include+jinja2.compiler.CodeGenerator.visit_Include"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Include"jinja2.nodes.Include*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Ò
+_import_common,jinja2.compiler.CodeGenerator._import_common"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*°
+nodeñ
+2Union[jinja2.nodes.Import,jinja2.nodes.FromImport]*
+jinja2.nodes.Import"jinja2.nodes.Import2
+jinja2.nodes.FromImport"jinja2.nodes.FromImport*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ˇ
+visit_Import*jinja2.compiler.CodeGenerator.visit_Import"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*4
+node*
+jinja2.nodes.Import"jinja2.nodes.Import*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*è
+visit_FromImport.jinja2.compiler.CodeGenerator.visit_FromImport"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*<
+node2
+jinja2.nodes.FromImport"jinja2.nodes.FromImport*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Û
+	visit_For'jinja2.compiler.CodeGenerator.visit_For"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*.
+node$
+jinja2.nodes.For"jinja2.nodes.For*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Ô
+visit_If&jinja2.compiler.CodeGenerator.visit_If"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*,
+node"
+jinja2.nodes.If"jinja2.nodes.If*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_Macro)jinja2.compiler.CodeGenerator.visit_Macro"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Macro"jinja2.nodes.Macro*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ã
+visit_CallBlock-jinja2.compiler.CodeGenerator.visit_CallBlock"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*:
+node0
+jinja2.nodes.CallBlock"jinja2.nodes.CallBlock*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ì
+visit_FilterBlock/jinja2.compiler.CodeGenerator.visit_FilterBlock"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*>
+node4
+jinja2.nodes.FilterBlock"jinja2.nodes.FilterBlock*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˜
+
+visit_With(jinja2.compiler.CodeGenerator.visit_With"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.With"jinja2.nodes.With*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*á
+visit_ExprStmt,jinja2.compiler.CodeGenerator.visit_ExprStmt"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*8
+node.
+jinja2.nodes.ExprStmt"jinja2.nodes.ExprStmt*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*s
+_default_finalize/jinja2.compiler.CodeGenerator._default_finalize"
+Any*
+value
+Any0:staticmethodh*©
+_make_finalize,jinja2.compiler.CodeGenerator._make_finalize"û
+KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Î
+_output_const_repr0jinja2.compiler.CodeGenerator._output_const_repr"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*;
+group0
+typing.Iterable[Any]
+Any"typing.Iterable*”
+_output_child_to_const4jinja2.compiler.CodeGenerator._output_child_to_const"
+builtins.str"builtins.str*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*≠
+finalizeû
+KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*µ
+_output_child_pre/jinja2.compiler.CodeGenerator._output_child_pre"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*≠
+finalizeû
+KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*∑
+_output_child_post0jinja2.compiler.CodeGenerator._output_child_post"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Expr"jinja2.nodes.Expr*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*≠
+finalizeû
+KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ˇ
+visit_Output*jinja2.compiler.CodeGenerator.visit_Output"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*4
+node*
+jinja2.nodes.Output"jinja2.nodes.Output*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ˇ
+visit_Assign*jinja2.compiler.CodeGenerator.visit_Assign"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*4
+node*
+jinja2.nodes.Assign"jinja2.nodes.Assign*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ì
+visit_AssignBlock/jinja2.compiler.CodeGenerator.visit_AssignBlock"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*>
+node4
+jinja2.nodes.AssignBlock"jinja2.nodes.AssignBlock*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˜
+
+visit_Name(jinja2.compiler.CodeGenerator.visit_Name"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Name"jinja2.nodes.Name*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_NSRef)jinja2.compiler.CodeGenerator.visit_NSRef"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.NSRef"jinja2.nodes.NSRef*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_Const)jinja2.compiler.CodeGenerator.visit_Const"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Const"jinja2.nodes.Const*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ó
+visit_TemplateData0jinja2.compiler.CodeGenerator.visit_TemplateData"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*@
+node6
+jinja2.nodes.TemplateData"jinja2.nodes.TemplateData*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_Tuple)jinja2.compiler.CodeGenerator.visit_Tuple"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Tuple"jinja2.nodes.Tuple*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˜
+
+visit_List(jinja2.compiler.CodeGenerator.visit_List"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.List"jinja2.nodes.List*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˜
+
+visit_Dict(jinja2.compiler.CodeGenerator.visit_Dict"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Dict"jinja2.nodes.Dict*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ê
+visit_Concat*jinja2.compiler.CodeGenerator.visit_Concat"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*4
+node*
+jinja2.nodes.Concat"jinja2.nodes.Concat*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*î
+visit_Compare+jinja2.compiler.CodeGenerator.visit_Compare"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Compare"jinja2.nodes.Compare*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*É
+visit_Operand+jinja2.compiler.CodeGenerator.visit_Operand"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Operand"jinja2.nodes.Operand*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*î
+visit_Getattr+jinja2.compiler.CodeGenerator.visit_Getattr"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Getattr"jinja2.nodes.Getattr*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*î
+visit_Getitem+jinja2.compiler.CodeGenerator.visit_Getitem"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Getitem"jinja2.nodes.Getitem*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*˚
+visit_Slice)jinja2.compiler.CodeGenerator.visit_Slice"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Slice"jinja2.nodes.Slice*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*‘
+_filter_test_common1jinja2.compiler.CodeGenerator._filter_test_common"2
+typing.Iterator[None]
+None"typing.Iterator*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*è
+nodeÑ
+,Union[jinja2.nodes.Filter,jinja2.nodes.Test]*
+jinja2.nodes.Filter"jinja2.nodes.Filter&
+jinja2.nodes.Test"jinja2.nodes.Test*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*-
+	is_filter
+builtins.bool"builtins.bool0:contextmanager*ê
+visit_Filter*jinja2.compiler.CodeGenerator.visit_Filter"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*4
+node*
+jinja2.nodes.Filter"jinja2.nodes.Filter*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*à
+
+visit_Test(jinja2.compiler.CodeGenerator.visit_Test"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Test"jinja2.nodes.Test*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*ò
+visit_CondExpr,jinja2.compiler.CodeGenerator.visit_CondExpr"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*8
+node.
+jinja2.nodes.CondExpr"jinja2.nodes.CondExpr*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame0:optimizeconst*æ
+
+visit_Call(jinja2.compiler.CodeGenerator.visit_Call"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*0
+node&
+jinja2.nodes.Call"jinja2.nodes.Call*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*4
+forward_caller
+builtins.bool"builtins.bool 0:optimizeconst*É
+visit_Keyword+jinja2.compiler.CodeGenerator.visit_Keyword"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*6
+node,
+jinja2.nodes.Keyword"jinja2.nodes.Keyword*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*á
+visit_MarkSafe,jinja2.compiler.CodeGenerator.visit_MarkSafe"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*8
+node.
+jinja2.nodes.MarkSafe"jinja2.nodes.MarkSafe*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*∑
+visit_MarkSafeIfAutoescape8jinja2.compiler.CodeGenerator.visit_MarkSafeIfAutoescape"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*P
+nodeF
+!jinja2.nodes.MarkSafeIfAutoescape"!jinja2.nodes.MarkSafeIfAutoescape*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*∑
+visit_EnvironmentAttribute8jinja2.compiler.CodeGenerator.visit_EnvironmentAttribute"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*P
+nodeF
+!jinja2.nodes.EnvironmentAttribute"!jinja2.nodes.EnvironmentAttribute*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*Ø
+visit_ExtensionAttribute6jinja2.compiler.CodeGenerator.visit_ExtensionAttribute"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*L
+nodeB
+jinja2.nodes.ExtensionAttribute"jinja2.nodes.ExtensionAttribute*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ó
+visit_ImportedName0jinja2.compiler.CodeGenerator.visit_ImportedName"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*@
+node6
+jinja2.nodes.ImportedName"jinja2.nodes.ImportedName*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ó
+visit_InternalName0jinja2.compiler.CodeGenerator.visit_InternalName"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*@
+node6
+jinja2.nodes.InternalName"jinja2.nodes.InternalName*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ß
+visit_ContextReference4jinja2.compiler.CodeGenerator.visit_ContextReference"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*H
+node>
+jinja2.nodes.ContextReference"jinja2.nodes.ContextReference*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*√
+visit_DerivedContextReference;jinja2.compiler.CodeGenerator.visit_DerivedContextReference"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*V
+nodeL
+$jinja2.nodes.DerivedContextReference"$jinja2.nodes.DerivedContextReference*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*á
+visit_Continue,jinja2.compiler.CodeGenerator.visit_Continue"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*8
+node.
+jinja2.nodes.Continue"jinja2.nodes.Continue*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_Break)jinja2.compiler.CodeGenerator.visit_Break"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Break"jinja2.nodes.Break*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*˚
+visit_Scope)jinja2.compiler.CodeGenerator.visit_Scope"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*2
+node(
+jinja2.nodes.Scope"jinja2.nodes.Scope*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*ó
+visit_OverlayScope0jinja2.compiler.CodeGenerator.visit_OverlayScope"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*@
+node6
+jinja2.nodes.OverlayScope"jinja2.nodes.OverlayScope*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*≥
+visit_EvalContextModifier7jinja2.compiler.CodeGenerator.visit_EvalContextModifier"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*N
+nodeD
+ jinja2.nodes.EvalContextModifier" jinja2.nodes.EvalContextModifier*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.Frame*À
+visit_ScopedEvalContextModifier=jinja2.compiler.CodeGenerator.visit_ScopedEvalContextModifier"
+None*H
+self>
+jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Z
+nodeP
+&jinja2.nodes.ScopedEvalContextModifier"&jinja2.nodes.ScopedEvalContextModifier*9
+frame.
+jinja2.compiler.Frame"jinja2.compiler.FramerΩ
+	_finalize'jinja2.compiler.CodeGenerator._finalizeÜ
+WUnion[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]],None]û
+KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+NonerÅ
+	visit_Add'jinja2.compiler.CodeGenerator.visit_AddK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Sub'jinja2.compiler.CodeGenerator.visit_SubK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Mul'jinja2.compiler.CodeGenerator.visit_MulK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Div'jinja2.compiler.CodeGenerator.visit_DivK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrã
+visit_FloorDiv,jinja2.compiler.CodeGenerator.visit_FloorDivK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Pow'jinja2.compiler.CodeGenerator.visit_PowK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Mod'jinja2.compiler.CodeGenerator.visit_ModK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_And'jinja2.compiler.CodeGenerator.visit_AndK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr
+visit_Or&jinja2.compiler.CodeGenerator.visit_OrK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Pos'jinja2.compiler.CodeGenerator.visit_PosK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Neg'jinja2.compiler.CodeGenerator.visit_NegK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÅ
+	visit_Not'jinja2.compiler.CodeGenerator.visit_NotK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrz
+environment)jinja2.compiler.CodeGenerator.environment@
+jinja2.environment.Environment"jinja2.environment.Environmentrp
+name"jinja2.compiler.CodeGenerator.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerx
+filename&jinja2.compiler.CodeGenerator.filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerN
+stream$jinja2.compiler.CodeGenerator.stream
+typing.TextIO"typing.TextIOrl
+created_block_context3jinja2.compiler.CodeGenerator.created_block_context
+builtins.bool"builtins.boolrV
+
+defer_init(jinja2.compiler.CodeGenerator.defer_init
+builtins.bool"builtins.boolr§
+	optimizer'jinja2.compiler.CodeGenerator.optimizern
+&Union[jinja2.optimizer.Optimizer,None]8
+jinja2.optimizer.Optimizer"jinja2.optimizer.Optimizer
+Nonerµ
+import_aliases,jinja2.compiler.CodeGenerator.import_aliasesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr∏
+blocks$jinja2.compiler.CodeGenerator.blocksá
+.builtins.dict[builtins.str,jinja2.nodes.Block]
+builtins.str"builtins.str(
+jinja2.nodes.Block"jinja2.nodes.Block"builtins.dictr\
+extends_so_far,jinja2.compiler.CodeGenerator.extends_so_far
+builtins.int"builtins.intrd
+has_known_extends/jinja2.compiler.CodeGenerator.has_known_extends
+builtins.bool"builtins.boolrV
+code_lineno)jinja2.compiler.CodeGenerator.code_lineno
+builtins.int"builtins.intr£
+tests#jinja2.compiler.CodeGenerator.testsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrß
+filters%jinja2.compiler.CodeGenerator.filtersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr€
+
+debug_info(jinja2.compiler.CodeGenerator.debug_info¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.listrä
+_write_debug_info/jinja2.compiler.CodeGenerator._write_debug_infoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerT
+
+_new_lines(jinja2.compiler.CodeGenerator._new_lines
+builtins.int"builtins.intrT
+
+_last_line(jinja2.compiler.CodeGenerator._last_line
+builtins.int"builtins.intrZ
+_first_write*jinja2.compiler.CodeGenerator._first_write
+builtins.bool"builtins.boolr`
+_last_identifier.jinja2.compiler.CodeGenerator._last_identifier
+builtins.int"builtins.intrX
+_indentation*jinja2.compiler.CodeGenerator._indentation
+builtins.int"builtins.intr√
+_assign_stack+jinja2.compiler.CodeGenerator._assign_stackÑ
+)builtins.list[builtins.set[builtins.str]]H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set"builtins.listr…
+_param_def_block.jinja2.compiler.CodeGenerator._param_def_blockÑ
+)builtins.list[builtins.set[builtins.str]]H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set"builtins.listrû
+_context_reference_stack6jinja2.compiler.CodeGenerator._context_reference_stackJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listk
+is_python_keywordkeyword.iskeyword"
+builtins.bool"builtins.bool*#
+s
+builtins.str"builtins.strc
+optimizeconstjinja2.compiler.optimizeconst"
+jinja2.compiler.F*
+f
+jinja2.compiler.Fù
+_make_binopjinja2.compiler._make_binop"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*$
+op
+builtins.str"builtins.strõ
+
+_make_unopjinja2.compiler._make_unop"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*$
+op
+builtins.str"builtins.str’
+generatejinja2.compiler.generate"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+node.
+jinja2.nodes.Template"jinja2.nodes.Template*Q
+environment@
+jinja2.environment.Environment"jinja2.environment.Environment*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+streamG
+Union[typing.TextIO,None]
+typing.TextIO"typing.TextIO
+None *0
+
+defer_init
+builtins.bool"builtins.bool */
+	optimized
+builtins.bool"builtins.bool b
+has_safe_reprjinja2.compiler.has_safe_repr"
+builtins.bool"builtins.bool*
+value
+Any¡
+find_undeclaredjinja2.compiler.find_undeclared"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*h
+nodes]
+"typing.Iterable[jinja2.nodes.Node]&
+jinja2.nodes.Node"jinja2.nodes.Node"typing.Iterable*Y
+namesN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*
+ttyping *
+tetyping_extensions *ù
+	operatorsjinja2.compiler.operatorsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict

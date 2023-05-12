@@ -1,0 +1,115 @@
+
+requests.auth¨
+AuthBaserequests.auth.AuthBase"builtins.object*ˆ
+__call__requests.auth.AuthBase.__call__"B
+requests.models.PreparedRequest"requests.models.PreparedRequest*:
+self0
+requests.auth.AuthBase"requests.auth.AuthBase*I
+rB
+requests.models.PreparedRequest"requests.models.PreparedRequest¨
+HTTPBasicAuthrequests.auth.HTTPBasicAuth"requests.auth.AuthBase*Ï
+__init__$requests.auth.HTTPBasicAuth.__init__"
+None*D
+self:
+requests.auth.HTTPBasicAuth"requests.auth.HTTPBasicAuth*t
+usernamef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*t
+passwordf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*A
+__call__$requests.auth.HTTPBasicAuth.__call__*
+self*
+rrò
+username$requests.auth.HTTPBasicAuth.usernamef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strrò
+password$requests.auth.HTTPBasicAuth.passwordf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strå
+HTTPProxyAuthrequests.auth.HTTPProxyAuth"requests.auth.HTTPBasicAuth*A
+__call__$requests.auth.HTTPProxyAuth.__call__*
+self*
+rú
+HTTPDigestAuthrequests.auth.HTTPDigestAuth"requests.auth.AuthBase*Ô
+__init__%requests.auth.HTTPDigestAuth.__init__"
+None*F
+self<
+requests.auth.HTTPDigestAuth"requests.auth.HTTPDigestAuth*t
+usernamef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*t
+passwordf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*f
+build_digest_header0requests.auth.HTTPDigestAuth.build_digest_header*
+self*
+
+method*
+url*\
+handle_redirect,requests.auth.HTTPDigestAuth.handle_redirect*
+self*
+r*
+
+kwargs*R
+
+handle_401'requests.auth.HTTPDigestAuth.handle_401*
+self*
+r*
+
+kwargs*B
+__call__%requests.auth.HTTPDigestAuth.__call__*
+self*
+r*ù
+init_per_thread_state2requests.auth.HTTPDigestAuth.init_per_thread_state"
+None*F
+self<
+requests.auth.HTTPDigestAuth"requests.auth.HTTPDigestAuthrô
+username%requests.auth.HTTPDigestAuth.usernamef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strrô
+password%requests.auth.HTTPDigestAuth.passwordf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strr>
+
+last_nonce'requests.auth.HTTPDigestAuth.last_nonce
+Anyr@
+nonce_count(requests.auth.HTTPDigestAuth.nonce_count
+Anyr2
+chal!requests.auth.HTTPDigestAuth.chal
+Anyr0
+pos requests.auth.HTTPDigestAuth.pos
+AnyrD
+num_401_calls*requests.auth.HTTPDigestAuth.num_401_calls
+Any∫
+_basic_auth_strrequests.auth._basic_auth_str"
+builtins.str"builtins.str*t
+usernamef
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*t
+passwordf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*ã
+extract_cookies_to_jar$requests.auth.extract_cookies_to_jarK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Å
+parse_dict_headerrequests.auth.parse_dict_headerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+to_native_stringrequests.auth.to_native_stringK
+CallableType[builtins.function]&
+builtins.function"builtins.function*S
+CONTENT_TYPE_FORM_URLENCODED*requests.auth.CONTENT_TYPE_FORM_URLENCODED
+Any*I
+CONTENT_TYPE_MULTI_PART%requests.auth.CONTENT_TYPE_MULTI_PART
+Any
