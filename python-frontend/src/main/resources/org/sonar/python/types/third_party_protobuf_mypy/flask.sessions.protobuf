@@ -1,0 +1,226 @@
+
+flask.sessions“
+SessionMixinflask.sessions.SessionMixin"typing.MutableMapping2°
+	permanent%flask.sessions.SessionMixin.permanent®
+	permanent%flask.sessions.SessionMixin.permanent"
+builtins.bool"builtins.bool*D
+self:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin0:propertyX`¡
+	permanent%flask.sessions.SessionMixin.permanent"
+None*D
+self:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin*)
+value
+builtins.bool"builtins.bool0:permanent.setterrF
+newflask.sessions.SessionMixin.new
+builtins.bool"builtins.boolrP
+modified$flask.sessions.SessionMixin.modified
+builtins.bool"builtins.boolrP
+accessed$flask.sessions.SessionMixin.accessed
+builtins.bool"builtins.bool¨	
+SecureCookieSession"flask.sessions.SecureCookieSession"/werkzeug.datastructures.structures.CallbackDict"flask.sessions.SessionMixin*Ã
+__init__+flask.sessions.SecureCookieSession.__init__"
+None*R
+selfH
+"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*5
+initial&
+Union[Any,None]
+Any
+None *Ω
+__getitem__.flask.sessions.SecureCookieSession.__getitem__"
+Any*P
+selfH
+"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*#
+key
+builtins.str"builtins.str*Ë
+get&flask.sessions.SecureCookieSession.get"
+Any*R
+selfH
+"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*%
+key
+builtins.str"builtins.str*5
+default&
+Union[Any,None]
+Any
+None *ˆ
+
+setdefault-flask.sessions.SecureCookieSession.setdefault"
+Any*R
+selfH
+"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*%
+key
+builtins.str"builtins.str*5
+default&
+Union[Any,None]
+Any
+None rW
+modified+flask.sessions.SecureCookieSession.modified
+builtins.bool"builtins.boolrW
+accessed+flask.sessions.SecureCookieSession.accessed
+builtins.bool"builtins.bool»
+NullSessionflask.sessions.NullSession""flask.sessions.SecureCookieSession*£
+_fail flask.sessions.NullSession._fail"
+NoReturn
+*B
+self8
+flask.sessions.NullSession"flask.sessions.NullSession*
+args
+Any*
+kwargs
+AnyrÇ
+__setitem__&flask.sessions.NullSession.__setitem__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÇ
+__delitem__&flask.sessions.NullSession.__delitem__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrv
+clear flask.sessions.NullSession.clearK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr%
+popflask.sessions.NullSession.poprz
+popitem"flask.sessions.NullSession.popitemK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr+
+update!flask.sessions.NullSession.updaterÄ
+
+setdefault%flask.sessions.NullSession.setdefaultK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÃ
+SessionInterfaceflask.sessions.SessionInterface"builtins.object*˚
+make_null_session1flask.sessions.SessionInterface.make_null_session"8
+flask.sessions.NullSession"flask.sessions.NullSession*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*›
+is_null_session/flask.sessions.SessionInterface.is_null_session"
+builtins.bool"builtins.bool*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+obj"
+builtins.object"builtins.object*€
+get_cookie_name/flask.sessions.SessionInterface.get_cookie_name"
+builtins.str"builtins.str*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*á
+get_cookie_domain1flask.sessions.SessionInterface.get_cookie_domain"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*€
+get_cookie_path/flask.sessions.SessionInterface.get_cookie_path"
+builtins.str"builtins.str*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*Â
+get_cookie_httponly3flask.sessions.SessionInterface.get_cookie_httponly"
+builtins.bool"builtins.bool*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*·
+get_cookie_secure1flask.sessions.SessionInterface.get_cookie_secure"
+builtins.bool"builtins.bool*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*„
+get_cookie_samesite3flask.sessions.SessionInterface.get_cookie_samesite"
+builtins.str"builtins.str*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*„
+get_expiration_time3flask.sessions.SessionInterface.get_expiration_time"S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*G
+session:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin*™
+should_set_cookie1flask.sessions.SessionInterface.should_set_cookie"
+builtins.bool"builtins.bool*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*G
+session:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin*È
+open_session,flask.sessions.SessionInterface.open_session"q
+'Union[flask.sessions.SessionMixin,None]:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin
+None*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*=
+request0
+flask.wrappers.Request"flask.wrappers.Request*Ã
+save_session,flask.sessions.SessionInterface.save_session"
+None*L
+selfB
+flask.sessions.SessionInterface"flask.sessions.SessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*G
+session:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin*@
+response2
+flask.wrappers.Response"flask.wrappers.ResponserÉ
+null_session_class2flask.sessions.SessionInterface.null_session_class9
+CallableType[abc.ABCMeta]
+abc.ABCMeta"abc.ABCMetar\
+pickle_based,flask.sessions.SessionInterface.pickle_based
+builtins.bool"builtins.bool˘
+SecureCookieSessionInterface+flask.sessions.SecureCookieSessionInterface"flask.sessions.SessionInterface*ñ
+get_signing_serializerBflask.sessions.SecureCookieSessionInterface.get_signing_serializer"§
+8Union[itsdangerous.url_safe.URLSafeTimedSerializer,None]\
+,itsdangerous.url_safe.URLSafeTimedSerializer",itsdangerous.url_safe.URLSafeTimedSerializer
+None*d
+selfZ
++flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*£
+open_session8flask.sessions.SecureCookieSessionInterface.open_session"Ü
+.Union[flask.sessions.SecureCookieSession,None]H
+"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession
+None*d
+selfZ
++flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*=
+request0
+flask.wrappers.Request"flask.wrappers.Request*
+save_session8flask.sessions.SecureCookieSessionInterface.save_session"
+None*d
+selfZ
++flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*+
+app"
+flask.app.Flask"flask.app.Flask*G
+session:
+flask.sessions.SessionMixin"flask.sessions.SessionMixin*@
+response2
+flask.wrappers.Response"flask.wrappers.ResponserV
+salt0flask.sessions.SecureCookieSessionInterface.salt
+builtins.str"builtins.strrz
+digest_method9flask.sessions.SecureCookieSessionInterface.digest_method.
+builtins.staticmethod"builtins.staticmethodrj
+key_derivation:flask.sessions.SecureCookieSessionInterface.key_derivation
+builtins.str"builtins.strrê
+
+serializer6flask.sessions.SecureCookieSessionInterface.serializerJ
+#flask.json.tag.TaggedJSONSerializer"#flask.json.tag.TaggedJSONSerializerrÖ
+session_class9flask.sessions.SecureCookieSessionInterface.session_class9
+CallableType[abc.ABCMeta]
+abc.ABCMeta"abc.ABCMeta*
+ttyping *ç
+session_json_serializer&flask.sessions.session_json_serializerJ
+#flask.json.tag.TaggedJSONSerializer"#flask.json.tag.TaggedJSONSerializer

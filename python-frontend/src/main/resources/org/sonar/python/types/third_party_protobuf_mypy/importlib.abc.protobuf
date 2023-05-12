@@ -1,0 +1,320 @@
+
+importlib.abc>
+Finderimportlib.abc.Finder"builtins.object@babc.ABCMeta²
+ResourceLoaderimportlib.abc.ResourceLoader"importlib.abc.Loader*ë
+get_data%importlib.abc.ResourceLoader.get_data" 
+builtins.bytes"builtins.bytes*F
+self<
+importlib.abc.ResourceLoader"importlib.abc.ResourceLoader*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path0:abstractmethod@š
+InspectLoaderimportlib.abc.InspectLoader"importlib.abc.Loader*Æ
+
+is_package&importlib.abc.InspectLoader.is_package"
+builtins.bool"builtins.bool*D
+self:
+importlib.abc.InspectLoader"importlib.abc.InspectLoader**
+fullname
+builtins.str"builtins.str*î
+get_code$importlib.abc.InspectLoader.get_code"J
+Union[types.CodeType,None] 
+types.CodeType"types.CodeType
+None*D
+self:
+importlib.abc.InspectLoader"importlib.abc.InspectLoader**
+fullname
+builtins.str"builtins.str*Î
+load_module'importlib.abc.InspectLoader.load_module"$
+types.ModuleType"types.ModuleType*D
+self:
+importlib.abc.InspectLoader"importlib.abc.InspectLoader**
+fullname
+builtins.str"builtins.str*€
+
+get_source&importlib.abc.InspectLoader.get_source"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*D
+self:
+importlib.abc.InspectLoader"importlib.abc.InspectLoader**
+fullname
+builtins.str"builtins.str0:abstractmethod@*¸
+exec_module'importlib.abc.InspectLoader.exec_module"
+None*D
+self:
+importlib.abc.InspectLoader"importlib.abc.InspectLoader*0
+module$
+types.ModuleType"types.ModuleType*Œ
+source_to_code*importlib.abc.InspectLoader.source_to_code" 
+types.CodeType"types.CodeType*p
+dataf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*(
+path
+builtins.str"builtins.str 0:staticmethodh¼
+ExecutionLoaderimportlib.abc.ExecutionLoader"importlib.abc.InspectLoader*õ
+get_filename*importlib.abc.ExecutionLoader.get_filename"®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path*H
+self>
+importlib.abc.ExecutionLoader"importlib.abc.ExecutionLoader**
+fullname
+builtins.str"builtins.str0:abstractmethod@*ô
+get_code&importlib.abc.ExecutionLoader.get_code"J
+Union[types.CodeType,None] 
+types.CodeType"types.CodeType
+None*H
+self>
+importlib.abc.ExecutionLoader"importlib.abc.ExecutionLoader**
+fullname
+builtins.str"builtins.str³
+SourceLoaderimportlib.abc.SourceLoader"importlib.abc.ResourceLoader"importlib.abc.ExecutionLoader*Õ
+
+path_mtime%importlib.abc.SourceLoader.path_mtime" 
+builtins.float"builtins.float*B
+self8
+importlib.abc.SourceLoader"importlib.abc.SourceLoader*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path*å
+set_data#importlib.abc.SourceLoader.set_data"
+None*B
+self8
+importlib.abc.SourceLoader"importlib.abc.SourceLoader*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path**
+data 
+builtins.bytes"builtins.bytes*é
+
+get_source%importlib.abc.SourceLoader.get_source"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*B
+self8
+importlib.abc.SourceLoader"importlib.abc.SourceLoader**
+fullname
+builtins.str"builtins.str*Ž
+
+path_stats%importlib.abc.SourceLoader.path_stats"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*B
+self8
+importlib.abc.SourceLoader"importlib.abc.SourceLoader*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path@babc.ABCMetaÄ
+MetaPathFinderimportlib.abc.MetaPathFinder"importlib.abc.Finder*ô
+find_module(importlib.abc.MetaPathFinder.find_module"\
+ Union[importlib.abc.Loader,None],
+importlib.abc.Loader"importlib.abc.Loader
+None*F
+self<
+importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder**
+fullname
+builtins.str"builtins.str*è
+pathÝ
+JUnion[typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]],None]‚
+>typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]]®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path"typing.Sequence
+None*•
+invalidate_caches.importlib.abc.MetaPathFinder.invalidate_caches"
+None*F
+self<
+importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder*î
+	find_spec&importlib.abc.MetaPathFinder.find_spec"z
+*Union[importlib.machinery.ModuleSpec,None]@
+importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
+None*F
+self<
+importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder**
+fullname
+builtins.str"builtins.str*è
+pathÝ
+JUnion[typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]],None]‚
+>typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]]®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path"typing.Sequence
+None*^
+targetP
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None ú
+PathEntryFinderimportlib.abc.PathEntryFinder"importlib.abc.Finder*Œ
+find_module)importlib.abc.PathEntryFinder.find_module"\
+ Union[importlib.abc.Loader,None],
+importlib.abc.Loader"importlib.abc.Loader
+None*H
+self>
+importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder**
+fullname
+builtins.str"builtins.str*þ
+find_loader)importlib.abc.PathEntryFinder.find_loader"Í
+fTuple[Union[importlib.abc.Loader,None],typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]]]\
+ Union[importlib.abc.Loader,None],
+importlib.abc.Loader"importlib.abc.Loader
+None‚
+>typing.Sequence[TypeAlias[Union[builtins.bytes,builtins.str]]]®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path"typing.Sequence*H
+self>
+importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder**
+fullname
+builtins.str"builtins.str*˜
+invalidate_caches/importlib.abc.PathEntryFinder.invalidate_caches"
+None*H
+self>
+importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder*†
+	find_spec'importlib.abc.PathEntryFinder.find_spec"z
+*Union[importlib.machinery.ModuleSpec,None]@
+importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
+None*H
+self>
+importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder**
+fullname
+builtins.str"builtins.str*^
+targetP
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None æ
+Loaderimportlib.abc.Loader"builtins.object*¹
+load_module importlib.abc.Loader.load_module"$
+types.ModuleType"types.ModuleType*6
+self,
+importlib.abc.Loader"importlib.abc.Loader**
+fullname
+builtins.str"builtins.str*·
+module_repr importlib.abc.Loader.module_repr"
+builtins.str"builtins.str*6
+self,
+importlib.abc.Loader"importlib.abc.Loader*0
+module$
+types.ModuleType"types.ModuleType*‰
+create_module"importlib.abc.Loader.create_module"P
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None*6
+self,
+importlib.abc.Loader"importlib.abc.Loader*J
+spec@
+importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec*£
+exec_module importlib.abc.Loader.exec_module"
+None*6
+self,
+importlib.abc.Loader"importlib.abc.Loader*0
+module$
+types.ModuleType"types.ModuleType@babc.ABCMetaš
+_LoaderProtocolimportlib.abc._LoaderProtocol"builtins.object*Ô
+load_module)importlib.abc._LoaderProtocol.load_module"$
+types.ModuleType"types.ModuleType*H
+self>
+importlib.abc._LoaderProtocol"importlib.abc._LoaderProtocol**
+fullname
+builtins.str"builtins.strX©
+
+FileLoaderimportlib.abc.FileLoader"importlib.abc.ResourceLoader"importlib.abc.ExecutionLoader*ß
+__init__!importlib.abc.FileLoader.__init__"
+None*>
+self4
+importlib.abc.FileLoader"importlib.abc.FileLoader**
+fullname
+builtins.str"builtins.str*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path*Ë
+get_data!importlib.abc.FileLoader.get_data" 
+builtins.bytes"builtins.bytes*>
+self4
+importlib.abc.FileLoader"importlib.abc.FileLoader*¹
+path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path*ø
+get_filename%importlib.abc.FileLoader.get_filename"®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Path*>
+self4
+importlib.abc.FileLoader"importlib.abc.FileLoader*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ë
+load_module$importlib.abc.FileLoader.load_module"$
+types.ModuleType"types.ModuleType*>
+self4
+importlib.abc.FileLoader"importlib.abc.FileLoader*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None @babc.ABCMetarC
+nameimportlib.abc.FileLoader.name
+builtins.str"builtins.strrÖ
+pathimportlib.abc.FileLoader.path®
+-TypeAlias[Union[builtins.bytes,builtins.str]]f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"importlib.abc._Pathª
+ResourceReaderimportlib.abc.ResourceReader"builtins.object*¢
+open_resource*importlib.abc.ResourceReader.open_resource"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*F
+self<
+importlib.abc.ResourceReader"importlib.abc.ResourceReader*¾
+resource¯
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath0:abstractmethod@*ö
+resource_path*importlib.abc.ResourceReader.resource_path"
+builtins.str"builtins.str*F
+self<
+importlib.abc.ResourceReader"importlib.abc.ResourceReader*¾
+resource¯
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.AnyPath0:abstractmethod@*Û
+is_resource(importlib.abc.ResourceReader.is_resource"
+builtins.bool"builtins.bool*F
+self<
+importlib.abc.ResourceReader"importlib.abc.ResourceReader*&
+name
+builtins.str"builtins.str0:abstractmethod@*Ý
+contents%importlib.abc.ResourceReader.contents"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*F
+self<
+importlib.abc.ResourceReader"importlib.abc.ResourceReader0:abstractmethod@@babc.ABCMeta

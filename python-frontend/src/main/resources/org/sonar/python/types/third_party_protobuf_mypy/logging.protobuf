@@ -1,0 +1,2006 @@
+
+logging£	
+Filtererlogging.Filterer"builtins.object*_
+__init__logging.Filterer.__init__"
+None*.
+self$
+logging.Filterer"logging.Filterer*ı
+	addFilterlogging.Filterer.addFilter"
+None*.
+self$
+logging.Filterer"logging.Filterer*ë
+filterÑ
+@TypeAlias[Union[logging.Filter,CallableType[builtins.function]]]®
+5Union[logging.Filter,CallableType[builtins.function]] 
+logging.Filter"logging.FilterK
+CallableType[builtins.function]&
+builtins.function"builtins.function"logging._FilterType*˚
+removeFilterlogging.Filterer.removeFilter"
+None*.
+self$
+logging.Filterer"logging.Filterer*ë
+filterÑ
+@TypeAlias[Union[logging.Filter,CallableType[builtins.function]]]®
+5Union[logging.Filter,CallableType[builtins.function]] 
+logging.Filter"logging.FilterK
+CallableType[builtins.function]&
+builtins.function"builtins.function"logging._FilterType*•
+filterlogging.Filterer.filter"
+builtins.bool"builtins.bool*.
+self$
+logging.Filterer"logging.Filterer*2
+record&
+logging.LogRecord"logging.LogRecordru
+filterslogging.Filterer.filtersP
+builtins.list[logging.Filter] 
+logging.Filter"logging.Filter"builtins.list 
+Managerlogging.Manager"builtins.object*î
+__init__logging.Manager.__init__"
+None*,
+self"
+logging.Manager"logging.Manager*6
+rootnode(
+logging.RootLogger"logging.RootLogger*û
+	getLoggerlogging.Manager.getLogger" 
+logging.Logger"logging.Logger*,
+self"
+logging.Manager"logging.Manager*&
+name
+builtins.str"builtins.str*Ø
+setLoggerClasslogging.Manager.setLoggerClass"
+None*,
+self"
+logging.Manager"logging.Manager*E
+klass:
+Type[logging.Logger] 
+logging.Logger"logging.Logger*Ã
+setLogRecordFactory#logging.Manager.setLogRecordFactory"
+None*,
+self"
+logging.Manager"logging.Manager*X
+factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrF
+rootlogging.Manager.root(
+logging.RootLogger"logging.RootLoggerr@
+disablelogging.Manager.disable
+builtins.int"builtins.intrb
+emittedNoHandlerWarning'logging.Manager.emittedNoHandlerWarning
+builtins.bool"builtins.boolrú
+
+loggerDictlogging.Manager.loggerDictÒ
+Ebuiltins.dict[builtins.str,Union[logging.Logger,logging.PlaceHolder]]
+builtins.str"builtins.str{
+)Union[logging.Logger,logging.PlaceHolder] 
+logging.Logger"logging.Logger*
+logging.PlaceHolder"logging.PlaceHolder"builtins.dictrñ
+loggerClasslogging.Manager.loggerClassj
+ Union[Type[logging.Logger],None]:
+Type[logging.Logger] 
+logging.Logger"logging.Logger
+NonerΩ
+logRecordFactory logging.Manager.logRecordFactoryÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noneóí
+Loggerlogging.Logger"logging.Filterer*≥
+__init__logging.Logger.__init__"
+None**
+self 
+logging.Logger"logging.Logger*&
+name
+builtins.str"builtins.str*Ø
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level *â
+setLevellogging.Logger.setLevel"
+None**
+self 
+logging.Logger"logging.Logger*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level*†
+isEnabledForlogging.Logger.isEnabledFor"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+getEffectiveLevel logging.Logger.getEffectiveLevel"
+builtins.int"builtins.int**
+self 
+logging.Logger"logging.Logger*õ
+getChildlogging.Logger.getChild" 
+logging.Logger"logging.Logger**
+self 
+logging.Logger"logging.Logger*(
+suffix
+builtins.str"builtins.str*≤
+debuglogging.Logger.debug"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*∞
+infologging.Logger.info"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*∂
+warninglogging.Logger.warning"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*∞
+warnlogging.Logger.warn"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*≤
+errorlogging.Logger.error"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*∫
+	exceptionlogging.Logger.exception"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*∏
+criticallogging.Logger.critical"
+None**
+self 
+logging.Logger"logging.Logger*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*◊
+loglogging.Logger.log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*⁄
+
+_loglogging.Logger._log"
+None**
+self 
+logging.Logger"logging.Logger*'
+level
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*é
+exc_info˝
+°Union[builtins.bool,Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],builtins.BaseException,None]
+builtins.bool"builtins.boolø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None0
+builtins.BaseException"builtins.BaseException
+None *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *ü
+filterlogging.Logger.filter"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecord*ã
+
+addHandlerlogging.Logger.addHandler"
+None**
+self 
+logging.Logger"logging.Logger*,
+hdlr"
+logging.Handler"logging.Handler*ë
+removeHandlerlogging.Logger.removeHandler"
+None**
+self 
+logging.Logger"logging.Logger*,
+hdlr"
+logging.Handler"logging.Handler*¢
+
+findCallerlogging.Logger.findCaller"Í
+FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None**
+self 
+logging.Logger"logging.Logger*0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *â
+handlelogging.Logger.handle"
+None**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecord*≈
+
+makeRecordlogging.Logger.makeRecord"&
+logging.LogRecord"logging.LogRecord**
+self 
+logging.Logger"logging.Logger*&
+name
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int*$
+fn
+builtins.str"builtins.str*%
+lno
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*î
+exc_infoÖ
+|Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+None*P
+funcD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *£
+extraï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *Q
+sinfoD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *u
+hasHandlerslogging.Logger.hasHandlers"
+builtins.bool"builtins.bool**
+self 
+logging.Logger"logging.Logger*ï
+callHandlerslogging.Logger.callHandlers"
+None**
+self 
+logging.Logger"logging.Logger*2
+record&
+logging.LogRecord"logging.LogRecordr9
+namelogging.Logger.name
+builtins.str"builtins.strr;
+levellogging.Logger.level
+builtins.int"builtins.intrk
+parentlogging.Logger.parentJ
+Union[logging.Logger,None] 
+logging.Logger"logging.Logger
+NonerE
+	propagatelogging.Logger.propagate
+builtins.bool"builtins.boolrx
+handlerslogging.Logger.handlersS
+builtins.list[logging.Handler]"
+logging.Handler"logging.Handler"builtins.listrC
+disabledlogging.Logger.disabled
+builtins.bool"builtins.boolrE
+rootlogging.Logger.root(
+logging.RootLogger"logging.RootLoggerrE
+managerlogging.Logger.manager"
+logging.Manager"logging.Managerrj
+fatallogging.Logger.fatalK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÓ
+Handlerlogging.Handler"logging.Filterer*é
+__init__logging.Handler.__init__"
+None*,
+self"
+logging.Handler"logging.Handler*Ø
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level *p
+get_namelogging.Handler.get_name"
+builtins.str"builtins.str*,
+self"
+logging.Handler"logging.Handler*Ñ
+set_namelogging.Handler.set_name"
+None*,
+self"
+logging.Handler"logging.Handler*&
+name
+builtins.str"builtins.str*`
+
+createLocklogging.Handler.createLock"
+None*,
+self"
+logging.Handler"logging.Handler*Z
+acquirelogging.Handler.acquire"
+None*,
+self"
+logging.Handler"logging.Handler*Z
+releaselogging.Handler.release"
+None*,
+self"
+logging.Handler"logging.Handler*å
+setLevellogging.Handler.setLevel"
+None*,
+self"
+logging.Handler"logging.Handler*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level*¬
+setFormatterlogging.Handler.setFormatter"
+None*,
+self"
+logging.Handler"logging.Handler*\
+fmtS
+Union[logging.Formatter,None]&
+logging.Formatter"logging.Formatter
+None*¢
+filterlogging.Handler.filter"
+builtins.bool"builtins.bool*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecord*V
+flushlogging.Handler.flush"
+None*,
+self"
+logging.Handler"logging.Handler*V
+closelogging.Handler.close"
+None*,
+self"
+logging.Handler"logging.Handler*¢
+handlelogging.Handler.handle"
+builtins.bool"builtins.bool*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecord*ñ
+handleErrorlogging.Handler.handleError"
+None*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecord*†
+formatlogging.Handler.format"
+builtins.str"builtins.str*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecord*à
+emitlogging.Handler.emit"
+None*,
+self"
+logging.Handler"logging.Handler*2
+record&
+logging.LogRecord"logging.LogRecordr<
+levellogging.Handler.level
+builtins.int"builtins.intr{
+	formatterlogging.Handler.formatterS
+Union[logging.Formatter,None]&
+logging.Formatter"logging.Formatter
+Nonerh
+locklogging.Handler.lockJ
+Union[threading.Lock,None] 
+threading.Lock"threading.Lock
+Nonerb
+namelogging.Handler.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None°
+	Formatterlogging.Formatter"builtins.object*„
+__init__logging.Formatter.__init__"
+None*0
+self&
+logging.Formatter"logging.Formatter*O
+fmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+datefmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *)
+style
+builtins.str"builtins.str *.
+validate
+builtins.bool"builtins.bool *¶
+formatlogging.Formatter.format"
+builtins.str"builtins.str*0
+self&
+logging.Formatter"logging.Formatter*2
+record&
+logging.LogRecord"logging.LogRecord*É
+
+formatTimelogging.Formatter.formatTime"
+builtins.str"builtins.str*0
+self&
+logging.Formatter"logging.Formatter*2
+record&
+logging.LogRecord"logging.LogRecord*S
+datefmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *©
+formatException!logging.Formatter.formatException"
+builtins.str"builtins.str*0
+self&
+logging.Formatter"logging.Formatter*¢
+eiô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType*¥
+formatMessagelogging.Formatter.formatMessage"
+builtins.str"builtins.str*0
+self&
+logging.Formatter"logging.Formatter*2
+record&
+logging.LogRecord"logging.LogRecord*™
+formatStacklogging.Formatter.formatStack"
+builtins.str"builtins.str*0
+self&
+logging.Formatter"logging.Formatter*,
+
+stack_info
+builtins.str"builtins.str*x
+usesTimelogging.Formatter.usesTime"
+builtins.bool"builtins.bool*0
+self&
+logging.Formatter"logging.Formatterru
+	converterlogging.Formatter.converterK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrd
+_fmtlogging.Formatter._fmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerj
+datefmtlogging.Formatter.datefmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerP
+_stylelogging.Formatter._style,
+logging.PercentStyle"logging.PercentStylerZ
+default_time_format%logging.Formatter.default_time_format
+builtins.str"builtins.strrZ
+default_msec_format%logging.Formatter.default_msec_format
+builtins.str"builtins.strà	
+BufferingFormatterlogging.BufferingFormatter"builtins.object*·
+__init__#logging.BufferingFormatter.__init__"
+None*B
+self8
+logging.BufferingFormatter"logging.BufferingFormatter*b
+linefmtS
+Union[logging.Formatter,None]&
+logging.Formatter"logging.Formatter
+None *Ö
+formatHeader'logging.BufferingFormatter.formatHeader"
+builtins.str"builtins.str*B
+self8
+logging.BufferingFormatter"logging.BufferingFormatter*j
+records]
+"typing.Sequence[logging.LogRecord]&
+logging.LogRecord"logging.LogRecord"typing.Sequence*Ö
+formatFooter'logging.BufferingFormatter.formatFooter"
+builtins.str"builtins.str*B
+self8
+logging.BufferingFormatter"logging.BufferingFormatter*j
+records]
+"typing.Sequence[logging.LogRecord]&
+logging.LogRecord"logging.LogRecord"typing.Sequence*˘
+format!logging.BufferingFormatter.format"
+builtins.str"builtins.str*B
+self8
+logging.BufferingFormatter"logging.BufferingFormatter*j
+records]
+"typing.Sequence[logging.LogRecord]&
+logging.LogRecord"logging.LogRecord"typing.SequencerU
+linefmt"logging.BufferingFormatter.linefmt&
+logging.Formatter"logging.Formatter«
+Filterlogging.Filter"builtins.object*É
+__init__logging.Filter.__init__"
+None**
+self 
+logging.Filter"logging.Filter*(
+name
+builtins.str"builtins.str *ü
+filterlogging.Filter.filter"
+builtins.bool"builtins.bool**
+self 
+logging.Filter"logging.Filter*2
+record&
+logging.LogRecord"logging.LogRecordr9
+namelogging.Filter.name
+builtins.str"builtins.strr9
+nlenlogging.Filter.nlen
+builtins.int"builtins.int†
+	LogRecordlogging.LogRecord"builtins.object*è
+
+__init__logging.LogRecord.__init__"
+None*0
+self&
+logging.LogRecord"logging.LogRecord*&
+name
+builtins.str"builtins.str*'
+level
+builtins.int"builtins.int**
+pathname
+builtins.str"builtins.str*(
+lineno
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*î
+exc_infoÖ
+|Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+None*P
+funcD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+sinfoD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *z
+
+getMessagelogging.LogRecord.getMessage"
+builtins.str"builtins.str*0
+self&
+logging.LogRecord"logging.LogRecordrÀ
+argslogging.LogRecord.args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsTyperB
+asctimelogging.LogRecord.asctime
+builtins.str"builtins.strrF
+createdlogging.LogRecord.created 
+builtins.float"builtins.floatrÆ
+exc_infologging.LogRecord.exc_infoÖ
+|Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],None]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None
+Nonerl
+exc_textlogging.LogRecord.exc_textD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerD
+filenamelogging.LogRecord.filename
+builtins.str"builtins.strrD
+funcNamelogging.LogRecord.funcName
+builtins.str"builtins.strrF
+	levelnamelogging.LogRecord.levelname
+builtins.str"builtins.strrB
+levelnologging.LogRecord.levelno
+builtins.int"builtins.intr@
+linenologging.LogRecord.lineno
+builtins.int"builtins.intr@
+modulelogging.LogRecord.module
+builtins.str"builtins.strrB
+msecslogging.LogRecord.msecs 
+builtins.float"builtins.floatrB
+messagelogging.LogRecord.message
+builtins.str"builtins.strr:
+msglogging.LogRecord.msg
+builtins.str"builtins.strr<
+namelogging.LogRecord.name
+builtins.str"builtins.strrD
+pathnamelogging.LogRecord.pathname
+builtins.str"builtins.strrj
+processlogging.LogRecord.processD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerr
+processNamelogging.LogRecord.processNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerV
+relativeCreated!logging.LogRecord.relativeCreated 
+builtins.float"builtins.floatrp
+
+stack_infologging.LogRecord.stack_infoD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerh
+threadlogging.LogRecord.threadD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerp
+
+threadNamelogging.LogRecord.threadNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneπ~
+LoggerAdapterlogging.LoggerAdapter"builtins.object*Ç
+__init__logging.LoggerAdapter.__init__"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*,
+logger 
+logging.Logger"logging.Logger*d
+extraY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*î
+processlogging.LoggerAdapter.process"®
+2Tuple[Any,typing.MutableMapping[builtins.str,Any]]
+Anyg
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*s
+kwargsg
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping*«
+debuglogging.LoggerAdapter.debug"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*≈
+infologging.LoggerAdapter.info"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*À
+warninglogging.LoggerAdapter.warning"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*≈
+warnlogging.LoggerAdapter.warn"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*«
+errorlogging.LoggerAdapter.error"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*œ
+	exceptionlogging.LoggerAdapter.exception"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*Õ
+criticallogging.LoggerAdapter.critical"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*Ï
+loglogging.LoggerAdapter.log"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*'
+level
+builtins.int"builtins.int*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any*µ
+isEnabledFor"logging.LoggerAdapter.isEnabledFor"
+builtins.bool"builtins.bool*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*'
+level
+builtins.int"builtins.int*î
+getEffectiveLevel'logging.LoggerAdapter.getEffectiveLevel"
+builtins.int"builtins.int*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*û
+setLevellogging.LoggerAdapter.setLevel"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level*ä
+hasHandlers!logging.LoggerAdapter.hasHandlers"
+builtins.bool"builtins.bool*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*ø
+
+_loglogging.LoggerAdapter._log"
+None*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter*'
+level
+builtins.int"builtins.int*
+msg
+Any*µ
+args™
+FTypeAlias[Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]]] 
+;Union[builtins.tuple[Any],typing.Mapping[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"logging._ArgsType*é
+exc_info˝
+°Union[builtins.bool,Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None],builtins.BaseException,None]
+builtins.bool"builtins.boolø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None0
+builtins.BaseException"builtins.BaseException
+None *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *0
+
+stack_info
+builtins.bool"builtins.bool *à
+namelogging.LoggerAdapter.name"
+builtins.str"builtins.str*8
+self.
+logging.LoggerAdapter"logging.LoggerAdapter0:property`rH
+loggerlogging.LoggerAdapter.logger 
+logging.Logger"logging.LoggerrL
+managerlogging.LoggerAdapter.manager"
+logging.Manager"logging.Managerr
+extralogging.LoggerAdapter.extraY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mappingß
+StreamHandlerlogging.StreamHandler"logging.Handler*ü
+__init__logging.StreamHandler.__init__"
+None*8
+self.
+logging.StreamHandler"logging.StreamHandler*Æ
+streamü
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
+None *Ù
+	setStreamlogging.StreamHandler.setStream"ü
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
+None*8
+self.
+logging.StreamHandler"logging.StreamHandler*j
+stream^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWriterÜ
+streamlogging.StreamHandler.stream^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWriterL
+
+terminator logging.StreamHandler.terminator
+builtins.str"builtins.strê
+FileHandlerlogging.FileHandler"logging.StreamHandler*ê
+__init__logging.FileHandler.__init__"
+None*4
+self*
+logging.FileHandler"logging.FileHandler*¯
+filenameÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*(
+mode
+builtins.str"builtins.str *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+delay
+builtins.bool"builtins.bool *~
+_openlogging.FileHandler._open"$
+typing.IO[Any]
+Any"	typing.IO*4
+self*
+logging.FileHandler"logging.FileHandlerrN
+baseFilename logging.FileHandler.baseFilename
+builtins.str"builtins.strr>
+modelogging.FileHandler.mode
+builtins.str"builtins.strrn
+encodinglogging.FileHandler.encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerB
+delaylogging.FileHandler.delay
+builtins.bool"builtins.bool3
+NullHandlerlogging.NullHandler"logging.HandlerÒ
+PlaceHolderlogging.PlaceHolder"builtins.object*ó
+__init__logging.PlaceHolder.__init__"
+None*4
+self*
+logging.PlaceHolder"logging.PlaceHolder*-
+alogger 
+logging.Logger"logging.Logger*ì
+appendlogging.PlaceHolder.append"
+None*4
+self*
+logging.PlaceHolder"logging.PlaceHolder*-
+alogger 
+logging.Logger"logging.Loggerrã
+	loggerMaplogging.PlaceHolder.loggerMap_
+"builtins.dict[logging.Logger,None] 
+logging.Logger"logging.Logger
+None"builtins.dict¡
+
+RootLoggerlogging.RootLogger"logging.Logger*é
+__init__logging.RootLogger.__init__"
+None*2
+self(
+logging.RootLogger"logging.RootLogger*'
+level
+builtins.int"builtins.intú
+PercentStylelogging.PercentStyle"builtins.object*í
+__init__logging.PercentStyle.__init__"
+None*6
+self,
+logging.PercentStyle"logging.PercentStyle*%
+fmt
+builtins.str"builtins.str*Å
+usesTimelogging.PercentStyle.usesTime"
+builtins.bool"builtins.bool*6
+self,
+logging.PercentStyle"logging.PercentStyle*k
+validatelogging.PercentStyle.validate"
+None*6
+self,
+logging.PercentStyle"logging.PercentStyle*ê
+formatlogging.PercentStyle.format"
+builtins.str"builtins.str*6
+self,
+logging.PercentStyle"logging.PercentStyle*
+record
+AnyrS
+default_format#logging.PercentStyle.default_format
+builtins.str"builtins.strrS
+asctime_format#logging.PercentStyle.asctime_format
+builtins.str"builtins.strrS
+asctime_search#logging.PercentStyle.asctime_search
+builtins.str"builtins.strrã
+validation_pattern'logging.PercentStyle.validation_patternL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Patternr?
+_fmtlogging.PercentStyle._fmt
+builtins.str"builtins.str‰
+StrFormatStylelogging.StrFormatStyle"logging.PercentStylerO
+fmt_speclogging.StrFormatStyle.fmt_spec"
+builtins.object"builtins.objectrS
+
+field_spec!logging.StrFormatStyle.field_spec"
+builtins.object"builtins.objectñ
+StringTemplateStylelogging.StringTemplateStyle"logging.PercentStylerL
+_tpl logging.StringTemplateStyle._tpl"
+string.Template"string.TemplateH
+currentframelogging.currentframe""
+types.FrameType"types.FrameTypeí
+	getLoggerlogging.getLogger" 
+logging.Logger"logging.Logger*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None d
+getLoggerClasslogging.getLoggerClass":
+Type[logging.Logger] 
+logging.Logger"logging.Logger
+getLogRecordFactorylogging.getLogRecordFactory"K
+CallableType[builtins.function]&
+builtins.function"builtins.functionˇ
+debuglogging.debug"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any˝
+infologging.info"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+AnyÉ
+warninglogging.warning"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any˝
+warnlogging.warn"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyˇ
+errorlogging.error"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+AnyÖ
+criticallogging.critical"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Anyá
+	exceptionlogging.exception"
+None*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+Any§
+loglogging.log"
+None*'
+level
+builtins.int"builtins.int*
+msg
+Any*
+args
+Any*ù	
+exc_infoå	
+æTypeAlias[Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]]∞
+≥Union[None,builtins.bool,TypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]],builtins.BaseException]
+None
+builtins.bool"builtins.boolô
+ÇTypeAlias[Union[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]]ˆ
+wUnion[Tuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]],Tuple[None,None,None]]ø
+ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.TracebackType,None]]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException0
+builtins.BaseException"builtins.BaseExceptionY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None7
+Tuple[None,None,None]
+None
+None
+None"logging._SysExcInfoType0
+builtins.BaseException"builtins.BaseException"logging._ExcInfoType *0
+
+stack_info
+builtins.bool"builtins.bool *.
+
+stacklevel
+builtins.int"builtins.int *†
+extraí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+kwargs
+AnyO
+disablelogging.disable"
+None*)
+level
+builtins.int"builtins.int Ñ
+addLevelNamelogging.addLevelName"
+None*'
+level
+builtins.int"builtins.int*+
+	levelName
+builtins.str"builtins.str›
+getLevelNamelogging.getLevelName"
+Any*≠
+level°
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"logging._Level≥
+makeLogRecordlogging.makeLogRecord"&
+logging.LogRecord"logging.LogRecord*c
+dictY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping√
+basicConfiglogging.basicConfig"
+None*∑
+filename¶
+2Union[builtins.str,os.PathLike[builtins.str],None]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike
+None *,
+filemode
+builtins.str"builtins.str **
+format
+builtins.str"builtins.str *S
+datefmtD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *)
+style
+builtins.str"builtins.str *|
+levelo
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *Æ
+streamü
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
+None *§
+handlersì
+,Union[typing.Iterable[logging.Handler],None]W
+ typing.Iterable[logging.Handler]"
+logging.Handler"logging.Handler"typing.Iterable
+None *+
+force
+builtins.bool"builtins.bool k
+shutdownlogging.shutdown"
+None*C
+handlerList0
+typing.Sequence[Any]
+Any"typing.Sequence y
+setLoggerClasslogging.setLoggerClass"
+None*E
+klass:
+Type[logging.Logger] 
+logging.Logger"logging.Loggera
+captureWarningslogging.captureWarnings"
+None*+
+capture
+builtins.bool"builtins.boolñ
+setLogRecordFactorylogging.setLogRecordFactory"
+None*X
+factoryK
+CallableType[builtins.function]&
+builtins.function"builtins.function*J
+raiseExceptionslogging.raiseExceptions
+builtins.bool"builtins.bool*@
+
+logThreadslogging.logThreads
+builtins.bool"builtins.bool*P
+logMultiprocessinglogging.logMultiprocessing
+builtins.bool"builtins.bool*D
+logProcesseslogging.logProcesses
+builtins.bool"builtins.bool*b
+_srcfilelogging._srcfileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*õ
+_levelToNamelogging._levelToNameu
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*õ
+_nameToLevellogging._nameToLevelu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*:
+CRITICALlogging.CRITICAL
+builtins.int"builtins.int*4
+FATALlogging.FATAL
+builtins.int"builtins.int*4
+ERRORlogging.ERROR
+builtins.int"builtins.int*8
+WARNINGlogging.WARNING
+builtins.int"builtins.int*2
+WARNlogging.WARN
+builtins.int"builtins.int*2
+INFOlogging.INFO
+builtins.int"builtins.int*4
+DEBUGlogging.DEBUG
+builtins.int"builtins.int*6
+NOTSETlogging.NOTSET
+builtins.int"builtins.int*c
+fatallogging.fatalK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Å
+
+lastResortlogging.lastResort_
+!Union[logging.StreamHandler,None].
+logging.StreamHandler"logging.StreamHandler
+None*>
+rootlogging.root(
+logging.RootLogger"logging.RootLogger*ä
+_STYLESlogging._STYLESÌ
+Dbuiltins.dict[builtins.str,Tuple[logging.PercentStyle,builtins.str]]
+builtins.str"builtins.strx
+(Tuple[logging.PercentStyle,builtins.str],
+logging.PercentStyle"logging.PercentStyle
+builtins.str"builtins.str"builtins.dict*B
+BASIC_FORMATlogging.BASIC_FORMAT
+builtins.str"builtins.str

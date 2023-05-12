@@ -1,0 +1,1546 @@
+
+urllib.request¶#
+Requesturllib.request.Request"builtins.object*‹
+__init__urllib.request.Request.__init__"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*%
+url
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Ñ
+headersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict *[
+origin_req_hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *2
+unverifiable
+builtins.bool"builtins.bool *R
+methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *â
+
+get_method!urllib.request.Request.get_method"
+builtins.str"builtins.str*:
+self0
+urllib.request.Request"urllib.request.Request*√
+
+add_header!urllib.request.Request.add_header"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*%
+key
+builtins.str"builtins.str*%
+val
+builtins.str"builtins.str*›
+add_unredirected_header.urllib.request.Request.add_unredirected_header"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*%
+key
+builtins.str"builtins.str*%
+val
+builtins.str"builtins.str*∫
+
+has_header!urllib.request.Request.has_header"
+builtins.bool"builtins.bool*:
+self0
+urllib.request.Request"urllib.request.Request*-
+header_name
+builtins.str"builtins.str*™
+remove_header$urllib.request.Request.remove_header"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*-
+header_name
+builtins.str"builtins.str*ç
+get_full_url#urllib.request.Request.get_full_url"
+builtins.str"builtins.str*:
+self0
+urllib.request.Request"urllib.request.Request*√
+	set_proxy urllib.request.Request.set_proxy"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*&
+host
+builtins.str"builtins.str*&
+type
+builtins.str"builtins.str*î
+header_items#urllib.request.Request.header_items"¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*:
+self0
+urllib.request.Request"urllib.request.Request*â
+	has_proxy urllib.request.Request.has_proxy"
+builtins.bool"builtins.bool*:
+self0
+urllib.request.Request"urllib.request.Request2˚
+full_urlurllib.request.Request.full_urlï
+full_urlurllib.request.Request.full_url"
+builtins.str"builtins.str*:
+self0
+urllib.request.Request"urllib.request.Request0:propertyX`≠
+full_urlurllib.request.Request.full_url"
+None*:
+self0
+urllib.request.Request"urllib.request.Request*'
+value
+builtins.str"builtins.str0:full_url.setterÖ
+full_urlurllib.request.Request.full_url"
+None*:
+self0
+urllib.request.Request"urllib.request.Request0:full_url.deleter2œ
+
+get_header!urllib.request.Request.get_headerÓ
+
+get_header!urllib.request.Request.get_header"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*:
+self0
+urllib.request.Request"urllib.request.Request*-
+header_name
+builtins.str"builtins.str0:overloadX¨
+
+get_header!urllib.request.Request.get_header"^
+%Union[builtins.str,urllib.request._T]
+builtins.str"builtins.str
+urllib.request._T*:
+self0
+urllib.request.Request"urllib.request.Request*-
+header_name
+builtins.str"builtins.str*"
+default
+urllib.request._T0:overloadXrA
+typeurllib.request.Request.type
+builtins.str"builtins.strrA
+hosturllib.request.Request.host
+builtins.str"builtins.strrW
+origin_req_host&urllib.request.Request.origin_req_host
+builtins.str"builtins.strrI
+selectorurllib.request.Request.selector
+builtins.str"builtins.strro
+dataurllib.request.Request.dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+Noner†
+headersurllib.request.Request.headersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr¥
+unredirected_hdrs(urllib.request.Request.unredirected_hdrsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrS
+unverifiable#urllib.request.Request.unverifiable
+builtins.bool"builtins.boolrm
+methodurllib.request.Request.methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneru
+timeouturllib.request.Request.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None÷
+
+OpenerDirectorurllib.request.OpenerDirector"builtins.object*”
+add_handler)urllib.request.OpenerDirector.add_handler"
+None*H
+self>
+urllib.request.OpenerDirector"urllib.request.OpenerDirector*E
+handler8
+urllib.request.BaseHandler"urllib.request.BaseHandler*Ó
+open"urllib.request.OpenerDirector.open"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*H
+self>
+urllib.request.OpenerDirector"urllib.request.OpenerDirector*ã
+fullurl~
+*Union[builtins.str,urllib.request.Request]
+builtins.str"builtins.str0
+urllib.request.Request"urllib.request.Request*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *Î
+error#urllib.request.OpenerDirector.error"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*H
+self>
+urllib.request.OpenerDirector"urllib.request.OpenerDirector*'
+proto
+builtins.str"builtins.str*
+args
+Any*Ä
+close#urllib.request.OpenerDirector.close"
+None*H
+self>
+urllib.request.OpenerDirector"urllib.request.OpenerDirectorr€
+
+addheaders(urllib.request.OpenerDirector.addheaders¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list…
+BaseHandlerurllib.request.BaseHandler"builtins.object*Õ
+
+add_parent%urllib.request.BaseHandler.add_parent"
+None*B
+self8
+urllib.request.BaseHandler"urllib.request.BaseHandler*J
+parent>
+urllib.request.OpenerDirector"urllib.request.OpenerDirector*w
+close urllib.request.BaseHandler.close"
+None*B
+self8
+urllib.request.BaseHandler"urllib.request.BaseHandlerrW
+handler_order(urllib.request.BaseHandler.handler_order
+builtins.int"builtins.intrk
+parent!urllib.request.BaseHandler.parent>
+urllib.request.OpenerDirector"urllib.request.OpenerDirectorù
+HTTPDefaultErrorHandler&urllib.request.HTTPDefaultErrorHandler"urllib.request.BaseHandler*Ω
+http_error_default9urllib.request.HTTPDefaultErrorHandler.http_error_default"0
+urllib.error.HTTPError"urllib.error.HTTPError*Z
+selfP
+&urllib.request.HTTPDefaultErrorHandler"&urllib.request.HTTPDefaultErrorHandler*9
+req0
+urllib.request.Request"urllib.request.Request*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.str"builtins.str*Å
+hdrsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MappingÛ
+HTTPRedirectHandler"urllib.request.HTTPRedirectHandler"urllib.request.BaseHandler*Ü
+redirect_request3urllib.request.HTTPRedirectHandler.redirect_request"b
+"Union[urllib.request.Request,None]0
+urllib.request.Request"urllib.request.Request
+None*R
+selfH
+"urllib.request.HTTPRedirectHandler""urllib.request.HTTPRedirectHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*(
+newurl
+builtins.str"builtins.str*ú
+http_error_3011urllib.request.HTTPRedirectHandler.http_error_301"&
+Union[Any,None]
+Any
+None*R
+selfH
+"urllib.request.HTTPRedirectHandler""urllib.request.HTTPRedirectHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ú
+http_error_3021urllib.request.HTTPRedirectHandler.http_error_302"&
+Union[Any,None]
+Any
+None*R
+selfH
+"urllib.request.HTTPRedirectHandler""urllib.request.HTTPRedirectHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ú
+http_error_3031urllib.request.HTTPRedirectHandler.http_error_303"&
+Union[Any,None]
+Any
+None*R
+selfH
+"urllib.request.HTTPRedirectHandler""urllib.request.HTTPRedirectHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ú
+http_error_3071urllib.request.HTTPRedirectHandler.http_error_307"&
+Union[Any,None]
+Any
+None*R
+selfH
+"urllib.request.HTTPRedirectHandler""urllib.request.HTTPRedirectHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingre
+max_redirections3urllib.request.HTTPRedirectHandler.max_redirections
+builtins.int"builtins.intr[
+max_repeats.urllib.request.HTTPRedirectHandler.max_repeats
+builtins.int"builtins.intrS
+inf_msg*urllib.request.HTTPRedirectHandler.inf_msg
+builtins.str"builtins.strç
+HTTPCookieProcessor"urllib.request.HTTPCookieProcessor"urllib.request.BaseHandler*ê
+__init__+urllib.request.HTTPCookieProcessor.__init__"
+None*R
+selfH
+"urllib.request.HTTPCookieProcessor""urllib.request.HTTPCookieProcessor*y
+	cookiejarh
+$Union[http.cookiejar.CookieJar,None]4
+http.cookiejar.CookieJar"http.cookiejar.CookieJar
+None *Ñ
+http_request/urllib.request.HTTPCookieProcessor.http_request"0
+urllib.request.Request"urllib.request.Request*R
+selfH
+"urllib.request.HTTPCookieProcessor""urllib.request.HTTPCookieProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*Œ
+http_response0urllib.request.HTTPCookieProcessor.http_response"4
+http.client.HTTPResponse"http.client.HTTPResponse*R
+selfH
+"urllib.request.HTTPCookieProcessor""urllib.request.HTTPCookieProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponse*Ü
+https_request0urllib.request.HTTPCookieProcessor.https_request"0
+urllib.request.Request"urllib.request.Request*R
+selfH
+"urllib.request.HTTPCookieProcessor""urllib.request.HTTPCookieProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*–
+https_response1urllib.request.HTTPCookieProcessor.https_response"4
+http.client.HTTPResponse"http.client.HTTPResponse*R
+selfH
+"urllib.request.HTTPCookieProcessor""urllib.request.HTTPCookieProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponsero
+	cookiejar,urllib.request.HTTPCookieProcessor.cookiejar4
+http.cookiejar.CookieJar"http.cookiejar.CookieJar«
+ProxyHandlerurllib.request.ProxyHandler"urllib.request.BaseHandler*Ã
+__init__$urllib.request.ProxyHandler.__init__"
+None*D
+self:
+urllib.request.ProxyHandler"urllib.request.ProxyHandler*…
+proxiesπ
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *Æ
+
+proxy_open&urllib.request.ProxyHandler.proxy_open"&
+Union[Any,None]
+Any
+None*D
+self:
+urllib.request.ProxyHandler"urllib.request.ProxyHandler*9
+req0
+urllib.request.Request"urllib.request.Request*'
+proxy
+builtins.str"builtins.str*&
+type
+builtins.str"builtins.str©
+HTTPPasswordMgrurllib.request.HTTPPasswordMgr"builtins.object*º
+add_password+urllib.request.HTTPPasswordMgr.add_password"
+None*J
+self@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr*'
+realm
+builtins.str"builtins.str*≠
+uri£
+1Union[builtins.str,typing.Sequence[builtins.str]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*≤
+find_user_password1urllib.request.HTTPPasswordMgr.find_user_password"»
+8Tuple[Union[builtins.str,None],Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*J
+self@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr*'
+realm
+builtins.str"builtins.str*)
+authuri
+builtins.str"builtins.str*Ò
+	is_suburi(urllib.request.HTTPPasswordMgr.is_suburi"
+builtins.bool"builtins.bool*J
+self@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr*&
+base
+builtins.str"builtins.str*&
+test
+builtins.str"builtins.str*¸
+
+reduce_uri)urllib.request.HTTPPasswordMgr.reduce_uri"
+builtins.str"builtins.str*J
+self@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr*%
+uri
+builtins.str"builtins.str*2
+default_port
+builtins.bool"builtins.bool ï	
+HTTPPasswordMgrWithDefaultRealm.urllib.request.HTTPPasswordMgrWithDefaultRealm"urllib.request.HTTPPasswordMgr*î
+add_password;urllib.request.HTTPPasswordMgrWithDefaultRealm.add_password"
+None*j
+self`
+.urllib.request.HTTPPasswordMgrWithDefaultRealm".urllib.request.HTTPPasswordMgrWithDefaultRealm*O
+realmD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*≠
+uri£
+1Union[builtins.str,typing.Sequence[builtins.str]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*ä
+find_user_passwordAurllib.request.HTTPPasswordMgrWithDefaultRealm.find_user_password"»
+8Tuple[Union[builtins.str,None],Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*j
+self`
+.urllib.request.HTTPPasswordMgrWithDefaultRealm".urllib.request.HTTPPasswordMgrWithDefaultRealm*O
+realmD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*)
+authuri
+builtins.str"builtins.str¯
+
+HTTPPasswordMgrWithPriorAuth+urllib.request.HTTPPasswordMgrWithPriorAuth".urllib.request.HTTPPasswordMgrWithDefaultRealm*√
+add_password8urllib.request.HTTPPasswordMgrWithPriorAuth.add_password"
+None*d
+selfZ
++urllib.request.HTTPPasswordMgrWithPriorAuth"+urllib.request.HTTPPasswordMgrWithPriorAuth*O
+realmD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*≠
+uri£
+1Union[builtins.str,typing.Sequence[builtins.str]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*6
+is_authenticated
+builtins.bool"builtins.bool *∞
+update_authenticated@urllib.request.HTTPPasswordMgrWithPriorAuth.update_authenticated"
+None*d
+selfZ
++urllib.request.HTTPPasswordMgrWithPriorAuth"+urllib.request.HTTPPasswordMgrWithPriorAuth*≠
+uri£
+1Union[builtins.str,typing.Sequence[builtins.str]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*6
+is_authenticated
+builtins.bool"builtins.bool *Å
+is_authenticated<urllib.request.HTTPPasswordMgrWithPriorAuth.is_authenticated"
+builtins.bool"builtins.bool*d
+selfZ
++urllib.request.HTTPPasswordMgrWithPriorAuth"+urllib.request.HTTPPasswordMgrWithPriorAuth*)
+authuri
+builtins.str"builtins.strΩ
+AbstractBasicAuthHandler'urllib.request.AbstractBasicAuthHandler"builtins.object*µ
+__init__0urllib.request.AbstractBasicAuthHandler.__init__"
+None*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*é
+password_mgrz
+*Union[urllib.request.HTTPPasswordMgr,None]@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr
+None *”
+http_error_auth_reqed=urllib.request.AbstractBasicAuthHandler.http_error_auth_reqed"
+None*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*)
+authreq
+builtins.str"builtins.str*&
+host
+builtins.str"builtins.str*9
+req0
+urllib.request.Request"urllib.request.Request*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*è
+http_request4urllib.request.AbstractBasicAuthHandler.http_request"0
+urllib.request.Request"urllib.request.Request*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*Ÿ
+http_response5urllib.request.AbstractBasicAuthHandler.http_response"4
+http.client.HTTPResponse"http.client.HTTPResponse*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponse*ë
+https_request5urllib.request.AbstractBasicAuthHandler.https_request"0
+urllib.request.Request"urllib.request.Request*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*€
+https_response6urllib.request.AbstractBasicAuthHandler.https_response"4
+http.client.HTTPResponse"http.client.HTTPResponse*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponse*Ë
+retry_http_basic_auth=urllib.request.AbstractBasicAuthHandler.retry_http_basic_auth"&
+Union[Any,None]
+Any
+None*\
+selfR
+'urllib.request.AbstractBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler*&
+host
+builtins.str"builtins.str*9
+req0
+urllib.request.Request"urllib.request.Request*'
+realm
+builtins.str"builtins.strr~
+rx*urllib.request.AbstractBasicAuthHandler.rxL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Patternrz
+passwd.urllib.request.AbstractBasicAuthHandler.passwd@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgrrë
+add_password4urllib.request.AbstractBasicAuthHandler.add_passwordK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÄ
+HTTPBasicAuthHandler#urllib.request.HTTPBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler"urllib.request.BaseHandler*ü
+http_error_4012urllib.request.HTTPBasicAuthHandler.http_error_401"&
+Union[Any,None]
+Any
+None*T
+selfJ
+#urllib.request.HTTPBasicAuthHandler"#urllib.request.HTTPBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingr\
+auth_header/urllib.request.HTTPBasicAuthHandler.auth_header
+builtins.str"builtins.strÜ
+ProxyBasicAuthHandler$urllib.request.ProxyBasicAuthHandler"'urllib.request.AbstractBasicAuthHandler"urllib.request.BaseHandler*¢
+http_error_4073urllib.request.ProxyBasicAuthHandler.http_error_407"&
+Union[Any,None]
+Any
+None*V
+selfL
+$urllib.request.ProxyBasicAuthHandler"$urllib.request.ProxyBasicAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingr]
+auth_header0urllib.request.ProxyBasicAuthHandler.auth_header
+builtins.str"builtins.strÅ
+AbstractDigestAuthHandler(urllib.request.AbstractDigestAuthHandler"builtins.object*≤
+__init__1urllib.request.AbstractDigestAuthHandler.__init__"
+None*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*à
+passwdz
+*Union[urllib.request.HTTPPasswordMgr,None]@
+urllib.request.HTTPPasswordMgr"urllib.request.HTTPPasswordMgr
+None *π
+reset_retry_count:urllib.request.AbstractDigestAuthHandler.reset_retry_count"
+None*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*⁄
+http_error_auth_reqed>urllib.request.AbstractDigestAuthHandler.http_error_auth_reqed"
+None*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*-
+auth_header
+builtins.str"builtins.str*&
+host
+builtins.str"builtins.str*9
+req0
+urllib.request.Request"urllib.request.Request*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ƒ
+retry_http_digest_auth?urllib.request.AbstractDigestAuthHandler.retry_http_digest_auth"&
+Union[Any,None]
+Any
+None*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*&
+auth
+builtins.str"builtins.str*Ë
+
+get_cnonce3urllib.request.AbstractDigestAuthHandler.get_cnonce"
+builtins.str"builtins.str*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*'
+nonce
+builtins.str"builtins.str*å
+get_authorization:urllib.request.AbstractDigestAuthHandler.get_authorization"
+builtins.str"builtins.str*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*Å
+chalw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*«
+get_algorithm_impls<urllib.request.AbstractDigestAuthHandler.get_algorithm_impls"‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*+
+	algorithm
+builtins.str"builtins.str*œ
+get_entity_digest:urllib.request.AbstractDigestAuthHandler.get_entity_digest"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*^
+selfT
+(urllib.request.AbstractDigestAuthHandler"(urllib.request.AbstractDigestAuthHandler*T
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*Å
+chalw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingá
+HTTPDigestAuthHandler$urllib.request.HTTPDigestAuthHandler"urllib.request.BaseHandler"(urllib.request.AbstractDigestAuthHandler*¢
+http_error_4013urllib.request.HTTPDigestAuthHandler.http_error_401"&
+Union[Any,None]
+Any
+None*V
+selfL
+$urllib.request.HTTPDigestAuthHandler"$urllib.request.HTTPDigestAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingr]
+auth_header0urllib.request.HTTPDigestAuthHandler.auth_header
+builtins.str"builtins.strç
+ProxyDigestAuthHandler%urllib.request.ProxyDigestAuthHandler"urllib.request.BaseHandler"(urllib.request.AbstractDigestAuthHandler*•
+http_error_4074urllib.request.ProxyDigestAuthHandler.http_error_407"&
+Union[Any,None]
+Any
+None*X
+selfN
+%urllib.request.ProxyDigestAuthHandler"%urllib.request.ProxyDigestAuthHandler*9
+req0
+urllib.request.Request"urllib.request.Request*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*&
+code
+builtins.int"builtins.int*%
+msg
+builtins.int"builtins.int*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingr^
+auth_header1urllib.request.ProxyDigestAuthHandler.auth_header
+builtins.str"builtins.strÔ
+AbstractHTTPHandler"urllib.request.AbstractHTTPHandler"urllib.request.BaseHandler*≈
+__init__+urllib.request.AbstractHTTPHandler.__init__"
+None*R
+selfH
+"urllib.request.AbstractHTTPHandler""urllib.request.AbstractHTTPHandler*.
+
+debuglevel
+builtins.int"builtins.int *‘
+set_http_debuglevel6urllib.request.AbstractHTTPHandler.set_http_debuglevel"
+None*R
+selfH
+"urllib.request.AbstractHTTPHandler""urllib.request.AbstractHTTPHandler*'
+level
+builtins.int"builtins.int*Ç
+do_request_.urllib.request.AbstractHTTPHandler.do_request_"0
+urllib.request.Request"urllib.request.Request*R
+selfH
+"urllib.request.AbstractHTTPHandler""urllib.request.AbstractHTTPHandler*=
+request0
+urllib.request.Request"urllib.request.Request*Û
+do_open*urllib.request.AbstractHTTPHandler.do_open"4
+http.client.HTTPResponse"http.client.HTTPResponse*R
+selfH
+"urllib.request.AbstractHTTPHandler""urllib.request.AbstractHTTPHandler*Z
+
+http_classJ
+#http.client._HTTPConnectionProtocol"#http.client._HTTPConnectionProtocol*9
+req0
+urllib.request.Request"urllib.request.Request*
+http_conn_args
+Any•
+HTTPHandlerurllib.request.HTTPHandler""urllib.request.AbstractHTTPHandler*Ê
+	http_open$urllib.request.HTTPHandler.http_open"4
+http.client.HTTPResponse"http.client.HTTPResponse*B
+self8
+urllib.request.HTTPHandler"urllib.request.HTTPHandler*9
+req0
+urllib.request.Request"urllib.request.Request*Ï
+http_request'urllib.request.HTTPHandler.http_request"0
+urllib.request.Request"urllib.request.Request*B
+self8
+urllib.request.HTTPHandler"urllib.request.HTTPHandler*=
+request0
+urllib.request.Request"urllib.request.Requestû
+HTTPSHandlerurllib.request.HTTPSHandler""urllib.request.AbstractHTTPHandler*Í
+__init__$urllib.request.HTTPSHandler.__init__"
+None*D
+self:
+urllib.request.HTTPSHandler"urllib.request.HTTPSHandler*.
+
+debuglevel
+builtins.int"builtins.int *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None *]
+check_hostnameG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Î
+
+https_open&urllib.request.HTTPSHandler.https_open"4
+http.client.HTTPResponse"http.client.HTTPResponse*D
+self:
+urllib.request.HTTPSHandler"urllib.request.HTTPSHandler*9
+req0
+urllib.request.Request"urllib.request.Request*Ò
+https_request)urllib.request.HTTPSHandler.https_request"0
+urllib.request.Request"urllib.request.Request*D
+self:
+urllib.request.HTTPSHandler"urllib.request.HTTPSHandler*=
+request0
+urllib.request.Request"urllib.request.Request§
+FileHandlerurllib.request.FileHandler"urllib.request.BaseHandler*Í
+	file_open$urllib.request.FileHandler.file_open"8
+urllib.response.addinfourl"urllib.response.addinfourl*B
+self8
+urllib.request.FileHandler"urllib.request.FileHandler*9
+req0
+urllib.request.Request"urllib.request.Request*√
+	get_names$urllib.request.FileHandler.get_names"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*B
+self8
+urllib.request.FileHandler"urllib.request.FileHandler*ˆ
+open_local_file*urllib.request.FileHandler.open_local_file"8
+urllib.response.addinfourl"urllib.response.addinfourl*B
+self8
+urllib.request.FileHandler"urllib.request.FileHandler*9
+req0
+urllib.request.Request"urllib.request.Requestr∞
+names urllib.request.FileHandler.namesÑ
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None≤
+DataHandlerurllib.request.DataHandler"urllib.request.BaseHandler*Í
+	data_open$urllib.request.DataHandler.data_open"8
+urllib.response.addinfourl"urllib.response.addinfourl*B
+self8
+urllib.request.DataHandler"urllib.request.DataHandler*9
+req0
+urllib.request.Request"urllib.request.Requestœ
+
+ftpwrapperurllib.request.ftpwrapper"builtins.object*—
+__init__"urllib.request.ftpwrapper.__init__"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*&
+dirs
+builtins.str"builtins.str*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *0
+
+persistent
+builtins.bool"builtins.bool *t
+closeurllib.request.ftpwrapper.close"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*Ä
+endtransfer%urllib.request.ftpwrapper.endtransfer"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*~
+
+file_close$urllib.request.ftpwrapper.file_close"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*r
+initurllib.request.ftpwrapper.init"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*~
+
+real_close$urllib.request.ftpwrapper.real_close"
+None*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*”
+retrfile"urllib.request.ftpwrapper.retrfile"ê
+0Tuple[urllib.response.addclosehook,builtins.int]<
+urllib.response.addclosehook"urllib.response.addclosehook
+builtins.int"builtins.int*@
+self6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*&
+file
+builtins.str"builtins.str*&
+type
+builtins.str"builtins.str’
+
+FTPHandlerurllib.request.FTPHandler"urllib.request.BaseHandler*Â
+ftp_open"urllib.request.FTPHandler.ftp_open"8
+urllib.response.addinfourl"urllib.response.addinfourl*@
+self6
+urllib.request.FTPHandler"urllib.request.FTPHandler*9
+req0
+urllib.request.Request"urllib.request.Request*ß
+connect_ftp%urllib.request.FTPHandler.connect_ftp"6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*@
+self6
+urllib.request.FTPHandler"urllib.request.FTPHandler*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*&
+dirs
+builtins.str"builtins.str*-
+timeout 
+builtins.float"builtins.floatô	
+CacheFTPHandlerurllib.request.CacheFTPHandler"urllib.request.FTPHandler*∂
+
+setTimeout)urllib.request.CacheFTPHandler.setTimeout"
+None*J
+self@
+urllib.request.CacheFTPHandler"urllib.request.CacheFTPHandler*'
+t 
+builtins.float"builtins.float*¥
+setMaxConns*urllib.request.CacheFTPHandler.setMaxConns"
+None*J
+self@
+urllib.request.CacheFTPHandler"urllib.request.CacheFTPHandler*#
+m
+builtins.int"builtins.int*è
+check_cache*urllib.request.CacheFTPHandler.check_cache"
+None*J
+self@
+urllib.request.CacheFTPHandler"urllib.request.CacheFTPHandler*è
+clear_cache*urllib.request.CacheFTPHandler.clear_cache"
+None*J
+self@
+urllib.request.CacheFTPHandler"urllib.request.CacheFTPHandler*∂
+connect_ftp*urllib.request.CacheFTPHandler.connect_ftp"6
+urllib.request.ftpwrapper"urllib.request.ftpwrapper*J
+self@
+urllib.request.CacheFTPHandler"urllib.request.CacheFTPHandler*&
+user
+builtins.str"builtins.str*(
+passwd
+builtins.str"builtins.str*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*&
+dirs
+builtins.str"builtins.str*-
+timeout 
+builtins.float"builtins.floatõ
+UnknownHandlerurllib.request.UnknownHandler"urllib.request.BaseHandler*Õ
+unknown_open*urllib.request.UnknownHandler.unknown_open"
+NoReturn
+*H
+self>
+urllib.request.UnknownHandler"urllib.request.UnknownHandler*9
+req0
+urllib.request.Request"urllib.request.Request˜
+HTTPErrorProcessor!urllib.request.HTTPErrorProcessor"urllib.request.BaseHandler*Œ
+http_response/urllib.request.HTTPErrorProcessor.http_response"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*P
+selfF
+!urllib.request.HTTPErrorProcessor"!urllib.request.HTTPErrorProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponse*–
+https_response0urllib.request.HTTPErrorProcessor.https_response"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*P
+selfF
+!urllib.request.HTTPErrorProcessor"!urllib.request.HTTPErrorProcessor*=
+request0
+urllib.request.Request"urllib.request.Request*B
+response4
+http.client.HTTPResponse"http.client.HTTPResponseﬂ(
+	URLopenerurllib.request.URLopener"builtins.object*Î
+__init__!urllib.request.URLopener.__init__"
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*…
+proxiesπ
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *&
+x509
+builtins.str"builtins.str*°
+openurllib.request.URLopener.open"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*)
+fullurl
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *±
+open_unknown%urllib.request.URLopener.open_unknown"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*)
+fullurl
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *ô
+retrieve!urllib.request.URLopener.retrieve"∏
+5Tuple[builtins.str,Union[email.message.Message,None]]
+builtins.str"builtins.str_
+!Union[email.message.Message,None].
+email.message.Message"email.message.Message
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ô
+
+reporthookÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Â
+	addheader"urllib.request.URLopener.addheader"
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*j
+args`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*u
+cleanup urllib.request.URLopener.cleanup"
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*q
+closeurllib.request.URLopener.close"
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*◊
+
+http_error#urllib.request.URLopener.http_error"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *è
+http_error_default+urllib.request.URLopener.http_error_default"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*®
+	open_data"urllib.request.URLopener.open_data"8
+urllib.response.addinfourl"urllib.response.addinfourl*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *–
+	open_file"urllib.request.URLopener.open_file"8
+urllib.response.addinfourl"urllib.response.addinfourl*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*Œ
+open_ftp!urllib.request.URLopener.open_ftp"8
+urllib.response.addinfourl"urllib.response.addinfourl*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*ß
+	open_http"urllib.request.URLopener.open_http"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *©
+
+open_https#urllib.request.URLopener.open_https"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *‹
+open_local_file(urllib.request.URLopener.open_local_file"8
+urllib.response.addinfourl"urllib.response.addinfourl*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*%
+url
+builtins.str"builtins.str*∑
+open_unknown_proxy+urllib.request.URLopener.open_unknown_proxy"
+None*>
+self4
+urllib.request.URLopener"urllib.request.URLopener*'
+proxy
+builtins.str"builtins.str*)
+fullurl
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None rI
+version urllib.request.URLopener.version
+builtins.str"builtins.strä:
+FancyURLopenerurllib.request.FancyURLopener"urllib.request.URLopener*√
+prompt_user_passwd0urllib.request.FancyURLopener.prompt_user_passwd"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*&
+host
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*Ó
+get_user_passwd-urllib.request.FancyURLopener.get_user_passwd"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*&
+host
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*/
+clear_cache
+builtins.int"builtins.int *¨
+http_error_301,urllib.request.FancyURLopener.http_error_301"{
+*Union[Any,urllib.response.addinfourl,None]
+Any8
+urllib.response.addinfourl"urllib.response.addinfourl
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *¨
+http_error_302,urllib.request.FancyURLopener.http_error_302"{
+*Union[Any,urllib.response.addinfourl,None]
+Any8
+urllib.response.addinfourl"urllib.response.addinfourl
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *¨
+http_error_303,urllib.request.FancyURLopener.http_error_303"{
+*Union[Any,urllib.response.addinfourl,None]
+Any8
+urllib.response.addinfourl"urllib.response.addinfourl
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *¨
+http_error_307,urllib.request.FancyURLopener.http_error_307"{
+*Union[Any,urllib.response.addinfourl,None]
+Any8
+urllib.response.addinfourl"urllib.response.addinfourl
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Ñ
+http_error_401,urllib.request.FancyURLopener.http_error_401"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *+
+retry
+builtins.bool"builtins.bool *Ñ
+http_error_407,urllib.request.FancyURLopener.http_error_407"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *+
+retry
+builtins.bool"builtins.bool *ü
+http_error_default0urllib.request.FancyURLopener.http_error_default"8
+urllib.response.addinfourl"urllib.response.addinfourl*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*€
+redirect_internal/urllib.request.FancyURLopener.redirect_internal"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*)
+errcode
+builtins.int"builtins.int*(
+errmsg
+builtins.str"builtins.str*Ñ
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*T
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*Ê
+retry_http_basic_auth3urllib.request.FancyURLopener.retry_http_basic_auth"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Ë
+retry_https_basic_auth4urllib.request.FancyURLopener.retry_https_basic_auth"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Ú
+retry_proxy_http_basic_auth9urllib.request.FancyURLopener.retry_proxy_http_basic_auth"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Ù
+retry_proxy_https_basic_auth:urllib.request.FancyURLopener.retry_proxy_https_basic_auth"&
+Union[Any,None]
+Any
+None*H
+self>
+urllib.request.FancyURLopener"urllib.request.FancyURLopener*%
+url
+builtins.str"builtins.str*'
+realm
+builtins.str"builtins.str*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None À
+urlopenurllib.request.urlopen"7
+TypeAlias[Any]
+Any"urllib.request._UrlopenRet*á
+url~
+*Union[builtins.str,urllib.request.Request]
+builtins.str"builtins.str0
+urllib.request.Request"urllib.request.Request*V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *R
+cafileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+capathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+	cadefault
+builtins.bool"builtins.bool *Y
+contextJ
+Union[ssl.SSLContext,None] 
+ssl.SSLContext"ssl.SSLContext
+None Ö
+install_openerurllib.request.install_opener"
+None*J
+opener>
+urllib.request.OpenerDirector"urllib.request.OpenerDirector…
+build_openerurllib.request.build_opener">
+urllib.request.OpenerDirector"urllib.request.OpenerDirector*€
+handlersÃ
+AUnion[urllib.request.BaseHandler,CallableType[builtins.function]]8
+urllib.request.BaseHandler"urllib.request.BaseHandlerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionu
+url2pathnameurllib.request.url2pathname"
+builtins.str"builtins.str**
+pathname
+builtins.str"builtins.stru
+pathname2urlurllib.request.pathname2url"
+builtins.str"builtins.str**
+pathname
+builtins.str"builtins.strû
+
+getproxiesurllib.request.getproxies"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict¢
+parse_http_listurllib.request.parse_http_list"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*#
+s
+builtins.str"builtins.str˚
+parse_keqv_listurllib.request.parse_keqv_list"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*Q
+lJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list´
+proxy_bypassurllib.request.proxy_bypass"
+Any*&
+host
+builtins.str"builtins.str*Ã
+proxiesº
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None ⁄
+urlretrieveurllib.request.urlretrieve"Å
++Tuple[builtins.str,http.client.HTTPMessage]
+builtins.str"builtins.str2
+http.client.HTTPMessage"http.client.HTTPMessage*%
+url
+builtins.str"builtins.str*è
+filename
+)Union[builtins.str,os.PathLike[Any],None]
+builtins.str"builtins.str(
+os.PathLike[Any]
+Any"os.PathLike
+None *ô
+
+reporthookÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None 1
+
+urlcleanupurllib.request.urlcleanup"
+None

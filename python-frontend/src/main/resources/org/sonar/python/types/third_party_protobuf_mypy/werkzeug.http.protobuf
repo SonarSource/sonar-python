@@ -1,0 +1,480 @@
+
+werkzeug.http√
+COEPwerkzeug.http.COEP"	enum.EnumHrK
+UNSAFE_NONEwerkzeug.http.COEP.UNSAFE_NONE
+builtins.str"builtins.strrM
+REQUIRE_CORPwerkzeug.http.COEP.REQUIRE_CORP
+builtins.str"builtins.str®
+COOPwerkzeug.http.COOP"	enum.EnumHrK
+UNSAFE_NONEwerkzeug.http.COOP.UNSAFE_NONE
+builtins.str"builtins.strre
+SAME_ORIGIN_ALLOW_POPUPS+werkzeug.http.COOP.SAME_ORIGIN_ALLOW_POPUPS
+builtins.str"builtins.strrK
+SAME_ORIGINwerkzeug.http.COOP.SAME_ORIGIN
+builtins.str"builtins.str•
+_parse_list_headerurllib.request.parse_http_list"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*#
+s
+builtins.str"builtins.strÙ
+quote_header_value werkzeug.http.quote_header_value"
+builtins.str"builtins.str*
+value
+Any*W
+extra_charsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *1
+allow_token
+builtins.bool"builtins.bool ›
+unquote_header_value"werkzeug.http.unquote_header_value"
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*Z
+is_filenameG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None ê
+dump_options_header!werkzeug.http.dump_options_header"
+builtins.str"builtins.str*P
+headerD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*f
+optionsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping˛
+dump_headerwerkzeug.http.dump_header"
+builtins.str"builtins.str*Ÿ
+iterable 
+;Union[builtins.dict[builtins.str,Any],typing.Iterable[Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0
+typing.Iterable[Any]
+Any"typing.Iterable*Z
+allow_tokenG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None ¬
+dump_csp_headerwerkzeug.http.dump_csp_header"
+builtins.str"builtins.str*r
+headerf
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy©
+parse_list_headerwerkzeug.http.parse_list_header"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*'
+value
+builtins.str"builtins.strˆ
+parse_dict_headerwerkzeug.http.parse_dict_header"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*'
+value
+builtins.str"builtins.str*ü
+clsì
+(Union[Type[builtins.dict[Any,Any]],None][
+Type[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict
+None „
+parse_options_header"werkzeug.http.parse_options_header"’
+<Tuple[builtins.str,builtins.dict[builtins.str,builtins.str]]
+builtins.str"builtins.stru
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None¸
+parse_set_headerwerkzeug.http.parse_set_header"\
+,werkzeug.datastructures.structures.HeaderSet",werkzeug.datastructures.structures.HeaderSet*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ò
+	on_updateÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None ∏
+parse_authorization_header(werkzeug.http.parse_authorization_header"û
+6Union[werkzeug.datastructures.auth.Authorization,None]X
+*werkzeug.datastructures.auth.Authorization"*werkzeug.datastructures.auth.Authorization
+None*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneñ
+parse_www_authenticate_header+werkzeug.http.parse_www_authenticate_header"\
+,werkzeug.datastructures.auth.WWWAuthenticate",werkzeug.datastructures.auth.WWWAuthenticate*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ò
+	on_updateÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None ›
+parse_if_range_header#werkzeug.http.parse_if_range_header"N
+%werkzeug.datastructures.range.IfRange"%werkzeug.datastructures.range.IfRange*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None…
+parse_range_header werkzeug.http.parse_range_header"â
+/Union[werkzeug.datastructures.range.Range,None]J
+#werkzeug.datastructures.range.Range"#werkzeug.datastructures.range.Range
+None*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*4
+make_inclusive
+builtins.bool"builtins.bool ”
+parse_content_range_header(werkzeug.http.parse_content_range_header"û
+6Union[werkzeug.datastructures.range.ContentRange,None]X
+*werkzeug.datastructures.range.ContentRange"*werkzeug.datastructures.range.ContentRange
+None*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ò
+	on_updateÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None ò
+
+quote_etagwerkzeug.http.quote_etag"
+builtins.str"builtins.str*&
+etag
+builtins.str"builtins.str**
+weak
+builtins.bool"builtins.bool …
+unquote_etagwerkzeug.http.unquote_etag"Ã
+9Union[Tuple[builtins.str,builtins.bool],Tuple[None,None]]c
+!Tuple[builtins.str,builtins.bool]
+builtins.str"builtins.str
+builtins.bool"builtins.bool(
+Tuple[None,None]
+None
+None*N
+etagD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None√
+parse_etagswerkzeug.http.parse_etags"H
+"werkzeug.datastructures.etag.ETags""werkzeug.datastructures.etag.ETags*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonev
+generate_etagwerkzeug.http.generate_etag"
+builtins.str"builtins.str**
+data 
+builtins.bytes"builtins.bytesÃ
+
+parse_datewerkzeug.http.parse_date"S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None¡
+	http_datewerkzeug.http.http_date"
+builtins.str"builtins.str*¸
+	timestampÍ
+√Union[datetime.datetime,datetime.date,builtins.int,builtins.float,Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]&
+datetime.datetime"datetime.datetime
+datetime.date"datetime.date
+builtins.int"builtins.int 
+builtins.float"builtins.floatç
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+None œ
+	parse_agewerkzeug.http.parse_age"V
+Union[datetime.timedelta,None](
+datetime.timedelta"datetime.timedelta
+None*Q
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None ¯
+dump_agewerkzeug.http.dump_age"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ç
+ageÅ
++Union[datetime.timedelta,builtins.int,None](
+datetime.timedelta"datetime.timedelta
+builtins.int"builtins.int
+None â
+is_resource_modified"werkzeug.http.is_resource_modified"
+builtins.bool"builtins.bool*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+etagD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *V
+dataJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *ì
+last_modified~
+*Union[datetime.datetime,builtins.str,None]&
+datetime.datetime"datetime.datetime
+builtins.str"builtins.str
+None *5
+ignore_if_range
+builtins.bool"builtins.bool ë
+remove_entity_headers#werkzeug.http.remove_entity_headers"
+None*È
+headers€
+^Union[werkzeug.datastructures.headers.Headers,builtins.list[Tuple[builtins.str,builtins.str]]]R
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*]
+allowedN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable ∫
+remove_hop_by_hop_headers'werkzeug.http.remove_hop_by_hop_headers"
+None*È
+headers€
+^Union[werkzeug.datastructures.headers.Headers,builtins.list[Tuple[builtins.str,builtins.str]]]R
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list|
+is_entity_headerwerkzeug.http.is_entity_header"
+builtins.bool"builtins.bool*(
+header
+builtins.str"builtins.strÑ
+is_hop_by_hop_header"werkzeug.http.is_hop_by_hop_header"
+builtins.bool"builtins.bool*(
+header
+builtins.str"builtins.str—
+parse_cookiewerkzeug.http.parse_cookie"≥
+Gwerkzeug.datastructures.structures.MultiDict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str",werkzeug.datastructures.structures.MultiDict*¶
+headerô
+CUnion[TypeAlias[builtins.dict[builtins.str,Any]],builtins.str,None]ß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment
+builtins.str"builtins.str
+None*S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ú
+clsê
+GUnion[Type[werkzeug.datastructures.structures.MultiDict[Any,Any]],None]∏
+;Type[werkzeug.datastructures.structures.MultiDict[Any,Any]]w
+5werkzeug.datastructures.structures.MultiDict[Any,Any]
+Any
+Any",werkzeug.datastructures.structures.MultiDict
+None ™
+dump_cookiewerkzeug.http.dump_cookie"
+builtins.str"builtins.str*%
+key
+builtins.str"builtins.str*)
+value
+builtins.str"builtins.str *ë
+max_ageÅ
++Union[datetime.timedelta,builtins.int,None](
+datetime.timedelta"datetime.timedelta
+builtins.int"builtins.int
+None *Í
+expires⁄
+FUnion[builtins.str,datetime.datetime,builtins.int,builtins.float,None]
+builtins.str"builtins.str&
+datetime.datetime"datetime.datetime
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+secure
+builtins.bool"builtins.bool *.
+httponly
+builtins.bool"builtins.bool *S
+charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *2
+sync_expires
+builtins.bool"builtins.bool *,
+max_size
+builtins.int"builtins.int *T
+samesiteD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None À
+is_byte_range_valid!werkzeug.http.is_byte_range_valid"
+builtins.bool"builtins.bool*O
+startD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*N
+stopD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*P
+lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"¨
+parse_accept_header!werkzeug.http.parse_accept_headerÈ
+parse_accept_header!werkzeug.http.parse_accept_header"N
+%werkzeug.datastructures.accept.Accept"%werkzeug.datastructures.accept.Accept*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None0:
+t.overloadXÖ
+parse_accept_header!werkzeug.http.parse_accept_header"
+werkzeug.http._TAnyAccept*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*K
+clsB
+Type[werkzeug.http._TAnyAccept]
+werkzeug.http._TAnyAccept0:
+t.overloadX"Î
+parse_cache_control_header(werkzeug.http.parse_cache_control_header¶
+parse_cache_control_header(werkzeug.http.parse_cache_control_header"v
+9werkzeug.datastructures.cache_control.RequestCacheControl"9werkzeug.datastructures.cache_control.RequestCacheControl*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Ô
+	on_updateﬂ
+6TypeAlias[Union[CallableType[builtins.function],None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"werkzeug.http._t_cc_update*
+cls
+None 0:
+t.overloadX˘
+parse_cache_control_header(werkzeug.http.parse_cache_control_header"
+werkzeug.http._TAnyCC*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Ô
+	on_updateﬂ
+6TypeAlias[Union[CallableType[builtins.function],None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"werkzeug.http._t_cc_update*C
+cls:
+Type[werkzeug.http._TAnyCC]
+werkzeug.http._TAnyCC0:
+t.overloadX"§
+parse_csp_headerwerkzeug.http.parse_csp_headerÉ
+parse_csp_headerwerkzeug.http.parse_csp_header"f
+1werkzeug.datastructures.csp.ContentSecurityPolicy"1werkzeug.datastructures.csp.ContentSecurityPolicy*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*
+	on_update‡
+6TypeAlias[Union[CallableType[builtins.function],None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"werkzeug.http._t_csp_update*
+cls
+None 0:
+t.overloadXÈ
+parse_csp_headerwerkzeug.http.parse_csp_header"
+werkzeug.http._TAnyCSP*O
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*
+	on_update‡
+6TypeAlias[Union[CallableType[builtins.function],None]]Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"werkzeug.http._t_csp_update*E
+cls<
+Type[werkzeug.http._TAnyCSP]
+werkzeug.http._TAnyCSP0:
+t.overloadX*
+emailemail *
+ttyping *Ä
+_token_charswerkzeug.http._token_charsT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*p
+_etag_rewerkzeug.http._etag_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*Ü
+_entity_headerswerkzeug.http._entity_headersT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*é
+_hop_by_hop_headers!werkzeug.http._hop_by_hop_headersT
+ builtins.frozenset[builtins.str]
+builtins.str"builtins.str"builtins.frozenset*´
+HTTP_STATUS_CODESwerkzeug.http.HTTP_STATUS_CODESu
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*z
+_parameter_rewerkzeug.http._parameter_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*Ç
+_charset_value_rewerkzeug.http._charset_value_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*Ä
+_continuation_rewerkzeug.http._continuation_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*Ü
+_cookie_no_quote_re!werkzeug.http._cookie_no_quote_reL
+typing.Pattern[builtins.str]
+builtins.str"builtins.str"typing.Pattern*Ü
+_cookie_slash_rewerkzeug.http._cookie_slash_reR
+typing.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Pattern*∏
+_cookie_slash_mapwerkzeug.http._cookie_slash_mapÅ
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*
+dswerkzeug.datastructures *&
+_sansio_httpwerkzeug.sansio.http 

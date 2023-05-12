@@ -1,0 +1,248 @@
+
+urllib3.connection=
+ConnectionErrorbuiltins.ConnectionError"builtins.OSError∏!
+_HTTPConnectionhttp.client.HTTPConnection"builtins.object*∑
+__init__#http.client.HTTPConnection.__init__"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*&
+host
+builtins.str"builtins.str*P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *≥
+source_addressú
+,Union[Tuple[builtins.str,builtins.int],None]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *-
+	blocksize
+builtins.int"builtins.int *ª
+request"http.client.HTTPConnection.request"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*(
+method
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str*≠
+body†
+VUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str,None] 
+builtins.bytes"builtins.bytes$
+typing.IO[Any]
+Any"	typing.IOT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str
+None *Ü
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping *4
+encode_chunked
+builtins.bool"builtins.bool *Ø
+getresponse&http.client.HTTPConnection.getresponse"4
+http.client.HTTPResponse"http.client.HTTPResponse*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*≤
+set_debuglevel)http.client.HTTPConnection.set_debuglevel"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*'
+level
+builtins.int"builtins.int* 
+
+set_tunnel%http.client.HTTPConnection.set_tunnel"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*&
+host
+builtins.str"builtins.str*P
+portD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ã
+headersº
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *{
+connect"http.client.HTTPConnection.connect"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*w
+close http.client.HTTPConnection.close"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*ø
+
+putrequest%http.client.HTTPConnection.putrequest"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*(
+method
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str*/
+	skip_host
+builtins.bool"builtins.bool *:
+skip_accept_encoding
+builtins.bool"builtins.bool *’
+	putheader$http.client.HTTPConnection.putheader"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*(
+header
+builtins.str"builtins.str**
+argument
+builtins.str"builtins.str*Ô
+
+endheaders%http.client.HTTPConnection.endheaders"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*µ
+message_body†
+VUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str,None] 
+builtins.bytes"builtins.bytes$
+typing.IO[Any]
+Any"	typing.IOT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str
+None *4
+encode_chunked
+builtins.bool"builtins.bool *é
+sendhttp.client.HTTPConnection.send"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*ñ
+dataã
+\TypeAlias[Union[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str]]ë
+QUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str] 
+builtins.bytes"builtins.bytes$
+typing.IO[Any]
+Any"	typing.IOT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str"http.client._DataTypery
+timeout"http.client.HTTPConnection.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerE
+hosthttp.client.HTTPConnection.host
+builtins.str"builtins.strrE
+porthttp.client.HTTPConnection.port
+builtins.int"builtins.intr0
+sockhttp.client.HTTPConnection.sock
+Any>
+HTTPExceptionhttp.client.HTTPException"builtins.ExceptionF
+DummyConnection"urllib3.connection.DummyConnection"builtins.objectœ
+HTTPConnection!urllib3.connection.HTTPConnection"http.client.HTTPConnection*∂
+__init__*urllib3.connection.HTTPConnection.__init__"
+None*P
+selfF
+!urllib3.connection.HTTPConnection"!urllib3.connection.HTTPConnection*
+args
+Any*
+kw
+Any*>
+connect)urllib3.connection.HTTPConnection.connect*
+selfrG
+default_port.urllib3.connection.HTTPConnection.default_port
+Anyr[
+default_socket_options8urllib3.connection.HTTPConnection.default_socket_options
+AnyrE
+is_verified-urllib3.connection.HTTPConnection.is_verified
+AnyrK
+source_address0urllib3.connection.HTTPConnection.source_address
+AnyrK
+socket_options0urllib3.connection.HTTPConnection.socket_options
+Any÷
+HTTPSConnection"urllib3.connection.HTTPSConnection"!urllib3.connection.HTTPConnection*∞
+__init__+urllib3.connection.HTTPSConnection.__init__"
+None*R
+selfH
+"urllib3.connection.HTTPSConnection""urllib3.connection.HTTPSConnection*
+host
+Any*
+port
+Any *
+key_file
+Any *
+	cert_file
+Any *
+strict
+Any *
+timeout
+Any *
+kw
+Any*?
+connect*urllib3.connection.HTTPSConnection.connect*
+selfrH
+default_port/urllib3.connection.HTTPSConnection.default_port
+Anyr@
+key_file+urllib3.connection.HTTPSConnection.key_file
+AnyrB
+	cert_file,urllib3.connection.HTTPSConnection.cert_file
+Anyr8
+sock'urllib3.connection.HTTPSConnection.sock
+AnyÅ	
+VerifiedHTTPSConnection*urllib3.connection.VerifiedHTTPSConnection""urllib3.connection.HTTPSConnection*º
+set_cert3urllib3.connection.VerifiedHTTPSConnection.set_cert*
+self*
+key_file *
+	cert_file *
+	cert_reqs *
+ca_certs *
+assert_hostname *
+assert_fingerprint *G
+connect2urllib3.connection.VerifiedHTTPSConnection.connect*
+selfrJ
+	cert_reqs4urllib3.connection.VerifiedHTTPSConnection.cert_reqs
+AnyrH
+ca_certs3urllib3.connection.VerifiedHTTPSConnection.ca_certs
+AnyrN
+ssl_version6urllib3.connection.VerifiedHTTPSConnection.ssl_version
+Anyr\
+assert_fingerprint=urllib3.connection.VerifiedHTTPSConnection.assert_fingerprint
+AnyrH
+key_file3urllib3.connection.VerifiedHTTPSConnection.key_file
+AnyrJ
+	cert_file4urllib3.connection.VerifiedHTTPSConnection.cert_file
+AnyrV
+assert_hostname:urllib3.connection.VerifiedHTTPSConnection.assert_hostname
+Anyr@
+sock/urllib3.connection.VerifiedHTTPSConnection.sock
+AnyrJ
+	auto_open4urllib3.connection.VerifiedHTTPSConnection.auto_open
+AnyrN
+is_verified6urllib3.connection.VerifiedHTTPSConnection.is_verified
+Any*Ä
+match_hostname!urllib3.connection.match_hostnameK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ü
+resolve_cert_reqs$urllib3.connection.resolve_cert_reqsK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ä
+resolve_ssl_version&urllib3.connection.resolve_ssl_versionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ç
+ssl_wrap_socket"urllib3.connection.ssl_wrap_socketK
+CallableType[builtins.function]&
+builtins.function"builtins.function*à
+assert_fingerprint%urllib3.connection.assert_fingerprintK
+CallableType[builtins.function]&
+builtins.function"builtins.function*'
+
+connectionurllib3.util.connection *<
+port_by_scheme!urllib3.connection.port_by_scheme
+Any*6
+RECENT_DATEurllib3.connection.RECENT_DATE
+Any
