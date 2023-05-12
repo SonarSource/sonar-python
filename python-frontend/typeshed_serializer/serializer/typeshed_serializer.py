@@ -30,6 +30,7 @@ STUBS_PATH = "../resources/typeshed-internal/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
+STUBGEN_GENERATED_PATH = "../resources/stubgen_generated"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 
 
@@ -64,8 +65,8 @@ def walk_typeshed_third_parties(opt: options.Options = get_options()):
     return build_result, source_paths
 
 
-def walk_custom_stubs(opt: options.Options = get_options()):
-    source_list, source_paths = get_sources(CUSTOM_STUBS_PATH, False)
+def walk_custom_stubs(opt: options.Options = get_options(), path=CUSTOM_STUBS_PATH):
+    source_list, source_paths = get_sources(path, False)
     build_result = build.build(source_list, opt)
     return build_result, source_paths
 
@@ -122,6 +123,20 @@ def serialize_custom_stubs(output_dir_name="output", python_version=(3, 8), is_d
         symbols.save_module(module_symbol, "custom_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
 
 
+def serialize_importer(output_dir_name="output_importer", python_version=(3, 8), is_debug=False):
+    file_path = os.path.join(CURRENT_PATH, "import_everything.py")
+    fq_module_name = "import_everything"
+    opt = get_options(python_version)
+    source = build.BuildSource(file_path, module=fq_module_name)
+    build_result = build.build([source], options=opt)
+    for file in build_result.files:
+        if file == SONAR_CUSTOM_BASE_STUB_MODULE:
+            continue
+        current_file = build_result.files.get(file)
+        module_symbol = symbols.ModuleSymbol(current_file)
+        symbols.save_module(module_symbol, "third_party_protobuf", is_debug=is_debug, debug_dir=output_dir_name)
+
+
 def serialize_typeshed_stdlib_multiple_python_version():
     """ Serialize semantic model for Python stdlib versions from 3.5 to 3.9
     """
@@ -138,8 +153,9 @@ def save_merged_symbols(is_debug=False, is_third_parties=False):
 
 def main():
     save_merged_symbols()
-    save_merged_symbols(is_third_parties=True)
+    #save_merged_symbols(is_third_parties=True, is_debug=True)
     serialize_custom_stubs()
+    serialize_importer()
 
 
 if __name__ == '__main__':

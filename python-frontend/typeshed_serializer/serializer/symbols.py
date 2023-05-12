@@ -18,6 +18,7 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import inspect
 import logging
 import os
 from enum import Enum
@@ -61,7 +62,9 @@ class TypeKind(Enum):
 
 
 class TypeDescriptor:
-    def __init__(self, _type: mpt.Type):
+    def __init__(self, _type: mpt.Type, visited=None):
+        if visited is None:
+            visited = set()
         self.args = []
         self.fully_qualified_name = None
         self.kind = None
@@ -70,8 +73,11 @@ class TypeDescriptor:
         if isinstance(_type, mpt.Instance):
             self.kind = TypeKind.INSTANCE
             if _type.args is not None and len(_type.args) > 0:
-                items = [TypeDescriptor(t) for t in _type.args]
-                item_names = [i.pretty_printed_name for i in items]
+                items = [TypeDescriptor(t, visited) for t in _type.args]
+                try:
+                    item_names = [i.pretty_printed_name for i in items]
+                except:
+                    item_names = ["Unknown"]
                 self.args.extend(items)
                 self.pretty_printed_name = f"{_type.type.fullname}[{','.join(item_names)}]"
                 self.fully_qualified_name = _type.type.fullname
@@ -80,18 +86,18 @@ class TypeDescriptor:
                 self.fully_qualified_name = _type.type.fullname
         elif isinstance(_type, mpt.UnionType):
             self.kind = TypeKind.UNION
-            items = [TypeDescriptor(t) for t in _type.items]
+            items = [TypeDescriptor(t, visited) for t in _type.items]
             self.args.extend(items)
             item_names = [i.pretty_printed_name for i in items]
             self.pretty_printed_name = f"Union[{','.join(item_names)}]"
         elif isinstance(_type, mpt.TypeType):
             self.kind = TypeKind.TYPE
-            item = TypeDescriptor(_type.item)
+            item = TypeDescriptor(_type.item, visited)
             self.args.append(item)
             self.pretty_printed_name = f"Type[{item.pretty_printed_name}]"
         elif isinstance(_type, mpt.TupleType):
             self.kind = TypeKind.TUPLE
-            items = [TypeDescriptor(t) for t in _type.items]
+            items = [TypeDescriptor(t, visited) for t in _type.items]
             if any(item.is_unknown for item in items):
                 self.kind = None
                 self.is_unknown = True
@@ -111,18 +117,22 @@ class TypeDescriptor:
         elif isinstance(_type, mpt.TypeAliasType):
             self.kind = TypeKind.TYPE_ALIAS
             alias = _type.alias
-            target = TypeDescriptor(alias.target)
-            self.args.append(target)
-            self.pretty_printed_name = f"TypeAlias[{target.pretty_printed_name}]"
-            self.fully_qualified_name = _type.alias.fullname
+            if alias.target not in visited:
+                visited.add(alias.target)
+                target = TypeDescriptor(alias.target, visited)
+                self.args.append(target)
+                self.pretty_printed_name = f"TypeAlias[{target.pretty_printed_name}]"
+                self.fully_qualified_name = _type.alias.fullname
+            else:
+                self.pretty_printed_name = "TypeAlias[Unknown]"
         elif isinstance(_type, mpt.CallableType):
             self.kind = TypeKind.CALLABLE
-            fallback = TypeDescriptor(_type.fallback)
+            fallback = TypeDescriptor(_type.fallback, visited)
             self.args.append(fallback)
             self.pretty_printed_name = f"CallableType[{fallback.pretty_printed_name}]"
         elif isinstance(_type, mpt.LiteralType):
             self.kind = TypeKind.LITERAL
-            fallback = TypeDescriptor(_type.fallback)
+            fallback = TypeDescriptor(_type.fallback, visited)
             self.args.append(fallback)
             self.pretty_printed_name = f"Literal[{fallback.pretty_printed_name}]"
         elif isinstance(_type, mpt.UninhabitedType):
@@ -137,7 +147,7 @@ class TypeDescriptor:
             self.pretty_printed_name = "TypedDict"
         elif isinstance(_type, mpt.Overloaded):
             self.kind = TypeKind.CALLABLE
-            fallback = TypeDescriptor(_type.fallback)
+            fallback = TypeDescriptor(_type.fallback, visited)
             self.fully_qualified_name = fallback.fully_qualified_name
             self.args.append(fallback)
             self.pretty_printed_name = f"CallableType[{fallback.pretty_printed_name}]"
@@ -180,7 +190,11 @@ class ParameterSymbol:
 
     def to_proto(self) -> symbols_pb2.ParameterSymbol:
         pb_parameter = symbols_pb2.ParameterSymbol()
-        pb_parameter.name = self.name
+        try:
+            pb_parameter.name = self.name
+        except:
+            # If parameter name starts with "__", it is not visible by mypy
+            pb_parameter.name = "__"
         pb_parameter.kind = symbols_pb2.ParameterKind.Value(self.kind.name)
         pb_parameter.has_default = self.has_default
         if self.type_annotation is not None:
@@ -231,7 +245,10 @@ class FunctionSymbol:
         self.return_type = extract_return_type(func_def)
         self.parameters = extract_parameters(func_def)
         self.has_decorators = func_def.is_decorated
-        self.is_abstract = func_def.is_abstract
+        try:
+            self.is_abstract = func_def.is_abstract
+        except AttributeError:
+            self.is_abstract = False
         self.is_asynchronous = func_def.is_async_generator or func_def.is_awaitable_coroutine or func_def.is_coroutine
         self.is_final = func_def.is_final
         self.is_overload = func_def.is_overload
