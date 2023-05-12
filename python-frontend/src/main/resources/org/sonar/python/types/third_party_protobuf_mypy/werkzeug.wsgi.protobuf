@@ -1,0 +1,364 @@
+
+werkzeug.wsgi±
+ClosingIteratorwerkzeug.wsgi.ClosingIterator"builtins.object*…
+__init__&werkzeug.wsgi.ClosingIterator.__init__"
+None*H
+self>
+werkzeug.wsgi.ClosingIterator"werkzeug.wsgi.ClosingIterator*b
+iterableT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*‹
+	callbacks 
+\Union[None,CallableType[builtins.function],typing.Iterable[CallableType[builtins.function]]]
+NoneK
+CallableType[builtins.function]&
+builtins.function"builtins.functionê
+0typing.Iterable[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Iterable *∫
+__iter__&werkzeug.wsgi.ClosingIterator.__iter__">
+werkzeug.wsgi.ClosingIterator"werkzeug.wsgi.ClosingIterator*F
+self>
+werkzeug.wsgi.ClosingIterator"werkzeug.wsgi.ClosingIterator*û
+__next__&werkzeug.wsgi.ClosingIterator.__next__" 
+builtins.bytes"builtins.bytes*H
+self>
+werkzeug.wsgi.ClosingIterator"werkzeug.wsgi.ClosingIterator*Ä
+close#werkzeug.wsgi.ClosingIterator.close"
+None*H
+self>
+werkzeug.wsgi.ClosingIterator"werkzeug.wsgi.ClosingIteratorry
+_next#werkzeug.wsgi.ClosingIterator._nextK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr≈
+
+_callbacks(werkzeug.wsgi.ClosingIterator._callbackså
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listÅ
+FileWrapperwerkzeug.wsgi.FileWrapper"builtins.object*ˇ
+__init__"werkzeug.wsgi.FileWrapper.__init__"
+None*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*/
+buffer_size
+builtins.int"builtins.int *t
+closewerkzeug.wsgi.FileWrapper.close"
+None*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*ê
+seekable"werkzeug.wsgi.FileWrapper.seekable"
+builtins.bool"builtins.bool*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*Ö
+seekwerkzeug.wsgi.FileWrapper.seek"
+None*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*
+args
+Any*Æ
+tellwerkzeug.wsgi.FileWrapper.tell"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*¶
+__iter__"werkzeug.wsgi.FileWrapper.__iter__"6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*>
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapper*í
+__next__"werkzeug.wsgi.FileWrapper.__next__" 
+builtins.bytes"builtins.bytes*@
+self6
+werkzeug.wsgi.FileWrapper"werkzeug.wsgi.FileWrapperrp
+filewerkzeug.wsgi.FileWrapper.fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOrR
+buffer_size%werkzeug.wsgi.FileWrapper.buffer_size
+builtins.int"builtins.intﬁ
+_RangeWrapperwerkzeug.wsgi._RangeWrapper"builtins.object*˛
+__init__$werkzeug.wsgi._RangeWrapper.__init__"
+None*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*Û
+iterable‰
+@Union[typing.Iterable[builtins.bytes],typing.IO[builtins.bytes]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterableH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*.
+
+start_byte
+builtins.int"builtins.int *V
+
+byte_rangeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∞
+__iter__$werkzeug.wsgi._RangeWrapper.__iter__":
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*B
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*û
+_next_chunk'werkzeug.wsgi._RangeWrapper._next_chunk" 
+builtins.bytes"builtins.bytes*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*•
+_first_iteration,werkzeug.wsgi._RangeWrapper._first_iteration"ú
+.Tuple[Union[builtins.bytes,None],builtins.int]J
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None
+builtins.int"builtins.int*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*í
+_next!werkzeug.wsgi._RangeWrapper._next" 
+builtins.bytes"builtins.bytes*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*ò
+__next__$werkzeug.wsgi._RangeWrapper.__next__" 
+builtins.bytes"builtins.bytes*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapper*z
+close!werkzeug.wsgi._RangeWrapper.close"
+None*D
+self:
+werkzeug.wsgi._RangeWrapper"werkzeug.wsgi._RangeWrapperrÜ
+iterable$werkzeug.wsgi._RangeWrapper.iterableT
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iteratorrz
+
+byte_range&werkzeug.wsgi._RangeWrapper.byte_rangeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerR
+
+start_byte&werkzeug.wsgi._RangeWrapper.start_byte
+builtins.int"builtins.intrv
+end_byte$werkzeug.wsgi._RangeWrapper.end_byteD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerT
+read_length'werkzeug.wsgi._RangeWrapper.read_length
+builtins.int"builtins.intrw
+seekable$werkzeug.wsgi._RangeWrapper.seekableE
+Union[builtins.bool,Any]
+builtins.bool"builtins.bool
+AnyrV
+end_reached'werkzeug.wsgi._RangeWrapper.end_reached
+builtins.bool"builtins.bool»
+LimitedStreamwerkzeug.wsgi.LimitedStream"io.RawIOBase*≠
+__init__$werkzeug.wsgi.LimitedStream.__init__"
+None*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*T
+streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*'
+limit
+builtins.int"builtins.int*,
+is_max
+builtins.bool"builtins.bool *¨
+is_exhausted(werkzeug.wsgi.LimitedStream.is_exhausted"
+builtins.bool"builtins.bool*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream0:property`*à
+on_exhausted(werkzeug.wsgi.LimitedStream.on_exhausted"
+None*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*Ô
+on_disconnect)werkzeug.wsgi.LimitedStream.on_disconnect"
+None*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*c
+errorV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None *ñ
+exhaust#werkzeug.wsgi.LimitedStream.exhaust" 
+builtins.bytes"builtins.bytes*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*Ì
+readinto$werkzeug.wsgi.LimitedStream.readinto"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*/
+b(
+builtins.bytearray"builtins.bytearray*ñ
+readall#werkzeug.wsgi.LimitedStream.readall" 
+builtins.bytes"builtins.bytes*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*å
+tell werkzeug.wsgi.LimitedStream.tell"
+builtins.int"builtins.int*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStream*ñ
+readable$werkzeug.wsgi.LimitedStream.readable"
+builtins.bool"builtins.bool*D
+self:
+werkzeug.wsgi.LimitedStream"werkzeug.wsgi.LimitedStreamrx
+_stream#werkzeug.wsgi.LimitedStream._streamH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOrF
+_pos werkzeug.wsgi.LimitedStream._pos
+builtins.int"builtins.intrH
+limit!werkzeug.wsgi.LimitedStream.limit
+builtins.int"builtins.intrZ
+_limit_is_max)werkzeug.wsgi.LimitedStream._limit_is_max
+builtins.bool"builtins.boolñ
+	responderwerkzeug.wsgi.responder"õ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function¡
+get_current_urlwerkzeug.wsgi.get_current_url"
+builtins.str"builtins.str*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*/
+	root_only
+builtins.bool"builtins.bool *7
+strip_querystring
+builtins.bool"builtins.bool */
+	host_only
+builtins.bool"builtins.bool *ù
+trusted_hostsá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None ¿
+_get_serverwerkzeug.wsgi._get_server"›
+8Union[Tuple[builtins.str,Union[builtins.int,None]],None]î
+,Tuple[builtins.str,Union[builtins.int,None]]
+builtins.str"builtins.strD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None
+None*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentò
+get_hostwerkzeug.wsgi.get_host"
+builtins.str"builtins.str*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*ù
+trusted_hostsá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None ¥
+get_content_length werkzeug.wsgi.get_content_length"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment…
+get_input_streamwerkzeug.wsgi.get_input_stream"H
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*3
+safe_fallback
+builtins.bool"builtins.bool *^
+max_content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Ó
+get_path_infowerkzeug.wsgi.get_path_info"
+builtins.str"builtins.str*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*
+charset
+Any *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None ∑
+	wrap_filewerkzeug.wsgi.wrap_file"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*µ
+environß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*/
+buffer_size
+builtins.int"builtins.int ¸
+_make_chunk_iterwerkzeug.wsgi._make_chunk_iter"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*Ò
+stream‰
+@Union[typing.Iterable[builtins.bytes],typing.IO[builtins.bytes]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterableH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*O
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*-
+buffer_size
+builtins.int"builtins.int±
+make_line_iterwerkzeug.wsgi.make_line_iter"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*Ò
+stream‰
+@Union[typing.Iterable[builtins.bytes],typing.IO[builtins.bytes]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterableH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+buffer_size
+builtins.int"builtins.int *3
+cap_at_buffer
+builtins.bool"builtins.bool ‰
+make_chunk_iterwerkzeug.wsgi.make_chunk_iter"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*Ò
+stream‰
+@Union[typing.Iterable[builtins.bytes],typing.IO[builtins.bytes]]T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.IterableH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*/
+	separator 
+builtins.bytes"builtins.bytes*Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+buffer_size
+builtins.int"builtins.int *3
+cap_at_buffer
+builtins.bool"builtins.bool *
+ttyping *(
+_sansio_utilswerkzeug.sansio.utils 

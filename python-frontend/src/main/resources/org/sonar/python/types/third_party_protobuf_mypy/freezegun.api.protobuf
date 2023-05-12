@@ -1,0 +1,209 @@
+
+freezegun.apiò
+TickingDateTimeFactory$freezegun.api.TickingDateTimeFactory"builtins.object*ä
+__init__-freezegun.api.TickingDateTimeFactory.__init__"
+None*V
+selfL
+$freezegun.api.TickingDateTimeFactory"$freezegun.api.TickingDateTimeFactory*:
+time_to_freeze&
+datetime.datetime"datetime.datetime*1
+start&
+datetime.datetime"datetime.datetime*π
+__call__-freezegun.api.TickingDateTimeFactory.__call__"&
+datetime.datetime"datetime.datetime*V
+selfL
+$freezegun.api.TickingDateTimeFactory"$freezegun.api.TickingDateTimeFactory¢
+FrozenDateTimeFactory#freezegun.api.FrozenDateTimeFactory"builtins.object*‘
+__init__,freezegun.api.FrozenDateTimeFactory.__init__"
+None*T
+selfJ
+#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*:
+time_to_freeze&
+datetime.datetime"datetime.datetime*∂
+__call__,freezegun.api.FrozenDateTimeFactory.__call__"&
+datetime.datetime"datetime.datetime*T
+selfJ
+#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*ƒ
+tick(freezegun.api.FrozenDateTimeFactory.tick"
+None*T
+selfJ
+#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*±
+delta£
+5Union[builtins.float,numbers.Real,datetime.timedelta] 
+builtins.float"builtins.float
+numbers.Real"numbers.Real(
+datetime.timedelta"datetime.timedelta *˚
+move_to+freezegun.api.FrozenDateTimeFactory.move_to"
+None*T
+selfJ
+#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*c
+target_datetimeN
+#Union[UnboundType[_Freezable],None]
+UnboundType[_Freezable]
+None¬	
+StepTickTimeFactory!freezegun.api.StepTickTimeFactory"builtins.object*Ä
+__init__*freezegun.api.StepTickTimeFactory.__init__"
+None*P
+selfF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*:
+time_to_freeze&
+datetime.datetime"datetime.datetime*0
+
+step_width 
+builtins.float"builtins.float*∞
+__call__*freezegun.api.StepTickTimeFactory.__call__"&
+datetime.datetime"datetime.datetime*P
+selfF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*Ô
+tick&freezegun.api.StepTickTimeFactory.tick"
+None*P
+selfF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*c
+deltaV
+Union[datetime.timedelta,None](
+datetime.timedelta"datetime.timedelta
+None *÷
+update_step_width3freezegun.api.StepTickTimeFactory.update_step_width"
+None*P
+selfF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*0
+
+step_width 
+builtins.float"builtins.float*ı
+move_to)freezegun.api.StepTickTimeFactory.move_to"
+None*P
+selfF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*c
+target_datetimeN
+#Union[UnboundType[_Freezable],None]
+UnboundType[_Freezable]
+None
+_freeze_timefreezegun.api._freeze_time"builtins.object*Ä
+__init__#freezegun.api._freeze_time.__init__"
+None*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*f
+time_to_freeze_strN
+#Union[UnboundType[_Freezable],None]
+UnboundType[_Freezable]
+None*Å
+	tz_offsetr
+&Union[builtins.int,datetime.timedelta]
+builtins.int"builtins.int(
+datetime.timedelta"datetime.timedelta*Z
+ignoreN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*(
+tick
+builtins.bool"builtins.bool**
+as_arg
+builtins.bool"builtins.bool**
+as_kwarg
+builtins.str"builtins.str*7
+auto_tick_seconds 
+builtins.float"builtins.float*⁄
+	__enter__$freezegun.api._freeze_time.__enter__"‰
+LUnion[freezegun.api.FrozenDateTimeFactory,freezegun.api.StepTickTimeFactory]J
+#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactoryF
+!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*@
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*©
+__exit__#freezegun.api._freeze_time.__exit__"
+None*@
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*,
+args"
+builtins.object"builtins.object*v
+start freezegun.api._freeze_time.start"
+Any*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*u
+stopfreezegun.api._freeze_time.stop"
+None*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*“
+decorate_class)freezegun.api._freeze_time.decorate_class"
+freezegun.api._T*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*;
+klass0
+Type[freezegun.api._T]
+freezegun.api._T*¬
+decorate_coroutine-freezegun.api._freeze_time.decorate_coroutine"
+freezegun.api._T*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*#
+	coroutine
+freezegun.api._T*©
+decorate_callable,freezegun.api._freeze_time.decorate_callable"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function2Ò
+__call__#freezegun.api._freeze_time.__call__Ô
+__call__#freezegun.api._freeze_time.__call__"0
+Type[freezegun.api._T]
+freezegun.api._T*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*:
+func0
+Type[freezegun.api._T]
+freezegun.api._T0:overloadX•
+__call__#freezegun.api._freeze_time.__call__"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX•
+__call__#freezegun.api._freeze_time.__call__"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*B
+self8
+freezegun.api._freeze_time"freezegun.api._freeze_time*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadX–
+freeze_timefreezegun.api.freeze_time"8
+freezegun.api._freeze_time"freezegun.api._freeze_time*’
+time_to_freezeæ
+lUnion[UnboundType[_Freezable],CallableType[builtins.function],typing.Iterator[UnboundType[_Freezable]],None]
+UnboundType[_Freezable]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionX
+(typing.Iterator[UnboundType[_Freezable]]
+UnboundType[_Freezable]"typing.Iterator
+None *ì
+	tz_offsetÅ
++Union[builtins.int,datetime.timedelta,None]
+builtins.int"builtins.int(
+datetime.timedelta"datetime.timedelta
+None *ñ
+ignoreá
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *S
+tickG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *U
+as_argG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *T
+as_kwargD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *c
+auto_tick_secondsJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *B
+
+_Freezablefreezegun.api._Freezable
+UnboundType[TypeAlias]

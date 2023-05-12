@@ -1,0 +1,733 @@
+
+ctypesŒ	
+CDLLctypes.CDLL"builtins.object*⁄
+__init__ctypes.CDLL.__init__"
+None*$
+self
+ctypes.CDLL"ctypes.CDLL*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*(
+mode
+builtins.int"builtins.int *R
+handleD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+	use_errno
+builtins.bool"builtins.bool *4
+use_last_error
+builtins.bool"builtins.bool *S
+winmodeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¶
+__getattr__ctypes.CDLL.__getattr__"4
+ctypes._NamedFuncPointer"ctypes._NamedFuncPointer*"
+self
+ctypes.CDLL"ctypes.CDLL*$
+name
+builtins.str"builtins.str*¶
+__getitem__ctypes.CDLL.__getitem__"4
+ctypes._NamedFuncPointer"ctypes._NamedFuncPointer*"
+self
+ctypes.CDLL"ctypes.CDLL*$
+name
+builtins.str"builtins.strrF
+_func_flags_ctypes.CDLL._func_flags_
+builtins.int"builtins.intrL
+_func_restype_ctypes.CDLL._func_restype_
+ctypes._CData"ctypes._CDatar8
+_namectypes.CDLL._name
+builtins.str"builtins.strr<
+_handlectypes.CDLL._handle
+builtins.int"builtins.intrk
+_FuncPtrctypes.CDLL._FuncPtrI
+Type[ctypes._FuncPointer]*
+ctypes._FuncPointer"ctypes._FuncPointer"
+PyDLLctypes.PyDLL"ctypes.CDLL¡
+LibraryLoaderctypes.LibraryLoader"builtins.object*¬
+__init__ctypes.LibraryLoader.__init__"
+None*V
+selfL
+"ctypes.LibraryLoader[ctypes._DLLT]
+ctypes._DLLT"ctypes.LibraryLoader*5
+dlltype(
+Type[ctypes._DLLT]
+ctypes._DLLT*Ω
+__getattr__ ctypes.LibraryLoader.__getattr__"
+ctypes._DLLT*T
+selfL
+"ctypes.LibraryLoader[ctypes._DLLT]
+ctypes._DLLT"ctypes.LibraryLoader*$
+name
+builtins.str"builtins.str*Ω
+__getitem__ ctypes.LibraryLoader.__getitem__"
+ctypes._DLLT*T
+selfL
+"ctypes.LibraryLoader[ctypes._DLLT]
+ctypes._DLLT"ctypes.LibraryLoader*$
+name
+builtins.str"builtins.str*¡
+LoadLibrary ctypes.LibraryLoader.LoadLibrary"
+ctypes._DLLT*V
+selfL
+"ctypes.LibraryLoader[ctypes._DLLT]
+ctypes._DLLT"ctypes.LibraryLoader*&
+name
+builtins.str"builtins.strP‚
+
+_CDataMetactypes._CDataMeta"builtins.type*÷
+__mul__ctypes._CDataMeta.__mul__"\
+Type[ctypes.Array[ctypes._CT]]8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*+
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*%
+other
+builtins.int"builtins.int*ÿ
+__rmul__ctypes._CDataMeta.__rmul__"\
+Type[ctypes.Array[ctypes._CT]]8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*+
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*%
+other
+builtins.int"builtins.int¬
+_CDatactypes._CData"builtins.object*ö
+from_bufferctypes._CData.from_buffer"
+
+ctypes._CT*-
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*Û
+sourceÊ
+WTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]]
+LUnion[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+ctypes._CData"ctypes._CData"ctypes._WritableBuffer**
+offset
+builtins.int"builtins.int 0:classmethodp*—
+from_buffer_copyctypes._CData.from_buffer_copy"
+
+ctypes._CT*-
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*†
+sourceì
+xTypeAlias[Union[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.bytes]]¸
+mUnion[TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]],builtins.bytes]Ê
+WTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData]]
+LUnion[builtins.bytearray,builtins.memoryview,array.array[Any],ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+ctypes._CData"ctypes._CData"ctypes._WritableBuffer 
+builtins.bytes"builtins.bytes"ctypes._ReadOnlyBuffer**
+offset
+builtins.int"builtins.int 0:classmethodp*•
+from_addressctypes._CData.from_address"
+
+ctypes._CT*-
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*)
+address
+builtins.int"builtins.int0:classmethodp*‹
+
+from_paramctypes._CData.from_param"b
+$Union[ctypes._CT,ctypes._CArgObject]
+
+ctypes._CT(
+ctypes._CArgObject"ctypes._CArgObject*-
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*
+obj
+Any0:classmethodp*ø
+in_dllctypes._CData.in_dll"
+
+ctypes._CT*-
+cls$
+Type[ctypes._CT]
+
+ctypes._CT*'
+library
+ctypes.CDLL"ctypes.CDLL*&
+name
+builtins.str"builtins.str0:classmethodp@bctypes._CDataMetar>
+_b_basectypes._CData._b_base
+builtins.int"builtins.intrL
+_b_needsfree_ctypes._CData._b_needsfree_
+builtins.bool"builtins.boolr∫
+_objectsctypes._CData._objectsï
+,Union[typing.Mapping[Any,builtins.int],None]Y
+ typing.Mapping[Any,builtins.int]
+Any
+builtins.int"builtins.int"typing.Mapping
+None.
+
+_CanCastToctypes._CanCastTo"ctypes._CData6
+_PointerLikectypes._PointerLike"ctypes._CanCastTo◊
+_FuncPointerctypes._FuncPointer"ctypes._PointerLike"ctypes._CData*è
+__call__ctypes._FuncPointer.__call__"
+Any*4
+self*
+ctypes._FuncPointer"ctypes._FuncPointer*
+args
+Any*
+kwargs
+Any2©
+__init__ctypes._FuncPointer.__init__°
+__init__ctypes._FuncPointer.__init__"
+None*4
+self*
+ctypes._FuncPointer"ctypes._FuncPointer*)
+address
+builtins.int"builtins.int0:overloadX—
+__init__ctypes._FuncPointer.__init__"
+None*4
+self*
+ctypes._FuncPointer"ctypes._FuncPointer*Y
+callableK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadXŒ
+__init__ctypes._FuncPointer.__init__"
+None*4
+self*
+ctypes._FuncPointer"ctypes._FuncPointer*≈
+	func_specµ
+3Tuple[Union[builtins.str,builtins.int],ctypes.CDLL]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+ctypes.CDLL"ctypes.CDLL*ç
+
+paramflags˙
+{builtins.tuple[TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]]Í
+kTypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]Ï
+`Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]5
+Tuple[builtins.int]
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strm
+$Tuple[builtins.int,builtins.str,Any]
+builtins.int"builtins.int
+builtins.str"builtins.str
+Any"
+ctypes._PF"builtins.tuple 0:overloadXµ
+__init__ctypes._FuncPointer.__init__"
+None*4
+self*
+ctypes._FuncPointer"ctypes._FuncPointer*,
+
+vtlb_index
+builtins.int"builtins.int*&
+name
+builtins.str"builtins.str*ç
+
+paramflags˙
+{builtins.tuple[TypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]]Í
+kTypeAlias[Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]]Ï
+`Union[Tuple[builtins.int],Tuple[builtins.int,builtins.str],Tuple[builtins.int,builtins.str,Any]]5
+Tuple[builtins.int]
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strm
+$Tuple[builtins.int,builtins.str,Any]
+builtins.int"builtins.int
+builtins.str"builtins.str
+Any"
+ctypes._PF"builtins.tuple *W
+iidL
+ctypes.pointer[ctypes.c_int]
+ctypes.c_int"ctypes.c_int"ctypes.pointer 0:overloadXr¸
+restypectypes._FuncPointer.restype”
+?Union[Type[ctypes._CData],CallableType[builtins.function],None]7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CDataK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonerö
+argtypesctypes._FuncPointer.argtypesp
+$typing.Sequence[Type[ctypes._CData]]7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData"typing.Sequencer≥
+errcheckctypes._FuncPointer.errcheckà
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"ctypes._ECTB
+_NamedFuncPointerctypes._NamedFuncPointer"ctypes._FuncPointer9
+ArgumentErrorctypes.ArgumentError"builtins.Exception2
+_CArgObjectctypes._CArgObject"builtins.objectÙ	
+pointerctypes.pointer"ctypes._PointerLike"ctypes._CData*ê
+__init__ctypes.pointer.__init__"
+None*F
+self<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*
+arg
+
+ctypes._CT 2ø
+__getitem__ctypes.pointer.__getitem__∞
+__getitem__ctypes.pointer.__getitem__"
+
+ctypes._CT*D
+self<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*!
+i
+builtins.int"builtins.int0:overloadX‡
+__getitem__ctypes.pointer.__getitem__":
+builtins.list[ctypes._CT]
+
+ctypes._CT"builtins.list*D
+self<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*%
+s 
+builtins.slice"builtins.slice0:overloadX2·
+__setitem__ctypes.pointer.__setitem__ø
+__setitem__ctypes.pointer.__setitem__"
+None*D
+self<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*!
+i
+builtins.int"builtins.int*
+o
+
+ctypes._CT0:overloadXÛ
+__setitem__ctypes.pointer.__setitem__"
+None*D
+self<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*%
+s 
+builtins.slice"builtins.slice*C
+o>
+typing.Iterable[ctypes._CT]
+
+ctypes._CT"typing.Iterable0:overloadXPrE
+_type_ctypes.pointer._type_$
+Type[ctypes._CT]
+
+ctypes._CTr3
+contentsctypes.pointer.contents
+
+ctypes._CTà
+_SimpleCDatactypes._SimpleCData"ctypes._CData*û
+__init__ctypes._SimpleCData.__init__"
+None*N
+selfD
+ctypes._SimpleCData[ctypes._T]
+	ctypes._T"ctypes._SimpleCData*
+value
+	ctypes._T Pr1
+valuectypes._SimpleCData.value
+	ctypes._T,
+c_bytectypes.c_byte"ctypes._SimpleCData˙
+c_charctypes.c_char"ctypes._SimpleCData*À
+__init__ctypes.c_char.__init__"
+None*(
+self
+ctypes.c_char"ctypes.c_char*s
+valuef
+"Union[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes ©
+c_char_pctypes.c_char_p"ctypes._PointerLike"ctypes._SimpleCData*·
+__init__ctypes.c_char_p.__init__"
+None*,
+self"
+ctypes.c_char_p"ctypes.c_char_p*Ç
+valueu
+'Union[builtins.int,builtins.bytes,None]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes
+None 0
+c_doublectypes.c_double"ctypes._SimpleCData8
+c_longdoublectypes.c_longdouble"ctypes._SimpleCData.
+c_floatctypes.c_float"ctypes._SimpleCData*
+c_intctypes.c_int"ctypes._SimpleCData,
+c_int8ctypes.c_int8"ctypes._SimpleCData.
+c_int16ctypes.c_int16"ctypes._SimpleCData.
+c_int32ctypes.c_int32"ctypes._SimpleCData.
+c_int64ctypes.c_int64"ctypes._SimpleCData,
+c_longctypes.c_long"ctypes._SimpleCData4
+
+c_longlongctypes.c_longlong"ctypes._SimpleCData.
+c_shortctypes.c_short"ctypes._SimpleCData0
+c_size_tctypes.c_size_t"ctypes._SimpleCData2
+	c_ssize_tctypes.c_ssize_t"ctypes._SimpleCData.
+c_ubytectypes.c_ubyte"ctypes._SimpleCData,
+c_uintctypes.c_uint"ctypes._SimpleCData.
+c_uint8ctypes.c_uint8"ctypes._SimpleCData0
+c_uint16ctypes.c_uint16"ctypes._SimpleCData0
+c_uint32ctypes.c_uint32"ctypes._SimpleCData0
+c_uint64ctypes.c_uint64"ctypes._SimpleCData.
+c_ulongctypes.c_ulong"ctypes._SimpleCData6
+c_ulonglongctypes.c_ulonglong"ctypes._SimpleCData0
+c_ushortctypes.c_ushort"ctypes._SimpleCDataE
+c_void_pctypes.c_void_p"ctypes._PointerLike"ctypes._SimpleCData.
+c_wcharctypes.c_wchar"ctypes._SimpleCDataß
+	c_wchar_pctypes.c_wchar_p"ctypes._PointerLike"ctypes._SimpleCData*›
+__init__ctypes.c_wchar_p.__init__"
+None*.
+self$
+ctypes.c_wchar_p"ctypes.c_wchar_p*|
+valueo
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None ≤
+c_boolctypes.c_bool"ctypes._SimpleCData*É
+__init__ctypes.c_bool.__init__"
+None*(
+self
+ctypes.c_bool"ctypes.c_bool*+
+value
+builtins.bool"builtins.bool G
+	py_objectctypes.py_object"ctypes._CanCastTo"ctypes._SimpleCDataP§
+_CFieldctypes._CField"builtins.objectr=
+offsetctypes._CField.offset
+builtins.int"builtins.intr9
+sizectypes._CField.size
+builtins.int"builtins.intú
+_StructUnionMetactypes._StructUnionMeta"ctypes._CDataMeta*∂
+__getattr__#ctypes._StructUnionMeta.__getattr__" 
+ctypes._CField"ctypes._CField*:
+self2
+ctypes._StructUnionMeta"ctypes._StructUnionMeta*$
+name
+builtins.str"builtins.strr’
+_fields_ ctypes._StructUnionMeta._fields_¶
+ttyping.Sequence[Union[Tuple[builtins.str,Type[ctypes._CData]],Tuple[builtins.str,Type[ctypes._CData],builtins.int]]]ú
+cUnion[Tuple[builtins.str,Type[ctypes._CData]],Tuple[builtins.str,Type[ctypes._CData],builtins.int]]Ç
+'Tuple[builtins.str,Type[ctypes._CData]]
+builtins.str"builtins.str7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData≠
+4Tuple[builtins.str,Type[ctypes._CData],builtins.int]
+builtins.str"builtins.str7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData
+builtins.int"builtins.int"typing.SequencerF
+_pack_ctypes._StructUnionMeta._pack_
+builtins.int"builtins.intrÇ
+_anonymous_#ctypes._StructUnionMeta._anonymous_N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence√
+_StructUnionBasectypes._StructUnionBase"ctypes._CData*ò
+__init__ ctypes._StructUnionBase.__init__"
+None*<
+self2
+ctypes._StructUnionBase"ctypes._StructUnionBase*
+args
+Any*
+kw
+Any*ù
+__getattr__#ctypes._StructUnionBase.__getattr__"
+Any*:
+self2
+ctypes._StructUnionBase"ctypes._StructUnionBase*$
+name
+builtins.str"builtins.str*∞
+__setattr__#ctypes._StructUnionBase.__setattr__"
+None*:
+self2
+ctypes._StructUnionBase"ctypes._StructUnionBase*$
+name
+builtins.str"builtins.str*
+value
+Any@bctypes._StructUnionMeta.
+Unionctypes.Union"ctypes._StructUnionBase6
+	Structurectypes.Structure"ctypes._StructUnionBaseA
+BigEndianStructurectypes.BigEndianStructure"ctypes.StructureG
+LittleEndianStructurectypes.LittleEndianStructure"ctypes.Structureã
+Arrayctypes.Array"ctypes._CData*Ç
+__init__ctypes.Array.__init__"
+None*B
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*
+args
+Any*ï
+__iter__ctypes.Array.__iter__"0
+typing.Iterator[Any]
+Any"typing.Iterator*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*
+__len__ctypes.Array.__len__"
+builtins.int"builtins.int*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array2ú
+__getitem__ctypes.Array.__getitem__£
+__getitem__ctypes.Array.__getitem__"
+Any*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*!
+i
+builtins.int"builtins.int0:overloadXÃ
+__getitem__ctypes.Array.__getitem__",
+builtins.list[Any]
+Any"builtins.list*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*%
+s 
+builtins.slice"builtins.slice0:overloadX2æ
+__setitem__ctypes.Array.__setitem__≤
+__setitem__ctypes.Array.__setitem__"
+None*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*!
+i
+builtins.int"builtins.int*
+o
+Any0:overloadXﬂ
+__setitem__ctypes.Array.__setitem__"
+None*@
+self8
+ctypes.Array[ctypes._CT]
+
+ctypes._CT"ctypes.Array*%
+s 
+builtins.slice"builtins.slice*5
+o0
+typing.Iterable[Any]
+Any"typing.Iterable0:overloadXPr?
+_length_ctypes.Array._length_
+builtins.int"builtins.intrC
+_type_ctypes.Array._type_$
+Type[ctypes._CT]
+
+ctypes._CTr9
+rawctypes.Array.raw 
+builtins.bytes"builtins.bytesr$
+valuectypes.Array.value
+Anyã
+	CFUNCTYPEctypes.CFUNCTYPE"I
+Type[ctypes._FuncPointer]*
+ctypes._FuncPointer"ctypes._FuncPointer*s
+restypef
+Union[Type[ctypes._CData],None]7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData
+None*E
+argtypes7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData*/
+	use_errno
+builtins.bool"builtins.bool *4
+use_last_error
+builtins.bool"builtins.bool ¶
+
+PYFUNCTYPEctypes.PYFUNCTYPE"I
+Type[ctypes._FuncPointer]*
+ctypes._FuncPointer"ctypes._FuncPointer*s
+restypef
+Union[Type[ctypes._CData],None]7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CData
+None*E
+argtypes7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CDatad
+	addressofctypes.addressof"
+builtins.int"builtins.int*'
+obj
+ctypes._CData"ctypes._CData’
+	alignmentctypes.alignment"
+builtins.int"builtins.int*ó
+obj_or_typeÖ
+(Union[ctypes._CData,Type[ctypes._CData]]
+ctypes._CData"ctypes._CData7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CDataî
+byrefctypes.byref"(
+ctypes._CArgObject"ctypes._CArgObject*'
+obj
+ctypes._CData"ctypes._CData**
+offset
+builtins.int"builtins.int à
+castctypes.cast"
+ctypes._CastT*™
+obj†
+4Union[ctypes._CData,ctypes._CArgObject,builtins.int]
+ctypes._CData"ctypes._CData(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int*3
+typ*
+Type[ctypes._CastT]
+ctypes._CastTƒ
+create_string_bufferctypes.create_string_buffer"K
+ctypes.Array[ctypes.c_char]
+ctypes.c_char"ctypes.c_char"ctypes.Array*p
+initf
+"Union[builtins.int,builtins.bytes]
+builtins.int"builtins.int 
+builtins.bytes"builtins.bytes*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None √
+create_unicode_bufferctypes.create_unicode_buffer"N
+ctypes.Array[ctypes.c_wchar] 
+ctypes.c_wchar"ctypes.c_wchar"ctypes.Array*j
+init`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ;
+	get_errnoctypes.get_errno"
+builtins.int"builtins.intÿ
+memmovectypes.memmove"
+None*Ï
+dst‚
+WTypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]
+LUnion[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]*
+ctypes._PointerLike"ctypes._PointerLike*
+ctypes.Array[Any]
+Any"ctypes.Array(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int"ctypes._CVoidPLike*ö
+srcê
+xTypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]¯
+mUnion[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]‚
+WTypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]
+LUnion[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]*
+ctypes._PointerLike"ctypes._PointerLike*
+ctypes.Array[Any]
+Any"ctypes.Array(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int"ctypes._CVoidPLike 
+builtins.bytes"builtins.bytes"ctypes._CVoidConstPLike*'
+count
+builtins.int"builtins.intﬁ
+memsetctypes.memset"
+None*Ï
+dst‚
+WTypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]
+LUnion[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]*
+ctypes._PointerLike"ctypes._PointerLike*
+ctypes.Array[Any]
+Any"ctypes.Array(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int"ctypes._CVoidPLike*#
+c
+builtins.int"builtins.int*'
+count
+builtins.int"builtins.int≠
+POINTERctypes.POINTER"b
+ Type[ctypes.pointer[ctypes._CT]]<
+ctypes.pointer[ctypes._CT]
+
+ctypes._CT"ctypes.pointer*.
+type$
+Type[ctypes._CT]
+
+ctypes._CTr
+resizectypes.resize"
+None*'
+obj
+ctypes._CData"ctypes._CData*&
+size
+builtins.int"builtins.intd
+	set_errnoctypes.set_errno"
+builtins.int"builtins.int*'
+value
+builtins.int"builtins.intœ
+sizeofctypes.sizeof"
+builtins.int"builtins.int*ó
+obj_or_typeÖ
+(Union[ctypes._CData,Type[ctypes._CData]]
+ctypes._CData"ctypes._CData7
+Type[ctypes._CData]
+ctypes._CData"ctypes._CDataä
+	string_atctypes.string_at" 
+builtins.bytes"builtins.bytes*û
+addressê
+xTypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]¯
+mUnion[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]‚
+WTypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]
+LUnion[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]*
+ctypes._PointerLike"ctypes._PointerLike*
+ctypes.Array[Any]
+Any"ctypes.Array(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int"ctypes._CVoidPLike 
+builtins.bytes"builtins.bytes"ctypes._CVoidConstPLike*(
+size
+builtins.int"builtins.int à
+
+wstring_atctypes.wstring_at"
+builtins.str"builtins.str*û
+addressê
+xTypeAlias[Union[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]]¯
+mUnion[TypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]],builtins.bytes]‚
+WTypeAlias[Union[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]]
+LUnion[ctypes._PointerLike,ctypes.Array[Any],ctypes._CArgObject,builtins.int]*
+ctypes._PointerLike"ctypes._PointerLike*
+ctypes.Array[Any]
+Any"ctypes.Array(
+ctypes._CArgObject"ctypes._CArgObject
+builtins.int"builtins.int"ctypes._CVoidPLike 
+builtins.bytes"builtins.bytes"ctypes._CVoidConstPLike*(
+size
+builtins.int"builtins.int *C
+_UnionTtyping.Union*
+typing._SpecialForm"typing._SpecialForm*?
+RTLD_GLOBALctypes.RTLD_GLOBAL
+builtins.int"builtins.int*=
+
+RTLD_LOCALctypes.RTLD_LOCAL
+builtins.int"builtins.int*A
+DEFAULT_MODEctypes.DEFAULT_MODE
+builtins.int"builtins.int*j
+cdllctypes.cdllU
+!ctypes.LibraryLoader[ctypes.CDLL]
+ctypes.CDLL"ctypes.CDLL"ctypes.LibraryLoader*o
+pydllctypes.pydllX
+"ctypes.LibraryLoader[ctypes.PyDLL]
+ctypes.PyDLL"ctypes.PyDLL"ctypes.LibraryLoader*;
+	pythonapictypes.pythonapi
+ctypes.PyDLL"ctypes.PyDLL*h
+c_bufferctypes.c_bufferK
+CallableType[builtins.function]&
+builtins.function"builtins.function

@@ -1,0 +1,498 @@
+
+werkzeug.localˇ
+Localwerkzeug.local.Local"builtins.object*Ä
+__init__werkzeug.local.Local.__init__"
+None*6
+self,
+werkzeug.local.Local"werkzeug.local.Local*í
+context_var˛
+CUnion[contextvars.ContextVar[builtins.dict[builtins.str,Any]],None]™
+7contextvars.ContextVar[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"contextvars.ContextVar
+None *‡
+__iter__werkzeug.local.Local.__iter__"
+(typing.Iterator[Tuple[builtins.str,Any]]B
+Tuple[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Iterator*4
+self,
+werkzeug.local.Local"werkzeug.local.Local*¨
+__call__werkzeug.local.Local.__call__"D
+werkzeug.local.LocalProxy[Any]
+Any"werkzeug.local.LocalProxy*6
+self,
+werkzeug.local.Local"werkzeug.local.Local*&
+name
+builtins.str"builtins.str*[
+unbound_messageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *}
+__release_local__&werkzeug.local.Local.__release_local__"
+None*6
+self,
+werkzeug.local.Local"werkzeug.local.Local*î
+__getattr__ werkzeug.local.Local.__getattr__"
+Any*4
+self,
+werkzeug.local.Local"werkzeug.local.Local*$
+name
+builtins.str"builtins.str*ß
+__setattr__ werkzeug.local.Local.__setattr__"
+None*4
+self,
+werkzeug.local.Local"werkzeug.local.Local*$
+name
+builtins.str"builtins.str*
+value
+Any*ï
+__delattr__ werkzeug.local.Local.__delattr__"
+None*4
+self,
+werkzeug.local.Local"werkzeug.local.Local*$
+name
+builtins.str"builtins.strrb
+	__slots__werkzeug.local.Local.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.stré
+
+LocalStackwerkzeug.local.LocalStack"builtins.object*¶
+__init__"werkzeug.local.LocalStack.__init__"
+None*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack*Å
+context_varÌ
+CUnion[contextvars.ContextVar[builtins.list[werkzeug.local.T]],None]ô
+7contextvars.ContextVar[builtins.list[werkzeug.local.T]]F
+builtins.list[werkzeug.local.T]
+werkzeug.local.T"builtins.list"contextvars.ContextVar
+None *¥
+__release_local__+werkzeug.local.LocalStack.__release_local__"
+None*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack*˜
+pushwerkzeug.local.LocalStack.push"F
+builtins.list[werkzeug.local.T]
+werkzeug.local.T"builtins.list*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack*
+obj
+werkzeug.local.T*–
+popwerkzeug.local.LocalStack.pop"@
+Union[werkzeug.local.T,None]
+werkzeug.local.T
+None*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack*ﬁ
+topwerkzeug.local.LocalStack.top"@
+Union[werkzeug.local.T,None]
+werkzeug.local.T
+None*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack0:property`*ç
+__call__"werkzeug.local.LocalStack.__call__"D
+werkzeug.local.LocalProxy[Any]
+Any"werkzeug.local.LocalProxy*h
+self^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStack*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+unbound_messageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None Prg
+	__slots__#werkzeug.local.LocalStack.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.strr 
+_storage"werkzeug.local.LocalStack._storageô
+7contextvars.ContextVar[builtins.list[werkzeug.local.T]]F
+builtins.list[werkzeug.local.T]
+werkzeug.local.T"builtins.list"contextvars.ContextVarô
+LocalManagerwerkzeug.local.LocalManager"builtins.object*∂
+__init__$werkzeug.local.LocalManager.__init__"
+None*D
+self:
+werkzeug.local.LocalManager"werkzeug.local.LocalManager*≥
+locals§
+ãUnion[None,werkzeug.local.Local,werkzeug.local.LocalStack[Any],typing.Iterable[Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]]]
+None,
+werkzeug.local.Local"werkzeug.local.LocalD
+werkzeug.local.LocalStack[Any]
+Any"werkzeug.local.LocalStackì
+Ktyping.Iterable[Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]]]≤
+:Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]],
+werkzeug.local.Local"werkzeug.local.LocalD
+werkzeug.local.LocalStack[Any]
+Any"werkzeug.local.LocalStack"typing.Iterable *~
+cleanup#werkzeug.local.LocalManager.cleanup"
+None*D
+self:
+werkzeug.local.LocalManager"werkzeug.local.LocalManager* 
+make_middleware+werkzeug.local.LocalManager.make_middleware"õ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*D
+self:
+werkzeug.local.LocalManager"werkzeug.local.LocalManager*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*¡
+
+middleware&werkzeug.local.LocalManager.middleware"õ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*D
+self:
+werkzeug.local.LocalManager"werkzeug.local.LocalManager*¶
+funcõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*í
+__repr__$werkzeug.local.LocalManager.__repr__"
+builtins.str"builtins.str*B
+self:
+werkzeug.local.LocalManager"werkzeug.local.LocalManagerri
+	__slots__%werkzeug.local.LocalManager.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.strrê
+locals"werkzeug.local.LocalManager.localsb
+#builtins.list[werkzeug.local.Local],
+werkzeug.local.Local"werkzeug.local.Local"builtins.listú
+_ProxyLookupwerkzeug.local._ProxyLookup"builtins.object*ó
+__init__$werkzeug.local._ProxyLookup.__init__"
+None*D
+self:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup*ê
+fÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ó
+fallbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *9
+class_value&
+Union[Any,None]
+Any
+None *-
+is_attr
+builtins.bool"builtins.bool *Å
+__set_name__(werkzeug.local._ProxyLookup.__set_name__"
+None*D
+self:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup*O
+ownerD
+werkzeug.local.LocalProxy[Any]
+Any"werkzeug.local.LocalProxy*&
+name
+builtins.str"builtins.str*ß
+__get__#werkzeug.local._ProxyLookup.__get__"
+Any*D
+self:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup*R
+instanceD
+werkzeug.local.LocalProxy[Any]
+Any"werkzeug.local.LocalProxy*T
+ownerG
+Union[builtins.type,None]
+builtins.type"builtins.type
+None *í
+__repr__$werkzeug.local._ProxyLookup.__repr__"
+builtins.str"builtins.str*B
+self:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup*˚
+__call__$werkzeug.local._ProxyLookup.__call__"
+Any*D
+self:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup*R
+instanceD
+werkzeug.local.LocalProxy[Any]
+Any"werkzeug.local.LocalProxy*
+args
+Any*
+kwargs
+Anyrñ
+	__slots__%werkzeug.local._ProxyLookup.__slots__·
+GTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strrµ
+bind_f"werkzeug.local._ProxyLookup.bind_fÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonerπ
+fallback$werkzeug.local._ProxyLookup.fallbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner^
+class_value'werkzeug.local._ProxyLookup.class_value&
+Union[Any,None]
+Any
+NonerN
+is_attr#werkzeug.local._ProxyLookup.is_attr
+builtins.bool"builtins.boolrF
+name werkzeug.local._ProxyLookup.name
+builtins.str"builtins.strß
+	_ProxyIOpwerkzeug.local._ProxyIOp"werkzeug.local._ProxyLookup*§
+__init__!werkzeug.local._ProxyIOp.__init__"
+None*>
+self4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOp*ê
+fÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ó
+fallbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None r<
+	__slots__"werkzeug.local._ProxyIOp.__slots__
+Tuple[]àS
+
+LocalProxywerkzeug.local.LocalProxy"builtins.object*™
+__init__"werkzeug.local.LocalProxy.__init__"
+None*h
+self^
++werkzeug.local.LocalProxy[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalProxy*÷
+local 
+êUnion[contextvars.ContextVar[werkzeug.local.T],werkzeug.local.Local,werkzeug.local.LocalStack[werkzeug.local.T],CallableType[builtins.function]]X
+(contextvars.ContextVar[werkzeug.local.T]
+werkzeug.local.T"contextvars.ContextVar,
+werkzeug.local.Local"werkzeug.local.Local^
++werkzeug.local.LocalStack[werkzeug.local.T]
+werkzeug.local.T"werkzeug.local.LocalStackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+unbound_messageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None Prí
+	__slots__#werkzeug.local.LocalProxy.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strrë
+_get_current_object-werkzeug.local.LocalProxy._get_current_objectK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrp
+__wrapped__%werkzeug.local.LocalProxy.__wrapped__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr.
+__repr__"werkzeug.local.LocalProxy.__repr__r,
+__str__!werkzeug.local.LocalProxy.__str__rl
+	__bytes__#werkzeug.local.LocalProxy.__bytes__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr2
+
+__format__$werkzeug.local.LocalProxy.__format__rf
+__lt__ werkzeug.local.LocalProxy.__lt__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprf
+__le__ werkzeug.local.LocalProxy.__le__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr*
+__eq__ werkzeug.local.LocalProxy.__eq__r*
+__ne__ werkzeug.local.LocalProxy.__ne__rf
+__gt__ werkzeug.local.LocalProxy.__gt__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprf
+__ge__ werkzeug.local.LocalProxy.__ge__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr.
+__hash__"werkzeug.local.LocalProxy.__hash__rj
+__bool__"werkzeug.local.LocalProxy.__bool__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__getattr__%werkzeug.local.LocalProxy.__getattr__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr4
+__setattr__%werkzeug.local.LocalProxy.__setattr__r4
+__delattr__%werkzeug.local.LocalProxy.__delattr__r,
+__dir__!werkzeug.local.LocalProxy.__dir__r0
+	__class__#werkzeug.local.LocalProxy.__class__r|
+__instancecheck__+werkzeug.local.LocalProxy.__instancecheck__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookupr|
+__subclasscheck__+werkzeug.local.LocalProxy.__subclasscheck__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__call__"werkzeug.local.LocalProxy.__call__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__len__!werkzeug.local.LocalProxy.__len__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprx
+__length_hint__)werkzeug.local.LocalProxy.__length_hint__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__getitem__%werkzeug.local.LocalProxy.__getitem__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__setitem__%werkzeug.local.LocalProxy.__setitem__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__delitem__%werkzeug.local.LocalProxy.__delitem__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__iter__"werkzeug.local.LocalProxy.__iter__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__next__"werkzeug.local.LocalProxy.__next__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprr
+__reversed__&werkzeug.local.LocalProxy.__reversed__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprr
+__contains__&werkzeug.local.LocalProxy.__contains__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__add__!werkzeug.local.LocalProxy.__add__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__sub__!werkzeug.local.LocalProxy.__sub__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__mul__!werkzeug.local.LocalProxy.__mul__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__matmul__$werkzeug.local.LocalProxy.__matmul__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__truediv__%werkzeug.local.LocalProxy.__truediv__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprr
+__floordiv__&werkzeug.local.LocalProxy.__floordiv__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__mod__!werkzeug.local.LocalProxy.__mod__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__divmod__$werkzeug.local.LocalProxy.__divmod__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__pow__!werkzeug.local.LocalProxy.__pow__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__lshift__$werkzeug.local.LocalProxy.__lshift__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__rshift__$werkzeug.local.LocalProxy.__rshift__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__and__!werkzeug.local.LocalProxy.__and__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__xor__!werkzeug.local.LocalProxy.__xor__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprf
+__or__ werkzeug.local.LocalProxy.__or__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__radd__"werkzeug.local.LocalProxy.__radd__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rsub__"werkzeug.local.LocalProxy.__rsub__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rmul__"werkzeug.local.LocalProxy.__rmul__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__rmatmul__%werkzeug.local.LocalProxy.__rmatmul__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprr
+__rtruediv__&werkzeug.local.LocalProxy.__rtruediv__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprt
+__rfloordiv__'werkzeug.local.LocalProxy.__rfloordiv__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rmod__"werkzeug.local.LocalProxy.__rmod__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__rdivmod__%werkzeug.local.LocalProxy.__rdivmod__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rpow__"werkzeug.local.LocalProxy.__rpow__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__rlshift__%werkzeug.local.LocalProxy.__rlshift__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__rrshift__%werkzeug.local.LocalProxy.__rrshift__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rand__"werkzeug.local.LocalProxy.__rand__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__rxor__"werkzeug.local.LocalProxy.__rxor__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__ror__!werkzeug.local.LocalProxy.__ror__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprd
+__iadd__"werkzeug.local.LocalProxy.__iadd__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__isub__"werkzeug.local.LocalProxy.__isub__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__imul__"werkzeug.local.LocalProxy.__imul__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprj
+__imatmul__%werkzeug.local.LocalProxy.__imatmul__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprl
+__itruediv__&werkzeug.local.LocalProxy.__itruediv__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprn
+__ifloordiv__'werkzeug.local.LocalProxy.__ifloordiv__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__imod__"werkzeug.local.LocalProxy.__imod__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__ipow__"werkzeug.local.LocalProxy.__ipow__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprj
+__ilshift__%werkzeug.local.LocalProxy.__ilshift__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprj
+__irshift__%werkzeug.local.LocalProxy.__irshift__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__iand__"werkzeug.local.LocalProxy.__iand__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprd
+__ixor__"werkzeug.local.LocalProxy.__ixor__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprb
+__ior__!werkzeug.local.LocalProxy.__ior__4
+werkzeug.local._ProxyIOp"werkzeug.local._ProxyIOprh
+__neg__!werkzeug.local.LocalProxy.__neg__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__pos__!werkzeug.local.LocalProxy.__pos__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__abs__!werkzeug.local.LocalProxy.__abs__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__invert__$werkzeug.local.LocalProxy.__invert__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprp
+__complex__%werkzeug.local.LocalProxy.__complex__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprh
+__int__!werkzeug.local.LocalProxy.__int__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__float__#werkzeug.local.LocalProxy.__float__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__index__#werkzeug.local.LocalProxy.__index__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__round__#werkzeug.local.LocalProxy.__round__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__trunc__#werkzeug.local.LocalProxy.__trunc__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__floor__#werkzeug.local.LocalProxy.__floor__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__ceil__"werkzeug.local.LocalProxy.__ceil__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__enter__#werkzeug.local.LocalProxy.__enter__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__exit__"werkzeug.local.LocalProxy.__exit__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__await__#werkzeug.local.LocalProxy.__await__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__aiter__#werkzeug.local.LocalProxy.__aiter__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__anext__#werkzeug.local.LocalProxy.__anext__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprn
+
+__aenter__$werkzeug.local.LocalProxy.__aenter__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprl
+	__aexit__#werkzeug.local.LocalProxy.__aexit__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprj
+__copy__"werkzeug.local.LocalProxy.__copy__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookuprr
+__deepcopy__&werkzeug.local.LocalProxy.__deepcopy__:
+werkzeug.local._ProxyLookup"werkzeug.local._ProxyLookup¯
+release_localwerkzeug.local.release_local"
+None*æ
+local≤
+:Union[werkzeug.local.Local,werkzeug.local.LocalStack[Any]],
+werkzeug.local.Local"werkzeug.local.LocalD
+werkzeug.local.LocalStack[Any]
+Any"werkzeug.local.LocalStack[
+
+_l_to_r_opwerkzeug.local._l_to_r_op"
+werkzeug.local.F*
+op
+werkzeug.local.FX
+	_identitywerkzeug.local._identity"
+werkzeug.local.T*
+o
+werkzeug.local.T*
+ttyping 

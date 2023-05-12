@@ -1,0 +1,334 @@
+
+picklež
+PickleBufferpickle.PickleBuffer"builtins.object*}
+__init__pickle.PickleBuffer.__init__"
+None*4
+self*
+pickle.PickleBuffer"pickle.PickleBuffer*
+buffer
+Any*€
+rawpickle.PickleBuffer.raw"*
+builtins.memoryview"builtins.memoryview*4
+self*
+pickle.PickleBuffer"pickle.PickleBuffer*f
+releasepickle.PickleBuffer.release"
+None*4
+self*
+pickle.PickleBuffer"pickle.PickleBuffer5
+PickleErrorpickle.PickleError"builtins.Exception9
+PicklingErrorpickle.PicklingError"pickle.PickleError=
+UnpicklingErrorpickle.UnpicklingError"pickle.PickleError½
+
+Picklerpickle.Pickler"builtins.object*¬
+__init__pickle.Pickler.__init__"
+None**
+self 
+pickle.Pickler"pickle.Pickler*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*T
+protocolD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *1
+fix_imports
+builtins.bool"builtins.bool *ó
+buffer_callbackÛ
+6TypeAlias[Union[CallableType[builtins.function],None]]†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pickle._BufferCallback *z
+reducer_overridepickle.Pickler.reducer_override"
+Any**
+self 
+pickle.Pickler"pickle.Pickler*
+obj
+Any*c
+dumppickle.Pickler.dump"
+None**
+self 
+pickle.Pickler"pickle.Pickler*
+__obj
+Any*]
+
+clear_memopickle.Pickler.clear_memo"
+None**
+self 
+pickle.Pickler"pickle.Pickler*t
+persistent_idpickle.Pickler.persistent_id"
+Any**
+self 
+pickle.Pickler"pickle.Pickler*
+obj
+Anyr;
+fastpickle.Pickler.fast
+builtins.bool"builtins.boolrî
+dispatch_tablepickle.Pickler.dispatch_table¼
+=typing.Mapping[builtins.type,CallableType[builtins.function]]
+builtins.type"builtins.typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mappingý
+	Unpicklerpickle.Unpickler"builtins.object*±
+__init__pickle.Unpickler.__init__"
+None*.
+self$
+pickle.Unpickler"pickle.Unpickler*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*1
+fix_imports
+builtins.bool"builtins.bool *,
+encoding
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str *o
+buffers`
+ Union[typing.Iterable[Any],None]0
+typing.Iterable[Any]
+Any"typing.Iterable
+None *V
+loadpickle.Unpickler.load"
+Any*.
+self$
+pickle.Unpickler"pickle.Unpickler*À
+
+find_classpickle.Unpickler.find_class"
+Any*.
+self$
+pickle.Unpickler"pickle.Unpickler*-
+__module_name
+builtins.str"builtins.str*-
+__global_name
+builtins.str"builtins.str*~
+persistent_load pickle.Unpickler.persistent_load"
+Any*.
+self$
+pickle.Unpickler"pickle.Unpickler*
+pid
+Any‚
+dumppickle.dump"
+None*
+obj
+Any*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*T
+protocolD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *1
+fix_imports
+builtins.bool"builtins.bool *ó
+buffer_callbackÛ
+6TypeAlias[Union[CallableType[builtins.function],None]]†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pickle._BufferCallback È
+dumpspickle.dumps" 
+builtins.bytes"builtins.bytes*
+obj
+Any*T
+protocolD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *1
+fix_imports
+builtins.bool"builtins.bool *ó
+buffer_callbackÛ
+6TypeAlias[Union[CallableType[builtins.function],None]]†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pickle._BufferCallback î
+loadpickle.load"
+Any*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*1
+fix_imports
+builtins.bool"builtins.bool *,
+encoding
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str *o
+buffers`
+ Union[typing.Iterable[Any],None]0
+typing.Iterable[Any]
+Any"typing.Iterable
+None È
+loadspickle.loads"
+Any**
+__data 
+builtins.bytes"builtins.bytes*1
+fix_imports
+builtins.bool"builtins.bool *,
+encoding
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str *o
+buffers`
+ Union[typing.Iterable[Any],None]0
+typing.Iterable[Any]
+Any"typing.Iterable
+None h
+encode_longpickle.encode_long" 
+builtins.bytes"builtins.bytes*#
+x
+builtins.int"builtins.intk
+decode_longpickle.decode_long"
+builtins.int"builtins.int**
+data 
+builtins.bytes"builtins.bytes*I
+HIGHEST_PROTOCOLpickle.HIGHEST_PROTOCOL
+builtins.int"builtins.int*I
+DEFAULT_PROTOCOLpickle.DEFAULT_PROTOCOL
+builtins.int"builtins.int*f
+bytes_typespickle.bytes_typesC
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"builtins.tuple*5
+MARKpickle.MARK 
+builtins.bytes"builtins.bytes*5
+STOPpickle.STOP 
+builtins.bytes"builtins.bytes*3
+POP
+pickle.POP 
+builtins.bytes"builtins.bytes*=
+POP_MARKpickle.POP_MARK 
+builtins.bytes"builtins.bytes*3
+DUP
+pickle.DUP 
+builtins.bytes"builtins.bytes*7
+FLOATpickle.FLOAT 
+builtins.bytes"builtins.bytes*3
+INT
+pickle.INT 
+builtins.bytes"builtins.bytes*9
+BININTpickle.BININT 
+builtins.bytes"builtins.bytes*;
+BININT1pickle.BININT1 
+builtins.bytes"builtins.bytes*5
+LONGpickle.LONG 
+builtins.bytes"builtins.bytes*;
+BININT2pickle.BININT2 
+builtins.bytes"builtins.bytes*5
+NONEpickle.NONE 
+builtins.bytes"builtins.bytes*9
+PERSIDpickle.PERSID 
+builtins.bytes"builtins.bytes*?
+	BINPERSIDpickle.BINPERSID 
+builtins.bytes"builtins.bytes*9
+REDUCEpickle.REDUCE 
+builtins.bytes"builtins.bytes*9
+STRINGpickle.STRING 
+builtins.bytes"builtins.bytes*?
+	BINSTRINGpickle.BINSTRING 
+builtins.bytes"builtins.bytes*K
+SHORT_BINSTRINGpickle.SHORT_BINSTRING 
+builtins.bytes"builtins.bytes*;
+UNICODEpickle.UNICODE 
+builtins.bytes"builtins.bytes*A
+
+BINUNICODEpickle.BINUNICODE 
+builtins.bytes"builtins.bytes*9
+APPENDpickle.APPEND 
+builtins.bytes"builtins.bytes*7
+BUILDpickle.BUILD 
+builtins.bytes"builtins.bytes*9
+GLOBALpickle.GLOBAL 
+builtins.bytes"builtins.bytes*5
+DICTpickle.DICT 
+builtins.bytes"builtins.bytes*A
+
+EMPTY_DICTpickle.EMPTY_DICT 
+builtins.bytes"builtins.bytes*;
+APPENDSpickle.APPENDS 
+builtins.bytes"builtins.bytes*3
+GET
+pickle.GET 
+builtins.bytes"builtins.bytes*9
+BINGETpickle.BINGET 
+builtins.bytes"builtins.bytes*5
+INSTpickle.INST 
+builtins.bytes"builtins.bytes*C
+LONG_BINGETpickle.LONG_BINGET 
+builtins.bytes"builtins.bytes*5
+LISTpickle.LIST 
+builtins.bytes"builtins.bytes*A
+
+EMPTY_LISTpickle.EMPTY_LIST 
+builtins.bytes"builtins.bytes*3
+OBJ
+pickle.OBJ 
+builtins.bytes"builtins.bytes*3
+PUT
+pickle.PUT 
+builtins.bytes"builtins.bytes*9
+BINPUTpickle.BINPUT 
+builtins.bytes"builtins.bytes*C
+LONG_BINPUTpickle.LONG_BINPUT 
+builtins.bytes"builtins.bytes*;
+SETITEMpickle.SETITEM 
+builtins.bytes"builtins.bytes*7
+TUPLEpickle.TUPLE 
+builtins.bytes"builtins.bytes*C
+EMPTY_TUPLEpickle.EMPTY_TUPLE 
+builtins.bytes"builtins.bytes*=
+SETITEMSpickle.SETITEMS 
+builtins.bytes"builtins.bytes*=
+BINFLOATpickle.BINFLOAT 
+builtins.bytes"builtins.bytes*5
+TRUEpickle.TRUE 
+builtins.bytes"builtins.bytes*7
+FALSEpickle.FALSE 
+builtins.bytes"builtins.bytes*7
+PROTOpickle.PROTO 
+builtins.bytes"builtins.bytes*9
+NEWOBJpickle.NEWOBJ 
+builtins.bytes"builtins.bytes*5
+EXT1pickle.EXT1 
+builtins.bytes"builtins.bytes*5
+EXT2pickle.EXT2 
+builtins.bytes"builtins.bytes*5
+EXT4pickle.EXT4 
+builtins.bytes"builtins.bytes*9
+TUPLE1pickle.TUPLE1 
+builtins.bytes"builtins.bytes*9
+TUPLE2pickle.TUPLE2 
+builtins.bytes"builtins.bytes*9
+TUPLE3pickle.TUPLE3 
+builtins.bytes"builtins.bytes*;
+NEWTRUEpickle.NEWTRUE 
+builtins.bytes"builtins.bytes*=
+NEWFALSEpickle.NEWFALSE 
+builtins.bytes"builtins.bytes*7
+LONG1pickle.LONG1 
+builtins.bytes"builtins.bytes*7
+LONG4pickle.LONG4 
+builtins.bytes"builtins.bytes*=
+BINBYTESpickle.BINBYTES 
+builtins.bytes"builtins.bytes*I
+SHORT_BINBYTESpickle.SHORT_BINBYTES 
+builtins.bytes"builtins.bytes*M
+SHORT_BINUNICODEpickle.SHORT_BINUNICODE 
+builtins.bytes"builtins.bytes*C
+BINUNICODE8pickle.BINUNICODE8 
+builtins.bytes"builtins.bytes*?
+	BINBYTES8pickle.BINBYTES8 
+builtins.bytes"builtins.bytes*?
+	EMPTY_SETpickle.EMPTY_SET 
+builtins.bytes"builtins.bytes*=
+ADDITEMSpickle.ADDITEMS 
+builtins.bytes"builtins.bytes*?
+	FROZENSETpickle.FROZENSET 
+builtins.bytes"builtins.bytes*?
+	NEWOBJ_EXpickle.NEWOBJ_EX 
+builtins.bytes"builtins.bytes*E
+STACK_GLOBALpickle.STACK_GLOBAL 
+builtins.bytes"builtins.bytes*;
+MEMOIZEpickle.MEMOIZE 
+builtins.bytes"builtins.bytes*7
+FRAMEpickle.FRAME 
+builtins.bytes"builtins.bytes

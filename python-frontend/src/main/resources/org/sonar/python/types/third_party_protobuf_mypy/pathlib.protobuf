@@ -1,0 +1,945 @@
+
+pathlibê!
+PurePathpathlib.PurePath"os.PathLike*Ù
+__new__pathlib.PurePath.__new__"
+
+pathlib._P*-
+cls$
+Type[pathlib._P]
+
+pathlib._P*ô
+argsé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*s
+__hash__pathlib.PurePath.__hash__"
+builtins.int"builtins.int*.
+self$
+pathlib.PurePath"pathlib.PurePath*ž
+__lt__pathlib.PurePath.__lt__"
+builtins.bool"builtins.bool*,
+self$
+pathlib.PurePath"pathlib.PurePath*-
+other$
+pathlib.PurePath"pathlib.PurePath*ž
+__le__pathlib.PurePath.__le__"
+builtins.bool"builtins.bool*,
+self$
+pathlib.PurePath"pathlib.PurePath*-
+other$
+pathlib.PurePath"pathlib.PurePath*ž
+__gt__pathlib.PurePath.__gt__"
+builtins.bool"builtins.bool*,
+self$
+pathlib.PurePath"pathlib.PurePath*-
+other$
+pathlib.PurePath"pathlib.PurePath*ž
+__ge__pathlib.PurePath.__ge__"
+builtins.bool"builtins.bool*,
+self$
+pathlib.PurePath"pathlib.PurePath*-
+other$
+pathlib.PurePath"pathlib.PurePath*Ç
+__truediv__pathlib.PurePath.__truediv__"
+
+pathlib._P*
+self
+
+pathlib._P*ñ
+keyé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*É
+__rtruediv__pathlib.PurePath.__rtruediv__"
+
+pathlib._P*
+self
+
+pathlib._P*ñ
+keyé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*y
+	__bytes__pathlib.PurePath.__bytes__" 
+builtins.bytes"builtins.bytes*.
+self$
+pathlib.PurePath"pathlib.PurePath*s
+as_posixpathlib.PurePath.as_posix"
+builtins.str"builtins.str*.
+self$
+pathlib.PurePath"pathlib.PurePath*o
+as_uripathlib.PurePath.as_uri"
+builtins.str"builtins.str*.
+self$
+pathlib.PurePath"pathlib.PurePath*{
+is_absolutepathlib.PurePath.is_absolute"
+builtins.bool"builtins.bool*.
+self$
+pathlib.PurePath"pathlib.PurePath*{
+is_reservedpathlib.PurePath.is_reserved"
+builtins.bool"builtins.bool*.
+self$
+pathlib.PurePath"pathlib.PurePath*Ÿ
+matchpathlib.PurePath.match"
+builtins.bool"builtins.bool*.
+self$
+pathlib.PurePath"pathlib.PurePath*.
+path_pattern
+builtins.str"builtins.str*Í
+relative_topathlib.PurePath.relative_to"
+
+pathlib._P*
+self
+
+pathlib._P*õ
+otheré
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*y
+	with_namepathlib.PurePath.with_name"
+
+pathlib._P*
+self
+
+pathlib._P*&
+name
+builtins.str"builtins.str*
+with_suffixpathlib.PurePath.with_suffix"
+
+pathlib._P*
+self
+
+pathlib._P*(
+suffix
+builtins.str"builtins.str*Ç
+joinpathpathlib.PurePath.joinpath"
+
+pathlib._P*
+self
+
+pathlib._P*õ
+otheré
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*‹
+parentspathlib.PurePath.parents">
+typing.Sequence[pathlib._P]
+
+pathlib._P"typing.Sequence*
+self
+
+pathlib._P0:property`*Y
+parentpathlib.PurePath.parent"
+
+pathlib._P*
+self
+
+pathlib._P0:property`rm
+partspathlib.PurePath.partsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupler=
+drivepathlib.PurePath.drive
+builtins.str"builtins.strr;
+rootpathlib.PurePath.root
+builtins.str"builtins.strr?
+anchorpathlib.PurePath.anchor
+builtins.str"builtins.strr;
+namepathlib.PurePath.name
+builtins.str"builtins.strr?
+suffixpathlib.PurePath.suffix
+builtins.str"builtins.strrq
+suffixespathlib.PurePath.suffixesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr;
+stempathlib.PurePath.stem
+builtins.str"builtins.str8
+PurePosixPathpathlib.PurePosixPath"pathlib.PurePath<
+PureWindowsPathpathlib.PureWindowsPath"pathlib.PurePathÈ‚
+Pathpathlib.Path"pathlib.PurePath*ê
+__new__pathlib.Path.__new__"
+
+pathlib._P*-
+cls$
+Type[pathlib._P]
+
+pathlib._P*ô
+argsé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*
+kwargs
+Any*K
+	__enter__pathlib.Path.__enter__"
+
+pathlib._P*
+self
+
+pathlib._P*ƒ
+__exit__pathlib.Path.__exit__"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*$
+self
+pathlib.Path"pathlib.Path*—
+exc_typeŠ
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*f
+	tracebackY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*g
+cwdpathlib.Path.cwd"
+
+pathlib._P*-
+cls$
+Type[pathlib._P]
+
+pathlib._P0:classmethodp*c
+statpathlib.Path.stat" 
+os.stat_result"os.stat_result*&
+self
+pathlib.Path"pathlib.Path*u
+chmodpathlib.Path.chmod"
+None*&
+self
+pathlib.Path"pathlib.Path*&
+mode
+builtins.int"builtins.int*e
+existspathlib.Path.exists"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*¾
+globpathlib.Path.glob"^
+&typing.Generator[pathlib._P,None,None]
+
+pathlib._P
+None
+None"typing.Generator*
+self
+
+pathlib._P*)
+pattern
+builtins.str"builtins.str*a
+grouppathlib.Path.group"
+builtins.str"builtins.str*&
+self
+pathlib.Path"pathlib.Path*e
+is_dirpathlib.Path.is_dir"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*g
+is_filepathlib.Path.is_file"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*i
+is_mountpathlib.Path.is_mount"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*m
+
+is_symlinkpathlib.Path.is_symlink"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*k
+	is_socketpathlib.Path.is_socket"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*g
+is_fifopathlib.Path.is_fifo"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*w
+is_block_devicepathlib.Path.is_block_device"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*u
+is_char_devicepathlib.Path.is_char_device"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*™
+iterdirpathlib.Path.iterdir"^
+&typing.Generator[pathlib._P,None,None]
+
+pathlib._P
+None
+None"typing.Generator*
+self
+
+pathlib._P*w
+lchmodpathlib.Path.lchmod"
+None*&
+self
+pathlib.Path"pathlib.Path*&
+mode
+builtins.int"builtins.int*e
+lstatpathlib.Path.lstat" 
+os.stat_result"os.stat_result*&
+self
+pathlib.Path"pathlib.Path*Ö
+mkdirpathlib.Path.mkdir"
+None*&
+self
+pathlib.Path"pathlib.Path*(
+mode
+builtins.int"builtins.int *-
+parents
+builtins.bool"builtins.bool *.
+exist_ok
+builtins.bool"builtins.bool *a
+ownerpathlib.Path.owner"
+builtins.str"builtins.str*&
+self
+pathlib.Path"pathlib.Path*Á
+renamepathlib.Path.rename"
+
+pathlib._P*
+self
+
+pathlib._P*x
+targetl
+$Union[builtins.str,pathlib.PurePath]
+builtins.str"builtins.str$
+pathlib.PurePath"pathlib.PurePath*Ã
+replacepathlib.Path.replace"
+
+pathlib._P*
+self
+
+pathlib._P*x
+targetl
+$Union[builtins.str,pathlib.PurePath]
+builtins.str"builtins.str$
+pathlib.PurePath"pathlib.PurePath*w
+resolvepathlib.Path.resolve"
+
+pathlib._P*
+self
+
+pathlib._P*,
+strict
+builtins.bool"builtins.bool *À
+rglobpathlib.Path.rglob"^
+&typing.Generator[pathlib._P,None,None]
+
+pathlib._P
+None
+None"typing.Generator*
+self
+
+pathlib._P*)
+pattern
+builtins.str"builtins.str*M
+rmdirpathlib.Path.rmdir"
+None*&
+self
+pathlib.Path"pathlib.Path*€
+
+symlink_topathlib.Path.symlink_to"
+None*&
+self
+pathlib.Path"pathlib.Path*l
+target`
+ Union[builtins.str,pathlib.Path]
+builtins.str"builtins.str
+pathlib.Path"pathlib.Path*9
+target_is_directory
+builtins.bool"builtins.bool *§
+touchpathlib.Path.touch"
+None*&
+self
+pathlib.Path"pathlib.Path*(
+mode
+builtins.int"builtins.int *.
+exist_ok
+builtins.bool"builtins.bool *
+unlinkpathlib.Path.unlink"
+None*&
+self
+pathlib.Path"pathlib.Path*0
+
+missing_ok
+builtins.bool"builtins.bool *i
+homepathlib.Path.home"
+
+pathlib._P*-
+cls$
+Type[pathlib._P]
+
+pathlib._P0:classmethodp*K
+absolutepathlib.Path.absolute"
+
+pathlib._P*
+self
+
+pathlib._P*O
+
+expanduserpathlib.Path.expanduser"
+
+pathlib._P*
+self
+
+pathlib._P*o
+
+read_bytespathlib.Path.read_bytes" 
+builtins.bytes"builtins.bytes*&
+self
+pathlib.Path"pathlib.Path*“
+	read_textpathlib.Path.read_text"
+builtins.str"builtins.str*&
+self
+pathlib.Path"pathlib.Path*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¹
+samefilepathlib.Path.samefile"
+builtins.bool"builtins.bool*&
+self
+pathlib.Path"pathlib.Path*Í
+
+other_path¼
+<Union[builtins.str,builtins.bytes,builtins.int,pathlib.Path]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int
+pathlib.Path"pathlib.Path*™
+write_bytespathlib.Path.write_bytes"
+builtins.int"builtins.int*&
+self
+pathlib.Path"pathlib.Path**
+data 
+builtins.bytes"builtins.bytes*½
+
+write_textpathlib.Path.write_text"
+builtins.int"builtins.int*&
+self
+pathlib.Path"pathlib.Path*&
+data
+builtins.str"builtins.str*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Á
+link_topathlib.Path.link_to"
+None*&
+self
+pathlib.Path"pathlib.Path*í
+targetà
+NUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],builtins.bytes]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath 
+builtins.bytes"builtins.bytes2´Ï
+openpathlib.Path.open³B
+openpathlib.Path.open"$
+io.TextIOWrapper"io.TextIOWrapper*&
+self
+pathlib.Path"pathlib.Path*?
+mode€?
+Õ	TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]‹5
+Ê	Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]ä
+ÑTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ë
+ÆUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenTextModeUpdatingÐ
+×TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Ò
+ÌUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenTextModeWritingÿ	
+™TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]¿
+ŽUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenTextModeReading"_typeshed.OpenTextMode *-
+	buffering
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX‘0
+openpathlib.Path.open"
+	io.FileIO"	io.FileIO*&
+self
+pathlib.Path"pathlib.Path*”.
+mode‰.
+‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
+€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
+¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
+–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
+ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
+¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
+•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
+ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*F
+	buffering7
+Literal[builtins.int]	
+builtins.int"builtins.int*
+encoding
+None *
+errors
+None *
+newline
+None 0:overloadXË
+openpathlib.Path.open"&
+io.BufferedRandom"io.BufferedRandom*&
+self
+pathlib.Path"pathlib.Path*É
+mode¾
+¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
+–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdating*º
+	buffering¨
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *
+newline
+None 0:overloadX°
+openpathlib.Path.open"&
+io.BufferedWriter"io.BufferedWriter*&
+self
+pathlib.Path"pathlib.Path*®
+mode£
+•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
+ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting*º
+	buffering¨
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *
+newline
+None 0:overloadXú	
+openpathlib.Path.open"&
+io.BufferedReader"io.BufferedReader*&
+self
+pathlib.Path"pathlib.Path*ø
+modeí
+ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
+¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeReading*º
+	buffering¨
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *
+encoding
+None *
+errors
+None *
+newline
+None 0:overloadX‚0
+openpathlib.Path.open""
+typing.BinaryIO"typing.BinaryIO*&
+self
+pathlib.Path"pathlib.Path*”.
+mode‰.
+‹TypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]]Ü&
+€Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]¾
+¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ó
+–Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str" _typeshed.OpenBinaryModeUpdatingí
+ÁTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]ƒ
+¶Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeReading£
+•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
+ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting"_typeshed.OpenBinaryMode*+
+	buffering
+builtins.int"builtins.int*
+encoding
+None *
+errors
+None *
+newline
+None 0:overloadXË
+openpathlib.Path.open"$
+typing.IO[Any]
+Any"	typing.IO*&
+self
+pathlib.Path"pathlib.Path*&
+mode
+builtins.str"builtins.str*-
+	buffering
+builtins.int"builtins.int *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadXC
+	PosixPathpathlib.PosixPath"pathlib.Path"pathlib.PurePosixPathI
+WindowsPathpathlib.WindowsPath"pathlib.Path"pathlib.PureWindowsPath

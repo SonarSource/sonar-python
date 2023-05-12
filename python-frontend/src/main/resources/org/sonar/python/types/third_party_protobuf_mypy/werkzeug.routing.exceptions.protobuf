@@ -1,0 +1,137 @@
+
+werkzeug.routing.exceptionsT
+RoutingException,werkzeug.routing.exceptions.RoutingException"builtins.ExceptionÖ
+
+RequestRedirect+werkzeug.routing.exceptions.RequestRedirect"!werkzeug.exceptions.HTTPException",werkzeug.routing.exceptions.RoutingException*€
+__init__4werkzeug.routing.exceptions.RequestRedirect.__init__"
+None*d
+selfZ
++werkzeug.routing.exceptions.RequestRedirect"+werkzeug.routing.exceptions.RequestRedirect*)
+new_url
+builtins.str"builtins.str*ﬂ
+get_response8werkzeug.routing.exceptions.RequestRedirect.get_response"J
+#werkzeug.wrappers.response.Response"#werkzeug.wrappers.response.Response*d
+selfZ
++werkzeug.routing.exceptions.RequestRedirect"+werkzeug.routing.exceptions.RequestRedirect*Ë
+environÿ
+XUnion[TypeAlias[builtins.dict[builtins.str,Any]],werkzeug.wrappers.request.Request,None]ß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironmentF
+!werkzeug.wrappers.request.Request"!werkzeug.wrappers.request.Request
+None *x
+scopek
+"Union[builtins.dict[Any,Any],None]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict
+None rV
+code0werkzeug.routing.exceptions.RequestRedirect.code
+builtins.int"builtins.intr\
+new_url3werkzeug.routing.exceptions.RequestRedirect.new_url
+builtins.str"builtins.strç
+RequestPath'werkzeug.routing.exceptions.RequestPath",werkzeug.routing.exceptions.RoutingException*—
+__init__0werkzeug.routing.exceptions.RequestPath.__init__"
+None*\
+selfR
+'werkzeug.routing.exceptions.RequestPath"'werkzeug.routing.exceptions.RequestPath*+
+	path_info
+builtins.str"builtins.strru
+	__slots__1werkzeug.routing.exceptions.RequestPath.__slots__5
+Tuple[builtins.str]
+builtins.str"builtins.strr\
+	path_info1werkzeug.routing.exceptions.RequestPath.path_info
+builtins.str"builtins.strÁ
+RequestAliasRedirect0werkzeug.routing.exceptions.RequestAliasRedirect",werkzeug.routing.exceptions.RoutingException*⁄
+__init__9werkzeug.routing.exceptions.RequestAliasRedirect.__init__"
+None*n
+selfd
+0werkzeug.routing.exceptions.RequestAliasRedirect"0werkzeug.routing.exceptions.RequestAliasRedirect*m
+matched_valuesY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping**
+endpoint
+builtins.str"builtins.strr¨
+matched_values?werkzeug.routing.exceptions.RequestAliasRedirect.matched_valuesY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mappingrc
+endpoint9werkzeug.routing.exceptions.RequestAliasRedirect.endpoint
+builtins.str"builtins.str≤
+
+BuildError&werkzeug.routing.exceptions.BuildError",werkzeug.routing.exceptions.RoutingException"builtins.LookupError*ï
+__init__/werkzeug.routing.exceptions.BuildError.__init__"
+None*Z
+selfP
+&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError**
+endpoint
+builtins.str"builtins.str*e
+valuesY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*P
+methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*å
+adapter}
++Union[werkzeug.routing.map.MapAdapter,None]B
+werkzeug.routing.map.MapAdapter"werkzeug.routing.map.MapAdapter
+None *ü
+	suggested0werkzeug.routing.exceptions.BuildError.suggested"q
+'Union[werkzeug.routing.rules.Rule,None]:
+werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
+None*Z
+selfP
+&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError0:cached_property*ü
+closest_rule3werkzeug.routing.exceptions.BuildError.closest_rule"q
+'Union[werkzeug.routing.rules.Rule,None]:
+werkzeug.routing.rules.Rule"werkzeug.routing.rules.Rule
+None*Z
+selfP
+&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildError*ä
+adapter}
++Union[werkzeug.routing.map.MapAdapter,None]B
+werkzeug.routing.map.MapAdapter"werkzeug.routing.map.MapAdapter
+None*±
+__str__.werkzeug.routing.exceptions.BuildError.__str__"
+builtins.str"builtins.str*X
+selfP
+&werkzeug.routing.exceptions.BuildError"&werkzeug.routing.exceptions.BuildErrorrY
+endpoint/werkzeug.routing.exceptions.BuildError.endpoint
+builtins.str"builtins.strrí
+values-werkzeug.routing.exceptions.BuildError.valuesY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mappingr}
+method-werkzeug.routing.exceptions.BuildError.methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner∏
+adapter.werkzeug.routing.exceptions.BuildError.adapter}
++Union[werkzeug.routing.map.MapAdapter,None]B
+werkzeug.routing.map.MapAdapter"werkzeug.routing.map.MapAdapter
+Noneb
+WebsocketMismatch-werkzeug.routing.exceptions.WebsocketMismatch"werkzeug.exceptions.BadRequestë
+NoMatch#werkzeug.routing.exceptions.NoMatch"builtins.Exception*Æ
+__init__,werkzeug.routing.exceptions.NoMatch.__init__"
+None*T
+selfJ
+#werkzeug.routing.exceptions.NoMatch"#werkzeug.routing.exceptions.NoMatch*\
+have_match_forH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*6
+websocket_mismatch
+builtins.bool"builtins.boolrú
+	__slots__-werkzeug.routing.exceptions.NoMatch.__slots__`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strré
+have_match_for2werkzeug.routing.exceptions.NoMatch.have_match_forH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrl
+websocket_mismatch6werkzeug.routing.exceptions.NoMatch.websocket_mismatch
+builtins.bool"builtins.bool*
+ttyping 

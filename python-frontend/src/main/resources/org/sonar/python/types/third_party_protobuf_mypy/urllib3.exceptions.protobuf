@@ -1,0 +1,179 @@
+
+urllib3.exceptions‘
+httplib_IncompleteReadhttp.client.IncompleteRead"http.client.HTTPException*Ç
+__init__#http.client.IncompleteRead.__init__"
+None*B
+self8
+http.client.IncompleteRead"http.client.IncompleteRead*-
+partial 
+builtins.bytes"builtins.bytes*T
+expectedD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None =
+	HTTPErrorurllib3.exceptions.HTTPError"builtins.Exception?
+HTTPWarningurllib3.exceptions.HTTPWarning"builtins.WarningÕ
+	PoolErrorurllib3.exceptions.PoolError"urllib3.exceptions.HTTPError*à
+__init__%urllib3.exceptions.PoolError.__init__"
+None*F
+self<
+urllib3.exceptions.PoolError"urllib3.exceptions.PoolError*X
+poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*)
+message
+builtins.str"builtins.strry
+pool!urllib3.exceptions.PoolError.poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool“
+RequestErrorurllib3.exceptions.RequestError"urllib3.exceptions.PoolError*∏
+__init__(urllib3.exceptions.RequestError.__init__"
+None*L
+selfB
+urllib3.exceptions.RequestError"urllib3.exceptions.RequestError*X
+poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*%
+url
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strrH
+url#urllib3.exceptions.RequestError.url
+builtins.str"builtins.strE
+SSLErrorurllib3.exceptions.SSLError"urllib3.exceptions.HTTPErrorØ
+
+ProxyErrorurllib3.exceptions.ProxyError"urllib3.exceptions.HTTPError*˘
+__init__&urllib3.exceptions.ProxyError.__init__"
+None*H
+self>
+urllib3.exceptions.ProxyError"urllib3.exceptions.ProxyError*)
+message
+builtins.str"builtins.str*3
+error(
+builtins.Exception"builtins.Exception*
+args
+Anyrh
+original_error,urllib3.exceptions.ProxyError.original_error(
+builtins.Exception"builtins.ExceptionK
+DecodeErrorurllib3.exceptions.DecodeError"urllib3.exceptions.HTTPErrorO
+ProtocolError urllib3.exceptions.ProtocolError"urllib3.exceptions.HTTPError◊
+MaxRetryError urllib3.exceptions.MaxRetryError"urllib3.exceptions.RequestError*ˆ
+__init__)urllib3.exceptions.MaxRetryError.__init__"
+None*N
+selfD
+ urllib3.exceptions.MaxRetryError" urllib3.exceptions.MaxRetryError*X
+poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*%
+url
+builtins.str"builtins.str*d
+reasonV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None râ
+reason'urllib3.exceptions.MaxRetryError.reasonV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+NoneÀ
+HostChangedError#urllib3.exceptions.HostChangedError"urllib3.exceptions.RequestError*∞
+__init__,urllib3.exceptions.HostChangedError.__init__"
+None*T
+selfJ
+#urllib3.exceptions.HostChangedError"#urllib3.exceptions.HostChangedError*X
+poolN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*%
+url
+builtins.str"builtins.str*î
+retriesÑ
+,Union[urllib3.util.retry.Retry,builtins.int]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.int"builtins.int rΩ
+retries+urllib3.exceptions.HostChangedError.retriesÑ
+,Union[urllib3.util.retry.Retry,builtins.int]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.int"builtins.intW
+TimeoutStateError$urllib3.exceptions.TimeoutStateError"urllib3.exceptions.HTTPErrorM
+TimeoutErrorurllib3.exceptions.TimeoutError"urllib3.exceptions.HTTPErrory
+ReadTimeoutError#urllib3.exceptions.ReadTimeoutError"urllib3.exceptions.TimeoutError"urllib3.exceptions.RequestError^
+ConnectTimeoutError&urllib3.exceptions.ConnectTimeoutError"urllib3.exceptions.TimeoutErrorÅ
+NewConnectionError%urllib3.exceptions.NewConnectionError"&urllib3.exceptions.ConnectTimeoutError"urllib3.exceptions.HTTPErrorQ
+EmptyPoolError!urllib3.exceptions.EmptyPoolError"urllib3.exceptions.PoolErrorS
+ClosedPoolError"urllib3.exceptions.ClosedPoolError"urllib3.exceptions.PoolErrorn
+LocationValueError%urllib3.exceptions.LocationValueError"builtins.ValueError"urllib3.exceptions.HTTPErrorâ
+LocationParseError%urllib3.exceptions.LocationParseError"%urllib3.exceptions.LocationValueError* 
+__init__.urllib3.exceptions.LocationParseError.__init__"
+None*X
+selfN
+%urllib3.exceptions.LocationParseError"%urllib3.exceptions.LocationParseError**
+location
+builtins.str"builtins.strrX
+location.urllib3.exceptions.LocationParseError.location
+builtins.str"builtins.str˜
+URLSchemeUnknown#urllib3.exceptions.URLSchemeUnknown"%urllib3.exceptions.LocationValueError*¬
+__init__,urllib3.exceptions.URLSchemeUnknown.__init__"
+None*T
+selfJ
+#urllib3.exceptions.URLSchemeUnknown"#urllib3.exceptions.URLSchemeUnknown*(
+scheme
+builtins.str"builtins.strrR
+scheme*urllib3.exceptions.URLSchemeUnknown.scheme
+builtins.str"builtins.strè
+ResponseError urllib3.exceptions.ResponseError"urllib3.exceptions.HTTPErrorr]
+GENERIC_ERROR.urllib3.exceptions.ResponseError.GENERIC_ERROR
+builtins.str"builtins.strr_
+SPECIFIC_ERROR/urllib3.exceptions.ResponseError.SPECIFIC_ERROR
+builtins.str"builtins.strU
+SecurityWarning"urllib3.exceptions.SecurityWarning"urllib3.exceptions.HTTPWarninge
+SubjectAltNameWarning(urllib3.exceptions.SubjectAltNameWarning""urllib3.exceptions.SecurityWarningg
+InsecureRequestWarning)urllib3.exceptions.InsecureRequestWarning""urllib3.exceptions.SecurityWarning]
+SystemTimeWarning$urllib3.exceptions.SystemTimeWarning""urllib3.exceptions.SecurityWarningi
+InsecurePlatformWarning*urllib3.exceptions.InsecurePlatformWarning""urllib3.exceptions.SecurityWarningY
+SNIMissingWarning$urllib3.exceptions.SNIMissingWarning"urllib3.exceptions.HTTPWarningY
+DependencyWarning$urllib3.exceptions.DependencyWarning"urllib3.exceptions.HTTPWarningr
+ResponseNotChunked%urllib3.exceptions.ResponseNotChunked" urllib3.exceptions.ProtocolError"builtins.ValueErrore
+BodyNotHttplibCompatible+urllib3.exceptions.BodyNotHttplibCompatible"urllib3.exceptions.HTTPErrorÖ
+IncompleteRead!urllib3.exceptions.IncompleteRead"urllib3.exceptions.HTTPError"http.client.IncompleteRead*ï
+__init__*urllib3.exceptions.IncompleteRead.__init__"
+None*P
+selfF
+!urllib3.exceptions.IncompleteRead"!urllib3.exceptions.IncompleteRead*-
+partial 
+builtins.bytes"builtins.bytes*R
+expectedD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneË
+InvalidChunkLength%urllib3.exceptions.InvalidChunkLength"urllib3.exceptions.HTTPError"http.client.IncompleteRead*ö
+__init__.urllib3.exceptions.InvalidChunkLength.__init__"
+None*X
+selfN
+%urllib3.exceptions.InvalidChunkLength"%urllib3.exceptions.InvalidChunkLength*L
+response>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse*,
+length 
+builtins.bytes"builtins.bytesrz
+response.urllib3.exceptions.InvalidChunkLength.response>
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponserX
+length,urllib3.exceptions.InvalidChunkLength.length 
+builtins.bytes"builtins.bytesO
+InvalidHeader urllib3.exceptions.InvalidHeader"urllib3.exceptions.HTTPErrorÏ
+ProxySchemeUnknown%urllib3.exceptions.ProxySchemeUnknown"builtins.AssertionError"#urllib3.exceptions.URLSchemeUnknown*
+__init__.urllib3.exceptions.ProxySchemeUnknown.__init__"
+None*X
+selfN
+%urllib3.exceptions.ProxySchemeUnknown"%urllib3.exceptions.ProxySchemeUnknown*P
+schemeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneX
+ProxySchemeUnsupported)urllib3.exceptions.ProxySchemeUnsupported"builtins.ValueErrorâ
+HeaderParsingError%urllib3.exceptions.HeaderParsingError"urllib3.exceptions.HTTPError*≠
+__init__.urllib3.exceptions.HeaderParsingError.__init__"
+None*X
+selfN
+%urllib3.exceptions.HeaderParsingError"%urllib3.exceptions.HeaderParsingError*Å
+defectst
+)builtins.list[email.errors.MessageDefect]8
+email.errors.MessageDefect"email.errors.MessageDefect"builtins.list*à
+unparsed_datau
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None_
+UnrewindableBodyError(urllib3.exceptions.UnrewindableBodyError"urllib3.exceptions.HTTPError
