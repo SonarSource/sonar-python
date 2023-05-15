@@ -34,51 +34,51 @@ def requestsTests():
   # requests-tests.py
   import requests
 
-  requests.request('GET', 'https://example.domain', verify=False) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
+  requests.request('GET', 'https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^^^
+  requests.request('GET', 'https://example.domain', verify='') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify=0) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^
+  requests.request('GET', 'https://example.domain', verify=0.0) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^
+  requests.request('GET', 'https://example.domain', verify=0j) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify="") # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify=b'') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^
+  requests.request('GET', 'https://example.domain', verify=[]) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify={}) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify=()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^
+  requests.request('GET', 'https://example.domain', verify=set()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^^^
+  requests.request('GET', 'https://example.domain', verify=range(0)) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                        ^^^^^^^^
+  requests.request(verify=False, method='GET', url='https://example.domain') # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                       ^^^^^
 
-  requests.request('GET', 'https://example.domain', verify='') # FN {{Enable server certificate validation on this SSL/TLS connection.}}
 
-  requests.request('GET', 'https://example.domain', verify=0) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=0.0) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=0j) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify="") # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=b'') # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=[]) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify={}) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=()) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=set()) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request('GET', 'https://example.domain', verify=range(0)) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.request(verify=False, method='GET', url='https://example.domain') # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-
-
-  kargs1 = {'verify': False} # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
+  kargs1 = {'verify': False} # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                   ^^^^^
   requests.request('GET', 'https://example.domain', **kargs1)
+  #                                                   ^^^^^^ < 1
 
 
-
-  kargs2 = {'method': 'GET', 'url': 'https://example.domain', 'verify': False} # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
+  kargs2 = {'method': 'GET', 'url': 'https://example.domain', 'verify': False} # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                                     ^^^^^
   requests.request(**kargs2)
+  #                  ^^^^^^ < 1
 
-
-  requests.get('https://example.domain', verify=False) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.post('https://example.domain', verify=False) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
-  requests.options('https://example.domain', verify=False) # FN {{Enable server certificate validation on this SSL/TLS connection.}}
-
+  requests.get('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                             ^^^^^
+  requests.post('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                              ^^^^^
+  requests.options('https://example.domain', verify=False) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
+  #                                                 ^^^^^
 
   requests.request(method='GET', url='https://example.domain') # Compliant
   requests.request(method='GET', url='https://example.domain', verify=True) # Compliant
