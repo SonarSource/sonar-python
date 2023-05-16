@@ -3,18 +3,13 @@ title: Python
 key: python
 ---
 
-<!-- static -->
-<!-- update_center:python -->
-<!-- /static -->  
-
-
 ## Supported Versions
 
-| Version           | Status    |
-|-------------------|-----------|
-| Python 3.0 - 3.11 | Supported |
-| Python 2.x        | Supported |
-| IPython 7.x       | Supported |
+| Version           | Status                                               |
+|-------------------|------------------------------------------------------|
+| Python 3.0 - 3.11 | Fully Supported                                      |
+| Python 2.x        | Fully Supported                                      |
+| IPython 7.x       | Partially Supported (Jupyter Notebooks context only) |
 
 ## Language-Specific Properties
 
