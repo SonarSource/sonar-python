@@ -20,19 +20,20 @@
 
 from unittest.mock import Mock
 
-from serializer import symbols, symbols_merger
+from serializer import symbols, symbols_merger, serializers
+from serializer.serializers import TypeshedSerializer
 from serializer.symbols import MergedModuleSymbol, TypeKind
 
 
 def test_build_multiple_python_version(typeshed_stdlib):
-    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
-    model_by_version = symbols_merger.build_multiple_python_version()
+    serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
+    model_by_version = TypeshedSerializer().build_for_every_python_version()
     assert set(model_by_version.keys()) == {'27', '35', '36', '37', '38', '39', '310'}
 
 
 def test_merge_multiple_python_versions(typeshed_stdlib):
-    symbols_merger.ts.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
-    merged_modules = symbols_merger.merge_multiple_python_versions()
+    serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
+    merged_modules = TypeshedSerializer().get_merged_modules()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
     assert len(merged_modules) == 28

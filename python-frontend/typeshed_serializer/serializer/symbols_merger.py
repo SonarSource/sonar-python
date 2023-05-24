@@ -22,38 +22,6 @@ from typing import Dict, Set, List
 
 from serializer.symbols import ModuleSymbol, MergedFunctionSymbol, MergedClassSymbol, MergedOverloadedFunctionSymbol, \
     MergedModuleSymbol, MergedVarSymbol
-from serializer import typeshed_serializer as ts
-
-SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
-
-
-def build_multiple_python_version(is_third_parties=False) -> Dict[str, Dict[str, ModuleSymbol]]:
-    model_by_version: Dict[str, Dict[str, ModuleSymbol]] = {}
-    for major, minor in SUPPORTED_PYTHON_VERSIONS:
-        opt = ts.get_options((major, minor))
-        build_result, source_paths = ts.walk_typeshed_third_parties(opt) if is_third_parties else ts.walk_typeshed_stdlib(opt)
-        modules = {}
-        for file in build_result.files:
-            path = build_result.files[file].path
-            if is_third_parties and path not in source_paths:
-                # build_result contains more modules from stdlib unrelated to third_parties
-                continue
-            ms = ModuleSymbol(build_result.files.get(file))
-            modules[ms.fullname] = ms
-        model_by_version[f"{major}{minor}"] = modules
-    return model_by_version
-
-
-def merge_multiple_python_versions(is_third_parties=False):
-    model_by_version = build_multiple_python_version(is_third_parties)
-    all_python_modules: Set[str] = set()
-    for version in model_by_version:
-        model = model_by_version[version]
-        for module_fqn in model:
-            mod: ModuleSymbol = model[module_fqn]
-            all_python_modules.add(mod.fullname)
-    merged_modules = merge_modules(all_python_modules, model_by_version)
-    return merged_modules
 
 
 def merge_modules(all_python_modules: Set[str], model_by_version: Dict[str, Dict[str, ModuleSymbol]]):
