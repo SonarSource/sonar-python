@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -92,12 +93,13 @@ public class CorsCheck extends PythonSubscriptionCheck {
   private static final List<String> TYPES_TO_CHECK = Arrays.asList(
     "django.http.HttpResponse",
     "django.http.response.HttpResponse",
-    "werkzeug.datastructures.Headers"
+    "werkzeug.datastructures.Headers",
+    "werkzeug.datastructures.headers.Headers"
   );
 
   private static final List<String> REQUEST_SET_HEADER_QUALIFIER = Arrays.asList("headers", "add");
 
-  private static final String WERKZEUG_BASERESPONSE_HEADERS = "werkzeug.wrappers.BaseResponse.headers";
+  private static final Set<String> WERKZEUG_BASERESPONSE_HEADERS = Set.of("werkzeug.wrappers.BaseResponse.headers", "werkzeug.sansio.response.Response.headers");
 
   @Override
   public void initialize(Context context) {
@@ -156,7 +158,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
 
   private static void checkAllowOriginPropertyQualifiedExpr(SubscriptionContext ctx, AssignmentStatement assignment, SubscriptionExpression subscr, List<Expression> subscripts) {
     if (subscr.object().is(Tree.Kind.QUALIFIED_EXPR)) {
-      if (isSymbol(((QualifiedExpression) subscr.object()).symbol(), WERKZEUG_BASERESPONSE_HEADERS)) {
+      if (WERKZEUG_BASERESPONSE_HEADERS.stream().anyMatch(fqn -> isSymbol(((QualifiedExpression) subscr.object()).symbol(), fqn))) {
         // flask.make_response().headers['Access-Control-Allow-Origin'] = '*'
         reportIfAllowOriginIsSet(ctx, assignment, subscripts.get(0));
       } else {
@@ -259,13 +261,13 @@ public class CorsCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol symbol = callExpression.calleeSymbol();
 
-    if (isSymbol(symbol, "werkzeug.datastructures.Headers") && callExpression.arguments().size() == 1) {
+    if (isSymbol(symbol, "werkzeug.datastructures.headers.Headers") && callExpression.arguments().size() == 1) {
       reportOnHeader(ctx, callExpression.arguments().get(0));
 
     } else {
-      reportOnSetMethod(ctx, "werkzeug.datastructures.Headers.set");
-      reportOnSetMethod(ctx, "werkzeug.datastructures.Headers.setdefault");
-      reportOnSetMethod(ctx, "werkzeug.datastructures.Headers.__setitem__");
+      reportOnSetMethod(ctx, "werkzeug.datastructures.headers.Headers.set");
+      reportOnSetMethod(ctx, "werkzeug.datastructures.headers.Headers.setdefault");
+      reportOnSetMethod(ctx, "werkzeug.datastructures.headers.Headers.__setitem__");
     }
   }
 

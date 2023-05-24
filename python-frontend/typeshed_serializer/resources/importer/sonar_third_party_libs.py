@@ -18,15 +18,38 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from serializer.serializers import TypeshedSerializer, CustomStubsSerializer, ImporterSerializer
-
-
-def main():
-    TypeshedSerializer().serialize_merged_modules()
-    TypeshedSerializer(is_third_parties=True).serialize_merged_modules()
-    CustomStubsSerializer().serialize()
-    ImporterSerializer().serialize()
-
-
-if __name__ == '__main__':
-    main()
+import atomicwrites
+import backports
+import backports_abc
+import certifi
+import characteristic
+import click
+import contextvar
+import cryptography
+import dataclasses
+import enum34
+import fb303
+import filelock
+import first
+import flask
+import freezegun
+import frozendict
+import futures
+import geoip2
+import ipaddress
+import itsdangerous
+import Jinja2
+import kazoo
+import MarkupSafe
+import maxminddb
+import orjson
+import pathlib
+import PyJWT
+import pymssql
+import requests
+import Routes
+import scribes
+import termcolor
+import tornado
+import WerkZeug
+import xxhash

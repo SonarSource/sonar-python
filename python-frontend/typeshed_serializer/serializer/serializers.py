@@ -34,6 +34,8 @@ CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
+IMPORTER_FILE_NAME = "../resources/importer/sonar_third_party_libs.py"
+IMPORTER_FQN = "sonar_third_party_libs"
 SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
 
 
@@ -168,6 +170,19 @@ class TypeshedSerializer(Serializer):
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path
         return self.is_third_parties and file_path not in source_paths
+
+
+class ImporterSerializer(Serializer):
+    save_location = "third_party_protobuf_mypy"
+
+    def get_build_result(self, opt=get_options()):
+        path = os.path.join(CURRENT_PATH, IMPORTER_FILE_NAME)
+        source = build.BuildSource(path, module=IMPORTER_FQN)
+        build_result = build.build([source], options=self.opt)
+        return build_result, {path}
+
+    def is_exception(self, file, build_result, source_paths):
+        return file == "sonar_third_party_libs"
 
 
 class CustomStubsSerializer(Serializer):
