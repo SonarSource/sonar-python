@@ -54,6 +54,8 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
     sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_signed_cookie", 8);
     sensitiveArgumentByFQN.put("flask.wrappers.Response.set_cookie", 7);
     sensitiveArgumentByFQN.put("werkzeug.wrappers.BaseResponse.set_cookie", 7);
+    // SONARPY-1357: It should be possible to report on flask.Response.set_cookie without setting the original fully qualified name of the method
+    sensitiveArgumentByFQN.put("werkzeug.sansio.response.Response.set_cookie", 7);
     sensitiveArgumentByFQN = Collections.unmodifiableMap(sensitiveArgumentByFQN);
   }
 

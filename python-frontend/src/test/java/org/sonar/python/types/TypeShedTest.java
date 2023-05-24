@@ -160,8 +160,8 @@ public class TypeShedTest {
     assertThat(symbolsForModule("docutils")).isNotEmpty();
     assertThat(symbolsForModule("ctypes.util")).isNotEmpty();
     assertThat(symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
+    assertThat(symbolsForModule("cryptography")).isNotEmpty();
     // resolved but still empty
-    assertThat(symbolsForModule("cryptography")).isEmpty();
     assertThat(symbolsForModule("kazoo")).isEmpty();
   }
 
@@ -564,8 +564,9 @@ public class TypeShedTest {
     assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
 
     // Python 2, import socketserver
+    // SONARPY-1359: socketserver is missing from the standard library stubs in Python 2, but it is indirectly serialized through the stubs serialized by the mypy importer
     socketServer = symbolsForModule("socketserver");
-    assertThat(socketServer).isEmpty();
+    assertThat(socketServer).isNotEmpty();
 
     // Python 3, import SocketServer
     setPythonVersions(PythonVersionUtils.fromString("3.10"));

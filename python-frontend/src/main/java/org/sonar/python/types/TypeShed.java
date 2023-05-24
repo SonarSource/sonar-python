@@ -69,6 +69,7 @@ public class TypeShed {
   private static final String PROTOBUF_CUSTOM_STUBS = "custom_protobuf/";
   private static final String PROTOBUF = "stdlib_protobuf/";
   private static final String PROTOBUF_THIRD_PARTY = "third_party_protobuf/";
+  private static final String PROTOBUF_THIRD_PARTY_MYPY = "third_party_protobuf_mypy/";
   private static final String BUILTINS_FQN = "builtins";
   private static final String BUILTINS_PREFIX = BUILTINS_FQN + ".";
   // Those fundamentals builtins symbols need not to be ambiguous for the frontend to work properly
@@ -289,6 +290,12 @@ public class TypeShed {
     if (!symbolsFromProtobuf.isEmpty()) {
       modulesInProgress.remove(moduleName);
       return symbolsFromProtobuf;
+    }
+
+    Map<String, Symbol> thirdPartySymbolsMypy = getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY_MYPY);
+    if (!thirdPartySymbolsMypy.isEmpty()) {
+      modulesInProgress.remove(moduleName);
+      return thirdPartySymbolsMypy;
     }
 
     Map<String, Symbol> thirdPartySymbols = getSymbolsFromProtobufModule(moduleName, PROTOBUF_THIRD_PARTY);
