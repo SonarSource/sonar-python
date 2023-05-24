@@ -19,27 +19,31 @@
 #
 
 import os
+from unittest import mock
 
 import pytest
 from mypy import build
 
-from serializer import typeshed_serializer, symbols_merger
-from serializer.typeshed_serializer import get_options
+from serializer import serializers
+from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, get_options
 
 CURRENT_PATH = os.path.dirname(__file__)
+MOCK_THIRD_PARTY_STUBS_LOCATION = "resources/mock_third_parties"
+MOCK_THIRD_PARTY_STUBS_LIST = os.listdir(os.path.join(CURRENT_PATH, MOCK_THIRD_PARTY_STUBS_LOCATION))
 
 
 @pytest.fixture(scope="session")
 def typeshed_stdlib():
-    typeshed_serializer.STDLIB_PATH = "resources/mock_stdlib"
-    typeshed_serializer.CURRENT_PATH = CURRENT_PATH
-    build_result, _ = typeshed_serializer.walk_typeshed_stdlib()
+    with mock.patch('serializer.serializers.CURRENT_PATH', CURRENT_PATH):
+        serializers.STDLIB_PATH = "resources/mock_stdlib"
+        serializers.CURRENT_PATH = CURRENT_PATH
+        build_result, _ = serializers.walk_typeshed_stdlib()
     return build_result
 
 
 @pytest.fixture(scope="session")
 def typeshed_custom_stubs():
-    build_result, _ = typeshed_serializer.walk_custom_stubs()
+    build_result, _ = CustomStubsSerializer().get_build_result()
     assert len(build_result.errors) == 0
     return build_result
 
@@ -57,8 +61,8 @@ def fake_module_36_38():
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():
-    typeshed_serializer.THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, "resources/mock_third_parties"))
-    return symbols_merger.merge_multiple_python_versions(is_third_parties=True)
+    serializers.THIRD_PARTIES_STUBS = MOCK_THIRD_PARTY_STUBS_LIST
+    return TypeshedSerializer(is_third_parties=True).get_merged_modules()
 
 
 def build_modules(modules: dict[str, str], python_version=(3, 8)):
