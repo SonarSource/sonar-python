@@ -22,12 +22,14 @@ from unittest.mock import Mock
 
 from serializer import typeshed_serializer
 
-from serializer.serializers import CustomStubsSerializer, TypeshedSerializer
+from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, ImporterSerializer
 
 
 def test_typeshed_serializer():
     TypeshedSerializer.serialize_merged_modules = Mock()
     CustomStubsSerializer.serialize = Mock()
+    ImporterSerializer.serialize = Mock()
     typeshed_serializer.main()
     assert TypeshedSerializer.serialize_merged_modules.call_count == 2
     assert CustomStubsSerializer.serialize.call_count == 1
+    assert ImporterSerializer.serialize.call_count == 1

@@ -82,7 +82,7 @@ def flask_tests():
     response3.set_cookie('c', 'value') # Noncompliant
 
     response4 = redirect()
-    response4.set_cookie('c', 'value') # FN
+    response4.set_cookie('c', 'value') # Noncompliant
 
 def flask_SessionCookieHttpOnlyFalse():
     from flask import Flask, request, url_for, render_template, redirect, make_response, request, session

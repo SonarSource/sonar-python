@@ -82,4 +82,4 @@ def flask_tests():
     response3.set_cookie('c', 'value') # Noncompliant
 
     response4 = redirect()
-    response4.set_cookie('c', 'value') # FN
+    response4.set_cookie('c', 'value') # Noncompliant

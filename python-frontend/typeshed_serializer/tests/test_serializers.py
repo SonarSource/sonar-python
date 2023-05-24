@@ -24,7 +24,7 @@ from unittest.mock import Mock, patch
 from serializer import symbols, serializers
 import os
 
-from serializer.serializers import CustomStubsSerializer, TypeshedSerializer
+from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, ImporterSerializer
 from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
 
@@ -51,6 +51,19 @@ def test_custom_stubs_serializer(typeshed_custom_stubs):
         assert custom_stubs_serializer.get_build_result.call_count == 1
         # Not every files from "typeshed_custom_stubs" build are serialized, as some are builtins
         assert symbols.save_module.call_count == 79
+
+
+def test_importer_serializer():
+    build_mock = Mock()
+    build_mock.BuildSource = Mock()
+    build_mock.build = Mock()
+    importer_serializer = ImporterSerializer()
+    with mock.patch('serializer.serializers.build', build_mock):
+        importer_serializer.get_build_result()
+        assert build_mock.BuildSource.call_count == 1
+        assert build_mock.build.call_count == 1
+    assert importer_serializer.is_exception("sonar_third_party_libs", None, set()) is True
+    assert importer_serializer.is_exception("other", None, set()) is False
 
 
 def test_all_third_parties_are_serialized(typeshed_third_parties):
