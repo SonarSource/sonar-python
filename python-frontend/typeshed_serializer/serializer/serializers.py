@@ -28,15 +28,14 @@ from serializer.symbols import ModuleSymbol
 from serializer.symbols_merger import merge_modules
 
 STDLIB_PATH = "../resources/typeshed/stdlib"
-STDLIB_INTERNAL_PATH = "../resources/typeshed-internal/stdlib"
-STUBS_PATH = "../resources/typeshed-internal/stubs"
+STUBS_PATH = "../resources/typeshed/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 IMPORTER_FILE_NAME = "../resources/importer/sonar_third_party_libs.py"
 IMPORTER_FQN = "sonar_third_party_libs"
-SUPPORTED_PYTHON_VERSIONS = ((2, 7), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
+SUPPORTED_PYTHON_VERSIONS = ((3, 6), (3, 7), (3, 8), (3, 9), (3, 10))
 
 
 def get_options(python_version=(3, 8)):
@@ -49,9 +48,7 @@ def get_options(python_version=(3, 8)):
 
 
 def walk_typeshed_stdlib(opt: options.Options = get_options()):
-    generate_python2_stdlib = opt.python_version < (3, 0)
-    relative_path = STDLIB_PATH if not generate_python2_stdlib else f"{STDLIB_INTERNAL_PATH}/@python2"
-    source_list, source_paths = get_sources(relative_path, generate_python2_stdlib)
+    source_list, source_paths = get_sources(STDLIB_PATH)
     build_result = build.build(source_list, opt)
     return build_result, source_paths
 
@@ -59,24 +56,22 @@ def walk_typeshed_stdlib(opt: options.Options = get_options()):
 def walk_typeshed_third_parties(opt: options.Options = get_options()):
     source_list = []
     source_paths = set()
-    generate_python2 = opt.python_version < (3, 0)
     for third_party_stub in THIRD_PARTIES_STUBS:
         stub_path = os.path.join(STUBS_PATH, third_party_stub)
-        relative_path = stub_path if not generate_python2 else f"{stub_path}/@python2"
-        src_list, src_paths = get_sources(relative_path, generate_python2)
+        src_list, src_paths = get_sources(stub_path)
         source_list.extend(src_list)
         source_paths = source_paths.union(src_paths)
     build_result = build.build(source_list, opt)
     return build_result, source_paths
 
 
-def get_sources(relative_path: str, generate_python2: bool):
+def get_sources(relative_path: str):
     source_list = []
     source_paths = set()
     path = os.path.join(CURRENT_PATH, relative_path)
     for root, dirs, files in os.walk(path):
         package_name = root.replace(path, "").replace("\\", ".").replace("/", ".").lstrip(".")
-        if not generate_python2 and "python2" in package_name:
+        if "python2" in package_name:
             # Avoid python2 stubs
             continue
         for file in files:
@@ -190,7 +185,7 @@ class CustomStubsSerializer(Serializer):
     save_location = "custom_protobuf"
 
     def get_build_result(self, opt=get_options()):
-        source_list, source_paths = get_sources(CUSTOM_STUBS_PATH, False)
+        source_list, source_paths = get_sources(CUSTOM_STUBS_PATH)
         build_result = build.build(source_list, self.opt)
         return build_result, source_paths
 

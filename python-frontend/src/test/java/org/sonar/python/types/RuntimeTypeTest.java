@@ -255,13 +255,9 @@ public class RuntimeTypeTest {
 
   @Test
   public void test_isCompatibleWith_str() {
-    InferredType unicode = runtimeBuiltinType("unicode");
-    assertThat(InferredTypes.STR.isCompatibleWith(unicode)).isTrue();
-    assertThat(InferredTypes.STR.isCompatibleWith(InferredTypes.STR)).isTrue();
-    assertThat(unicode.isCompatibleWith(InferredTypes.STR)).isFalse();
-
     InferredType memoryView = runtimeBuiltinType("memoryview");
     assertThat(memoryView.isCompatibleWith(InferredTypes.STR)).isTrue();
+    assertThat(InferredTypes.STR.isCompatibleWith(InferredTypes.STR)).isTrue();
     assertThat(InferredTypes.STR.isCompatibleWith(memoryView)).isFalse();
   }
 

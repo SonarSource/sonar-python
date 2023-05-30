@@ -24,7 +24,7 @@ def builtin_types_not_supporting_setitem():
   mydict.items()[0] = 42  # Noncompliant
 
   # iterators
-  iter(mylist)[0] = 42  # Noncompliant
+  iter(mylist)[0] = 42  # FN Noncompliant
 
   # Numeric types
   from fractions import Fraction
@@ -45,7 +45,7 @@ def builtin_types_not_supporting_setitem():
   # set Comprehension
   {nb for nb in range(4)}[0] = 42 # Noncompliant
 
-  range(10)[0] = 42  # FN
+  range(10)[0] = 42  # Noncompliant
 
   var = None
   var[0] = 42  # Noncompliant
@@ -84,10 +84,10 @@ def standard_library():
   math[0] = 42  # FN: Any type
 
   # File
-  open("foo.py")[0] = 42  # Noncompliant
+  open("foo.py")[0] = 42  # FN Noncompliant
 
   import os
-  os.popen('ls')[0] = 42  # Noncompliant
+  os.popen('ls')[0] = 42  # FN Noncompliant
 
   from array import array
   a = array('b', [0, 1, 2])

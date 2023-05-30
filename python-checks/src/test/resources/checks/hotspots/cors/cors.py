@@ -43,40 +43,40 @@ import flask
 def flask_cors():
     from flask_cors import CORS
     app = flask.Flask(__name__)
-    CORS(app) # Noncompliant
-    CORS(app, origins="*") # Noncompliant
-    CORS(app, origins=r".*") # Noncompliant
-    CORS(app, origins=r".+") # Noncompliant
-    CORS(app, origins=r"^.*$") # Noncompliant
-    CORS(app, origins=r"^.+$") # Noncompliant
-    CORS(app, origins=r"^.+") # Noncompliant
-    CORS(app, origins=["*"]) # Noncompliant
+    CORS(app) # FN Noncompliant
+    CORS(app, origins="*") # FN Noncompliant
+    CORS(app, origins=r".*") # FN Noncompliant
+    CORS(app, origins=r".+") # FN Noncompliant
+    CORS(app, origins=r"^.*$") # FN Noncompliant
+    CORS(app, origins=r"^.+$") # FN Noncompliant
+    CORS(app, origins=r"^.+") # FN Noncompliant
+    CORS(app, origins=["*"]) # FN Noncompliant
     CORS(app, origins="trustedwebsite.com") # Compliant
     CORS(app, origins=0) # Compliant
     CORS(app, origins=["trustedwebsite.com"]) # Compliant
-    CORS(app, resources=r"/api/*") # Noncompliant
+    CORS(app, resources=r"/api/*") # FN Noncompliant
     CORS(app, resources=r"/api/*", origins="trustedwebsite.com") # OK
     CORS(app, resources=0) # OK
-    CORS(app, resources={r"/api/1": {"origins": "*"}, r"/api/2": {"origins": "*"}}) # Noncompliant
-    CORS(app, resources={r"/api/*": {"origins": r".*"}}) # Noncompliant
-    CORS(app, resources={r"/api/*": {"origins": r".*", "something_else": 42}}) # Noncompliant
-    CORS(app, resources={r"/api/*": {"origins": r".+"}}) # Noncompliant
-    CORS(app, resources={r"/api/*": {"origins": ["*"]}}) # Noncompliant
+    CORS(app, resources={r"/api/1": {"origins": "*"}, r"/api/2": {"origins": "*"}}) # FN Noncompliant
+    CORS(app, resources={r"/api/*": {"origins": r".*"}}) # FN Noncompliant
+    CORS(app, resources={r"/api/*": {"origins": r".*", "something_else": 42}}) # FN Noncompliant
+    CORS(app, resources={r"/api/*": {"origins": r".+"}}) # FN Noncompliant
+    CORS(app, resources={r"/api/*": {"origins": ["*"]}}) # FN Noncompliant
     CORS(app, resources={r"/api/*": {"foo": ["*"]}}) # OK
     CORS(app, resources={r"/api/*": {"origins": "trustedwebsite.com"}, **unpack}) # Compliant
     CORS(app, resources={r"/api/*": {"origins": ["trustedwebsite.com"]}}) # Compliant
 
 def flask_cross_origin_decorator():
     from flask_cors import cross_origin
-    @cross_origin() # Noncompliant
-#   ^^^^^^^^^^^^^^^
-    @cross_origin # Noncompliant
-#   ^^^^^^^^^^^^^
-    @cross_origin(origins="*") # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    @cross_origin(origins=r".*") # Noncompliant
-    @cross_origin(origins=r".+") # Noncompliant
-    @cross_origin(origins=["*"]) # Noncompliant
+    @cross_origin() # FN Noncompliant
+##   ^^^^^^^^^^^^^^^
+    @cross_origin # FN Noncompliant
+##   ^^^^^^^^^^^^^
+    @cross_origin(origins="*") # FN Noncompliant
+##   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    @cross_origin(origins=r".*") # FN Noncompliant
+    @cross_origin(origins=r".+") # FN Noncompliant
+    @cross_origin(origins=["*"]) # FN Noncompliant
     @cross_origin(origins="trustedwebsite.com") # Compliant
     @cross_origin(origins=["trustedwebsite.com"]) # Compliant
     @foo.cross_origin() # compliant

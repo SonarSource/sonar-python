@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol.Parameter;
@@ -37,6 +38,7 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.AMBIGUOUS;
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.python.types.InferredTypes.typeSymbols;
 
@@ -154,6 +156,9 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
         InferredType parameterType = parameters.get(1).declaredType();
         return !type.isCompatibleWith(parameterType);
       }
+    }
+    if (resolvedMethod.is(AMBIGUOUS)) {
+      return ((AmbiguousSymbol) resolvedMethod).alternatives().stream().allMatch(s -> hasIncompatibleTypeOrAbsentSpecialMethod(s, type));
     }
     return false;
   }

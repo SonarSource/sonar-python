@@ -29,7 +29,7 @@ def builtins_not_supporting_getitem():
   mydict.items()[0] # Noncompliant
 
   # iterators
-  iter(mylist)[0]  # Noncompliant
+  iter(mylist)[0]  # FN Noncompliant
 
   # Numeric types
   from fractions import Fraction
@@ -76,7 +76,7 @@ def builtins_not_supporting_getitem():
       yield 1
 
   async_generator()[0]  # Noncompliant
-  open("foo.py")[0]  # Noncompliant
+  open("foo.py")[0]  # FN Noncompliant
 
 
 def standard_library():
@@ -98,7 +98,7 @@ def standard_library():
   math[0]  # FN: type unknown
 
   import os
-  os.popen('ls')[0]  # Noncompliant
+  os.popen('ls')[0]  # FN Noncompliant
 
 def custom_classes():
   class A:
