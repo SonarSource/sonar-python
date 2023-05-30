@@ -71,7 +71,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
     groupsCollector.visit(regexParseResult);
 
     getCallExpressionResultUsages(regexFunctionCall, COMPILE_FUNCTION_NAMES)
-      .map(patternUsages -> getUsagesQualifiedExpressions(patternUsages, "typing.Pattern.match")
+      .map(patternUsages -> getUsagesQualifiedExpressions(patternUsages, "re.Pattern.match")
         .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.ASSIGNMENT_STMT))
         .filter(Objects::nonNull)
         .map(AssignmentStatement.class::cast)
@@ -105,7 +105,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
   }
 
   private void checkGroupAccesses(RegexParseResult regexParseResult, KnownGroupsCollector groupsCollector, List<Usage> matchUsages) {
-    getUsagesQualifiedExpressions(matchUsages, "typing.Match.group")
+    getUsagesQualifiedExpressions(matchUsages, "re.Match.group")
       .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.CALL_EXPR))
       .filter(Objects::nonNull)
       .map(CallExpression.class::cast)

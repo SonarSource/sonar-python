@@ -1,6 +1,7 @@
 import zope
 from argumentNumberImported import fn
 from contextvars import copy_context
+import datetime
 
 fn(1, 2) # OK, no project level information
 
@@ -148,7 +149,7 @@ def builtin_method():
     l = list[int](42, 43)
     l.append(1, 2) # Noncompliant
     import math
-    math.acos(0, 1) # Noncompliant
+    math.acos(0, 1) # FN Noncompliant
 
 def builtin_method_different_for_python_2_and_3():
     myList = list(42, 43)
@@ -194,3 +195,13 @@ def jinja_apis():
     from jinja2.filters import do_indent, do_wordwrap
     do_wordwrap(environment, s, break_on_hyphens=False)
     do_indent(s, first=first, blank=blank)
+
+
+class BuiltinFunctionWithEmptyParameterName:
+    def __init__(self, name, value):
+        setattr(self, name, value)  # OK
+
+
+class MyTZInfo(datetime.tzinfo):
+    def tzname(self): # FN 
+        pass

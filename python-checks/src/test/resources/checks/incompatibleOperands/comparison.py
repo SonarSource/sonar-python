@@ -2,7 +2,7 @@ def builtin_noncompliant(p):
   1 < "1"  # Noncompliant {{Fix this invalid "<" operation between incompatible types (int and str).}}
 #   ^
   complex(1) < complex(1)  # Noncompliant
-  [1] < (1,)  # Noncompliant
+  [1] < (1,)  # FN Noncompliant
 
   "1" > 1 # Noncompliant {{Fix this invalid ">" operation between incompatible types (str and int).}}
 

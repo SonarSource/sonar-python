@@ -28,7 +28,7 @@ from serializer.symbols import MergedModuleSymbol, TypeKind
 def test_build_multiple_python_version(typeshed_stdlib):
     serializers.walk_typeshed_stdlib = Mock(return_value=(typeshed_stdlib, set()))
     model_by_version = TypeshedSerializer().build_for_every_python_version()
-    assert set(model_by_version.keys()) == {'27', '35', '36', '37', '38', '39', '310'}
+    assert set(model_by_version.keys()) == {'36', '37', '38', '39', '310'}
 
 
 def test_merge_multiple_python_versions(typeshed_stdlib):
@@ -36,7 +36,7 @@ def test_merge_multiple_python_versions(typeshed_stdlib):
     merged_modules = TypeshedSerializer().get_merged_modules()
     for mod in merged_modules.values():
         assert isinstance(mod, MergedModuleSymbol)
-    assert len(merged_modules) == 28
+    assert len(merged_modules) == 47
 
 
 def test_basic_module_merge(typeshed_stdlib):
@@ -213,7 +213,7 @@ def test_actual_module_merge(fake_module_36_38):
     assert len(fakemodule_proto.overloaded_functions) == len(flattened_overloaded_funcs)
 
     all_vars = merged_fakemodule_module.vars
-    assert len(all_vars) == 7
+    assert len(all_vars) == 8
     common_var = all_vars['fakemodule.common_var']
     assert len(common_var) == 1
     assert common_var[0].valid_for == ["36", "38"]
@@ -250,6 +250,10 @@ def test_actual_module_merge(fake_module_36_38):
     imported_math = all_vars['math']
     assert len(imported_math) == 1
     assert imported_math[0].var_symbol.is_imported_module is True
+
+    imported_sys = all_vars['sys.flags']
+    assert len(imported_sys) == 1
+    assert imported_sys[0].var_symbol.name == "my_flags"
 
     fakemodule_class_with_fields_symbols = classes_dict['fakemodule.ClassWithFields']
     assert len(fakemodule_class_with_fields_symbols) == 1

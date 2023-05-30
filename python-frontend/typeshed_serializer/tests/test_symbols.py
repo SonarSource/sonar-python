@@ -51,6 +51,17 @@ def test_module_symbol(typeshed_stdlib):
     assert ("os.path", "path") in imported_modules
 
 
+def test_self_defined_symbol(fake_module_self_defined_symbol):
+    module_symbol = symbols.ModuleSymbol(fake_module_self_defined_symbol)
+    assert module_symbol.fullname == "fakemodule_self_defined_symbol"
+    assert len(module_symbol.classes) == 1
+    assert len(module_symbol.functions) == 0
+
+    pb_module = module_symbol.to_proto()
+    assert pb_module.fully_qualified_name == "fakemodule_self_defined_symbol"
+    assert len(pb_module.classes) == 1
+    assert len(pb_module.functions) == 0
+
 def test_class_symbol(typeshed_stdlib):
     mypy_cmd_module = typeshed_stdlib.files.get("cmd")
     mypy_cmd_class = mypy_cmd_module.names.get("Cmd")
@@ -88,7 +99,11 @@ def test_function_symbol(typeshed_stdlib):
     args = completenames_method_symbol.parameters
     assert len(args) == 3
 
+    ignored_param = args[2]
+    assert not ignored_param.has_default
+    assert ignored_param.kind == symbols.ParamKind.VAR_POSITIONAL
     pb_func = completenames_method_symbol.to_proto()
+
     assert pb_func.name == "completenames"
     assert pb_func.fully_qualified_name == "cmd.Cmd.completenames"
     assert not pb_func.has_decorators
@@ -97,20 +112,41 @@ def test_function_symbol(typeshed_stdlib):
     assert len(pb_func.resolved_decorator_names) == 0
 
 
+    mypy_cmd_loop_method_node = mypy_cmd_class_node.names.get("cmdloop").node
+    cmd_loop = symbols.FunctionSymbol(mypy_cmd_loop_method_node)
+    assert cmd_loop.name == "cmdloop"
+    assert len(cmd_loop.parameters) == 2
+    self_param = cmd_loop.parameters[0]
+    assert not self_param.has_default
+    assert self_param.kind == symbols.ParamKind.POSITIONAL_OR_KEYWORD
+    intro_param = cmd_loop.parameters[1]
+    assert intro_param.has_default
+    assert intro_param.kind == symbols.ParamKind.POSITIONAL_OR_KEYWORD
+
 def test_overloaded_functions(typeshed_stdlib):
-    sys_module_symbol = symbols.ModuleSymbol(typeshed_stdlib.files.get("sys"))
+    sys_module_symbol = symbols.ModuleSymbol(typeshed_stdlib.files.get("subprocess"))
     overloaded_functions = sys_module_symbol.overloaded_functions
-    assert len(overloaded_functions) == 1
+    assert len(overloaded_functions) == 2
+    overloaded_functions = sorted(overloaded_functions, key=lambda x: x.name)
     overloaded_func = overloaded_functions[0]
-    assert overloaded_func.name == "getsizeof"
-    assert overloaded_func.fullname == "sys.getsizeof"
-    assert len(overloaded_func.definitions) == 2
+    assert overloaded_func.name == "check_output"
+    assert overloaded_func.fullname == "subprocess.check_output"
+    assert len(overloaded_func.definitions) == 6
 
     overloaded_func_proto = overloaded_func.to_proto()
-    assert overloaded_func_proto.name == "getsizeof"
-    assert overloaded_func_proto.fullname == "sys.getsizeof"
-    assert len(overloaded_func_proto.definitions) == 2
+    assert overloaded_func_proto.name == "check_output"
+    assert overloaded_func_proto.fullname == "subprocess.check_output"
+    assert len(overloaded_func_proto.definitions) == 6
 
+    overloaded_func2 = overloaded_functions[1]
+    assert overloaded_func2.name == "run"
+    assert overloaded_func2.fullname == "subprocess.run"
+    assert len(overloaded_func2.definitions) == 6
+
+    overloaded_func_proto2 = overloaded_func2.to_proto()
+    assert overloaded_func_proto2.name == "run"
+    assert overloaded_func_proto2.fullname == "subprocess.run"
+    assert len(overloaded_func_proto2.definitions) == 6
 
 def test_save_module(typeshed_stdlib):
     mock_open = mock.mock_open(read_data='some data from opened file')

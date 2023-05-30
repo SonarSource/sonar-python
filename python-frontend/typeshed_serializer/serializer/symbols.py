@@ -172,14 +172,14 @@ class ParameterSymbol:
         self.name = param
         self.kind = None
         self.type_annotation = None
-        self.has_default = kind in [1, 5]
+        self.has_default = kind in [mpn.ARG_OPT, mpn.ARG_NAMED_OPT]
         if name is None:
             self.kind = ParamKind.POSITIONAL_ONLY
-        if kind == 2:
+        if kind == mpn.ARG_STAR:
             self.kind = ParamKind.VAR_POSITIONAL
-        if kind == 4:
+        if kind == mpn.ARG_STAR2:
             self.kind = ParamKind.VAR_KEYWORD
-        if kind in [3, 5]:
+        if kind in [mpn.ARG_NAMED, mpn.ARG_NAMED_OPT]:
             self.kind = ParamKind.KEYWORD_ONLY
         if self.kind is None:
             self.kind = ParamKind.POSITIONAL_OR_KEYWORD
@@ -240,7 +240,7 @@ class FunctionSymbol:
         self.return_type = extract_return_type(func_def)
         self.parameters = extract_parameters(func_def)
         self.has_decorators = func_def.is_decorated
-        self.is_abstract = func_def.is_abstract
+        self.is_abstract = False if func_def.abstract_status == mpn.NOT_ABSTRACT else True
         self.is_asynchronous = func_def.is_async_generator or func_def.is_awaitable_coroutine or func_def.is_coroutine
         self.is_final = func_def.is_final
         self.is_overload = func_def.is_overload

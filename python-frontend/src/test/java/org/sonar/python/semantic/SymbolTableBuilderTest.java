@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -278,8 +279,10 @@ public class SymbolTableBuilderTest {
     CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(1)).expressions().get(0);
     Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
     assertThat(qualifiedExpressionSymbol).isNotNull();
-    assertThat(qualifiedExpressionSymbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
-    assertThat(((FunctionSymbolImpl) qualifiedExpressionSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
+    assertThat(qualifiedExpressionSymbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
+    Symbol symbol = ((AmbiguousSymbolImpl) qualifiedExpressionSymbol).alternatives().iterator().next();
+    assertThat(symbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl)symbol).declaredReturnType().canOnlyBe("float")).isTrue();
   }
 
   @Test

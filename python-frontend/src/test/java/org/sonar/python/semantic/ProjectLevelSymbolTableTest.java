@@ -684,7 +684,7 @@ public class ProjectLevelSymbolTableTest {
       "def nlargest(n, iterable, key=None): ..."
     );
     Set<Symbol> globalSymbols = globalSymbols(tree, "");
-    assertThat(globalSymbols).isEmpty();
+    assertThat(globalSymbols).hasOnlyElementsOfType(AmbiguousSymbolImpl.class);
 
     tree = parseWithoutSymbols(
       "nonlocal nlargest",

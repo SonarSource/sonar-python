@@ -23,3 +23,9 @@ def passed_as_argument():
 
 ls = [1, 2, 3]
 result = ls.append(42)  # FN - no type inference outside of functions
+
+import win32pdh
+
+# FP due to the stubs of win32 being incomplete
+path = win32pdh.MakeCounterPath((None, None, None, None, -1, None)) # Noncompliant
+hc = win32pdh.AddCounter(None, path)

@@ -57,10 +57,10 @@ def functions_defined_locally():
 
 def stdlib_functions():
   A = UnexpectedClass()
-  acos(A) # Noncompliant
+  acos(A) # FN Noncompliant
   B = datetime.tzinfo()
-  B.tzname(42) # Noncompliant {{Change this argument; Function "tzname" expects a different type}}
-#          ^^
+  B.tzname(42) # FN Noncompliant {{Change this argument; Function "tzname" expects a different type}}
+##          ^^
   select.select([],[],[], 0)
   time.sleep(1) # OK
   x = time.gmtime(int(time.time()))
@@ -68,10 +68,9 @@ def stdlib_functions():
   time.sleep(True) # OK, converted to 1
   time.sleep(1j) # FN, considered duck type compatible
   genericpath.isfile("some/path")
-  genericpath.isfile(42) # Noncompliant
+  genericpath.isfile(42) # FN Noncompliant
   my_list = [1,2,3]
-  _heapq.heapify(42) # Noncompliant {{Change this argument; Function "heapify" expects a different type}}
-#                ^^
+  _heapq.heapify(42) # FN Noncompliant {{Change this argument; Function "heapify" expects a different type}}
   _heapq.heapify(my_list)
   imap4 = imaplib.IMAP4()
   imap4.setannotation(42) # FN, we do not handle variadic parameters
@@ -84,12 +83,12 @@ def builtin_functions():
   round("42.3")  # FN, ambiguous symbol: no parameters defined yet | missing type hierarchy
   unexpected = UnexpectedClass()
   number = 42
-  number.__add__("27") # Noncompliant
-  number.__add__(unexpected) # Noncompliant
-  number.__add__(x = unexpected) # Noncompliant {{Change this argument; Function "__add__" expects a different type}}
-#                ^^^^^^^^^^^^^^
+  number.__add__("27") # FN Noncompliant
+  number.__add__(unexpected) # FN Noncompliant
+  number.__add__(x = unexpected) # FN Noncompliant {{Change this argument; Function "__add__" expects a different type}}
+##                ^^^^^^^^^^^^^^
   float.fromhex(42) # Noncompliant
-  eval(42) # Noncompliant
+  eval(42) # FN Noncompliant
   "Some string literal".format(1, 2)
   exit(1)
   repr(A)
@@ -222,3 +221,22 @@ def special_form_types():
   import collections.abc as collections_abc
   class A: ...
   isinstance(A(), collections_abc.Callable) # OK
+
+
+def fp_email_utils_getaddresses(val):
+    from email.utils import getaddresses
+    # FP: stub says list is expected, but tuple works as well
+    getaddresses((val,))  # Noncompliant
+
+
+def fp_win32pdh(machine, object, instance, inum, counter):
+    import win32pdh
+    path = win32pdh.MakeCounterPath((machine, object, instance, None, inum, counter))
+    hq = win32pdh.OpenQuery()
+    # FP: stubs for win32pdh are incomplete
+    hc = win32pdh.AddCounter(hq, path)  # Noncompliant
+
+
+def fn_len():
+    len(len([1,2,3]))  # FN
+    len(42)  # FN

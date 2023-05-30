@@ -58,6 +58,12 @@ def fake_module_36_38():
     model_38 = build_modules(modules, python_version=(3, 8))
     return [model_36.get("fakemodule"), model_38.get("fakemodule")]
 
+@pytest.fixture(scope="session")
+def fake_module_self_defined_symbol():
+    modules = {
+        "fakemodule_self_defined_symbol": os.path.join(CURRENT_PATH, "resources/fakemodule_self_defined_symbol.pyi"),
+    }
+    return build_modules(modules).get("fakemodule_self_defined_symbol")
 
 @pytest.fixture(scope="session")
 def typeshed_third_parties():

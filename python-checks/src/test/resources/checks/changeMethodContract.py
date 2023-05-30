@@ -66,7 +66,7 @@ class UnresolvedParent(OtherClass):
   def my_method(self): ... # OK
 
 class MyString(str):
-  def capitalize(self, p1): ... # Noncompliant {{Remove parameter p1 or provide default value. This method overrides str.capitalize.}}
+  def capitalize(self, p1): ... # FN Noncompliant {{Remove parameter p1 or provide default value. This method overrides str.capitalize.}}
 
 
 class Intermediate(ParentClass): ...
@@ -114,4 +114,4 @@ class ChildClassOneExtraDefault(ParentClass):
 from io import BytesIO
 
 class StreamingBuffer(BytesIO):
-  def read(self): ... # FN
+  def read(self): ... # Noncompliant {{Add missing parameters null. This method overrides io.BufferedIOBase.read.}}
