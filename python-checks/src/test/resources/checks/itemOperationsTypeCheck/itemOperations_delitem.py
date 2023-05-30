@@ -21,7 +21,7 @@ def builtin_types_not_supporting_delitem():
   del mydict.items()[0]  # Noncompliant
 
   # iterators
-  del iter(mylist)[0]  # Noncompliant
+  del iter(mylist)[0]  # FN Noncompliant
 
   # Numeric types
   from fractions import Fraction
@@ -43,7 +43,7 @@ def builtin_types_not_supporting_delitem():
   # set Comprehension
   del {nb for nb in range(4)}[0]  # Noncompliant
 
-  del range(10)[0]  # FN
+  del range(10)[0]  # Noncompliant
 
   var = None
   del var[0]  # Noncompliant
@@ -82,10 +82,10 @@ def standard_library():
   del math[0]  # FN: Symbol "OTHER" Any type
 
   # File
-  del open("foo.py")[0]  # Noncompliant
+  del open("foo.py")[0]  # FN Noncompliant
 
   import os
-  del os.popen('ls')[0]  # Noncompliant
+  del os.popen('ls')[0]  # FN Noncompliant
 
   from array import array
   a = array('b', [0, 1, 2])
