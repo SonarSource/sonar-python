@@ -38,7 +38,7 @@ message Type {
 }
 
 message ParameterSymbol {
-  string name = 1;
+  optional string name = 1;
   ParameterKind kind = 2;
   optional Type type_annotation = 3;
   bool has_default = 4;
