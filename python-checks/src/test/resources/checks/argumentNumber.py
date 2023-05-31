@@ -194,3 +194,8 @@ def jinja_apis():
     from jinja2.filters import do_indent, do_wordwrap
     do_wordwrap(environment, s, break_on_hyphens=False)
     do_indent(s, first=first, blank=blank)
+
+
+class BuiltinFunctionWithEmptyParameterName:
+    def __init__(self, name, value):
+        setattr(self, name, value)  # OK
