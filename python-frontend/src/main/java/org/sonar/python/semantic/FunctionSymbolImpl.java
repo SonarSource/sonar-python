@@ -116,7 +116,8 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       } else {
         declaredType = anyType();
       }
-      ParameterImpl parameter = new ParameterImpl(parameterSymbol.getName(), declaredType, null, parameterSymbol.getHasDefault(), parameterState,
+      String parameterName = parameterSymbol.hasName() ? parameterSymbol.getName() : null;
+      ParameterImpl parameter = new ParameterImpl(parameterName, declaredType, null, parameterSymbol.getHasDefault(), parameterState,
         isKeywordVariadic, isPositionalVariadic, parameterSymbol.getTypeAnnotation(), null);
       parameters.add(parameter);
     }
