@@ -188,7 +188,8 @@ class ParameterSymbol:
 
     def to_proto(self) -> symbols_pb2.ParameterSymbol:
         pb_parameter = symbols_pb2.ParameterSymbol()
-        pb_parameter.name = self.name
+        if self.name is not None:
+            pb_parameter.name = self.name
         pb_parameter.kind = symbols_pb2.ParameterKind.Value(self.kind.name)
         pb_parameter.has_default = self.has_default
         if self.type_annotation is not None:
