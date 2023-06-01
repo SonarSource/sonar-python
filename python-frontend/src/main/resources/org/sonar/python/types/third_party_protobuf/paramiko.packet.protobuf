@@ -1,30 +1,30 @@
 
-paramiko.packete
-NeedRekeyException"paramiko.packet.NeedRekeyException"builtins.Exceptionj35j36j37j38j39j310—/
+paramiko.packeta
+NeedRekeyException"paramiko.packet.NeedRekeyException"builtins.Exceptionj36j37j38j39j310«=
 
-Packetizerparamiko.packet.Packetizer"builtins.object*¬
+Packetizerparamiko.packet.Packetizer"builtins.object*æ
 __init__#paramiko.packet.Packetizer.__init__"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer**
 socket
-socket.socket"socket.socketz35z36z37z38z39z310*∂
+socket.socket"socket.socketz36z37z38z39z310*≤
 closed!paramiko.packet.Packetizer.closed"
 builtins.bool"builtins.bool*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer0:property`z35z36z37z38z39z310*ø
+paramiko.packet.Packetizer"paramiko.packet.Packetizer0:property`z36z37z38z39z310*ª
 set_log"paramiko.packet.Packetizer.set_log"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*)
 log 
-logging.Logger"logging.Loggerz35z36z37z38z39z310*Ø
+logging.Logger"logging.Loggerz36z37z38z39z310*é
 set_outbound_cipher.paramiko.packet.Packetizer.set_outbound_cipher"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*p
-block_engine^
--cryptography.hazmat.primitives.ciphers.Cipher"-cryptography.hazmat.primitives.ciphers.Cipher*,
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*z
+block_engineh
+2cryptography.hazmat.primitives.ciphers.base.Cipher"2cryptography.hazmat.primitives.ciphers.base.Cipher*,
 
 block_size
 builtins.int"builtins.int*.
@@ -32,19 +32,21 @@ block_size
 mac_engine
 hashlib._Hash"hashlib._Hash**
 mac_size
-builtins.int"builtins.int*-
-mac_key 
-builtins.bytes"builtins.bytes*+
+builtins.int"builtins.int*Ö
+mac_keyx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*+
 sdctr
 builtins.bool"builtins.bool *)
 etm
-builtins.bool"builtins.bool z35z36z37z38z39z310*Ä
+builtins.bool"builtins.bool z36z37z38z39z310*ﬂ
 set_inbound_cipher-paramiko.packet.Packetizer.set_inbound_cipher"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*p
-block_engine^
--cryptography.hazmat.primitives.ciphers.Cipher"-cryptography.hazmat.primitives.ciphers.Cipher*,
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*z
+block_engineh
+2cryptography.hazmat.primitives.ciphers.base.Cipher"2cryptography.hazmat.primitives.ciphers.base.Cipher*,
 
 block_size
 builtins.int"builtins.int*.
@@ -52,52 +54,54 @@ block_size
 mac_engine
 hashlib._Hash"hashlib._Hash**
 mac_size
-builtins.int"builtins.int*-
-mac_key 
-builtins.bytes"builtins.bytes*)
+builtins.int"builtins.int*Ö
+mac_keyx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*)
 etm
-builtins.bool"builtins.bool z35z36z37z38z39z310*ä
+builtins.bool"builtins.bool z36z37z38z39z310*Ü
 set_outbound_compressor2paramiko.packet.Packetizer.set_outbound_compressor"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*T
 
 compressorD
- paramiko.compress.ZlibCompressor" paramiko.compress.ZlibCompressorz35z36z37z38z39z310*å
+ paramiko.compress.ZlibCompressor" paramiko.compress.ZlibCompressorz36z37z38z39z310*à
 set_inbound_compressor1paramiko.packet.Packetizer.set_inbound_compressor"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*X
 
 compressorH
-"paramiko.compress.ZlibDecompressor""paramiko.compress.ZlibDecompressorz35z36z37z38z39z310*ê
+"paramiko.compress.ZlibDecompressor""paramiko.compress.ZlibDecompressorz36z37z38z39z310*å
 close paramiko.packet.Packetizer.close"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*…
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*≈
 set_hexdump&paramiko.packet.Packetizer.set_hexdump"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*+
 hexdump
-builtins.bool"builtins.boolz35z36z37z38z39z310*≤
+builtins.bool"builtins.boolz36z37z38z39z310*Æ
 get_hexdump&paramiko.packet.Packetizer.get_hexdump"
 builtins.bool"builtins.bool*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*∏
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*¥
 get_mac_size_in*paramiko.packet.Packetizer.get_mac_size_in"
 builtins.int"builtins.int*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*∫
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*∂
 get_mac_size_out+paramiko.packet.Packetizer.get_mac_size_out"
 builtins.int"builtins.int*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*∞
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*¨
 
 need_rekey%paramiko.packet.Packetizer.need_rekey"
 builtins.bool"builtins.bool*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*ß
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*£
 set_keepalive(paramiko.packet.Packetizer.set_keepalive"
 None*B
 self8
@@ -106,26 +110,26 @@ need_rekey%paramiko.packet.Packetizer.need_rekey"
 builtins.int"builtins.int*Y
 callbackK
 CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z310*ö
+builtins.function"builtins.functionz36z37z38z39z310*ñ
 
 read_timer%paramiko.packet.Packetizer.read_timer"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*”
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*œ
 start_handshake*paramiko.packet.Packetizer.start_handshake"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*-
 timeout 
-builtins.float"builtins.floatz35z36z37z38z39z310*¬
+builtins.float"builtins.floatz36z37z38z39z310*æ
 handshake_timed_out.paramiko.packet.Packetizer.handshake_timed_out"
 builtins.bool"builtins.bool*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*™
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*¶
 complete_handshake-paramiko.packet.Packetizer.complete_handshake"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310*Ü
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310*Ç
 read_all#paramiko.packet.Packetizer.read_all" 
 builtins.bytes"builtins.bytes*B
 self8
@@ -133,48 +137,112 @@ read_timer%paramiko.packet.Packetizer.read_timer"
 n
 builtins.int"builtins.int*1
 check_rekey
-builtins.bool"builtins.bool z35z36z37z38z39z310*√
+builtins.bool"builtins.bool z36z37z38z39z310*Ì
 	write_all$paramiko.packet.Packetizer.write_all"
 None*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizer*)
-out 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*Ÿ
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*„
+outŸ
+ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytesï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz36z37*Ô
+	write_all$paramiko.packet.Packetizer.write_all"
+None*B
+self8
+paramiko.packet.Packetizer"paramiko.packet.Packetizer*‡
+out÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz38z39z310*’
 readline#paramiko.packet.Packetizer.readline"
 builtins.str"builtins.str*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*-
 timeout 
-builtins.float"builtins.floatz35z36z37z38z39z310*ﬁ
+builtins.float"builtins.floatz36z37z38z39z310*⁄
 send_message'paramiko.packet.Packetizer.send_message"
 None*B
 self8
 paramiko.packet.Packetizer"paramiko.packet.Packetizer*>
 data4
-paramiko.message.Message"paramiko.message.Messagez35z36z37z38z39z310*õ
+paramiko.message.Message"paramiko.message.Messagez36z37z38z39z310*ó
 read_message'paramiko.packet.Packetizer.read_message"Ñ
 ,Tuple[builtins.int,paramiko.message.Message]
 builtins.int"builtins.int4
 paramiko.message.Message"paramiko.message.Message*B
 self8
-paramiko.packet.Packetizer"paramiko.packet.Packetizerz35z36z37z38z39z310j35j36j37j38j39j310rp
+paramiko.packet.Packetizer"paramiko.packet.Packetizerz36z37z38z39z310j36j37j38j39j310rl
 REKEY_PACKETS(paramiko.packet.Packetizer.REKEY_PACKETS
-builtins.int"builtins.int*35*36*37*38*39*310rl
+builtins.int"builtins.int*36*37*38*39*310rh
 REKEY_BYTES&paramiko.packet.Packetizer.REKEY_BYTES
-builtins.int"builtins.int*35*36*37*38*39*310rä
+builtins.int"builtins.int*36*37*38*39*310rÜ
 REKEY_PACKETS_OVERFLOW_MAX5paramiko.packet.Packetizer.REKEY_PACKETS_OVERFLOW_MAX
-builtins.int"builtins.int*35*36*37*38*39*310rÜ
+builtins.int"builtins.int*36*37*38*39*310rÇ
 REKEY_BYTES_OVERFLOW_MAX3paramiko.packet.Packetizer.REKEY_BYTES_OVERFLOW_MAX
-builtins.int"builtins.int*35*36*37*38*39*310Û
+builtins.int"builtins.int*36*37*38*39*310ˆ
 compute_hmacparamiko.packet.compute_hmac" 
-builtins.bytes"builtins.bytes*)
-key 
-builtins.bytes"builtins.bytes*-
-message 
-builtins.bytes"builtins.bytes*0
+builtins.bytes"builtins.bytes*Å
+keyx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*Á
+messageŸ
+ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytesï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*0
 digest_class
-hashlib._Hash"hashlib._Hashz35z36z37z38z39z310y
+hashlib._Hash"hashlib._Hashz36z37¯
+compute_hmacparamiko.packet.compute_hmac" 
+builtins.bytes"builtins.bytes*Å
+keyx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*‰
+message÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*0
+digest_class
+hashlib._Hash"hashlib._Hashz38z39z310u
 	first_argparamiko.packet.first_arg"
 Any*/
 e(
-builtins.Exception"builtins.Exceptionz35z36z37z38z39z310
+builtins.Exception"builtins.Exceptionz36z37z38z39z310*†
+__annotations__paramiko.packet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

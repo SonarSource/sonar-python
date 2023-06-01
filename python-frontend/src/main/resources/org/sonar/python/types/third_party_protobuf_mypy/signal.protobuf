@@ -1,30 +1,31 @@
 
-signal3
-ItimerErrorsignal.ItimerError"builtins.OSErrorþ
+signalþ
 Signalssignal.Signals"enum.IntEnumHr?
 SIGABRTsignal.Signals.SIGABRT
-builtins.int"builtins.intr?
-SIGALRMsignal.Signals.SIGALRM
-builtins.int"builtins.intr=
-SIGBUSsignal.Signals.SIGBUS
-builtins.int"builtins.intr?
-SIGCHLDsignal.Signals.SIGCHLD
-builtins.int"builtins.intr=
-SIGCLDsignal.Signals.SIGCLD
-builtins.int"builtins.intr?
-SIGCONTsignal.Signals.SIGCONT
 builtins.int"builtins.intr=
 SIGEMTsignal.Signals.SIGEMT
 builtins.int"builtins.intr=
 SIGFPEsignal.Signals.SIGFPE
-builtins.int"builtins.intr=
-SIGHUPsignal.Signals.SIGHUP
 builtins.int"builtins.intr=
 SIGILLsignal.Signals.SIGILL
 builtins.int"builtins.intr?
 SIGINFOsignal.Signals.SIGINFO
 builtins.int"builtins.intr=
 SIGINTsignal.Signals.SIGINT
+builtins.int"builtins.intr?
+SIGSEGVsignal.Signals.SIGSEGV
+builtins.int"builtins.intr?
+SIGTERMsignal.Signals.SIGTERM
+builtins.int"builtins.intr?
+SIGALRMsignal.Signals.SIGALRM
+builtins.int"builtins.intr=
+SIGBUSsignal.Signals.SIGBUS
+builtins.int"builtins.intr?
+SIGCHLDsignal.Signals.SIGCHLD
+builtins.int"builtins.intr?
+SIGCONTsignal.Signals.SIGCONT
+builtins.int"builtins.intr=
+SIGHUPsignal.Signals.SIGHUP
 builtins.int"builtins.intr;
 SIGIOsignal.Signals.SIGIO
 builtins.int"builtins.intr=
@@ -34,25 +35,13 @@
 builtins.int"builtins.intr?
 SIGPIPEsignal.Signals.SIGPIPE
 builtins.int"builtins.intr?
-SIGPOLLsignal.Signals.SIGPOLL
-builtins.int"builtins.intr=
-SIGPWRsignal.Signals.SIGPWR
-builtins.int"builtins.intr?
 SIGPROFsignal.Signals.SIGPROF
 builtins.int"builtins.intr?
 SIGQUITsignal.Signals.SIGQUIT
-builtins.int"builtins.intrA
-SIGRTMAXsignal.Signals.SIGRTMAX
-builtins.int"builtins.intrA
-SIGRTMINsignal.Signals.SIGRTMIN
-builtins.int"builtins.intr?
-SIGSEGVsignal.Signals.SIGSEGV
 builtins.int"builtins.intr?
 SIGSTOPsignal.Signals.SIGSTOP
 builtins.int"builtins.intr=
 SIGSYSsignal.Signals.SIGSYS
-builtins.int"builtins.intr?
-SIGTERMsignal.Signals.SIGTERM
 builtins.int"builtins.intr?
 SIGTRAPsignal.Signals.SIGTRAP
 builtins.int"builtins.intr?
@@ -75,34 +64,31 @@
 SIGXCPUsignal.Signals.SIGXCPU
 builtins.int"builtins.intr?
 SIGXFSZsignal.Signals.SIGXFSZ
+builtins.int"builtins.intr=
+SIGCLDsignal.Signals.SIGCLD
+builtins.int"builtins.intr?
+SIGPOLLsignal.Signals.SIGPOLL
+builtins.int"builtins.intr=
+SIGPWRsignal.Signals.SIGPWR
+builtins.int"builtins.intrA
+SIGRTMAXsignal.Signals.SIGRTMAX
+builtins.int"builtins.intrA
+SIGRTMINsignal.Signals.SIGRTMIN
 builtins.int"builtins.int¯
 Handlerssignal.Handlers"enum.IntEnumHr@
 SIG_DFLsignal.Handlers.SIG_DFL
 builtins.int"builtins.intr@
 SIG_IGNsignal.Handlers.SIG_IGN
-builtins.int"builtins.int…
+builtins.int"builtins.int3
+ItimerErrorsignal.ItimerError"builtins.OSError…
 Sigmaskssignal.Sigmasks"enum.IntEnumHrD
 	SIG_BLOCKsignal.Sigmasks.SIG_BLOCK
 builtins.int"builtins.intrH
 SIG_UNBLOCKsignal.Sigmasks.SIG_UNBLOCK
 builtins.int"builtins.intrH
 SIG_SETMASKsignal.Sigmasks.SIG_SETMASK
-builtins.int"builtins.intÙ
-struct_siginfosignal.struct_siginfo"builtins.tuple*×
-__init__signal.struct_siginfo.__init__"
-None*Â
-self·
-aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*\
-sequenceN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable*›
+builtins.int"builtins.int–
+struct_siginfosignal.struct_siginfo"_typeshed.structseq"builtins.tuple*›
 si_signosignal.struct_siginfo.si_signo"
 builtins.int"builtins.int*Â
 self·
@@ -179,23 +165,14 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int0:property`^
-alarmsignal.alarm"
-builtins.int"builtins.int*)
-	__seconds
-builtins.int"builtins.int”
-default_int_handlersignal.default_int_handler"
-None*(
-signum
-builtins.int"builtins.int*-
-frame"
-types.FrameType"types.FrameType´
-	getitimersignal.getitimer"l
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.float*'
-__which
-builtins.int"builtins.int¬
+builtins.int"builtins.int0:property`8°
+default_int_handlersignal.default_int_handler"
+NoReturn
+*
+builtins.int"builtins.int*OM
+Union[types.FrameType,None]"
+types.FrameType"types.FrameType
+NoneŸ
 	getsignalsignal.getsignal"Ð
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
@@ -203,73 +180,11 @@ HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 builtins.function"builtins.function
 builtins.int"builtins.int"
 signal.Handlers"signal.Handlers
-None"signal._HANDLER*¹
-__signalnum©
+None"signal._HANDLER*¬©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUMŸ
-	strsignalsignal.strsignal"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*¹
-__signalnum©
--TypeAlias[Union[builtins.int,signal.Signals]]f
-"Union[builtins.int,signal.Signals]
-builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUMu
-valid_signalssignal.valid_signals"N
-builtins.set[signal.Signals] 
-signal.Signals"signal.Signals"builtins.seté
-raise_signalsignal.raise_signal"
-None*¹
-__signalnum©
--TypeAlias[Union[builtins.int,signal.Signals]]f
-"Union[builtins.int,signal.Signals]
-builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM
-pausesignal.pause"
-None‡
-pthread_killsignal.pthread_kill"
-None*+
-__thread_id
-builtins.int"builtins.int*+
-__signalnum
-builtins.int"builtins.int¤
-pthread_sigmasksignal.pthread_sigmask"÷
-;builtins.set[TypeAlias[Union[builtins.int,signal.Signals]]]©
--TypeAlias[Union[builtins.int,signal.Signals]]f
-"Union[builtins.int,signal.Signals]
-builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM"builtins.set*%
-__how
-builtins.int"builtins.int*X
-__maskN
-typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable¤
-set_wakeup_fdsignal.set_wakeup_fd"
-builtins.int"builtins.int*$
-fd
-builtins.int"builtins.int*9
-warn_on_full_buffer
-builtins.bool"builtins.bool •
-	setitimersignal.setitimer"l
-$Tuple[builtins.float,builtins.float] 
-builtins.float"builtins.float 
-builtins.float"builtins.float*'
-__which
-builtins.int"builtins.int*-
-	__seconds 
-builtins.float"builtins.float*0
-
-__interval 
-builtins.float"builtins.float „
-siginterruptsignal.siginterrupt"
-None*+
-__signalnum
-builtins.int"builtins.int*(
-__flag
-builtins.bool"builtins.bool‡
+signal.Signals"signal.Signals"signal._SIGNUMï
 signalsignal.signal"Ð
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
@@ -277,33 +192,65 @@ HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 builtins.function"builtins.function
 builtins.int"builtins.int"
 signal.Handlers"signal.Handlers
-None"signal._HANDLER*¹
-__signalnum©
+None"signal._HANDLER*¬©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM*Þ
-	__handlerÐ
+signal.Signals"signal.Signals"signal._SIGNUM*ÓÐ
 STypeAlias[Union[CallableType[builtins.function],builtins.int,signal.Handlers,None]]å
 HUnion[CallableType[builtins.function],builtins.int,signal.Handlers,None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
 builtins.int"builtins.int"
 signal.Handlers"signal.Handlers
-None"signal._HANDLER(
+None"signal._HANDLERS
+alarmsignal.alarm"
+builtins.int"builtins.int*
+builtins.int"builtins.int«
+	getitimersignal.getitimer"l
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float*
+builtins.int"builtins.int
+pausesignal.pause"
+Nonem
+pthread_killsignal.pthread_kill"
+None*
+builtins.int"builtins.int*
+builtins.int"builtins.int•
+pthread_sigmasksignal.pthread_sigmask"÷
+;builtins.set[TypeAlias[Union[builtins.int,signal.Signals]]]©
+-TypeAlias[Union[builtins.int,signal.Signals]]f
+"Union[builtins.int,signal.Signals]
+builtins.int"builtins.int 
+signal.Signals"signal.Signals"signal._SIGNUM"builtins.set*
+builtins.int"builtins.int*PN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterableõ
+	setitimersignal.setitimer"l
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float*
+builtins.int"builtins.int*" 
+builtins.float"builtins.float*$ 
+builtins.float"builtins.float o
+siginterruptsignal.siginterrupt"
+None*
+builtins.int"builtins.int* 
+builtins.bool"builtins.bool(
 
 sigpendingsignal.sigpending"
-Any¡
+Any—
 sigwaitsignal.sigwait"©
 -TypeAlias[Union[builtins.int,signal.Signals]]f
 "Union[builtins.int,signal.Signals]
 builtins.int"builtins.int 
-signal.Signals"signal.Signals"signal._SIGNUM*Z
-__sigsetN
+signal.Signals"signal.Signals"signal._SIGNUM*PN
 typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterableæ
-sigtimedwaitsignal.sigtimedwait"µ
-mUnion[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]·
+builtins.int"builtins.int"typing.Iterableû
+sigtimedwaitsignal.sigtimedwait"Ê
+xUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]Á
+lTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]·
 aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
 builtins.int"builtins.int
@@ -311,14 +258,15 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int
+builtins.int"builtins.int"signal.struct_siginfo
 None*Z
 sigsetN
 typing.Iterable[builtins.int]
 builtins.int"builtins.int"typing.Iterable*-
 timeout 
-builtins.float"builtins.float·
-sigwaitinfosignal.sigwaitinfo"·
+builtins.float"builtins.floatÁ
+sigwaitinfosignal.sigwaitinfo"Á
+lTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]·
 aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
 builtins.int"builtins.int
@@ -326,51 +274,68 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int*Z
+builtins.int"builtins.int"signal.struct_siginfo*Z
 sigsetN
 typing.Iterable[builtins.int]
-builtins.int"builtins.int"typing.Iterable*?
-ITIMER_PROFsignal.ITIMER_PROF
-builtins.int"builtins.int*?
-ITIMER_REALsignal.ITIMER_REAL
-builtins.int"builtins.int*E
-ITIMER_VIRTUALsignal.ITIMER_VIRTUAL
-builtins.int"builtins.int*1
+builtins.int"builtins.int"typing.Iterable’
+	strsignalsignal.strsignal"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*¬©
+-TypeAlias[Union[builtins.int,signal.Signals]]f
+"Union[builtins.int,signal.Signals]
+builtins.int"builtins.int 
+signal.Signals"signal.Signals"signal._SIGNUMu
+valid_signalssignal.valid_signals"N
+builtins.set[signal.Signals] 
+signal.Signals"signal.Signals"builtins.setÜ
+raise_signalsignal.raise_signal"
+None*¬©
+-TypeAlias[Union[builtins.int,signal.Signals]]f
+"Union[builtins.int,signal.Signals]
+builtins.int"builtins.int 
+signal.Signals"signal.Signals"signal._SIGNUM¤
+set_wakeup_fdsignal.set_wakeup_fd"
+builtins.int"builtins.int*$
+fd
+builtins.int"builtins.int*9
+warn_on_full_buffer
+builtins.bool"builtins.bool *‚
+__annotations__signal.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*1
 NSIGsignal.NSIG
 builtins.int"builtins.int*=
 SIG_DFLsignal.SIG_DFL"
 signal.Handlers"signal.Handlers*=
 SIG_IGNsignal.SIG_IGN"
-signal.Handlers"signal.Handlers*A
-	SIG_BLOCKsignal.SIG_BLOCK"
-signal.Sigmasks"signal.Sigmasks*E
-SIG_UNBLOCKsignal.SIG_UNBLOCK"
-signal.Sigmasks"signal.Sigmasks*E
-SIG_SETMASKsignal.SIG_SETMASK"
-signal.Sigmasks"signal.Sigmasks*;
+signal.Handlers"signal.Handlers*;
 SIGABRTsignal.SIGABRT 
-signal.Signals"signal.Signals*;
-SIGALRMsignal.SIGALRM 
-signal.Signals"signal.Signals*9
-SIGBUSsignal.SIGBUS 
-signal.Signals"signal.Signals*;
-SIGCHLDsignal.SIGCHLD 
-signal.Signals"signal.Signals*9
-SIGCLDsignal.SIGCLD 
-signal.Signals"signal.Signals*;
-SIGCONTsignal.SIGCONT 
 signal.Signals"signal.Signals*9
 SIGEMTsignal.SIGEMT 
 signal.Signals"signal.Signals*9
 SIGFPEsignal.SIGFPE 
-signal.Signals"signal.Signals*9
-SIGHUPsignal.SIGHUP 
 signal.Signals"signal.Signals*9
 SIGILLsignal.SIGILL 
 signal.Signals"signal.Signals*;
 SIGINFOsignal.SIGINFO 
 signal.Signals"signal.Signals*9
 SIGINTsignal.SIGINT 
+signal.Signals"signal.Signals*;
+SIGSEGVsignal.SIGSEGV 
+signal.Signals"signal.Signals*;
+SIGTERMsignal.SIGTERM 
+signal.Signals"signal.Signals*;
+SIGALRMsignal.SIGALRM 
+signal.Signals"signal.Signals*9
+SIGBUSsignal.SIGBUS 
+signal.Signals"signal.Signals*;
+SIGCHLDsignal.SIGCHLD 
+signal.Signals"signal.Signals*;
+SIGCONTsignal.SIGCONT 
+signal.Signals"signal.Signals*9
+SIGHUPsignal.SIGHUP 
 signal.Signals"signal.Signals*7
 SIGIOsignal.SIGIO 
 signal.Signals"signal.Signals*9
@@ -380,25 +345,13 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 signal.Signals"signal.Signals*;
 SIGPIPEsignal.SIGPIPE 
 signal.Signals"signal.Signals*;
-SIGPOLLsignal.SIGPOLL 
-signal.Signals"signal.Signals*9
-SIGPWRsignal.SIGPWR 
-signal.Signals"signal.Signals*;
 SIGPROFsignal.SIGPROF 
 signal.Signals"signal.Signals*;
 SIGQUITsignal.SIGQUIT 
-signal.Signals"signal.Signals*=
-SIGRTMAXsignal.SIGRTMAX 
-signal.Signals"signal.Signals*=
-SIGRTMINsignal.SIGRTMIN 
-signal.Signals"signal.Signals*;
-SIGSEGVsignal.SIGSEGV 
 signal.Signals"signal.Signals*;
 SIGSTOPsignal.SIGSTOP 
 signal.Signals"signal.Signals*9
 SIGSYSsignal.SIGSYS 
-signal.Signals"signal.Signals*;
-SIGTERMsignal.SIGTERM 
 signal.Signals"signal.Signals*;
 SIGTRAPsignal.SIGTRAP 
 signal.Signals"signal.Signals*;
@@ -421,4 +374,26 @@ aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 SIGXCPUsignal.SIGXCPU 
 signal.Signals"signal.Signals*;
 SIGXFSZsignal.SIGXFSZ 
+signal.Signals"signal.Signals*?
+ITIMER_PROFsignal.ITIMER_PROF
+builtins.int"builtins.int*?
+ITIMER_REALsignal.ITIMER_REAL
+builtins.int"builtins.int*E
+ITIMER_VIRTUALsignal.ITIMER_VIRTUAL
+builtins.int"builtins.int*A
+	SIG_BLOCKsignal.SIG_BLOCK"
+signal.Sigmasks"signal.Sigmasks*E
+SIG_UNBLOCKsignal.SIG_UNBLOCK"
+signal.Sigmasks"signal.Sigmasks*E
+SIG_SETMASKsignal.SIG_SETMASK"
+signal.Sigmasks"signal.Sigmasks*9
+SIGCLDsignal.SIGCLD 
+signal.Signals"signal.Signals*;
+SIGPOLLsignal.SIGPOLL 
+signal.Signals"signal.Signals*9
+SIGPWRsignal.SIGPWR 
+signal.Signals"signal.Signals*=
+SIGRTMAXsignal.SIGRTMAX 
+signal.Signals"signal.Signals*=
+SIGRTMINsignal.SIGRTMIN 
 signal.Signals"signal.Signals

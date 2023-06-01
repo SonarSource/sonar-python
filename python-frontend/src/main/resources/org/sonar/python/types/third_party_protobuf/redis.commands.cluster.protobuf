@@ -1,0 +1,268 @@
+
+redis.commands.cluster—
+ClusterMultiKeyCommands.redis.commands.cluster.ClusterMultiKeyCommands"builtins.object*‚
+mget_nonatomic=redis.commands.cluster.ClusterMultiKeyCommands.mget_nonatomic*
+self*
+keys*
+argsz36z37z38z39z310*{
+mset_nonatomic=redis.commands.cluster.ClusterMultiKeyCommands.mset_nonatomic*
+self*
+mappingz36z37z38z39z310*h
+exists5redis.commands.cluster.ClusterMultiKeyCommands.exists*
+self*
+keysz36z37z38z39z310*h
+delete5redis.commands.cluster.ClusterMultiKeyCommands.delete*
+self*
+keysz36z37z38z39z310*f
+touch4redis.commands.cluster.ClusterMultiKeyCommands.touch*
+self*
+keysz36z37z38z39z310*h
+unlink5redis.commands.cluster.ClusterMultiKeyCommands.unlink*
+self*
+keysz36z37z38z39z310j36j37j38j39j310ƒ
+ClusterManagementCommands0redis.commands.cluster.ClusterManagementCommands"&redis.commands.core.ManagementCommands*ú
+slaveof8redis.commands.cluster.ClusterManagementCommands.slaveof"
+None*n
+selfd
+0redis.commands.cluster.ClusterManagementCommands"0redis.commands.cluster.ClusterManagementCommands*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310*þ
+	replicaof:redis.commands.cluster.ClusterManagementCommands.replicaof"
+None*n
+selfd
+0redis.commands.cluster.ClusterManagementCommands"0redis.commands.cluster.ClusterManagementCommands*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310*ø
+swapdb7redis.commands.cluster.ClusterManagementCommands.swapdb"
+None*n
+selfd
+0redis.commands.cluster.ClusterManagementCommands"0redis.commands.cluster.ClusterManagementCommands*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310j36j37j38j39j310¥
+ClusterDataAccessCommands0redis.commands.cluster.ClusterDataAccessCommands"&redis.commands.core.DataAccessCommands*–
+stralgo8redis.commands.cluster.ClusterDataAccessCommands.stralgo"
+Any*¯
+self¤
+Nredis.commands.cluster.ClusterDataAccessCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"0redis.commands.cluster.ClusterDataAccessCommands*
+algo
+Any*
+value1
+Any*
+value2
+Any*5
+specific_argument
+builtins.str"builtins.str *)
+len
+builtins.bool"builtins.bool *)
+idx
+builtins.bool"builtins.bool *n
+minmatchlen[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *2
+withmatchlen
+builtins.bool"builtins.bool *
+kwargs
+Anyz36z37z38z39z310Pj36j37j38j39j310…:
+RedisClusterCommands+redis.commands.cluster.RedisClusterCommands".redis.commands.cluster.ClusterMultiKeyCommands"0redis.commands.cluster.ClusterManagementCommands"redis.commands.core.ACLCommands""redis.commands.core.PubSubCommands"0redis.commands.cluster.ClusterDataAccessCommands*‹
+cluster_addslots<redis.commands.cluster.RedisClusterCommands.cluster_addslots*
+self*
+target_node*	
+slotsz36z37z38z39z310*Š
+cluster_countkeysinslotCredis.commands.cluster.RedisClusterCommands.cluster_countkeysinslot*
+self*
+slot_idz36z37z38z39z310*”
+cluster_count_failure_reportHredis.commands.cluster.RedisClusterCommands.cluster_count_failure_report*
+self*
+node_idz36z37z38z39z310*z
+cluster_delslots<redis.commands.cluster.RedisClusterCommands.cluster_delslots*
+self*	
+slotsz36z37z38z39z310*›
+cluster_failover<redis.commands.cluster.RedisClusterCommands.cluster_failover"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*
+target_node
+Any*i
+option[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*ÿ
+cluster_info8redis.commands.cluster.RedisClusterCommands.cluster_info"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*v
+cluster_keyslot;redis.commands.cluster.RedisClusterCommands.cluster_keyslot*
+self*
+keyz36z37z38z39z310*¥
+cluster_meet8redis.commands.cluster.RedisClusterCommands.cluster_meet"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*
+host
+Any*
+port
+Any*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*i
+cluster_nodes9redis.commands.cluster.RedisClusterCommands.cluster_nodes*
+selfz36z37z38z39z310*
+cluster_replicate=redis.commands.cluster.RedisClusterCommands.cluster_replicate*
+self*
+target_nodes*
+node_idz36z37z38z39z310*­
+cluster_reset9redis.commands.cluster.RedisClusterCommands.cluster_reset"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands**
+soft
+builtins.bool"builtins.bool *o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*
+cluster_save_config?redis.commands.cluster.RedisClusterCommands.cluster_save_config"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*—
+cluster_get_keys_in_slotDredis.commands.cluster.RedisClusterCommands.cluster_get_keys_in_slot*
+self*
+slot*
+num_keysz36z37z38z39z310*«
+cluster_set_config_epochDredis.commands.cluster.RedisClusterCommands.cluster_set_config_epoch"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*
+epoch
+Any*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*£
+cluster_setslot;redis.commands.cluster.RedisClusterCommands.cluster_setslot*
+self*
+target_node*
+node_id*
+slot_id*	
+statez36z37z38z39z310*ˆ
+cluster_setslot_stableBredis.commands.cluster.RedisClusterCommands.cluster_setslot_stable*
+self*
+slot_idz36z37z38z39z310*
+cluster_replicas<redis.commands.cluster.RedisClusterCommands.cluster_replicas"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*
+node_id
+Any*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*
+cluster_slots9redis.commands.cluster.RedisClusterCommands.cluster_slots"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*‰
+cluster_myshardid=redis.commands.cluster.RedisClusterCommands.cluster_myshardid"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*Ô
+cluster_links9redis.commands.cluster.RedisClusterCommands.cluster_links"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*B
+target_node1
+TypeAlias[Any]
+Any"_typeshed.Incompletez36z37z38z39z310*
+cluster_flushslots>redis.commands.cluster.RedisClusterCommands.cluster_flushslots"
+NoReturn
+*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*Ž
+cluster_bumpepoch=redis.commands.cluster.RedisClusterCommands.cluster_bumpepoch"
+NoReturn
+*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*÷
+readonly4redis.commands.cluster.RedisClusterCommands.readonly"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*ù
+	readwrite5redis.commands.cluster.RedisClusterCommands.readwrite"
+Any*¥
+selfš
+Iredis.commands.cluster.RedisClusterCommands[redis.commands.core._StrType] 
+redis.commands.core._StrType"+redis.commands.cluster.RedisClusterCommands*o
+target_nodes[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310Pj36j37j38j39j310r‰
+read_from_replicas>redis.commands.cluster.RedisClusterCommands.read_from_replicas
+builtins.bool"builtins.bool*36*37*38*39*310*§
+__annotations__&redis.commands.cluster.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

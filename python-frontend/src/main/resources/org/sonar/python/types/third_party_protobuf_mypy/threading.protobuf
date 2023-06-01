@@ -1,28 +1,28 @@
 
 	threading8
-ThreadErrorthreading.ThreadError"builtins.Exceptionﬂ
-localthreading.local"builtins.object*è
+ThreadErrorthreading.ThreadError"builtins.Exceptionª
+localthreading.local"builtins.object*É
 __getattribute__ threading.local.__getattribute__"
-Any**
-self"
-threading.local"threading.local*$
-name
-builtins.str"builtins.str*ò
+Any*$"
+threading.local"threading.local*
+builtins.str"builtins.str*ç
 __setattr__threading.local.__setattr__"
-None**
-self"
-threading.local"threading.local*$
-name
-builtins.str"builtins.str*
-value
-Any*Ü
+None*,
+self"
+threading.local"threading.local*
+builtins.str"builtins.str*	
+Any*z
 __delattr__threading.local.__delattr__"
-None**
-self"
-threading.local"threading.local*$
-name
-builtins.str"builtins.str∂
-Threadthreading.Thread"builtins.object*ú
+None*$"
+threading.local"threading.local*
+builtins.str"builtins.strı
+Threadthreading.Thread"builtins.object*£
+identthreading.Thread.ident"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*.
+self$
+threading.Thread"threading.Thread0:property`*ú
 __init__threading.Thread.__init__"
 None*.
 self$
@@ -66,17 +66,7 @@
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None *q
-getNamethreading.Thread.getName"
-builtins.str"builtins.str*.
-self$
-threading.Thread"threading.Thread*Ö
-setNamethreading.Thread.setName"
-None*.
-self$
-threading.Thread"threading.Thread*&
-name
-builtins.str"builtins.str*´
+None *´
 	native_idthreading.Thread.native_id"D
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -90,7 +80,17 @@
 isAlivethreading.Thread.isAlive"
 builtins.bool"builtins.bool*.
 self$
-threading.Thread"threading.Thread*u
+threading.Thread"threading.Thread*q
+getNamethreading.Thread.getName"
+builtins.str"builtins.str*.
+self$
+threading.Thread"threading.Thread*Ö
+setNamethreading.Thread.setName"
+None*.
+self$
+threading.Thread"threading.Thread*&
+name
+builtins.str"builtins.str*u
 isDaemonthreading.Thread.isDaemon"
 builtins.bool"builtins.bool*.
 self$
@@ -102,39 +102,28 @@
 daemonic
 builtins.bool"builtins.boolr;
 namethreading.Thread.name
-builtins.str"builtins.strre
-identthreading.Thread.identD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NonerA
+builtins.str"builtins.strrA
 daemonthreading.Thread.daemon
-builtins.bool"builtins.bool8
-_DummyThreadthreading._DummyThread"threading.Threadë	
-Lockthreading.Lock"builtins.object*Y
-__init__threading.Lock.__init__"
-None**
-self 
-threading.Lock"threading.Lock*o
+builtins.bool"builtins.bool´
+_DummyThreadthreading._DummyThread"threading.Thread*q
+__init__threading._DummyThread.__init__"
+None*:
+self0
+threading._DummyThread"threading._DummyThread“
+Lockthreading.Lock"builtins.object*i
 	__enter__threading.Lock.__enter__"
-builtins.bool"builtins.bool*(
-self 
-threading.Lock"threading.Lock*Ñ
-__exit__threading.Lock.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*(
-self 
-threading.Lock"threading.Lock*ó
-exc_typeä
+builtins.bool"builtins.bool*" 
+threading.Lock"threading.Lock*§
+__exit__threading.Lock.__exit__"
+None*" 
+threading.Lock"threading.Lock*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*Œ
@@ -153,35 +142,8 @@
 lockedthreading.Lock.locked"
 builtins.bool"builtins.bool**
 self 
-threading.Lock"threading.Lock∆
-_RLockthreading._RLock"builtins.object*_
-__init__threading._RLock.__init__"
-None*.
-self$
-threading._RLock"threading._RLock*u
-	__enter__threading._RLock.__enter__"
-builtins.bool"builtins.bool*,
-self$
-threading._RLock"threading._RLock*ä
-__exit__threading._RLock.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*,
-self$
-threading._RLock"threading._RLock*ó
-exc_typeä
-(Union[Type[builtins.BaseException],None]R
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*‘
+threading.Lock"threading.Lock8Ü
+_RLockthreading._RLock"builtins.object*‘
 acquirethreading._RLock.acquire"
 builtins.bool"builtins.bool*.
 self$
@@ -193,7 +155,23 @@
 releasethreading._RLock.release"
 None*.
 self$
-threading._RLock"threading._RLockÒ
+threading._RLock"threading._RLock*™
+__exit__threading._RLock.__exit__"
+None*&$
+threading._RLock"threading._RLock*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None8rt
+	__enter__threading._RLock.__enter__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionã
 	Conditionthreading.Condition"builtins.object*˘
 __init__threading.Condition.__init__"
 None*4
@@ -203,27 +181,20 @@
 +Union[threading.Lock,threading._RLock,None] 
 threading.Lock"threading.Lock$
 threading._RLock"threading._RLock
-None *~
+None *x
 	__enter__threading.Condition.__enter__"
-builtins.bool"builtins.bool*2
-self*
-threading.Condition"threading.Condition*ì
-__exit__threading.Condition.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*2
-self*
-threading.Condition"threading.Condition*ó
-exc_typeä
+builtins.bool"builtins.bool*,*
+threading.Condition"threading.Condition*≥
+__exit__threading.Condition.__exit__"
+None*,*
+threading.Condition"threading.Condition*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*›
@@ -272,7 +243,7 @@ notify_allthreading.Condition.notify_all"
 	notifyAllthreading.Condition.notifyAll"
 None*4
 self*
-threading.Condition"threading.Condition◊
+threading.Condition"threading.Condition¢
 
 	Semaphorethreading.Semaphore"builtins.object*ì
 __init__threading.Semaphore.__init__"
@@ -280,23 +251,17 @@ notify_allthreading.Condition.notify_all"
 self*
 threading.Semaphore"threading.Semaphore*)
 value
-builtins.int"builtins.int *ì
-__exit__threading.Semaphore.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*2
-self*
-threading.Semaphore"threading.Semaphore*ó
-exc_typeä
+builtins.int"builtins.int *≥
+__exit__threading.Semaphore.__exit__"
+None*,*
+threading.Semaphore"threading.Semaphore*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*á
@@ -309,28 +274,27 @@ notify_allthreading.Condition.notify_all"
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None *Ö
+None *Ï
 	__enter__threading.Semaphore.__enter__"
-builtins.bool"builtins.bool*2
-self*
-threading.Semaphore"threading.Semaphore*,
-blocking
-builtins.bool"builtins.bool *W
-timeoutJ
+builtins.bool"builtins.bool*,*
+threading.Semaphore"threading.Semaphore*"
+builtins.bool"builtins.bool *NJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
 None *f
 releasethreading.Semaphore.release"
 None*4
 self*
-threading.Semaphore"threading.SemaphoreC
-BoundedSemaphorethreading.BoundedSemaphore"threading.SemaphoreÎ
-Eventthreading.Event"builtins.object*\
-__init__threading.Event.__init__"
-None*,
-self"
-threading.Event"threading.Event*n
+threading.Semaphore"threading.SemaphorerB
+_valuethreading.Semaphore._value
+builtins.int"builtins.intC
+BoundedSemaphorethreading.BoundedSemaphore"threading.Semaphore˚
+Eventthreading.Event"builtins.object*n
 is_setthreading.Event.is_set"
+builtins.bool"builtins.bool*,
+self"
+threading.Event"threading.Event*l
+isSetthreading.Event.isSet"
 builtins.bool"builtins.bool*,
 self"
 threading.Event"threading.Event*R
@@ -349,7 +313,7 @@ notify_allthreading.Condition.notify_all"
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None É
+None ’
 Timerthreading.Timer"threading.Thread*¸
 __init__threading.Timer.__init__"
 None*,
@@ -374,8 +338,34 @@ notify_allthreading.Condition.notify_all"
 cancelthreading.Timer.cancel"
 None*,
 self"
-threading.Timer"threading.Timerà
-Barrierthreading.Barrier"builtins.object*Ä
+threading.Timer"threading.TimerrN
+argsthreading.Timer.args0
+typing.Iterable[Any]
+Any"typing.IterablerH
+finishedthreading.Timer.finished"
+threading.Event"threading.Eventrq
+functionthreading.Timer.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrF
+intervalthreading.Timer.interval 
+builtins.float"builtins.floatr{
+kwargsthreading.Timer.kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MappingÀ	
+Barrierthreading.Barrier"builtins.object*Ç
+partiesthreading.Barrier.parties"
+builtins.int"builtins.int*0
+self&
+threading.Barrier"threading.Barrier0:property`*Ü
+	n_waitingthreading.Barrier.n_waiting"
+builtins.int"builtins.int*0
+self&
+threading.Barrier"threading.Barrier0:property`*Ç
+brokenthreading.Barrier.broken"
+builtins.bool"builtins.bool*0
+self&
+threading.Barrier"threading.Barrier0:property`*Ä
 __init__threading.Barrier.__init__"
 None*0
 self&
@@ -406,15 +396,11 @@ notify_allthreading.Condition.notify_all"
 abortthreading.Barrier.abort"
 None*0
 self&
-threading.Barrier"threading.BarrierrB
-partiesthreading.Barrier.parties
-builtins.int"builtins.intrF
-	n_waitingthreading.Barrier.n_waiting
-builtins.int"builtins.intrB
-brokenthreading.Barrier.broken
-builtins.bool"builtins.boolI
+threading.Barrier"threading.BarrierI
 BrokenBarrierErrorthreading.BrokenBarrierError"builtins.RuntimeErrorD
 active_countthreading.active_count"
+builtins.int"builtins.intB
+activeCountthreading.activeCount"
 builtins.int"builtins.intP
 current_threadthreading.current_thread"$
 threading.Thread"threading.ThreadN
@@ -428,29 +414,40 @@ notify_allthreading.Condition.notify_all"
 main_threadthreading.main_thread"$
 threading.Thread"threading.ThreadD
 get_native_id_thread.get_native_id"
-builtins.int"builtins.int¿
+builtins.int"builtins.int 
 settracethreading.settrace"
-None*ï
-funcä
+None*ü
+funcî
 *TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function"threading._TF¿
+builtins.function"builtins.function"_typeshed.TraceFunctionó
 
 setprofilethreading.setprofile"
-None*ë
-funcÜ
-+Union[CallableType[builtins.function],None]K
+None*Ë
+func›
+6Union[TypeAlias[CallableType[builtins.function]],None]ñ
+*TypeAlias[CallableType[builtins.function]]K
 CallableType[builtins.function]&
-builtins.function"builtins.function
+builtins.function"builtins.function"_typeshed.ProfileFunction
 Nonej
 
 stack_sizethreading.stack_size"
 builtins.int"builtins.int*(
 size
-builtins.int"builtins.int *h
+builtins.int"builtins.int *Ö
+__annotations__threading.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*h
 __all__threading.__all__J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*F
+builtins.str"builtins.str"builtins.list*à
+_profile_hookthreading._profile_hook›
+6Union[TypeAlias[CallableType[builtins.function]],None]ñ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.ProfileFunction
+None*F
 TIMEOUT_MAXthreading.TIMEOUT_MAX 
 builtins.float"builtins.float*o
 

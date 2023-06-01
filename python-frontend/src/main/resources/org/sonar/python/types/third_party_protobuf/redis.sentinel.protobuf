@@ -1,0 +1,225 @@
+
+redis.sentinelp
+MasterNotFoundError"redis.sentinel.MasterNotFoundError" redis.exceptions.ConnectionErrorj36j37j38j39j310n
+SlaveNotFoundError!redis.sentinel.SlaveNotFoundError" redis.exceptions.ConnectionErrorj36j37j38j39j310À
+
+SentinelManagedConnection(redis.sentinel.SentinelManagedConnection"redis.connection.Connection*Ñ
+__init__1redis.sentinel.SentinelManagedConnection.__init__"
+None*^
+selfT
+(redis.sentinel.SentinelManagedConnection"(redis.sentinel.SentinelManagedConnection*
+kwargs
+Anyz36z37z38z39z310*‚
+
+connect_to3redis.sentinel.SentinelManagedConnection.connect_to"
+None*^
+selfT
+(redis.sentinel.SentinelManagedConnection"(redis.sentinel.SentinelManagedConnection*¿
+address±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPortz36z37z38z39z310*º
+connect0redis.sentinel.SentinelManagedConnection.connect"
+None*^
+selfT
+(redis.sentinel.SentinelManagedConnection"(redis.sentinel.SentinelManagedConnectionz36z37z38z39z310*ý
+read_response6redis.sentinel.SentinelManagedConnection.read_response"
+Any*^
+selfT
+(redis.sentinel.SentinelManagedConnection"(redis.sentinel.SentinelManagedConnection*6
+disable_decoding
+builtins.bool"builtins.bool z36z37z38z39z310j36j37j38j39j310r°
+connection_pool8redis.sentinel.SentinelManagedConnection.connection_poolN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPool*36*37*38*39*310ª
+SentinelManagedSSLConnection+redis.sentinel.SentinelManagedSSLConnection"(redis.sentinel.SentinelManagedConnection"redis.connection.SSLConnectionj36j37j38j39j310Á
+SentinelConnectionPool%redis.sentinel.SentinelConnectionPool"redis.connection.ConnectionPool*Â
+__init__.redis.sentinel.SentinelConnectionPool.__init__"
+None*X
+selfN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPool*.
+service_name
+builtins.str"builtins.str*H
+sentinel_manager2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*
+kwargs
+Anyz36z37z38z39z310*­
+reset+redis.sentinel.SentinelConnectionPool.reset"
+None*X
+selfN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPoolz36z37z38z39z310*£
+owns_connection5redis.sentinel.SentinelConnectionPool.owns_connection"
+builtins.bool"builtins.bool*X
+selfN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPool*J
+
+connection:
+redis.connection.Connection"redis.connection.Connectionz36z37z38z39z310*ñ
+get_master_address8redis.sentinel.SentinelConnectionPool.get_master_address"±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort*X
+selfN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPoolz36z37z38z39z310*¹
+rotate_slaves3redis.sentinel.SentinelConnectionPool.rotate_slaves"ƒ
+<typing.Iterator[TypeAlias[Tuple[builtins.str,builtins.int]]]±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort"typing.Iterator*X
+selfN
+%redis.sentinel.SentinelConnectionPool"%redis.sentinel.SentinelConnectionPoolz36z37z38z39z310j36j37j38j39j310rq
+	is_master/redis.sentinel.SentinelConnectionPool.is_master
+builtins.bool"builtins.bool*36*37*38*39*310r
+check_connection6redis.sentinel.SentinelConnectionPool.check_connection
+builtins.bool"builtins.bool*36*37*38*39*310ru
+service_name2redis.sentinel.SentinelConnectionPool.service_name
+builtins.str"builtins.str*36*37*38*39*310r“
+sentinel_manager6redis.sentinel.SentinelConnectionPool.sentinel_manager2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*36*37*38*39*310ä&
+Sentinelredis.sentinel.Sentinel"(redis.commands.sentinel.SentinelCommands*¥
+__init__ redis.sentinel.Sentinel.__init__"
+None*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*“
+	sentinelsƒ
+<typing.Iterable[TypeAlias[Tuple[builtins.str,builtins.int]]]±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort"typing.Iterable*7
+min_other_sentinels
+builtins.int"builtins.int *ª
+sentinel_kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *
+connection_kwargs
+Anyz36z37z38z39z310*˜
+check_master_state*redis.sentinel.Sentinel.check_master_state"
+builtins.bool"builtins.bool*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*²
+state¦
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"redis.sentinel._SentinelState*.
+service_name
+builtins.str"builtins.strz36z37z38z39z310*ñ
+discover_master'redis.sentinel.Sentinel.discover_master"±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.strz36z37z38z39z310*’
+filter_slaves%redis.sentinel.Sentinel.filter_slaves"ÿ
+:builtins.list[TypeAlias[Tuple[builtins.str,builtins.int]]]±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort"builtins.list*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*„
+slaves÷
+;typing.Iterable[TypeAlias[builtins.dict[builtins.str,Any]]]¦
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"redis.sentinel._SentinelState"typing.Iterablez36z37z38z39z310*¿
+discover_slaves'redis.sentinel.Sentinel.discover_slaves"ÿ
+:builtins.list[TypeAlias[Tuple[builtins.str,builtins.int]]]±
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"redis.sentinel._AddressAndPort"builtins.list*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.strz36z37z38z39z310*ñ
+execute_command'redis.sentinel.Sentinel.execute_command":
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*
+args
+Any*
+kwargs
+Anyz36z37z38z39z3102¼
+
+master_for"redis.sentinel.Sentinel.master_forŸ
+
+master_for"redis.sentinel.Sentinel.master_for"6
+redis.client.Redis[Any]
+Any"redis.client.Redis*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.str*$
+connection_pool_class
+Any *
+kwargs
+Any0:overloadXÒ
+
+master_for"redis.sentinel.Sentinel.master_for"
+redis.sentinel._RedisT*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.str*M
+redis_class<
+Type[redis.sentinel._RedisT]
+redis.sentinel._RedisT*$
+connection_pool_class
+Any *
+kwargs
+Any0:overloadX"36"37"38"39"3102¶
+	slave_for!redis.sentinel.Sentinel.slave_for
+	slave_for!redis.sentinel.Sentinel.slave_for"6
+redis.client.Redis[Any]
+Any"redis.client.Redis*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.str*$
+connection_pool_class
+Any *
+kwargs
+Any0:overloadXÐ
+	slave_for!redis.sentinel.Sentinel.slave_for"
+redis.sentinel._RedisT*<
+self2
+redis.sentinel.Sentinel"redis.sentinel.Sentinel*.
+service_name
+builtins.str"builtins.str*M
+redis_class<
+Type[redis.sentinel._RedisT]
+redis.sentinel._RedisT*$
+connection_pool_class
+Any *
+kwargs
+Any0:overloadX"36"37"38"39"310j36j37j38j39j310r¨
+sentinel_kwargs'redis.sentinel.Sentinel.sentinel_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310r´
+	sentinels!redis.sentinel.Sentinel.sentinelso
+&builtins.list[redis.client.Redis[Any]]6
+redis.client.Redis[Any]
+Any"redis.client.Redis"builtins.list*36*37*38*39*310ru
+min_other_sentinels+redis.sentinel.Sentinel.min_other_sentinels
+builtins.int"builtins.int*36*37*38*39*310r¬
+connection_kwargs)redis.sentinel.Sentinel.connection_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*Ÿ
+__annotations__redis.sentinel.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

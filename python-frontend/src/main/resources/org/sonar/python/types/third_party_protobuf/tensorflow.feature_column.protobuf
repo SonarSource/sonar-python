@@ -1,0 +1,316 @@
+
+tensorflow.feature_column≈
+numeric_column(tensorflow.feature_column.numeric_column"Ñ
+@tensorflow.python.feature_column.feature_column_v2.NumericColumn"@tensorflow.python.feature_column.feature_column_v2.NumericColumn*%
+key
+builtins.str"builtins.str*Ñ
+shapeˆ
+¨TypeAlias[Union[tensorflow.TensorShape,typing.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]],builtins.int,tensorflow.Tensor]]´
+°Union[tensorflow.TensorShape,typing.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]],builtins.int,tensorflow.Tensor]0
+tensorflow.TensorShape"tensorflow.TensorShapeä
+dtyping.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]]ê
+SUnion[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]¨
+GTypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]]∫
+<Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]&
+tensorflow.Tensor"tensorflow.Tensor
+builtins.str"builtins.str 
+builtins.float"builtins.float
+Any
+Any""tensorflow._ScalarTensorCompatible
+None"typing.Iterable
+builtins.int"builtins.int&
+tensorflow.Tensor"tensorflow.Tensor"tensorflow._ShapeLike *_
+default_valueJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType *ú
+normalizer_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None z36z37z38z39z310˛
+bucketized_column+tensorflow.feature_column.bucketized_column"ä
+Ctensorflow.python.feature_column.feature_column_v2.BucketizedColumn"Ctensorflow.python.feature_column.feature_column_v2.BucketizedColumn*ò
+source_columnÑ
+@tensorflow.python.feature_column.feature_column_v2.NumericColumn"@tensorflow.python.feature_column.feature_column_v2.NumericColumn*˛
+
+boundariesÌ
+CUnion[builtins.list[builtins.float],builtins.tuple[builtins.float]]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listR
+builtins.tuple[builtins.float] 
+builtins.float"builtins.float"builtins.tuplez36z37z38z39z310Ç
+embedding_column*tensorflow.feature_column.embedding_column"à
+Btensorflow.python.feature_column.feature_column_v2.EmbeddingColumn"Btensorflow.python.feature_column.feature_column_v2.EmbeddingColumn*•
+categorical_columnå
+Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn*+
+	dimension
+builtins.int"builtins.int*°
+combinerê
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"=tensorflow.python.feature_column.feature_column_v2._Combiners *ö
+initializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *]
+ckpt_to_load_fromD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *_
+tensor_name_in_ckptD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Z
+max_normJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+	trainable
+builtins.bool"builtins.bool *?
+use_safe_embedding_lookup
+builtins.bool"builtins.bool z36z37z38z39z310’
+shared_embeddings+tensorflow.feature_column.shared_embeddings"ˇ
+Wbuiltins.list[tensorflow.python.feature_column.feature_column_v2.SharedEmbeddingColumn]î
+Htensorflow.python.feature_column.feature_column_v2.SharedEmbeddingColumn"Htensorflow.python.feature_column.feature_column_v2.SharedEmbeddingColumn"builtins.list*ë
+categorical_columns˜
+Utyping.Iterable[tensorflow.python.feature_column.feature_column_v2.CategoricalColumn]å
+Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"typing.Iterable*+
+	dimension
+builtins.int"builtins.int*°
+combinerê
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"=tensorflow.python.feature_column.feature_column_v2._Combiners *ö
+initializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *l
+ shared_embedding_collection_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *]
+ckpt_to_load_fromD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *_
+tensor_name_in_ckptD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Z
+max_normJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+	trainable
+builtins.bool"builtins.bool *?
+use_safe_embedding_lookup
+builtins.bool"builtins.bool z36z37z38z39z310√
+ categorical_column_with_identity:tensorflow.feature_column.categorical_column_with_identity"ú
+Ltensorflow.python.feature_column.feature_column_v2.IdentityCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.IdentityCategoricalColumn*%
+key
+builtins.str"builtins.str*-
+num_buckets
+builtins.int"builtins.int*Y
+default_valueD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310∞
+#categorical_column_with_hash_bucket=tensorflow.feature_column.categorical_column_with_hash_bucket"ò
+Jtensorflow.python.feature_column.feature_column_v2.HashedCategoricalColumn"Jtensorflow.python.feature_column.feature_column_v2.HashedCategoricalColumn*%
+key
+builtins.str"builtins.str*2
+hash_bucket_size
+builtins.int"builtins.int*?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType z36z37z38z39z310π
+'categorical_column_with_vocabulary_fileAtensorflow.feature_column.categorical_column_with_vocabulary_file"®
+Rtensorflow.python.feature_column.feature_column_v2.VocabularyFileCategoricalColumn"Rtensorflow.python.feature_column.feature_column_v2.VocabularyFileCategoricalColumn*%
+key
+builtins.str"builtins.str*1
+vocabulary_file
+builtins.str"builtins.str*[
+vocabulary_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType *Ñ
+default_valueo
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *3
+num_oov_buckets
+builtins.int"builtins.int *W
+file_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310Ç
+'categorical_column_with_vocabulary_listAtensorflow.feature_column.categorical_column_with_vocabulary_list"®
+Rtensorflow.python.feature_column.feature_column_v2.VocabularyListCategoricalColumn"Rtensorflow.python.feature_column.feature_column_v2.VocabularyListCategoricalColumn*%
+key
+builtins.str"builtins.str*¸
+vocabulary_listÊ
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*r
+dtypee
+#Union[tensorflow.dtypes.DType,None]2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType
+None *Ñ
+default_valueo
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *3
+num_oov_buckets
+builtins.int"builtins.int z36z37z38z39z310Ü
+indicator_column*tensorflow.feature_column.indicator_column"à
+Btensorflow.python.feature_column.feature_column_v2.IndicatorColumn"Btensorflow.python.feature_column.feature_column_v2.IndicatorColumn*•
+categorical_columnå
+Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumnz36z37z38z39z310ß
+weighted_categorical_column5tensorflow.feature_column.weighted_categorical_column"ú
+Ltensorflow.python.feature_column.feature_column_v2.WeightedCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.WeightedCategoricalColumn*•
+categorical_columnå
+Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn*4
+weight_feature_key
+builtins.str"builtins.str*?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType z36z37z38z39z310ˆ
+crossed_column(tensorflow.feature_column.crossed_column"Ñ
+@tensorflow.python.feature_column.feature_column_v2.CrossedColumn"@tensorflow.python.feature_column.feature_column_v2.CrossedColumn*ì
+keysà
+ityping.Iterable[Union[builtins.str,tensorflow.python.feature_column.feature_column_v2.CategoricalColumn]]â
+XUnion[builtins.str,tensorflow.python.feature_column.feature_column_v2.CategoricalColumn]
+builtins.str"builtins.strå
+Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"Dtensorflow.python.feature_column.feature_column_v2.CategoricalColumn"typing.Iterable*2
+hash_bucket_size
+builtins.int"builtins.int*T
+hash_keyD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310Ø
+sequence_numeric_column1tensorflow.feature_column.sequence_numeric_column"
+Any*%
+key
+builtins.str"builtins.str*Ñ
+shapeˆ
+¨TypeAlias[Union[tensorflow.TensorShape,typing.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]],builtins.int,tensorflow.Tensor]]´
+°Union[tensorflow.TensorShape,typing.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]],builtins.int,tensorflow.Tensor]0
+tensorflow.TensorShape"tensorflow.TensorShapeä
+dtyping.Iterable[Union[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]]ê
+SUnion[TypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]],None]¨
+GTypeAlias[Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]]∫
+<Union[tensorflow.Tensor,builtins.str,builtins.float,Any,Any]&
+tensorflow.Tensor"tensorflow.Tensor
+builtins.str"builtins.str 
+builtins.float"builtins.float
+Any
+Any""tensorflow._ScalarTensorCompatible
+None"typing.Iterable
+builtins.int"builtins.int&
+tensorflow.Tensor"tensorflow.Tensor"tensorflow._ShapeLike *5
+default_value 
+builtins.float"builtins.float *?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType *ú
+normalizer_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None z36z37z38z39z310’
+)sequence_categorical_column_with_identityCtensorflow.feature_column.sequence_categorical_column_with_identity"ú
+Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn*%
+key
+builtins.str"builtins.str*-
+num_buckets
+builtins.int"builtins.int*Y
+default_valueD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310∆
+,sequence_categorical_column_with_hash_bucketFtensorflow.feature_column.sequence_categorical_column_with_hash_bucket"ú
+Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn*%
+key
+builtins.str"builtins.str*2
+hash_bucket_size
+builtins.int"builtins.int*?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType z36z37z38z39z310Ê
+0sequence_categorical_column_with_vocabulary_fileJtensorflow.feature_column.sequence_categorical_column_with_vocabulary_file"ú
+Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn*%
+key
+builtins.str"builtins.str*1
+vocabulary_file
+builtins.str"builtins.str*[
+vocabulary_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *3
+num_oov_buckets
+builtins.int"builtins.int *Ñ
+default_valueo
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *?
+dtype2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType z36z37z38z39z310à
+0sequence_categorical_column_with_vocabulary_listJtensorflow.feature_column.sequence_categorical_column_with_vocabulary_list"ú
+Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn"Ltensorflow.python.feature_column.feature_column_v2.SequenceCategoricalColumn*%
+key
+builtins.str"builtins.str*¸
+vocabulary_listÊ
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*r
+dtypee
+#Union[tensorflow.dtypes.DType,None]2
+tensorflow.dtypes.DType"tensorflow.dtypes.DType
+None *Ñ
+default_valueo
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *3
+num_oov_buckets
+builtins.int"builtins.int z36z37z38z39z310Ê
+make_parse_example_spec1tensorflow.feature_column.make_parse_example_spec"
+*builtins.dict[builtins.str,Union[Any,Any]]
+builtins.str"builtins.str$
+Union[Any,Any]
+Any
+Any"builtins.dict*Å
+feature_columnsÎ
+Qtyping.Iterable[tensorflow.python.feature_column.feature_column_v2.FeatureColumn]Ñ
+@tensorflow.python.feature_column.feature_column_v2.FeatureColumn"@tensorflow.python.feature_column.feature_column_v2.FeatureColumn"typing.Iterablez36z37z38z39z310*è
+__path__"tensorflow.feature_column.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*™
+__annotations__)tensorflow.feature_column.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*'
+tf
+tensorflow *36*37*38*39*310*O
+fc2tensorflow.python.feature_column.feature_column_v2 *36*37*38*39*310*Y
+seq_fc8tensorflow.python.feature_column.sequence_feature_column *36*37*38*39*310

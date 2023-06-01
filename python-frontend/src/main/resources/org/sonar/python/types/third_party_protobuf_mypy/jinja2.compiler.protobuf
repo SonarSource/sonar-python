@@ -140,7 +140,7 @@ visit_Name0jinja2.compiler.UndeclaredNameVisitor.visit_Name"
 undeclared0jinja2.compiler.UndeclaredNameVisitor.undeclaredH
 builtins.set[builtins.str]
 builtins.str"builtins.str"builtins.set@
-CompilerExitjinja2.compiler.CompilerExit"builtins.Exception™Ò
+CompilerExitjinja2.compiler.CompilerExit"builtins.ExceptionÁˆ
 CodeGeneratorjinja2.compiler.CodeGenerator"jinja2.visitor.NodeVisitor*∑
 __init__&jinja2.compiler.CodeGenerator.__init__"
 None*H
@@ -538,8 +538,9 @@ visit_With(jinja2.compiler.CodeGenerator.visit_With"
 _default_finalize/jinja2.compiler.CodeGenerator._default_finalize"
 Any*
 value
-Any0:staticmethodh*©
-_make_finalize,jinja2.compiler.CodeGenerator._make_finalize"û
+Any0:staticmethodh*≥
+_make_finalize,jinja2.compiler.CodeGenerator._make_finalize"®
+VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
@@ -547,7 +548,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*H
+None"+jinja2.compiler.CodeGenerator._FinalizeInfo*H
 self>
 jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*Î
 _output_const_repr0jinja2.compiler.CodeGenerator._output_const_repr"
@@ -556,7 +557,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 jinja2.compiler.CodeGenerator"jinja2.compiler.CodeGenerator*;
 group0
 typing.Iterable[Any]
-Any"typing.Iterable*”
+Any"typing.Iterable*›
 _output_child_to_const4jinja2.compiler.CodeGenerator._output_child_to_const"
 builtins.str"builtins.str*H
 self>
@@ -564,8 +565,9 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 node&
 jinja2.nodes.Expr"jinja2.nodes.Expr*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*≠
-finalizeû
+jinja2.compiler.Frame"jinja2.compiler.Frame*∑
+finalize®
+VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
@@ -573,7 +575,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*µ
+None"+jinja2.compiler.CodeGenerator._FinalizeInfo*ø
 _output_child_pre/jinja2.compiler.CodeGenerator._output_child_pre"
 None*H
 self>
@@ -581,8 +583,9 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 node&
 jinja2.nodes.Expr"jinja2.nodes.Expr*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*≠
-finalizeû
+jinja2.compiler.Frame"jinja2.compiler.Frame*∑
+finalize®
+VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
@@ -590,7 +593,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*∑
+None"+jinja2.compiler.CodeGenerator._FinalizeInfo*¡
 _output_child_post0jinja2.compiler.CodeGenerator._output_child_post"
 None*H
 self>
@@ -598,8 +601,9 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 node&
 jinja2.nodes.Expr"jinja2.nodes.Expr*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.Frame*≠
-finalizeû
+jinja2.compiler.Frame"jinja2.compiler.Frame*∑
+finalize®
+VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
@@ -607,7 +611,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*ˇ
+None"+jinja2.compiler.CodeGenerator._FinalizeInfo*ˇ
 visit_Output*jinja2.compiler.CodeGenerator.visit_Output"
 None*H
 self>
@@ -907,9 +911,10 @@ $jinja2.nodes.DerivedContextReference"$jinja2.nodes.DerivedContextReference*9
 nodeP
 &jinja2.nodes.ScopedEvalContextModifier"&jinja2.nodes.ScopedEvalContextModifier*9
 frame.
-jinja2.compiler.Frame"jinja2.compiler.FramerΩ
-	_finalize'jinja2.compiler.CodeGenerator._finalizeÜ
-WUnion[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]],None]û
+jinja2.compiler.Frame"jinja2.compiler.Framer“
+	_finalize'jinja2.compiler.CodeGenerator._finalizeõ
+bUnion[TypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]],None]®
+VTypeAlias[Tuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]]û
 KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
@@ -917,7 +922,7 @@ KTuple[Union[CallableType[builtins.function],None],Union[builtins.str,None]]Ü
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None
+None"+jinja2.compiler.CodeGenerator._FinalizeInfo
 NonerÅ
 	visit_Add'jinja2.compiler.CodeGenerator.visit_AddK
 CallableType[builtins.function]&
@@ -1087,7 +1092,11 @@ defer_init
 jinja2.nodes.Node"jinja2.nodes.Node"typing.Iterable*Y
 namesN
 typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable*
+builtins.str"builtins.str"typing.Iterable*ã
+__annotations__jinja2.compiler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
 ttyping *
 tetyping_extensions *ù
 	operatorsjinja2.compiler.operatorsu

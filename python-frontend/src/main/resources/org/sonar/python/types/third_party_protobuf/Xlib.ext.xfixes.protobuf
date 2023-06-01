@@ -1,0 +1,91 @@
+
+Xlib.ext.xfixes`
+QueryVersionXlib.ext.xfixes.QueryVersion"Xlib.protocol.rq.ReplyRequestj36j37j38j39j310W
+
+HideCursorXlib.ext.xfixes.HideCursor"Xlib.protocol.rq.Requestj36j37j38j39j310W
+
+ShowCursorXlib.ext.xfixes.ShowCursor"Xlib.protocol.rq.Requestj36j37j38j39j310k
+SelectSelectionInput$Xlib.ext.xfixes.SelectSelectionInput"Xlib.protocol.rq.Requestj36j37j38j39j310_
+SelectionNotifyXlib.ext.xfixes.SelectionNotify"Xlib.protocol.rq.Eventj36j37j38j39j310x
+SetSelectionOwnerNotify'Xlib.ext.xfixes.SetSelectionOwnerNotify"Xlib.ext.xfixes.SelectionNotifyj36j37j38j39j310‚
+SelectionWindowDestroyNotify,Xlib.ext.xfixes.SelectionWindowDestroyNotify"Xlib.ext.xfixes.SelectionNotifyj36j37j38j39j310~
+SelectionClientCloseNotify*Xlib.ext.xfixes.SelectionClientCloseNotify"Xlib.ext.xfixes.SelectionNotifyj36j37j38j39j310e
+SelectCursorInput!Xlib.ext.xfixes.SelectCursorInput"Xlib.protocol.rq.Requestj36j37j38j39j310d
+GetCursorImageXlib.ext.xfixes.GetCursorImage"Xlib.protocol.rq.ReplyRequestj36j37j38j39j310g
+DisplayCursorNotify#Xlib.ext.xfixes.DisplayCursorNotify"Xlib.protocol.rq.Eventj36j37j38j39j310½
+query_versionXlib.ext.xfixes.query_version"<
+Xlib.ext.xfixes.QueryVersion"Xlib.ext.xfixes.QueryVersion*¹
+self®
+:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
+Xlib.display.Display"Xlib.display.Display@
+Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resourcez36z37z38z39z310‘
+hide_cursorXlib.ext.xfixes.hide_cursor"
+None*F
+self<
+Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310‘
+show_cursorXlib.ext.xfixes.show_cursor"
+None*F
+self<
+Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310Þ
+select_selection_input&Xlib.ext.xfixes.select_selection_input"L
+$Xlib.ext.xfixes.SelectSelectionInput"$Xlib.ext.xfixes.SelectSelectionInput*¹
+self®
+:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
+Xlib.display.Display"Xlib.display.Display@
+Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+window
+builtins.int"builtins.int*+
+	selection
+builtins.int"builtins.int*&
+mask
+builtins.int"builtins.intz36z37z38z39z310¥
+select_cursor_input#Xlib.ext.xfixes.select_cursor_input"F
+!Xlib.ext.xfixes.SelectCursorInput"!Xlib.ext.xfixes.SelectCursorInput*¹
+self®
+:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
+Xlib.display.Display"Xlib.display.Display@
+Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+window
+builtins.int"builtins.int*&
+mask
+builtins.int"builtins.intz36z37z38z39z310÷
+get_cursor_image Xlib.ext.xfixes.get_cursor_image"@
+Xlib.ext.xfixes.GetCursorImage"Xlib.ext.xfixes.GetCursorImage*¹
+self®
+:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
+Xlib.display.Display"Xlib.display.Display@
+Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*.
+window"
+builtins.object"builtins.objectz36z37z38z39z310Ë
+initXlib.ext.xfixes.init"
+None*6
+disp,
+Xlib.display.Display"Xlib.display.Display*V
+infoL
+$Xlib.protocol.request.QueryExtension"$Xlib.protocol.request.QueryExtensionz36z37z38z39z310* 
+__annotations__Xlib.ext.xfixes.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*U
+extnameXlib.ext.xfixes.extname
+builtins.str"builtins.str*36*37*38*39*310*q
+XFixesSelectionNotify%Xlib.ext.xfixes.XFixesSelectionNotify
+builtins.int"builtins.int*36*37*38*39*310*k
+XFixesCursorNotify"Xlib.ext.xfixes.XFixesCursorNotify
+builtins.int"builtins.int*36*37*38*39*310*‰
+!XFixesSetSelectionOwnerNotifyMask1Xlib.ext.xfixes.XFixesSetSelectionOwnerNotifyMask
+builtins.int"builtins.int*36*37*38*39*310*“
+&XFixesSelectionWindowDestroyNotifyMask6Xlib.ext.xfixes.XFixesSelectionWindowDestroyNotifyMask
+builtins.int"builtins.int*36*37*38*39*310*
+$XFixesSelectionClientCloseNotifyMask4Xlib.ext.xfixes.XFixesSelectionClientCloseNotifyMask
+builtins.int"builtins.int*36*37*38*39*310*
+XFixesDisplayCursorNotifyMask-Xlib.ext.xfixes.XFixesDisplayCursorNotifyMask
+builtins.int"builtins.int*36*37*38*39*310*
+XFixesSetSelectionOwnerNotify-Xlib.ext.xfixes.XFixesSetSelectionOwnerNotify
+builtins.int"builtins.int*36*37*38*39*310*‹
+"XFixesSelectionWindowDestroyNotify2Xlib.ext.xfixes.XFixesSelectionWindowDestroyNotify
+builtins.int"builtins.int*36*37*38*39*310*‡
+ XFixesSelectionClientCloseNotify0Xlib.ext.xfixes.XFixesSelectionClientCloseNotify
+builtins.int"builtins.int*36*37*38*39*310*y
+XFixesDisplayCursorNotify)Xlib.ext.xfixes.XFixesDisplayCursorNotify
+builtins.int"builtins.int*36*37*38*39*310

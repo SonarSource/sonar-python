@@ -1,12 +1,33 @@
 
-picklež
-PickleBufferpickle.PickleBuffer"builtins.object*}
+pickleô
+_ReadableFileobjpickle._ReadableFileobj"builtins.object*¤
+readpickle._ReadableFileobj.read" 
+builtins.bytes"builtins.bytes*<
+self2
+pickle._ReadableFileobj"pickle._ReadableFileobj*
+builtins.int"builtins.int*Œ
+readline pickle._ReadableFileobj.readline" 
+builtins.bytes"builtins.bytes*<
+self2
+pickle._ReadableFileobj"pickle._ReadableFileobjXò	
+PickleBufferpickle.PickleBuffer"builtins.object*Î
 __init__pickle.PickleBuffer.__init__"
 None*4
 self*
-pickle.PickleBuffer"pickle.PickleBuffer*
-buffer
-Any*€
+pickle.PickleBuffer"pickle.PickleBuffer*ã
+bufferÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*€
 rawpickle.PickleBuffer.raw"*
 builtins.memoryview"builtins.memoryview*4
 self*
@@ -14,19 +35,18 @@
 releasepickle.PickleBuffer.release"
 None*4
 self*
-pickle.PickleBuffer"pickle.PickleBuffer5
+pickle.PickleBuffer"pickle.PickleBuffer85
 PickleErrorpickle.PickleError"builtins.Exception9
 PicklingErrorpickle.PicklingError"pickle.PickleError=
-UnpicklingErrorpickle.UnpicklingError"pickle.PickleError½
-
-Picklerpickle.Pickler"builtins.object*¬
+UnpicklingErrorpickle.UnpicklingError"pickle.PickleErrorð
+Picklerpickle.Pickler"builtins.object*È
 __init__pickle.Pickler.__init__"
 None**
 self 
-pickle.Pickler"pickle.Pickler*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*T
+pickle.Pickler"pickle.Pickler*n
+filed
+'_typeshed.SupportsWrite[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsWrite*T
 protocolD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -44,12 +64,11 @@
 self 
 pickle.Pickler"pickle.Pickler*
 obj
-Any*c
+Any*\
 dumppickle.Pickler.dump"
 None**
 self 
-pickle.Pickler"pickle.Pickler*
-__obj
+pickle.Pickler"pickle.Pickler*	
 Any*]
 
 clear_memopickle.Pickler.clear_memo"
@@ -68,15 +87,21 @@ clear_memopickle.Pickler.clear_memo"
 =typing.Mapping[builtins.type,CallableType[builtins.function]]
 builtins.type"builtins.typeK
 CallableType[builtins.function]&
-builtins.function"builtins.function"typing.Mappingý
-	Unpicklerpickle.Unpickler"builtins.object*±
+builtins.function"builtins.function"typing.Mappingr9
+binpickle.Pickler.bin
+builtins.bool"builtins.boolrà
+dispatchpickle.Pickler.dispatchº
+<builtins.dict[builtins.type,CallableType[builtins.function]]
+builtins.type"builtins.typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict«
+	Unpicklerpickle.Unpickler"builtins.object*›
 __init__pickle.Unpickler.__init__"
 None*.
 self$
-pickle.Unpickler"pickle.Unpickler*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*1
+pickle.Unpickler"pickle.Unpickler*<
+file2
+pickle._ReadableFileobj"pickle._ReadableFileobj*1
 fix_imports
 builtins.bool"builtins.bool *,
 encoding
@@ -91,29 +116,32 @@ clear_memopickle.Pickler.clear_memo"
 loadpickle.Unpickler.load"
 Any*.
 self$
-pickle.Unpickler"pickle.Unpickler*À
+pickle.Unpickler"pickle.Unpickler*¢
 
 find_classpickle.Unpickler.find_class"
 Any*.
 self$
-pickle.Unpickler"pickle.Unpickler*-
-__module_name
-builtins.str"builtins.str*-
-__global_name
+pickle.Unpickler"pickle.Unpickler*
+builtins.str"builtins.str*
 builtins.str"builtins.str*~
 persistent_load pickle.Unpickler.persistent_load"
 Any*.
 self$
 pickle.Unpickler"pickle.Unpickler*
 pid
-Any‚
+Anyrß
+dispatchpickle.Unpickler.dispatch·
+;builtins.dict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictž
 dumppickle.dump"
 None*
 obj
-Any*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*T
+Any*n
+filed
+'_typeshed.SupportsWrite[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsWrite*T
 protocolD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -141,12 +169,11 @@ find_classpickle.Unpickler.find_class"
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None"pickle._BufferCallback î
+None"pickle._BufferCallback Ø
 loadpickle.load"
-Any*R
-fileH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*1
+Any*<
+file2
+pickle._ReadableFileobj"pickle._ReadableFileobj*1
 fix_imports
 builtins.bool"builtins.bool *,
 encoding
@@ -157,11 +184,21 @@ find_classpickle.Unpickler.find_class"
  Union[typing.Iterable[Any],None]0
 typing.Iterable[Any]
 Any"typing.Iterable
-None È
+None ø
 loadspickle.loads"
-Any**
-__data 
-builtins.bytes"builtins.bytes*1
+Any*ÙÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*1
 fix_imports
 builtins.bool"builtins.bool *,
 encoding
@@ -176,11 +213,35 @@ find_classpickle.Unpickler.find_class"
 encode_longpickle.encode_long" 
 builtins.bytes"builtins.bytes*#
 x
-builtins.int"builtins.intk
+builtins.int"builtins.intÆ
+
 decode_longpickle.decode_long"
-builtins.int"builtins.int**
-data 
-builtins.bytes"builtins.bytes*I
+builtins.int"builtins.int*„
+
+dataù	
+ãUnion[typing.Iterable[typing_extensions.SupportsIndex],typing.SupportsBytes,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]‡
+0typing.Iterable[typing_extensions.SupportsIndex]B
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex"typing.Iterable,
+typing.SupportsBytes"typing.SupportsBytesÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*‚
+__annotations__pickle.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*e
+__all__pickle.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*I
 HIGHEST_PROTOCOLpickle.HIGHEST_PROTOCOL
 builtins.int"builtins.int*I
 DEFAULT_PROTOCOLpickle.DEFAULT_PROTOCOL
@@ -331,4 +392,11 @@ pickle.PUT
 MEMOIZEpickle.MEMOIZE 
 builtins.bytes"builtins.bytes*7
 FRAMEpickle.FRAME 
+builtins.bytes"builtins.bytes*A
+
+BYTEARRAY8pickle.BYTEARRAY8 
+builtins.bytes"builtins.bytes*C
+NEXT_BUFFERpickle.NEXT_BUFFER 
+builtins.bytes"builtins.bytes*K
+READONLY_BUFFERpickle.READONLY_BUFFER 
 builtins.bytes"builtins.bytes

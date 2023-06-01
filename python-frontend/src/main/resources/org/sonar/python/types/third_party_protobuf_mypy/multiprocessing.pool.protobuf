@@ -1,23 +1,23 @@
 
-multiprocessing.poolå
-ApplyResult multiprocessing.pool.ApplyResult"builtins.object*¬
+multiprocessing.poolà
+ApplyResult multiprocessing.pool.ApplyResult"builtins.object*æ
 __init__)multiprocessing.pool.ApplyResult.__init__"
 None*Ñ
 selfz
 9multiprocessing.pool.ApplyResult[multiprocessing.pool._T]
 multiprocessing.pool._T" multiprocessing.pool.ApplyResult*@
 pool6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*ó
+multiprocessing.pool.Pool"multiprocessing.pool.Pool*ï
 callbackÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None *ù
+None*õ
 error_callbackÜ
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None *™
+None*™
 get$multiprocessing.pool.ApplyResult.get"
 multiprocessing.pool._T*Ñ
 selfz
@@ -46,13 +46,40 @@ successful+multiprocessing.pool.ApplyResult.successful"
 builtins.bool"builtins.bool*Ñ
 selfz
 9multiprocessing.pool.ApplyResult[multiprocessing.pool._T]
-multiprocessing.pool._T" multiprocessing.pool.ApplyResultPO
-	MapResultmultiprocessing.pool.MapResult" multiprocessing.pool.ApplyResultP™
-IMapIterator!multiprocessing.pool.IMapIterator"typing.Iterator*x
-__iter__*multiprocessing.pool.IMapIterator.__iter__"
-multiprocessing.pool._S*#
-self
-multiprocessing.pool._S*Ø
+multiprocessing.pool._T" multiprocessing.pool.ApplyResultP·
+	MapResultmultiprocessing.pool.MapResult" multiprocessing.pool.ApplyResult*è
+__init__'multiprocessing.pool.MapResult.__init__"
+None*Ä
+selfv
+7multiprocessing.pool.MapResult[multiprocessing.pool._T]
+multiprocessing.pool._T"multiprocessing.pool.MapResult*@
+pool6
+multiprocessing.pool.Pool"multiprocessing.pool.Pool*+
+	chunksize
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.int*ï
+callbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*õ
+error_callbackÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneP—
+IMapIterator!multiprocessing.pool.IMapIterator"typing.Iterator*ã
+__init__*multiprocessing.pool.IMapIterator.__init__"
+None*Ü
+self|
+:multiprocessing.pool.IMapIterator[multiprocessing.pool._T]
+multiprocessing.pool._T"!multiprocessing.pool.IMapIterator*@
+pool6
+multiprocessing.pool.Pool"multiprocessing.pool.Pool*ê
+__iter__*multiprocessing.pool.IMapIterator.__iter__"*
+&multiprocessing.pool.IMapIterator.Self*,*
+&multiprocessing.pool.IMapIterator.Self*Ø
 next&multiprocessing.pool.IMapIterator.next"
 multiprocessing.pool._T*Ü
 self|
@@ -71,8 +98,8 @@ successful+multiprocessing.pool.ApplyResult.successful"
 Union[builtins.float,None] 
 builtins.float"builtins.float
 None Ph
-IMapUnorderedIterator*multiprocessing.pool.IMapUnorderedIterator"!multiprocessing.pool.IMapIteratorP∆/
-Poolmultiprocessing.pool.Pool"typing.ContextManager*≈
+IMapUnorderedIterator*multiprocessing.pool.IMapUnorderedIterator"!multiprocessing.pool.IMapIteratorPé3
+Poolmultiprocessing.pool.Pool"builtins.object*≈
 __init__"multiprocessing.pool.Pool.__init__"
 None*@
 self6
@@ -260,13 +287,25 @@ Hmultiprocessing.pool.ApplyResult[builtins.list[multiprocessing.pool._T]]T
 joinmultiprocessing.pool.Pool.join"
 None*@
 self6
-multiprocessing.pool.Pool"multiprocessing.pool.Pool*t
-	__enter__#multiprocessing.pool.Pool.__enter__"
-multiprocessing.pool._PT*$
-self
-multiprocessing.pool._PT§
+multiprocessing.pool.Pool"multiprocessing.pool.Pool*z
+	__enter__#multiprocessing.pool.Pool.__enter__""
+multiprocessing.pool.Pool.Self*$"
+multiprocessing.pool.Pool.Self*≈
+__exit__"multiprocessing.pool.Pool.__exit__"
+None*86
+multiprocessing.pool.Pool"multiprocessing.pool.Pool*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Noneç
 
-ThreadPoolmultiprocessing.pool.ThreadPool"multiprocessing.pool.Pool"typing.ContextManager*¬
+ThreadPoolmultiprocessing.pool.ThreadPool"multiprocessing.pool.Pool*¬
 __init__(multiprocessing.pool.ThreadPool.__init__"
 None*L
 selfB
@@ -282,12 +321,23 @@ ThreadPoolmultiprocessing.pool.ThreadPool"multiprocessing.pool.Pool"typing.C
 None *@
 initargs0
 typing.Iterable[Any]
-Any"typing.Iterable *?
-INITmultiprocessing.pool.INIT
-builtins.str"builtins.str*=
-RUNmultiprocessing.pool.RUN
-builtins.str"builtins.str*A
-CLOSEmultiprocessing.pool.CLOSE
-builtins.str"builtins.str*I
-	TERMINATEmultiprocessing.pool.TERMINATE
+Any"typing.Iterable *ê
+__annotations__$multiprocessing.pool.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*s
+__all__multiprocessing.pool.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Z
+INITmultiprocessing.pool.INIT7
+Literal[builtins.str]	
+builtins.str"builtins.str*X
+RUNmultiprocessing.pool.RUN7
+Literal[builtins.str]	
+builtins.str"builtins.str*\
+CLOSEmultiprocessing.pool.CLOSE7
+Literal[builtins.str]	
+builtins.str"builtins.str*d
+	TERMINATEmultiprocessing.pool.TERMINATE7
+Literal[builtins.str]	
 builtins.str"builtins.str

@@ -1,6 +1,6 @@
 
 werkzeug.sansio.multipart9
-Eventwerkzeug.sansio.multipart.Event"builtins.objectè
+Eventwerkzeug.sansio.multipart.Event"builtins.objectÔ
 Preamble"werkzeug.sansio.multipart.Preamble"werkzeug.sansio.multipart.Event*Á
 __init__+werkzeug.sansio.multipart.Preamble.__init__"
 None*R
@@ -9,7 +9,12 @@
 data 
 builtins.bytes"builtins.bytes8rQ
 data'werkzeug.sansio.multipart.Preamble.data 
-builtins.bytes"builtins.bytes¸
+builtins.bytes"builtins.bytesré
+__dataclass_fields__7werkzeug.sansio.multipart.Preamble.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¡
 Fieldwerkzeug.sansio.multipart.Field"werkzeug.sansio.multipart.Event*•
 __init__(werkzeug.sansio.multipart.Field.__init__"
 None*L
@@ -22,7 +27,12 @@
 name$werkzeug.sansio.multipart.Field.name
 builtins.str"builtins.strr†
 headers'werkzeug.sansio.multipart.Field.headersR
-'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headers°
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headersræ
+__dataclass_fields__4werkzeug.sansio.multipart.Field.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˜
 Filewerkzeug.sansio.multipart.File"werkzeug.sansio.multipart.Event*¾
 __init__'werkzeug.sansio.multipart.File.__init__"
 None*J
@@ -39,7 +49,12 @@
 filename'werkzeug.sansio.multipart.File.filename
 builtins.str"builtins.strr…
 headers&werkzeug.sansio.multipart.File.headersR
-'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.HeadersÖ
+'werkzeug.datastructures.headers.Headers"'werkzeug.datastructures.headers.Headersrå
+__dataclass_fields__3werkzeug.sansio.multipart.File.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¾
 Datawerkzeug.sansio.multipart.Data"werkzeug.sansio.multipart.Event*ä
 __init__'werkzeug.sansio.multipart.Data.__init__"
 None*J
@@ -52,7 +67,12 @@
 data#werkzeug.sansio.multipart.Data.data 
 builtins.bytes"builtins.bytesrU
 	more_data(werkzeug.sansio.multipart.Data.more_data
-builtins.bool"builtins.boolè
+builtins.bool"builtins.boolrå
+__dataclass_fields__3werkzeug.sansio.multipart.Data.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÔ
 Epilogue"werkzeug.sansio.multipart.Epilogue"werkzeug.sansio.multipart.Event*Á
 __init__+werkzeug.sansio.multipart.Epilogue.__init__"
 None*R
@@ -61,7 +81,12 @@
 data 
 builtins.bytes"builtins.bytes8rQ
 data'werkzeug.sansio.multipart.Epilogue.data 
-builtins.bytes"builtins.bytesO
+builtins.bytes"builtins.bytesré
+__dataclass_fields__7werkzeug.sansio.multipart.Epilogue.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictO
 NeedData"werkzeug.sansio.multipart.NeedData"werkzeug.sansio.multipart.Eventý
 Statewerkzeug.sansio.multipart.State"	enum.EnumHrL
 PREAMBLE(werkzeug.sansio.multipart.State.PREAMBLE
@@ -76,7 +101,7 @@ DATA_START*werkzeug.sansio.multipart.State.DATA_START
 EPILOGUE(werkzeug.sansio.multipart.State.EPILOGUE
 	enum.auto"	enum.autorL
 COMPLETE(werkzeug.sansio.multipart.State.COMPLETE
-	enum.auto"	enum.autoŽ
+	enum.auto"	enum.autoþ
 MultipartDecoder*werkzeug.sansio.multipart.MultipartDecoder"builtins.object*–
 __init__3werkzeug.sansio.multipart.MultipartDecoder.__init__"
 None*b
@@ -143,13 +168,15 @@ next_event5werkzeug.sansio.multipart.MultipartDecoder.next_event"B
 state0werkzeug.sansio.multipart.MultipartDecoder.stateB
 werkzeug.sansio.multipart.State"werkzeug.sansio.multipart.Statera
 boundary3werkzeug.sansio.multipart.MultipartDecoder.boundary 
-builtins.bytes"builtins.bytesr™
-preamble_re6werkzeug.sansio.multipart.MultipartDecoder.preamble_reR
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Patternr™
-boundary_re6werkzeug.sansio.multipart.MultipartDecoder.boundary_reR
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Patternrm
+builtins.bytes"builtins.bytesr‘
+preamble_re6werkzeug.sansio.multipart.MultipartDecoder.preamble_reJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Patternr‘
+boundary_re6werkzeug.sansio.multipart.MultipartDecoder.boundary_reJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Patternrm
 _search_position;werkzeug.sansio.multipart.MultipartDecoder._search_position
 builtins.int"builtins.intri
 _parts_decoded9werkzeug.sansio.multipart.MultipartDecoder._parts_decoded
@@ -171,21 +198,28 @@ send_event5werkzeug.sansio.multipart.MultipartEncoder.send_event"
 boundary3werkzeug.sansio.multipart.MultipartEncoder.boundary 
 builtins.bytes"builtins.bytesr}
 state0werkzeug.sansio.multipart.MultipartEncoder.stateB
-werkzeug.sansio.multipart.State"werkzeug.sansio.multipart.State*
+werkzeug.sansio.multipart.State"werkzeug.sansio.multipart.State*•
+__annotations__)werkzeug.sansio.multipart.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
 ttyping *z
 	NEED_DATA#werkzeug.sansio.multipart.NEED_DATAH
 "werkzeug.sansio.multipart.NeedData""werkzeug.sansio.multipart.NeedData*T
 
 LINE_BREAK$werkzeug.sansio.multipart.LINE_BREAK 
-builtins.bytes"builtins.bytes*Œ
-BLANK_LINE_RE'werkzeug.sansio.multipart.BLANK_LINE_RER
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Pattern*Œ
-LINE_BREAK_RE'werkzeug.sansio.multipart.LINE_BREAK_RER
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Pattern*ž
-HEADER_CONTINUATION_RE0werkzeug.sansio.multipart.HEADER_CONTINUATION_RER
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Pattern*b
+builtins.bytes"builtins.bytes*„
+BLANK_LINE_RE'werkzeug.sansio.multipart.BLANK_LINE_REJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*„
+LINE_BREAK_RE'werkzeug.sansio.multipart.LINE_BREAK_REJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*–
+HEADER_CONTINUATION_RE0werkzeug.sansio.multipart.HEADER_CONTINUATION_REJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*b
 SEARCH_EXTRA_LENGTH-werkzeug.sansio.multipart.SEARCH_EXTRA_LENGTH
 builtins.int"builtins.int

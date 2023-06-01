@@ -1,56 +1,27 @@
 
-plistlibÓ
-Dictplistlib.Dict"builtins.dict*ã
-__getattr__plistlib.Dict.__getattr__"
-Any*&
-self
-plistlib.Dict"plistlib.Dict*$
-attr
-builtins.str"builtins.strz27z35z36*û
-__setattr__plistlib.Dict.__setattr__"
-None*&
-self
-plistlib.Dict"plistlib.Dict*$
-attr
-builtins.str"builtins.str*
-value
-Anyz27z35z36*å
-__delattr__plistlib.Dict.__delattr__"
-None*&
-self
-plistlib.Dict"plistlib.Dict*$
-attr
-builtins.str"builtins.strz27z35z36j27j35j36‡
-Dataplistlib.Data"builtins.object*Ç
-__init__plistlib.Data.__init__"
-None*(
-self
-plistlib.Data"plistlib.Data*&
-data
-builtins.str"builtins.strz27*í
+plistlibÉ
+PlistFormatplistlib.PlistFormat"	enum.EnumHj36j37j38j39j310rZ
+FMT_XMLplistlib.PlistFormat.FMT_XML
+builtins.int"builtins.int*36*37*38*39*310r`
+
+FMT_BINARYplistlib.PlistFormat.FMT_BINARY
+builtins.int"builtins.int*36*37*38*39*310ç
+Dataplistlib.Data"builtins.object*é
 __init__plistlib.Data.__init__"
 None*(
 self
 plistlib.Data"plistlib.Data**
 data 
-builtins.bytes"builtins.bytesz35z36z37z38j27j35j36j37j38r<
-dataplistlib.Data.data
-builtins.str"builtins.str*27rL
+builtins.bytes"builtins.bytesz36z37z38j36j37j38rH
 dataplistlib.Data.data 
-builtins.bytes"builtins.bytes*35*36*37*38∫
-InvalidFileExceptionplistlib.InvalidFileException"builtins.ValueError*–
+builtins.bytes"builtins.bytes*36*37*38™
+InvalidFileExceptionplistlib.InvalidFileException"builtins.ValueError*»
 __init__&plistlib.InvalidFileException.__init__"
 None*H
 self>
 plistlib.InvalidFileException"plistlib.InvalidFileException*+
 message
-builtins.str"builtins.str z27z35z36z37z38z39z310j27j35j36j37j38j39j310è
-PlistFormatplistlib.PlistFormat"	enum.EnumHj35j36j37j38j39j310r^
-FMT_XMLplistlib.PlistFormat.FMT_XML
-builtins.int"builtins.int*35*36*37*38*39*310rd
-
-FMT_BINARYplistlib.PlistFormat.FMT_BINARY
-builtins.int"builtins.int*35*36*37*38*39*310’
+builtins.str"builtins.str z36z37z38z39z310j36j37j38j39j310á
 UIDplistlib.UID"builtins.object*à
 __init__plistlib.UID.__init__"
 None*&
@@ -61,29 +32,176 @@ FMT_BINARYplistlib.PlistFormat.FMT_BINARY
 	__index__plistlib.UID.__index__"
 builtins.int"builtins.int*&
 self
-plistlib.UID"plistlib.UIDz38z39z310*c
+plistlib.UID"plistlib.UIDz38z39z310*˜
 
-__reduce__plistlib.UID.__reduce__"
-Any*&
-self
-plistlib.UID"plistlib.UIDz38z39z310*t
-__hash__plistlib.UID.__hash__"
-builtins.int"builtins.int*&
-self
-plistlib.UID"plistlib.UIDz38z39z310j38j39j310rD
+__reduce__plistlib.UID.__reduce__"°
+2Tuple[Type[plistlib.UID.Self],Tuple[builtins.int]]2
+Type[plistlib.UID.Self]
+plistlib.UID.Self5
+Tuple[builtins.int]
+builtins.int"builtins.int*
+self
+plistlib.UID.Selfz38z39z310*ê
+__eq__plistlib.UID.__eq__"
+builtins.bool"builtins.bool*
+plistlib.UID"plistlib.UID*$"
+builtins.object"builtins.objectz38z39z310j38j39j310rD
 dataplistlib.UID.data
-builtins.int"builtins.int*38*39*310ä
-	readPlistplistlib.readPlist"
-Any*€
-
-pathOrFile 
-NUnion[TypeAlias[Union[builtins.str,builtins.unicode]],typing.IO[builtins.str]]±
-/TypeAlias[Union[builtins.str,builtins.unicode]]l
-$Union[builtins.str,builtins.unicode]
-builtins.str"builtins.str$
-builtins.unicode"builtins.unicode"plistlib._PathB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IOz27Â
+builtins.int"builtins.int*38*39*310Õ
+loadplistlib.load"
+Any*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*g
+fmt\
+ Union[plistlib.PlistFormat,None],
+plistlib.PlistFormat"plistlib.PlistFormat
+None *7
+use_builtin_types
+builtins.bool"builtins.bool *¨
+	dict_typeö
+-Type[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping z36z37z38ë
+loadplistlib.load"
+Any*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*g
+fmt\
+ Union[plistlib.PlistFormat,None],
+plistlib.PlistFormat"plistlib.PlistFormat
+None *¨
+	dict_typeö
+-Type[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping z39z310Á
+loadsplistlib.loads"
+Any*Î
+valueﬂ
+ÉTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]]]∫
+xUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]] 
+builtins.bytes"builtins.bytesô
+bTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]ï
+WUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap 
+_ctypes._CData"_ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*g
+fmt\
+ Union[plistlib.PlistFormat,None],
+plistlib.PlistFormat"plistlib.PlistFormat
+None *7
+use_builtin_types
+builtins.bool"builtins.bool *¨
+	dict_typeö
+-Type[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping z36z37‡	
+loadsplistlib.loads"
+Any*Ë
+value‹
+óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
+åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÌ
+vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
+kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap 
+_ctypes._CData"_ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*g
+fmt\
+ Union[plistlib.PlistFormat,None],
+plistlib.PlistFormat"plistlib.PlistFormat
+None *7
+use_builtin_types
+builtins.bool"builtins.bool *¨
+	dict_typeö
+-Type[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping z38¨	
+loadsplistlib.loads"
+Any*Ë
+value‹
+óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
+åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÌ
+vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
+kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap 
+_ctypes._CData"_ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*g
+fmt\
+ Union[plistlib.PlistFormat,None],
+plistlib.PlistFormat"plistlib.PlistFormat
+None *¨
+	dict_typeö
+-Type[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping z39z310Ì
+dumpplistlib.dump"
+None* 
+valueæ
+¨Union[typing.Mapping[builtins.str,Any],builtins.list[Any],builtins.tuple[Any],builtins.str,builtins.bool,builtins.float,builtins.bytes,builtins.bytearray,datetime.datetime]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping,
+builtins.list[Any]
+Any"builtins.list.
+builtins.tuple[Any]
+Any"builtins.tuple
+builtins.str"builtins.str
+builtins.bool"builtins.bool 
+builtins.float"builtins.float 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray&
+datetime.datetime"datetime.datetime*P
+fpH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*7
+fmt,
+plistlib.PlistFormat"plistlib.PlistFormat */
+	sort_keys
+builtins.bool"builtins.bool *.
+skipkeys
+builtins.bool"builtins.bool z36z37z38z39z310µ
+dumpsplistlib.dumps" 
+builtins.bytes"builtins.bytes* 
+valueæ
+¨Union[typing.Mapping[builtins.str,Any],builtins.list[Any],builtins.tuple[Any],builtins.str,builtins.bool,builtins.float,builtins.bytes,builtins.bytearray,datetime.datetime]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping,
+builtins.list[Any]
+Any"builtins.list.
+builtins.tuple[Any]
+Any"builtins.tuple
+builtins.str"builtins.str
+builtins.bool"builtins.bool 
+builtins.float"builtins.float 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray&
+datetime.datetime"datetime.datetime*7
+fmt,
+plistlib.PlistFormat"plistlib.PlistFormat *.
+skipkeys
+builtins.bool"builtins.bool */
+	sort_keys
+builtins.bool"builtins.bool z36z37z38z39z310·
 	readPlistplistlib.readPlist"
 Any*™
 
@@ -91,23 +209,7 @@ pathOrFileô
 -Union[builtins.str,typing.IO[builtins.bytes]]
 builtins.str"builtins.strH
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38Û
-
-writePlistplistlib.writePlist"
-None*d
-valueY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*€
-
-pathOrFile 
-NUnion[TypeAlias[Union[builtins.str,builtins.unicode]],typing.IO[builtins.str]]±
-/TypeAlias[Union[builtins.str,builtins.unicode]]l
-$Union[builtins.str,builtins.unicode]
-builtins.str"builtins.str$
-builtins.unicode"builtins.unicode"plistlib._PathB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IOz27Œ
+builtins.bytes"builtins.bytes"	typing.IOz36z37z38 
 
 writePlistplistlib.writePlist"
 None*d
@@ -120,152 +222,51 @@ pathOrFileô
 -Union[builtins.str,typing.IO[builtins.bytes]]
 builtins.str"builtins.strH
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IOz35z36z37z38f
+builtins.bytes"builtins.bytes"	typing.IOz36z37z38Ø
 readPlistFromBytesplistlib.readPlistFromBytes"
-Any*&
-data
-builtins.str"builtins.strz27v
+Any*Í
+dataﬂ
+ÉTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]]]∫
+xUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]] 
+builtins.bytes"builtins.bytesô
+bTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData]]ï
+WUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap 
+_ctypes._CData"_ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz36z37®
 readPlistFromBytesplistlib.readPlistFromBytes"
-Any**
-data 
-builtins.bytes"builtins.bytesz35z36z37z38∑
-writePlistToBytesplistlib.writePlistToBytes"
-builtins.str"builtins.str*d
-valueY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mappingz27«
+Any*Á
+data‹
+óTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]]]£
+åUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÌ
+vTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer]]’
+kUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,_ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap 
+_ctypes._CData"_ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz38√
 writePlistToBytesplistlib.writePlistToBytes" 
 builtins.bytes"builtins.bytes*d
 valueY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mappingz35z36z37z38€
-readPlistFromResourceplistlib.readPlistFromResource"
-Any*º
-path±
-/TypeAlias[Union[builtins.str,builtins.unicode]]l
-$Union[builtins.str,builtins.unicode]
-builtins.str"builtins.str$
-builtins.unicode"builtins.unicode"plistlib._Path*+
-restype
-builtins.str"builtins.str *)
-resid
-builtins.int"builtins.int z27≈
-writePlistToResourceplistlib.writePlistToResource"
-None*i
-
-rootObjectY
- typing.Mapping[builtins.str,Any]
+Any"typing.Mappingz36z37z38*ô
+__annotations__plistlib.__annotations__W
+builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping*º
-path±
-/TypeAlias[Union[builtins.str,builtins.unicode]]l
-$Union[builtins.str,builtins.unicode]
-builtins.str"builtins.str$
-builtins.unicode"builtins.unicode"plistlib._Path*+
-restype
-builtins.str"builtins.str *)
-resid
-builtins.int"builtins.int z27h
-readPlistFromStringplistlib.readPlistFromString"
-Any*&
-data
-builtins.str"builtins.strz27æ
-writePlistToStringplistlib.writePlistToString"
-builtins.str"builtins.str*i
-
-rootObjectY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mappingz27—
-loadplistlib.load"
-Any*P
-fpH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*g
-fmt\
- Union[plistlib.PlistFormat,None],
-plistlib.PlistFormat"plistlib.PlistFormat
-None *7
-use_builtin_types
-builtins.bool"builtins.bool *¨
-	dict_typeö
--Type[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping z35z36z37z38ë
-loadplistlib.load"
-Any*P
-fpH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*g
-fmt\
- Union[plistlib.PlistFormat,None],
-plistlib.PlistFormat"plistlib.PlistFormat
-None *¨
-	dict_typeö
--Type[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping z39z310Æ
-loadsplistlib.loads"
-Any*+
-value 
-builtins.bytes"builtins.bytes*g
-fmt\
- Union[plistlib.PlistFormat,None],
-plistlib.PlistFormat"plistlib.PlistFormat
-None *7
-use_builtin_types
-builtins.bool"builtins.bool *¨
-	dict_typeö
--Type[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping z35z36z37z38Ó
-loadsplistlib.loads"
-Any*+
-value 
-builtins.bytes"builtins.bytes*g
-fmt\
- Union[plistlib.PlistFormat,None],
-plistlib.PlistFormat"plistlib.PlistFormat
-None *¨
-	dict_typeö
--Type[typing.MutableMapping[builtins.str,Any]]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping z39z310ä
-dumpplistlib.dump"
-None*d
-valueY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*P
-fpH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*7
-fmt,
-plistlib.PlistFormat"plistlib.PlistFormat */
-	sort_keys
-builtins.bool"builtins.bool *.
-skipkeys
-builtins.bool"builtins.bool z35z36z37z38z39z310“
-dumpsplistlib.dumps" 
-builtins.bytes"builtins.bytes*d
-valueY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*7
-fmt,
-plistlib.PlistFormat"plistlib.PlistFormat *.
-skipkeys
-builtins.bool"builtins.bool */
-	sort_keys
-builtins.bool"builtins.bool z35z36z37z38z39z310*b
+Any"builtins.dict*36*37*38*39*310*|
+__all__plistlib.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*^
 FMT_XMLplistlib.FMT_XML,
-plistlib.PlistFormat"plistlib.PlistFormat*35*36*37*38*39*310*h
+plistlib.PlistFormat"plistlib.PlistFormat*36*37*38*39*310*d
 
 FMT_BINARYplistlib.FMT_BINARY,
-plistlib.PlistFormat"plistlib.PlistFormat*35*36*37*38*39*310
+plistlib.PlistFormat"plistlib.PlistFormat*36*37*38*39*310

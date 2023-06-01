@@ -1,0 +1,537 @@
+
+serial.rfc2217®
+TelnetOptionserial.rfc2217.TelnetOption"builtins.object*½
+__init__$serial.rfc2217.TelnetOption.__init__"
+None*D
+self:
+serial.rfc2217.TelnetOption"serial.rfc2217.TelnetOption*>
+
+connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*&
+name
+builtins.str"builtins.str*,
+option 
+builtins.bytes"builtins.bytes*.
+send_yes 
+builtins.bytes"builtins.bytes*-
+send_no 
+builtins.bytes"builtins.bytes*-
+ack_yes 
+builtins.bytes"builtins.bytes*,
+ack_no 
+builtins.bytes"builtins.bytes*/
+initial_state
+builtins.str"builtins.str*¢
+activation_callback†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None z36z37z38z39z310*Ô
+process_incoming,serial.rfc2217.TelnetOption.process_incoming"
+None*D
+self:
+serial.rfc2217.TelnetOption"serial.rfc2217.TelnetOption*-
+command 
+builtins.bytes"builtins.bytesz36z37z38z39z310j36j37j38j39j310ry
+
+connection&serial.rfc2217.TelnetOption.connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*36*37*38*39*310r[
+name serial.rfc2217.TelnetOption.name
+builtins.str"builtins.str*36*37*38*39*310rc
+option"serial.rfc2217.TelnetOption.option 
+builtins.bytes"builtins.bytes*36*37*38*39*310rg
+send_yes$serial.rfc2217.TelnetOption.send_yes 
+builtins.bytes"builtins.bytes*36*37*38*39*310re
+send_no#serial.rfc2217.TelnetOption.send_no 
+builtins.bytes"builtins.bytes*36*37*38*39*310re
+ack_yes#serial.rfc2217.TelnetOption.ack_yes 
+builtins.bytes"builtins.bytes*36*37*38*39*310rc
+ack_no"serial.rfc2217.TelnetOption.ack_no 
+builtins.bytes"builtins.bytes*36*37*38*39*310r]
+state!serial.rfc2217.TelnetOption.state
+builtins.str"builtins.str*36*37*38*39*310ra
+active"serial.rfc2217.TelnetOption.active
+builtins.bool"builtins.bool*36*37*38*39*310r¨
+activation_callback/serial.rfc2217.TelnetOption.activation_callbackK
+CallableType[builtins.function]&
+builtins.function"builtins.function*36*37*38*39*310ø
+TelnetSubnegotiation#serial.rfc2217.TelnetSubnegotiation"builtins.object*¡
+__init__,serial.rfc2217.TelnetSubnegotiation.__init__"
+None*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiation*>
+
+connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*&
+name
+builtins.str"builtins.str*,
+option 
+builtins.bytes"builtins.bytes*\
+
+ack_optionJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None z36z37z38z39z310*Ð
+set'serial.rfc2217.TelnetSubnegotiation.set"
+None*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiation*+
+value 
+builtins.bytes"builtins.bytesz36z37z38z39z310*Ã
+is_ready,serial.rfc2217.TelnetSubnegotiation.is_ready"
+builtins.bool"builtins.bool*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiationz36z37z38z39z310*Í
+active*serial.rfc2217.TelnetSubnegotiation.active"
+builtins.bool"builtins.bool*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiation0:property`z36z37z38z39z310*Ö
+wait(serial.rfc2217.TelnetSubnegotiation.wait"
+None*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiation*/
+timeout 
+builtins.float"builtins.float z36z37z38z39z310*æ
+check_answer0serial.rfc2217.TelnetSubnegotiation.check_answer"
+None*T
+selfJ
+#serial.rfc2217.TelnetSubnegotiation"#serial.rfc2217.TelnetSubnegotiation*/
+	suboption 
+builtins.bytes"builtins.bytesz36z37z38z39z310j36j37j38j39j310r
+
+connection.serial.rfc2217.TelnetSubnegotiation.connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*36*37*38*39*310rc
+name(serial.rfc2217.TelnetSubnegotiation.name
+builtins.str"builtins.str*36*37*38*39*310rk
+option*serial.rfc2217.TelnetSubnegotiation.option 
+builtins.bytes"builtins.bytes*36*37*38*39*310r“
+value)serial.rfc2217.TelnetSubnegotiation.valueJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*36*37*38*39*310rs
+
+ack_option.serial.rfc2217.TelnetSubnegotiation.ack_option 
+builtins.bytes"builtins.bytes*36*37*38*39*310re
+state)serial.rfc2217.TelnetSubnegotiation.state
+builtins.str"builtins.str*36*37*38*39*310ù'
+Serialserial.rfc2217.Serial"serial.serialutil.SerialBase*{
+openserial.rfc2217.Serial.open"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serialz36z37z38z39z310*‚
+from_urlserial.rfc2217.Serial.from_url"`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*%
+url
+builtins.str"builtins.strz36z37z38z39z310*©
+
+in_waiting serial.rfc2217.Serial.in_waiting"
+builtins.int"builtins.int*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial0:property`z36z37z38z39z310*½
+readserial.rfc2217.Serial.read" 
+builtins.bytes"builtins.bytes*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*(
+size
+builtins.int"builtins.int z36z37z38z39z310*‹
+writeserial.rfc2217.Serial.write"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*ÜÙ
+‚TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytes•
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]’
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz36z37*
+writeserial.rfc2217.Serial.write"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*ÙÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferz38z39z310*—
+reset_input_buffer(serial.rfc2217.Serial.reset_input_buffer"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serialz36z37z38z39z310*™
+reset_output_buffer)serial.rfc2217.Serial.reset_output_buffer"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serialz36z37z38z39z310*
+ctsserial.rfc2217.Serial.cts"
+builtins.bool"builtins.bool*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial0:property`z36z37z38z39z310*
+dsrserial.rfc2217.Serial.dsr"
+builtins.bool"builtins.bool*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial0:property`z36z37z38z39z310*›
+riserial.rfc2217.Serial.ri"
+builtins.bool"builtins.bool*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial0:property`z36z37z38z39z310*›
+cdserial.rfc2217.Serial.cd"
+builtins.bool"builtins.bool*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial0:property`z36z37z38z39z310*ó
+telnet_send_option(serial.rfc2217.Serial.telnet_send_option"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*,
+action 
+builtins.bytes"builtins.bytes*,
+option 
+builtins.bytes"builtins.bytesz36z37z38z39z310*†
+rfc2217_send_subnegotiation1serial.rfc2217.Serial.rfc2217_send_subnegotiation"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*,
+option 
+builtins.bytes"builtins.bytes*-
+value 
+builtins.bytes"builtins.bytes z36z37z38z39z310*Ä
+rfc2217_send_purge(serial.rfc2217.Serial.rfc2217_send_purge"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*+
+value 
+builtins.bytes"builtins.bytesz36z37z38z39z310*Æ
+rfc2217_set_control)serial.rfc2217.Serial.rfc2217_set_control"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serial*+
+value 
+builtins.bytes"builtins.bytesz36z37z38z39z310*¥
+rfc2217_flow_server_ready/serial.rfc2217.Serial.rfc2217_flow_server_ready"
+None*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serialz36z37z38z39z310*¥
+get_modem_state%serial.rfc2217.Serial.get_modem_state"
+builtins.int"builtins.int*8
+self.
+serial.rfc2217.Serial"serial.rfc2217.Serialz36z37z38z39z310j36j37j38j39j310r‡
+loggerserial.rfc2217.Serial.loggerJ
+Union[logging.Logger,None] 
+logging.Logger"logging.Logger
+None*36*37*38*39*310•
+PortManagerserial.rfc2217.PortManager"builtins.object*í
+__init__#serial.rfc2217.PortManager.__init__"
+None*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager*?
+serial_port.
+serial.rfc2217.Serial"serial.rfc2217.Serial*>
+
+connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*X
+loggerJ
+Union[logging.Logger,None] 
+logging.Logger"logging.Logger
+None z36z37z38z39z310*‚
+telnet_send_option-serial.rfc2217.PortManager.telnet_send_option"
+None*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager*,
+action 
+builtins.bytes"builtins.bytes*,
+option 
+builtins.bytes"builtins.bytesz36z37z38z39z310*•
+rfc2217_send_subnegotiation6serial.rfc2217.PortManager.rfc2217_send_subnegotiation"
+None*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager*,
+option 
+builtins.bytes"builtins.bytes*-
+value 
+builtins.bytes"builtins.bytes z36z37z38z39z310*Þ
+check_modem_lines,serial.rfc2217.PortManager.check_modem_lines"
+None*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager*8
+force_notification
+builtins.bool"builtins.bool z36z37z38z39z310*¦
+escape!serial.rfc2217.PortManager.escape"t
+*typing.Generator[builtins.bytes,None,None] 
+builtins.bytes"builtins.bytes
+None
+None"typing.Generator*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager**
+data 
+builtins.bytes"builtins.bytesz36z37z38z39z310*¦
+filter!serial.rfc2217.PortManager.filter"t
+*typing.Generator[builtins.bytes,None,None] 
+builtins.bytes"builtins.bytes
+None
+None"typing.Generator*B
+self8
+serial.rfc2217.PortManager"serial.rfc2217.PortManager**
+data 
+builtins.bytes"builtins.bytesz36z37z38z39z310j36j37j38j39j310rp
+serial!serial.rfc2217.PortManager.serial.
+serial.rfc2217.Serial"serial.rfc2217.Serial*36*37*38*39*310rx
+
+connection%serial.rfc2217.PortManager.connection.
+serial.rfc2217.Serial"serial.rfc2217.Serial*36*37*38*39*310rŒ
+logger!serial.rfc2217.PortManager.loggerJ
+Union[logging.Logger,None] 
+logging.Logger"logging.Logger
+None*36*37*38*39*310rZ
+modeserial.rfc2217.PortManager.mode
+builtins.int"builtins.int*36*37*38*39*310r’
+	suboption$serial.rfc2217.PortManager.suboptionJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*36*37*38*39*310rœ
+telnet_command)serial.rfc2217.PortManager.telnet_commandJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*36*37*38*39*310rp
+modemstate_mask*serial.rfc2217.PortManager.modemstate_mask
+builtins.int"builtins.int*36*37*38*39*310r˜
+last_modemstate*serial.rfc2217.PortManager.last_modemstateD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*36*37*38*39*310rl
+linstate_mask(serial.rfc2217.PortManager.linstate_mask
+builtins.int"builtins.int*36*37*38*39*310*Ÿ
+__annotations__serial.rfc2217.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*¹
+LOGGER_LEVELSserial.rfc2217.LOGGER_LEVELSu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*36*37*38*39*310*N
+SEserial.rfc2217.SE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*P
+NOPserial.rfc2217.NOP 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+DMserial.rfc2217.DM 
+builtins.bytes"builtins.bytes*36*37*38*39*310*P
+BRKserial.rfc2217.BRK 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+IPserial.rfc2217.IP 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+AOserial.rfc2217.AO 
+builtins.bytes"builtins.bytes*36*37*38*39*310*P
+AYTserial.rfc2217.AYT 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+ECserial.rfc2217.EC 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+ELserial.rfc2217.EL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+GAserial.rfc2217.GA 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+SBserial.rfc2217.SB 
+builtins.bytes"builtins.bytes*36*37*38*39*310*R
+WILLserial.rfc2217.WILL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*R
+WONTserial.rfc2217.WONT 
+builtins.bytes"builtins.bytes*36*37*38*39*310*N
+DOserial.rfc2217.DO 
+builtins.bytes"builtins.bytes*36*37*38*39*310*R
+DONTserial.rfc2217.DONT 
+builtins.bytes"builtins.bytes*36*37*38*39*310*P
+IACserial.rfc2217.IAC 
+builtins.bytes"builtins.bytes*36*37*38*39*310*`
+IAC_DOUBLEDserial.rfc2217.IAC_DOUBLED 
+builtins.bytes"builtins.bytes*36*37*38*39*310*V
+BINARYserial.rfc2217.BINARY 
+builtins.bytes"builtins.bytes*36*37*38*39*310*R
+ECHOserial.rfc2217.ECHO 
+builtins.bytes"builtins.bytes*36*37*38*39*310*P
+SGAserial.rfc2217.SGA 
+builtins.bytes"builtins.bytes*36*37*38*39*310*h
+COM_PORT_OPTIONserial.rfc2217.COM_PORT_OPTION 
+builtins.bytes"builtins.bytes*36*37*38*39*310*b
+SET_BAUDRATEserial.rfc2217.SET_BAUDRATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*b
+SET_DATASIZEserial.rfc2217.SET_DATASIZE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*^
+
+SET_PARITYserial.rfc2217.SET_PARITY 
+builtins.bytes"builtins.bytes*36*37*38*39*310*b
+SET_STOPSIZEserial.rfc2217.SET_STOPSIZE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*`
+SET_CONTROLserial.rfc2217.SET_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*j
+NOTIFY_LINESTATEserial.rfc2217.NOTIFY_LINESTATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*l
+NOTIFY_MODEMSTATE serial.rfc2217.NOTIFY_MODEMSTATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+FLOWCONTROL_SUSPEND"serial.rfc2217.FLOWCONTROL_SUSPEND 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+FLOWCONTROL_RESUME!serial.rfc2217.FLOWCONTROL_RESUME 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+SET_LINESTATE_MASK!serial.rfc2217.SET_LINESTATE_MASK 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SET_MODEMSTATE_MASK"serial.rfc2217.SET_MODEMSTATE_MASK 
+builtins.bytes"builtins.bytes*36*37*38*39*310*^
+
+PURGE_DATAserial.rfc2217.PURGE_DATA 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SERVER_SET_BAUDRATE"serial.rfc2217.SERVER_SET_BAUDRATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SERVER_SET_DATASIZE"serial.rfc2217.SERVER_SET_DATASIZE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*l
+SERVER_SET_PARITY serial.rfc2217.SERVER_SET_PARITY 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SERVER_SET_STOPSIZE"serial.rfc2217.SERVER_SET_STOPSIZE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+SERVER_SET_CONTROL!serial.rfc2217.SERVER_SET_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*x
+SERVER_NOTIFY_LINESTATE&serial.rfc2217.SERVER_NOTIFY_LINESTATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*z
+SERVER_NOTIFY_MODEMSTATE'serial.rfc2217.SERVER_NOTIFY_MODEMSTATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*~
+SERVER_FLOWCONTROL_SUSPEND)serial.rfc2217.SERVER_FLOWCONTROL_SUSPEND 
+builtins.bytes"builtins.bytes*36*37*38*39*310*|
+SERVER_FLOWCONTROL_RESUME(serial.rfc2217.SERVER_FLOWCONTROL_RESUME 
+builtins.bytes"builtins.bytes*36*37*38*39*310*|
+SERVER_SET_LINESTATE_MASK(serial.rfc2217.SERVER_SET_LINESTATE_MASK 
+builtins.bytes"builtins.bytes*36*37*38*39*310*~
+SERVER_SET_MODEMSTATE_MASK)serial.rfc2217.SERVER_SET_MODEMSTATE_MASK 
+builtins.bytes"builtins.bytes*36*37*38*39*310*l
+SERVER_PURGE_DATA serial.rfc2217.SERVER_PURGE_DATA 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Ð
+RFC2217_ANSWER_MAP!serial.rfc2217.RFC2217_ANSWER_MAP
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*36*37*38*39*310*‚
+SET_CONTROL_REQ_FLOW_SETTING+serial.rfc2217.SET_CONTROL_REQ_FLOW_SETTING 
+builtins.bytes"builtins.bytes*36*37*38*39*310*ˆ
+SET_CONTROL_USE_NO_FLOW_CONTROL.serial.rfc2217.SET_CONTROL_USE_NO_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*ˆ
+SET_CONTROL_USE_SW_FLOW_CONTROL.serial.rfc2217.SET_CONTROL_USE_SW_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*ˆ
+SET_CONTROL_USE_HW_FLOW_CONTROL.serial.rfc2217.SET_CONTROL_USE_HW_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*€
+SET_CONTROL_REQ_BREAK_STATE*serial.rfc2217.SET_CONTROL_REQ_BREAK_STATE 
+builtins.bytes"builtins.bytes*36*37*38*39*310*r
+SET_CONTROL_BREAK_ON#serial.rfc2217.SET_CONTROL_BREAK_ON 
+builtins.bytes"builtins.bytes*36*37*38*39*310*t
+SET_CONTROL_BREAK_OFF$serial.rfc2217.SET_CONTROL_BREAK_OFF 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SET_CONTROL_REQ_DTR"serial.rfc2217.SET_CONTROL_REQ_DTR 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+SET_CONTROL_DTR_ON!serial.rfc2217.SET_CONTROL_DTR_ON 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SET_CONTROL_DTR_OFF"serial.rfc2217.SET_CONTROL_DTR_OFF 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SET_CONTROL_REQ_RTS"serial.rfc2217.SET_CONTROL_REQ_RTS 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+SET_CONTROL_RTS_ON!serial.rfc2217.SET_CONTROL_RTS_ON 
+builtins.bytes"builtins.bytes*36*37*38*39*310*p
+SET_CONTROL_RTS_OFF"serial.rfc2217.SET_CONTROL_RTS_OFF 
+builtins.bytes"builtins.bytes*36*37*38*39*310*ˆ
+SET_CONTROL_REQ_FLOW_SETTING_IN.serial.rfc2217.SET_CONTROL_REQ_FLOW_SETTING_IN 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Ž
+"SET_CONTROL_USE_NO_FLOW_CONTROL_IN1serial.rfc2217.SET_CONTROL_USE_NO_FLOW_CONTROL_IN 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Œ
+!SET_CONTROL_USE_SW_FLOW_CONTOL_IN0serial.rfc2217.SET_CONTROL_USE_SW_FLOW_CONTOL_IN 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Œ
+!SET_CONTROL_USE_HW_FLOW_CONTOL_IN0serial.rfc2217.SET_CONTROL_USE_HW_FLOW_CONTOL_IN 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Š
+ SET_CONTROL_USE_DCD_FLOW_CONTROL/serial.rfc2217.SET_CONTROL_USE_DCD_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Š
+ SET_CONTROL_USE_DTR_FLOW_CONTROL/serial.rfc2217.SET_CONTROL_USE_DTR_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Š
+ SET_CONTROL_USE_DSR_FLOW_CONTROL/serial.rfc2217.SET_CONTROL_USE_DSR_FLOW_CONTROL 
+builtins.bytes"builtins.bytes*36*37*38*39*310*r
+LINESTATE_MASK_TIMEOUT%serial.rfc2217.LINESTATE_MASK_TIMEOUT
+builtins.int"builtins.int*36*37*38*39*310*€
+LINESTATE_MASK_SHIFTREG_EMPTY,serial.rfc2217.LINESTATE_MASK_SHIFTREG_EMPTY
+builtins.int"builtins.int*36*37*38*39*310*€
+LINESTATE_MASK_TRANSREG_EMPTY,serial.rfc2217.LINESTATE_MASK_TRANSREG_EMPTY
+builtins.int"builtins.int*36*37*38*39*310*|
+LINESTATE_MASK_BREAK_DETECT*serial.rfc2217.LINESTATE_MASK_BREAK_DETECT
+builtins.int"builtins.int*36*37*38*39*310*~
+LINESTATE_MASK_FRAMING_ERROR+serial.rfc2217.LINESTATE_MASK_FRAMING_ERROR
+builtins.int"builtins.int*36*37*38*39*310*|
+LINESTATE_MASK_PARTIY_ERROR*serial.rfc2217.LINESTATE_MASK_PARTIY_ERROR
+builtins.int"builtins.int*36*37*38*39*310*~
+LINESTATE_MASK_OVERRUN_ERROR+serial.rfc2217.LINESTATE_MASK_OVERRUN_ERROR
+builtins.int"builtins.int*36*37*38*39*310*x
+LINESTATE_MASK_DATA_READY(serial.rfc2217.LINESTATE_MASK_DATA_READY
+builtins.int"builtins.int*36*37*38*39*310*j
+MODEMSTATE_MASK_CD!serial.rfc2217.MODEMSTATE_MASK_CD
+builtins.int"builtins.int*36*37*38*39*310*j
+MODEMSTATE_MASK_RI!serial.rfc2217.MODEMSTATE_MASK_RI
+builtins.int"builtins.int*36*37*38*39*310*l
+MODEMSTATE_MASK_DSR"serial.rfc2217.MODEMSTATE_MASK_DSR
+builtins.int"builtins.int*36*37*38*39*310*l
+MODEMSTATE_MASK_CTS"serial.rfc2217.MODEMSTATE_MASK_CTS
+builtins.int"builtins.int*36*37*38*39*310*x
+MODEMSTATE_MASK_CD_CHANGE(serial.rfc2217.MODEMSTATE_MASK_CD_CHANGE
+builtins.int"builtins.int*36*37*38*39*310*x
+MODEMSTATE_MASK_RI_CHANGE(serial.rfc2217.MODEMSTATE_MASK_RI_CHANGE
+builtins.int"builtins.int*36*37*38*39*310*z
+MODEMSTATE_MASK_DSR_CHANGE)serial.rfc2217.MODEMSTATE_MASK_DSR_CHANGE
+builtins.int"builtins.int*36*37*38*39*310*z
+MODEMSTATE_MASK_CTS_CHANGE)serial.rfc2217.MODEMSTATE_MASK_CTS_CHANGE
+builtins.int"builtins.int*36*37*38*39*310*r
+PURGE_RECEIVE_BUFFER#serial.rfc2217.PURGE_RECEIVE_BUFFER 
+builtins.bytes"builtins.bytes*36*37*38*39*310*t
+PURGE_TRANSMIT_BUFFER$serial.rfc2217.PURGE_TRANSMIT_BUFFER 
+builtins.bytes"builtins.bytes*36*37*38*39*310*n
+PURGE_BOTH_BUFFERS!serial.rfc2217.PURGE_BOTH_BUFFERS 
+builtins.bytes"builtins.bytes*36*37*38*39*310*Ã
+RFC2217_PARITY_MAP!serial.rfc2217.RFC2217_PARITY_MAPu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*36*37*38*39*310*Ó
+RFC2217_REVERSE_PARITY_MAP)serial.rfc2217.RFC2217_REVERSE_PARITY_MAPu
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310*¦
+RFC2217_STOPBIT_MAP"serial.rfc2217.RFC2217_STOPBIT_MAPÕ
+>builtins.dict[Union[builtins.int,builtins.float],builtins.int]f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.int"builtins.int"builtins.dict*36*37*38*39*310*¶
+RFC2217_REVERSE_STOPBIT_MAP*serial.rfc2217.RFC2217_REVERSE_STOPBIT_MAPÕ
+>builtins.dict[builtins.int,Union[builtins.int,builtins.float]]
+builtins.int"builtins.intf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float"builtins.dict*36*37*38*39*310*V
+M_NORMALserial.rfc2217.M_NORMAL
+builtins.int"builtins.int*36*37*38*39*310*Z
+
+M_IAC_SEENserial.rfc2217.M_IAC_SEEN
+builtins.int"builtins.int*36*37*38*39*310*\
+M_NEGOTIATEserial.rfc2217.M_NEGOTIATE
+builtins.int"builtins.int*36*37*38*39*310*X
+	REQUESTEDserial.rfc2217.REQUESTED
+builtins.str"builtins.str*36*37*38*39*310*R
+ACTIVEserial.rfc2217.ACTIVE
+builtins.str"builtins.str*36*37*38*39*310*V
+INACTIVEserial.rfc2217.INACTIVE
+builtins.str"builtins.str*36*37*38*39*310*d
+REALLY_INACTIVEserial.rfc2217.REALLY_INACTIVE
+builtins.str"builtins.str*36*37*38*39*310

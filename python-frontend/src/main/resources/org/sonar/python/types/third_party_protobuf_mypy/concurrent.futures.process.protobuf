@@ -1,6 +1,171 @@
 
-concurrent.futures.processj
-BrokenProcessPool,concurrent.futures.process.BrokenProcessPool"'concurrent.futures._base.BrokenExecutor˘
+concurrent.futures.process±
+_ThreadWakeup(concurrent.futures.process._ThreadWakeup"builtins.object*°
+close.concurrent.futures.process._ThreadWakeup.close"
+None*^
+selfT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeup*£
+wakeup/concurrent.futures.process._ThreadWakeup.wakeup"
+None*^
+selfT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeup*°
+clear.concurrent.futures.process._ThreadWakeup.clear"
+None*^
+selfT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeupr[
+_closed0concurrent.futures.process._ThreadWakeup._closed
+builtins.bool"builtins.boolrã
+_reader0concurrent.futures.process._ThreadWakeup._readerN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connectionrã
+_writer0concurrent.futures.process._ThreadWakeup._writerN
+%multiprocessing.connection.Connection"%multiprocessing.connection.Connectioné
+_RemoteTraceback+concurrent.futures.process._RemoteTraceback"builtins.Exception*‰
+__init__4concurrent.futures.process._RemoteTraceback.__init__"
+None*d
+selfZ
++concurrent.futures.process._RemoteTraceback"+concurrent.futures.process._RemoteTraceback*2
+tb*
+types.TracebackType"types.TracebackTyperR
+tb.concurrent.futures.process._RemoteTraceback.tb
+builtins.str"builtins.str¨
+_ExceptionWithTraceback2concurrent.futures.process._ExceptionWithTraceback"builtins.object*¥
+__init__;concurrent.futures.process._ExceptionWithTraceback.__init__"
+None*r
+selfh
+2concurrent.futures.process._ExceptionWithTraceback"2concurrent.futures.process._ExceptionWithTraceback*9
+exc0
+builtins.BaseException"builtins.BaseException*2
+tb*
+types.TracebackType"types.TracebackType*∫
+
+__reduce__=concurrent.futures.process._ExceptionWithTraceback.__reduce__"y
+'Union[builtins.str,builtins.tuple[Any]]
+builtins.str"builtins.str.
+builtins.tuple[Any]
+Any"builtins.tuple*r
+selfh
+2concurrent.futures.process._ExceptionWithTraceback"2concurrent.futures.process._ExceptionWithTracebackro
+exc6concurrent.futures.process._ExceptionWithTraceback.exc0
+builtins.BaseException"builtins.BaseExceptionrg
+tb5concurrent.futures.process._ExceptionWithTraceback.tb*
+types.TracebackType"types.TracebackTypeÂ	
+	_WorkItem$concurrent.futures.process._WorkItem"builtins.object*Î
+__init__-concurrent.futures.process._WorkItem.__init__"
+None*ô
+selfé
+Cconcurrent.futures.process._WorkItem[concurrent.futures.process._T]!
+concurrent.futures.process._T"$concurrent.futures.process._WorkItem*ë
+futureÑ
+>concurrent.futures._base.Future[concurrent.futures.process._T]!
+concurrent.futures.process._T"concurrent.futures._base.Future*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*:
+args0
+typing.Iterable[Any]
+Any"typing.Iterable*e
+kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MappingPrº
+future+concurrent.futures.process._WorkItem.futureÑ
+>concurrent.futures._base.Future[concurrent.futures.process._T]!
+concurrent.futures.process._T"concurrent.futures._base.Futurerz
+fn'concurrent.futures.process._WorkItem.fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrc
+args)concurrent.futures.process._WorkItem.args0
+typing.Iterable[Any]
+Any"typing.Iterablerê
+kwargs+concurrent.futures.process._WorkItem.kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping∏
+_ResultItem&concurrent.futures.process._ResultItem"builtins.object*Î
+__init__/concurrent.futures.process._ResultItem.__init__"
+None*Z
+selfP
+&concurrent.futures.process._ResultItem"&concurrent.futures.process._ResultItem*)
+work_id
+builtins.int"builtins.int*g
+	exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None *4
+result&
+Union[Any,None]
+Any
+None rW
+work_id.concurrent.futures.process._ResultItem.work_id
+builtins.int"builtins.intrg
+	exception0concurrent.futures.process._ResultItem.exception(
+builtins.Exception"builtins.Exceptionr@
+result-concurrent.futures.process._ResultItem.result
+AnyŒ
+	_CallItem$concurrent.futures.process._CallItem"builtins.object*æ
+__init__-concurrent.futures.process._CallItem.__init__"
+None*V
+selfL
+$concurrent.futures.process._CallItem"$concurrent.futures.process._CallItem*)
+work_id
+builtins.int"builtins.int*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*:
+args0
+typing.Iterable[Any]
+Any"typing.Iterable*e
+kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MappingrU
+work_id,concurrent.futures.process._CallItem.work_id
+builtins.int"builtins.intrz
+fn'concurrent.futures.process._CallItem.fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrc
+args)concurrent.futures.process._CallItem.args0
+typing.Iterable[Any]
+Any"typing.Iterablerê
+kwargs+concurrent.futures.process._CallItem.kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping˜
+
+_SafeQueue%concurrent.futures.process._SafeQueue"multiprocessing.queues.Queue*µ
+__init__.concurrent.futures.process._SafeQueue.__init__"
+None*X
+selfN
+%concurrent.futures.process._SafeQueue"%concurrent.futures.process._SafeQueue*T
+max_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *S
+ctxJ
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*È
+pending_work_items–
+Ebuiltins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]
+builtins.int"builtins.intZ
+)concurrent.futures.process._WorkItem[Any]
+Any"$concurrent.futures.process._WorkItem"builtins.dict*¬
+_on_queue_feeder_error<concurrent.futures.process._SafeQueue._on_queue_feeder_error"
+None*X
+selfN
+%concurrent.futures.process._SafeQueue"%concurrent.futures.process._SafeQueue*/
+e(
+builtins.Exception"builtins.Exception*U
+objL
+$concurrent.futures.process._CallItem"$concurrent.futures.process._CallItemr°
+pending_work_items8concurrent.futures.process._SafeQueue.pending_work_items–
+Ebuiltins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]
+builtins.int"builtins.intZ
+)concurrent.futures.process._WorkItem[Any]
+Any"$concurrent.futures.process._WorkItem"builtins.dictrf
+shutdown_lock3concurrent.futures.process._SafeQueue.shutdown_lock 
+threading.Lock"threading.Lockrö
+thread_wakeup3concurrent.futures.process._SafeQueue.thread_wakeupT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeupj
+BrokenProcessPool,concurrent.futures.process.BrokenProcessPool"'concurrent.futures._base.BrokenExecutorπ
 ProcessPoolExecutor.concurrent.futures.process.ProcessPoolExecutor"!concurrent.futures._base.Executor*é
 __init__7concurrent.futures.process.ProcessPoolExecutor.__init__"
 None*j
@@ -22,6 +187,141 @@ mp_contextâ
 None *>
 initargs.
 builtins.tuple[Any]
-Any"builtins.tuple *L
-EXTRA_QUEUED_CALLS-concurrent.futures.process.EXTRA_QUEUED_CALLS
-Any
+Any"builtins.tuple *”
+_adjust_process_countDconcurrent.futures.process.ProcessPoolExecutor._adjust_process_count"
+None*j
+self`
+.concurrent.futures.process.ProcessPoolExecutor".concurrent.futures.process.ProcessPoolExecutorr’
+_mp_context:concurrent.futures.process.ProcessPoolExecutor._mp_contextâ
+/Union[multiprocessing.context.BaseContext,None]J
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext
+Noner‘
+_initializer;concurrent.futures.process.ProcessPoolExecutor._initializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noneru
+	_initargs8concurrent.futures.process.ProcessPoolExecutor._initargs.
+builtins.tuple[Any]
+Any"builtins.tuplerπ
+_executor_manager_threadGconcurrent.futures.process.ProcessPoolExecutor._executor_manager_threadT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeuprà
+
+_processes9concurrent.futures.process.ProcessPoolExecutor._processesæ
+Ctyping.MutableMapping[builtins.int,multiprocessing.context.Process]
+builtins.int"builtins.intB
+multiprocessing.context.Process"multiprocessing.context.Process"typing.MutableMappingrs
+_shutdown_thread?concurrent.futures.process.ProcessPoolExecutor._shutdown_thread
+builtins.bool"builtins.boolrq
+_shutdown_lock=concurrent.futures.process.ProcessPoolExecutor._shutdown_lock 
+threading.Lock"threading.Lockrã
+_idle_worker_semaphoreEconcurrent.futures.process.ProcessPoolExecutor._idle_worker_semaphore*
+threading.Semaphore"threading.Semaphorera
+_broken6concurrent.futures.process.ProcessPoolExecutor._broken
+builtins.bool"builtins.boolri
+_queue_count;concurrent.futures.process.ProcessPoolExecutor._queue_count
+builtins.int"builtins.intr¨
+_pending_work_itemsBconcurrent.futures.process.ProcessPoolExecutor._pending_work_items–
+Ebuiltins.dict[builtins.int,concurrent.futures.process._WorkItem[Any]]
+builtins.int"builtins.intZ
+)concurrent.futures.process._WorkItem[Any]
+Any"$concurrent.futures.process._WorkItem"builtins.dictrÅ
+_cancel_pending_futuresFconcurrent.futures.process.ProcessPoolExecutor._cancel_pending_futures
+builtins.bool"builtins.boolr«
+_executor_manager_thread_wakeupNconcurrent.futures.process.ProcessPoolExecutor._executor_manager_thread_wakeupT
+(concurrent.futures.process._ThreadWakeup"(concurrent.futures.process._ThreadWakeupr•
+_result_queue<concurrent.futures.process.ProcessPoolExecutor._result_queueV
+'multiprocessing.queues.SimpleQueue[Any]
+Any""multiprocessing.queues.SimpleQueuerë
+	_work_ids8concurrent.futures.process.ProcessPoolExecutor._work_idsJ
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.QueueA
+_python_exit'concurrent.futures.process._python_exit"
+None∫
+_rebuild_exc'concurrent.futures.process._rebuild_exc"(
+builtins.Exception"builtins.Exception*1
+exc(
+builtins.Exception"builtins.Exception*$
+tb
+builtins.str"builtins.strÑ
+_get_chunks&concurrent.futures.process._get_chunks"á
+/typing.Generator[builtins.tuple[Any],None,None].
+builtins.tuple[Any]
+Any"builtins.tuple
+None
+None"typing.Generator*
+	iterables
+Any*+
+	chunksize
+builtins.int"builtins.intÊ
+_process_chunk)concurrent.futures.process._process_chunk"`
+,builtins.list[concurrent.futures.process._T]!
+concurrent.futures.process._T"builtins.list*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*r
+chunkg
+$typing.Iterable[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"typing.Iterable¯
+_sendback_result+concurrent.futures.process._sendback_result"
+None*‚
+result_queueœ
+Mmultiprocessing.queues.SimpleQueue[concurrent.futures.process._WorkItem[Any]]Z
+)concurrent.futures.process._WorkItem[Any]
+Any"$concurrent.futures.process._WorkItem""multiprocessing.queues.SimpleQueue*)
+work_id
+builtins.int"builtins.int*4
+result&
+Union[Any,None]
+Any
+None *g
+	exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None º
+_process_worker*concurrent.futures.process._process_worker"
+None*¡
+
+call_queue∞
+Bmultiprocessing.queues.Queue[concurrent.futures.process._CallItem]L
+$concurrent.futures.process._CallItem"$concurrent.futures.process._CallItem"multiprocessing.queues.Queue*’
+result_queue¬
+Jmultiprocessing.queues.SimpleQueue[concurrent.futures.process._ResultItem]P
+&concurrent.futures.process._ResultItem"&concurrent.futures.process._ResultItem""multiprocessing.queues.SimpleQueue*ò
+initializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*<
+initargs.
+builtins.tuple[Any]
+Any"builtins.tupleQ
+_check_system_limits/concurrent.futures.process._check_system_limits"
+NoneÚ
+_chain_from_iterable_of_lists8concurrent.futures.process._chain_from_iterable_of_lists"
+Any*ç
+iterable
+,typing.Iterable[typing.MutableSequence[Any]]>
+typing.MutableSequence[Any]
+Any"typing.MutableSequence"typing.Iterable*ñ
+__annotations__*concurrent.futures.process.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ä
+_threads_wakeups+concurrent.futures.process._threads_wakeupsI
+typing.MutableMapping[Any,Any]
+Any
+Any"typing.MutableMapping*_
+_global_shutdown+concurrent.futures.process._global_shutdown
+builtins.bool"builtins.bool*a
+EXTRA_QUEUED_CALLS-concurrent.futures.process.EXTRA_QUEUED_CALLS
+builtins.int"builtins.int*e
+_MAX_WINDOWS_WORKERS/concurrent.futures.process._MAX_WINDOWS_WORKERS
+builtins.int"builtins.int*k
+_system_limits_checked1concurrent.futures.process._system_limits_checked
+builtins.bool"builtins.bool*Ü
+_system_limited*concurrent.futures.process._system_limitedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None

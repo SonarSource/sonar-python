@@ -1,5 +1,81 @@
 
-randomâ'
+random±
+AbstractSettyping.AbstractSet"typing.Collection*’
+__contains__typing.AbstractSet.__contains__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*$"
+builtins.object"builtins.object0:abstractmethod@*ì
+_hashtyping.AbstractSet._hash"
+builtins.int"builtins.int*R
+selfH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*…
+__le__typing.AbstractSet.__le__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*…
+__lt__typing.AbstractSet.__lt__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*…
+__gt__typing.AbstractSet.__gt__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*…
+__ge__typing.AbstractSet.__ge__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*ı
+__and__typing.AbstractSet.__and__"H
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*√
+__or__typing.AbstractSet.__or__"ã
+1typing.AbstractSet[Union[typing._T_co,typing._T]]B
+Union[typing._T_co,typing._T]
+typing._T_co
+	typing._T"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*DB
+typing.AbstractSet[typing._T]
+	typing._T"typing.AbstractSet*ı
+__sub__typing.AbstractSet.__sub__"H
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*≈
+__xor__typing.AbstractSet.__xor__"ã
+1typing.AbstractSet[Union[typing._T_co,typing._T]]B
+Union[typing._T_co,typing._T]
+typing._T_co
+	typing._T"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*DB
+typing.AbstractSet[typing._T]
+	typing._T"typing.AbstractSet*‹
+
+isdisjointtyping.AbstractSet.isdisjoint"
+builtins.bool"builtins.bool*R
+selfH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*;
+other0
+typing.Iterable[Any]
+Any"typing.IterablePü(
 Randomrandom.Random"_random.Random*h
 __init__random.Random.__init__"
 None*(
@@ -26,13 +102,7 @@
 random.Random"random.Random*9
 state.
 builtins.tuple[Any]
-Any"builtins.tuple*ï
-getrandbitsrandom.Random.getrandbits"
-builtins.int"builtins.int*(
-self
-random.Random"random.Random*#
-__k
-builtins.int"builtins.int*ë
+Any"builtins.tuple*ë
 	randrangerandom.Random.randrange"
 builtins.int"builtins.int*(
 self
@@ -52,32 +122,36 @@
 a
 builtins.int"builtins.int*#
 b
-builtins.int"builtins.int*û
+builtins.int"builtins.int*æ
 choicerandom.Random.choice"
 	random._T*(
 self
-random.Random"random.Random*E
-seq<
-typing.Sequence[random._T]
-	random._T"typing.Sequence*¡
+random.Random"random.Random*e
+seq\
+*_typeshed.SupportsLenAndGetItem[random._T]
+	random._T"_typeshed.SupportsLenAndGetItem*˚
 choicesrandom.Random.choices"8
 builtins.list[random._T]
 	random._T"builtins.list*(
 self
-random.Random"random.Random*L
+random.Random"random.Random*l
 
-population<
-typing.Sequence[random._T]
-	random._T"typing.Sequence*ü
-weightsè
-+Union[typing.Sequence[builtins.float],None]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.Sequence
-None *£
-cum_weightsè
-+Union[typing.Sequence[builtins.float],None]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.Sequence
+population\
+*_typeshed.SupportsLenAndGetItem[random._T]
+	random._T"_typeshed.SupportsLenAndGetItem*¨
+weightsú
+EUnion[typing.Sequence[Union[builtins.float,fractions.Fraction]],None]∆
+9typing.Sequence[Union[builtins.float,fractions.Fraction]]x
+(Union[builtins.float,fractions.Fraction] 
+builtins.float"builtins.float(
+fractions.Fraction"fractions.Fraction"typing.Sequence
+None *∞
+cum_weightsú
+EUnion[typing.Sequence[Union[builtins.float,fractions.Fraction]],None]∆
+9typing.Sequence[Union[builtins.float,fractions.Fraction]]x
+(Union[builtins.float,fractions.Fraction] 
+builtins.float"builtins.float(
+fractions.Fraction"fractions.Fraction"typing.Sequence
 None *%
 k
 builtins.int"builtins.int *≥
@@ -106,11 +180,7 @@ population≈
 typing.AbstractSet[random._T]
 	random._T"typing.AbstractSet*#
 k
-builtins.int"builtins.int*j
-randomrandom.Random.random" 
-builtins.float"builtins.float*(
-self
-random.Random"random.Random*æ
+builtins.int"builtins.int*æ
 uniformrandom.Random.uniform" 
 builtins.float"builtins.float*(
 self
@@ -161,16 +231,16 @@ triangularrandom.Random.triangular"
 mu 
 builtins.float"builtins.float*+
 sigma 
-builtins.float"builtins.float*—
-lognormvariaterandom.Random.lognormvariate" 
+builtins.float"builtins.float*œ
+normalvariaterandom.Random.normalvariate" 
 builtins.float"builtins.float*(
 self
 random.Random"random.Random*(
 mu 
 builtins.float"builtins.float*+
 sigma 
-builtins.float"builtins.float*œ
-normalvariaterandom.Random.normalvariate" 
+builtins.float"builtins.float*—
+lognormvariaterandom.Random.lognormvariate" 
 builtins.float"builtins.float*(
 self
 random.Random"random.Random*(
@@ -199,8 +269,16 @@ triangularrandom.Random.triangular"
 alpha 
 builtins.float"builtins.float**
 beta 
-builtins.float"builtins.float‹
-SystemRandomrandom.SystemRandom"random.Random*í
+builtins.float"builtins.floatr>
+VERSIONrandom.Random.VERSION
+builtins.int"builtins.intÜ
+SystemRandomrandom.SystemRandom"random.Random*ß
+getrandbitsrandom.SystemRandom.getrandbits"
+builtins.int"builtins.int*4
+self*
+random.SystemRandom"random.SystemRandom*#
+k
+builtins.int"builtins.int*í
 getstaterandom.SystemRandom.getstate"
 NoReturn
 *4
@@ -218,151 +296,80 @@ triangularrandom.Random.triangular"
 args
 Any*
 kwds
-Any\
-seedrandom.seed"
-None*
-a
-Any *+
-version
-builtins.int"builtins.int ?
-getstaterandom.getstate""
-builtins.object"builtins.objectT
-setstaterandom.setstate"
-None*-
-state"
-builtins.object"builtins.objectd
-getrandbitsrandom.getrandbits"
-builtins.int"builtins.int*#
-__k
-builtins.int"builtins.int‡
-	randrangerandom.randrange"
-builtins.int"builtins.int*'
-start
-builtins.int"builtins.int*P
-stopD
-Union[None,builtins.int]
-None
-builtins.int"builtins.int *(
-step
-builtins.int"builtins.int Å
-randintrandom.randint"
-builtins.int"builtins.int*#
-a
-builtins.int"builtins.int*#
-b
-builtins.int"builtins.intm
-choicerandom.choice"
-	random._T*E
-seq<
-typing.Sequence[random._T]
-	random._T"typing.Sequenceê
-choicesrandom.choices"8
-builtins.list[random._T]
-	random._T"builtins.list*L
-
-population<
-typing.Sequence[random._T]
-	random._T"typing.Sequence*ü
-weightsè
-+Union[typing.Sequence[builtins.float],None]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.Sequence
-None *£
-cum_weightsè
-+Union[typing.Sequence[builtins.float],None]T
-typing.Sequence[builtins.float] 
-builtins.float"builtins.float"typing.Sequence
-None *%
-k
-builtins.int"builtins.int Ç
-shufflerandom.shuffle"
-None*E
-x>
-typing.MutableSequence[Any]
-Any"typing.MutableSequence*ï
-randomÜ
-+Union[CallableType[builtins.function],None]K
+Any*Ç
+__annotations__random.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*e
+__all__random.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*5
+_instrandom._inst
+random.Random"random.Random*`
+seedrandom.seedK
 CallableType[builtins.function]&
-builtins.function"builtins.function
-None œ
-samplerandom.sample"8
-builtins.list[random._T]
-	random._T"builtins.list*÷
+builtins.function"builtins.function*d
+randomrandom.randomK
+CallableType[builtins.function]&
+builtins.function"builtins.function*f
+uniformrandom.uniformK
+CallableType[builtins.function]&
+builtins.function"builtins.function*l
 
-population≈
-?Union[typing.Sequence[random._T],typing.AbstractSet[random._T]]<
-typing.Sequence[random._T]
-	random._T"typing.SequenceB
-typing.AbstractSet[random._T]
-	random._T"typing.AbstractSet*#
-k
-builtins.int"builtins.int9
-randomrandom.random" 
-builtins.float"builtins.floatç
-uniformrandom.uniform" 
-builtins.float"builtins.float*'
-a 
-builtins.float"builtins.float*'
-b 
-builtins.float"builtins.floatÙ
-
-triangularrandom.triangular" 
-builtins.float"builtins.float*+
-low 
-builtins.float"builtins.float *,
-high 
-builtins.float"builtins.float *V
-modeJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None ú
-betavariaterandom.betavariate" 
-builtins.float"builtins.float*+
-alpha 
-builtins.float"builtins.float**
-beta 
-builtins.float"builtins.floatp
-expovariaterandom.expovariate" 
-builtins.float"builtins.float*+
-lambd 
-builtins.float"builtins.floatû
-gammavariaterandom.gammavariate" 
-builtins.float"builtins.float*+
-alpha 
-builtins.float"builtins.float**
-beta 
-builtins.float"builtins.floaté
-gaussrandom.gauss" 
-builtins.float"builtins.float*(
-mu 
-builtins.float"builtins.float*+
-sigma 
-builtins.float"builtins.float†
-lognormvariaterandom.lognormvariate" 
-builtins.float"builtins.float*(
-mu 
-builtins.float"builtins.float*+
-sigma 
-builtins.float"builtins.floatû
-normalvariaterandom.normalvariate" 
-builtins.float"builtins.float*(
-mu 
-builtins.float"builtins.float*+
-sigma 
-builtins.float"builtins.float¢
-vonmisesvariaterandom.vonmisesvariate" 
-builtins.float"builtins.float*(
-mu 
-builtins.float"builtins.float*+
-kappa 
-builtins.float"builtins.floatt
-paretovariaterandom.paretovariate" 
-builtins.float"builtins.float*+
-alpha 
-builtins.float"builtins.float¢
-weibullvariaterandom.weibullvariate" 
-builtins.float"builtins.float*+
-alpha 
-builtins.float"builtins.float**
-beta 
-builtins.float"builtins.float
+triangularrandom.triangularK
+CallableType[builtins.function]&
+builtins.function"builtins.function*f
+randintrandom.randintK
+CallableType[builtins.function]&
+builtins.function"builtins.function*d
+choicerandom.choiceK
+CallableType[builtins.function]&
+builtins.function"builtins.function*j
+	randrangerandom.randrangeK
+CallableType[builtins.function]&
+builtins.function"builtins.function*d
+samplerandom.sampleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*f
+shufflerandom.shuffleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*f
+choicesrandom.choicesK
+CallableType[builtins.function]&
+builtins.function"builtins.function*r
+normalvariaterandom.normalvariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*t
+lognormvariaterandom.lognormvariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*n
+expovariaterandom.expovariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*v
+vonmisesvariaterandom.vonmisesvariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*p
+gammavariaterandom.gammavariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*b
+gaussrandom.gaussK
+CallableType[builtins.function]&
+builtins.function"builtins.function*n
+betavariaterandom.betavariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*r
+paretovariaterandom.paretovariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*t
+weibullvariaterandom.weibullvariateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*h
+getstaterandom.getstateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*h
+setstaterandom.setstateK
+CallableType[builtins.function]&
+builtins.function"builtins.function*n
+getrandbitsrandom.getrandbitsK
+CallableType[builtins.function]&
+builtins.function"builtins.function

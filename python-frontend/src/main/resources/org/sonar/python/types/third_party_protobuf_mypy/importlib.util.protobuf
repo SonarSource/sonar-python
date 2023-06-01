@@ -1,5 +1,5 @@
 
-importlib.utilñ
+importlib.utilÖ
 
 LazyLoaderimportlib.util.LazyLoader"importlib.abc.Loader*´
 __init__"importlib.util.LazyLoader.__init__"
@@ -15,15 +15,7 @@ LazyLoaderimportlib.util.LazyLoader"importlib.abc.Loader*´
 Type[importlib.util.LazyLoader]6
 importlib.util.LazyLoader"importlib.util.LazyLoader*8
 loader,
-importlib.abc.Loader"importlib.abc.Loader0:classmethodp*˜
-create_module'importlib.util.LazyLoader.create_module"P
-Union[types.ModuleType,None]$
-types.ModuleType"types.ModuleType
-None*@
-self6
-importlib.util.LazyLoader"importlib.util.LazyLoader*J
-spec@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec*²
+importlib.abc.Loader"importlib.abc.Loader0:classmethodp*²
 exec_module%importlib.util.LazyLoader.exec_module"
 None*@
 self6
@@ -48,13 +40,15 @@ set_loaderimportlib.util.set_loader"K
 builtins.function"builtins.function*T
 fxnK
 CallableType[builtins.function]&
-builtins.function"builtins.functionœ
+builtins.function"builtins.functionÄ
 resolve_nameimportlib.util.resolve_name"
 builtins.str"builtins.str*&
 name
-builtins.str"builtins.str*)
-package
-builtins.str"builtins.str–
+builtins.str"builtins.str*Q
+packageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None–
 cache_from_source importlib.util.cache_from_source"
 builtins.str"builtins.str*&
 path
@@ -70,11 +64,22 @@ set_loaderimportlib.util.set_loader"K
 source_from_cache importlib.util.source_from_cache"
 builtins.str"builtins.str*&
 path
-builtins.str"builtins.str
+builtins.str"builtins.str·
 decode_sourceimportlib.util.decode_source"
-builtins.str"builtins.str*2
-source_bytes 
-builtins.bytes"builtins.bytesž
+builtins.str"builtins.str*é
+source_bytesÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferž
 	find_specimportlib.util.find_spec"z
 *Union[importlib.machinery.ModuleSpec,None]@
 importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
@@ -103,21 +108,23 @@ set_loaderimportlib.util.set_loader"K
 is_packageG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None Í
+None Â
 spec_from_file_location&importlib.util.spec_from_file_location"z
 *Union[importlib.machinery.ModuleSpec,None]@
 importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec
 None*&
 name
-builtins.str"builtins.str*Ò
-locationÁ
-]Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes],None]
+builtins.str"builtins.str*Ç
+location¶
+oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytesF
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLikeL
 os.PathLike[builtins.bytes] 
-builtins.bytes"builtins.bytes"os.PathLike
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
 None *j
 loader\
  Union[importlib.abc.Loader,None],
@@ -131,7 +138,26 @@ is_packageG
 module_from_specimportlib.util.module_from_spec"$
 types.ModuleType"types.ModuleType*J
 spec@
-importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec*
+importlib.machinery.ModuleSpec"importlib.machinery.ModuleSpec³
+source_hashimportlib.util.source_hash"
+builtins.int"builtins.int*é
+source_bytesÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*Š
+__annotations__importlib.util.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
 	importlib	importlib *M
 MAGIC_NUMBERimportlib.util.MAGIC_NUMBER 
 builtins.bytes"builtins.bytes

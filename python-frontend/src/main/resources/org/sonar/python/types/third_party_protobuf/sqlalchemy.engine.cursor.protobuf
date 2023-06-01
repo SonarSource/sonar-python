@@ -1,0 +1,465 @@
+
+sqlalchemy.engine.cursorˆ
+CursorResultMetaData-sqlalchemy.engine.cursor.CursorResultMetaData"'sqlalchemy.engine.result.ResultMetaData*Å
+__init__6sqlalchemy.engine.cursor.CursorResultMetaData.__init__"
+None*h
+self^
+-sqlalchemy.engine.cursor.CursorResultMetaData"-sqlalchemy.engine.cursor.CursorResultMetaData*
+parent
+Any*
+cursor_description
+Anyz36z37z38z39z310j36j37j38j39j310r
+returns_rows:sqlalchemy.engine.cursor.CursorResultMetaData.returns_rows
+builtins.bool"builtins.bool*36*37*38*39*310rl
+case_sensitive<sqlalchemy.engine.cursor.CursorResultMetaData.case_sensitive
+Any*36*37*38*39*310ï
+LegacyCursorResultMetaData3sqlalchemy.engine.cursor.LegacyCursorResultMetaData"-sqlalchemy.engine.cursor.CursorResultMetaDataj36j37j38j39j310ê
+ResultFetchStrategy,sqlalchemy.engine.cursor.ResultFetchStrategy"builtins.object*¸
+
+soft_close7sqlalchemy.engine.cursor.ResultFetchStrategy.soft_close"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*¸
+
+hard_close7sqlalchemy.engine.cursor.ResultFetchStrategy.hard_close"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*å
+	yield_per6sqlalchemy.engine.cursor.ResultFetchStrategy.yield_per"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+num
+Anyz36z37z38z39z310*™
+fetchone5sqlalchemy.engine.cursor.ResultFetchStrategy.fetchone"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*0
+
+hard_close
+builtins.bool"builtins.bool z36z37z38z39z310*„
+	fetchmany6sqlalchemy.engine.cursor.ResultFetchStrategy.fetchmany"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*g
+size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*›
+fetchall5sqlalchemy.engine.cursor.ResultFetchStrategy.fetchall"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Anyz36z37z38z39z310*ö
+handle_exception=sqlalchemy.engine.cursor.ResultFetchStrategy.handle_exception"
+None*f
+self\
+,sqlalchemy.engine.cursor.ResultFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+err
+Anyz36z37z38z39z310j36j37j38j39j310rá
+alternate_cursor_descriptionIsqlalchemy.engine.cursor.ResultFetchStrategy.alternate_cursor_description
+Any*36*37*38*39*310¥
+NoCursorFetchStrategy.sqlalchemy.engine.cursor.NoCursorFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*Ç
+
+soft_close9sqlalchemy.engine.cursor.NoCursorFetchStrategy.soft_close"
+None*j
+self`
+.sqlalchemy.engine.cursor.NoCursorFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*Ç
+
+hard_close9sqlalchemy.engine.cursor.NoCursorFetchStrategy.hard_close"
+None*j
+self`
+.sqlalchemy.engine.cursor.NoCursorFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*Ø
+fetchone7sqlalchemy.engine.cursor.NoCursorFetchStrategy.fetchone"
+Any*j
+self`
+.sqlalchemy.engine.cursor.NoCursorFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*0
+
+hard_close
+builtins.bool"builtins.bool z36z37z38z39z310*Ë
+	fetchmany8sqlalchemy.engine.cursor.NoCursorFetchStrategy.fetchmany"
+Any*j
+self`
+.sqlalchemy.engine.cursor.NoCursorFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*g
+size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*Ä
+fetchall7sqlalchemy.engine.cursor.NoCursorFetchStrategy.fetchall*
+self*
+
+result*
+dbapi_cursorz36z37z38z39z310j36j37j38j39j310í
+NoCursorDQLFetchStrategy1sqlalchemy.engine.cursor.NoCursorDQLFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategyj36j37j38j39j310í
+NoCursorDMLFetchStrategy1sqlalchemy.engine.cursor.NoCursorDMLFetchStrategy".sqlalchemy.engine.cursor.NoCursorFetchStrategyj36j37j38j39j310¡
+CursorFetchStrategy,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.ResultFetchStrategy*¸
+
+soft_close7sqlalchemy.engine.cursor.CursorFetchStrategy.soft_close"
+None*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*¸
+
+hard_close7sqlalchemy.engine.cursor.CursorFetchStrategy.hard_close"
+None*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*ö
+handle_exception=sqlalchemy.engine.cursor.CursorFetchStrategy.handle_exception"
+None*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+err
+Anyz36z37z38z39z310*å
+	yield_per6sqlalchemy.engine.cursor.CursorFetchStrategy.yield_per"
+None*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+num
+Anyz36z37z38z39z310*©
+fetchone5sqlalchemy.engine.cursor.CursorFetchStrategy.fetchone"
+Any*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*0
+
+hard_close
+builtins.bool"builtins.bool z36z37z38z39z310*‚
+	fetchmany6sqlalchemy.engine.cursor.CursorFetchStrategy.fetchmany"
+Any*f
+self\
+,sqlalchemy.engine.cursor.CursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*g
+size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*~
+fetchall5sqlalchemy.engine.cursor.CursorFetchStrategy.fetchall*
+self*
+
+result*
+dbapi_cursorz36z37z38z39z310j36j37j38j39j310æ
+BufferedRowCursorFetchStrategy7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy* 
+__init__@sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.__init__"
+None*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+dbapi_cursor
+Any*
+execution_options
+Any*1
+growth_factor
+builtins.int"builtins.int *q
+initial_buffer[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*É
+create>sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.create*
+cls*
+
+result0:classmethodpz36z37z38z39z310*≠
+	yield_perAsqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.yield_per"
+None*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+num
+Anyz36z37z38z39z310*ù
+
+soft_closeBsqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.soft_close"
+None*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*ù
+
+hard_closeBsqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.hard_close"
+None*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310* 
+fetchone@sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.fetchone"
+Any*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*0
+
+hard_close
+builtins.bool"builtins.bool z36z37z38z39z310*É
+	fetchmanyAsqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.fetchmany"
+Any*|
+selfr
+7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy"7sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*g
+size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*â
+fetchall@sqlalchemy.engine.cursor.BufferedRowCursorFetchStrategy.fetchall*
+self*
+
+result*
+dbapi_cursorz36z37z38z39z310j36j37j38j39j310¶
+ FullyBufferedCursorFetchStrategy9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy",sqlalchemy.engine.cursor.CursorFetchStrategy*¯
+__init__Bsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.__init__"
+None*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+dbapi_cursor
+Any*x
+alternate_description[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *q
+initial_buffer[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*¥
+	yield_perCsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.yield_per"
+None*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*
+num
+Anyz36z37z38z39z310*§
+
+soft_closeDsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.soft_close"
+None*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*§
+
+hard_closeDsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.hard_close"
+None*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Anyz36z37z38z39z310*—
+fetchoneBsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.fetchone"
+Any*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*0
+
+hard_close
+builtins.bool"builtins.bool z36z37z38z39z310*ä
+	fetchmanyCsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.fetchmany"
+Any*Ä
+selfv
+9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy"9sqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy*
+result
+Any*
+dbapi_cursor
+Any*g
+size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*ã
+fetchallBsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.fetchall*
+self*
+
+result*
+dbapi_cursorz36z37z38z39z310j36j37j38j39j310rî
+alternate_cursor_descriptionVsqlalchemy.engine.cursor.FullyBufferedCursorFetchStrategy.alternate_cursor_description
+Any*36*37*38*39*310∆
+_NoResultMetaData*sqlalchemy.engine.cursor._NoResultMetaData"'sqlalchemy.engine.result.ResultMetaData*»
+keys/sqlalchemy.engine.cursor._NoResultMetaData.keys"
+None*b
+selfX
+*sqlalchemy.engine.cursor._NoResultMetaData"*sqlalchemy.engine.cursor._NoResultMetaData0:property`z36z37z38z39z310j36j37j38j39j310r|
+returns_rows7sqlalchemy.engine.cursor._NoResultMetaData.returns_rows
+builtins.bool"builtins.bool*36*37*38*39*310¯
+_LegacyNoResultMetaData0sqlalchemy.engine.cursor._LegacyNoResultMetaData"*sqlalchemy.engine.cursor._NoResultMetaData*j
+keys5sqlalchemy.engine.cursor._LegacyNoResultMetaData.keys*
+self0:property`z36z37z38z39z310j36j37j38j39j310ÿ
+BaseCursorResult)sqlalchemy.engine.cursor.BaseCursorResult"builtins.object*ó
+__init__2sqlalchemy.engine.cursor.BaseCursorResult.__init__*
+self*
+context*
+cursor_strategy*
+cursor_descriptionz36z37z38z39z310*ç
+inserted_primary_key_rowsCsqlalchemy.engine.cursor.BaseCursorResult.inserted_primary_key_rows*
+self0:property`z36z37z38z39z310*É
+inserted_primary_key>sqlalchemy.engine.cursor.BaseCursorResult.inserted_primary_key*
+self0:property`z36z37z38z39z310*s
+last_updated_params=sqlalchemy.engine.cursor.BaseCursorResult.last_updated_params*
+selfz36z37z38z39z310*u
+last_inserted_params>sqlalchemy.engine.cursor.BaseCursorResult.last_inserted_params*
+selfz36z37z38z39z310*á
+returned_defaults_rows@sqlalchemy.engine.cursor.BaseCursorResult.returned_defaults_rows*
+self0:property`z36z37z38z39z310*}
+returned_defaults;sqlalchemy.engine.cursor.BaseCursorResult.returned_defaults*
+self0:property`z36z37z38z39z310*u
+lastrow_has_defaults>sqlalchemy.engine.cursor.BaseCursorResult.lastrow_has_defaults*
+selfz36z37z38z39z310*i
+postfetch_cols8sqlalchemy.engine.cursor.BaseCursorResult.postfetch_cols*
+selfz36z37z38z39z310*g
+prefetch_cols7sqlalchemy.engine.cursor.BaseCursorResult.prefetch_cols*
+selfz36z37z38z39z310*y
+supports_sane_rowcount@sqlalchemy.engine.cursor.BaseCursorResult.supports_sane_rowcount*
+selfz36z37z38z39z310*Ö
+supports_sane_multi_rowcountFsqlalchemy.engine.cursor.BaseCursorResult.supports_sane_multi_rowcount*
+selfz36z37z38z39z310*r
+rowcount2sqlalchemy.engine.cursor.BaseCursorResult.rowcount*
+self0:memoized_propertyz36z37z38z39z310*m
+	lastrowid3sqlalchemy.engine.cursor.BaseCursorResult.lastrowid*
+self0:property`z36z37z38z39z310*s
+returns_rows6sqlalchemy.engine.cursor.BaseCursorResult.returns_rows*
+self0:property`z36z37z38z39z310*m
+	is_insert3sqlalchemy.engine.cursor.BaseCursorResult.is_insert*
+self0:property`z36z37z38z39z310j36j37j38j39j310rh
+out_parameters8sqlalchemy.engine.cursor.BaseCursorResult.out_parameters
+Any*36*37*38*39*310ro
+closed0sqlalchemy.engine.cursor.BaseCursorResult.closed
+builtins.bool"builtins.bool*36*37*38*39*310rZ
+context1sqlalchemy.engine.cursor.BaseCursorResult.context
+Any*36*37*38*39*310rZ
+dialect1sqlalchemy.engine.cursor.BaseCursorResult.dialect
+Any*36*37*38*39*310rX
+cursor0sqlalchemy.engine.cursor.BaseCursorResult.cursor
+Any*36*37*38*39*310rj
+cursor_strategy9sqlalchemy.engine.cursor.BaseCursorResult.cursor_strategy
+Any*36*37*38*39*310r`
+
+connection4sqlalchemy.engine.cursor.BaseCursorResult.connection
+Any*36*37*38*39*310ß
+CursorResult%sqlalchemy.engine.cursor.CursorResult")sqlalchemy.engine.cursor.BaseCursorResult"sqlalchemy.engine.result.Result*_
+merge+sqlalchemy.engine.cursor.CursorResult.merge*
+self*
+
+othersz36z37z38z39z310*≠
+close+sqlalchemy.engine.cursor.CursorResult.close"
+None*X
+selfN
+%sqlalchemy.engine.cursor.CursorResult"%sqlalchemy.engine.cursor.CursorResultz36z37z38z39z310j36j37j38j39j310ø
+LegacyCursorResult+sqlalchemy.engine.cursor.LegacyCursorResult"%sqlalchemy.engine.cursor.CursorResult*ø
+close1sqlalchemy.engine.cursor.LegacyCursorResult.close"
+None*d
+selfZ
++sqlalchemy.engine.cursor.LegacyCursorResult"+sqlalchemy.engine.cursor.LegacyCursorResultz36z37z38z39z310j36j37j38j39j310ã
+BufferedRowResultProxy/sqlalchemy.engine.cursor.BufferedRowResultProxy"+sqlalchemy.engine.cursor.LegacyCursorResultj36j37j38j39j310è
+FullyBufferedResultProxy1sqlalchemy.engine.cursor.FullyBufferedResultProxy"+sqlalchemy.engine.cursor.LegacyCursorResultj36j37j38j39j310Ñ
+BufferedColumnRow*sqlalchemy.engine.cursor.BufferedColumnRow"sqlalchemy.engine.row.LegacyRow@babc.ABCMetaj36j37j38j39j310ë
+BufferedColumnResultProxy2sqlalchemy.engine.cursor.BufferedColumnResultProxy"+sqlalchemy.engine.cursor.LegacyCursorResultj36j37j38j39j310*©
+__annotations__(sqlalchemy.engine.cursor.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*]
+RM_NAMEsqlalchemy.sql.compiler.RM_NAME
+builtins.int"builtins.int*36*37*38*39*310*c
+
+RM_OBJECTS"sqlalchemy.sql.compiler.RM_OBJECTS
+builtins.int"builtins.int*36*37*38*39*310*o
+RM_RENDERED_NAME(sqlalchemy.sql.compiler.RM_RENDERED_NAME
+builtins.int"builtins.int*36*37*38*39*310*]
+RM_TYPEsqlalchemy.sql.compiler.RM_TYPE
+builtins.int"builtins.int*36*37*38*39*310*`
+MD_INDEX!sqlalchemy.engine.cursor.MD_INDEX
+builtins.int"builtins.int*36*37*38*39*310*v
+MD_RESULT_MAP_INDEX,sqlalchemy.engine.cursor.MD_RESULT_MAP_INDEX
+builtins.int"builtins.int*36*37*38*39*310*d
+
+MD_OBJECTS#sqlalchemy.engine.cursor.MD_OBJECTS
+builtins.int"builtins.int*36*37*38*39*310*j
+MD_LOOKUP_KEY&sqlalchemy.engine.cursor.MD_LOOKUP_KEY
+builtins.int"builtins.int*36*37*38*39*310*p
+MD_RENDERED_NAME)sqlalchemy.engine.cursor.MD_RENDERED_NAME
+builtins.int"builtins.int*36*37*38*39*310*h
+MD_PROCESSOR%sqlalchemy.engine.cursor.MD_PROCESSOR
+builtins.int"builtins.int*36*37*38*39*310*n
+MD_UNTRANSLATED(sqlalchemy.engine.cursor.MD_UNTRANSLATED
+builtins.int"builtins.int*36*37*38*39*310

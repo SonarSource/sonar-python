@@ -1,0 +1,256 @@
+
+ influxdb_client.client.write_api√
+	WriteType*influxdb_client.client.write_api.WriteType"	enum.EnumHj36j37j38j39j310rr
+batching3influxdb_client.client.write_api.WriteType.batching
+builtins.int"builtins.int*36*37*38*39*310rz
+asynchronous7influxdb_client.client.write_api.WriteType.asynchronous
+builtins.int"builtins.int*36*37*38*39*310rx
+synchronous6influxdb_client.client.write_api.WriteType.synchronous
+builtins.int"builtins.int*36*37*38*39*310˛
+WriteOptions-influxdb_client.client.write_api.WriteOptions"builtins.object*®
+__init__6influxdb_client.client.write_api.WriteOptions.__init__"
+None*h
+self^
+-influxdb_client.client.write_api.WriteOptions"-influxdb_client.client.write_api.WriteOptions*j
+
+write_typeX
+*influxdb_client.client.write_api.WriteType"*influxdb_client.client.write_api.WriteType *.
+
+batch_size
+builtins.int"builtins.int *2
+flush_interval
+builtins.int"builtins.int *3
+jitter_interval
+builtins.int"builtins.int *2
+retry_interval
+builtins.int"builtins.int */
+max_retries
+builtins.int"builtins.int *3
+max_retry_delay
+builtins.int"builtins.int *2
+max_retry_time
+builtins.int"builtins.int *4
+exponential_base
+builtins.int"builtins.int *2
+max_close_wait
+builtins.int"builtins.int *
+write_scheduler
+Any z36z37z38z39z310*
+to_retry_strategy?influxdb_client.client.write_api.WriteOptions.to_retry_strategy*
+self*
+
+kwargsz36z37z38z39z310j36j37j38j39j310rµ
+
+write_type8influxdb_client.client.write_api.WriteOptions.write_typeX
+*influxdb_client.client.write_api.WriteType"*influxdb_client.client.write_api.WriteType*36*37*38*39*310ry
+
+batch_size8influxdb_client.client.write_api.WriteOptions.batch_size
+builtins.int"builtins.int*36*37*38*39*310rÅ
+flush_interval<influxdb_client.client.write_api.WriteOptions.flush_interval
+builtins.int"builtins.int*36*37*38*39*310rÉ
+jitter_interval=influxdb_client.client.write_api.WriteOptions.jitter_interval
+builtins.int"builtins.int*36*37*38*39*310rÅ
+retry_interval<influxdb_client.client.write_api.WriteOptions.retry_interval
+builtins.int"builtins.int*36*37*38*39*310r{
+max_retries9influxdb_client.client.write_api.WriteOptions.max_retries
+builtins.int"builtins.int*36*37*38*39*310rÉ
+max_retry_delay=influxdb_client.client.write_api.WriteOptions.max_retry_delay
+builtins.int"builtins.int*36*37*38*39*310rÅ
+max_retry_time<influxdb_client.client.write_api.WriteOptions.max_retry_time
+builtins.int"builtins.int*36*37*38*39*310rÖ
+exponential_base>influxdb_client.client.write_api.WriteOptions.exponential_base
+builtins.int"builtins.int*36*37*38*39*310rò
+write_scheduler=influxdb_client.client.write_api.WriteOptions.write_scheduler1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310rÅ
+max_close_wait<influxdb_client.client.write_api.WriteOptions.max_close_wait
+builtins.int"builtins.int*36*37*38*39*310Í
+PointSettings.influxdb_client.client.write_api.PointSettings"builtins.object*È
+__init__7influxdb_client.client.write_api.PointSettings.__init__"
+None*j
+self`
+.influxdb_client.client.write_api.PointSettings".influxdb_client.client.write_api.PointSettings*
+default_tags
+Anyz36z37z38z39z310*Ç
+add_default_tag>influxdb_client.client.write_api.PointSettings.add_default_tag"
+None*j
+self`
+.influxdb_client.client.write_api.PointSettings".influxdb_client.client.write_api.PointSettings*
+key
+Any*
+value
+Anyz36z37z38z39z310j36j37j38j39j310rë
+defaultTags:influxdb_client.client.write_api.PointSettings.defaultTags1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310˚	
+_BatchItemKey.influxdb_client.client.write_api._BatchItemKey"builtins.object*è
+__init__7influxdb_client.client.write_api._BatchItemKey.__init__"
+None*j
+self`
+.influxdb_client.client.write_api._BatchItemKey".influxdb_client.client.write_api._BatchItemKey*
+bucket
+Any*
+org
+Any*
+	precision
+Any z36z37z38z39z310*‚
+__hash__7influxdb_client.client.write_api._BatchItemKey.__hash__"
+builtins.int"builtins.int*j
+self`
+.influxdb_client.client.write_api._BatchItemKey".influxdb_client.client.write_api._BatchItemKeyz36z37z38z39z310*˛
+__eq__5influxdb_client.client.write_api._BatchItemKey.__eq__"
+builtins.bool"builtins.bool*b`
+.influxdb_client.client.write_api._BatchItemKey".influxdb_client.client.write_api._BatchItemKey*$"
+builtins.object"builtins.objectz36z37z38z39z310j36j37j38j39j310rá
+bucket5influxdb_client.client.write_api._BatchItemKey.bucket1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310rÅ
+org2influxdb_client.client.write_api._BatchItemKey.org1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310rç
+	precision8influxdb_client.client.write_api._BatchItemKey.precision1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310©	
+
+_BatchItem+influxdb_client.client.write_api._BatchItem"builtins.object*Ì
+__init__4influxdb_client.client.write_api._BatchItem.__init__"
+None*d
+selfZ
++influxdb_client.client.write_api._BatchItem"+influxdb_client.client.write_api._BatchItem*i
+key`
+.influxdb_client.client.write_api._BatchItemKey".influxdb_client.client.write_api._BatchItemKey*
+data
+Any*(
+size
+builtins.int"builtins.int z36z37z38z39z310*—
+to_key_tuple8influxdb_client.client.write_api._BatchItem.to_key_tuple"ã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*d
+selfZ
++influxdb_client.client.write_api._BatchItem"+influxdb_client.client.write_api._BatchItemz36z37z38z39z310j36j37j38j39j310r~
+key/influxdb_client.client.write_api._BatchItem.key1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310rÄ
+data0influxdb_client.client.write_api._BatchItem.data1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310rÄ
+size0influxdb_client.client.write_api._BatchItem.size1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310¢
+_BatchResponse/influxdb_client.client.write_api._BatchResponse"builtins.object*†
+__init__8influxdb_client.client.write_api._BatchResponse.__init__"
+None*l
+selfb
+/influxdb_client.client.write_api._BatchResponse"/influxdb_client.client.write_api._BatchResponse*d
+dataZ
++influxdb_client.client.write_api._BatchItem"+influxdb_client.client.write_api._BatchItem*g
+	exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None z36z37z38z39z310j36j37j38j39j310rÑ
+data4influxdb_client.client.write_api._BatchResponse.data1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310ré
+	exception9influxdb_client.client.write_api._BatchResponse.exception1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310Ë
+WriteApi)influxdb_client.client.write_api.WriteApi"*influxdb_client.client._base._BaseWriteApi*ﬂ
+__init__2influxdb_client.client.write_api.WriteApi.__init__"
+None*`
+selfV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApi*
+influxdb_client
+Any*s
+write_options^
+-influxdb_client.client.write_api.WriteOptions"-influxdb_client.client.write_api.WriteOptions *v
+point_settings`
+.influxdb_client.client.write_api.PointSettings".influxdb_client.client.write_api.PointSettings *
+kwargs
+Anyz36z37z38z39z310*é
+write/influxdb_client.client.write_api.WriteApi.write"
+Any*`
+selfV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApi*(
+bucket
+builtins.str"builtins.str*O
+orgD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *∫
+
+record´
+
+˙Union[builtins.str,typing.Iterable[builtins.str],influxdb_client.client.write.point.Point,typing.Iterable[influxdb_client.client.write.point.Point],builtins.dict[TypeAlias[Any],Unknown],typing.Iterable[builtins.dict[Unknown,Unknown]],builtins.bytes,typing.Iterable[builtins.bytes],Unknown,TypeAlias[builtins.tuple[Any]],typing.Iterable[Unknown],Unknown,typing.Iterable[Unknown]]
+builtins.str"builtins.strN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.IterableT
+(influxdb_client.client.write.point.Point"(influxdb_client.client.write.point.Point¢
+9typing.Iterable[influxdb_client.client.write.point.Point]T
+(influxdb_client.client.write.point.Point"(influxdb_client.client.write.point.Point"typing.Iterablek
+%builtins.dict[TypeAlias[Any],Unknown]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete "builtins.dictw
+/typing.Iterable[builtins.dict[Unknown,Unknown]]3
+builtins.dict[Unknown,Unknown]  "builtins.dict"typing.Iterable 
+builtins.bytes"builtins.bytesT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable Ä
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple",influxdb_client.client.write_api._NamedTuple-
+typing.Iterable[Unknown] "typing.Iterable -
+typing.Iterable[Unknown] "typing.Iterable *Ü
+write_precisionÓ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"6influxdb_client.domain.write_precision._WritePrecision *
+kwargs
+Anyz36z37z38z39z310*π
+flush/influxdb_client.client.write_api.WriteApi.flush"
+None*`
+selfV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApiz36z37z38z39z310*π
+close/influxdb_client.client.write_api.WriteApi.close"
+None*`
+selfV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApiz36z37z38z39z310*ø
+	__enter__3influxdb_client.client.write_api.WriteApi.__enter__"2
+.influxdb_client.client.write_api.WriteApi.Self*42
+.influxdb_client.client.write_api.WriteApi.Selfz36z37z38z39z310*ä
+__exit__2influxdb_client.client.write_api.WriteApi.__exit__"
+None*XV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApi*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+Nonez36z37z38z39z310*µ
+__del__1influxdb_client.client.write_api.WriteApi.__del__"
+None*XV
+)influxdb_client.client.write_api.WriteApi")influxdb_client.client.write_api.WriteApiz36z37z38z39z310j36j37j38j39j310*±
+__annotations__0influxdb_client.client.write_api.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*h
+logger'influxdb_client.client.write_api.logger 
+logging.Logger"logging.Logger*36*37*38*39*310*É
+SYNCHRONOUS,influxdb_client.client.write_api.SYNCHRONOUS1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*Ö
+ASYNCHRONOUS-influxdb_client.client.write_api.ASYNCHRONOUS1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310

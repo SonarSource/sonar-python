@@ -1,6 +1,6 @@
 
-json.encoder‘
-JSONEncoderjson.encoder.JSONEncoder"builtins.object*´
+json.encoderê
+JSONEncoderjson.encoder.JSONEncoder"builtins.object*“
 __init__!json.encoder.JSONEncoder.__init__"
 None*>
 self4
@@ -14,10 +14,11 @@
 	allow_nan
 builtins.bool"builtins.bool */
 	sort_keys
-builtins.bool"builtins.bool *R
-indentD
-Union[builtins.int,None]
-builtins.int"builtins.int
+builtins.bool"builtins.bool *}
+indento
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
 None *Ø
 
 separatorsú
@@ -30,19 +31,19 @@ separatorsú
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None z35z36z37z38z39z310*ù
+None z36z37z38z39z310*ô
 default json.encoder.JSONEncoder.default"
 Any*>
 self4
 json.encoder.JSONEncoder"json.encoder.JSONEncoder*
 o
-Anyz35z36z37z38z39z310*∞
+Anyz36z37z38z39z310*¨
 encodejson.encoder.JSONEncoder.encode"
 builtins.str"builtins.str*>
 self4
 json.encoder.JSONEncoder"json.encoder.JSONEncoder*
 o
-Anyz35z36z37z38z39z310*õ
+Anyz36z37z38z39z310*ó
 
 iterencode#json.encoder.JSONEncoder.iterencode"N
 typing.Iterator[builtins.str]
@@ -52,20 +53,53 @@ iterencode#json.encoder.JSONEncoder.iterencode"N
 o
 Any*/
 	_one_shot
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310rp
+builtins.bool"builtins.bool z36z37z38z39z310j36j37j38j39j310rl
 item_separator'json.encoder.JSONEncoder.item_separator
-builtins.str"builtins.str*35*36*37*38*39*310rn
+builtins.str"builtins.str*36*37*38*39*310rj
 key_separator&json.encoder.JSONEncoder.key_separator
-builtins.str"builtins.str*35*36*37*38*39*310rf
+builtins.str"builtins.str*36*37*38*39*310rb
 skipkeys!json.encoder.JSONEncoder.skipkeys
-builtins.bool"builtins.bool*35*36*37*38*39*310rn
+builtins.bool"builtins.bool*36*37*38*39*310rj
 ensure_ascii%json.encoder.JSONEncoder.ensure_ascii
-builtins.bool"builtins.bool*35*36*37*38*39*310rr
+builtins.bool"builtins.bool*36*37*38*39*310rn
 check_circular'json.encoder.JSONEncoder.check_circular
-builtins.bool"builtins.bool*35*36*37*38*39*310rh
+builtins.bool"builtins.bool*36*37*38*39*310rd
 	allow_nan"json.encoder.JSONEncoder.allow_nan
-builtins.bool"builtins.bool*35*36*37*38*39*310rh
+builtins.bool"builtins.bool*36*37*38*39*310rd
 	sort_keys"json.encoder.JSONEncoder.sort_keys
-builtins.bool"builtins.bool*35*36*37*38*39*310r`
-indentjson.encoder.JSONEncoder.indent
-builtins.int"builtins.int*35*36*37*38*39*310
+builtins.bool"builtins.bool*36*37*38*39*310r†
+indentjson.encoder.JSONEncoder.indent`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*36*37*38*39*310ë
+py_encode_basestring!json.encoder.py_encode_basestring"
+builtins.str"builtins.str*#
+s
+builtins.str"builtins.strz36z37z38z39z310ù
+py_encode_basestring_ascii'json.encoder.py_encode_basestring_ascii"
+builtins.str"builtins.str*#
+s
+builtins.str"builtins.strz36z37z38z39z310*ù
+__annotations__json.encoder.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*x
+ESCAPEjson.encoder.ESCAPED
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*36*37*38*39*310*Ñ
+ESCAPE_ASCIIjson.encoder.ESCAPE_ASCIID
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*36*37*38*39*310*Ç
+HAS_UTF8json.encoder.HAS_UTF8J
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*36*37*38*39*310*±
+
+ESCAPE_DCTjson.encoder.ESCAPE_DCTu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310*X
+INFINITYjson.encoder.INFINITY 
+builtins.float"builtins.float*36*37*38*39*310
