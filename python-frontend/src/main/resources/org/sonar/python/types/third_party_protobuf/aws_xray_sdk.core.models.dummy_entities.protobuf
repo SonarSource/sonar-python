@@ -1,0 +1,341 @@
+
+'aws_xray_sdk.core.models.dummy_entitiesñ
+NoOpTraceId1aws_xray_sdk.core.models.noop_traceid.NoOpTraceId"builtins.object*◊
+__init__:aws_xray_sdk.core.models.noop_traceid.NoOpTraceId.__init__"
+None*p
+selff
+1aws_xray_sdk.core.models.noop_traceid.NoOpTraceId"1aws_xray_sdk.core.models.noop_traceid.NoOpTraceIdz36z37z38z39z310*_
+to_id7aws_xray_sdk.core.models.noop_traceid.NoOpTraceId.to_id*
+selfz36z37z38z39z310j36j37j38j39j310rw
+VERSION9aws_xray_sdk.core.models.noop_traceid.NoOpTraceId.VERSION
+builtins.str"builtins.str*36*37*38*39*310r{
+	DELIMITER;aws_xray_sdk.core.models.noop_traceid.NoOpTraceId.DELIMITER
+builtins.str"builtins.str*36*37*38*39*310r}
+
+start_time<aws_xray_sdk.core.models.noop_traceid.NoOpTraceId.start_time
+builtins.str"builtins.str*36*37*38*39*310Í
+Segment(aws_xray_sdk.core.models.segment.Segment"&aws_xray_sdk.core.models.entity.Entity*Ä
+__init__1aws_xray_sdk.core.models.segment.Segment.__init__"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+name
+Any*T
+entityidD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+traceidD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	parent_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *-
+sampled
+builtins.bool"builtins.bool z36z37z38z39z310*∫
+add_subsegment7aws_xray_sdk.core.models.segment.Segment.add_subsegment"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*p
+
+subsegment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz36z37z38z39z310*æ
+	increment2aws_xray_sdk.core.models.segment.Segment.increment"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz36z37z38z39z310*÷
+decrement_ref_counter>aws_xray_sdk.core.models.segment.Segment.decrement_ref_counter"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz36z37z38z39z310*f
+ready_to_send6aws_xray_sdk.core.models.segment.Segment.ready_to_send*
+selfz36z37z38z39z310*Ä
+get_total_subsegments_sizeCaws_xray_sdk.core.models.segment.Segment.get_total_subsegments_size*
+selfz36z37z38z39z310*Ä
+decrement_subsegments_sizeCaws_xray_sdk.core.models.segment.Segment.decrement_subsegments_size*
+selfz36z37z38z39z310*Á
+remove_subsegment:aws_xray_sdk.core.models.segment.Segment.remove_subsegment"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+
+subsegment
+Anyz36z37z38z39z310*œ
+set_user1aws_xray_sdk.core.models.segment.Segment.set_user"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+user
+Anyz36z37z38z39z310*›
+set_service4aws_xray_sdk.core.models.segment.Segment.set_service"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+service_info
+Anyz36z37z38z39z310*ﬁ
+set_rule_name6aws_xray_sdk.core.models.segment.Segment.set_rule_name"
+None*^
+selfT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*
+	rule_name
+Anyz36z37z38z39z310*Z
+to_dict0aws_xray_sdk.core.models.segment.Segment.to_dict*
+selfz36z37z38z39z310j36j37j38j39j310rò
+trace_id1aws_xray_sdk.core.models.segment.Segment.trace_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310rå
+id+aws_xray_sdk.core.models.segment.Segment.idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310rx
+in_progress4aws_xray_sdk.core.models.segment.Segment.in_progress
+builtins.bool"builtins.bool*36*37*38*39*310rp
+sampled0aws_xray_sdk.core.models.segment.Segment.sampled
+builtins.bool"builtins.bool*36*37*38*39*310rê
+user-aws_xray_sdk.core.models.segment.Segment.userD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310r∆
+ref_counter4aws_xray_sdk.core.models.segment.Segment.ref_counterl
+4aws_xray_sdk.core.utils.atomic_counter.AtomicCounter"4aws_xray_sdk.core.utils.atomic_counter.AtomicCounter*36*37*38*39*310rö
+	parent_id2aws_xray_sdk.core.models.segment.Segment.parent_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310r«
+service0aws_xray_sdk.core.models.segment.Segment.serviceu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310Ó
+
+Subsegment.aws_xray_sdk.core.models.subsegment.Subsegment"&aws_xray_sdk.core.models.entity.Entity*Ü
+__init__7aws_xray_sdk.core.models.subsegment.Subsegment.__init__"
+None*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*&
+name
+builtins.str"builtins.str*+
+	namespace
+builtins.str"builtins.str*a
+segmentT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentz36z37z38z39z310*Ã
+add_subsegment=aws_xray_sdk.core.models.subsegment.Subsegment.add_subsegment"
+None*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*p
+
+subsegment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz36z37z38z39z310*“
+remove_subsegment@aws_xray_sdk.core.models.subsegment.Subsegment.remove_subsegment"
+None*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*p
+
+subsegment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz36z37z38z39z310*≠
+close4aws_xray_sdk.core.models.subsegment.Subsegment.close"
+None*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*‚
+end_time—
+íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
+ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int"time.struct_time
+None z36z37z38z39z310*Æ
+set_sql6aws_xray_sdk.core.models.subsegment.Subsegment.set_sql"
+None*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment*`
+sqlW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictz36z37z38z39z310*õ
+to_dict6aws_xray_sdk.core.models.subsegment.Subsegment.to_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*j
+self`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentz36z37z38z39z310j36j37j38j39j310r∫
+parent_segment=aws_xray_sdk.core.models.subsegment.Subsegment.parent_segmentT
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*36*37*38*39*310rv
+trace_id7aws_xray_sdk.core.models.subsegment.Subsegment.trace_id
+builtins.str"builtins.str*36*37*38*39*310rn
+type3aws_xray_sdk.core.models.subsegment.Subsegment.type
+builtins.str"builtins.str*36*37*38*39*310rx
+	namespace8aws_xray_sdk.core.models.subsegment.Subsegment.namespace
+builtins.str"builtins.str*36*37*38*39*310rß
+sql2aws_xray_sdk.core.models.subsegment.Subsegment.sqlW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310µ
+TraceId(aws_xray_sdk.core.models.traceid.TraceId"builtins.object*º
+__init__1aws_xray_sdk.core.models.traceid.TraceId.__init__"
+None*^
+selfT
+(aws_xray_sdk.core.models.traceid.TraceId"(aws_xray_sdk.core.models.traceid.TraceIdz36z37z38z39z310*V
+to_id.aws_xray_sdk.core.models.traceid.TraceId.to_id*
+selfz36z37z38z39z310j36j37j38j39j310rn
+VERSION0aws_xray_sdk.core.models.traceid.TraceId.VERSION
+builtins.str"builtins.str*36*37*38*39*310rr
+	DELIMITER2aws_xray_sdk.core.models.traceid.TraceId.DELIMITER
+builtins.str"builtins.str*36*37*38*39*310r_
+
+start_time3aws_xray_sdk.core.models.traceid.TraceId.start_time
+Any*36*37*38*39*310£
+DummySegment4aws_xray_sdk.core.models.dummy_entities.DummySegment"(aws_xray_sdk.core.models.segment.Segment*ä
+__init__=aws_xray_sdk.core.models.dummy_entities.DummySegment.__init__"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*(
+name
+builtins.str"builtins.str z36z37z38z39z310*ı
+set_aws<aws_xray_sdk.core.models.dummy_entities.DummySegment.set_aws"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+aws_meta
+Anyz36z37z38z39z310*ê
+put_http_metaBaws_xray_sdk.core.models.dummy_entities.DummySegment.put_http_meta"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+key
+Any*
+value
+Anyz36z37z38z39z310*í
+put_annotationCaws_xray_sdk.core.models.dummy_entities.DummySegment.put_annotation"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+key
+Any*
+value
+Anyz36z37z38z39z310*Ω
+put_metadataAaws_xray_sdk.core.models.dummy_entities.DummySegment.put_metadata"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+key
+Any*
+value
+Any*-
+	namespace
+builtins.str"builtins.str z36z37z38z39z310*Û
+set_user=aws_xray_sdk.core.models.dummy_entities.DummySegment.set_user"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+user
+Anyz36z37z38z39z310*Å
+set_service@aws_xray_sdk.core.models.dummy_entities.DummySegment.set_service"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+service_info
+Anyz36z37z38z39z310*å
+apply_status_codeFaws_xray_sdk.core.models.dummy_entities.DummySegment.apply_status_code"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+status_code
+Anyz36z37z38z39z310*ƒ
+add_exceptionBaws_xray_sdk.core.models.dummy_entities.DummySegment.add_exception"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*
+	exception
+Any*
+stack
+Any*,
+remote
+builtins.bool"builtins.bool z36z37z38z39z310*‚
+	serialize>aws_xray_sdk.core.models.dummy_entities.DummySegment.serialize"
+None*v
+selfl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegmentz36z37z38z39z310j36j37j38j39j310r|
+sampled<aws_xray_sdk.core.models.dummy_entities.DummySegment.sampled
+builtins.bool"builtins.bool*36*37*38*39*310í
+DummySubsegment7aws_xray_sdk.core.models.dummy_entities.DummySubsegment".aws_xray_sdk.core.models.subsegment.Subsegment*©
+__init__@aws_xray_sdk.core.models.dummy_entities.DummySubsegment.__init__"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+segment
+Any*(
+name
+builtins.str"builtins.str z36z37z38z39z310*˛
+set_aws?aws_xray_sdk.core.models.dummy_entities.DummySubsegment.set_aws"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+aws_meta
+Anyz36z37z38z39z310*ô
+put_http_metaEaws_xray_sdk.core.models.dummy_entities.DummySubsegment.put_http_meta"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+key
+Any*
+value
+Anyz36z37z38z39z310*õ
+put_annotationFaws_xray_sdk.core.models.dummy_entities.DummySubsegment.put_annotation"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+key
+Any*
+value
+Anyz36z37z38z39z310*∆
+put_metadataDaws_xray_sdk.core.models.dummy_entities.DummySubsegment.put_metadata"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+key
+Any*
+value
+Any*-
+	namespace
+builtins.str"builtins.str z36z37z38z39z310*˘
+set_sql?aws_xray_sdk.core.models.dummy_entities.DummySubsegment.set_sql"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+sql
+Anyz36z37z38z39z310*ï
+apply_status_codeIaws_xray_sdk.core.models.dummy_entities.DummySubsegment.apply_status_code"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+status_code
+Anyz36z37z38z39z310*Õ
+add_exceptionEaws_xray_sdk.core.models.dummy_entities.DummySubsegment.add_exception"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*
+	exception
+Any*
+stack
+Any*,
+remote
+builtins.bool"builtins.bool z36z37z38z39z310*Î
+	serializeAaws_xray_sdk.core.models.dummy_entities.DummySubsegment.serialize"
+None*|
+selfr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegmentz36z37z38z39z310j36j37j38j39j310r
+sampled?aws_xray_sdk.core.models.dummy_entities.DummySubsegment.sampled
+builtins.bool"builtins.bool*36*37*38*39*310*∏
+__annotations__7aws_xray_sdk.core.models.dummy_entities.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

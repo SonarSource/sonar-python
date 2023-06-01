@@ -120,17 +120,23 @@ Expression_ast.Expression"_ast.modr4
 builtins.list[_ast.expr]
 	_ast.expr"	_ast.expr"builtins.listr2
 value_ast.Assign.value
-	_ast.expr"	_ast.exprœ
-	AugAssign_ast.AugAssign"	_ast.stmtr7
-target_ast.AugAssign.target
-	_ast.expr"	_ast.exprr7
+	_ast.expr"	_ast.expr…
+	AugAssign_ast.AugAssign"	_ast.stmtr∞
+target_ast.AugAssign.targeté
+.Union[_ast.Name,_ast.Attribute,_ast.Subscript]
+	_ast.Name"	_ast.Name 
+_ast.Attribute"_ast.Attribute 
+_ast.Subscript"_ast.Subscriptr7
 op_ast.AugAssign.op
 _ast.operator"_ast.operatorr5
 value_ast.AugAssign.value
-	_ast.expr"	_ast.exprª
-	AnnAssign_ast.AnnAssign"	_ast.stmtr7
-target_ast.AnnAssign.target
-	_ast.expr"	_ast.exprr?
+	_ast.expr"	_ast.exprµ
+	AnnAssign_ast.AnnAssign"	_ast.stmtr∞
+target_ast.AnnAssign.targeté
+.Union[_ast.Name,_ast.Attribute,_ast.Subscript]
+	_ast.Name"	_ast.Name 
+_ast.Attribute"_ast.Attribute 
+_ast.Subscript"_ast.Subscriptr?
 
 annotation_ast.AnnAssign.annotation
 	_ast.expr"	_ast.exprrZ
@@ -367,15 +373,13 @@ _ast.cmpop"builtins.listrj
 	_ast.expr"	_ast.expr"builtins.listrj
 keywords_ast.Call.keywordsJ
 builtins.list[_ast.keyword]
-_ast.keyword"_ast.keyword"builtins.listÕ
+_ast.keyword"_ast.keyword"builtins.list•
 FormattedValue_ast.FormattedValue"	_ast.exprr:
 value_ast.FormattedValue.value
-	_ast.expr"	_ast.exprrr
+	_ast.expr"	_ast.exprrJ
 
-conversion_ast.FormattedValue.conversionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerk
+conversion_ast.FormattedValue.conversion
+builtins.int"builtins.intrk
 format_spec_ast.FormattedValue.format_spec;
 Union[_ast.expr,None]
 	_ast.expr"	_ast.expr
@@ -383,7 +387,7 @@ conversion_ast.FormattedValue.conversionD
 	JoinedStr_ast.JoinedStr"	_ast.exprrb
 values_ast.JoinedStr.valuesA
 builtins.list[_ast.expr]
-	_ast.expr"	_ast.expr"builtins.listà
+	_ast.expr"	_ast.expr"builtins.listÉ
 Constant_ast.Constant"	_ast.exprr%
 value_ast.Constant.value
 Anyr`
@@ -392,12 +396,15 @@ conversion_ast.FormattedValue.conversionD
 builtins.str"builtins.str
 Noner
 s_ast.Constant.s
-Anyr:
-n_ast.Constant.n$
+Anyr¥
+n_ast.Constant.nù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
 builtins.complex"builtins.complexñ
 	NamedExpr_ast.NamedExpr"	_ast.exprr7
 target_ast.NamedExpr.target
-	_ast.expr"	_ast.exprr5
+	_ast.Name"	_ast.Namer5
 value_ast.NamedExpr.value
 	_ast.expr"	_ast.expr€
 	Attribute_ast.Attribute"	_ast.exprr5
@@ -609,22 +616,26 @@ _ast.alias"_ast.ASTr5
 optional_vars_ast.withitem.optional_vars;
 Union[_ast.expr,None]
 	_ast.expr"	_ast.expr
-None[
-Numast.Num"_ast.Constantr<
-valueast.Num.value$
-builtins.complex"builtins.complexÅ
-Strast.Str"_ast.Constantr4
+None
+_ABCast._ABC"builtins.type‚
+Numast.Num"_ast.Constant@bast._ABCr∂
+valueast.Num.valueù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexç
+Strast.Str"_ast.Constant@bast._ABCr4
 valueast.Str.value
 builtins.str"builtins.strr,
 s	ast.Str.s
-builtins.str"builtins.strë
-Bytes	ast.Bytes"_ast.Constantr:
+builtins.str"builtins.strù
+Bytes	ast.Bytes"_ast.Constant@bast._ABCr:
 valueast.Bytes.value 
 builtins.bytes"builtins.bytesr2
 sast.Bytes.s 
-builtins.bytes"builtins.bytes/
-NameConstantast.NameConstant"_ast.Constant'
-Ellipsisast.Ellipsis"_ast.ConstantÖu
+builtins.bytes"builtins.bytes;
+NameConstantast.NameConstant"_ast.Constant@bast._ABC3
+Ellipsisast.Ellipsis"_ast.Constant@bast._ABC°v
 NodeVisitorast.NodeVisitor"builtins.object*u
 visitast.NodeVisitor.visit"
 Any*,
@@ -952,7 +963,13 @@ visit_Callast.NodeVisitor.visit_Call"
 self"
 ast.NodeVisitor"ast.NodeVisitor**
 node 
-_ast.NamedExpr"_ast.NamedExpr*ï
+_ast.NamedExpr"_ast.NamedExpr*ô
+visit_TypeIgnore ast.NodeVisitor.visit_TypeIgnore"
+Any*,
+self"
+ast.NodeVisitor"ast.NodeVisitor*,
+node"
+_ast.TypeIgnore"_ast.TypeIgnore*ï
 visit_Attributeast.NodeVisitor.visit_Attribute"
 Any*,
 self"
@@ -1343,13 +1360,17 @@ _ast.Param*{
 ast._T*
 node
 
-ast._Tµ
+ast._TÄ
 get_docstringast.get_docstring"D
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*
-node
-_ast.AST"_ast.AST*+
+None*Ë
+node›
+GUnion[_ast.AsyncFunctionDef,_ast.FunctionDef,_ast.ClassDef,_ast.Module].
+_ast.AsyncFunctionDef"_ast.AsyncFunctionDef$
+_ast.FunctionDef"_ast.FunctionDef
+_ast.ClassDef"_ast.ClassDef
+_ast.Module"_ast.Module*+
 clean
 builtins.bool"builtins.bool q
 increment_linenoast.increment_lineno"
@@ -1392,18 +1413,42 @@ _ast.Param*{
 typing.Iterator[_ast.AST]
 _ast.AST"_ast.AST"typing.Iterator*
 node
-_ast.AST"_ast.AST"ˇ	
-parse	ast.parseÑ
+_ast.AST"_ast.AST"Ïâ
+parse	ast.parse√
 parse	ast.parse"
-_ast.Module"_ast.Module*r
-sourcef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*v
-filenamef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes *C
+_ast.Module"_ast.Module*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*Ú
+filename·
+ªUnion[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],os.PathLike[Any]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer(
+os.PathLike[Any]
+Any"os.PathLike *C
 mode7
 Literal[builtins.str]	
 builtins.str"builtins.str *3
@@ -1415,17 +1460,266 @@ _ast.Param*{
 builtins.int"builtins.int`
  Tuple[builtins.int,builtins.int]
 builtins.int"builtins.int
-builtins.int"builtins.int 0:overloadX„
+builtins.int"builtins.int 0:overloadX«
+parse	ast.parse""
+_ast.Expression"_ast.Expression*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*
+filename·
+ªUnion[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],os.PathLike[Any]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer(
+os.PathLike[Any]
+Any"os.PathLike*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadXÀ
+parse	ast.parse"&
+_ast.FunctionType"_ast.FunctionType*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*
+filename·
+ªUnion[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],os.PathLike[Any]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer(
+os.PathLike[Any]
+Any"os.PathLike*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadX…
+parse	ast.parse"$
+_ast.Interactive"_ast.Interactive*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*
+filename·
+ªUnion[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],os.PathLike[Any]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer(
+os.PathLike[Any]
+Any"os.PathLike*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadX‘
+parse	ast.parse""
+_ast.Expression"_ast.Expression*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadXÿ
+parse	ast.parse"&
+_ast.FunctionType"_ast.FunctionType*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadX÷
+parse	ast.parse"$
+_ast.Interactive"_ast.Interactive*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*A
+mode7
+Literal[builtins.str]	
+builtins.str"builtins.str*3
+type_comments
+builtins.bool"builtins.bool *ﬂ
+feature_version«
+9Union[None,builtins.int,Tuple[builtins.int,builtins.int]]
+None
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int 0:overloadX¢
 parse	ast.parse"
-_ast.AST"_ast.AST*r
-sourcef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*v
-filenamef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes *(
+_ast.AST"_ast.AST*≥
+source¶
+™Union[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*Ú
+filename·
+ªUnion[builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],os.PathLike[Any]]
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer(
+os.PathLike[Any]
+Any"os.PathLike *(
 mode
 builtins.str"builtins.str *3
 type_comments
@@ -1436,11 +1730,17 @@ _ast.Param*{
 builtins.int"builtins.int`
  Tuple[builtins.int,builtins.int]
 builtins.int"builtins.int
-builtins.int"builtins.int 0:overloadX*
-_typingtyping *A
-PyCF_ONLY_AST_ast.PyCF_ONLY_AST
-builtins.int"builtins.int*K
-PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS
-builtins.int"builtins.int*[
-PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT
+builtins.int"builtins.int 0:overloadX*
+__annotations__ast.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*\
+PyCF_ONLY_AST_ast.PyCF_ONLY_AST7
+Literal[builtins.int]	
+builtins.int"builtins.int*f
+PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS7
+Literal[builtins.int]	
+builtins.int"builtins.int*v
+PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT7
+Literal[builtins.int]	
 builtins.int"builtins.int

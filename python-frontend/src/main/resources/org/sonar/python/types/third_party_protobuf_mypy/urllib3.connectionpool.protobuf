@@ -1,7 +1,7 @@
 
 urllib3.connectionpool=
 ConnectionErrorbuiltins.ConnectionError"builtins.OSError>
-HTTPExceptionhttp.client.HTTPException"builtins.Exception™
+HTTPExceptionhttp.client.HTTPException"builtins.Exceptionä
 ConnectionPool%urllib3.connectionpool.ConnectionPool"builtins.object*ò
 __init__.urllib3.connectionpool.ConnectionPool.__init__"
 None*X
@@ -12,26 +12,21 @@
 portD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *ù
-	__enter__/urllib3.connectionpool.ConnectionPool.__enter__"
-Any*V
-selfN
-%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*º
+None *û
+	__enter__/urllib3.connectionpool.ConnectionPool.__enter__".
+*urllib3.connectionpool.ConnectionPool.Self*0.
+*urllib3.connectionpool.ConnectionPool.Self*õ
 __exit__.urllib3.connectionpool.ConnectionPool.__exit__":
 Literal[builtins.bool]	
-builtins.bool"builtins.bool*V
-selfN
-%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*ó
-exc_typeä
+builtins.bool"builtins.bool*PN
+%urllib3.connectionpool.ConnectionPool"%urllib3.connectionpool.ConnectionPool*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*ò
@@ -52,8 +47,8 @@
 port*urllib3.connectionpool.ConnectionPool.portD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None‘-
-HTTPConnectionPool)urllib3.connectionpool.HTTPConnectionPool"%urllib3.connectionpool.ConnectionPool"urllib3.request.RequestMethods*⁄
+Noneı9
+HTTPConnectionPool)urllib3.connectionpool.HTTPConnectionPool"%urllib3.connectionpool.ConnectionPool"urllib3.request.RequestMethods*Î
 __init__2urllib3.connectionpool.HTTPConnectionPool.__init__"
 None*`
 selfV
@@ -65,9 +60,12 @@
 builtins.int"builtins.int
 None *,
 strict
-builtins.bool"builtins.bool *(
-timeout
-UnboundType[_Timeout] *+
+builtins.bool"builtins.bool *ã
+timeout˚
+=TypeAlias[Union[urllib3.util.timeout.Timeout,builtins.float]]ñ
+2Union[urllib3.util.timeout.Timeout,builtins.float]<
+urllib3.util.timeout.Timeout"urllib3.util.timeout.Timeout 
+builtins.float"builtins.float"urllib3.connectionpool._Timeout *+
 maxsize
 builtins.int"builtins.int *+
 block
@@ -77,13 +75,20 @@
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
 builtins.str"builtins.str"typing.Mapping
-None *Y
-retriesJ
-!Union[UnboundType[_Retries],None]
-UnboundType[_Retries]
-None *Î
-_proxy‹
-ÃUnion[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]],None]˛
+None *ë
+retriesÅ
+QUnion[TypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]],None]ü
+ETypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]]≤
+:Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.bool"builtins.bool
+builtins.int"builtins.int"urllib3.connectionpool._Retries
+None *ﬂ
+
+_proxy–
+
+◊Union[TypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]],None]Á
+ÀTypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]]Ç
 ¿TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]§
 µTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]D
 Union[builtins.str,None]
@@ -106,7 +111,7 @@
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"urllib3.util.Url
+None"urllib3.util.url.Url"urllib3.util.Url
 None *”
 _proxy_headersº
 5Union[typing.Mapping[builtins.str,builtins.str],None]w
@@ -153,21 +158,30 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 #Type[urllib3.response.HTTPResponse]>
 urllib3.response.HTTPResponse"urllib3.response.HTTPResponserZ
 strict0urllib3.connectionpool.HTTPConnectionPool.strict
-builtins.bool"builtins.boolrW
-timeout1urllib3.connectionpool.HTTPConnectionPool.timeout
-UnboundType[_Timeout]rà
-retries1urllib3.connectionpool.HTTPConnectionPool.retriesJ
-!Union[UnboundType[_Retries],None]
-UnboundType[_Retries]
+builtins.bool"builtins.boolr∫
+timeout1urllib3.connectionpool.HTTPConnectionPool.timeout˚
+=TypeAlias[Union[urllib3.util.timeout.Timeout,builtins.float]]ñ
+2Union[urllib3.util.timeout.Timeout,builtins.float]<
+urllib3.util.timeout.Timeout"urllib3.util.timeout.Timeout 
+builtins.float"builtins.float"urllib3.connectionpool._Timeoutr¿
+retries1urllib3.connectionpool.HTTPConnectionPool.retriesÅ
+QUnion[TypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]],None]ü
+ETypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]]≤
+:Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.bool"builtins.bool
+builtins.int"builtins.int"urllib3.connectionpool._Retries
 Noner¨
 pool.urllib3.connectionpool.HTTPConnectionPool.poolt
 (Union[urllib3.util.queue.LifoQueue,None]<
 urllib3.util.queue.LifoQueue"urllib3.util.queue.LifoQueue
 NonerX
 block/urllib3.connectionpool.HTTPConnectionPool.block
-builtins.bool"builtins.boolró	
-proxy/urllib3.connectionpool.HTTPConnectionPool.proxy‹
-ÃUnion[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]],None]˛
+builtins.bool"builtins.boolrã
+proxy/urllib3.connectionpool.HTTPConnectionPool.proxy–
+
+◊Union[TypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]],None]Á
+ÀTypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]]Ç
 ¿TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]§
 µTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]D
 Union[builtins.str,None]
@@ -190,7 +204,7 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"urllib3.util.Url
+None"urllib3.util.url.Url"urllib3.util.Url
 Noner¡
 proxy_headers7urllib3.connectionpool.HTTPConnectionPool.proxy_headersw
 )typing.Mapping[builtins.str,builtins.str]
@@ -201,8 +215,8 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 num_requests6urllib3.connectionpool.HTTPConnectionPool.num_requests
 builtins.int"builtins.intrE
 conn_kw1urllib3.connectionpool.HTTPConnectionPool.conn_kw
-Any˜ 
-HTTPSConnectionPool*urllib3.connectionpool.HTTPSConnectionPool")urllib3.connectionpool.HTTPConnectionPool*˙
+Anyà'
+HTTPSConnectionPool*urllib3.connectionpool.HTTPSConnectionPool")urllib3.connectionpool.HTTPConnectionPool*ã
 __init__3urllib3.connectionpool.HTTPSConnectionPool.__init__"
 None*b
 selfX
@@ -214,9 +228,12 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 builtins.int"builtins.int
 None *,
 strict
-builtins.bool"builtins.bool *(
-timeout
-UnboundType[_Timeout] *+
+builtins.bool"builtins.bool *ã
+timeout˚
+=TypeAlias[Union[urllib3.util.timeout.Timeout,builtins.float]]ñ
+2Union[urllib3.util.timeout.Timeout,builtins.float]<
+urllib3.util.timeout.Timeout"urllib3.util.timeout.Timeout 
+builtins.float"builtins.float"urllib3.connectionpool._Timeout *+
 maxsize
 builtins.int"builtins.int *+
 block
@@ -226,13 +243,20 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
 builtins.str"builtins.str"typing.Mapping
-None *Y
-retriesJ
-!Union[UnboundType[_Retries],None]
-UnboundType[_Retries]
-None *Î
-_proxy‹
-ÃUnion[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]],None]˛
+None *ë
+retriesÅ
+QUnion[TypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]],None]ü
+ETypeAlias[Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]]≤
+:Union[urllib3.util.retry.Retry,builtins.bool,builtins.int]4
+urllib3.util.retry.Retry"urllib3.util.retry.Retry
+builtins.bool"builtins.bool
+builtins.int"builtins.int"urllib3.connectionpool._Retries
+None *ﬂ
+
+_proxy–
+
+◊Union[TypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]],None]Á
+ÀTypeAlias[TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]]Ç
 ¿TypeAlias[Tuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]]§
 µTuple[Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],Union[builtins.str,None]]D
 Union[builtins.str,None]
@@ -255,7 +279,7 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 NoneD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"urllib3.util.Url
+None"urllib3.util.url.Url"urllib3.util.Url
 None *”
 _proxy_headersº
 5Union[typing.Mapping[builtins.str,builtins.str],None]w
@@ -334,9 +358,11 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 url
 builtins.str"builtins.str*
 kw
-Any*,
-Selfurllib3.connectionpool.Self
-Any*(
+Any*í
+__annotations__&urllib3.connectionpool.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*(
 _connectionurllib3.util.connection *$
 urllib3queueurllib3.util.queue *@
 port_by_scheme%urllib3.connectionpool.port_by_scheme
@@ -346,11 +372,7 @@ WUnion[Type[urllib3.connection.HTTPConnection],Type[urllib3.connection.HTTPSConn
 builtins.function"builtins.function*x
 get_hosturllib3.connectionpool.get_hostK
 CallableType[builtins.function]&
-builtins.function"builtins.function*G
-_Timeouturllib3.connectionpool._Timeout
-UnboundType[TypeAlias]*G
-_Retriesurllib3.connectionpool._Retries
-UnboundType[TypeAlias]*0
+builtins.function"builtins.function*0
 xrangeurllib3.connectionpool.xrange
 Any*C
 logurllib3.connectionpool.log 

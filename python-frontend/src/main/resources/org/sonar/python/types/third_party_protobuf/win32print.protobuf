@@ -1,0 +1,608 @@
+
+
+win32print–
+OpenPrinterwin32.win32print.OpenPrinter"<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*)
+printer
+builtins.str"builtins.str*k
+Defaults[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310¾
+
+GetPrinterwin32.win32print.GetPrinter"
+Any*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*)
+Level
+builtins.int"builtins.int z36z37z38z39z310Õ
+
+SetPrinterwin32.win32print.SetPrinter"
+None*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+Level
+Any*
+pPrinter
+Any*
+Command
+Anyz36z37z38z39z310˜
+ClosePrinterwin32.win32print.ClosePrinter"
+None*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310†
+AddPrinterConnection%win32.win32print.AddPrinterConnection"
+Any*)
+printer
+builtins.str"builtins.strz36z37z38z39z310Œ
+DeletePrinterConnection(win32.win32print.DeletePrinterConnection"
+Any*)
+printer
+builtins.str"builtins.strz36z37z38z39z310Ü
+EnumPrinterswin32.win32print.EnumPrinters"
+Any*
+flags
+Any*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *)
+level
+builtins.int"builtins.int z36z37z38z39z310j
+GetDefaultPrinter"win32.win32print.GetDefaultPrinter"
+builtins.str"builtins.strz36z37z38z39z310l
+GetDefaultPrinterW#win32.win32print.GetDefaultPrinterW"
+builtins.str"builtins.strz36z37z38z39z310€
+SetDefaultPrinter"win32.win32print.SetDefaultPrinter"
+Any*)
+printer
+builtins.str"builtins.strz36z37z38z39z310‚
+SetDefaultPrinterW#win32.win32print.SetDefaultPrinterW"
+Any*)
+Printer
+builtins.str"builtins.strz36z37z38z39z310Ý
+StartDocPrinter win32.win32print.StartDocPrinter"
+Any*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+_tuple
+Any*)
+level
+builtins.int"builtins.int z36z37z38z39z310™
+EndDocPrinterwin32.win32print.EndDocPrinter"
+Any*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310˜
+AbortPrinterwin32.win32print.AbortPrinter"
+None*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310 
+StartPagePrinter!win32.win32print.StartPagePrinter"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310œ
+EndPagePrinterwin32.win32print.EndPagePrinter"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310€
+StartDocwin32.win32print.StartDoc"
+Any*%
+hdc
+builtins.int"builtins.int*
+docinfo
+Anyz36z37z38z39z310g
+EndDocwin32.win32print.EndDoc"
+None*%
+hdc
+builtins.int"builtins.intz36z37z38z39z310k
+AbortDocwin32.win32print.AbortDoc"
+None*%
+hdc
+builtins.int"builtins.intz36z37z38z39z310m
+	StartPagewin32.win32print.StartPage"
+None*%
+hdc
+builtins.int"builtins.intz36z37z38z39z310i
+EndPagewin32.win32print.EndPage"
+None*%
+hdc
+builtins.int"builtins.intz36z37z38z39z310¾
+WritePrinterwin32.win32print.WritePrinter"
+Any*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*%
+buf
+builtins.str"builtins.strz36z37z38z39z310Ñ
+EnumJobswin32.win32print.EnumJobs"
+Any*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+FirstJob
+Any*
+NoJobs
+Any*
+Level
+Any z36z37z38z39z310Ê
+GetJobwin32.win32print.GetJob"
+Any*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+JobID
+Any*)
+Level
+builtins.int"builtins.int z36z37z38z39z310ß
+SetJobwin32.win32print.SetJob"
+Any*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+JobID
+Any*
+Level
+Any*
+JobInfo
+Any*
+Command
+Anyz36z37z38z39z310•
+DocumentProperties#win32.win32print.DocumentProperties"
+Any*&
+HWnd
+builtins.int"builtins.int*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*,
+
+DeviceName
+builtins.str"builtins.str*C
+DevModeOutput0
+_win32typing.PyDEVMODE"_win32typing.PyDEVMODE*B
+DevModeInput0
+_win32typing.PyDEVMODE"_win32typing.PyDEVMODE*
+Mode
+Anyz36z37z38z39z310Ë
+EnumPrintProcessors$win32.win32print.EnumPrintProcessors"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*R
+ServerD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+EnvironmentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310’
+EnumPrintProcessorDatatypes,win32.win32print.EnumPrintProcessorDatatypes"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*,
+
+ServerName
+builtins.str"builtins.str*4
+PrintProcessorName
+builtins.str"builtins.strz36z37z38z39z310ö
+EnumPrinterDrivers#win32.win32print.EnumPrinterDrivers"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*R
+ServerD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+EnvironmentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+Level
+Any z36z37z38z39z310ú
+	EnumFormswin32.win32print.EnumForms"p
+(builtins.tuple[_win32typing.FORM_INFO_1]4
+_win32typing.FORM_INFO_1"_win32typing.FORM_INFO_1"builtins.tuple*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310¡
+AddFormwin32.win32print.AddForm"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+Form
+Anyz36z37z38z39z310À
+
+DeleteFormwin32.win32print.DeleteForm"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE**
+FormName
+builtins.str"builtins.strz36z37z38z39z310º
+GetFormwin32.win32print.GetForm"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE**
+FormName
+builtins.str"builtins.strz36z37z38z39z310Í
+SetFormwin32.win32print.SetForm"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE**
+FormName
+builtins.str"builtins.str*
+Form
+Anyz36z37z38z39z310Œ
+AddJobwin32.win32print.AddJob"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310ª
+ScheduleJobwin32.win32print.ScheduleJob"
+None*J
+hprinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+JobId
+Anyz36z37z38z39z310¶
+DeviceCapabilities#win32.win32print.DeviceCapabilities"
+None*(
+Device
+builtins.str"builtins.str*&
+Port
+builtins.str"builtins.str*
+
+Capability
+Any*q
+DEVMODEb
+"Union[_win32typing.PyDEVMODE,None]0
+_win32typing.PyDEVMODE"_win32typing.PyDEVMODE
+None z36z37z38z39z310ˆ
+GetDeviceCapswin32.win32print.GetDeviceCaps"
+Any*%
+hdc
+builtins.int"builtins.int*
+Index
+Anyz36z37z38z39z310ã
+EnumMonitorswin32.win32print.EnumMonitors"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*&
+Name
+builtins.str"builtins.str*
+Level
+Anyz36z37z38z39z310Ý
+	EnumPortswin32.win32print.EnumPorts"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*&
+Name
+builtins.str"builtins.str*
+Level
+Anyz36z37z38z39z310Ó
+GetPrintProcessorDirectory+win32.win32print.GetPrintProcessorDirectory"
+builtins.str"builtins.str*&
+Name
+builtins.str"builtins.str*-
+Environment
+builtins.str"builtins.strz36z37z38z39z310Ñ
+GetPrinterDriverDirectory*win32.win32print.GetPrinterDriverDirectory"
+builtins.str"builtins.str*&
+Name
+builtins.str"builtins.str*-
+Environment
+builtins.str"builtins.strz36z37z38z39z310Ï
+
+AddPrinterwin32.win32print.AddPrinter"<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*&
+Name
+builtins.str"builtins.str*
+Level
+Any*
+pPrinter
+Anyz36z37z38z39z310š
+DeletePrinterwin32.win32print.DeletePrinter"
+None*J
+hPrinter<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLEz36z37z38z39z310á
+DeletePrinterDriver$win32.win32print.DeletePrinterDriver"
+None*(
+Server
+builtins.str"builtins.str*-
+Environment
+builtins.str"builtins.str*,
+
+DriverName
+builtins.str"builtins.strz36z37z38z39z310˜
+DeletePrinterDriverEx&win32.win32print.DeletePrinterDriverEx"
+None*(
+Server
+builtins.str"builtins.str*-
+Environment
+builtins.str"builtins.str*,
+
+DriverName
+builtins.str"builtins.str*
+
+DeleteFlag
+Any*
+VersionFlag
+Anyz36z37z38z39z310¼
+FlushPrinterwin32.win32print.FlushPrinter"
+Any*I
+Printer<
+_win32typing.PyPrinterHANDLE"_win32typing.PyPrinterHANDLE*
+Buf
+Any*
+Sleep
+Anyz36z37z38z39z310*›
+__annotations__win32print.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*`
+DEF_PRIORITYwin32.win32print.DEF_PRIORITY
+builtins.int"builtins.int*36*37*38*39*310*b
+DI_APPBANDINGwin32.win32print.DI_APPBANDING
+builtins.int"builtins.int*36*37*38*39*310*x
+DI_ROPS_READ_DESTINATION)win32.win32print.DI_ROPS_READ_DESTINATION
+builtins.int"builtins.int*36*37*38*39*310*p
+DPD_DELETE_ALL_FILES%win32.win32print.DPD_DELETE_ALL_FILES
+builtins.int"builtins.int*36*37*38*39*310*~
+DPD_DELETE_SPECIFIC_VERSION,win32.win32print.DPD_DELETE_SPECIFIC_VERSION
+builtins.int"builtins.int*36*37*38*39*310*v
+DPD_DELETE_UNUSED_FILES(win32.win32print.DPD_DELETE_UNUSED_FILES
+builtins.int"builtins.int*36*37*38*39*310*f
+DSPRINT_PENDING win32.win32print.DSPRINT_PENDING
+builtins.int"builtins.int*36*37*38*39*310*f
+DSPRINT_PUBLISH win32.win32print.DSPRINT_PUBLISH
+builtins.int"builtins.int*36*37*38*39*310*j
+DSPRINT_REPUBLISH"win32.win32print.DSPRINT_REPUBLISH
+builtins.int"builtins.int*36*37*38*39*310*j
+DSPRINT_UNPUBLISH"win32.win32print.DSPRINT_UNPUBLISH
+builtins.int"builtins.int*36*37*38*39*310*d
+DSPRINT_UPDATEwin32.win32print.DSPRINT_UPDATE
+builtins.int"builtins.int*36*37*38*39*310*`
+FORM_BUILTINwin32.win32print.FORM_BUILTIN
+builtins.int"builtins.int*36*37*38*39*310*`
+FORM_PRINTERwin32.win32print.FORM_PRINTER
+builtins.int"builtins.int*36*37*38*39*310*Z
+	FORM_USERwin32.win32print.FORM_USER
+builtins.int"builtins.int*36*37*38*39*310*r
+JOB_ACCESS_ADMINISTER&win32.win32print.JOB_ACCESS_ADMINISTER
+builtins.int"builtins.int*36*37*38*39*310*f
+JOB_ACCESS_READ win32.win32print.JOB_ACCESS_READ
+builtins.int"builtins.int*36*37*38*39*310*d
+JOB_ALL_ACCESSwin32.win32print.JOB_ALL_ACCESS
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_CONTROL_CANCEL#win32.win32print.JOB_CONTROL_CANCEL
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_CONTROL_DELETE#win32.win32print.JOB_CONTROL_DELETE
+builtins.int"builtins.int*36*37*38*39*310*‚
+JOB_CONTROL_LAST_PAGE_EJECTED.win32.win32print.JOB_CONTROL_LAST_PAGE_EJECTED
+builtins.int"builtins.int*36*37*38*39*310*j
+JOB_CONTROL_PAUSE"win32.win32print.JOB_CONTROL_PAUSE
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_CONTROL_RESTART$win32.win32print.JOB_CONTROL_RESTART
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_CONTROL_RESUME#win32.win32print.JOB_CONTROL_RESUME
+builtins.int"builtins.int*36*37*38*39*310*~
+JOB_CONTROL_SENT_TO_PRINTER,win32.win32print.JOB_CONTROL_SENT_TO_PRINTER
+builtins.int"builtins.int*36*37*38*39*310*^
+JOB_EXECUTEwin32.win32print.JOB_EXECUTE
+builtins.int"builtins.int*36*37*38*39*310*\
+
+JOB_INFO_1win32.win32print.JOB_INFO_1
+builtins.int"builtins.int*36*37*38*39*310*x
+JOB_POSITION_UNSPECIFIED)win32.win32print.JOB_POSITION_UNSPECIFIED
+builtins.int"builtins.int*36*37*38*39*310*X
+JOB_READwin32.win32print.JOB_READ
+builtins.int"builtins.int*36*37*38*39*310*v
+JOB_STATUS_BLOCKED_DEVQ(win32.win32print.JOB_STATUS_BLOCKED_DEVQ
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_STATUS_COMPLETE$win32.win32print.JOB_STATUS_COMPLETE
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_STATUS_DELETED#win32.win32print.JOB_STATUS_DELETED
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_STATUS_DELETING$win32.win32print.JOB_STATUS_DELETING
+builtins.int"builtins.int*36*37*38*39*310*h
+JOB_STATUS_ERROR!win32.win32print.JOB_STATUS_ERROR
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_STATUS_OFFLINE#win32.win32print.JOB_STATUS_OFFLINE
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_STATUS_PAPEROUT$win32.win32print.JOB_STATUS_PAPEROUT
+builtins.int"builtins.int*36*37*38*39*310*j
+JOB_STATUS_PAUSED"win32.win32print.JOB_STATUS_PAUSED
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_STATUS_PRINTED#win32.win32print.JOB_STATUS_PRINTED
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_STATUS_PRINTING$win32.win32print.JOB_STATUS_PRINTING
+builtins.int"builtins.int*36*37*38*39*310*l
+JOB_STATUS_RESTART#win32.win32print.JOB_STATUS_RESTART
+builtins.int"builtins.int*36*37*38*39*310*n
+JOB_STATUS_SPOOLING$win32.win32print.JOB_STATUS_SPOOLING
+builtins.int"builtins.int*36*37*38*39*310*€
+JOB_STATUS_USER_INTERVENTION-win32.win32print.JOB_STATUS_USER_INTERVENTION
+builtins.int"builtins.int*36*37*38*39*310*Z
+	JOB_WRITEwin32.win32print.JOB_WRITE
+builtins.int"builtins.int*36*37*38*39*310*`
+MAX_PRIORITYwin32.win32print.MAX_PRIORITY
+builtins.int"builtins.int*36*37*38*39*310*`
+MIN_PRIORITYwin32.win32print.MIN_PRIORITY
+builtins.int"builtins.int*36*37*38*39*310*r
+PORT_STATUS_DOOR_OPEN&win32.win32print.PORT_STATUS_DOOR_OPEN
+builtins.int"builtins.int*36*37*38*39*310*p
+PORT_STATUS_NO_TONER%win32.win32print.PORT_STATUS_NO_TONER
+builtins.int"builtins.int*36*37*38*39*310*n
+PORT_STATUS_OFFLINE$win32.win32print.PORT_STATUS_OFFLINE
+builtins.int"builtins.int*36*37*38*39*310*~
+PORT_STATUS_OUTPUT_BIN_FULL,win32.win32print.PORT_STATUS_OUTPUT_BIN_FULL
+builtins.int"builtins.int*36*37*38*39*310*z
+PORT_STATUS_OUT_OF_MEMORY*win32.win32print.PORT_STATUS_OUT_OF_MEMORY
+builtins.int"builtins.int*36*37*38*39*310*r
+PORT_STATUS_PAPER_JAM&win32.win32print.PORT_STATUS_PAPER_JAM
+builtins.int"builtins.int*36*37*38*39*310*r
+PORT_STATUS_PAPER_OUT&win32.win32print.PORT_STATUS_PAPER_OUT
+builtins.int"builtins.int*36*37*38*39*310*z
+PORT_STATUS_PAPER_PROBLEM*win32.win32print.PORT_STATUS_PAPER_PROBLEM
+builtins.int"builtins.int*36*37*38*39*310*t
+PORT_STATUS_POWER_SAVE'win32.win32print.PORT_STATUS_POWER_SAVE
+builtins.int"builtins.int*36*37*38*39*310*r
+PORT_STATUS_TONER_LOW&win32.win32print.PORT_STATUS_TONER_LOW
+builtins.int"builtins.int*36*37*38*39*310*t
+PORT_STATUS_TYPE_ERROR'win32.win32print.PORT_STATUS_TYPE_ERROR
+builtins.int"builtins.int*36*37*38*39*310*r
+PORT_STATUS_TYPE_INFO&win32.win32print.PORT_STATUS_TYPE_INFO
+builtins.int"builtins.int*36*37*38*39*310*x
+PORT_STATUS_TYPE_WARNING)win32.win32print.PORT_STATUS_TYPE_WARNING
+builtins.int"builtins.int*36*37*38*39*310*‚
+PORT_STATUS_USER_INTERVENTION.win32.win32print.PORT_STATUS_USER_INTERVENTION
+builtins.int"builtins.int*36*37*38*39*310*t
+PORT_STATUS_WARMING_UP'win32.win32print.PORT_STATUS_WARMING_UP
+builtins.int"builtins.int*36*37*38*39*310*t
+PORT_TYPE_NET_ATTACHED'win32.win32print.PORT_TYPE_NET_ATTACHED
+builtins.int"builtins.int*36*37*38*39*310*d
+PORT_TYPE_READwin32.win32print.PORT_TYPE_READ
+builtins.int"builtins.int*36*37*38*39*310*p
+PORT_TYPE_REDIRECTED%win32.win32print.PORT_TYPE_REDIRECTED
+builtins.int"builtins.int*36*37*38*39*310*f
+PORT_TYPE_WRITE win32.win32print.PORT_TYPE_WRITE
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_ACCESS_ADMINISTER*win32.win32print.PRINTER_ACCESS_ADMINISTER
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ACCESS_USE#win32.win32print.PRINTER_ACCESS_USE
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ALL_ACCESS#win32.win32print.PRINTER_ALL_ACCESS
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_ATTRIBUTE_DEFAULT*win32.win32print.PRINTER_ATTRIBUTE_DEFAULT
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_ATTRIBUTE_DIRECT)win32.win32print.PRINTER_ATTRIBUTE_DIRECT
+builtins.int"builtins.int*36*37*38*39*310*Ž
+#PRINTER_ATTRIBUTE_DO_COMPLETE_FIRST4win32.win32print.PRINTER_ATTRIBUTE_DO_COMPLETE_FIRST
+builtins.int"builtins.int*36*37*38*39*310*‚
+PRINTER_ATTRIBUTE_ENABLE_BIDI.win32.win32print.PRINTER_ATTRIBUTE_ENABLE_BIDI
+builtins.int"builtins.int*36*37*38*39*310*‚
+PRINTER_ATTRIBUTE_ENABLE_DEVQ.win32.win32print.PRINTER_ATTRIBUTE_ENABLE_DEVQ
+builtins.int"builtins.int*36*37*38*39*310*r
+PRINTER_ATTRIBUTE_FAX&win32.win32print.PRINTER_ATTRIBUTE_FAX
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_ATTRIBUTE_HIDDEN)win32.win32print.PRINTER_ATTRIBUTE_HIDDEN
+builtins.int"builtins.int*36*37*38*39*310*Š
+!PRINTER_ATTRIBUTE_KEEPPRINTEDJOBS2win32.win32print.PRINTER_ATTRIBUTE_KEEPPRINTEDJOBS
+builtins.int"builtins.int*36*37*38*39*310*v
+PRINTER_ATTRIBUTE_LOCAL(win32.win32print.PRINTER_ATTRIBUTE_LOCAL
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_ATTRIBUTE_NETWORK*win32.win32print.PRINTER_ATTRIBUTE_NETWORK
+builtins.int"builtins.int*36*37*38*39*310*~
+PRINTER_ATTRIBUTE_PUBLISHED,win32.win32print.PRINTER_ATTRIBUTE_PUBLISHED
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_ATTRIBUTE_QUEUED)win32.win32print.PRINTER_ATTRIBUTE_QUEUED
+builtins.int"builtins.int*36*37*38*39*310*|
+PRINTER_ATTRIBUTE_RAW_ONLY+win32.win32print.PRINTER_ATTRIBUTE_RAW_ONLY
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_ATTRIBUTE_SHARED)win32.win32print.PRINTER_ATTRIBUTE_SHARED
+builtins.int"builtins.int*36*37*38*39*310*p
+PRINTER_ATTRIBUTE_TS%win32.win32print.PRINTER_ATTRIBUTE_TS
+builtins.int"builtins.int*36*37*38*39*310*„
+PRINTER_ATTRIBUTE_WORK_OFFLINE/win32.win32print.PRINTER_ATTRIBUTE_WORK_OFFLINE
+builtins.int"builtins.int*36*37*38*39*310*r
+PRINTER_CONTROL_PAUSE&win32.win32print.PRINTER_CONTROL_PAUSE
+builtins.int"builtins.int*36*37*38*39*310*r
+PRINTER_CONTROL_PURGE&win32.win32print.PRINTER_CONTROL_PURGE
+builtins.int"builtins.int*36*37*38*39*310*t
+PRINTER_CONTROL_RESUME'win32.win32print.PRINTER_CONTROL_RESUME
+builtins.int"builtins.int*36*37*38*39*310*|
+PRINTER_CONTROL_SET_STATUS+win32.win32print.PRINTER_CONTROL_SET_STATUS
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_ENUM_CONNECTIONS)win32.win32print.PRINTER_ENUM_CONNECTIONS
+builtins.int"builtins.int*36*37*38*39*310*t
+PRINTER_ENUM_CONTAINER'win32.win32print.PRINTER_ENUM_CONTAINER
+builtins.int"builtins.int*36*37*38*39*310*p
+PRINTER_ENUM_DEFAULT%win32.win32print.PRINTER_ENUM_DEFAULT
+builtins.int"builtins.int*36*37*38*39*310*n
+PRINTER_ENUM_EXPAND$win32.win32print.PRINTER_ENUM_EXPAND
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON1#win32.win32print.PRINTER_ENUM_ICON1
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON2#win32.win32print.PRINTER_ENUM_ICON2
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON3#win32.win32print.PRINTER_ENUM_ICON3
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON4#win32.win32print.PRINTER_ENUM_ICON4
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON5#win32.win32print.PRINTER_ENUM_ICON5
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON6#win32.win32print.PRINTER_ENUM_ICON6
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON7#win32.win32print.PRINTER_ENUM_ICON7
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_ICON8#win32.win32print.PRINTER_ENUM_ICON8
+builtins.int"builtins.int*36*37*38*39*310*l
+PRINTER_ENUM_LOCAL#win32.win32print.PRINTER_ENUM_LOCAL
+builtins.int"builtins.int*36*37*38*39*310*j
+PRINTER_ENUM_NAME"win32.win32print.PRINTER_ENUM_NAME
+builtins.int"builtins.int*36*37*38*39*310*p
+PRINTER_ENUM_NETWORK%win32.win32print.PRINTER_ENUM_NETWORK
+builtins.int"builtins.int*36*37*38*39*310*n
+PRINTER_ENUM_REMOTE$win32.win32print.PRINTER_ENUM_REMOTE
+builtins.int"builtins.int*36*37*38*39*310*n
+PRINTER_ENUM_SHARED$win32.win32print.PRINTER_ENUM_SHARED
+builtins.int"builtins.int*36*37*38*39*310*f
+PRINTER_EXECUTE win32.win32print.PRINTER_EXECUTE
+builtins.int"builtins.int*36*37*38*39*310*d
+PRINTER_INFO_1win32.win32print.PRINTER_INFO_1
+builtins.int"builtins.int*36*37*38*39*310*`
+PRINTER_READwin32.win32print.PRINTER_READ
+builtins.int"builtins.int*36*37*38*39*310*n
+PRINTER_STATUS_BUSY$win32.win32print.PRINTER_STATUS_BUSY
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_DOOR_OPEN)win32.win32print.PRINTER_STATUS_DOOR_OPEN
+builtins.int"builtins.int*36*37*38*39*310*p
+PRINTER_STATUS_ERROR%win32.win32print.PRINTER_STATUS_ERROR
+builtins.int"builtins.int*36*37*38*39*310*~
+PRINTER_STATUS_INITIALIZING,win32.win32print.PRINTER_STATUS_INITIALIZING
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_IO_ACTIVE)win32.win32print.PRINTER_STATUS_IO_ACTIVE
+builtins.int"builtins.int*36*37*38*39*310*|
+PRINTER_STATUS_MANUAL_FEED+win32.win32print.PRINTER_STATUS_MANUAL_FEED
+builtins.int"builtins.int*36*37*38*39*310*€
+PRINTER_STATUS_NOT_AVAILABLE-win32.win32print.PRINTER_STATUS_NOT_AVAILABLE
+builtins.int"builtins.int*36*37*38*39*310*v
+PRINTER_STATUS_NO_TONER(win32.win32print.PRINTER_STATUS_NO_TONER
+builtins.int"builtins.int*36*37*38*39*310*t
+PRINTER_STATUS_OFFLINE'win32.win32print.PRINTER_STATUS_OFFLINE
+builtins.int"builtins.int*36*37*38*39*310*„
+PRINTER_STATUS_OUTPUT_BIN_FULL/win32.win32print.PRINTER_STATUS_OUTPUT_BIN_FULL
+builtins.int"builtins.int*36*37*38*39*310*€
+PRINTER_STATUS_OUT_OF_MEMORY-win32.win32print.PRINTER_STATUS_OUT_OF_MEMORY
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_PAGE_PUNT)win32.win32print.PRINTER_STATUS_PAGE_PUNT
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_PAPER_JAM)win32.win32print.PRINTER_STATUS_PAPER_JAM
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_PAPER_OUT)win32.win32print.PRINTER_STATUS_PAPER_OUT
+builtins.int"builtins.int*36*37*38*39*310*€
+PRINTER_STATUS_PAPER_PROBLEM-win32.win32print.PRINTER_STATUS_PAPER_PROBLEM
+builtins.int"builtins.int*36*37*38*39*310*r
+PRINTER_STATUS_PAUSED&win32.win32print.PRINTER_STATUS_PAUSED
+builtins.int"builtins.int*36*37*38*39*310*†
+PRINTER_STATUS_PENDING_DELETION0win32.win32print.PRINTER_STATUS_PENDING_DELETION
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_STATUS_POWER_SAVE*win32.win32print.PRINTER_STATUS_POWER_SAVE
+builtins.int"builtins.int*36*37*38*39*310*v
+PRINTER_STATUS_PRINTING(win32.win32print.PRINTER_STATUS_PRINTING
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_STATUS_PROCESSING*win32.win32print.PRINTER_STATUS_PROCESSING
+builtins.int"builtins.int*36*37*38*39*310*‚
+PRINTER_STATUS_SERVER_UNKNOWN.win32.win32print.PRINTER_STATUS_SERVER_UNKNOWN
+builtins.int"builtins.int*36*37*38*39*310*x
+PRINTER_STATUS_TONER_LOW)win32.win32print.PRINTER_STATUS_TONER_LOW
+builtins.int"builtins.int*36*37*38*39*310*ˆ
+ PRINTER_STATUS_USER_INTERVENTION1win32.win32print.PRINTER_STATUS_USER_INTERVENTION
+builtins.int"builtins.int*36*37*38*39*310*t
+PRINTER_STATUS_WAITING'win32.win32print.PRINTER_STATUS_WAITING
+builtins.int"builtins.int*36*37*38*39*310*z
+PRINTER_STATUS_WARMING_UP*win32.win32print.PRINTER_STATUS_WARMING_UP
+builtins.int"builtins.int*36*37*38*39*310*b
+PRINTER_WRITEwin32.win32print.PRINTER_WRITE
+builtins.int"builtins.int*36*37*38*39*310*x
+SERVER_ACCESS_ADMINISTER)win32.win32print.SERVER_ACCESS_ADMINISTER
+builtins.int"builtins.int*36*37*38*39*310*v
+SERVER_ACCESS_ENUMERATE(win32.win32print.SERVER_ACCESS_ENUMERATE
+builtins.int"builtins.int*36*37*38*39*310*j
+SERVER_ALL_ACCESS"win32.win32print.SERVER_ALL_ACCESS
+builtins.int"builtins.int*36*37*38*39*310*d
+SERVER_EXECUTEwin32.win32print.SERVER_EXECUTE
+builtins.int"builtins.int*36*37*38*39*310*^
+SERVER_READwin32.win32print.SERVER_READ
+builtins.int"builtins.int*36*37*38*39*310*`
+SERVER_WRITEwin32.win32print.SERVER_WRITE
+builtins.int"builtins.int*36*37*38*39*310

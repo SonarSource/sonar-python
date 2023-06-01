@@ -1,0 +1,245 @@
+
+dockerfile_parse.util‹
+WordSplitter"dockerfile_parse.util.WordSplitter"builtins.object*ç
+__init__+dockerfile_parse.util.WordSplitter.__init__"
+None*R
+selfH
+"dockerfile_parse.util.WordSplitter""dockerfile_parse.util.WordSplitter*#
+s
+builtins.str"builtins.str*É
+args¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *É
+envs¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None z36z37z38z39z310*¼
+dequote*dockerfile_parse.util.WordSplitter.dequote"
+builtins.str"builtins.str*R
+selfH
+"dockerfile_parse.util.WordSplitter""dockerfile_parse.util.WordSplitterz36z37z38z39z310*Ä
+split(dockerfile_parse.util.WordSplitter.split"¢
+4typing.Generator[Union[builtins.str,None],None,None]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+None
+None"typing.Generator*R
+selfH
+"dockerfile_parse.util.WordSplitter""dockerfile_parse.util.WordSplitter*T
+maxsplitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *-
+dequote
+builtins.bool"builtins.bool z36z37z38z39z310j36j37j38j39j310rÖ
+SQUOTE)dockerfile_parse.util.WordSplitter.SQUOTE‹
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"dockerfile_parse.util._Quotes*36*37*38*39*310rÖ
+DQUOTE)dockerfile_parse.util.WordSplitter.DQUOTE‹
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"dockerfile_parse.util._Quotes*36*37*38*39*310rd
+stream)dockerfile_parse.util.WordSplitter.stream
+io.StringIO"io.StringIO*36*37*38*39*310rƒ
+args'dockerfile_parse.util.WordSplitter.args¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None*36*37*38*39*310rƒ
+envs'dockerfile_parse.util.WordSplitter.envs¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None*36*37*38*39*310r°
+quotes)dockerfile_parse.util.WordSplitter.quoteså
+IUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]],None]‹
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"dockerfile_parse.util._Quotes
+None*36*37*38*39*310rj
+escaped*dockerfile_parse.util.WordSplitter.escaped
+builtins.bool"builtins.bool*36*37*38*39*310¸%
+Contextdockerfile_parse.util.Context"builtins.object*¸
+__init__&dockerfile_parse.util.Context.__init__"
+None*H
+self>
+dockerfile_parse.util.Context"dockerfile_parse.util.Context*ß
+argsÒ
+<Union[typing.MutableMapping[builtins.str,builtins.str],None]…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping
+None *ß
+envsÒ
+<Union[typing.MutableMapping[builtins.str,builtins.str],None]…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping
+None *á
+labelsÒ
+<Union[typing.MutableMapping[builtins.str,builtins.str],None]…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping
+None *Î
+	line_args¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *Î
+	line_envs¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *Ğ
+line_labels¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None z36z37z38z39z310*·
+set_line_value,dockerfile_parse.util.Context.set_line_value"
+None*H
+self>
+dockerfile_parse.util.Context"dockerfile_parse.util.Context*ˆ
+context_typeõ
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]÷
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str""dockerfile_parse.util._ContextType*‚
+valuew
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mappingz36z37z38z39z310*¡
+get_line_value,dockerfile_parse.util.Context.get_line_value"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*H
+self>
+dockerfile_parse.util.Context"dockerfile_parse.util.Context*ˆ
+context_typeõ
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]÷
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str""dockerfile_parse.util._ContextTypez36z37z38z39z310*™
+
+get_values(dockerfile_parse.util.Context.get_values"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*H
+self>
+dockerfile_parse.util.Context"dockerfile_parse.util.Context*ˆ
+context_typeõ
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]÷
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str""dockerfile_parse.util._ContextTypez36z37z38z39z310j36j37j38j39j310rÇ
+args"dockerfile_parse.util.Context.args…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping*36*37*38*39*310rÇ
+envs"dockerfile_parse.util.Context.envs…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping*36*37*38*39*310rË
+labels$dockerfile_parse.util.Context.labels…
+0typing.MutableMapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.MutableMapping*36*37*38*39*310rÂ
+	line_args'dockerfile_parse.util.Context.line_argsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310rÂ
+	line_envs'dockerfile_parse.util.Context.line_envsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310rÆ
+line_labels)dockerfile_parse.util.Context.line_labelsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310Ç
+b2udockerfile_parse.util.b2u"
+builtins.str"builtins.str*r
+stringf
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.strz36z37z38z39z310Ë
+u2bdockerfile_parse.util.u2b" 
+builtins.bytes"builtins.bytes*r
+stringf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesz36z37z38z39z310æ
+extract_key_values(dockerfile_parse.util.extract_key_values"¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list*/
+env_replace
+builtins.bool"builtins.bool*
+argsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*
+envsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*3
+instruction_value
+builtins.str"builtins.strz36z37z38z39z310Ò
+get_key_val_dictionary,dockerfile_parse.util.get_key_val_dictionary"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*3
+instruction_value
+builtins.str"builtins.str*1
+env_replace
+builtins.bool"builtins.bool *É
+args¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None *É
+envs¼
+5Union[typing.Mapping[builtins.str,builtins.str],None]w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping
+None z36z37z38z39z310*¦
+__annotations__%dockerfile_parse.util.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

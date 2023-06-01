@@ -131,11 +131,22 @@ public_key*
 self*
 private_key*
 
-f_privo
+f_privß
 _base64_encodebase64.encodebytes" 
-builtins.bytes"builtins.bytes*'
-s 
-builtins.bytes"builtins.bytesÓ
+builtins.bytes"builtins.bytes*ﬁ
+s÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferÓ
 _bcrypt_kdf-redefinition<cryptography.hazmat.primitives.serialization.ssh._bcrypt_kdf" 
 builtins.bytes"builtins.bytes*.
 password 
@@ -179,7 +190,7 @@ _get_mpint;cryptography.hazmat.primitives.serialization.ssh._get_mpint*
 	_to_mpint:cryptography.hazmat.primitives.serialization.ssh._to_mpint*
 vala
 _lookup_kformat@cryptography.hazmat.primitives.serialization.ssh._lookup_kformat*
-key_type†
+key_typeÅ
 load_ssh_private_keyEcryptography.hazmat.primitives.serialization.ssh.load_ssh_private_key"É	
 íTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]†
 áUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]å
@@ -192,11 +203,9 @@ Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptograp
 passwordJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
-None*5
-backend&
-Union[Any,None]
-Any
-None ˝
+None*
+backend
+Any ˝
 
 serialize_ssh_private_keyJcryptography.hazmat.primitives.serialization.ssh.serialize_ssh_private_key" 
 builtins.bytes"builtins.bytes*ï	
@@ -210,7 +219,7 @@ Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptograp
 passwordJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
-None ≥
+None î
 
 load_ssh_public_keyDcryptography.hazmat.primitives.serialization.ssh.load_ssh_public_key"Ú
 éTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]î
@@ -220,11 +229,9 @@ Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptograp
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
 Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES**
 data 
-builtins.bytes"builtins.bytes*5
-backend&
-Union[Any,None]
-Any
-None ç
+builtins.bytes"builtins.bytes*
+backend
+Any ç
 
 serialize_ssh_public_keyIcryptography.hazmat.primitives.serialization.ssh.serialize_ssh_public_key" 
 builtins.bytes"builtins.bytes*É	
@@ -235,7 +242,11 @@ public_keyÚ
 Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
 :cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
-Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES*T
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES*¨
+__annotations__@cryptography.hazmat.primitives.serialization.ssh.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*T
 _bcrypt_kdf<cryptography.hazmat.primitives.serialization.ssh._bcrypt_kdf
 Any*w
 _bcrypt_supportedBcryptography.hazmat.primitives.serialization.ssh._bcrypt_supported
@@ -253,10 +264,11 @@ Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptograph
 _ECDSA_NISTP521@cryptography.hazmat.primitives.serialization.ssh._ECDSA_NISTP521 
 builtins.bytes"builtins.bytes*o
 _CERT_SUFFIX=cryptography.hazmat.primitives.serialization.ssh._CERT_SUFFIX 
-builtins.bytes"builtins.bytes*•
-_SSH_PUBKEY_RC?cryptography.hazmat.primitives.serialization.ssh._SSH_PUBKEY_RCR
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Pattern*i
+builtins.bytes"builtins.bytes*ù
+_SSH_PUBKEY_RC?cryptography.hazmat.primitives.serialization.ssh._SSH_PUBKEY_RCJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*i
 	_SK_MAGIC:cryptography.hazmat.primitives.serialization.ssh._SK_MAGIC 
 builtins.bytes"builtins.bytes*i
 	_SK_START:cryptography.hazmat.primitives.serialization.ssh._SK_START 
@@ -272,10 +284,11 @@ Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptograph
 _DEFAULT_ROUNDS@cryptography.hazmat.primitives.serialization.ssh._DEFAULT_ROUNDS
 builtins.int"builtins.int*m
 _MAX_PASSWORD>cryptography.hazmat.primitives.serialization.ssh._MAX_PASSWORD
-builtins.int"builtins.int*ó
-_PEM_RC8cryptography.hazmat.primitives.serialization.ssh._PEM_RCR
-typing.Pattern[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Pattern*q
+builtins.int"builtins.int*è
+_PEM_RC8cryptography.hazmat.primitives.serialization.ssh._PEM_RCJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*q
 _PADDING9cryptography.hazmat.primitives.serialization.ssh._PADDING*
 builtins.memoryview"builtins.memoryview*Ç
 _SSH_CIPHERS=cryptography.hazmat.primitives.serialization.ssh._SSH_CIPHERS≤

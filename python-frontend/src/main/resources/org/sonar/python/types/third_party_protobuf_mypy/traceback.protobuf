@@ -1,6 +1,6 @@
 
-	traceback¾
-TracebackExceptiontraceback.TracebackException"builtins.object*°
+	tracebackú
+TracebackExceptiontraceback.TracebackException"builtins.object*ß
 __init__%traceback.TracebackException.__init__"
 None*F
 self<
@@ -9,9 +9,11 @@
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException*?
 	exc_value0
-builtins.BaseException"builtins.BaseException*=
-exc_traceback*
-types.TracebackType"types.TracebackType*Q
+builtins.BaseException"builtins.BaseException*l
+exc_tracebackY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*Q
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -24,12 +26,12 @@
 &Union[builtins.set[builtins.int],None]H
 builtins.set[builtins.int]
 builtins.int"builtins.int"builtins.set
-None *ó
-from_exception+traceback.TracebackException.from_exception"<
-traceback.TracebackException"traceback.TracebackException*m
-clsd
-"Type[traceback.TracebackException]<
-traceback.TracebackException"traceback.TracebackException*9
+None *Ê
+from_exception+traceback.TracebackException.from_exception"%
+!traceback.TracebackException.Self*[
+clsR
+'Type[traceback.TracebackException.Self]%
+!traceback.TracebackException.Self*9
 exc0
 builtins.BaseException"builtins.BaseException*Q
 limitD
@@ -39,7 +41,11 @@
 lookup_lines
 builtins.bool"builtins.bool *4
 capture_locals
-builtins.bool"builtins.bool 0:classmethodp*’
+builtins.bool"builtins.bool 0:classmethodp*³
+__eq__#traceback.TracebackException.__eq__"
+builtins.bool"builtins.bool*><
+traceback.TracebackException"traceback.TracebackException*$"
+builtins.object"builtins.object*’
 format#traceback.TracebackException.format"n
 (typing.Generator[builtins.str,None,None]
 builtins.str"builtins.str
@@ -76,16 +82,18 @@
 offset#traceback.TracebackException.offset
 builtins.int"builtins.intrE
 msg traceback.TracebackException.msg
-builtins.str"builtins.str®
-FrameSummarytraceback.FrameSummary"typing.Iterable*Â
+builtins.str"builtins.strÅ
+FrameSummarytraceback.FrameSummary"typing.Iterable*ê
 __init__traceback.FrameSummary.__init__"
 None*:
 self0
 traceback.FrameSummary"traceback.FrameSummary**
 filename
-builtins.str"builtins.str*(
-lineno
-builtins.int"builtins.int*&
+builtins.str"builtins.str*P
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*&
 name
 builtins.str"builtins.str*1
 lookup_line
@@ -99,45 +107,77 @@
 lineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *—
-__getitem__"traceback.FrameSummary.__getitem__"
-Any*8
-self0
-traceback.FrameSummary"traceback.FrameSummary*!
-i
-builtins.int"builtins.int*—
+None *³
+linetraceback.FrameSummary.line"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*:
+self0
+traceback.FrameSummary"traceback.FrameSummary0:property`*‘
 __iter__traceback.FrameSummary.__iter__"0
 typing.Iterator[Any]
-Any"typing.Iterator*8
-self0
-traceback.FrameSummary"traceback.FrameSummaryrI
+Any"typing.Iterator*20
+traceback.FrameSummary"traceback.FrameSummary*¡
+__eq__traceback.FrameSummary.__eq__"
+builtins.bool"builtins.bool*20
+traceback.FrameSummary"traceback.FrameSummary*$"
+builtins.object"builtins.object*–
+__len__traceback.FrameSummary.__len__"7
+Literal[builtins.int]	
+builtins.int"builtins.int*20
+traceback.FrameSummary"traceback.FrameSummary2´
+__getitem__"traceback.FrameSummary.__getitem__Ì
+__getitem__"traceback.FrameSummary.__getitem__"
+builtins.str"builtins.str*20
+traceback.FrameSummary"traceback.FrameSummary*97
+Literal[builtins.int]	
+builtins.int"builtins.int0:overloadXÌ
+__getitem__"traceback.FrameSummary.__getitem__"
+builtins.int"builtins.int*20
+traceback.FrameSummary"traceback.FrameSummary*97
+Literal[builtins.int]	
+builtins.int"builtins.int0:overloadXÌ
+__getitem__"traceback.FrameSummary.__getitem__"
+builtins.str"builtins.str*20
+traceback.FrameSummary"traceback.FrameSummary*97
+Literal[builtins.int]	
+builtins.int"builtins.int0:overloadXô
+__getitem__"traceback.FrameSummary.__getitem__"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*20
+traceback.FrameSummary"traceback.FrameSummary*97
+Literal[builtins.int]	
+builtins.int"builtins.int0:overloadXœ
+__getitem__"traceback.FrameSummary.__getitem__"
+Any*20
+traceback.FrameSummary"traceback.FrameSummary*
+builtins.int"builtins.int0:overloadXrI
 filenametraceback.FrameSummary.filename
-builtins.str"builtins.strrE
-linenotraceback.FrameSummary.lineno
-builtins.int"builtins.intrA
+builtins.str"builtins.strrm
+linenotraceback.FrameSummary.linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerA
 nametraceback.FrameSummary.name
-builtins.str"builtins.strrA
-linetraceback.FrameSummary.line
 builtins.str"builtins.strrã
 localstraceback.FrameSummary.locals¹
 4Union[builtins.dict[builtins.str,builtins.str],None]u
 (builtins.dict[builtins.str,builtins.str]
 builtins.str"builtins.str
 builtins.str"builtins.str"builtins.dict
-Noneú
-StackSummarytraceback.StackSummary"builtins.list*ë
+None¥
+StackSummarytraceback.StackSummary"builtins.list*Ë
 extracttraceback.StackSummary.extract"0
 traceback.StackSummary"traceback.StackSummary*[
 clsR
 Type[traceback.StackSummary]0
-traceback.StackSummary"traceback.StackSummary*â
-	frame_genÒ
-?typing.Generator[Tuple[types.FrameType,builtins.int],None,None]i
+traceback.StackSummary"traceback.StackSummary*Â
+	frame_gen²
+4typing.Iterable[Tuple[types.FrameType,builtins.int]]i
 #Tuple[types.FrameType,builtins.int]"
 types.FrameType"types.FrameType
-builtins.int"builtins.int
-None
-None"typing.Generator*Q
+builtins.int"builtins.int"typing.Iterable*Q
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -145,14 +185,16 @@
 lookup_lines
 builtins.bool"builtins.bool *4
 capture_locals
-builtins.bool"builtins.bool 0:classmethodp*¢
+builtins.bool"builtins.bool 0:classmethodp*í
 	from_list traceback.StackSummary.from_list"0
 traceback.StackSummary"traceback.StackSummary*[
 clsR
 Type[traceback.StackSummary]0
-traceback.StackSummary"traceback.StackSummary*Ò
-a_listÅ
-`builtins.list[TypeAlias[Tuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]]]Ñ
+traceback.StackSummary"traceback.StackSummary*
+a_list
+€typing.Iterable[Union[traceback.FrameSummary,TypeAlias[Tuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]]]]ù
+oUnion[traceback.FrameSummary,TypeAlias[Tuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]]]0
+traceback.FrameSummary"traceback.FrameSummaryÑ
 QTypeAlias[Tuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]]ê
 FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
 builtins.str"builtins.str
@@ -160,12 +202,12 @@ FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
 builtins.str"builtins.strD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"traceback._PT"builtins.list0:classmethodp*¯
+None"traceback._PT"typing.Iterable0:classmethodp*¯
 formattraceback.StackSummary.format"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*:
 self0
-traceback.StackSummary"traceback.StackSummaryâ
+traceback.StackSummary"traceback.StackSummary
 print_tbtraceback.print_tb"
 None*a
 tbY
@@ -175,12 +217,12 @@ FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-fileu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
-None ¥
+None *¬
+fileŸ
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
+None Ð
 print_exceptiontraceback.print_exception"
 None*–
 etypeŠ
@@ -199,41 +241,63 @@ FTuple[builtins.str,builtins.int,builtins.str,Union[builtins.str,None]]
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-fileu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
+None *¬
+fileŸ
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
 None *+
 chain
-builtins.bool"builtins.bool ®
+builtins.bool"builtins.bool å
+format_exceptiontraceback.format_exception"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*–
+etypeŠ
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*m
+valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*a
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *+
+chain
+builtins.bool"builtins.bool Ù
 	print_exctraceback.print_exc"
 None*Q
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-fileu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
+None *¬
+fileŸ
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
 None *+
 chain
-builtins.bool"builtins.bool °
+builtins.bool"builtins.bool Û
 
 print_lasttraceback.print_last"
 None*Q
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-fileu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
+None *¬
+fileŸ
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
 None *+
 chain
-builtins.bool"builtins.bool Ý
+builtins.bool"builtins.bool ˆ
 print_stacktraceback.print_stack"
 None*V
 fM
@@ -243,11 +307,11 @@ print_lasttraceback.print_last"
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-fileu
-#Union[typing.IO[builtins.str],None]B
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO
+None *¬
+fileŸ
+1Union[_typeshed.SupportsWrite[builtins.str],None]^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite
 None Š
 
 extract_tbtraceback.extract_tb"0
@@ -298,29 +362,7 @@ print_listtraceback.print_list"
 valueb
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-Noneå
-format_exceptiontraceback.format_exception"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*–
-etypeŠ
-(Union[Type[builtins.BaseException],None]R
-Type[builtins.BaseException]0
-builtins.BaseException"builtins.BaseException
-None*m
-valueb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*a
-tbY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*Q
-limitD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *+
-chain
-builtins.bool"builtins.bool À
+NoneÀ
 
 format_exctraceback.format_exc"
 builtins.str"builtins.str*Q
@@ -351,11 +393,13 @@ format_exctraceback.format_exc"
 limitD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None d
+None “
 clear_framestraceback.clear_frames"
-None*2
-tb*
-types.TracebackType"types.TracebackType­
+None*a
+tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None­
 
 walk_stacktraceback.walk_stack"²
 4typing.Iterator[Tuple[types.FrameType,builtins.int]]i
@@ -374,4 +418,11 @@ walk_stacktraceback.walk_stack"²
 tbY
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-None
+None*…
+__annotations__traceback.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*h
+__all__traceback.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

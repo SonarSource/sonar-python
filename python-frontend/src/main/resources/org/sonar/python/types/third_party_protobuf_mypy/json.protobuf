@@ -89,8 +89,8 @@ raw_decode#json.decoder.JSONDecoder.raw_decode"B
 builtins.bool"builtins.boolrå
 object_pairs_hook*json.decoder.JSONDecoder.object_pairs_hookK
 CallableType[builtins.function]&
-builtins.function"builtins.functionè
-JSONEncoderjson.encoder.JSONEncoder"builtins.object*í
+builtins.function"builtins.functionˇ
+JSONEncoderjson.encoder.JSONEncoder"builtins.object*Ω
 __init__!json.encoder.JSONEncoder.__init__"
 None*>
 self4
@@ -104,10 +104,11 @@ raw_decode#json.decoder.JSONDecoder.raw_decode"B
 	allow_nan
 builtins.bool"builtins.bool */
 	sort_keys
-builtins.bool"builtins.bool *R
-indentD
-Union[builtins.int,None]
-builtins.int"builtins.int
+builtins.bool"builtins.bool *}
+indento
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
 None *Ø
 
 separatorsú
@@ -156,9 +157,11 @@ iterencode#json.encoder.JSONEncoder.iterencode"N
 	allow_nan"json.encoder.JSONEncoder.allow_nan
 builtins.bool"builtins.boolrO
 	sort_keys"json.encoder.JSONEncoder.sort_keys
-builtins.bool"builtins.boolrG
-indentjson.encoder.JSONEncoder.indent
-builtins.int"builtins.intΩ
+builtins.bool"builtins.boolrã
+indentjson.encoder.JSONEncoder.indent`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strΩ
 dumps
 json.dumps"
 builtins.str"builtins.str*
@@ -197,14 +200,14 @@ separatorsú
 	sort_keys
 builtins.bool"builtins.bool *
 kwds
-AnyÛ
+Anyè
 dump	json.dump"
 None*
 obj
-Any*J
-fpB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*.
+Any*f
+fp^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite*.
 skipkeys
 builtins.bool"builtins.bool *2
 ensure_ascii
@@ -238,14 +241,15 @@ separatorsú
 	sort_keys
 builtins.bool"builtins.bool *
 kwds
-Any◊
+Anyñ	
 loads
 json.loads"
-Any*m
-sf
-"Union[builtins.str,builtins.bytes]
+Any*´
+s£
+5Union[builtins.str,builtins.bytes,builtins.bytearray]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*û
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*û
 clsí
 *Union[Type[json.decoder.JSONDecoder],None]X
 Type[json.decoder.JSONDecoder]4
@@ -316,8 +320,20 @@ json.loads"
 builtins.function"builtins.function
 None *
 kwds
-Anyn
+Any∆
 detect_encodingjson.detect_encoding"
-builtins.str"builtins.str*'
-b 
-builtins.bytes"builtins.bytes
+builtins.str"builtins.str*
+bx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*e
+__path__json.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Ä
+__annotations__json.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*c
+__all__json.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

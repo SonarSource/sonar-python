@@ -1,13 +1,13 @@
 
 
-jinja2.ext§
-_TranslationsBasicjinja2.ext._TranslationsBasic"builtins.object*√
+jinja2.ext®
+_TranslationsBasicjinja2.ext._TranslationsBasic"builtins.object*≈
 gettext%jinja2.ext._TranslationsBasic.gettext"
 builtins.str"builtins.str*H
 self>
 jinja2.ext._TranslationsBasic"jinja2.ext._TranslationsBasic*)
 message
-builtins.str"builtins.str*ï
+builtins.str"builtins.str@*ó
 ngettext&jinja2.ext._TranslationsBasic.ngettext"
 builtins.str"builtins.str*H
 self>
@@ -17,7 +17,7 @@ jinja2.ext§
 plural
 builtins.str"builtins.str*#
 n
-builtins.int"builtins.intXö
+builtins.int"builtins.int@Xö
 _TranslationsContextjinja2.ext._TranslationsContext"jinja2.ext._TranslationsBasic*ˆ
 pgettext(jinja2.ext._TranslationsContext.pgettext"
 builtins.str"builtins.str*L
@@ -38,7 +38,7 @@ jinja2.ext§
 plural
 builtins.str"builtins.str*#
 n
-builtins.int"builtins.intì
+builtins.int"builtins.int¸
 	Extensionjinja2.ext.Extension"builtins.object*û
 __init_subclass__&jinja2.ext.Extension.__init_subclass__"
 None*U
@@ -71,15 +71,16 @@ preprocessjinja2.ext.Extension.preprocess"
 filenameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *™
-filter_stream"jinja2.ext.Extension.filter_stream"˙
-^Union[jinja2.lexer.TokenStream,typing.Iterable[Tuple[builtins.int,builtins.str,builtins.str]]]4
-jinja2.lexer.TokenStream"jinja2.lexer.TokenStreamﬂ
->typing.Iterable[Tuple[builtins.int,builtins.str,builtins.str]]ã
+None *ì
+filter_stream"jinja2.ext.Extension.filter_stream"„
+iUnion[jinja2.lexer.TokenStream,typing.Iterable[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]]4
+jinja2.lexer.TokenStream"jinja2.lexer.TokenStreamΩ
+Ityping.Iterable[TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]]ﬁ
+8TypeAlias[Tuple[builtins.int,builtins.str,builtins.str]]ã
 -Tuple[builtins.int,builtins.str,builtins.str]
 builtins.int"builtins.int
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Iterable*6
+builtins.str"builtins.str"jinja2.lexer.Token"typing.Iterable*6
 self,
 jinja2.ext.Extension"jinja2.ext.Extension*@
 stream4
@@ -141,7 +142,7 @@ identifierjinja2.ext.Extension.identifier
 priorityjinja2.ext.Extension.priority
 builtins.int"builtins.intrq
 environment jinja2.ext.Extension.environment@
-jinja2.environment.Environment"jinja2.environment.EnvironmentØ+
+jinja2.environment.Environment"jinja2.environment.Environmentß+
 InternationalizationExtension(jinja2.ext.InternationalizationExtension"jinja2.ext.Extension*˙
 __init__1jinja2.ext.InternationalizationExtension.__init__"
 None*^
@@ -233,16 +234,17 @@ AUnion[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]
 selfT
 (jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*8
 parser,
-jinja2.parser.Parser"jinja2.parser.Parser*—
+jinja2.parser.Parser"jinja2.parser.Parser*…
 _trim_whitespace9jinja2.ext.InternationalizationExtension._trim_whitespace"
 builtins.str"builtins.str*^
 selfT
 (jinja2.ext.InternationalizationExtension"(jinja2.ext.InternationalizationExtension*(
 string
-builtins.str"builtins.str*Z
-_ws_reL
-typing.Pattern[builtins.str]
-builtins.str"builtins.str"typing.Pattern *¥
+builtins.str"builtins.str*R
+_ws_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern *¥
 _parse_block5jinja2.ext.InternationalizationExtension._parse_block"ù
 /Tuple[builtins.list[builtins.str],builtins.str]J
 builtins.list[builtins.str]
@@ -431,12 +433,17 @@ AUnion[builtins.str,None,builtins.tuple[Union[builtins.str,None]]]
 optionsW
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
+Any"builtins.dict*Ü
+__annotations__jinja2.ext.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
 Any"builtins.dict*
 ttyping *
 tetyping_extensions *
 GETTEXT_FUNCTIONSjinja2.ext.GETTEXT_FUNCTIONSL
 builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*i
-_ws_rejinja2.ext._ws_reL
-typing.Pattern[builtins.str]
-builtins.str"builtins.str"typing.Pattern
+builtins.str"builtins.str"builtins.tuple*a
+_ws_rejinja2.ext._ws_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern

@@ -1,0 +1,410 @@
+
+aws_xray_sdk.coreªñ
+AWSXRayRecorder*aws_xray_sdk.core.recorder.AWSXRayRecorder"builtins.object*¬
+__init__3aws_xray_sdk.core.recorder.AWSXRayRecorder.__init__"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*Û
+	configure4aws_xray_sdk.core.recorder.AWSXRayRecorder.configure"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*W
+samplingG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ó
+pluginsá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+None *[
+context_missingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+sampling_rulesΩ
+8Union[builtins.dict[builtins.str,Any],builtins.str,None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str
+None *Z
+daemon_addressD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+serviceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ì
+contextÉ
+-Union[aws_xray_sdk.core.context.Context,None]F
+!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context
+None *√
+emitter≥
+=Union[aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter,None]f
+1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter"1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter
+None *Ì
+	streaming€
+JUnion[aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming,None]Ä
+>aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming">aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming
+None *Ñ
+dynamic_namingÌ
+PUnion[aws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming,None]å
+Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming"Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming
+None *_
+streaming_thresholdD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Z
+max_trace_backD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *È
+samplerŸ
+sUnion[aws_xray_sdk.core.sampling.local.sampler.LocalSampler,aws_xray_sdk.core.sampling.sampler.DefaultSampler,None]n
+5aws_xray_sdk.core.sampling.local.sampler.LocalSampler"5aws_xray_sdk.core.sampling.local.sampler.LocalSamplerf
+1aws_xray_sdk.core.sampling.sampler.DefaultSampler"1aws_xray_sdk.core.sampling.sampler.DefaultSampler
+None *Y
+
+stream_sqlG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310*ù
+
+in_segment5aws_xray_sdk.core.recorder.AWSXRayRecorder.in_segment"p
+6aws_xray_sdk.core.models.segment.SegmentContextManager"6aws_xray_sdk.core.models.segment.SegmentContextManager*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+segment_kwargs
+Anyz36z37z38z39z310*≤
+in_subsegment8aws_xray_sdk.core.recorder.AWSXRayRecorder.in_subsegment"|
+<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+subsegment_kwargs
+Anyz36z37z38z39z310*»
+begin_segment8aws_xray_sdk.core.recorder.AWSXRayRecorder.begin_segment"¨
+dUnion[aws_xray_sdk.core.models.segment.Segment,aws_xray_sdk.core.models.dummy_entities.DummySegment]T
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segmentl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegment*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+traceidD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	parent_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+samplingG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310*≠
+end_segment6aws_xray_sdk.core.recorder.AWSXRayRecorder.end_segment"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*‚
+end_time—
+íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
+ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int"time.struct_time
+None z36z37z38z39z310*ú
+current_segment:aws_xray_sdk.core.recorder.AWSXRayRecorder.current_segment"T
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*¯
+begin_subsegment;aws_xray_sdk.core.recorder.AWSXRayRecorder.begin_subsegment"÷
+rUnion[aws_xray_sdk.core.models.dummy_entities.DummySubsegment,aws_xray_sdk.core.models.subsegment.Subsegment,None]r
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegment
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*&
+name
+builtins.str"builtins.str*-
+	namespace
+builtins.str"builtins.str z36z37z38z39z310*•
+current_subsegment=aws_xray_sdk.core.recorder.AWSXRayRecorder.current_subsegment"÷
+rUnion[aws_xray_sdk.core.models.subsegment.Subsegment,aws_xray_sdk.core.models.dummy_entities.DummySubsegment,None]`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*≥
+end_subsegment9aws_xray_sdk.core.recorder.AWSXRayRecorder.end_subsegment"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*‚
+end_time—
+íUnion[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]],None]≠
+ÜTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]ç
+{Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int"time.struct_time
+None z36z37z38z39z310*â
+put_annotation9aws_xray_sdk.core.recorder.AWSXRayRecorder.put_annotation"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*%
+key
+builtins.str"builtins.str*
+value
+Anyz36z37z38z39z310*¥
+put_metadata7aws_xray_sdk.core.recorder.AWSXRayRecorder.put_metadata"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*%
+key
+builtins.str"builtins.str*
+value
+Any*-
+	namespace
+builtins.str"builtins.str z36z37z38z39z310*‹
+
+is_sampled5aws_xray_sdk.core.recorder.AWSXRayRecorder.is_sampled"
+builtins.bool"builtins.bool*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*µ
+get_trace_entity;aws_xray_sdk.core.recorder.AWSXRayRecorder.get_trace_entity"Í
+ÀUnion[aws_xray_sdk.core.models.segment.Segment,aws_xray_sdk.core.models.subsegment.Subsegment,aws_xray_sdk.core.models.dummy_entities.DummySegment,aws_xray_sdk.core.models.dummy_entities.DummySubsegment]T
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegmentr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegment*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*“
+set_trace_entity;aws_xray_sdk.core.recorder.AWSXRayRecorder.set_trace_entity"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*˝
+trace_entityÍ
+ÀUnion[aws_xray_sdk.core.models.segment.Segment,aws_xray_sdk.core.models.subsegment.Subsegment,aws_xray_sdk.core.models.dummy_entities.DummySegment,aws_xray_sdk.core.models.dummy_entities.DummySubsegment]T
+(aws_xray_sdk.core.models.segment.Segment"(aws_xray_sdk.core.models.segment.Segment`
+.aws_xray_sdk.core.models.subsegment.Subsegment".aws_xray_sdk.core.models.subsegment.Subsegmentl
+4aws_xray_sdk.core.models.dummy_entities.DummySegment"4aws_xray_sdk.core.models.dummy_entities.DummySegmentr
+7aws_xray_sdk.core.models.dummy_entities.DummySubsegment"7aws_xray_sdk.core.models.dummy_entities.DummySubsegmentz36z37z38z39z310*⁄
+clear_trace_entities?aws_xray_sdk.core.recorder.AWSXRayRecorder.clear_trace_entities"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*÷
+stream_subsegments=aws_xray_sdk.core.recorder.AWSXRayRecorder.stream_subsegments"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorderz36z37z38z39z310*Ü
+capture2aws_xray_sdk.core.recorder.AWSXRayRecorder.capture"|
+<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager"<aws_xray_sdk.core.models.subsegment.SubsegmentContextManager*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310*ó
+record_subsegment<aws_xray_sdk.core.recorder.AWSXRayRecorder.record_subsegment"
+Any*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*X
+wrappedK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+instance
+Any*6
+args,
+builtins.list[Any]
+Any"builtins.list*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*&
+name
+builtins.str"builtins.str*+
+	namespace
+builtins.str"builtins.str*_
+meta_processorK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz36z37z38z39z3102ë
+enabled2aws_xray_sdk.core.recorder.AWSXRayRecorder.enabled—
+enabled2aws_xray_sdk.core.recorder.AWSXRayRecorder.enabled"
+builtins.bool"builtins.bool*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`Ë
+enabled2aws_xray_sdk.core.recorder.AWSXRayRecorder.enabled"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*)
+value
+builtins.bool"builtins.bool0:enabled.setter"36"37"38"39"3102ò
+sampling3aws_xray_sdk.core.recorder.AWSXRayRecorder.sampling”
+sampling3aws_xray_sdk.core.recorder.AWSXRayRecorder.sampling"
+builtins.bool"builtins.bool*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`Î
+sampling3aws_xray_sdk.core.recorder.AWSXRayRecorder.sampling"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*)
+value
+builtins.bool"builtins.bool0:sampling.setter"36"37"38"39"3102Ï
+sampler2aws_xray_sdk.core.recorder.AWSXRayRecorder.sampler˛
+sampler2aws_xray_sdk.core.recorder.AWSXRayRecorder.sampler" 
+nUnion[aws_xray_sdk.core.sampling.local.sampler.LocalSampler,aws_xray_sdk.core.sampling.sampler.DefaultSampler]n
+5aws_xray_sdk.core.sampling.local.sampler.LocalSampler"5aws_xray_sdk.core.sampling.local.sampler.LocalSamplerf
+1aws_xray_sdk.core.sampling.sampler.DefaultSampler"1aws_xray_sdk.core.sampling.sampler.DefaultSampler*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`ñ
+sampler2aws_xray_sdk.core.recorder.AWSXRayRecorder.sampler"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*÷
+value 
+nUnion[aws_xray_sdk.core.sampling.local.sampler.LocalSampler,aws_xray_sdk.core.sampling.sampler.DefaultSampler]n
+5aws_xray_sdk.core.sampling.local.sampler.LocalSampler"5aws_xray_sdk.core.sampling.local.sampler.LocalSamplerf
+1aws_xray_sdk.core.sampling.sampler.DefaultSampler"1aws_xray_sdk.core.sampling.sampler.DefaultSampler0:sampler.setter"36"37"38"39"3102ç
+service2aws_xray_sdk.core.recorder.AWSXRayRecorder.serviceœ
+service2aws_xray_sdk.core.recorder.AWSXRayRecorder.service"
+builtins.str"builtins.str*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`Ê
+service2aws_xray_sdk.core.recorder.AWSXRayRecorder.service"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*'
+value
+builtins.str"builtins.str0:service.setter"36"37"38"39"3102ﬂ
+dynamic_naming9aws_xray_sdk.core.recorder.AWSXRayRecorder.dynamic_naming≠
+dynamic_naming9aws_xray_sdk.core.recorder.AWSXRayRecorder.dynamic_naming"Î
+OUnion[Any,aws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming]
+Anyå
+Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming"Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`Ã
+dynamic_naming9aws_xray_sdk.core.recorder.AWSXRayRecorder.dynamic_naming"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*˜
+valueÎ
+OUnion[Any,aws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming]
+Anyå
+Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming"Daws_xray_sdk.core.models.default_dynamic_naming.DefaultDynamicNaming0:dynamic_naming.setter"36"37"38"39"3102ﬂ
+context2aws_xray_sdk.core.recorder.AWSXRayRecorder.context˘
+context2aws_xray_sdk.core.recorder.AWSXRayRecorder.context"F
+!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`é
+context2aws_xray_sdk.core.recorder.AWSXRayRecorder.context"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*O
+cxtF
+!aws_xray_sdk.core.context.Context"!aws_xray_sdk.core.context.Context0:context.setter"36"37"38"39"3102°
+emitter2aws_xray_sdk.core.recorder.AWSXRayRecorder.emitterô
+emitter2aws_xray_sdk.core.recorder.AWSXRayRecorder.emitter"f
+1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter"1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`∞
+emitter2aws_xray_sdk.core.recorder.AWSXRayRecorder.emitter"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*q
+valuef
+1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter"1aws_xray_sdk.core.emitters.udp_emitter.UDPEmitter0:emitter.setter"36"37"38"39"3102Ê
+	streaming4aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming∏
+	streaming4aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming"Ä
+>aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming">aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`“
+	streaming4aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*å
+valueÄ
+>aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming">aws_xray_sdk.core.streaming.default_streaming.DefaultStreaming0:streaming.setter"36"37"38"39"3102·
+streaming_threshold>aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming_thresholdÁ
+streaming_threshold>aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming_threshold"
+builtins.int"builtins.int*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`ä
+streaming_threshold>aws_xray_sdk.core.recorder.AWSXRayRecorder.streaming_threshold"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*'
+value
+builtins.int"builtins.int0:streaming_threshold.setter"36"37"38"39"3102æ
+max_trace_back9aws_xray_sdk.core.recorder.AWSXRayRecorder.max_trace_back›
+max_trace_back9aws_xray_sdk.core.recorder.AWSXRayRecorder.max_trace_back"
+builtins.int"builtins.int*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`˚
+max_trace_back9aws_xray_sdk.core.recorder.AWSXRayRecorder.max_trace_back"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*'
+value
+builtins.int"builtins.int0:max_trace_back.setter"36"37"38"39"3102¶
+
+stream_sql5aws_xray_sdk.core.recorder.AWSXRayRecorder.stream_sql◊
+
+stream_sql5aws_xray_sdk.core.recorder.AWSXRayRecorder.stream_sql"
+builtins.bool"builtins.bool*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder0:propertyX`Ò
+
+stream_sql5aws_xray_sdk.core.recorder.AWSXRayRecorder.stream_sql"
+None*b
+selfX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*)
+value
+builtins.bool"builtins.bool0:stream_sql.setter"36"37"38"39"310j36j37j38j39j310≈
+patchaws_xray_sdk.core.patcher.patch"
+None*d
+modules_to_patchN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*2
+raise_errors
+builtins.bool"builtins.bool *b
+ignore_module_patternsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310É
+	patch_all#aws_xray_sdk.core.patcher.patch_all"
+None*2
+double_patch
+builtins.bool"builtins.bool z36z37z38z39z310*á
+__path__aws_xray_sdk.core.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*¢
+__annotations__!aws_xray_sdk.core.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*ü
+xray_recorderaws_xray_sdk.core.xray_recorderX
+*aws_xray_sdk.core.recorder.AWSXRayRecorder"*aws_xray_sdk.core.recorder.AWSXRayRecorder*36*37*38*39*310

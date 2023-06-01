@@ -1,24 +1,70 @@
 
-redis.exceptionsV
+redis.exceptionsR
 
-RedisErrorredis.exceptions.RedisError"builtins.Exceptionj35j36j37j38j39j310q
-AuthenticationError$redis.exceptions.AuthenticationError"redis.exceptions.RedisErrorj35j36j37j38j39j310i
-ConnectionError redis.exceptions.ConnectionError"redis.exceptions.RedisErrorj35j36j37j38j39j310c
-TimeoutErrorredis.exceptions.TimeoutError"redis.exceptions.RedisErrorj35j36j37j38j39j310p
-BusyLoadingError!redis.exceptions.BusyLoadingError" redis.exceptions.ConnectionErrorj35j36j37j38j39j310i
-InvalidResponse redis.exceptions.InvalidResponse"redis.exceptions.RedisErrorj35j36j37j38j39j310e
-ResponseErrorredis.exceptions.ResponseError"redis.exceptions.RedisErrorj35j36j37j38j39j310]
-	DataErrorredis.exceptions.DataError"redis.exceptions.RedisErrorj35j36j37j38j39j310a
-PubSubErrorredis.exceptions.PubSubError"redis.exceptions.RedisErrorj35j36j37j38j39j310_
+RedisErrorredis.exceptions.RedisError"builtins.Exceptionj36j37j38j39j310m
+AuthenticationError$redis.exceptions.AuthenticationError"redis.exceptions.RedisErrorj36j37j38j39j310e
+ConnectionError redis.exceptions.ConnectionError"redis.exceptions.RedisErrorj36j37j38j39j310_
+TimeoutErrorredis.exceptions.TimeoutError"redis.exceptions.RedisErrorj36j37j38j39j310p
+AuthorizationError#redis.exceptions.AuthorizationError" redis.exceptions.ConnectionErrorj36j37j38j39j310l
+BusyLoadingError!redis.exceptions.BusyLoadingError" redis.exceptions.ConnectionErrorj36j37j38j39j310e
+InvalidResponse redis.exceptions.InvalidResponse"redis.exceptions.RedisErrorj36j37j38j39j310a
+ResponseErrorredis.exceptions.ResponseError"redis.exceptions.RedisErrorj36j37j38j39j310Y
+	DataErrorredis.exceptions.DataError"redis.exceptions.RedisErrorj36j37j38j39j310]
+PubSubErrorredis.exceptions.PubSubError"redis.exceptions.RedisErrorj36j37j38j39j310[
 
-WatchErrorredis.exceptions.WatchError"redis.exceptions.RedisErrorj35j36j37j38j39j310h
-NoScriptErrorredis.exceptions.NoScriptError"redis.exceptions.ResponseErrorj35j36j37j38j39j310j
-ExecAbortErrorredis.exceptions.ExecAbortError"redis.exceptions.ResponseErrorj35j36j37j38j39j310h
-ReadOnlyErrorredis.exceptions.ReadOnlyError"redis.exceptions.ResponseErrorj35j36j37j38j39j310p
-NoPermissionError"redis.exceptions.NoPermissionError"redis.exceptions.ResponseErrorj35j36j37j38j39j310r
-	LockErrorredis.exceptions.LockError"redis.exceptions.RedisError"builtins.ValueErrorj35j36j37j38j39j310l
-LockNotOwnedError"redis.exceptions.LockNotOwnedError"redis.exceptions.LockErrorj35j36j37j38j39j310j
-ChildDeadlockedError%redis.exceptions.ChildDeadlockedError"builtins.Exceptionj35j36j37j38j39j310–
-$AuthenticationWrongNumberOfArgsError5redis.exceptions.AuthenticationWrongNumberOfArgsError"redis.exceptions.ResponseErrorj35j36j37j38j39j310N
-__unicode__redis.exceptions.__unicode__*
-selfz35z36z37z38z39z310
+WatchErrorredis.exceptions.WatchError"redis.exceptions.RedisErrorj36j37j38j39j310d
+NoScriptErrorredis.exceptions.NoScriptError"redis.exceptions.ResponseErrorj36j37j38j39j310f
+ExecAbortErrorredis.exceptions.ExecAbortError"redis.exceptions.ResponseErrorj36j37j38j39j310d
+ReadOnlyErrorredis.exceptions.ReadOnlyError"redis.exceptions.ResponseErrorj36j37j38j39j310l
+NoPermissionError"redis.exceptions.NoPermissionError"redis.exceptions.ResponseErrorj36j37j38j39j310`
+ModuleErrorredis.exceptions.ModuleError"redis.exceptions.ResponseErrorj36j37j38j39j310n
+	LockErrorredis.exceptions.LockError"redis.exceptions.RedisError"builtins.ValueErrorj36j37j38j39j310h
+LockNotOwnedError"redis.exceptions.LockNotOwnedError"redis.exceptions.LockErrorj36j37j38j39j310f
+ChildDeadlockedError%redis.exceptions.ChildDeadlockedError"builtins.Exceptionj36j37j38j39j310’
+$AuthenticationWrongNumberOfArgsError5redis.exceptions.AuthenticationWrongNumberOfArgsError"redis.exceptions.ResponseErrorj36j37j38j39j310h
+RedisClusterException&redis.exceptions.RedisClusterException"builtins.Exceptionj36j37j38j39j310_
+ClusterErrorredis.exceptions.ClusterError"redis.exceptions.RedisErrorj36j37j38j39j310À
+ClusterDownError!redis.exceptions.ClusterDownError"redis.exceptions.ClusterError"redis.exceptions.ResponseError*Ï
+__init__*redis.exceptions.ClusterDownError.__init__"
+None*P
+selfF
+!redis.exceptions.ClusterDownError"!redis.exceptions.ClusterDownError*&
+resp
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310rz
+args&redis.exceptions.ClusterDownError.args5
+Tuple[builtins.str]
+builtins.str"builtins.str*36*37*38*39*310rg
+message)redis.exceptions.ClusterDownError.message
+builtins.str"builtins.str*36*37*38*39*310ª
+AskErrorredis.exceptions.AskError"redis.exceptions.ResponseError*·
+__init__"redis.exceptions.AskError.__init__"
+None*@
+self6
+redis.exceptions.AskError"redis.exceptions.AskError*&
+resp
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310rr
+argsredis.exceptions.AskError.args5
+Tuple[builtins.str]
+builtins.str"builtins.str*36*37*38*39*310r_
+message!redis.exceptions.AskError.message
+builtins.str"builtins.str*36*37*38*39*310r_
+slot_id!redis.exceptions.AskError.slot_id
+builtins.int"builtins.int*36*37*38*39*310r§
+	node_addr#redis.exceptions.AskError.node_addr`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int*36*37*38*39*310rY
+hostredis.exceptions.AskError.host
+builtins.str"builtins.str*36*37*38*39*310rY
+portredis.exceptions.AskError.port
+builtins.int"builtins.int*36*37*38*39*310d
+TryAgainErrorredis.exceptions.TryAgainError"redis.exceptions.ResponseErrorj36j37j38j39j310t
+ClusterCrossSlotError&redis.exceptions.ClusterCrossSlotError"redis.exceptions.ResponseErrorj36j37j38j39j310Y
+
+MovedErrorredis.exceptions.MovedError"redis.exceptions.AskErrorj36j37j38j39j310k
+MasterDownError redis.exceptions.MasterDownError"!redis.exceptions.ClusterDownErrorj36j37j38j39j310x
+SlotNotCoveredError$redis.exceptions.SlotNotCoveredError"&redis.exceptions.RedisClusterExceptionj36j37j38j39j310*¡
+__annotations__ redis.exceptions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

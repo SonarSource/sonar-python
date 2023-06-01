@@ -1,6 +1,13 @@
 
-urllib3.responseE
-_HttplibHTTPMessagehttp.client.HTTPMessage"email.message.Messageã$
+urllib3.responseÀ
+_HttplibHTTPMessagehttp.client.HTTPMessage"email.message.Message*ø
+getallmatchingheaders-http.client.HTTPMessage.getallmatchingheaders"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*<
+self2
+http.client.HTTPMessage"http.client.HTTPMessage*&
+name
+builtins.str"builtins.strÜ(
 _HttplibHTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*ö
 __init__!http.client.HTTPResponse.__init__"
 None*>
@@ -18,7 +25,13 @@ debuglevel
 urlD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *Ø
+None *®
+peekhttp.client.HTTPResponse.peek" 
+builtins.bytes"builtins.bytes*>
+self4
+http.client.HTTPResponse"http.client.HTTPResponse*%
+n
+builtins.int"builtins.int *Ø
 readhttp.client.HTTPResponse.read" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -32,19 +45,21 @@ debuglevel
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int *ï
+builtins.int"builtins.int *ÿ
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*á
-bÙ
-STypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]ä
-HUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap](
+http.client.HTTPResponse"http.client.HTTPResponse*ñ
+bé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
 builtins.bytearray"builtins.bytearray*
 builtins.memoryview"builtins.memoryview(
 array.array[Any]
 Any"array.array
-	mmap.mmap"	mmap.mmap"_typeshed.WriteableBuffer*º
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer*º
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -58,40 +73,28 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.str"builtins.str
 builtins.str"builtins.str"builtins.list*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*‡
-filenohttp.client.HTTPResponse.fileno"
-builtins.int"builtins.int*>
-self4
 http.client.HTTPResponse"http.client.HTTPResponse*
 isclosed!http.client.HTTPResponse.isclosed"
 builtins.bool"builtins.bool*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*Á
+http.client.HTTPResponse"http.client.HTTPResponse*»
 __iter__!http.client.HTTPResponse.__iter__"T
 typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*£
-	__enter__"http.client.HTTPResponse.__enter__"4
-http.client.HTTPResponse"http.client.HTTPResponse*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*¢
-__exit__!http.client.HTTPResponse.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*—
-exc_typeŠ
+builtins.bytes"builtins.bytes"typing.Iterator*64
+http.client.HTTPResponse"http.client.HTTPResponse*w
+	__enter__"http.client.HTTPResponse.__enter__"!
+http.client.HTTPResponse.Self*#!
+http.client.HTTPResponse.Self*Â
+__exit__!http.client.HTTPResponse.__exit__"
+None*64
+http.client.HTTPResponse"http.client.HTTPResponse*Š
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*•
@@ -139,18 +142,32 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 
 debuglevel#http.client.HTTPResponse.debuglevel
 builtins.int"builtins.intrI
+fphttp.client.HTTPResponse.fp&
+io.BufferedReader"io.BufferedReaderrI
 closedhttp.client.HTTPResponse.closed
 builtins.bool"builtins.boolrG
 statushttp.client.HTTPResponse.status
 builtins.int"builtins.intrG
 reasonhttp.client.HTTPResponse.reason
-builtins.str"builtins.strÑ
-DeflateDecoderurllib3.response.DeflateDecoder"builtins.object*µ
+builtins.str"builtins.strrK
+chunked http.client.HTTPResponse.chunked
+builtins.bool"builtins.boolrw
+
+chunk_left#http.client.HTTPResponse.chunk_leftD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonero
+lengthhttp.client.HTTPResponse.lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerQ
+
+will_close#http.client.HTTPResponse.will_close
+builtins.bool"builtins.boolÅ
+DeflateDecoderurllib3.response.DeflateDecoder"builtins.object*©
 __getattr__+urllib3.response.DeflateDecoder.__getattr__"
-Any*J
-selfB
-urllib3.response.DeflateDecoder"urllib3.response.DeflateDecoder*$
-name
+Any*DB
+urllib3.response.DeflateDecoder"urllib3.response.DeflateDecoder*
 builtins.str"builtins.str*Ô
 
 decompress*urllib3.response.DeflateDecoder.decompress" 
@@ -168,13 +185,11 @@ decompress*urllib3.response.DeflateDecoder.decompress"
 builtins.int"builtins.intrw
 SWALLOW_DATA.urllib3.response.GzipDecoderState.SWALLOW_DATA7
 Literal[builtins.int]	
-builtins.int"builtins.int¹
-GzipDecoderurllib3.response.GzipDecoder"builtins.object*¬
+builtins.int"builtins.int­
+GzipDecoderurllib3.response.GzipDecoder"builtins.object* 
 __getattr__(urllib3.response.GzipDecoder.__getattr__"
-Any*D
-self<
-urllib3.response.GzipDecoder"urllib3.response.GzipDecoder*$
-name
+Any*><
+urllib3.response.GzipDecoder"urllib3.response.GzipDecoder*
 builtins.str"builtins.str*Ë
 
 decompress'urllib3.response.GzipDecoder.decompress" 
@@ -205,14 +220,21 @@ decompress(urllib3.response.MultiDecoder.decompress"
 self>
 urllib3.response.MultiDecoder"urllib3.response.MultiDecoder**
 data 
-builtins.bytes"builtins.bytes‹B
-HTTPResponseurllib3.response.HTTPResponse"	io.IOBase*Ð
+builtins.bytes"builtins.bytesE
+HTTPResponseurllib3.response.HTTPResponse"	io.IOBase*È
 __init__&urllib3.response.HTTPResponse.__init__"
 None*H
 self>
-urllib3.response.HTTPResponse"urllib3.response.HTTPResponse*'
-body
-UnboundType[_TYPE_BODY] *€
+urllib3.response.HTTPResponse"urllib3.response.HTTPResponse*ž
+body‘
+\TypeAlias[Union[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str]]‘
+QUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str] 
+builtins.bytes"builtins.bytes$
+typing.IO[Any]
+Any"	typing.IOT
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str"urllib3.response._TYPE_BODY *€
 headersð
 cUnion[typing.Mapping[builtins.str,builtins.str],typing.Mapping[builtins.bytes,builtins.bytes],None]w
 )typing.Mapping[builtins.str,builtins.str]
@@ -334,12 +356,12 @@ connection(urllib3.response.HTTPResponse.connection"
 decode_contentG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None *
-from_httplib*urllib3.response.HTTPResponse.from_httplib"
-Any*p
-clsg
-#Type[urllib3.response.HTTPResponse]>
-urllib3.response.HTTPResponse"urllib3.response.HTTPResponse*;
+None *©
+from_httplib*urllib3.response.HTTPResponse.from_httplib"&
+"urllib3.response.HTTPResponse.Self*]
+clsT
+(Type[urllib3.response.HTTPResponse.Self]&
+"urllib3.response.HTTPResponse.Self*;
 r4
 http.client.HTTPResponse"http.client.HTTPResponse*
 response_kw
@@ -455,9 +477,8 @@ chunk_left(urllib3.response.HTTPResponse.chunk_leftD
 length_remaining.urllib3.response.HTTPResponse.length_remainingD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None*&
-Selfurllib3.response.Self
-Any*E
-
-_TYPE_BODYurllib3.response._TYPE_BODY
-UnboundType[TypeAlias]
+None*Œ
+__annotations__ urllib3.response.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

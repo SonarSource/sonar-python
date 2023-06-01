@@ -1,52 +1,191 @@
 
 
-dateparser†
-parsedateparser.parse"S
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None*-
-date_string
-builtins.str"builtins.str*Æ
-date_formats±
-VUnion[builtins.list[builtins.str],Tuple[builtins.str],builtins.set[builtins.str],None]J
+dateparser-
+DateDataParserdateparser.date.DateDataParser"builtins.object*¿
+__init__'dateparser.date.DateDataParser.__init__"
+None*J
+self@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*ã
+	languagesÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list5
-Tuple[builtins.str]
-builtins.str"builtins.strH
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
 builtins.set[builtins.str]
 builtins.str"builtins.str"builtins.set
-None *Ã
-	languages±
-VUnion[builtins.list[builtins.str],Tuple[builtins.str],builtins.set[builtins.str],None]J
+None *á
+localesÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list5
-Tuple[builtins.str]
-builtins.str"builtins.strH
-builtins.set[builtins.str]
-builtins.str"builtins.str"builtins.set
-None *Á
-locales±
-VUnion[builtins.list[builtins.str],Tuple[builtins.str],builtins.set[builtins.str],None]J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list5
-Tuple[builtins.str]
-builtins.str"builtins.strH
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
 builtins.set[builtins.str]
 builtins.str"builtins.str"builtins.set
 None *R
 regionD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *¦
-settings•
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
+None *:
+try_previous_locales
+builtins.bool"builtins.bool *5
+use_given_order
+builtins.bool"builtins.bool *}
+settingsm
+ Union[TypeAlias[TypedDict],None]=
+TypeAlias[TypedDict]
+	TypedDict"dateparser._Settings
+None *
+detect_languages_functionì
+6Union[TypeAlias[CallableType[builtins.function]],None]¥
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"(dateparser.date._DetectLanguagesFunction
+None z36z37z38z39z310*ì
+get_date_data,dateparser.date.DateDataParser.get_date_data"4
+dateparser.date.DateData"dateparser.date.DateData*J
+self@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*-
+date_string
+builtins.str"builtins.str*æ
+date_formatsÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None z36z37z38z39z310*Á
+get_date_tuple-dateparser.date.DateDataParser.get_date_tuple"
+Any*J
+self@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*-
+date_string
+builtins.str"builtins.str*æ
+date_formatsÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None z36z37z38z39z310*ô
+_get_applicable_locales6dateparser.date.DateDataParser._get_applicable_locales"
+3typing.Iterator[dateparser.languages.locale.Locale]H
+"dateparser.languages.locale.Locale""dateparser.languages.locale.Locale"typing.Iterator*J
+self@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*-
+date_string
+builtins.str"builtins.strz36z37z38z39z310*Ó
+_is_applicable_locale4dateparser.date.DateDataParser._is_applicable_locale"
+builtins.bool"builtins.bool*J
+self@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*T
+localeH
+"dateparser.languages.locale.Locale""dateparser.languages.locale.Locale*-
+date_string
+builtins.str"builtins.strz36z37z38z39z310*À
+_get_locale_loader1dateparser.date.DateDataParser._get_locale_loader"\
+,dateparser.languages.loader.LocaleDataLoader",dateparser.languages.loader.LocaleDataLoader*s
+clsj
+$Type[dateparser.date.DateDataParser]@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser0:classmethodpz36z37z38z39z310j36j37j38j39j310r€
+	_settings(dateparser.date.DateDataParser._settings4
+dateparser.conf.Settings"dateparser.conf.Settings*36*37*38*39*310rù
+locale_loader,dateparser.date.DateDataParser.locale_loader¤
+8Union[dateparser.languages.loader.LocaleDataLoader,None]\
+,dateparser.languages.loader.LocaleDataLoader",dateparser.languages.loader.LocaleDataLoader
+None*36*37*38*39*310r€
+try_previous_locales3dateparser.date.DateDataParser.try_previous_locales
+builtins.bool"builtins.bool*36*37*38*39*310rv
+use_given_order.dateparser.date.DateDataParser.use_given_order
+builtins.bool"builtins.bool*36*37*38*39*310rÎ
+	languages(dateparser.date.DateDataParser.languages
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*36*37*38*39*310rš
+locales&dateparser.date.DateDataParser.localesÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None*36*37*38*39*310rb
+region%dateparser.date.DateDataParser.region
+builtins.str"builtins.str*36*37*38*39*310rÙ
+detect_languages_function8dateparser.date.DateDataParser.detect_languages_functionì
+6Union[TypeAlias[CallableType[builtins.function]],None]¥
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"(dateparser.date._DetectLanguagesFunction
+None*36*37*38*39*310rŠ
+previous_locales/dateparser.date.DateDataParser.previous_locales¯
+@collections.OrderedDict[dateparser.languages.locale.Locale,None]H
+"dateparser.languages.locale.Locale""dateparser.languages.locale.Locale
+None"collections.OrderedDict*36*37*38*39*310I
+	_Settingsdateparser._Settings"typing._TypedDictj36j37j38j39j310É
+parsedateparser.parse"S
+Union[datetime.datetime,None]&
+datetime.datetime"datetime.datetime
+None*-
+date_string
+builtins.str"builtins.str*æ
+date_formatsÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None *ã
+	languagesÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None *á
+localesÑ
+_Union[builtins.list[builtins.str],builtins.tuple[builtins.str],builtins.set[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None *R
+regionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *}
+settingsm
+ Union[TypeAlias[TypedDict],None]=
+TypeAlias[TypedDict]
+	TypedDict"dateparser._Settings
+None *
+detect_languages_functionì
+6Union[TypeAlias[CallableType[builtins.function]],None]¥
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"(dateparser.date._DetectLanguagesFunction
+None z36z37z38z39z310*€
+__path__dateparser.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*›
+__annotations__dateparser.__annotations__W
+builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping
-None z35z36z37z38z39z310m
-__getattr__dateparser.__getattr__"
-Any*$
-name
-builtins.str"builtins.strz35z36z37z38z39z310*\
+Any"builtins.dict*36*37*38*39*310*X
 __version__dateparser.__version__
-builtins.str"builtins.str*35*36*37*38*39*310
+builtins.str"builtins.str*36*37*38*39*310*„
+_default_parserdateparser._default_parser@
+dateparser.date.DateDataParser"dateparser.date.DateDataParser*36*37*38*39*310

@@ -1,17 +1,32 @@
 
-socket∆
+socket.
+gaierror_socket.gaierror"builtins.OSError*
+herror_socket.herror"builtins.OSError,
+timeout_socket.timeout"builtins.OSError∆
 AddressFamilysocket.AddressFamily"enum.IntEnumHrE
-AF_UNIXsocket.AddressFamily.AF_UNIX
-builtins.int"builtins.intrE
 AF_INETsocket.AddressFamily.AF_INET
 builtins.int"builtins.intrG
 AF_INET6socket.AddressFamily.AF_INET6
-builtins.int"builtins.intrE
-AF_AAL5socket.AddressFamily.AF_AAL5
-builtins.int"builtins.intrC
-AF_ALGsocket.AddressFamily.AF_ALG
 builtins.int"builtins.intrO
 AF_APPLETALK!socket.AddressFamily.AF_APPLETALK
+builtins.int"builtins.intrI
+	AF_DECnetsocket.AddressFamily.AF_DECnet
+builtins.int"builtins.intrC
+AF_IPXsocket.AddressFamily.AF_IPX
+builtins.int"builtins.intrC
+AF_SNAsocket.AddressFamily.AF_SNA
+builtins.int"builtins.intrI
+	AF_UNSPECsocket.AddressFamily.AF_UNSPEC
+builtins.int"builtins.intrE
+AF_IRDAsocket.AddressFamily.AF_IRDA
+builtins.int"builtins.intrG
+AF_ROUTEsocket.AddressFamily.AF_ROUTE
+builtins.int"builtins.intrI
+	AF_SYSTEMsocket.AddressFamily.AF_SYSTEM
+builtins.int"builtins.intrE
+AF_UNIXsocket.AddressFamily.AF_UNIX
+builtins.int"builtins.intrE
+AF_AAL5socket.AddressFamily.AF_AAL5
 builtins.int"builtins.intrC
 AF_ASHsocket.AddressFamily.AF_ASH
 builtins.int"builtins.intrI
@@ -20,64 +35,52 @@
 	AF_ATMSVCsocket.AddressFamily.AF_ATMSVC
 builtins.int"builtins.intrE
 AF_AX25socket.AddressFamily.AF_AX25
-builtins.int"builtins.intrO
-AF_BLUETOOTH!socket.AddressFamily.AF_BLUETOOTH
 builtins.int"builtins.intrI
 	AF_BRIDGEsocket.AddressFamily.AF_BRIDGE
-builtins.int"builtins.intrC
-AF_CANsocket.AddressFamily.AF_CAN
-builtins.int"builtins.intrI
-	AF_DECnetsocket.AddressFamily.AF_DECnet
 builtins.int"builtins.intrI
 	AF_ECONETsocket.AddressFamily.AF_ECONET
 builtins.int"builtins.intrC
-AF_IPXsocket.AddressFamily.AF_IPX
-builtins.int"builtins.intrE
-AF_IRDAsocket.AddressFamily.AF_IRDA
-builtins.int"builtins.intrC
 AF_KEYsocket.AddressFamily.AF_KEY
-builtins.int"builtins.intrE
-AF_LINKsocket.AddressFamily.AF_LINK
 builtins.int"builtins.intrC
 AF_LLCsocket.AddressFamily.AF_LLC
 builtins.int"builtins.intrK
 
 AF_NETBEUIsocket.AddressFamily.AF_NETBEUI
-builtins.int"builtins.intrK
-
-AF_NETLINKsocket.AddressFamily.AF_NETLINK
 builtins.int"builtins.intrI
 	AF_NETROMsocket.AddressFamily.AF_NETROM
-builtins.int"builtins.intrI
-	AF_PACKETsocket.AddressFamily.AF_PACKET
 builtins.int"builtins.intrG
 AF_PPPOXsocket.AddressFamily.AF_PPPOX
-builtins.int"builtins.intrK
-
-AF_QIPCRTRsocket.AddressFamily.AF_QIPCRTR
-builtins.int"builtins.intrC
-AF_RDSsocket.AddressFamily.AF_RDS
 builtins.int"builtins.intrE
 AF_ROSEsocket.AddressFamily.AF_ROSE
-builtins.int"builtins.intrG
-AF_ROUTEsocket.AddressFamily.AF_ROUTE
 builtins.int"builtins.intrM
 AF_SECURITY socket.AddressFamily.AF_SECURITY
-builtins.int"builtins.intrC
-AF_SNAsocket.AddressFamily.AF_SNA
-builtins.int"builtins.intrI
-	AF_SYSTEMsocket.AddressFamily.AF_SYSTEM
-builtins.int"builtins.intrE
-AF_TIPCsocket.AddressFamily.AF_TIPC
-builtins.int"builtins.intrI
-	AF_UNSPECsocket.AddressFamily.AF_UNSPEC
-builtins.int"builtins.intrG
-AF_VSOCKsocket.AddressFamily.AF_VSOCK
 builtins.int"builtins.intrK
 
 AF_WANPIPEsocket.AddressFamily.AF_WANPIPE
 builtins.int"builtins.intrC
 AF_X25socket.AddressFamily.AF_X25
+builtins.int"builtins.intrC
+AF_CANsocket.AddressFamily.AF_CAN
+builtins.int"builtins.intrI
+	AF_PACKETsocket.AddressFamily.AF_PACKET
+builtins.int"builtins.intrC
+AF_RDSsocket.AddressFamily.AF_RDS
+builtins.int"builtins.intrE
+AF_TIPCsocket.AddressFamily.AF_TIPC
+builtins.int"builtins.intrC
+AF_ALGsocket.AddressFamily.AF_ALG
+builtins.int"builtins.intrK
+
+AF_NETLINKsocket.AddressFamily.AF_NETLINK
+builtins.int"builtins.intrG
+AF_VSOCKsocket.AddressFamily.AF_VSOCK
+builtins.int"builtins.intrK
+
+AF_QIPCRTRsocket.AddressFamily.AF_QIPCRTR
+builtins.int"builtins.intrE
+AF_LINKsocket.AddressFamily.AF_LINK
+builtins.int"builtins.intrO
+AF_BLUETOOTH!socket.AddressFamily.AF_BLUETOOTH
 builtins.int"builtins.int¡
 
 SocketKindsocket.SocketKind"enum.IntEnumHrJ
@@ -95,7 +98,49 @@ SOCK_DGRAMsocket.SocketKind.SOCK_DGRAM
 SOCK_CLOEXECsocket.SocketKind.SOCK_CLOEXEC
 builtins.int"builtins.intrN
 SOCK_NONBLOCKsocket.SocketKind.SOCK_NONBLOCK
-builtins.int"builtins.int“
+builtins.int"builtins.intø
+MsgFlagsocket.MsgFlag"enum.IntFlagHrE
+
+MSG_CTRUNCsocket.MsgFlag.MSG_CTRUNC
+builtins.int"builtins.intrK
+MSG_DONTROUTEsocket.MsgFlag.MSG_DONTROUTE
+builtins.int"builtins.intr?
+MSG_OOBsocket.MsgFlag.MSG_OOB
+builtins.int"builtins.intrA
+MSG_PEEKsocket.MsgFlag.MSG_PEEK
+builtins.int"builtins.intrC
+	MSG_TRUNCsocket.MsgFlag.MSG_TRUNC
+builtins.int"builtins.intrG
+MSG_WAITALLsocket.MsgFlag.MSG_WAITALL
+builtins.int"builtins.intrC
+	MSG_BCASTsocket.MsgFlag.MSG_BCAST
+builtins.int"builtins.intrC
+	MSG_MCASTsocket.MsgFlag.MSG_MCAST
+builtins.int"builtins.intrI
+MSG_ERRQUEUEsocket.MsgFlag.MSG_ERRQUEUE
+builtins.int"builtins.intrA
+MSG_BTAGsocket.MsgFlag.MSG_BTAG
+builtins.int"builtins.intrQ
+MSG_CMSG_CLOEXECsocket.MsgFlag.MSG_CMSG_CLOEXEC
+builtins.int"builtins.intrG
+MSG_CONFIRMsocket.MsgFlag.MSG_CONFIRM
+builtins.int"builtins.intrA
+MSG_ETAGsocket.MsgFlag.MSG_ETAG
+builtins.int"builtins.intrI
+MSG_FASTOPENsocket.MsgFlag.MSG_FASTOPEN
+builtins.int"builtins.intrA
+MSG_MOREsocket.MsgFlag.MSG_MORE
+builtins.int"builtins.intrQ
+MSG_NOTIFICATIONsocket.MsgFlag.MSG_NOTIFICATION
+builtins.int"builtins.intrI
+MSG_DONTWAITsocket.MsgFlag.MSG_DONTWAIT
+builtins.int"builtins.intr?
+MSG_EOFsocket.MsgFlag.MSG_EOF
+builtins.int"builtins.intr?
+MSG_EORsocket.MsgFlag.MSG_EOR
+builtins.int"builtins.intrI
+MSG_NOSIGNALsocket.MsgFlag.MSG_NOSIGNAL
+builtins.int"builtins.int∑
 AddressInfosocket.AddressInfo"enum.IntFlagHrO
 AI_ADDRCONFIG socket.AddressInfo.AI_ADDRCONFIG
 builtins.int"builtins.intrA
@@ -111,375 +156,277 @@ SOCK_DGRAMsocket.SocketKind.SOCK_DGRAM
 AI_PASSIVEsocket.AddressInfo.AI_PASSIVE
 builtins.int"builtins.intrK
 AI_V4MAPPEDsocket.AddressInfo.AI_V4MAPPED
-builtins.int"builtins.int€
-MsgFlagsocket.MsgFlag"enum.IntFlagHrE
-
-MSG_CTRUNCsocket.MsgFlag.MSG_CTRUNC
-builtins.int"builtins.intrK
-MSG_DONTROUTEsocket.MsgFlag.MSG_DONTROUTE
 builtins.int"builtins.intrI
-MSG_DONTWAITsocket.MsgFlag.MSG_DONTWAIT
-builtins.int"builtins.intr?
-MSG_EORsocket.MsgFlag.MSG_EOR
-builtins.int"builtins.intr?
-MSG_OOBsocket.MsgFlag.MSG_OOB
-builtins.int"builtins.intrA
-MSG_PEEKsocket.MsgFlag.MSG_PEEK
+
+AI_DEFAULTsocket.AddressInfo.AI_DEFAULT
 builtins.int"builtins.intrC
-	MSG_TRUNCsocket.MsgFlag.MSG_TRUNC
-builtins.int"builtins.intrG
-MSG_WAITALLsocket.MsgFlag.MSG_WAITALL
-builtins.int"builtins.int⁄
-herrorsocket.herror"builtins.OSError*Æ
-__init__socket.herror.__init__"
-None*(
-self
-socket.herror"socket.herror**
-herror
-builtins.int"builtins.int **
-string
-builtins.str"builtins.str „
-gaierrorsocket.gaierror"builtins.OSError*≥
-__init__socket.gaierror.__init__"
-None*,
-self"
-socket.gaierror"socket.gaierror*)
-error
-builtins.int"builtins.int **
-string
-builtins.str"builtins.str ﬁ
-timeoutsocket.timeout"builtins.OSError*∞
-__init__socket.timeout.__init__"
-None**
-self 
-socket.timeout"socket.timeout*)
-error
-builtins.int"builtins.int **
-string
-builtins.str"builtins.str „f
-socketsocket.socket"builtins.object*´
+AI_MASKsocket.AddressInfo.AI_MASK
+builtins.int"builtins.intrS
+AI_V4MAPPED_CFG"socket.AddressInfo.AI_V4MAPPED_CFG
+builtins.int"builtins.intˆ
+_SendableFilesocket._SendableFile"builtins.object*õ
+readsocket._SendableFile.read" 
+builtins.bytes"builtins.bytes*6
+self,
+socket._SendableFile"socket._SendableFile*
+builtins.int"builtins.int*ù
+seeksocket._SendableFile.seek""
+builtins.object"builtins.object*6
+self,
+socket._SendableFile"socket._SendableFile*
+builtins.int"builtins.intXÅ?
+socketsocket.socket"_socket.socket*€
 __init__socket.socket.__init__"
 None*(
 self
-socket.socket"socket.socket**
-family
-builtins.int"builtins.int *(
-type
+socket.socket"socket.socket*Ü
+familyx
+(Union[socket.AddressFamily,builtins.int],
+socket.AddressFamily"socket.AddressFamily
+builtins.int"builtins.int *{
+typeo
+%Union[socket.SocketKind,builtins.int]&
+socket.SocketKind"socket.SocketKind
 builtins.int"builtins.int *)
 proto
 builtins.int"builtins.int *R
 filenoD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *R
-	__enter__socket.socket.__enter__"
-socket._SelfT*
-self
-socket._SelfT*g
+None *V
+	__enter__socket.socket.__enter__"
+socket.socket.Self*
+socket.socket.Self*v
 __exit__socket.socket.__exit__"
-None*&
-self
-socket.socket"socket.socket*
-args
-Any*¬
-acceptsocket.socket.accept"x
+None* 
+socket.socket"socket.socket*&"
+builtins.object"builtins.object*R
+dupsocket.socket.dup"
+socket.socket.Self* 
+self
+socket.socket.Self*√
+acceptsocket.socket.accept"y
 #Tuple[socket.socket,TypeAlias[Any]]
-socket.socket"socket.socket/
+socket.socket"socket.socket0
 TypeAlias[Any]
-Any"socket._RetAddress*(
+Any"_socket._RetAddress*(
 self
-socket.socket"socket.socket*í
-bindsocket.socket.bind"
-None*(
-self
-socket.socket"socket.socket*¡
-address≥
-HUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str]],builtins.bytes]¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address 
-builtins.bytes"builtins.bytes*P
-closesocket.socket.close"
-None*(
-self
-socket.socket"socket.socket*ò
-connectsocket.socket.connect"
-None*(
-self
-socket.socket"socket.socket*¡
-address≥
-HUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str]],builtins.bytes]¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address 
-builtins.bytes"builtins.bytes*≤
-
-connect_exsocket.socket.connect_ex"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*¡
-address≥
-HUnion[TypeAlias[Union[builtins.tuple[Any],builtins.str]],builtins.bytes]¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address 
-builtins.bytes"builtins.bytes*f
-detachsocket.socket.detach"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*b
-dupsocket.socket.dup"
-socket.socket"socket.socket*(
-self
-socket.socket"socket.socket*f
-filenosocket.socket.fileno"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*z
-get_inheritablesocket.socket.get_inheritable"
-builtins.bool"builtins.bool*(
-self
-socket.socket"socket.socket*É
-getpeernamesocket.socket.getpeername"/
-TypeAlias[Any]
-Any"socket._RetAddress*(
-self
-socket.socket"socket.socket*É
-getsocknamesocket.socket.getsockname"/
-TypeAlias[Any]
-Any"socket._RetAddress*(
-self
-socket.socket"socket.socket*r
-getblockingsocket.socket.getblocking"
-builtins.bool"builtins.bool*(
-self
-socket.socket"socket.socket*ú
-
-gettimeoutsocket.socket.gettimeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*(
-self
-socket.socket"socket.socket*
-listensocket.socket.listen"
-None*(
-self
-socket.socket"socket.socket*+
-	__backlog
-builtins.int"builtins.int *º
-recvsocket.socket.recv" 
-builtins.bytes"builtins.bytes*(
-self
-socket.socket"socket.socket*)
-bufsize
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int *ü
-recvfromsocket.socket.recvfrom"{
-$Tuple[builtins.bytes,TypeAlias[Any]] 
-builtins.bytes"builtins.bytes/
-TypeAlias[Any]
-Any"socket._RetAddress*(
-self
-socket.socket"socket.socket*)
-bufsize
-builtins.int"builtins.int*)
-flags
-builtins.int"builtins.int *–
-recvmsgsocket.socket.recvmsg"˝
-pTuple[builtins.bytes,builtins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]],builtins.int,Any] 
-builtins.bytes"builtins.bytesΩ
-Ibuiltins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]]‡
-:TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]ë
-/Tuple[builtins.int,builtins.int,builtins.bytes]
-builtins.int"builtins.int
-builtins.int"builtins.int 
-builtins.bytes"builtins.bytes"socket._CMSG"builtins.list
-builtins.int"builtins.int
-Any*(
-self
-socket.socket"socket.socket*)
-	__bufsize
-builtins.int"builtins.int*.
-__ancbufsize
-builtins.int"builtins.int *)
-__flags
-builtins.int"builtins.int *Ù
-recvmsg_intosocket.socket.recvmsg_into"˜
-nTuple[builtins.int,builtins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]],builtins.int,Any]
-builtins.int"builtins.intΩ
-Ibuiltins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]]‡
-:TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]ë
-/Tuple[builtins.int,builtins.int,builtins.bytes]
-builtins.int"builtins.int
-builtins.int"builtins.int 
-builtins.bytes"builtins.bytes"socket._CMSG"builtins.list
-builtins.int"builtins.int
-Any*(
-self
-socket.socket"socket.socket*»
-	__buffers∫
-Ityping.Iterable[TypeAlias[Union[builtins.bytearray,builtins.memoryview]]]€
-8TypeAlias[Union[builtins.bytearray,builtins.memoryview]]á
--Union[builtins.bytearray,builtins.memoryview](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"socket._WriteBuffer"typing.Iterable*.
-__ancbufsize
-builtins.int"builtins.int *)
-__flags
-builtins.int"builtins.int *è
-recvfrom_intosocket.socket.recvfrom_into"u
-"Tuple[builtins.int,TypeAlias[Any]]
-builtins.int"builtins.int/
-TypeAlias[Any]
-Any"socket._RetAddress*(
-self
-socket.socket"socket.socket*Ë
-buffer€
-8TypeAlias[Union[builtins.bytearray,builtins.memoryview]]á
--Union[builtins.bytearray,builtins.memoryview](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"socket._WriteBuffer**
-nbytes
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *Æ
-	recv_intosocket.socket.recv_into"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*Ë
-buffer€
-8TypeAlias[Union[builtins.bytearray,builtins.memoryview]]á
--Union[builtins.bytearray,builtins.memoryview](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview"socket._WriteBuffer**
-nbytes
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *π
-sendsocket.socket.send"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket**
-data 
-builtins.bytes"builtins.bytes*)
-flags
-builtins.int"builtins.int *´
-sendallsocket.socket.sendall"
-None*(
-self
-socket.socket"socket.socket**
-data 
-builtins.bytes"builtins.bytes*)
-flags
-builtins.int"builtins.int *ü
-sendmsgsocket.socket.sendmsg"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*a
-	__buffersT
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable*—
-	__ancdata¡
-Ktyping.Iterable[TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]]‡
-:TypeAlias[Tuple[builtins.int,builtins.int,builtins.bytes]]ë
-/Tuple[builtins.int,builtins.int,builtins.bytes]
-builtins.int"builtins.int
-builtins.int"builtins.int 
-builtins.bytes"builtins.bytes"socket._CMSG"typing.Iterable *)
-__flags
-builtins.int"builtins.int *“
-	__address¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address *Á
-sendmsg_afalgsocket.socket.sendmsg_afalg"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket*_
-msgT
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable *$
-op
-builtins.int"builtins.int*
-iv
-Any *,
-assoclen
-builtins.int"builtins.int *)
-flags
-builtins.int"builtins.int *ó
+socket.socket"socket.socket*°
 sendfilesocket.socket.sendfile"
 builtins.int"builtins.int*(
 self
-socket.socket"socket.socket*,
-file"
-typing.BinaryIO"typing.BinaryIO**
+socket.socket"socket.socket*6
+file,
+socket._SendableFile"socket._SendableFile**
 offset
 builtins.int"builtins.int *Q
 countD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *ï
+None *Ñ
+familysocket.socket.family",
+socket.AddressFamily"socket.AddressFamily*(
+self
+socket.socket"socket.socket0:property`*z
+typesocket.socket.type"&
+socket.SocketKind"socket.SocketKind*(
+self
+socket.socket"socket.socket0:property`*z
+get_inheritablesocket.socket.get_inheritable"
+builtins.bool"builtins.bool*(
+self
+socket.socket"socket.socket*ï
 set_inheritablesocket.socket.set_inheritable"
 None*(
 self
 socket.socket"socket.socket*/
 inheritable
-builtins.bool"builtins.bool*Ü
-setblockingsocket.socket.setblocking"
-None*(
-self
-socket.socket"socket.socket*(
-flag
-builtins.bool"builtins.bool*±
+builtins.bool"builtins.bool2‘0
+makefilesocket.socket.makefile√
 
-settimeoutsocket.socket.settimeout"
-None*(
+makefilesocket.socket.makefile""
+socket.SocketIO"socket.SocketIO*(
 self
-socket.socket"socket.socket*U
-valueJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None*}
-shutdownsocket.socket.shutdown"
-None*(
+socket.socket"socket.socket*˚
+mode
+¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*F
+	buffering7
+Literal[builtins.int]	
+builtins.int"builtins.int*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX¿
+makefilesocket.socket.makefile"&
+io.BufferedRWPair"io.BufferedRWPair*(
 self
-socket.socket"socket.socket*%
-how
-builtins.int"builtins.int2˙
+socket.socket"socket.socket*
+modeÂ
+äUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*…
+	buffering∑
+7Union[Literal[builtins.int],Literal[builtins.int],None]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadXÉ
+makefilesocket.socket.makefile"&
+io.BufferedReader"io.BufferedReader*(
+self
+socket.socket"socket.socket*≥
+mode®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*…
+	buffering∑
+7Union[Literal[builtins.int],Literal[builtins.int],None]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadXÉ
+makefilesocket.socket.makefile"&
+io.BufferedWriter"io.BufferedWriter*(
+self
+socket.socket"socket.socket*≥
+mode®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*…
+	buffering∑
+7Union[Literal[builtins.int],Literal[builtins.int],None]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadXú
 
-getsockoptsocket.socket.getsockopt–
-
-getsockoptsocket.socket.getsockopt"
-builtins.int"builtins.int*(
+makefilesocket.socket.makefile"
+	io.IOBase"	io.IOBase*(
 self
-socket.socket"socket.socket*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int0:overloadX˛
-
-getsockoptsocket.socket.getsockopt" 
-builtins.bytes"builtins.bytes*(
-self
-socket.socket"socket.socket*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*(
-buflen
-builtins.int"builtins.int0:overloadX2Ô
-makefilesocket.socket.makefileı
-makefilesocket.socket.makefile"
-typing.TextIO"typing.TextIO*(
+socket.socket"socket.socket*˚
+mode
+¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*+
+	buffering
+builtins.int"builtins.int*T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+errorsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+newlineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX˚
+makefilesocket.socket.makefile"$
+io.TextIOWrapper"io.TextIOWrapper*(
 self
 socket.socket"socket.socket*¢
 modeï
@@ -509,14 +456,16 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 newlineD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:overloadX“
-
-makefilesocket.socket.makefile""
-typing.BinaryIO"typing.BinaryIO*(
-self
-socket.socket"socket.socket*˚
-mode
-¯Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+None 0:overloadX˜
+SocketIOsocket.SocketIO"io.RawIOBase*˘
+__init__socket.SocketIO.__init__"
+None*,
+self"
+socket.SocketIO"socket.SocketIO*(
+sock
+socket.socket"socket.socket*
+modeÂ
+äUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
@@ -528,98 +477,220 @@ tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str*U
-	bufferingD
+builtins.str"builtins.str*å
+readintosocket.SocketIO.readinto"D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *T
-encodingD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *R
-errorsD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *S
-newlineD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None 0:overloadX2≥
-sendtosocket.socket.sendtoÛ
-sendtosocket.socket.sendto"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket**
-data 
-builtins.bytes"builtins.bytes*–
-address¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address0:overloadXú
-sendtosocket.socket.sendto"
-builtins.int"builtins.int*(
-self
-socket.socket"socket.socket**
-data 
-builtins.bytes"builtins.bytes*'
-flags
-builtins.int"builtins.int*–
-address¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
-builtins.tuple[Any]
-Any"builtins.tuple
-builtins.str"builtins.str"socket._Address0:overloadX2÷
+None*,
+self"
+socket.SocketIO"socket.SocketIO*Ò
+bÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer*Û
+writesocket.SocketIO.write"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*,
+self"
+socket.SocketIO"socket.SocketIO*ﬁ
+b÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*v
+namesocket.SocketIO.name"
+builtins.int"builtins.int*,
+self"
+socket.SocketIO"socket.SocketIO0:property`*“
+modesocket.SocketIO.mode"˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*,
+self"
+socket.SocketIO"socket.SocketIO0:property``
+dup_socket.dup"
+builtins.int"builtins.int*.,
+typing.SupportsIndex"typing.SupportsIndexz
+getdefaulttimeout_socket.getdefaulttimeout"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NoneŒ
+gethostbyaddr_socket.gethostbyaddr"Ö
+KTuple[builtins.str,builtins.list[builtins.str],builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*
+builtins.str"builtins.strd
+gethostbyname_socket.gethostbyname"
+builtins.str"builtins.str*
+builtins.str"builtins.str‘
+gethostbyname_ex_socket.gethostbyname_ex"Ö
+KTuple[builtins.str,builtins.list[builtins.str],builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*
+builtins.str"builtins.str@
+gethostname_socket.gethostname"
+builtins.str"builtins.str´
+getnameinfo_socket.getnameinfo"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*ÑÅ
+bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int∂
+:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*
+builtins.int"builtins.intf
+getprotobyname_socket.getprotobyname"
+builtins.int"builtins.int*
+builtins.str"builtins.strÜ
+getservbyname_socket.getservbyname"
+builtins.int"builtins.int*
+builtins.str"builtins.str* 
+builtins.str"builtins.str Ü
+getservbyport_socket.getservbyport"
+builtins.str"builtins.str*
+builtins.int"builtins.int* 
+builtins.str"builtins.str T
+htonl_socket.htonl"
+builtins.int"builtins.int*
+builtins.int"builtins.intT
+htons_socket.htons"
+builtins.int"builtins.int*
+builtins.int"builtins.int`
+	inet_aton_socket.inet_aton" 
+builtins.bytes"builtins.bytes*
+builtins.str"builtins.strò
+	inet_ntoa_socket.inet_ntoa"
+builtins.str"builtins.str*Ÿ÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer∏
+	inet_ntop_socket.inet_ntop"
+builtins.str"builtins.str*
+builtins.int"builtins.int*Ÿ÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBufferÄ
+	inet_pton_socket.inet_pton" 
+builtins.bytes"builtins.bytes*
+builtins.int"builtins.int*
+builtins.str"builtins.strT
+ntohl_socket.ntohl"
+builtins.int"builtins.int*
+builtins.int"builtins.intT
+ntohs_socket.ntohs"
+builtins.int"builtins.int*
+builtins.int"builtins.intÜ
+setdefaulttimeout_socket.setdefaulttimeout"
+None*LJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NoneP
+close_socket.close"
+None*.,
+typing.SupportsIndex"typing.SupportsIndexZ
+CMSG_LEN_socket.CMSG_LEN"
+builtins.int"builtins.int*
+builtins.int"builtins.int^
 
-setsockoptsocket.socket.setsockoptØ
-
-setsockoptsocket.socket.setsockopt"
-None*(
-self
-socket.socket"socket.socket*'
-level
+CMSG_SPACE_socket.CMSG_SPACE"
+builtins.int"builtins.int*
+builtins.int"builtins.intL
+sethostname_socket.sethostname"
+None*
+builtins.str"builtins.strf
+if_indextoname_socket.if_indextoname"
+builtins.str"builtins.str*
+builtins.int"builtins.int…
+if_nameindex_socket.if_nameindex"¢
+/builtins.list[Tuple[builtins.int,builtins.str]]`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.listf
+if_nametoindex_socket.if_nametoindex"
+builtins.int"builtins.int*
+builtins.str"builtins.strö
+fromfdsocket.fromfd"
+socket.socket"socket.socket*4
+fd,
+typing.SupportsIndex"typing.SupportsIndex*Ñ
+familyx
+(Union[socket.AddressFamily,builtins.int],
+socket.AddressFamily"socket.AddressFamily
+builtins.int"builtins.int*y
+typeo
+%Union[socket.SocketKind,builtins.int]&
+socket.SocketKind"socket.SocketKind
 builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*q
-valuef
-"Union[builtins.int,builtins.bytes]
-builtins.int"builtins.int 
-builtins.bytes"builtins.bytes0:overloadX˚
+proto
+builtins.int"builtins.int ø
 
-setsockoptsocket.socket.setsockopt"
-None*(
-self
-socket.socket"socket.socket*'
-level
-builtins.int"builtins.int*)
-optname
-builtins.int"builtins.int*
-value
-None*(
-optlen
-builtins.int"builtins.int0:overloadXr<
-familysocket.socket.family
-builtins.int"builtins.intr8
-typesocket.socket.type
-builtins.int"builtins.intr:
-protosocket.socket.proto
-builtins.int"builtins.intE
-closesocket.close"
-None*$
-fd
-builtins.int"builtins.intﬁ
+socketpairsocket.socketpair"f
+"Tuple[socket.socket,socket.socket]
+socket.socket"socket.socket
+socket.socket"socket.socket*ñ
+familyá
+-Union[builtins.int,socket.AddressFamily,None]
+builtins.int"builtins.int,
+socket.AddressFamily"socket.AddressFamily
+None *r
+typef
+"Union[_socket.socket,builtins.int] 
+_socket.socket"_socket.socket
+builtins.int"builtins.int *)
+proto
+builtins.int"builtins.int a
+getfqdnsocket.getfqdn"
+builtins.str"builtins.str*(
+name
+builtins.str"builtins.str õ
 create_connectionsocket.create_connection"
 socket.socket"socket.socket*¢
 addressî
@@ -631,24 +702,52 @@ setsockoptsocket.socket.setsockopt"
 timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None *é
-source_address˜
-UUnion[Tuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int],None]ë
-ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
-5Union[builtins.bytearray,builtins.bytes,builtins.str](
-builtins.bytearray"builtins.bytearray 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-builtins.int"builtins.int
-None Å
-create_serversocket.create_server"
-socket.socket"socket.socket*–
-address¬
-2TypeAlias[Union[builtins.tuple[Any],builtins.str]]y
-'Union[builtins.tuple[Any],builtins.str].
+None *À
+source_address¥
+’Union[TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]],None]Õ
+
+…TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]Í
+æUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]].
 builtins.tuple[Any]
 Any"builtins.tuple
-builtins.str"builtins.str"socket._Address**
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._Address
+None O
+has_dualstack_ipv6socket.has_dualstack_ipv6"
+builtins.bool"builtins.boolå
+create_serversocket.create_server"
+socket.socket"socket.socket*€
+
+addressÕ
+
+…TypeAlias[Union[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]]Í
+æUnion[builtins.tuple[Any],builtins.str,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]].
+builtins.tuple[Any]
+Any"builtins.tuple
+builtins.str"builtins.str÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_socket._Address**
 family
 builtins.int"builtins.int *S
 backlogD
@@ -659,19 +758,7 @@ ITuple[Union[builtins.bytearray,builtins.bytes,builtins.str],builtins.int]£
 reuse_port
 builtins.bool"builtins.bool *4
 dualstack_ipv6
-builtins.bool"builtins.bool O
-has_dualstack_ipv6socket.has_dualstack_ipv6"
-builtins.bool"builtins.bool⁄
-fromfdsocket.fromfd"
-socket.socket"socket.socket*$
-fd
-builtins.int"builtins.int*(
-family
-builtins.int"builtins.int*&
-type
-builtins.int"builtins.int*)
-proto
-builtins.int"builtins.int û
+builtins.bool"builtins.bool í
 getaddrinfosocket.getaddrinfo"ì
 πbuiltins.list[Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]]]≈
 ™Tuple[socket.AddressFamily,socket.SocketKind,builtins.int,builtins.str,Union[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]],
@@ -687,15 +774,15 @@ bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins
 builtins.str"builtins.str
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int"builtins.list*Ω
-host≤
-:Union[builtins.bytearray,builtins.bytes,builtins.str,None](
-builtins.bytearray"builtins.bytearray 
+builtins.int"builtins.int"builtins.list*
+hostu
+'Union[builtins.bytes,builtins.str,None] 
 builtins.bytes"builtins.bytes
 builtins.str"builtins.str
-None*y
-porto
-%Union[builtins.str,builtins.int,None]
+None*´
+port†
+4Union[builtins.bytes,builtins.str,builtins.int,None] 
+builtins.bytes"builtins.bytes
 builtins.str"builtins.str
 builtins.int"builtins.int
 None**
@@ -706,173 +793,734 @@ bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins
 proto
 builtins.int"builtins.int *)
 flags
-builtins.int"builtins.int a
-getfqdnsocket.getfqdn"
-builtins.str"builtins.str*(
-name
-builtins.str"builtins.str o
-gethostbynamesocket.gethostbyname"
-builtins.str"builtins.str**
-hostname
-builtins.str"builtins.strﬂ
-gethostbyname_exsocket.gethostbyname_ex"Ö
-KTuple[builtins.str,builtins.list[builtins.str],builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list**
-hostname
-builtins.str"builtins.str?
-gethostnamesocket.gethostname"
-builtins.str"builtins.str€
-gethostbyaddrsocket.gethostbyaddr"Ö
-KTuple[builtins.str,builtins.list[builtins.str],builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.listJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*,
+builtins.int"builtins.int *Ç
+__annotations__socket.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*<
+	EAI_AGAIN_socket.EAI_AGAIN
+builtins.int"builtins.int*B
+EAI_BADFLAGS_socket.EAI_BADFLAGS
+builtins.int"builtins.int*:
+EAI_FAIL_socket.EAI_FAIL
+builtins.int"builtins.int*>
 
-ip_address
-builtins.str"builtins.strø
-getnameinfosocket.getnameinfo"`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str*ê
-sockaddrÅ
-bUnion[Tuple[builtins.str,builtins.int],Tuple[builtins.str,builtins.int,builtins.int,builtins.int]]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int∂
-:Tuple[builtins.str,builtins.int,builtins.int,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-builtins.int"builtins.int
-builtins.int"builtins.int*'
-flags
-builtins.int"builtins.intu
-getprotobynamesocket.getprotobyname"
-builtins.int"builtins.int*.
-protocolname
-builtins.str"builtins.str§
-getservbynamesocket.getservbyname"
-builtins.int"builtins.int*-
-servicename
-builtins.str"builtins.str*0
-protocolname
-builtins.str"builtins.str ù
-getservbyportsocket.getservbyport"
-builtins.str"builtins.str*&
-port
-builtins.int"builtins.int*0
-protocolname
-builtins.str"builtins.str ∞
+EAI_FAMILY_socket.EAI_FAMILY
+builtins.int"builtins.int*>
 
-socketpairsocket.socketpair"f
-"Tuple[socket.socket,socket.socket]
-socket.socket"socket.socket
-socket.socket"socket.socket*R
-familyD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *(
-type
-builtins.int"builtins.int *)
-proto
-builtins.int"builtins.int X
-ntohlsocket.ntohl"
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.intX
-ntohssocket.ntohs"
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.intX
-htonlsocket.htonl"
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.intX
-htonssocket.htons"
-builtins.int"builtins.int*#
-x
-builtins.int"builtins.intl
-	inet_atonsocket.inet_aton" 
-builtins.bytes"builtins.bytes*+
-	ip_string
-builtins.str"builtins.strl
-	inet_ntoasocket.inet_ntoa"
-builtins.str"builtins.str*/
-	packed_ip 
-builtins.bytes"builtins.bytesû
-	inet_ptonsocket.inet_pton" 
-builtins.bytes"builtins.bytes*0
-address_family
-builtins.int"builtins.int*+
-	ip_string
-builtins.str"builtins.strû
-	inet_ntopsocket.inet_ntop"
-builtins.str"builtins.str*0
-address_family
-builtins.int"builtins.int*/
-	packed_ip 
-builtins.bytes"builtins.bytesc
-CMSG_LENsocket.CMSG_LEN"
-builtins.int"builtins.int*(
-length
-builtins.int"builtins.intg
+EAI_MEMORY_socket.EAI_MEMORY
+builtins.int"builtins.int*>
 
-CMSG_SPACEsocket.CMSG_SPACE"
-builtins.int"builtins.int*(
-length
-builtins.int"builtins.inty
-getdefaulttimeoutsocket.getdefaulttimeout"J
-Union[builtins.float,None] 
-builtins.float"builtins.float
-Noneê
-setdefaulttimeoutsocket.setdefaulttimeout"
-None*W
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-NoneS
-sethostnamesocket.sethostname"
-None*&
-name
-builtins.str"builtins.str»
-if_nameindexsocket.if_nameindex"¢
-/builtins.list[Tuple[builtins.int,builtins.str]]`
- Tuple[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.listm
-if_nametoindexsocket.if_nametoindex"
-builtins.int"builtins.int*&
-name
-builtins.str"builtins.strn
-if_indextonamesocket.if_indextoname"
-builtins.str"builtins.str*'
-index
-builtins.int"builtins.int*;
-has_ipv6socket.has_ipv6
-builtins.bool"builtins.bool*(
+EAI_NODATA_socket.EAI_NODATA
+builtins.int"builtins.int*>
 
-SocketTypesocket.SocketType
-Any*$
-SocketIOsocket.SocketIO
-Any*5
-EAGAINsocket.EAGAIN
+EAI_NONAME_socket.EAI_NONAME
+builtins.int"builtins.int*@
+EAI_SERVICE_socket.EAI_SERVICE
+builtins.int"builtins.int*B
+EAI_SOCKTYPE_socket.EAI_SOCKTYPE
+builtins.int"builtins.int*T
+INADDR_ALLHOSTS_GROUP_socket.INADDR_ALLHOSTS_GROUP
+builtins.int"builtins.int*>
+
+INADDR_ANY_socket.INADDR_ANY
+builtins.int"builtins.int*J
+INADDR_BROADCAST_socket.INADDR_BROADCAST
+builtins.int"builtins.int*H
+INADDR_LOOPBACK_socket.INADDR_LOOPBACK
+builtins.int"builtins.int*V
+INADDR_MAX_LOCAL_GROUP_socket.INADDR_MAX_LOCAL_GROUP
+builtins.int"builtins.int*@
+INADDR_NONE_socket.INADDR_NONE
+builtins.int"builtins.int*P
+INADDR_UNSPEC_GROUP_socket.INADDR_UNSPEC_GROUP
+builtins.int"builtins.int*L
+IP_ADD_MEMBERSHIP_socket.IP_ADD_MEMBERSHIP
+builtins.int"builtins.int*N
+IP_DROP_MEMBERSHIP_socket.IP_DROP_MEMBERSHIP
+builtins.int"builtins.int*>
+
+IP_HDRINCL_socket.IP_HDRINCL
+builtins.int"builtins.int*H
+IP_MULTICAST_IF_socket.IP_MULTICAST_IF
+builtins.int"builtins.int*L
+IP_MULTICAST_LOOP_socket.IP_MULTICAST_LOOP
+builtins.int"builtins.int*J
+IP_MULTICAST_TTL_socket.IP_MULTICAST_TTL
+builtins.int"builtins.int*>
+
+IP_OPTIONS_socket.IP_OPTIONS
+builtins.int"builtins.int*F
+IP_RECVDSTADDR_socket.IP_RECVDSTADDR
+builtins.int"builtins.int*6
+IP_TOS_socket.IP_TOS
+builtins.int"builtins.int*6
+IP_TTL_socket.IP_TTL
+builtins.int"builtins.int*H
+IPPORT_RESERVED_socket.IPPORT_RESERVED
+builtins.int"builtins.int*P
+IPPORT_USERRESERVED_socket.IPPORT_USERRESERVED
+builtins.int"builtins.int*B
+IPPROTO_ICMP_socket.IPPROTO_ICMP
+builtins.int"builtins.int*>
+
+IPPROTO_IP_socket.IPPROTO_IP
+builtins.int"builtins.int*@
+IPPROTO_RAW_socket.IPPROTO_RAW
+builtins.int"builtins.int*@
+IPPROTO_TCP_socket.IPPROTO_TCP
+builtins.int"builtins.int*@
+IPPROTO_UDP_socket.IPPROTO_UDP
+builtins.int"builtins.int*D
+IPV6_CHECKSUM_socket.IPV6_CHECKSUM
+builtins.int"builtins.int*H
+IPV6_JOIN_GROUP_socket.IPV6_JOIN_GROUP
+builtins.int"builtins.int*J
+IPV6_LEAVE_GROUP_socket.IPV6_LEAVE_GROUP
+builtins.int"builtins.int*P
+IPV6_MULTICAST_HOPS_socket.IPV6_MULTICAST_HOPS
+builtins.int"builtins.int*L
+IPV6_MULTICAST_IF_socket.IPV6_MULTICAST_IF
+builtins.int"builtins.int*P
+IPV6_MULTICAST_LOOP_socket.IPV6_MULTICAST_LOOP
+builtins.int"builtins.int*H
+IPV6_RECVTCLASS_socket.IPV6_RECVTCLASS
+builtins.int"builtins.int*@
+IPV6_TCLASS_socket.IPV6_TCLASS
+builtins.int"builtins.int*L
+IPV6_UNICAST_HOPS_socket.IPV6_UNICAST_HOPS
+builtins.int"builtins.int*@
+IPV6_V6ONLY_socket.IPV6_V6ONLY
+builtins.int"builtins.int*:
+NI_DGRAM_socket.NI_DGRAM
+builtins.int"builtins.int*>
+
+NI_MAXHOST_socket.NI_MAXHOST
+builtins.int"builtins.int*>
+
+NI_MAXSERV_socket.NI_MAXSERV
+builtins.int"builtins.int*@
+NI_NAMEREQD_socket.NI_NAMEREQD
+builtins.int"builtins.int*<
+	NI_NOFQDN_socket.NI_NOFQDN
+builtins.int"builtins.int*F
+NI_NUMERICHOST_socket.NI_NUMERICHOST
+builtins.int"builtins.int*F
+NI_NUMERICSERV_socket.NI_NUMERICSERV
+builtins.int"builtins.int*8
+SHUT_RD_socket.SHUT_RD
+builtins.int"builtins.int*<
+	SHUT_RDWR_socket.SHUT_RDWR
+builtins.int"builtins.int*8
+SHUT_WR_socket.SHUT_WR
+builtins.int"builtins.int*D
+SO_ACCEPTCONN_socket.SO_ACCEPTCONN
+builtins.int"builtins.int*B
+SO_BROADCAST_socket.SO_BROADCAST
+builtins.int"builtins.int*:
+SO_DEBUG_socket.SO_DEBUG
+builtins.int"builtins.int*B
+SO_DONTROUTE_socket.SO_DONTROUTE
+builtins.int"builtins.int*:
+SO_ERROR_socket.SO_ERROR
+builtins.int"builtins.int*B
+SO_KEEPALIVE_socket.SO_KEEPALIVE
+builtins.int"builtins.int*<
+	SO_LINGER_socket.SO_LINGER
+builtins.int"builtins.int*B
+SO_OOBINLINE_socket.SO_OOBINLINE
+builtins.int"builtins.int*<
+	SO_RCVBUF_socket.SO_RCVBUF
+builtins.int"builtins.int*@
+SO_RCVLOWAT_socket.SO_RCVLOWAT
+builtins.int"builtins.int*@
+SO_RCVTIMEO_socket.SO_RCVTIMEO
+builtins.int"builtins.int*B
+SO_REUSEADDR_socket.SO_REUSEADDR
+builtins.int"builtins.int*<
+	SO_SNDBUF_socket.SO_SNDBUF
+builtins.int"builtins.int*@
+SO_SNDLOWAT_socket.SO_SNDLOWAT
+builtins.int"builtins.int*@
+SO_SNDTIMEO_socket.SO_SNDTIMEO
+builtins.int"builtins.int*8
+SO_TYPE_socket.SO_TYPE
+builtins.int"builtins.int*F
+SO_USELOOPBACK_socket.SO_USELOOPBACK
+builtins.int"builtins.int*6
+SOL_IP_socket.SOL_IP
+builtins.int"builtins.int*>
+
+SOL_SOCKET_socket.SOL_SOCKET
+builtins.int"builtins.int*8
+SOL_TCP_socket.SOL_TCP
+builtins.int"builtins.int*8
+SOL_UDP_socket.SOL_UDP
+builtins.int"builtins.int*<
+	SOMAXCONN_socket.SOMAXCONN
+builtins.int"builtins.int*B
+TCP_FASTOPEN_socket.TCP_FASTOPEN
+builtins.int"builtins.int*@
+TCP_KEEPCNT_socket.TCP_KEEPCNT
+builtins.int"builtins.int*>
+
+TCP_MAXSEG_socket.TCP_MAXSEG
+builtins.int"builtins.int*@
+TCP_NODELAY_socket.TCP_NODELAY
+builtins.int"builtins.int*<
+has_ipv6_socket.has_ipv6
+builtins.bool"builtins.bool*D
+IPV6_DONTFRAG_socket.IPV6_DONTFRAG
+builtins.int"builtins.int*D
+IPV6_HOPLIMIT_socket.IPV6_HOPLIMIT
+builtins.int"builtins.int*B
+IPV6_HOPOPTS_socket.IPV6_HOPOPTS
+builtins.int"builtins.int*B
+IPV6_PKTINFO_socket.IPV6_PKTINFO
+builtins.int"builtins.int*F
+IPV6_RECVRTHDR_socket.IPV6_RECVRTHDR
+builtins.int"builtins.int*>
+
+IPV6_RTHDR_socket.IPV6_RTHDR
+builtins.int"builtins.int*P
+SO_EXCLUSIVEADDRUSE_socket.SO_EXCLUSIVEADDRUSE
+builtins.int"builtins.int*>
+
+IP_RECVTOS_socket.IP_RECVTOS
+builtins.int"builtins.int*D
+TCP_KEEPINTVL_socket.TCP_KEEPINTVL
+builtins.int"builtins.int*B
+TCP_KEEPIDLE_socket.TCP_KEEPIDLE
+builtins.int"builtins.int*>
+
+IPPROTO_AH_socket.IPPROTO_AH
+builtins.int"builtins.int*H
+IPPROTO_DSTOPTS_socket.IPPROTO_DSTOPTS
+builtins.int"builtins.int*@
+IPPROTO_EGP_socket.IPPROTO_EGP
+builtins.int"builtins.int*@
+IPPROTO_ESP_socket.IPPROTO_ESP
+builtins.int"builtins.int*J
+IPPROTO_FRAGMENT_socket.IPPROTO_FRAGMENT
+builtins.int"builtins.int*@
+IPPROTO_GGP_socket.IPPROTO_GGP
+builtins.int"builtins.int*H
+IPPROTO_HOPOPTS_socket.IPPROTO_HOPOPTS
+builtins.int"builtins.int*F
+IPPROTO_ICMPV6_socket.IPPROTO_ICMPV6
+builtins.int"builtins.int*@
+IPPROTO_IDP_socket.IPPROTO_IDP
+builtins.int"builtins.int*B
+IPPROTO_IGMP_socket.IPPROTO_IGMP
+builtins.int"builtins.int*B
+IPPROTO_IPV4_socket.IPPROTO_IPV4
+builtins.int"builtins.int*B
+IPPROTO_IPV6_socket.IPPROTO_IPV6
+builtins.int"builtins.int*@
+IPPROTO_MAX_socket.IPPROTO_MAX
+builtins.int"builtins.int*>
+
+IPPROTO_ND_socket.IPPROTO_ND
+builtins.int"builtins.int*B
+IPPROTO_NONE_socket.IPPROTO_NONE
+builtins.int"builtins.int*@
+IPPROTO_PIM_socket.IPPROTO_PIM
+builtins.int"builtins.int*@
+IPPROTO_PUP_socket.IPPROTO_PUP
+builtins.int"builtins.int*H
+IPPROTO_ROUTING_socket.IPPROTO_ROUTING
+builtins.int"builtins.int*B
+IPPROTO_SCTP_socket.IPPROTO_SCTP
+builtins.int"builtins.int*@
+IPPROTO_CBT_socket.IPPROTO_CBT
+builtins.int"builtins.int*H
+IPPROTO_ICLFXBM_socket.IPPROTO_ICLFXBM
+builtins.int"builtins.int*@
+IPPROTO_IGP_socket.IPPROTO_IGP
+builtins.int"builtins.int*B
+IPPROTO_L2TP_socket.IPPROTO_L2TP
+builtins.int"builtins.int*@
+IPPROTO_PGM_socket.IPPROTO_PGM
+builtins.int"builtins.int*@
+IPPROTO_RDP_socket.IPPROTO_RDP
+builtins.int"builtins.int*>
+
+IPPROTO_ST_socket.IPPROTO_ST
+builtins.int"builtins.int*F
+IP_TRANSPARENT_socket.IP_TRANSPARENT
+builtins.int"builtins.int*@
+IPPROTO_BIP_socket.IPPROTO_BIP
+builtins.int"builtins.int*F
+IPPROTO_MOBILE_socket.IPPROTO_MOBILE
+builtins.int"builtins.int*B
+IPPROTO_VRRP_socket.IPPROTO_VRRP
+builtins.int"builtins.int*:
+IPX_TYPE_socket.IPX_TYPE
+builtins.int"builtins.int*H
+SCM_CREDENTIALS_socket.SCM_CREDENTIALS
+builtins.int"builtins.int*H
+SO_BINDTODEVICE_socket.SO_BINDTODEVICE
+builtins.int"builtins.int*8
+SO_MARK_socket.SO_MARK
+builtins.int"builtins.int*@
+SO_PASSCRED_socket.SO_PASSCRED
+builtins.int"builtins.int*@
+SO_PEERCRED_socket.SO_PEERCRED
+builtins.int"builtins.int*@
+SO_PRIORITY_socket.SO_PRIORITY
+builtins.int"builtins.int*<
+	SO_SETFIB_socket.SO_SETFIB
+builtins.int"builtins.int*<
+	SOL_ATALK_socket.SOL_ATALK
+builtins.int"builtins.int*:
+SOL_AX25_socket.SOL_AX25
+builtins.int"builtins.int*8
+SOL_HCI_socket.SOL_HCI
+builtins.int"builtins.int*8
+SOL_IPX_socket.SOL_IPX
+builtins.int"builtins.int*>
+
+SOL_NETROM_socket.SOL_NETROM
+builtins.int"builtins.int*:
+SOL_ROSE_socket.SOL_ROSE
+builtins.int"builtins.int*:
+TCP_CORK_socket.TCP_CORK
+builtins.int"builtins.int*J
+TCP_DEFER_ACCEPT_socket.TCP_DEFER_ACCEPT
+builtins.int"builtins.int*:
+TCP_INFO_socket.TCP_INFO
+builtins.int"builtins.int*@
+TCP_LINGER2_socket.TCP_LINGER2
+builtins.int"builtins.int*B
+TCP_QUICKACK_socket.TCP_QUICKACK
+builtins.int"builtins.int*>
+
+TCP_SYNCNT_socket.TCP_SYNCNT
+builtins.int"builtins.int*J
+TCP_WINDOW_CLAMP_socket.TCP_WINDOW_CLAMP
+builtins.int"builtins.int*F
+EAI_ADDRFAMILY_socket.EAI_ADDRFAMILY
+builtins.int"builtins.int*B
+EAI_BADHINTS_socket.EAI_BADHINTS
+builtins.int"builtins.int*8
+EAI_MAX_socket.EAI_MAX
+builtins.int"builtins.int*B
+EAI_OVERFLOW_socket.EAI_OVERFLOW
+builtins.int"builtins.int*B
+EAI_PROTOCOL_socket.EAI_PROTOCOL
+builtins.int"builtins.int*>
+
+EAI_SYSTEM_socket.EAI_SYSTEM
+builtins.int"builtins.int*\
+IP_DEFAULT_MULTICAST_LOOP!_socket.IP_DEFAULT_MULTICAST_LOOP
+builtins.int"builtins.int*Z
+IP_DEFAULT_MULTICAST_TTL _socket.IP_DEFAULT_MULTICAST_TTL
+builtins.int"builtins.int*N
+IP_MAX_MEMBERSHIPS_socket.IP_MAX_MEMBERSHIPS
+builtins.int"builtins.int*@
+IP_RECVOPTS_socket.IP_RECVOPTS
+builtins.int"builtins.int*F
+IP_RECVRETOPTS_socket.IP_RECVRETOPTS
+builtins.int"builtins.int*>
+
+IP_RETOPTS_socket.IP_RETOPTS
+builtins.int"builtins.int*@
+IPPROTO_EON_socket.IPPROTO_EON
+builtins.int"builtins.int*@
+IPPROTO_GRE_socket.IPPROTO_GRE
+builtins.int"builtins.int*D
+IPPROTO_HELLO_socket.IPPROTO_HELLO
+builtins.int"builtins.int*F
+IPPROTO_IPCOMP_socket.IPPROTO_IPCOMP
+builtins.int"builtins.int*B
+IPPROTO_IPIP_socket.IPPROTO_IPIP
+builtins.int"builtins.int*B
+IPPROTO_RSVP_socket.IPPROTO_RSVP
+builtins.int"builtins.int*>
+
+IPPROTO_TP_socket.IPPROTO_TP
+builtins.int"builtins.int*@
+IPPROTO_XTP_socket.IPPROTO_XTP
+builtins.int"builtins.int*L
+IPV6_RTHDR_TYPE_0_socket.IPV6_RTHDR_TYPE_0
+builtins.int"builtins.int*F
+LOCAL_PEERCRED_socket.LOCAL_PEERCRED
+builtins.int"builtins.int*<
+	SCM_CREDS_socket.SCM_CREDS
+builtins.int"builtins.int*>
+
+SCM_RIGHTS_socket.SCM_RIGHTS
+builtins.int"builtins.int*B
+SO_REUSEPORT_socket.SO_REUSEPORT
+builtins.int"builtins.int*B
+IPV6_DSTOPTS_socket.IPV6_DSTOPTS
+builtins.int"builtins.int*B
+IPV6_NEXTHOP_socket.IPV6_NEXTHOP
+builtins.int"builtins.int*B
+IPV6_PATHMTU_socket.IPV6_PATHMTU
+builtins.int"builtins.int*J
+IPV6_RECVDSTOPTS_socket.IPV6_RECVDSTOPTS
+builtins.int"builtins.int*L
+IPV6_RECVHOPLIMIT_socket.IPV6_RECVHOPLIMIT
+builtins.int"builtins.int*J
+IPV6_RECVHOPOPTS_socket.IPV6_RECVHOPOPTS
+builtins.int"builtins.int*J
+IPV6_RECVPATHMTU_socket.IPV6_RECVPATHMTU
+builtins.int"builtins.int*J
+IPV6_RECVPKTINFO_socket.IPV6_RECVPKTINFO
+builtins.int"builtins.int*L
+IPV6_RTHDRDSTOPTS_socket.IPV6_RTHDRDSTOPTS
+builtins.int"builtins.int*J
+IPV6_USE_MIN_MTU_socket.IPV6_USE_MIN_MTU
+builtins.int"builtins.int*>
+
+BDADDR_ANY_socket.BDADDR_ANY
+builtins.str"builtins.str*B
+BDADDR_LOCAL_socket.BDADDR_LOCAL
+builtins.str"builtins.str*F
+BTPROTO_RFCOMM_socket.BTPROTO_RFCOMM
+builtins.int"builtins.int*F
+ALG_OP_DECRYPT_socket.ALG_OP_DECRYPT
+builtins.int"builtins.int*F
+ALG_OP_ENCRYPT_socket.ALG_OP_ENCRYPT
+builtins.int"builtins.int*@
+ALG_OP_SIGN_socket.ALG_OP_SIGN
+builtins.int"builtins.int*D
+ALG_OP_VERIFY_socket.ALG_OP_VERIFY
+builtins.int"builtins.int*T
+ALG_SET_AEAD_ASSOCLEN_socket.ALG_SET_AEAD_ASSOCLEN
+builtins.int"builtins.int*T
+ALG_SET_AEAD_AUTHSIZE_socket.ALG_SET_AEAD_AUTHSIZE
+builtins.int"builtins.int*>
+
+ALG_SET_IV_socket.ALG_SET_IV
+builtins.int"builtins.int*@
+ALG_SET_KEY_socket.ALG_SET_KEY
+builtins.int"builtins.int*>
+
+ALG_SET_OP_socket.ALG_SET_OP
+builtins.int"builtins.int*F
+ALG_SET_PUBKEY_socket.ALG_SET_PUBKEY
+builtins.int"builtins.int*8
+CAN_BCM_socket.CAN_BCM
+builtins.int"builtins.int*N
+CAN_BCM_RX_CHANGED_socket.CAN_BCM_RX_CHANGED
+builtins.int"builtins.int*L
+CAN_BCM_RX_DELETE_socket.CAN_BCM_RX_DELETE
+builtins.int"builtins.int*H
+CAN_BCM_RX_READ_socket.CAN_BCM_RX_READ
+builtins.int"builtins.int*J
+CAN_BCM_RX_SETUP_socket.CAN_BCM_RX_SETUP
+builtins.int"builtins.int*L
+CAN_BCM_RX_STATUS_socket.CAN_BCM_RX_STATUS
+builtins.int"builtins.int*N
+CAN_BCM_RX_TIMEOUT_socket.CAN_BCM_RX_TIMEOUT
+builtins.int"builtins.int*L
+CAN_BCM_TX_DELETE_socket.CAN_BCM_TX_DELETE
+builtins.int"builtins.int*N
+CAN_BCM_TX_EXPIRED_socket.CAN_BCM_TX_EXPIRED
+builtins.int"builtins.int*H
+CAN_BCM_TX_READ_socket.CAN_BCM_TX_READ
+builtins.int"builtins.int*H
+CAN_BCM_TX_SEND_socket.CAN_BCM_TX_SEND
+builtins.int"builtins.int*J
+CAN_BCM_TX_SETUP_socket.CAN_BCM_TX_SETUP
+builtins.int"builtins.int*L
+CAN_BCM_TX_STATUS_socket.CAN_BCM_TX_STATUS
+builtins.int"builtins.int*B
+CAN_EFF_FLAG_socket.CAN_EFF_FLAG
+builtins.int"builtins.int*B
+CAN_EFF_MASK_socket.CAN_EFF_MASK
+builtins.int"builtins.int*B
+CAN_ERR_FLAG_socket.CAN_ERR_FLAG
+builtins.int"builtins.int*B
+CAN_ERR_MASK_socket.CAN_ERR_MASK
+builtins.int"builtins.int*8
+CAN_RAW_socket.CAN_RAW
+builtins.int"builtins.int*N
+CAN_RAW_ERR_FILTER_socket.CAN_RAW_ERR_FILTER
+builtins.int"builtins.int*L
+CAN_RAW_FD_FRAMES_socket.CAN_RAW_FD_FRAMES
+builtins.int"builtins.int*F
+CAN_RAW_FILTER_socket.CAN_RAW_FILTER
+builtins.int"builtins.int*J
+CAN_RAW_LOOPBACK_socket.CAN_RAW_LOOPBACK
+builtins.int"builtins.int*T
+CAN_RAW_RECV_OWN_MSGS_socket.CAN_RAW_RECV_OWN_MSGS
+builtins.int"builtins.int*B
+CAN_RTR_FLAG_socket.CAN_RTR_FLAG
+builtins.int"builtins.int*B
+CAN_SFF_MASK_socket.CAN_SFF_MASK
+builtins.int"builtins.int*B
+NETLINK_ARPD_socket.NETLINK_ARPD
+builtins.int"builtins.int*F
+NETLINK_CRYPTO_socket.NETLINK_CRYPTO
+builtins.int"builtins.int*H
+NETLINK_DNRTMSG_socket.NETLINK_DNRTMSG
+builtins.int"builtins.int*J
+NETLINK_FIREWALL_socket.NETLINK_FIREWALL
+builtins.int"builtins.int*F
+NETLINK_IP6_FW_socket.NETLINK_IP6_FW
+builtins.int"builtins.int*D
+NETLINK_NFLOG_socket.NETLINK_NFLOG
+builtins.int"builtins.int*D
+NETLINK_ROUTE_socket.NETLINK_ROUTE
+builtins.int"builtins.int*F
+NETLINK_ROUTE6_socket.NETLINK_ROUTE6
+builtins.int"builtins.int*B
+NETLINK_SKIP_socket.NETLINK_SKIP
+builtins.int"builtins.int*H
+NETLINK_TAPBASE_socket.NETLINK_TAPBASE
+builtins.int"builtins.int*H
+NETLINK_TCPDIAG_socket.NETLINK_TCPDIAG
+builtins.int"builtins.int*J
+NETLINK_USERSOCK_socket.NETLINK_USERSOCK
+builtins.int"builtins.int*>
+
+NETLINK_W1_socket.NETLINK_W1
+builtins.int"builtins.int*B
+NETLINK_XFRM_socket.NETLINK_XFRM
+builtins.int"builtins.int*J
+PACKET_BROADCAST_socket.PACKET_BROADCAST
+builtins.int"builtins.int*J
+PACKET_FASTROUTE_socket.PACKET_FASTROUTE
+builtins.int"builtins.int*@
+PACKET_HOST_socket.PACKET_HOST
+builtins.int"builtins.int*H
+PACKET_LOOPBACK_socket.PACKET_LOOPBACK
+builtins.int"builtins.int*J
+PACKET_MULTICAST_socket.PACKET_MULTICAST
+builtins.int"builtins.int*J
+PACKET_OTHERHOST_socket.PACKET_OTHERHOST
+builtins.int"builtins.int*H
+PACKET_OUTGOING_socket.PACKET_OUTGOING
+builtins.int"builtins.int*6
+PF_CAN_socket.PF_CAN
+builtins.int"builtins.int*<
+	PF_PACKET_socket.PF_PACKET
+builtins.int"builtins.int*6
+PF_RDS_socket.PF_RDS
+builtins.int"builtins.int*N
+RDS_CANCEL_SENT_TO_socket.RDS_CANCEL_SENT_TO
+builtins.int"builtins.int*N
+RDS_CMSG_RDMA_ARGS_socket.RDS_CMSG_RDMA_ARGS
+builtins.int"builtins.int*N
+RDS_CMSG_RDMA_DEST_socket.RDS_CMSG_RDMA_DEST
+builtins.int"builtins.int*L
+RDS_CMSG_RDMA_MAP_socket.RDS_CMSG_RDMA_MAP
+builtins.int"builtins.int*R
+RDS_CMSG_RDMA_STATUS_socket.RDS_CMSG_RDMA_STATUS
+builtins.int"builtins.int*R
+RDS_CMSG_RDMA_UPDATE_socket.RDS_CMSG_RDMA_UPDATE
+builtins.int"builtins.int*J
+RDS_CONG_MONITOR_socket.RDS_CONG_MONITOR
+builtins.int"builtins.int*@
+RDS_FREE_MR_socket.RDS_FREE_MR
+builtins.int"builtins.int*>
+
+RDS_GET_MR_socket.RDS_GET_MR
+builtins.int"builtins.int*P
+RDS_GET_MR_FOR_DEST_socket.RDS_GET_MR_FOR_DEST
+builtins.int"builtins.int*L
+RDS_RDMA_DONTWAIT_socket.RDS_RDMA_DONTWAIT
+builtins.int"builtins.int*F
+RDS_RDMA_FENCE_socket.RDS_RDMA_FENCE
+builtins.int"builtins.int*P
+RDS_RDMA_INVALIDATE_socket.RDS_RDMA_INVALIDATE
+builtins.int"builtins.int*N
+RDS_RDMA_NOTIFY_ME_socket.RDS_RDMA_NOTIFY_ME
+builtins.int"builtins.int*N
+RDS_RDMA_READWRITE_socket.RDS_RDMA_READWRITE
+builtins.int"builtins.int*H
+RDS_RDMA_SILENT_socket.RDS_RDMA_SILENT
+builtins.int"builtins.int*L
+RDS_RDMA_USE_ONCE_socket.RDS_RDMA_USE_ONCE
+builtins.int"builtins.int*@
+RDS_RECVERR_socket.RDS_RECVERR
+builtins.int"builtins.int*8
+SOL_ALG_socket.SOL_ALG
+builtins.int"builtins.int*B
+SOL_CAN_BASE_socket.SOL_CAN_BASE
+builtins.int"builtins.int*@
+SOL_CAN_RAW_socket.SOL_CAN_RAW
+builtins.int"builtins.int*8
+SOL_RDS_socket.SOL_RDS
+builtins.int"builtins.int*:
+SOL_TIPC_socket.SOL_TIPC
+builtins.int"builtins.int*B
+TIPC_ADDR_ID_socket.TIPC_ADDR_ID
+builtins.int"builtins.int*F
+TIPC_ADDR_NAME_socket.TIPC_ADDR_NAME
+builtins.int"builtins.int*L
+TIPC_ADDR_NAMESEQ_socket.TIPC_ADDR_NAMESEQ
+builtins.int"builtins.int*B
+TIPC_CFG_SRV_socket.TIPC_CFG_SRV
+builtins.int"builtins.int*N
+TIPC_CLUSTER_SCOPE_socket.TIPC_CLUSTER_SCOPE
+builtins.int"builtins.int*L
+TIPC_CONN_TIMEOUT_socket.TIPC_CONN_TIMEOUT
+builtins.int"builtins.int*Z
+TIPC_CRITICAL_IMPORTANCE _socket.TIPC_CRITICAL_IMPORTANCE
+builtins.int"builtins.int*P
+TIPC_DEST_DROPPABLE_socket.TIPC_DEST_DROPPABLE
+builtins.int"builtins.int*R
+TIPC_HIGH_IMPORTANCE_socket.TIPC_HIGH_IMPORTANCE
+builtins.int"builtins.int*H
+TIPC_IMPORTANCE_socket.TIPC_IMPORTANCE
+builtins.int"builtins.int*P
+TIPC_LOW_IMPORTANCE_socket.TIPC_LOW_IMPORTANCE
+builtins.int"builtins.int*V
+TIPC_MEDIUM_IMPORTANCE_socket.TIPC_MEDIUM_IMPORTANCE
+builtins.int"builtins.int*H
+TIPC_NODE_SCOPE_socket.TIPC_NODE_SCOPE
+builtins.int"builtins.int*F
+TIPC_PUBLISHED_socket.TIPC_PUBLISHED
+builtins.int"builtins.int*N
+TIPC_SRC_DROPPABLE_socket.TIPC_SRC_DROPPABLE
+builtins.int"builtins.int*H
+TIPC_SUB_CANCEL_socket.TIPC_SUB_CANCEL
+builtins.int"builtins.int*F
+TIPC_SUB_PORTS_socket.TIPC_SUB_PORTS
+builtins.int"builtins.int*J
+TIPC_SUB_SERVICE_socket.TIPC_SUB_SERVICE
+builtins.int"builtins.int*P
+TIPC_SUBSCR_TIMEOUT_socket.TIPC_SUBSCR_TIMEOUT
+builtins.int"builtins.int*B
+TIPC_TOP_SRV_socket.TIPC_TOP_SRV
+builtins.int"builtins.int*L
+TIPC_WAIT_FOREVER_socket.TIPC_WAIT_FOREVER
+builtins.int"builtins.int*F
+TIPC_WITHDRAWN_socket.TIPC_WITHDRAWN
+builtins.int"builtins.int*H
+TIPC_ZONE_SCOPE_socket.TIPC_ZONE_SCOPE
+builtins.int"builtins.int*<
+	CAN_ISOTP_socket.CAN_ISOTP
+builtins.int"builtins.int*f
+IOCTL_VM_SOCKETS_GET_LOCAL_CID&_socket.IOCTL_VM_SOCKETS_GET_LOCAL_CID
+builtins.int"builtins.int*d
+SO_VM_SOCKETS_BUFFER_MAX_SIZE%_socket.SO_VM_SOCKETS_BUFFER_MAX_SIZE
+builtins.int"builtins.int*d
+SO_VM_SOCKETS_BUFFER_MIN_SIZE%_socket.SO_VM_SOCKETS_BUFFER_MIN_SIZE
+builtins.int"builtins.int*\
+SO_VM_SOCKETS_BUFFER_SIZE!_socket.SO_VM_SOCKETS_BUFFER_SIZE
+builtins.int"builtins.int*^
+VM_SOCKETS_INVALID_VERSION"_socket.VM_SOCKETS_INVALID_VERSION
+builtins.int"builtins.int*F
+VMADDR_CID_ANY_socket.VMADDR_CID_ANY
+builtins.int"builtins.int*H
+VMADDR_CID_HOST_socket.VMADDR_CID_HOST
+builtins.int"builtins.int*H
+VMADDR_PORT_ANY_socket.VMADDR_PORT_ANY
+builtins.int"builtins.int*L
+TCP_NOTSENT_LOWAT_socket.TCP_NOTSENT_LOWAT
+builtins.int"builtins.int*R
+CAN_BCM_CAN_FD_FRAME_socket.CAN_BCM_CAN_FD_FRAME
+builtins.int"builtins.int*^
+CAN_BCM_RX_ANNOUNCE_RESUME"_socket.CAN_BCM_RX_ANNOUNCE_RESUME
+builtins.int"builtins.int*R
+CAN_BCM_RX_CHECK_DLC_socket.CAN_BCM_RX_CHECK_DLC
+builtins.int"builtins.int*R
+CAN_BCM_RX_FILTER_ID_socket.CAN_BCM_RX_FILTER_ID
+builtins.int"builtins.int*X
+CAN_BCM_RX_NO_AUTOTIMER_socket.CAN_BCM_RX_NO_AUTOTIMER
+builtins.int"builtins.int*R
+CAN_BCM_RX_RTR_FRAME_socket.CAN_BCM_RX_RTR_FRAME
+builtins.int"builtins.int*J
+CAN_BCM_SETTIMER_socket.CAN_BCM_SETTIMER
+builtins.int"builtins.int*N
+CAN_BCM_STARTTIMER_socket.CAN_BCM_STARTTIMER
+builtins.int"builtins.int*P
+CAN_BCM_TX_ANNOUNCE_socket.CAN_BCM_TX_ANNOUNCE
+builtins.int"builtins.int*P
+CAN_BCM_TX_COUNTEVT_socket.CAN_BCM_TX_COUNTEVT
+builtins.int"builtins.int*R
+CAN_BCM_TX_CP_CAN_ID_socket.CAN_BCM_TX_CP_CAN_ID
+builtins.int"builtins.int*^
+CAN_BCM_TX_RESET_MULTI_IDX"_socket.CAN_BCM_TX_RESET_MULTI_IDX
 builtins.int"builtins.int*3
 EBADFsocket.EBADF
-builtins.int"builtins.int*3
-EINTRsocket.EINTR
+builtins.int"builtins.int*5
+EAGAINsocket.EAGAIN
 builtins.int"builtins.int*?
 EWOULDBLOCKsocket.EWOULDBLOCK
 builtins.int"builtins.int*G
-AF_UNIXsocket.AF_UNIX,
-socket.AddressFamily"socket.AddressFamily*G
 AF_INETsocket.AF_INET,
 socket.AddressFamily"socket.AddressFamily*I
 AF_INET6socket.AF_INET6,
+socket.AddressFamily"socket.AddressFamily*Q
+AF_APPLETALKsocket.AF_APPLETALK,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_DECnetsocket.AF_DECnet,
+socket.AddressFamily"socket.AddressFamily*E
+AF_IPXsocket.AF_IPX,
+socket.AddressFamily"socket.AddressFamily*E
+AF_SNAsocket.AF_SNA,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_UNSPECsocket.AF_UNSPEC,
+socket.AddressFamily"socket.AddressFamily*G
+AF_IRDAsocket.AF_IRDA,
+socket.AddressFamily"socket.AddressFamily*I
+AF_ROUTEsocket.AF_ROUTE,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_SYSTEMsocket.AF_SYSTEM,
+socket.AddressFamily"socket.AddressFamily*G
+AF_UNIXsocket.AF_UNIX,
+socket.AddressFamily"socket.AddressFamily*G
+AF_AAL5socket.AF_AAL5,
+socket.AddressFamily"socket.AddressFamily*E
+AF_ASHsocket.AF_ASH,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_ATMPVCsocket.AF_ATMPVC,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_ATMSVCsocket.AF_ATMSVC,
+socket.AddressFamily"socket.AddressFamily*G
+AF_AX25socket.AF_AX25,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_BRIDGEsocket.AF_BRIDGE,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_ECONETsocket.AF_ECONET,
+socket.AddressFamily"socket.AddressFamily*E
+AF_KEYsocket.AF_KEY,
+socket.AddressFamily"socket.AddressFamily*E
+AF_LLCsocket.AF_LLC,
+socket.AddressFamily"socket.AddressFamily*M
+
+AF_NETBEUIsocket.AF_NETBEUI,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_NETROMsocket.AF_NETROM,
+socket.AddressFamily"socket.AddressFamily*I
+AF_PPPOXsocket.AF_PPPOX,
+socket.AddressFamily"socket.AddressFamily*G
+AF_ROSEsocket.AF_ROSE,
+socket.AddressFamily"socket.AddressFamily*O
+AF_SECURITYsocket.AF_SECURITY,
+socket.AddressFamily"socket.AddressFamily*M
+
+AF_WANPIPEsocket.AF_WANPIPE,
+socket.AddressFamily"socket.AddressFamily*E
+AF_X25socket.AF_X25,
+socket.AddressFamily"socket.AddressFamily*E
+AF_CANsocket.AF_CAN,
+socket.AddressFamily"socket.AddressFamily*K
+	AF_PACKETsocket.AF_PACKET,
+socket.AddressFamily"socket.AddressFamily*E
+AF_RDSsocket.AF_RDS,
+socket.AddressFamily"socket.AddressFamily*G
+AF_TIPCsocket.AF_TIPC,
+socket.AddressFamily"socket.AddressFamily*E
+AF_ALGsocket.AF_ALG,
+socket.AddressFamily"socket.AddressFamily*M
+
+AF_NETLINKsocket.AF_NETLINK,
+socket.AddressFamily"socket.AddressFamily*I
+AF_VSOCKsocket.AF_VSOCK,
+socket.AddressFamily"socket.AddressFamily*M
+
+AF_QIPCRTRsocket.AF_QIPCRTR,
+socket.AddressFamily"socket.AddressFamily*G
+AF_LINKsocket.AF_LINK,
+socket.AddressFamily"socket.AddressFamily*Q
+AF_BLUETOOTHsocket.AF_BLUETOOTH,
 socket.AddressFamily"socket.AddressFamily*I
 SOCK_STREAMsocket.SOCK_STREAM&
 socket.SocketKind"socket.SocketKind*G
@@ -888,69 +1536,53 @@ SOCK_DGRAMsocket.SOCK_DGRAM&
 SOCK_CLOEXECsocket.SOCK_CLOEXEC&
 socket.SocketKind"socket.SocketKind*M
 SOCK_NONBLOCKsocket.SOCK_NONBLOCK&
-socket.SocketKind"socket.SocketKind*G
-AF_AAL5socket.AF_AAL5,
-socket.AddressFamily"socket.AddressFamily*Q
-AF_APPLETALKsocket.AF_APPLETALK,
-socket.AddressFamily"socket.AddressFamily*E
-AF_ASHsocket.AF_ASH,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_ATMPVCsocket.AF_ATMPVC,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_ATMSVCsocket.AF_ATMSVC,
-socket.AddressFamily"socket.AddressFamily*G
-AF_AX25socket.AF_AX25,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_BRIDGEsocket.AF_BRIDGE,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_DECnetsocket.AF_DECnet,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_ECONETsocket.AF_ECONET,
-socket.AddressFamily"socket.AddressFamily*E
-AF_IPXsocket.AF_IPX,
-socket.AddressFamily"socket.AddressFamily*G
-AF_IRDAsocket.AF_IRDA,
-socket.AddressFamily"socket.AddressFamily*E
-AF_KEYsocket.AF_KEY,
-socket.AddressFamily"socket.AddressFamily*E
-AF_LLCsocket.AF_LLC,
-socket.AddressFamily"socket.AddressFamily*M
+socket.SocketKind"socket.SocketKind*A
 
-AF_NETBEUIsocket.AF_NETBEUI,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_NETROMsocket.AF_NETROM,
-socket.AddressFamily"socket.AddressFamily*I
-AF_PPPOXsocket.AF_PPPOX,
-socket.AddressFamily"socket.AddressFamily*G
-AF_ROSEsocket.AF_ROSE,
-socket.AddressFamily"socket.AddressFamily*I
-AF_ROUTEsocket.AF_ROUTE,
-socket.AddressFamily"socket.AddressFamily*O
-AF_SECURITYsocket.AF_SECURITY,
-socket.AddressFamily"socket.AddressFamily*E
-AF_SNAsocket.AF_SNA,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_SYSTEMsocket.AF_SYSTEM,
-socket.AddressFamily"socket.AddressFamily*K
-	AF_UNSPECsocket.AF_UNSPEC,
-socket.AddressFamily"socket.AddressFamily*M
-
-AF_WANPIPEsocket.AF_WANPIPE,
-socket.AddressFamily"socket.AddressFamily*E
-AF_X25socket.AF_X25,
-socket.AddressFamily"socket.AddressFamily*;
-	SOMAXCONNsocket.SOMAXCONN
-builtins.int"builtins.int*O
+MSG_CTRUNCsocket.MSG_CTRUNC 
+socket.MsgFlag"socket.MsgFlag*G
+MSG_DONTROUTEsocket.MSG_DONTROUTE 
+socket.MsgFlag"socket.MsgFlag*;
+MSG_OOBsocket.MSG_OOB 
+socket.MsgFlag"socket.MsgFlag*=
+MSG_PEEKsocket.MSG_PEEK 
+socket.MsgFlag"socket.MsgFlag*?
+	MSG_TRUNCsocket.MSG_TRUNC 
+socket.MsgFlag"socket.MsgFlag*C
+MSG_WAITALLsocket.MSG_WAITALL 
+socket.MsgFlag"socket.MsgFlag*?
+	MSG_BCASTsocket.MSG_BCAST 
+socket.MsgFlag"socket.MsgFlag*?
+	MSG_MCASTsocket.MSG_MCAST 
+socket.MsgFlag"socket.MsgFlag*E
+MSG_ERRQUEUEsocket.MSG_ERRQUEUE 
+socket.MsgFlag"socket.MsgFlag*E
+MSG_DONTWAITsocket.MSG_DONTWAIT 
+socket.MsgFlag"socket.MsgFlag*;
+MSG_EOFsocket.MSG_EOF 
+socket.MsgFlag"socket.MsgFlag*;
+MSG_EORsocket.MSG_EOR 
+socket.MsgFlag"socket.MsgFlag*E
+MSG_NOSIGNALsocket.MSG_NOSIGNAL 
+socket.MsgFlag"socket.MsgFlag*=
+MSG_BTAGsocket.MSG_BTAG 
+socket.MsgFlag"socket.MsgFlag*M
+MSG_CMSG_CLOEXECsocket.MSG_CMSG_CLOEXEC 
+socket.MsgFlag"socket.MsgFlag*C
+MSG_CONFIRMsocket.MSG_CONFIRM 
+socket.MsgFlag"socket.MsgFlag*=
+MSG_ETAGsocket.MSG_ETAG 
+socket.MsgFlag"socket.MsgFlag*E
+MSG_FASTOPENsocket.MSG_FASTOPEN 
+socket.MsgFlag"socket.MsgFlag*=
+MSG_MOREsocket.MSG_MORE 
+socket.MsgFlag"socket.MsgFlag*M
+MSG_NOTIFICATIONsocket.MSG_NOTIFICATION 
+socket.MsgFlag"socket.MsgFlag*O
 AI_ADDRCONFIGsocket.AI_ADDRCONFIG(
 socket.AddressInfo"socket.AddressInfo*A
 AI_ALLsocket.AI_ALL(
 socket.AddressInfo"socket.AddressInfo*M
 AI_CANONNAMEsocket.AI_CANONNAME(
-socket.AddressInfo"socket.AddressInfo*I
-
-AI_DEFAULTsocket.AI_DEFAULT(
-socket.AddressInfo"socket.AddressInfo*C
-AI_MASKsocket.AI_MASK(
 socket.AddressInfo"socket.AddressInfo*Q
 AI_NUMERICHOSTsocket.AI_NUMERICHOST(
 socket.AddressInfo"socket.AddressInfo*Q
@@ -960,714 +1592,11 @@ AI_DEFAULTsocket.AI_DEFAULT(
 AI_PASSIVEsocket.AI_PASSIVE(
 socket.AddressInfo"socket.AddressInfo*K
 AI_V4MAPPEDsocket.AI_V4MAPPED(
+socket.AddressInfo"socket.AddressInfo*I
+
+AI_DEFAULTsocket.AI_DEFAULT(
+socket.AddressInfo"socket.AddressInfo*C
+AI_MASKsocket.AI_MASK(
 socket.AddressInfo"socket.AddressInfo*S
 AI_V4MAPPED_CFGsocket.AI_V4MAPPED_CFG(
-socket.AddressInfo"socket.AddressInfo*E
-EAI_ADDRFAMILYsocket.EAI_ADDRFAMILY
-builtins.int"builtins.int*;
-	EAI_AGAINsocket.EAI_AGAIN
-builtins.int"builtins.int*A
-EAI_BADFLAGSsocket.EAI_BADFLAGS
-builtins.int"builtins.int*A
-EAI_BADHINTSsocket.EAI_BADHINTS
-builtins.int"builtins.int*9
-EAI_FAILsocket.EAI_FAIL
-builtins.int"builtins.int*=
-
-EAI_FAMILYsocket.EAI_FAMILY
-builtins.int"builtins.int*7
-EAI_MAXsocket.EAI_MAX
-builtins.int"builtins.int*=
-
-EAI_MEMORYsocket.EAI_MEMORY
-builtins.int"builtins.int*=
-
-EAI_NODATAsocket.EAI_NODATA
-builtins.int"builtins.int*=
-
-EAI_NONAMEsocket.EAI_NONAME
-builtins.int"builtins.int*A
-EAI_OVERFLOWsocket.EAI_OVERFLOW
-builtins.int"builtins.int*A
-EAI_PROTOCOLsocket.EAI_PROTOCOL
-builtins.int"builtins.int*?
-EAI_SERVICEsocket.EAI_SERVICE
-builtins.int"builtins.int*A
-EAI_SOCKTYPEsocket.EAI_SOCKTYPE
-builtins.int"builtins.int*=
-
-EAI_SYSTEMsocket.EAI_SYSTEM
-builtins.int"builtins.int*S
-INADDR_ALLHOSTS_GROUPsocket.INADDR_ALLHOSTS_GROUP
-builtins.int"builtins.int*=
-
-INADDR_ANYsocket.INADDR_ANY
-builtins.int"builtins.int*I
-INADDR_BROADCASTsocket.INADDR_BROADCAST
-builtins.int"builtins.int*G
-INADDR_LOOPBACKsocket.INADDR_LOOPBACK
-builtins.int"builtins.int*U
-INADDR_MAX_LOCAL_GROUPsocket.INADDR_MAX_LOCAL_GROUP
-builtins.int"builtins.int*?
-INADDR_NONEsocket.INADDR_NONE
-builtins.int"builtins.int*O
-INADDR_UNSPEC_GROUPsocket.INADDR_UNSPEC_GROUP
-builtins.int"builtins.int*G
-IPPORT_RESERVEDsocket.IPPORT_RESERVED
-builtins.int"builtins.int*O
-IPPORT_USERRESERVEDsocket.IPPORT_USERRESERVED
-builtins.int"builtins.int*=
-
-IPPROTO_AHsocket.IPPROTO_AH
-builtins.int"builtins.int*?
-IPPROTO_BIPsocket.IPPROTO_BIP
-builtins.int"builtins.int*G
-IPPROTO_DSTOPTSsocket.IPPROTO_DSTOPTS
-builtins.int"builtins.int*?
-IPPROTO_EGPsocket.IPPROTO_EGP
-builtins.int"builtins.int*?
-IPPROTO_EONsocket.IPPROTO_EON
-builtins.int"builtins.int*?
-IPPROTO_ESPsocket.IPPROTO_ESP
-builtins.int"builtins.int*I
-IPPROTO_FRAGMENTsocket.IPPROTO_FRAGMENT
-builtins.int"builtins.int*?
-IPPROTO_GGPsocket.IPPROTO_GGP
-builtins.int"builtins.int*?
-IPPROTO_GREsocket.IPPROTO_GRE
-builtins.int"builtins.int*C
-IPPROTO_HELLOsocket.IPPROTO_HELLO
-builtins.int"builtins.int*G
-IPPROTO_HOPOPTSsocket.IPPROTO_HOPOPTS
-builtins.int"builtins.int*A
-IPPROTO_ICMPsocket.IPPROTO_ICMP
-builtins.int"builtins.int*E
-IPPROTO_ICMPV6socket.IPPROTO_ICMPV6
-builtins.int"builtins.int*?
-IPPROTO_IDPsocket.IPPROTO_IDP
-builtins.int"builtins.int*A
-IPPROTO_IGMPsocket.IPPROTO_IGMP
-builtins.int"builtins.int*=
-
-IPPROTO_IPsocket.IPPROTO_IP
-builtins.int"builtins.int*E
-IPPROTO_IPCOMPsocket.IPPROTO_IPCOMP
-builtins.int"builtins.int*A
-IPPROTO_IPIPsocket.IPPROTO_IPIP
-builtins.int"builtins.int*A
-IPPROTO_IPV4socket.IPPROTO_IPV4
-builtins.int"builtins.int*A
-IPPROTO_IPV6socket.IPPROTO_IPV6
-builtins.int"builtins.int*?
-IPPROTO_MAXsocket.IPPROTO_MAX
-builtins.int"builtins.int*E
-IPPROTO_MOBILEsocket.IPPROTO_MOBILE
-builtins.int"builtins.int*=
-
-IPPROTO_NDsocket.IPPROTO_ND
-builtins.int"builtins.int*A
-IPPROTO_NONEsocket.IPPROTO_NONE
-builtins.int"builtins.int*?
-IPPROTO_PIMsocket.IPPROTO_PIM
-builtins.int"builtins.int*?
-IPPROTO_PUPsocket.IPPROTO_PUP
-builtins.int"builtins.int*?
-IPPROTO_RAWsocket.IPPROTO_RAW
-builtins.int"builtins.int*G
-IPPROTO_ROUTINGsocket.IPPROTO_ROUTING
-builtins.int"builtins.int*A
-IPPROTO_RSVPsocket.IPPROTO_RSVP
-builtins.int"builtins.int*A
-IPPROTO_SCTPsocket.IPPROTO_SCTP
-builtins.int"builtins.int*?
-IPPROTO_TCPsocket.IPPROTO_TCP
-builtins.int"builtins.int*=
-
-IPPROTO_TPsocket.IPPROTO_TP
-builtins.int"builtins.int*?
-IPPROTO_UDPsocket.IPPROTO_UDP
-builtins.int"builtins.int*A
-IPPROTO_VRRPsocket.IPPROTO_VRRP
-builtins.int"builtins.int*?
-IPPROTO_XTPsocket.IPPROTO_XTP
-builtins.int"builtins.int*C
-IPV6_CHECKSUMsocket.IPV6_CHECKSUM
-builtins.int"builtins.int*C
-IPV6_DONTFRAGsocket.IPV6_DONTFRAG
-builtins.int"builtins.int*A
-IPV6_DSTOPTSsocket.IPV6_DSTOPTS
-builtins.int"builtins.int*C
-IPV6_HOPLIMITsocket.IPV6_HOPLIMIT
-builtins.int"builtins.int*A
-IPV6_HOPOPTSsocket.IPV6_HOPOPTS
-builtins.int"builtins.int*G
-IPV6_JOIN_GROUPsocket.IPV6_JOIN_GROUP
-builtins.int"builtins.int*I
-IPV6_LEAVE_GROUPsocket.IPV6_LEAVE_GROUP
-builtins.int"builtins.int*O
-IPV6_MULTICAST_HOPSsocket.IPV6_MULTICAST_HOPS
-builtins.int"builtins.int*K
-IPV6_MULTICAST_IFsocket.IPV6_MULTICAST_IF
-builtins.int"builtins.int*O
-IPV6_MULTICAST_LOOPsocket.IPV6_MULTICAST_LOOP
-builtins.int"builtins.int*A
-IPV6_NEXTHOPsocket.IPV6_NEXTHOP
-builtins.int"builtins.int*A
-IPV6_PATHMTUsocket.IPV6_PATHMTU
-builtins.int"builtins.int*A
-IPV6_PKTINFOsocket.IPV6_PKTINFO
-builtins.int"builtins.int*I
-IPV6_RECVDSTOPTSsocket.IPV6_RECVDSTOPTS
-builtins.int"builtins.int*K
-IPV6_RECVHOPLIMITsocket.IPV6_RECVHOPLIMIT
-builtins.int"builtins.int*I
-IPV6_RECVHOPOPTSsocket.IPV6_RECVHOPOPTS
-builtins.int"builtins.int*I
-IPV6_RECVPATHMTUsocket.IPV6_RECVPATHMTU
-builtins.int"builtins.int*I
-IPV6_RECVPKTINFOsocket.IPV6_RECVPKTINFO
-builtins.int"builtins.int*E
-IPV6_RECVRTHDRsocket.IPV6_RECVRTHDR
-builtins.int"builtins.int*G
-IPV6_RECVTCLASSsocket.IPV6_RECVTCLASS
-builtins.int"builtins.int*=
-
-IPV6_RTHDRsocket.IPV6_RTHDR
-builtins.int"builtins.int*K
-IPV6_RTHDRDSTOPTSsocket.IPV6_RTHDRDSTOPTS
-builtins.int"builtins.int*K
-IPV6_RTHDR_TYPE_0socket.IPV6_RTHDR_TYPE_0
-builtins.int"builtins.int*?
-IPV6_TCLASSsocket.IPV6_TCLASS
-builtins.int"builtins.int*K
-IPV6_UNICAST_HOPSsocket.IPV6_UNICAST_HOPS
-builtins.int"builtins.int*I
-IPV6_USE_MIN_MTUsocket.IPV6_USE_MIN_MTU
-builtins.int"builtins.int*?
-IPV6_V6ONLYsocket.IPV6_V6ONLY
-builtins.int"builtins.int*9
-IPX_TYPEsocket.IPX_TYPE
-builtins.int"builtins.int*K
-IP_ADD_MEMBERSHIPsocket.IP_ADD_MEMBERSHIP
-builtins.int"builtins.int*[
-IP_DEFAULT_MULTICAST_LOOP socket.IP_DEFAULT_MULTICAST_LOOP
-builtins.int"builtins.int*Y
-IP_DEFAULT_MULTICAST_TTLsocket.IP_DEFAULT_MULTICAST_TTL
-builtins.int"builtins.int*M
-IP_DROP_MEMBERSHIPsocket.IP_DROP_MEMBERSHIP
-builtins.int"builtins.int*=
-
-IP_HDRINCLsocket.IP_HDRINCL
-builtins.int"builtins.int*M
-IP_MAX_MEMBERSHIPSsocket.IP_MAX_MEMBERSHIPS
-builtins.int"builtins.int*G
-IP_MULTICAST_IFsocket.IP_MULTICAST_IF
-builtins.int"builtins.int*K
-IP_MULTICAST_LOOPsocket.IP_MULTICAST_LOOP
-builtins.int"builtins.int*I
-IP_MULTICAST_TTLsocket.IP_MULTICAST_TTL
-builtins.int"builtins.int*=
-
-IP_OPTIONSsocket.IP_OPTIONS
-builtins.int"builtins.int*E
-IP_RECVDSTADDRsocket.IP_RECVDSTADDR
-builtins.int"builtins.int*?
-IP_RECVOPTSsocket.IP_RECVOPTS
-builtins.int"builtins.int*E
-IP_RECVRETOPTSsocket.IP_RECVRETOPTS
-builtins.int"builtins.int*=
-
-IP_RETOPTSsocket.IP_RETOPTS
-builtins.int"builtins.int*5
-IP_TOSsocket.IP_TOS
-builtins.int"builtins.int*E
-IP_TRANSPARENTsocket.IP_TRANSPARENT
-builtins.int"builtins.int*5
-IP_TTLsocket.IP_TTL
-builtins.int"builtins.int*E
-LOCAL_PEERCREDsocket.LOCAL_PEERCRED
-builtins.int"builtins.int*?
-	MSG_BCASTsocket.MSG_BCAST 
-socket.MsgFlag"socket.MsgFlag*=
-MSG_BTAGsocket.MSG_BTAG 
-socket.MsgFlag"socket.MsgFlag*M
-MSG_CMSG_CLOEXECsocket.MSG_CMSG_CLOEXEC 
-socket.MsgFlag"socket.MsgFlag*C
-MSG_CONFIRMsocket.MSG_CONFIRM 
-socket.MsgFlag"socket.MsgFlag*A
-
-MSG_CTRUNCsocket.MSG_CTRUNC 
-socket.MsgFlag"socket.MsgFlag*G
-MSG_DONTROUTEsocket.MSG_DONTROUTE 
-socket.MsgFlag"socket.MsgFlag*E
-MSG_DONTWAITsocket.MSG_DONTWAIT 
-socket.MsgFlag"socket.MsgFlag*;
-MSG_EOFsocket.MSG_EOF 
-socket.MsgFlag"socket.MsgFlag*;
-MSG_EORsocket.MSG_EOR 
-socket.MsgFlag"socket.MsgFlag*E
-MSG_ERRQUEUEsocket.MSG_ERRQUEUE 
-socket.MsgFlag"socket.MsgFlag*=
-MSG_ETAGsocket.MSG_ETAG 
-socket.MsgFlag"socket.MsgFlag*E
-MSG_FASTOPENsocket.MSG_FASTOPEN 
-socket.MsgFlag"socket.MsgFlag*?
-	MSG_MCASTsocket.MSG_MCAST 
-socket.MsgFlag"socket.MsgFlag*=
-MSG_MOREsocket.MSG_MORE 
-socket.MsgFlag"socket.MsgFlag*E
-MSG_NOSIGNALsocket.MSG_NOSIGNAL 
-socket.MsgFlag"socket.MsgFlag*M
-MSG_NOTIFICATIONsocket.MSG_NOTIFICATION 
-socket.MsgFlag"socket.MsgFlag*;
-MSG_OOBsocket.MSG_OOB 
-socket.MsgFlag"socket.MsgFlag*=
-MSG_PEEKsocket.MSG_PEEK 
-socket.MsgFlag"socket.MsgFlag*?
-	MSG_TRUNCsocket.MSG_TRUNC 
-socket.MsgFlag"socket.MsgFlag*C
-MSG_WAITALLsocket.MSG_WAITALL 
-socket.MsgFlag"socket.MsgFlag*9
-NI_DGRAMsocket.NI_DGRAM
-builtins.int"builtins.int*=
-
-NI_MAXHOSTsocket.NI_MAXHOST
-builtins.int"builtins.int*=
-
-NI_MAXSERVsocket.NI_MAXSERV
-builtins.int"builtins.int*?
-NI_NAMEREQDsocket.NI_NAMEREQD
-builtins.int"builtins.int*;
-	NI_NOFQDNsocket.NI_NOFQDN
-builtins.int"builtins.int*E
-NI_NUMERICHOSTsocket.NI_NUMERICHOST
-builtins.int"builtins.int*E
-NI_NUMERICSERVsocket.NI_NUMERICSERV
-builtins.int"builtins.int*G
-SCM_CREDENTIALSsocket.SCM_CREDENTIALS
-builtins.int"builtins.int*;
-	SCM_CREDSsocket.SCM_CREDS
-builtins.int"builtins.int*=
-
-SCM_RIGHTSsocket.SCM_RIGHTS
-builtins.int"builtins.int*7
-SHUT_RDsocket.SHUT_RD
-builtins.int"builtins.int*;
-	SHUT_RDWRsocket.SHUT_RDWR
-builtins.int"builtins.int*7
-SHUT_WRsocket.SHUT_WR
-builtins.int"builtins.int*;
-	SOL_ATALKsocket.SOL_ATALK
-builtins.int"builtins.int*9
-SOL_AX25socket.SOL_AX25
-builtins.int"builtins.int*7
-SOL_HCIsocket.SOL_HCI
-builtins.int"builtins.int*5
-SOL_IPsocket.SOL_IP
-builtins.int"builtins.int*7
-SOL_IPXsocket.SOL_IPX
-builtins.int"builtins.int*=
-
-SOL_NETROMsocket.SOL_NETROM
-builtins.int"builtins.int*9
-SOL_ROSEsocket.SOL_ROSE
-builtins.int"builtins.int*=
-
-SOL_SOCKETsocket.SOL_SOCKET
-builtins.int"builtins.int*7
-SOL_TCPsocket.SOL_TCP
-builtins.int"builtins.int*7
-SOL_UDPsocket.SOL_UDP
-builtins.int"builtins.int*C
-SO_ACCEPTCONNsocket.SO_ACCEPTCONN
-builtins.int"builtins.int*G
-SO_BINDTODEVICEsocket.SO_BINDTODEVICE
-builtins.int"builtins.int*A
-SO_BROADCASTsocket.SO_BROADCAST
-builtins.int"builtins.int*9
-SO_DEBUGsocket.SO_DEBUG
-builtins.int"builtins.int*A
-SO_DONTROUTEsocket.SO_DONTROUTE
-builtins.int"builtins.int*9
-SO_ERRORsocket.SO_ERROR
-builtins.int"builtins.int*O
-SO_EXCLUSIVEADDRUSEsocket.SO_EXCLUSIVEADDRUSE
-builtins.int"builtins.int*A
-SO_KEEPALIVEsocket.SO_KEEPALIVE
-builtins.int"builtins.int*;
-	SO_LINGERsocket.SO_LINGER
-builtins.int"builtins.int*7
-SO_MARKsocket.SO_MARK
-builtins.int"builtins.int*A
-SO_OOBINLINEsocket.SO_OOBINLINE
-builtins.int"builtins.int*?
-SO_PASSCREDsocket.SO_PASSCRED
-builtins.int"builtins.int*?
-SO_PEERCREDsocket.SO_PEERCRED
-builtins.int"builtins.int*?
-SO_PRIORITYsocket.SO_PRIORITY
-builtins.int"builtins.int*;
-	SO_RCVBUFsocket.SO_RCVBUF
-builtins.int"builtins.int*?
-SO_RCVLOWATsocket.SO_RCVLOWAT
-builtins.int"builtins.int*?
-SO_RCVTIMEOsocket.SO_RCVTIMEO
-builtins.int"builtins.int*A
-SO_REUSEADDRsocket.SO_REUSEADDR
-builtins.int"builtins.int*A
-SO_REUSEPORTsocket.SO_REUSEPORT
-builtins.int"builtins.int*;
-	SO_SETFIBsocket.SO_SETFIB
-builtins.int"builtins.int*;
-	SO_SNDBUFsocket.SO_SNDBUF
-builtins.int"builtins.int*?
-SO_SNDLOWATsocket.SO_SNDLOWAT
-builtins.int"builtins.int*?
-SO_SNDTIMEOsocket.SO_SNDTIMEO
-builtins.int"builtins.int*7
-SO_TYPEsocket.SO_TYPE
-builtins.int"builtins.int*E
-SO_USELOOPBACKsocket.SO_USELOOPBACK
-builtins.int"builtins.int*9
-TCP_CORKsocket.TCP_CORK
-builtins.int"builtins.int*I
-TCP_DEFER_ACCEPTsocket.TCP_DEFER_ACCEPT
-builtins.int"builtins.int*A
-TCP_FASTOPENsocket.TCP_FASTOPEN
-builtins.int"builtins.int*9
-TCP_INFOsocket.TCP_INFO
-builtins.int"builtins.int*?
-TCP_KEEPCNTsocket.TCP_KEEPCNT
-builtins.int"builtins.int*A
-TCP_KEEPIDLEsocket.TCP_KEEPIDLE
-builtins.int"builtins.int*C
-TCP_KEEPINTVLsocket.TCP_KEEPINTVL
-builtins.int"builtins.int*?
-TCP_LINGER2socket.TCP_LINGER2
-builtins.int"builtins.int*=
-
-TCP_MAXSEGsocket.TCP_MAXSEG
-builtins.int"builtins.int*?
-TCP_NODELAYsocket.TCP_NODELAY
-builtins.int"builtins.int*A
-TCP_QUICKACKsocket.TCP_QUICKACK
-builtins.int"builtins.int*=
-
-TCP_SYNCNTsocket.TCP_SYNCNT
-builtins.int"builtins.int*I
-TCP_WINDOW_CLAMPsocket.TCP_WINDOW_CLAMP
-builtins.int"builtins.int*K
-TCP_NOTSENT_LOWATsocket.TCP_NOTSENT_LOWAT
-builtins.int"builtins.int*E
-AF_CANsocket.AF_CAN,
-socket.AddressFamily"socket.AddressFamily*5
-PF_CANsocket.PF_CAN
-builtins.int"builtins.int*A
-SOL_CAN_BASEsocket.SOL_CAN_BASE
-builtins.int"builtins.int*?
-SOL_CAN_RAWsocket.SOL_CAN_RAW
-builtins.int"builtins.int*A
-CAN_EFF_FLAGsocket.CAN_EFF_FLAG
-builtins.int"builtins.int*A
-CAN_EFF_MASKsocket.CAN_EFF_MASK
-builtins.int"builtins.int*A
-CAN_ERR_FLAGsocket.CAN_ERR_FLAG
-builtins.int"builtins.int*A
-CAN_ERR_MASKsocket.CAN_ERR_MASK
-builtins.int"builtins.int*7
-CAN_RAWsocket.CAN_RAW
-builtins.int"builtins.int*M
-CAN_RAW_ERR_FILTERsocket.CAN_RAW_ERR_FILTER
-builtins.int"builtins.int*E
-CAN_RAW_FILTERsocket.CAN_RAW_FILTER
-builtins.int"builtins.int*I
-CAN_RAW_LOOPBACKsocket.CAN_RAW_LOOPBACK
-builtins.int"builtins.int*S
-CAN_RAW_RECV_OWN_MSGSsocket.CAN_RAW_RECV_OWN_MSGS
-builtins.int"builtins.int*A
-CAN_RTR_FLAGsocket.CAN_RTR_FLAG
-builtins.int"builtins.int*A
-CAN_SFF_MASKsocket.CAN_SFF_MASK
-builtins.int"builtins.int*7
-CAN_BCMsocket.CAN_BCM
-builtins.int"builtins.int*I
-CAN_BCM_TX_SETUPsocket.CAN_BCM_TX_SETUP
-builtins.int"builtins.int*K
-CAN_BCM_TX_DELETEsocket.CAN_BCM_TX_DELETE
-builtins.int"builtins.int*G
-CAN_BCM_TX_READsocket.CAN_BCM_TX_READ
-builtins.int"builtins.int*G
-CAN_BCM_TX_SENDsocket.CAN_BCM_TX_SEND
-builtins.int"builtins.int*I
-CAN_BCM_RX_SETUPsocket.CAN_BCM_RX_SETUP
-builtins.int"builtins.int*K
-CAN_BCM_RX_DELETEsocket.CAN_BCM_RX_DELETE
-builtins.int"builtins.int*G
-CAN_BCM_RX_READsocket.CAN_BCM_RX_READ
-builtins.int"builtins.int*K
-CAN_BCM_TX_STATUSsocket.CAN_BCM_TX_STATUS
-builtins.int"builtins.int*M
-CAN_BCM_TX_EXPIREDsocket.CAN_BCM_TX_EXPIRED
-builtins.int"builtins.int*K
-CAN_BCM_RX_STATUSsocket.CAN_BCM_RX_STATUS
-builtins.int"builtins.int*M
-CAN_BCM_RX_TIMEOUTsocket.CAN_BCM_RX_TIMEOUT
-builtins.int"builtins.int*M
-CAN_BCM_RX_CHANGEDsocket.CAN_BCM_RX_CHANGED
-builtins.int"builtins.int*K
-CAN_RAW_FD_FRAMESsocket.CAN_RAW_FD_FRAMES
-builtins.int"builtins.int*I
-CAN_BCM_SETTIMERsocket.CAN_BCM_SETTIMER
-builtins.int"builtins.int*M
-CAN_BCM_STARTTIMERsocket.CAN_BCM_STARTTIMER
-builtins.int"builtins.int*O
-CAN_BCM_TX_COUNTEVTsocket.CAN_BCM_TX_COUNTEVT
-builtins.int"builtins.int*O
-CAN_BCM_TX_ANNOUNCEsocket.CAN_BCM_TX_ANNOUNCE
-builtins.int"builtins.int*Q
-CAN_BCM_TX_CP_CAN_IDsocket.CAN_BCM_TX_CP_CAN_ID
-builtins.int"builtins.int*Q
-CAN_BCM_RX_FILTER_IDsocket.CAN_BCM_RX_FILTER_ID
-builtins.int"builtins.int*Q
-CAN_BCM_RX_CHECK_DLCsocket.CAN_BCM_RX_CHECK_DLC
-builtins.int"builtins.int*W
-CAN_BCM_RX_NO_AUTOTIMERsocket.CAN_BCM_RX_NO_AUTOTIMER
-builtins.int"builtins.int*]
-CAN_BCM_RX_ANNOUNCE_RESUME!socket.CAN_BCM_RX_ANNOUNCE_RESUME
-builtins.int"builtins.int*]
-CAN_BCM_TX_RESET_MULTI_IDX!socket.CAN_BCM_TX_RESET_MULTI_IDX
-builtins.int"builtins.int*Q
-CAN_BCM_RX_RTR_FRAMEsocket.CAN_BCM_RX_RTR_FRAME
-builtins.int"builtins.int*Q
-CAN_BCM_CAN_FD_FRAMEsocket.CAN_BCM_CAN_FD_FRAME
-builtins.int"builtins.int*;
-	CAN_ISOTPsocket.CAN_ISOTP
-builtins.int"builtins.int*K
-	AF_PACKETsocket.AF_PACKET,
-socket.AddressFamily"socket.AddressFamily*;
-	PF_PACKETsocket.PF_PACKET
-builtins.int"builtins.int*I
-PACKET_BROADCASTsocket.PACKET_BROADCAST
-builtins.int"builtins.int*I
-PACKET_FASTROUTEsocket.PACKET_FASTROUTE
-builtins.int"builtins.int*?
-PACKET_HOSTsocket.PACKET_HOST
-builtins.int"builtins.int*G
-PACKET_LOOPBACKsocket.PACKET_LOOPBACK
-builtins.int"builtins.int*I
-PACKET_MULTICASTsocket.PACKET_MULTICAST
-builtins.int"builtins.int*I
-PACKET_OTHERHOSTsocket.PACKET_OTHERHOST
-builtins.int"builtins.int*G
-PACKET_OUTGOINGsocket.PACKET_OUTGOING
-builtins.int"builtins.int*E
-AF_RDSsocket.AF_RDS,
-socket.AddressFamily"socket.AddressFamily*5
-PF_RDSsocket.PF_RDS
-builtins.int"builtins.int*7
-SOL_RDSsocket.SOL_RDS
-builtins.int"builtins.int*M
-RDS_CANCEL_SENT_TOsocket.RDS_CANCEL_SENT_TO
-builtins.int"builtins.int*M
-RDS_CMSG_RDMA_ARGSsocket.RDS_CMSG_RDMA_ARGS
-builtins.int"builtins.int*M
-RDS_CMSG_RDMA_DESTsocket.RDS_CMSG_RDMA_DEST
-builtins.int"builtins.int*K
-RDS_CMSG_RDMA_MAPsocket.RDS_CMSG_RDMA_MAP
-builtins.int"builtins.int*Q
-RDS_CMSG_RDMA_STATUSsocket.RDS_CMSG_RDMA_STATUS
-builtins.int"builtins.int*Q
-RDS_CMSG_RDMA_UPDATEsocket.RDS_CMSG_RDMA_UPDATE
-builtins.int"builtins.int*I
-RDS_CONG_MONITORsocket.RDS_CONG_MONITOR
-builtins.int"builtins.int*?
-RDS_FREE_MRsocket.RDS_FREE_MR
-builtins.int"builtins.int*=
-
-RDS_GET_MRsocket.RDS_GET_MR
-builtins.int"builtins.int*O
-RDS_GET_MR_FOR_DESTsocket.RDS_GET_MR_FOR_DEST
-builtins.int"builtins.int*K
-RDS_RDMA_DONTWAITsocket.RDS_RDMA_DONTWAIT
-builtins.int"builtins.int*E
-RDS_RDMA_FENCEsocket.RDS_RDMA_FENCE
-builtins.int"builtins.int*O
-RDS_RDMA_INVALIDATEsocket.RDS_RDMA_INVALIDATE
-builtins.int"builtins.int*M
-RDS_RDMA_NOTIFY_MEsocket.RDS_RDMA_NOTIFY_ME
-builtins.int"builtins.int*M
-RDS_RDMA_READWRITEsocket.RDS_RDMA_READWRITE
-builtins.int"builtins.int*G
-RDS_RDMA_SILENTsocket.RDS_RDMA_SILENT
-builtins.int"builtins.int*K
-RDS_RDMA_USE_ONCEsocket.RDS_RDMA_USE_ONCE
-builtins.int"builtins.int*?
-RDS_RECVERRsocket.RDS_RECVERR
-builtins.int"builtins.int*G
-AF_TIPCsocket.AF_TIPC,
-socket.AddressFamily"socket.AddressFamily*9
-SOL_TIPCsocket.SOL_TIPC
-builtins.int"builtins.int*A
-TIPC_ADDR_IDsocket.TIPC_ADDR_ID
-builtins.int"builtins.int*E
-TIPC_ADDR_NAMEsocket.TIPC_ADDR_NAME
-builtins.int"builtins.int*K
-TIPC_ADDR_NAMESEQsocket.TIPC_ADDR_NAMESEQ
-builtins.int"builtins.int*A
-TIPC_CFG_SRVsocket.TIPC_CFG_SRV
-builtins.int"builtins.int*M
-TIPC_CLUSTER_SCOPEsocket.TIPC_CLUSTER_SCOPE
-builtins.int"builtins.int*K
-TIPC_CONN_TIMEOUTsocket.TIPC_CONN_TIMEOUT
-builtins.int"builtins.int*Y
-TIPC_CRITICAL_IMPORTANCEsocket.TIPC_CRITICAL_IMPORTANCE
-builtins.int"builtins.int*O
-TIPC_DEST_DROPPABLEsocket.TIPC_DEST_DROPPABLE
-builtins.int"builtins.int*Q
-TIPC_HIGH_IMPORTANCEsocket.TIPC_HIGH_IMPORTANCE
-builtins.int"builtins.int*G
-TIPC_IMPORTANCEsocket.TIPC_IMPORTANCE
-builtins.int"builtins.int*O
-TIPC_LOW_IMPORTANCEsocket.TIPC_LOW_IMPORTANCE
-builtins.int"builtins.int*U
-TIPC_MEDIUM_IMPORTANCEsocket.TIPC_MEDIUM_IMPORTANCE
-builtins.int"builtins.int*G
-TIPC_NODE_SCOPEsocket.TIPC_NODE_SCOPE
-builtins.int"builtins.int*E
-TIPC_PUBLISHEDsocket.TIPC_PUBLISHED
-builtins.int"builtins.int*M
-TIPC_SRC_DROPPABLEsocket.TIPC_SRC_DROPPABLE
-builtins.int"builtins.int*O
-TIPC_SUBSCR_TIMEOUTsocket.TIPC_SUBSCR_TIMEOUT
-builtins.int"builtins.int*G
-TIPC_SUB_CANCELsocket.TIPC_SUB_CANCEL
-builtins.int"builtins.int*E
-TIPC_SUB_PORTSsocket.TIPC_SUB_PORTS
-builtins.int"builtins.int*I
-TIPC_SUB_SERVICEsocket.TIPC_SUB_SERVICE
-builtins.int"builtins.int*A
-TIPC_TOP_SRVsocket.TIPC_TOP_SRV
-builtins.int"builtins.int*K
-TIPC_WAIT_FOREVERsocket.TIPC_WAIT_FOREVER
-builtins.int"builtins.int*E
-TIPC_WITHDRAWNsocket.TIPC_WITHDRAWN
-builtins.int"builtins.int*G
-TIPC_ZONE_SCOPEsocket.TIPC_ZONE_SCOPE
-builtins.int"builtins.int*E
-AF_ALGsocket.AF_ALG,
-socket.AddressFamily"socket.AddressFamily*7
-SOL_ALGsocket.SOL_ALG
-builtins.int"builtins.int*E
-ALG_OP_DECRYPTsocket.ALG_OP_DECRYPT
-builtins.int"builtins.int*E
-ALG_OP_ENCRYPTsocket.ALG_OP_ENCRYPT
-builtins.int"builtins.int*?
-ALG_OP_SIGNsocket.ALG_OP_SIGN
-builtins.int"builtins.int*C
-ALG_OP_VERIFYsocket.ALG_OP_VERIFY
-builtins.int"builtins.int*S
-ALG_SET_AEAD_ASSOCLENsocket.ALG_SET_AEAD_ASSOCLEN
-builtins.int"builtins.int*S
-ALG_SET_AEAD_AUTHSIZEsocket.ALG_SET_AEAD_AUTHSIZE
-builtins.int"builtins.int*=
-
-ALG_SET_IVsocket.ALG_SET_IV
-builtins.int"builtins.int*?
-ALG_SET_KEYsocket.ALG_SET_KEY
-builtins.int"builtins.int*=
-
-ALG_SET_OPsocket.ALG_SET_OP
-builtins.int"builtins.int*E
-ALG_SET_PUBKEYsocket.ALG_SET_PUBKEY
-builtins.int"builtins.int*I
-AF_VSOCKsocket.AF_VSOCK,
-socket.AddressFamily"socket.AddressFamily*e
-IOCTL_VM_SOCKETS_GET_LOCAL_CID%socket.IOCTL_VM_SOCKETS_GET_LOCAL_CID
-builtins.int"builtins.int*E
-VMADDR_CID_ANYsocket.VMADDR_CID_ANY
-builtins.int"builtins.int*G
-VMADDR_CID_HOSTsocket.VMADDR_CID_HOST
-builtins.int"builtins.int*G
-VMADDR_PORT_ANYsocket.VMADDR_PORT_ANY
-builtins.int"builtins.int*c
-SO_VM_SOCKETS_BUFFER_MAX_SIZE$socket.SO_VM_SOCKETS_BUFFER_MAX_SIZE
-builtins.int"builtins.int*[
-SO_VM_SOCKETS_BUFFER_SIZE socket.SO_VM_SOCKETS_BUFFER_SIZE
-builtins.int"builtins.int*c
-SO_VM_SOCKETS_BUFFER_MIN_SIZE$socket.SO_VM_SOCKETS_BUFFER_MIN_SIZE
-builtins.int"builtins.int*]
-VM_SOCKETS_INVALID_VERSION!socket.VM_SOCKETS_INVALID_VERSION
-builtins.int"builtins.int*G
-AF_LINKsocket.AF_LINK,
-socket.AddressFamily"socket.AddressFamily*;
-	SO_DOMAINsocket.SO_DOMAIN
-builtins.int"builtins.int*=
-
-SO_PASSSECsocket.SO_PASSSEC
-builtins.int"builtins.int*=
-
-SO_PEERSECsocket.SO_PEERSEC
-builtins.int"builtins.int*?
-SO_PROTOCOLsocket.SO_PROTOCOL
-builtins.int"builtins.int*E
-TCP_CONGESTIONsocket.TCP_CONGESTION
-builtins.int"builtins.int*I
-TCP_USER_TIMEOUTsocket.TCP_USER_TIMEOUT
-builtins.int"builtins.int*M
-
-AF_QIPCRTRsocket.AF_QIPCRTR,
-socket.AddressFamily"socket.AddressFamily*M
-
-AF_NETLINKsocket.AF_NETLINK,
-socket.AddressFamily"socket.AddressFamily*A
-NETLINK_ARPDsocket.NETLINK_ARPD
-builtins.int"builtins.int*E
-NETLINK_CRYPTOsocket.NETLINK_CRYPTO
-builtins.int"builtins.int*G
-NETLINK_DNRTMSGsocket.NETLINK_DNRTMSG
-builtins.int"builtins.int*I
-NETLINK_FIREWALLsocket.NETLINK_FIREWALL
-builtins.int"builtins.int*E
-NETLINK_IP6_FWsocket.NETLINK_IP6_FW
-builtins.int"builtins.int*C
-NETLINK_NFLOGsocket.NETLINK_NFLOG
-builtins.int"builtins.int*E
-NETLINK_ROUTE6socket.NETLINK_ROUTE6
-builtins.int"builtins.int*C
-NETLINK_ROUTEsocket.NETLINK_ROUTE
-builtins.int"builtins.int*A
-NETLINK_SKIPsocket.NETLINK_SKIP
-builtins.int"builtins.int*G
-NETLINK_TAPBASEsocket.NETLINK_TAPBASE
-builtins.int"builtins.int*G
-NETLINK_TCPDIAGsocket.NETLINK_TCPDIAG
-builtins.int"builtins.int*I
-NETLINK_USERSOCKsocket.NETLINK_USERSOCK
-builtins.int"builtins.int*=
-
-NETLINK_W1socket.NETLINK_W1
-builtins.int"builtins.int*A
-NETLINK_XFRMsocket.NETLINK_XFRM
-builtins.int"builtins.int*Q
-AF_BLUETOOTHsocket.AF_BLUETOOTH,
-socket.AddressFamily"socket.AddressFamily*?
-BTPROTO_HCIsocket.BTPROTO_HCI
-builtins.int"builtins.int*C
-BTPROTO_L2CAPsocket.BTPROTO_L2CAP
-builtins.int"builtins.int*E
-BTPROTO_RFCOMMsocket.BTPROTO_RFCOMM
-builtins.int"builtins.int*?
-BTPROTO_SCOsocket.BTPROTO_SCO
-builtins.int"builtins.int*=
-
-BDADDR_ANYsocket.BDADDR_ANY
-builtins.str"builtins.str*A
-BDADDR_LOCALsocket.BDADDR_LOCAL
-builtins.str"builtins.str*=
-
-HCI_FILTERsocket.HCI_FILTER
-builtins.int"builtins.int*E
-HCI_TIME_STAMPsocket.HCI_TIME_STAMP
-builtins.int"builtins.int*A
-HCI_DATA_DIRsocket.HCI_DATA_DIR
-builtins.int"builtins.int
+socket.AddressInfo"socket.AddressInfo

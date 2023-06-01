@@ -105,13 +105,11 @@ AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 -Tuple[builtins.str,builtins.str,builtins.int]
 builtins.str"builtins.str
 builtins.str"builtins.str
-builtins.int"builtins.intì
-extend_pathpkgutil.extend_path"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*T
-pathJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*&
+builtins.int"builtins.int|
+extend_pathpkgutil.extend_path"
+pkgutil._PathT*
+path
+pkgutil._PathT*&
 name
 builtins.str"builtins.str¬
 find_loaderpkgutil.find_loader"\
@@ -125,10 +123,12 @@ AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder
 None*+
 	path_item
-builtins.str"builtins.str€
+builtins.str"builtins.str°
 
-get_loaderpkgutil.get_loader",
-importlib.abc.Loader"importlib.abc.Loader*0
+get_loaderpkgutil.get_loader"\
+ Union[importlib.abc.Loader,None],
+importlib.abc.Loader"importlib.abc.Loader
+None*0
 module_or_name
 builtins.str"builtins.str„
 iter_importerspkgutil.iter_importers"«
@@ -137,16 +137,16 @@ AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder>
 importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder"typing.Iterator*,
 fullname
-builtins.str"builtins.str ø
-iter_modulespkgutil.iter_modules"Ž
-typing.Iterator[TypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]]ù
+builtins.str"builtins.str ó
+iter_modulespkgutil.iter_modules"‰
+typing.Iterator[TypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]]ô
 nTypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]ë
 cTuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]Ã
 AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder>
 importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder
 builtins.str"builtins.str
-builtins.bool"builtins.bool"pkgutil._ModuleInfoLike"typing.Iterator*”
+builtins.bool"builtins.bool"pkgutil.ModuleInfo"typing.Iterator*”
 path‡
 )Union[typing.Iterable[builtins.str],None]N
 typing.Iterable[builtins.str]
@@ -158,16 +158,16 @@ AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 Any*n
 streamb
 &_typeshed.SupportsRead[builtins.bytes] 
-builtins.bytes"builtins.bytes"_typeshed.SupportsRead“
-walk_packagespkgutil.walk_packages"Ž
-typing.Iterator[TypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]]ù
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadŽ
+walk_packagespkgutil.walk_packages"‰
+typing.Iterator[TypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]]ô
 nTypeAlias[Tuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]]ë
 cTuple[Union[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder],builtins.str,builtins.bool]Ã
 AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 importlib.abc.MetaPathFinder"importlib.abc.MetaPathFinder>
 importlib.abc.PathEntryFinder"importlib.abc.PathEntryFinder
 builtins.str"builtins.str
-builtins.bool"builtins.bool"pkgutil._ModuleInfoLike"typing.Iterator*”
+builtins.bool"builtins.bool"pkgutil.ModuleInfo"typing.Iterator*”
 path‡
 )Union[typing.Iterable[builtins.str],None]N
 typing.Iterable[builtins.str]
@@ -187,4 +187,11 @@ AUnion[importlib.abc.MetaPathFinder,importlib.abc.PathEntryFinder]<
 package
 builtins.str"builtins.str**
 resource
-builtins.str"builtins.str
+builtins.str"builtins.str*ƒ
+__annotations__pkgutil.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*f
+__all__pkgutil.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -2,26 +2,37 @@
 zipfile4
 
 BadZipFilezipfile.BadZipFile"builtins.Exception8
-LargeZipFilezipfile.LargeZipFile"builtins.Exception¿
+LargeZipFilezipfile.LargeZipFile"builtins.ExceptionË
 
-ZipExtFilezipfile.ZipExtFile"io.BufferedIOBase*¡
-__init__zipfile.ZipExtFile.__init__"
-None*2
+_ZipStreamzipfile._ZipStream"builtins.object*•
+readzipfile._ZipStream.read" 
+builtins.bytes"builtins.bytes*2
 self(
-zipfile.ZipExtFile"zipfile.ZipExtFile*U
-fileobjH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*&
-mode
-builtins.str"builtins.str*/
-zipinfo"
-zipfile.ZipInfo"zipfile.ZipInfo*U
-pwdJ
-Union[builtins.bytes,None] 
-builtins.bytes"builtins.bytes
-None *3
-close_fileobj
-builtins.bool"builtins.bool *Ä
+zipfile._ZipStream"zipfile._ZipStream*
+builtins.int"builtins.intXô
+_SupportsReadSeekTellzipfile._SupportsReadSeekTell"builtins.object*¸
+read"zipfile._SupportsReadSeekTell.read" 
+builtins.bytes"builtins.bytes*H
+self>
+zipfile._SupportsReadSeekTell"zipfile._SupportsReadSeekTell* 
+builtins.int"builtins.int *Ø
+seek"zipfile._SupportsReadSeekTell.seek""
+builtins.object"builtins.object*H
+self>
+zipfile._SupportsReadSeekTell"zipfile._SupportsReadSeekTell*
+builtins.int"builtins.int*
+builtins.int"builtins.int*’
+tell"zipfile._SupportsReadSeekTell.tell"
+builtins.int"builtins.int*H
+self>
+zipfile._SupportsReadSeekTell"zipfile._SupportsReadSeekTellXÚ
+_ClosableZipStreamzipfile._ClosableZipStream"zipfile._ZipStream*‘
+close zipfile._ClosableZipStream.close""
+builtins.object"builtins.object*B
+self8
+zipfile._ClosableZipStream"zipfile._ClosableZipStreamXâ
+
+ZipExtFilezipfile.ZipExtFile"io.BufferedIOBase*Ä
 readzipfile.ZipExtFile.read" 
 builtins.bytes"builtins.bytes*2
 self(
@@ -35,11 +46,7 @@ ZipExtFilezipfile.ZipExtFile"io.BufferedIOBase*¡
 self(
 zipfile.ZipExtFile"zipfile.ZipExtFile*)
 limit
-builtins.int"builtins.int *w
-__repr__zipfile.ZipExtFile.__repr__"
-builtins.str"builtins.str*0
-self(
-zipfile.ZipExtFile"zipfile.ZipExtFile*œ
+builtins.int"builtins.int *œ
 peekzipfile.ZipExtFile.peek" 
 builtins.bytes"builtins.bytes*2
 self(
@@ -53,7 +60,82 @@ ZipExtFilezipfile.ZipExtFile"io.BufferedIOBase*¡
 nD
 Union[builtins.int,None]
 builtins.int"builtins.int
-Noner?
+None*Ç
+seekzipfile.ZipExtFile.seek"
+builtins.int"builtins.int*2
+self(
+zipfile.ZipExtFile"zipfile.ZipExtFile*(
+offset
+builtins.int"builtins.int**
+whence
+builtins.int"builtins.int 2‰
+__init__zipfile.ZipExtFile.__init__¡
+__init__zipfile.ZipExtFile.__init__"
+None*2
+self(
+zipfile.ZipExtFile"zipfile.ZipExtFile*E
+fileobj8
+zipfile._ClosableZipStream"zipfile._ClosableZipStream*
+mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteMode*/
+zipinfo"
+zipfile.ZipInfo"zipfile.ZipInfo*S
+pwdJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None*M
+close_fileobj:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:overloadX£
+__init__zipfile.ZipExtFile.__init__"
+None*2
+self(
+zipfile.ZipExtFile"zipfile.ZipExtFile*E
+fileobj8
+zipfile._ClosableZipStream"zipfile._ClosableZipStream*
+mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteMode*/
+zipinfo"
+zipfile.ZipInfo"zipfile.ZipInfo*U
+pwdJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *M
+close_fileobj:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool0:overloadX•
+__init__zipfile.ZipExtFile.__init__"
+None*2
+self(
+zipfile.ZipExtFile"zipfile.ZipExtFile*5
+fileobj(
+zipfile._ZipStream"zipfile._ZipStream*
+mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteMode*/
+zipinfo"
+zipfile.ZipInfo"zipfile.ZipInfo*U
+pwdJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *O
+close_fileobj:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool 0:overloadXr?
 MAX_Nzipfile.ZipExtFile.MAX_N
 builtins.int"builtins.intrO
 MIN_READ_SIZE zipfile.ZipExtFile.MIN_READ_SIZE
@@ -64,19 +146,23 @@ ZipExtFilezipfile.ZipExtFile"io.BufferedIOBase*¡
 )Union[builtins.list[builtins.bytes],None]P
 builtins.list[builtins.bytes] 
 builtins.bytes"builtins.bytes"builtins.list
-Noner=
-modezipfile.ZipExtFile.mode
-builtins.str"builtins.strr=
+Noner¦
+modezipfile.ZipExtFile.mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteModer=
 namezipfile.ZipExtFile.name
-builtins.str"builtins.str©
-_Writerzipfile._Writer"builtins.object*z
-writezipfile._Writer.write"
-Any*,
+builtins.str"builtins.strÀ
+_Writerzipfile._Writer"builtins.object*
+writezipfile._Writer.write""
+builtins.object"builtins.object*,
 self"
-zipfile._Writer"zipfile._Writer*#
-__s
-builtins.str"builtins.strXÿ2
-ZipFilezipfile.ZipFile"builtins.object*ž
+zipfile._Writer"zipfile._Writer*
+builtins.str"builtins.strXºI
+ZipFilezipfile.ZipFile"builtins.object*Ð	
 __init__zipfile.ZipFile.__init__"
 None*,
 self"
@@ -89,9 +175,18 @@ YUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],typing.IO[builti
 os.PathLike[builtins.str]
 builtins.str"builtins.str"os.PathLike"_typeshed.StrPathH
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*(
-mode
-builtins.str"builtins.str */
+builtins.bytes"builtins.bytes"	typing.IO*Ù
+modeÌ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Æ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ZipFileMode */
 compression
 builtins.int"builtins.int *0
 
@@ -102,25 +197,20 @@ allowZip64
 builtins.int"builtins.int
 None *7
 strict_timestamps
-builtins.bool"builtins.bool *v
-	__enter__zipfile.ZipFile.__enter__""
-zipfile.ZipFile"zipfile.ZipFile**
-self"
-zipfile.ZipFile"zipfile.ZipFile*È
+builtins.bool"builtins.bool *\
+	__enter__zipfile.ZipFile.__enter__"
+zipfile.ZipFile.Self*
+zipfile.ZipFile.Self*§
 __exit__zipfile.ZipFile.__exit__"
-None**
-self"
-zipfile.ZipFile"zipfile.ZipFile*—
-exc_typeŠ
+None*$"
+zipfile.ZipFile"zipfile.ZipFile*Š
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
 None*V
@@ -143,59 +233,68 @@ allowZip64
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*
+zipfile.ZipFile"zipfile.ZipFile*§
 openzipfile.ZipFile.open"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*¶
-name«
-.TypeAlias[Union[builtins.str,zipfile.ZipInfo]]i
+zipfile.ZipFile"zipfile.ZipFile*s
+namei
 #Union[builtins.str,zipfile.ZipInfo]
 builtins.str"builtins.str"
-zipfile.ZipInfo"zipfile.ZipInfo"zipfile._SZI*(
-mode
-builtins.str"builtins.str *U
+zipfile.ZipInfo"zipfile.ZipInfo*‘
+mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteMode *U
 pwdJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
 None *1
 force_zip64
-builtins.bool"builtins.bool *¶
+builtins.bool"builtins.bool *Š
 extractzipfile.ZipFile.extract"
 builtins.str"builtins.str*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*¸
-member«
-.TypeAlias[Union[builtins.str,zipfile.ZipInfo]]i
+zipfile.ZipFile"zipfile.ZipFile*u
+memberi
 #Union[builtins.str,zipfile.ZipInfo]
 builtins.str"builtins.str"
-zipfile.ZipInfo"zipfile.ZipInfo"zipfile._SZI*³
-path¦
-2Union[builtins.str,os.PathLike[builtins.str],None]
+zipfile.ZipInfo"zipfile.ZipInfo*Ë
+path¾
+DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
 None *U
 pwdJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
-None *‡
+None *›
 
 extractallzipfile.ZipFile.extractall"
 None*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*³
-path¦
-2Union[builtins.str,os.PathLike[builtins.str],None]
+zipfile.ZipFile"zipfile.ZipFile*Ë
+path¾
+DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
-None *—
-members‡
-)Union[typing.Iterable[builtins.str],None]N
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
+None *“
+membersƒ
+@Union[typing.Iterable[Union[builtins.str,zipfile.ZipInfo]],None]²
+4typing.Iterable[Union[builtins.str,zipfile.ZipInfo]]i
+#Union[builtins.str,zipfile.ZipInfo]
+builtins.str"builtins.str"
+zipfile.ZipInfo"zipfile.ZipInfo"typing.Iterable
 None *U
 pwdJ
 Union[builtins.bytes,None] 
@@ -214,16 +313,15 @@ extractallzipfile.ZipFile.extractall"
 self"
 zipfile.ZipFile"zipfile.ZipFile*)
 pwd 
-builtins.bytes"builtins.bytes*ü
+builtins.bytes"builtins.bytes*¸
 readzipfile.ZipFile.read" 
 builtins.bytes"builtins.bytes*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*¶
-name«
-.TypeAlias[Union[builtins.str,zipfile.ZipInfo]]i
+zipfile.ZipFile"zipfile.ZipFile*s
+namei
 #Union[builtins.str,zipfile.ZipInfo]
 builtins.str"builtins.str"
-zipfile.ZipInfo"zipfile.ZipInfo"zipfile._SZI*U
+zipfile.ZipInfo"zipfile.ZipInfo*U
 pwdJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
@@ -233,7 +331,7 @@ extractallzipfile.ZipFile.extractall"
 builtins.str"builtins.str
 None*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*À
+zipfile.ZipFile"zipfile.ZipFile*Ø
 writezipfile.ZipFile.write"
 None*,
 self"
@@ -243,12 +341,14 @@ extractallzipfile.ZipFile.extractall"
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*¶
-arcname¦
-2Union[builtins.str,os.PathLike[builtins.str],None]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*Î
+arcname¾
+DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
 None *Y
 compress_typeD
 Union[builtins.int,None]
@@ -257,19 +357,30 @@ extractallzipfile.ZipFile.extractall"
 compresslevelD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *É
+None *•
 writestrzipfile.ZipFile.writestr"
 None*,
 self"
-zipfile.ZipFile"zipfile.ZipFile*Â
-zinfo_or_arcname«
-.TypeAlias[Union[builtins.str,zipfile.ZipInfo]]i
+zipfile.ZipFile"zipfile.ZipFile*
+zinfo_or_arcnamei
 #Union[builtins.str,zipfile.ZipInfo]
 builtins.str"builtins.str"
-zipfile.ZipInfo"zipfile.ZipInfo"zipfile._SZI*p
-dataf
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
+zipfile.ZipInfo"zipfile.ZipInfo*ÿ	
+dataô	
+µUnion[TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],builtins.str]™
+¡TypeAlias[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]Ö
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"_typeshed._BufferWithLen
 builtins.str"builtins.str*Y
 compress_typeD
 Union[builtins.int,None]
@@ -301,8 +412,30 @@ NameToInfozipfile.ZipFile.NameToInfo~
 builtins.str"builtins.str"
 zipfile.ZipInfo"zipfile.ZipInfo"builtins.dictrD
 	start_dirzipfile.ZipFile.start_dir
-builtins.int"builtins.intÏ
-	PyZipFilezipfile.PyZipFile"zipfile.ZipFile*Ä
+builtins.int"builtins.intrH
+compressionzipfile.ZipFile.compression
+builtins.int"builtins.intrt
+compresslevelzipfile.ZipFile.compresslevelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerë
+modezipfile.ZipFile.modeÌ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Æ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ZipFileModerf
+pwdzipfile.ZipFile.pwdJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None
+
+	PyZipFilezipfile.PyZipFile"zipfile.ZipFile*ö
 __init__zipfile.PyZipFile.__init__"
 None*0
 self&
@@ -311,9 +444,18 @@ NameToInfozipfile.ZipFile.NameToInfo~
 -Union[builtins.str,typing.IO[builtins.bytes]]
 builtins.str"builtins.strH
 typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*(
-mode
-builtins.str"builtins.str */
+builtins.bytes"builtins.bytes"	typing.IO*Ù
+modeÌ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Æ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ZipFileMode */
 compression
 builtins.int"builtins.int *0
 
@@ -334,42 +476,41 @@ filterfunc†
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-None ý
-ZipInfozipfile.ZipInfo"builtins.object*Ä
+None ¼
+ZipInfozipfile.ZipInfo"builtins.object*¥
 __init__zipfile.ZipInfo.__init__"
 None*,
 self"
-zipfile.ZipInfo"zipfile.ZipInfo*T
-filenameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-	date_timeý
-`Union[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int],None]Œ
+zipfile.ZipInfo"zipfile.ZipInfo*,
+filename
+builtins.str"builtins.str *˜
+	date_time†
+_TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]Œ
 TTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int
-None *
-	from_filezipfile.ZipInfo.from_file""
-zipfile.ZipInfo"zipfile.ZipInfo*F
-cls=
-Type[zipfile.ZipInfo]"
-zipfile.ZipInfo"zipfile.ZipInfo*ø
+builtins.int"builtins.int"zipfile._DateTuple *™
+	from_filezipfile.ZipInfo.from_file"
+zipfile.ZipInfo.Self*A
+cls8
+Type[zipfile.ZipInfo.Self]
+zipfile.ZipInfo.Self*ø
 filenameé
 8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*¶
-arcname¦
-2Union[builtins.str,os.PathLike[builtins.str],None]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*Î
+arcname¾
+DUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],None]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath
 None *7
 strict_timestamps
 builtins.bool"builtins.bool 0:classmethodp*n
@@ -387,8 +528,8 @@ FileHeaderzipfile.ZipInfo.FileHeader"
 builtins.bool"builtins.bool
 None rB
 filenamezipfile.ZipInfo.filename
-builtins.str"builtins.strr¨
-	date_timezipfile.ZipInfo.date_timeÿ
+builtins.str"builtins.strr¯
+	date_timezipfile.ZipInfo.date_time†
 _TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]Œ
 TTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
@@ -396,7 +537,7 @@ TTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.int"zipfile._DTrL
+builtins.int"builtins.int"zipfile._DateTuplerL
 compress_typezipfile.ZipInfo.compress_type
 builtins.int"builtins.intrD
 commentzipfile.ZipInfo.comment 
@@ -426,28 +567,36 @@ TTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins
 compress_sizezipfile.ZipInfo.compress_size
 builtins.int"builtins.intrD
 	file_sizezipfile.ZipInfo.file_size
-builtins.int"builtins.int²
-_PathOpenProtocolzipfile._PathOpenProtocol"builtins.object*î
+builtins.int"builtins.intrL
+orig_filenamezipfile.ZipInfo.orig_filename
+builtins.str"builtins.strœ
+_PathOpenProtocolzipfile._PathOpenProtocol"builtins.object*Ø
 __call__"zipfile._PathOpenProtocol.__call__"H
 typing.IO[builtins.bytes] 
 builtins.bytes"builtins.bytes"	typing.IO*@
 self6
-zipfile._PathOpenProtocol"zipfile._PathOpenProtocol*(
-mode
-builtins.str"builtins.str *U
+zipfile._PathOpenProtocol"zipfile._PathOpenProtocol*‘
+mode„
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"zipfile._ReadWriteMode *U
 pwdJ
 Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
 None *1
 force_zip64
-builtins.bool"builtins.bool X¾
+builtins.bool"builtins.bool XÞ
 Pathzipfile.Path"builtins.object*m
 namezipfile.Path.name"
 builtins.str"builtins.str*&
 self
-zipfile.Path"zipfile.Path0:property`*q
-parentzipfile.Path.parent"
-zipfile.Path"zipfile.Path*&
+zipfile.Path"zipfile.Path0:property`*›
+parentzipfile.Path.parent"F
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*&
 self
 zipfile.Path"zipfile.Path0:property`*Ð
 __init__zipfile.Path.__init__"
@@ -521,29 +670,36 @@ read_byteszipfile.Path.read_bytes"
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*ß
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*Ô
 __truediv__zipfile.Path.__truediv__"
-zipfile.Path"zipfile.Path*$
-self
-zipfile.Path"zipfile.Path*ñ
-addé
+zipfile.Path"zipfile.Path*
+zipfile.Path"zipfile.Path*ìé
 8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
 -Union[builtins.str,os.PathLike[builtins.str]]
 builtins.str"builtins.strF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathå
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathØ
 
 is_zipfilezipfile.is_zipfile"
-builtins.bool"builtins.bool*¢
-filename“
-YUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],typing.IO[builtins.bytes]]é
-8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
--Union[builtins.str,os.PathLike[builtins.str]]
-builtins.str"builtins.strF
+builtins.bool"builtins.bool*•
+filename†
+ˆUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],zipfile._SupportsReadSeekTell]¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
 os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike"_typeshed.StrPathH
-typing.IO[builtins.bytes] 
-builtins.bytes"builtins.bytes"	typing.IO*>
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath>
+zipfile._SupportsReadSeekTell"zipfile._SupportsReadSeekTell*ƒ
+__annotations__zipfile.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*f
+__all__zipfile.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*>
 
 ZIP_STOREDzipfile.ZIP_STORED
 builtins.int"builtins.int*B

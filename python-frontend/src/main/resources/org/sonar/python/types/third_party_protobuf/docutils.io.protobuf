@@ -1,74 +1,145 @@
 
-docutils.ioO
+docutils.ioK
 
-InputErrordocutils.io.InputError"builtins.OSErrorj35j36j37j38j39j310Q
-OutputErrordocutils.io.OutputError"builtins.OSErrorj35j36j37j38j39j310Ô
-Inputdocutils.io.Input"docutils.TransformSpec*r
+InputErrordocutils.io.InputError"builtins.OSErrorj36j37j38j39j310M
+OutputErrordocutils.io.OutputError"builtins.OSErrorj36j37j38j39j310õ
+Inputdocutils.io.Input"docutils.TransformSpec*n
 readdocutils.io.Input.read"
 Any*0
 self&
-docutils.io.Input"docutils.io.Inputz35z36z37z38z39z310*§
-__getattr__docutils.io.Input.__getattr__"
-Any*.
-self&
-docutils.io.Input"docutils.io.Input*$
-name
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310ri
+docutils.io.Input"docutils.io.Inputz36z37z38z39z310*∏
+decodedocutils.io.Input.decode"
+builtins.str"builtins.str*0
+self&
+docutils.io.Input"docutils.io.Input*Æ
+data£
+5Union[builtins.str,builtins.bytes,builtins.bytearray]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearrayz36z37z38z39z310*å
+determine_encoding_from_data.docutils.io.Input.determine_encoding_from_data"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*0
+self&
+docutils.io.Input"docutils.io.Input*Æ
+data£
+5Union[builtins.str,builtins.bytes,builtins.bytearray]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearrayz36z37z38z39z310*â
+isattydocutils.io.Input.isatty"
+builtins.bool"builtins.bool*0
+self&
+docutils.io.Input"docutils.io.Inputz36z37z38z39z310j36j37j38j39j310re
 component_type docutils.io.Input.component_type
-builtins.str"builtins.str*35*36*37*38*39*310rõ
+builtins.str"builtins.str*36*37*38*39*310ró
 default_source_path%docutils.io.Input.default_source_pathD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310≠
-Outputdocutils.io.Output"docutils.TransformSpec*Ç
+None*36*37*38*39*310rç
+coding_slugdocutils.io.Input.coding_slugJ
+re.Pattern[builtins.bytes] 
+builtins.bytes"builtins.bytes"
+re.Pattern*36*37*38*39*310r˙
+byte_order_marks"docutils.io.Input.byte_order_marks¨
+2builtins.tuple[Tuple[builtins.bytes,builtins.str]]f
+"Tuple[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str"builtins.tuple*36*37*38*39*310ˇ
+Outputdocutils.io.Output"docutils.TransformSpec*Ë
 __init__docutils.io.Output.__init__"
 None*2
 self(
-docutils.io.Output"docutils.io.Output*9
-destination&
-Union[Any,None]
-Any
-None *>
-destination_path&
-Union[Any,None]
-Any
+docutils.io.Output"docutils.io.Output*n
+destination[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *s
+destination_path[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
 None *T
 encodingD
 Union[builtins.str,None]
 builtins.str"builtins.str
 None *1
 error_handler
-builtins.str"builtins.str z35z36z37z38z39z310*ü
+builtins.str"builtins.str z36z37z38z39z310*õ
 writedocutils.io.Output.write"
 Any*2
 self(
 docutils.io.Output"docutils.io.Output*&
 data
-builtins.str"builtins.strz35z36z37z38z39z310*°
+builtins.str"builtins.strz36z37z38z39z310*ù
 encodedocutils.io.Output.encode"
 Any*2
 self(
 docutils.io.Output"docutils.io.Output*&
 data
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310rj
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310rf
 component_type!docutils.io.Output.component_type
-builtins.str"builtins.str*35*36*37*38*39*310r¶
+builtins.str"builtins.str*36*37*38*39*310r¢
 default_destination_path+docutils.io.Output.default_destination_pathD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None*35*36*37*38*39*310æ
-	FileInputdocutils.io.FileInput"docutils.io.Input*õ
+None*36*37*38*39*310µ
+ErrorOutputdocutils.io.ErrorOutput"builtins.object*ã
+__init__ docutils.io.ErrorOutput.__init__"
+None*<
+self2
+docutils.io.ErrorOutput"docutils.io.ErrorOutput*ø
+destination´
+}Union[builtins.str,_typeshed.SupportsWrite[builtins.str],_typeshed.SupportsWrite[builtins.bytes],Literal[builtins.bool],None]
+builtins.str"builtins.str^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrited
+'_typeshed.SupportsWrite[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsWrite:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *3
+encoding_errors
+builtins.str"builtins.str *3
+decoding_errors
+builtins.str"builtins.str z36z37z38z39z310*¥
+writedocutils.io.ErrorOutput.write"
+None*<
+self2
+docutils.io.ErrorOutput"docutils.io.ErrorOutput*Æ
+data£
+5Union[builtins.str,builtins.bytes,builtins.Exception]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes(
+builtins.Exception"builtins.Exceptionz36z37z38z39z310*É
+closedocutils.io.ErrorOutput.close"
+None*<
+self2
+docutils.io.ErrorOutput"docutils.io.ErrorOutputz36z37z38z39z310*õ
+isattydocutils.io.ErrorOutput.isatty"
+builtins.bool"builtins.bool*<
+self2
+docutils.io.ErrorOutput"docutils.io.ErrorOutputz36z37z38z39z310j36j37j38j39j310©
+	FileInputdocutils.io.FileInput"docutils.io.Input*Å
 __init__docutils.io.FileInput.__init__"
 None*8
 self.
-docutils.io.FileInput"docutils.io.FileInput*4
-source&
-Union[Any,None]
-Any
-None *9
-source_path&
-Union[Any,None]
-Any
+docutils.io.FileInput"docutils.io.FileInput*i
+source[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+source_path[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
 None *T
 encodingD
 Union[builtins.str,None]
@@ -123,24 +194,27 @@ InputErrordocutils.io.InputError"builtins.OSErrorj35j36j37j38j39j310Q
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeReading z35z36z37z38z39z310*À
+builtins.str"builtins.str"_typeshed.OpenBinaryModeReading z36z37z38z39z310*è
+readdocutils.io.FileInput.read"
+builtins.str"builtins.str*8
+self.
+docutils.io.FileInput"docutils.io.FileInputz36z37z38z39z310*«
 	readlinesdocutils.io.FileInput.readlines"J
 builtins.list[builtins.str]
 builtins.str"builtins.str"builtins.list*8
 self.
-docutils.io.FileInput"docutils.io.FileInputz35z36z37z38z39z310*Å
+docutils.io.FileInput"docutils.io.FileInputz36z37z38z39z310*}
 closedocutils.io.FileInput.close"
 None*8
 self.
-docutils.io.FileInput"docutils.io.FileInputz35z36z37z38z39z310j35j36j37j38j39j310ª
+docutils.io.FileInput"docutils.io.FileInputz36z37z38z39z310j36j37j38j39j310Õ
 
-FileOutputdocutils.io.FileOutput"docutils.io.Output*≥
-__getattr__"docutils.io.FileOutput.__getattr__"
-Any*8
-self0
-docutils.io.FileOutput"docutils.io.FileOutput*$
-name
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310r±
+FileOutputdocutils.io.FileOutput"docutils.io.Output*Õ
+__getattr__"docutils.io.FileOutput.__getattr__"1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*20
+docutils.io.FileOutput"docutils.io.FileOutput*
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310r≠
 modedocutils.io.FileOutput.modeÚ
 ÙUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]]–
 ◊TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]“
@@ -176,38 +250,38 @@ FileOutputdocutils.io.FileOutput"docutils.io.Output*≥
 Literal[builtins.str]	
 builtins.str"builtins.str7
 Literal[builtins.str]	
-builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting*35*36*37*38*39*310a
-BinaryFileOutputdocutils.io.BinaryFileOutput"docutils.io.FileOutputj35j36j37j38j39j310Õ
-StringInputdocutils.io.StringInput"docutils.io.Inputj35j36j37j38j39j310ry
+builtins.str"builtins.str"_typeshed.OpenBinaryModeWriting*36*37*38*39*310]
+BinaryFileOutputdocutils.io.BinaryFileOutput"docutils.io.FileOutputj36j37j38j39j310≈
+StringInputdocutils.io.StringInput"docutils.io.Inputj36j37j38j39j310ru
 default_source_path+docutils.io.StringInput.default_source_path
-builtins.str"builtins.str*35*36*37*38*39*310ì
-StringOutputdocutils.io.StringOutput"docutils.io.Outputj35j36j37j38j39j310rÑ
+builtins.str"builtins.str*36*37*38*39*310á
+StringOutputdocutils.io.StringOutput"docutils.io.Outputj36j37j38j39j310rÄ
 default_destination_path1docutils.io.StringOutput.default_destination_path
-builtins.str"builtins.str*35*36*37*38*39*310r¥
+builtins.str"builtins.str*36*37*38*39*310r∞
 destination$docutils.io.StringOutput.destinationf
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310›
-	NullInputdocutils.io.NullInput"docutils.io.Input*ì
+builtins.bytes"builtins.bytes*36*37*38*39*310—
+	NullInputdocutils.io.NullInput"docutils.io.Input*è
 readdocutils.io.NullInput.read"
 builtins.str"builtins.str*8
 self.
-docutils.io.NullInput"docutils.io.NullInputz35z36z37z38z39z310j35j36j37j38j39j310rw
+docutils.io.NullInput"docutils.io.NullInputz36z37z38z39z310j36j37j38j39j310rs
 default_source_path)docutils.io.NullInput.default_source_path
-builtins.str"builtins.str*35*36*37*38*39*310ã
+builtins.str"builtins.str*36*37*38*39*310˛
 
-NullOutputdocutils.io.NullOutput"docutils.io.Output*≤
+NullOutputdocutils.io.NullOutput"docutils.io.Output*Æ
 writedocutils.io.NullOutput.write"
 None*:
 self0
 docutils.io.NullOutput"docutils.io.NullOutput*,
 data"
-builtins.object"builtins.objectz35z36z37z38z39z310j35j36j37j38j39j310rÇ
+builtins.object"builtins.objectz36z37z38z39z310j36j37j38j39j310r~
 default_destination_path/docutils.io.NullOutput.default_destination_path
-builtins.str"builtins.str*35*36*37*38*39*310–
-DocTreeInputdocutils.io.DocTreeInput"docutils.io.Inputj35j36j37j38j39j310rz
+builtins.str"builtins.str*36*37*38*39*310»
+DocTreeInputdocutils.io.DocTreeInput"docutils.io.Inputj36j37j38j39j310rv
 default_source_path,docutils.io.DocTreeInput.default_source_path
-builtins.str"builtins.str*35*36*37*38*39*310œ
+builtins.str"builtins.str*36*37*38*39*310À
 check_encodingdocutils.io.check_encoding"G
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
@@ -215,6 +289,14 @@ NullOutputdocutils.io.NullOutput"docutils.io.Output*≤
 stream
 Any**
 encoding
-builtins.str"builtins.strz35z36z37z38z39z310*a
+builtins.str"builtins.strz36z37z38z39z310ñ
+error_stringdocutils.io.error_string"
+builtins.str"builtins.str*9
+err0
+builtins.BaseException"builtins.BaseExceptionz36z37z38z39z310*ú
+__annotations__docutils.io.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*]
 __docformat__docutils.io.__docformat__
-builtins.str"builtins.str*35*36*37*38*39*310
+builtins.str"builtins.str*36*37*38*39*310
