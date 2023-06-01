@@ -1,5 +1,5 @@
 
-itsdangerous.timedÀ
+itsdangerous.timed
 TimestampSigner"itsdangerous.timed.TimestampSigner"itsdangerous.signer.Signer*³
 get_timestamp0itsdangerous.timed.TimestampSigner.get_timestamp"
 builtins.int"builtins.int*R
@@ -19,7 +19,7 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*Ğ
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*š
 validate+itsdangerous.timed.TimestampSigner.validate"
 builtins.bool"builtins.bool*R
 selfH
@@ -28,12 +28,13 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*S
-max_ageD
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*œ
+max_ageŒ
+#TypeAlias[Union[builtins.int,None]]D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 2ü	
-unsign)itsdangerous.timed.TimestampSigner.unsign·
+None"itsdangerous.timed._t_opt_int 2
+unsign)itsdangerous.timed.TimestampSigner.unsign
 unsign)itsdangerous.timed.TimestampSigner.unsign" 
 builtins.bytes"builtins.bytes*R
 selfH
@@ -42,14 +43,15 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*S
-max_ageD
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*œ
+max_ageŒ
+#TypeAlias[Union[builtins.int,None]]D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *R
+None"itsdangerous.timed._t_opt_int *R
 return_timestamp:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadXŒ
+builtins.bool"builtins.bool 0:typing.overloadXÖ
 unsign)itsdangerous.timed.TimestampSigner.unsign"u
 'Tuple[builtins.bytes,datetime.datetime] 
 builtins.bytes"builtins.bytes&
@@ -60,25 +62,27 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*S
-max_ageD
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*œ
+max_ageŒ
+#TypeAlias[Union[builtins.int,None]]D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *R
+None"itsdangerous.timed._t_opt_int *R
 return_timestamp:
 Literal[builtins.bool]	
-builtins.bool"builtins.bool 0:typing.overloadXª
-TimedSerializer"itsdangerous.timed.TimedSerializer""itsdangerous.serializer.Serializer*®
+builtins.bool"builtins.bool 0:typing.overloadXØ
+TimedSerializer"itsdangerous.timed.TimedSerializer""itsdangerous.serializer.Serializer*Œ
 iter_unsigners1itsdangerous.timed.TimedSerializer.iter_unsigners"
 3typing.Iterator[itsdangerous.timed.TimestampSigner]H
 "itsdangerous.timed.TimestampSigner""itsdangerous.timed.TimestampSigner"typing.Iterator*R
 selfH
-"itsdangerous.timed.TimedSerializer""itsdangerous.timed.TimedSerializer*
-saltu
+"itsdangerous.timed.TimedSerializer""itsdangerous.timed.TimedSerializer*ß
+saltÒ
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
 'Union[builtins.str,builtins.bytes,None]
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes
-None *ä
+None"#itsdangerous.timed._t_opt_str_bytes *Œ
 loads(itsdangerous.timed.TimedSerializer.loads"
 Any*R
 selfH
@@ -87,18 +91,20 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*S
-max_ageD
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*œ
+max_ageŒ
+#TypeAlias[Union[builtins.int,None]]D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *6
+None"itsdangerous.timed._t_opt_int *6
 return_timestamp
-builtins.bool"builtins.bool *
-saltu
+builtins.bool"builtins.bool *ß
+saltÒ
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
 'Union[builtins.str,builtins.bytes,None]
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes
-None *ø
+None"#itsdangerous.timed._t_opt_str_bytes * 
 loads_unsafe/itsdangerous.timed.TimedSerializer.loads_unsafe"E
 Tuple[builtins.bool,Any]
 builtins.bool"builtins.bool
@@ -109,18 +115,24 @@
 -TypeAlias[Union[builtins.str,builtins.bytes]]f
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*S
-max_ageD
+builtins.bytes"builtins.bytes"itsdangerous.timed._t_str_bytes*œ
+max_ageŒ
+#TypeAlias[Union[builtins.int,None]]D
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *
-saltu
+None"itsdangerous.timed._t_opt_int *ß
+saltÒ
+2TypeAlias[Union[builtins.str,builtins.bytes,None]]u
 'Union[builtins.str,builtins.bytes,None]
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes
-None r»
+None"#itsdangerous.timed._t_opt_str_bytes r»
 default_signer1itsdangerous.timed.TimedSerializer.default_signerv
 (Type[itsdangerous.timed.TimestampSigner]H
-"itsdangerous.timed.TimestampSigner""itsdangerous.timed.TimestampSigner*
+"itsdangerous.timed.TimestampSigner""itsdangerous.timed.TimestampSigner*
+__annotations__"itsdangerous.timed.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
 _ttyping *
 _tetyping_extensions 

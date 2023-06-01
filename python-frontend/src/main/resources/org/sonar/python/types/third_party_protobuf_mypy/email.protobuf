@@ -1,10 +1,6 @@
 
-emailÓ\
-Messageemail.message.Message"builtins.object*~
-__str__email.message.Message.__str__"
-builtins.str"builtins.str*6
-self.
-email.message.Message"email.message.Message*Œ
+emailÕ{
+Messageemail.message.Message"builtins.object*Œ
 is_multipart"email.message.Message.is_multipart"
 builtins.bool"builtins.bool*8
 self.
@@ -36,18 +32,19 @@
 builtins.int"builtins.int
 None *,
 decode
-builtins.bool"builtins.bool *å
+builtins.bool"builtins.bool *µ
 set_payload!email.message.Message.set_payload"
 None*8
 self.
-email.message.Message"email.message.Message*õ
-payloadç
-RTypeAlias[Union[builtins.list[email.message.Message],builtins.str,builtins.bytes]]ò
-GUnion[builtins.list[email.message.Message],builtins.str,builtins.bytes]e
+email.message.Message"email.message.Message*Å
+payload·
+eTypeAlias[Union[builtins.list[email.message.Message],builtins.str,builtins.bytes,builtins.bytearray]]¯
+ZUnion[builtins.list[email.message.Message],builtins.str,builtins.bytes,builtins.bytearray]e
 $builtins.list[email.message.Message].
 email.message.Message"email.message.Message"builtins.list
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"email.message._PayloadType*ö
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray"email.message._PayloadType*ö
 charsetæ
 9TypeAlias[Union[email.charset.Charset,builtins.str,None]]Š
 .Union[email.charset.Charset,builtins.str,None].
@@ -71,38 +68,32 @@ $builtins.list[email.message.Message].
 builtins.str"builtins.str
 None"email.message._CharsetType*8
 self.
-email.message.Message"email.message.Message*~
+email.message.Message"email.message.Message*x
 __len__email.message.Message.__len__"
-builtins.int"builtins.int*6
-self.
-email.message.Message"email.message.Message*°
+builtins.int"builtins.int*0.
+email.message.Message"email.message.Message*¤
 __contains__"email.message.Message.__contains__"
-builtins.bool"builtins.bool*6
-self.
-email.message.Message"email.message.Message*$
-name
-builtins.str"builtins.str*Æ
+builtins.bool"builtins.bool*0.
+email.message.Message"email.message.Message*
+builtins.str"builtins.str*¬
+__iter__email.message.Message.__iter__"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*0.
+email.message.Message"email.message.Message*º
 __getitem__!email.message.Message.__getitem__"6
 TypeAlias[Any]
-Any"email.message._HeaderType*6
-self.
-email.message.Message"email.message.Message*$
-name
-builtins.str"builtins.str*×
+Any"email.message._HeaderType*0.
+email.message.Message"email.message.Message*
+builtins.str"builtins.str*Æ
 __setitem__!email.message.Message.__setitem__"
-None*6
-self.
-email.message.Message"email.message.Message*$
-name
-builtins.str"builtins.str*=
-val6
+None*0.
+email.message.Message"email.message.Message*
+builtins.str"builtins.str*86
 TypeAlias[Any]
-Any"email.message._HeaderType*˜
+Any"email.message._HeaderType*Œ
 __delitem__!email.message.Message.__delitem__"
-None*6
-self.
-email.message.Message"email.message.Message*$
-name
+None*0.
+email.message.Message"email.message.Message*
 builtins.str"builtins.str*¨
 keysemail.message.Message.keys"J
 builtins.list[builtins.str]
@@ -122,30 +113,7 @@ $builtins.list[email.message.Message].
 TypeAlias[Any]
 Any"email.message._HeaderType"builtins.list*8
 self.
-email.message.Message"email.message.Message*¡
-getemail.message.Message.get"x
-&Union[TypeAlias[Any],email.message._T]6
-TypeAlias[Any]
-Any"email.message._HeaderType
-email.message._T*8
-self.
-email.message.Message"email.message.Message*&
-name
-builtins.str"builtins.str*#
-failobj
-email.message._T *é
-get_allemail.message.Message.get_all"·
-5Union[builtins.list[TypeAlias[Any]],email.message._T]f
-builtins.list[TypeAlias[Any]]6
-TypeAlias[Any]
-Any"email.message._HeaderType"builtins.list
-email.message._T*8
-self.
-email.message.Message"email.message.Message*&
-name
-builtins.str"builtins.str*#
-failobj
-email.message._T *•
+email.message.Message"email.message.Message*
 
 add_header email.message.Message.add_header"
 None*8
@@ -154,8 +122,8 @@ add_header email.message.Message.add_header"
 _name
 builtins.str"builtins.str*(
 _value
-builtins.str"builtins.str*Í
-_params¿
+builtins.str"builtins.str*Å
+_params·
 ]TypeAlias[Union[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]]À
 RUnion[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.str]]
 builtins.str"builtins.str
@@ -165,7 +133,7 @@ RUnion[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.st
 Union[builtins.str,None]
 builtins.str"builtins.str
 None
-builtins.str"builtins.str"email.message._ParamsType*ç
+builtins.str"builtins.str"email._ParamsType*ç
 replace_header$email.message.Message.replace_header"
 None*8
 self.
@@ -196,47 +164,7 @@ RUnion[builtins.str,None,Tuple[builtins.str,Union[builtins.str,None],builtins.st
 self.
 email.message.Message"email.message.Message*'
 ctype
-builtins.str"builtins.str*ñ
-
-get_params email.message.Message.get_params"†
-GUnion[builtins.list[Tuple[builtins.str,builtins.str]],email.message._T]¢
-/builtins.list[Tuple[builtins.str,builtins.str]]`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.list
-email.message._T*8
-self.
-email.message.Message"email.message.Message*#
-failobj
-email.message._T **
-header
-builtins.str"builtins.str *-
-unquote
-builtins.bool"builtins.bool *¡
-	get_paramemail.message.Message.get_param"
-|Union[email.message._T,TypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]]
-email.message._Tö
-dTypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]ñ
-YUnion[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]
-builtins.str"builtins.stró
-ETuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None
-builtins.str"builtins.str"email.message._ParamType*8
-self.
-email.message.Message"email.message.Message*'
-param
-builtins.str"builtins.str*#
-failobj
-email.message._T **
-header
-builtins.str"builtins.str *-
-unquote
-builtins.bool"builtins.bool *ô
+builtins.str"builtins.str*ô
 	del_paramemail.message.Message.del_param"
 None*8
 self.
@@ -256,53 +184,20 @@ ETuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
 header
 builtins.str"builtins.str *-
 requote
-builtins.bool"builtins.bool *ï
-get_filename"email.message.Message.get_filename"\
-$Union[email.message._T,builtins.str]
-email.message._T
-builtins.str"builtins.str*8
-self.
-email.message.Message"email.message.Message*#
-failobj
-email.message._T *ï
-get_boundary"email.message.Message.get_boundary"\
-$Union[email.message._T,builtins.str]
-email.message._T
-builtins.str"builtins.str*8
-self.
-email.message.Message"email.message.Message*#
-failobj
-email.message._T *¢
+builtins.bool"builtins.bool *¢
 set_boundary"email.message.Message.set_boundary"
 None*8
 self.
 email.message.Message"email.message.Message**
 boundary
-builtins.str"builtins.str*ı
-get_content_charset)email.message.Message.get_content_charset"\
-$Union[email.message._T,builtins.str]
-email.message._T
-builtins.str"builtins.str*8
-self.
-email.message.Message"email.message.Message*#
-failobj
-email.message._T *­
-get_charsets"email.message.Message.get_charsets"™
-3Union[email.message._T,builtins.list[builtins.str]]
-email.message._TJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*8
-self.
-email.message.Message"email.message.Message*#
-failobj
-email.message._T *è
-walkemail.message.Message.walk"‰
-1typing.Generator[email.message.Message,None,None].
-email.message.Message"email.message.Message
+builtins.str"builtins.str*Ì
+walkemail.message.Message.walk"~
+6typing.Generator[email.message.Message.Self,None,None]
+email.message.Message.Self
 None
-None"typing.Generator*8
-self.
-email.message.Message"email.message.Message*È
+None"typing.Generator*(
+self
+email.message.Message.Self*È
 get_content_disposition-email.message.Message.get_content_disposition"D
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -360,7 +255,223 @@ $Union[email.message._T,builtins.str]
 self.
 email.message.Message"email.message.Message*8
 policy*
-email.policy.Policy"email.policy.Policy rR
+email.policy.Policy"email.policy.Policy *×
+set_rawemail.message.Message.set_raw"
+None*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*A
+value6
+TypeAlias[Any]
+Any"email.message._HeaderType*­
+	raw_itemsemail.message.Message.raw_items"Ä
+3typing.Iterator[Tuple[builtins.str,TypeAlias[Any]]]|
+"Tuple[builtins.str,TypeAlias[Any]]
+builtins.str"builtins.str6
+TypeAlias[Any]
+Any"email.message._HeaderType"typing.Iterator*8
+self.
+email.message.Message"email.message.Message2Ş
+getemail.message.Message.get‹
+getemail.message.Message.get"`
+Union[TypeAlias[Any],None]6
+TypeAlias[Any]
+Any"email.message._HeaderType
+None*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*
+failobj
+None 0:overloadX­
+getemail.message.Message.get"x
+&Union[TypeAlias[Any],email.message._T]6
+TypeAlias[Any]
+Any"email.message._HeaderType
+email.message._T*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*!
+failobj
+email.message._T0:overloadX2ö
+get_allemail.message.Message.get_allÓ
+get_allemail.message.Message.get_all"Ÿ
+)Union[builtins.list[TypeAlias[Any]],None]f
+builtins.list[TypeAlias[Any]]6
+TypeAlias[Any]
+Any"email.message._HeaderType"builtins.list
+None*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*
+failobj
+None 0:overloadXõ
+get_allemail.message.Message.get_all"·
+5Union[builtins.list[TypeAlias[Any]],email.message._T]f
+builtins.list[TypeAlias[Any]]6
+TypeAlias[Any]
+Any"email.message._HeaderType"builtins.list
+email.message._T*8
+self.
+email.message.Message"email.message.Message*&
+name
+builtins.str"builtins.str*!
+failobj
+email.message._T0:overloadX2Œ
+
+get_params email.message.Message.get_paramsÛ
+
+get_params email.message.Message.get_params"î
+;Union[builtins.list[Tuple[builtins.str,builtins.str]],None]¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list
+None*8
+self.
+email.message.Message"email.message.Message*
+failobj
+None **
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool 0:overloadXı
+
+get_params email.message.Message.get_params"†
+GUnion[builtins.list[Tuple[builtins.str,builtins.str]],email.message._T]¢
+/builtins.list[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.list
+email.message._T*8
+self.
+email.message.Message"email.message.Message*!
+failobj
+email.message._T**
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool 0:overloadX2Ú
+	get_paramemail.message.Message.get_paramƒ
+	get_paramemail.message.Message.get_param"ï
+pUnion[TypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]],None]î
+dTypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]ñ
+YUnion[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]
+builtins.str"builtins.stró
+ETuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"email._ParamType
+None*8
+self.
+email.message.Message"email.message.Message*'
+param
+builtins.str"builtins.str*
+failobj
+None **
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool 0:overloadX¥
+	get_paramemail.message.Message.get_param"‡
+|Union[TypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]],email.message._T]î
+dTypeAlias[Union[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]]ñ
+YUnion[builtins.str,Tuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]]
+builtins.str"builtins.stró
+ETuple[Union[builtins.str,None],Union[builtins.str,None],builtins.str]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None
+builtins.str"builtins.str"email._ParamType
+email.message._T*8
+self.
+email.message.Message"email.message.Message*'
+param
+builtins.str"builtins.str*!
+failobj
+email.message._T**
+header
+builtins.str"builtins.str *-
+unquote
+builtins.bool"builtins.bool 0:overloadX2Œ
+get_filename"email.message.Message.get_filenameÙ
+get_filename"email.message.Message.get_filename"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+email.message.Message"email.message.Message*
+failobj
+None 0:overloadXû
+get_filename"email.message.Message.get_filename"\
+$Union[builtins.str,email.message._T]
+builtins.str"builtins.str
+email.message._T*8
+self.
+email.message.Message"email.message.Message*!
+failobj
+email.message._T0:overloadX2Œ
+get_boundary"email.message.Message.get_boundaryÙ
+get_boundary"email.message.Message.get_boundary"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+email.message.Message"email.message.Message*
+failobj
+None 0:overloadXû
+get_boundary"email.message.Message.get_boundary"\
+$Union[builtins.str,email.message._T]
+builtins.str"builtins.str
+email.message._T*8
+self.
+email.message.Message"email.message.Message*!
+failobj
+email.message._T0:overloadX2
+get_content_charset)email.message.Message.get_content_charsetÎ
+get_content_charset)email.message.Message.get_content_charset"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*8
+self.
+email.message.Message"email.message.Message0:overloadX‰
+get_content_charset)email.message.Message.get_content_charset"\
+$Union[builtins.str,email.message._T]
+builtins.str"builtins.str
+email.message._T*8
+self.
+email.message.Message"email.message.Message*!
+failobj
+email.message._T0:overloadX2
+get_charsets"email.message.Message.get_charsets“
+get_charsets"email.message.Message.get_charsets"~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list*8
+self.
+email.message.Message"email.message.Message*
+failobj
+None 0:overloadXÂ
+get_charsets"email.message.Message.get_charsets"¢
+3builtins.list[Union[builtins.str,email.message._T]]\
+$Union[builtins.str,email.message._T]
+builtins.str"builtins.str
+email.message._T"builtins.list*8
+self.
+email.message.Message"email.message.Message*!
+failobj
+email.message._T0:overloadXrR
 policyemail.message.Message.policy*
 email.policy.Policy"email.policy.Policyrp
 preambleemail.message.Message.preambleD
@@ -373,14 +484,29 @@ $Union[email.message._T,builtins.str]
 Noner
 defectsemail.message.Message.defectst
 )builtins.list[email.errors.MessageDefect]8
-email.errors.MessageDefect"email.errors.MessageDefect"builtins.list†
-Policyemail.policy.Policy"builtins.object*y
+email.errors.MessageDefect"email.errors.MessageDefect"builtins.list
+Policyemail.policy.Policy"builtins.object*¬
 __init__email.policy.Policy.__init__"
 None*4
 self*
-email.policy.Policy"email.policy.Policy*
-kw
-Any*•
+email.policy.Policy"email.policy.Policy*[
+max_line_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *+
+linesep
+builtins.str"builtins.str *,
+cte_type
+builtins.str"builtins.str *5
+raise_on_defect
+builtins.bool"builtins.bool *2
+mangle_from_
+builtins.bool"builtins.bool *
+message_factory†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *•
 cloneemail.policy.Policy.clone"*
 email.policy.Policy"email.policy.Policy*4
 self*
@@ -453,7 +579,7 @@ $Union[email.message._T,builtins.str]
 name
 builtins.str"builtins.str*'
 value
-builtins.str"builtins.str0:abstractmethod@r|
+builtins.str"builtins.str0:abstractmethod@@babc.ABCMetar|
 max_line_length#email.policy.Policy.max_line_lengthD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -463,10 +589,14 @@ $Union[email.message._T,builtins.str]
 cte_typeemail.policy.Policy.cte_type
 builtins.str"builtins.strrV
 raise_on_defect#email.policy.Policy.raise_on_defect
-builtins.bool"builtins.boolrL
-
-mange_fromemail.policy.Policy.mange_from
-builtins.bool"builtins.boolš
+builtins.bool"builtins.boolrP
+mangle_from_ email.policy.Policy.mangle_from_
+builtins.bool"builtins.boolr¿
+message_factory#email.policy.Policy.message_factory†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noneš
 message_from_stringemail.message_from_string".
 email.message.Message"email.message.Message*#
 s
@@ -475,11 +605,13 @@ mange_fromemail.policy.Policy.mange_from
 CallableType[builtins.function]&
 builtins.function"builtins.function *8
 policy*
-email.policy.Policy"email.policy.Policy œ
+email.policy.Policy"email.policy.Policy ô
 message_from_bytesemail.message_from_bytes".
-email.message.Message"email.message.Message*'
-s 
-builtins.bytes"builtins.bytes*Y
+email.message.Message"email.message.Message*
+sx
+(Union[builtins.bytes,builtins.bytearray] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*Y
 _classK
 CallableType[builtins.function]&
 builtins.function"builtins.function *8
@@ -504,4 +636,11 @@ mange_fromemail.policy.Policy.mange_from
 CallableType[builtins.function]&
 builtins.function"builtins.function *8
 policy*
-email.policy.Policy"email.policy.Policy 
+email.policy.Policy"email.policy.Policy *f
+__path__email.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*
+__annotations__email.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

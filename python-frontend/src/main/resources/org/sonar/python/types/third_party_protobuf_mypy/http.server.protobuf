@@ -5,27 +5,9 @@ HTTPServerhttp.server.HTTPServer"socketserver.TCPServerrO
 server_name"http.server.HTTPServer.server_name
 builtins.str"builtins.strrO
 server_port"http.server.HTTPServer.server_port
-builtins.int"builtins.intÕ
-ThreadingHTTPServerhttp.server.ThreadingHTTPServer"socketserver.ThreadingMixIn"http.server.HTTPServerr`
-daemon_threads.http.server.ThreadingHTTPServer.daemon_threads
-builtins.bool"builtins.bool˜1
-BaseHTTPRequestHandler"http.server.BaseHTTPRequestHandler"!socketserver.StreamRequestHandler*˙
-__init__+http.server.BaseHTTPRequestHandler.__init__"
-None*R
-selfH
-"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandler*-
-request 
-builtins.bytes"builtins.bytes*t
-client_address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*>
-server2
-socketserver.BaseServer"socketserver.BaseServer*ë
-handle)http.server.BaseHTTPRequestHandler.handle"
-None*R
-selfH
-"http.server.BaseHTTPRequestHandler""http.server.BaseHTTPRequestHandler*©
+builtins.int"builtins.intk
+ThreadingHTTPServerhttp.server.ThreadingHTTPServer"socketserver.ThreadingMixIn"http.server.HTTPServerÚ-
+BaseHTTPRequestHandler"http.server.BaseHTTPRequestHandler"!socketserver.StreamRequestHandler*©
 handle_one_request5http.server.BaseHTTPRequestHandler.handle_one_request"
 None*R
 selfH
@@ -141,8 +123,6 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
  Tuple[builtins.str,builtins.int]
 builtins.str"builtins.str
 builtins.int"builtins.intrg
-server)http.server.BaseHTTPRequestHandler.server2
-socketserver.BaseServer"socketserver.BaseServerrg
 close_connection3http.server.BaseHTTPRequestHandler.close_connection
 builtins.bool"builtins.boolr[
 requestline.http.server.BaseHTTPRequestHandler.requestline
@@ -172,7 +152,9 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
 builtins.int"builtins.int`
  Tuple[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mappingrç
+builtins.str"builtins.str"typing.Mappingrs
+default_request_version:http.server.BaseHTTPRequestHandler.default_request_version
+builtins.str"builtins.strrç
 weekdayname.http.server.BaseHTTPRequestHandler.weekdaynameN
 typing.Sequence[builtins.str]
 builtins.str"builtins.str"typing.Sequenceræ
@@ -180,25 +162,27 @@ send_error-http.server.BaseHTTPRequestHandler.send_error"
 )typing.Sequence[Union[builtins.str,None]]D
 Union[builtins.str,None]
 builtins.str"builtins.str
-None"typing.Sequenceó	
-SimpleHTTPRequestHandler$http.server.SimpleHTTPRequestHandler""http.server.BaseHTTPRequestHandler*ª
+None"typing.SequenceÈ
+SimpleHTTPRequestHandler$http.server.SimpleHTTPRequestHandler""http.server.BaseHTTPRequestHandler*µ
 __init__-http.server.SimpleHTTPRequestHandler.__init__"
 None*V
 selfL
-$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*-
-request 
-builtins.bytes"builtins.bytes*t
-client_address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*>
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*∫
+request¨
+CTypeAlias[Union[socket.socket,Tuple[builtins.bytes,socket.socket]]]«
+8Union[socket.socket,Tuple[builtins.bytes,socket.socket]]
+socket.socket"socket.socketi
+#Tuple[builtins.bytes,socket.socket] 
+builtins.bytes"builtins.bytes
+socket.socket"socket.socket"socketserver._RequestType*D
+client_address0
+TypeAlias[Any]
+Any"_socket._RetAddress*>
 server2
-socketserver.BaseServer"socketserver.BaseServer*∏
-	directory¶
-2Union[builtins.str,os.PathLike[builtins.str],None]
-builtins.str"builtins.strF
-os.PathLike[builtins.str]
-builtins.str"builtins.str"os.PathLike
+socketserver.BaseServer"socketserver.BaseServer*U
+	directoryD
+Union[builtins.str,None]
+builtins.str"builtins.str
 None *ó
 do_GET+http.server.SimpleHTTPRequestHandler.do_GET"
 None*V
@@ -207,17 +191,114 @@ $http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*ô
 do_HEAD,http.server.SimpleHTTPRequestHandler.do_HEAD"
 None*V
 selfL
-$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandlerrº
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*á
+	send_head.http.server.SimpleHTTPRequestHandler.send_head"r
+&Union[io.BytesIO,typing.BinaryIO,None]
+
+io.BytesIO"
+io.BytesIO"
+typing.BinaryIO"typing.BinaryIO
+None*V
+selfL
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*‘
+list_directory3http.server.SimpleHTTPRequestHandler.list_directory">
+Union[io.BytesIO,None]
+
+io.BytesIO"
+io.BytesIO
+None*V
+selfL
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*„
+translate_path3http.server.SimpleHTTPRequestHandler.translate_path"
+builtins.str"builtins.str*V
+selfL
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*&
+path
+builtins.str"builtins.str*·
+copyfile-http.server.SimpleHTTPRequestHandler.copyfile"
+None*V
+selfL
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*^
+sourceR
+%_typeshed.SupportsRead[typing.AnyStr]
+typing.AnyStr"_typeshed.SupportsRead*d
+
+outputfileT
+&_typeshed.SupportsWrite[typing.AnyStr]
+typing.AnyStr"_typeshed.SupportsWrite*™
+
+guess_type/http.server.SimpleHTTPRequestHandler.guess_type"
+builtins.str"builtins.str*V
+selfL
+$http.server.SimpleHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathrº
 extensions_map3http.server.SimpleHTTPRequestHandler.extensions_mapu
 (builtins.dict[builtins.str,builtins.str]
 builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dictÜ
+builtins.str"builtins.str"builtins.dictÍ
 CGIHTTPRequestHandler!http.server.CGIHTTPRequestHandler"$http.server.SimpleHTTPRequestHandler*ê
 do_POST)http.server.CGIHTTPRequestHandler.do_POST"
+None*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*§
+is_cgi(http.server.CGIHTTPRequestHandler.is_cgi"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*©
+is_executable/http.server.CGIHTTPRequestHandler.is_executable"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*°
+	is_python+http.server.CGIHTTPRequestHandler.is_python"
+builtins.bool"builtins.bool*P
+selfF
+!http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandler*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*ê
+run_cgi)http.server.CGIHTTPRequestHandler.run_cgi"
 None*P
 selfF
 !http.server.CGIHTTPRequestHandler"!http.server.CGIHTTPRequestHandlerrê
 cgi_directories1http.server.CGIHTTPRequestHandler.cgi_directoriesJ
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*
-emailemail 
+builtins.str"builtins.str"builtins.listrX
+	have_fork+http.server.CGIHTTPRequestHandler.have_fork
+builtins.bool"builtins.boolª
+
+executablehttp.server.executable"
+builtins.bool"builtins.bool*Ù
+pathÈ
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath*á
+__annotations__http.server.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+emailemail *j
+__all__http.server.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

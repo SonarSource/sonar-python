@@ -1,0 +1,535 @@
+
+win32serviceë
+errorwin32.lib.pywintypes.error"builtins.Exception*ñ
+__init__#win32.lib.pywintypes.error.__init__"
+None*B
+self8
+win32.lib.pywintypes.error"win32.lib.pywintypes.error**
+winerror
+builtins.int"builtins.int**
+funcname
+builtins.str"builtins.str**
+strerror
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310rb
+winerror#win32.lib.pywintypes.error.winerror
+builtins.int"builtins.int*36*37*38*39*310rb
+funcname#win32.lib.pywintypes.error.funcname
+builtins.str"builtins.str*36*37*38*39*310rb
+strerror#win32.lib.pywintypes.error.strerror
+builtins.str"builtins.str*36*37*38*39*310ë
+GetThreadDesktop#win32.win32service.GetThreadDesktop",
+_win32typing.PyHDESK"_win32typing.PyHDESK*
+ThreadId
+Anyz36z37z38z39z310ê
+EnumWindowStations%win32.win32service.EnumWindowStations"Ω
+2builtins.tuple[Tuple[builtins.str,TypeAlias[Any]]]w
+"Tuple[builtins.str,TypeAlias[Any]]
+builtins.str"builtins.str1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuplez36z37z38z39z310§
+GetUserObjectInformation+win32.win32service.GetUserObjectInformation"
+None*(
+Handle
+builtins.int"builtins.int*
+_type
+Anyz36z37z38z39z310∑
+SetUserObjectInformation+win32.win32service.SetUserObjectInformation"
+None*(
+Handle
+builtins.int"builtins.int*
+info
+Any*
+_type
+Anyz36z37z38z39z310…
+OpenWindowStation$win32.win32service.OpenWindowStation"0
+_win32typing.PyHWINSTA"_win32typing.PyHWINSTA*
+szWinSta
+Any*
+Inherit
+Any*
+DesiredAccess
+Anyz36z37z38z39z310Œ
+OpenDesktopwin32.win32service.OpenDesktop",
+_win32typing.PyHDESK"_win32typing.PyHDESK*
+	szDesktop
+Any*
+Flags
+Any*
+Inherit
+Any*
+DesiredAccess
+Anyz36z37z38z39z310ú
+CreateDesktop win32.win32service.CreateDesktop",
+_win32typing.PyHDESK"_win32typing.PyHDESK*
+Desktop
+Any*
+Flags
+Any*
+DesiredAccess
+Any*`
+SecurityAttributesH
+"_win32typing.PySECURITY_ATTRIBUTES""_win32typing.PySECURITY_ATTRIBUTESz36z37z38z39z310¿
+OpenInputDesktop#win32.win32service.OpenInputDesktop",
+_win32typing.PyHDESK"_win32typing.PyHDESK*
+Flags
+Any*
+Inherit
+Any*
+DesiredAccess
+Anyz36z37z38z39z310å
+GetProcessWindowStation*win32.win32service.GetProcessWindowStation"0
+_win32typing.PyHWINSTA"_win32typing.PyHWINSTAz36z37z38z39z310≤
+CreateWindowStation&win32.win32service.CreateWindowStation"0
+_win32typing.PyHWINSTA"_win32typing.PyHWINSTA*
+WindowStation
+Any*
+Flags
+Any*
+DesiredAccess
+Any*`
+SecurityAttributesH
+"_win32typing.PySECURITY_ATTRIBUTES""_win32typing.PySECURITY_ATTRIBUTESz36z37z38z39z310∞
+EnumServicesStatus%win32.win32service.EnumServicesStatus"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*D
+
+hSCManager4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+ServiceType
+Any*
+ServiceState
+Anyz36z37z38z39z310π
+EnumServicesStatusEx'win32.win32service.EnumServicesStatusEx"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*C
+	SCManager4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+ServiceType
+Any*
+ServiceState
+Any*
+	InfoLevel
+Any*l
+	GroupName[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310ö
+EnumDependentServices(win32.win32service.EnumDependentServices"c
+builtins.tuple[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"builtins.tuple*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+ServiceState
+Anyz36z37z38z39z310ù
+QueryServiceConfig%win32.win32service.QueryServiceConfig"
+Any*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310ß
+StartServicewin32.win32service.StartService"
+None*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*í
+argsá
+)Union[typing.Iterable[builtins.str],None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+Nonez36z37z38z39z310Ä
+OpenServicewin32.win32service.OpenService"4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*B
+scHandle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*&
+name
+builtins.str"builtins.str*
+desiredAccess
+Anyz36z37z38z39z310÷
+OpenSCManager win32.win32service.OpenSCManager"4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*U
+machineNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*P
+dbNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*/
+desiredAccess
+builtins.int"builtins.intz36z37z38z39z310û
+CloseServiceHandle%win32.win32service.CloseServiceHandle"
+None*B
+scHandle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310–
+QueryServiceStatus%win32.win32service.QueryServiceStatus":
+_win32typing.SERVICE_STATUS"_win32typing.SERVICE_STATUS*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310‘
+QueryServiceStatusEx'win32.win32service.QueryServiceStatusEx":
+_win32typing.SERVICE_STATUS"_win32typing.SERVICE_STATUS*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310¨
+SetServiceObjectSecurity+win32.win32service.SetServiceObjectSecurity"
+None*@
+Handle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE* 
+SecurityInformation
+Any*`
+SecurityDescriptorH
+"_win32typing.PySECURITY_DESCRIPTOR""_win32typing.PySECURITY_DESCRIPTORz36z37z38z39z310é
+QueryServiceObjectSecurity-win32.win32service.QueryServiceObjectSecurity"H
+"_win32typing.PySECURITY_DESCRIPTOR""_win32typing.PySECURITY_DESCRIPTOR*@
+Handle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE* 
+SecurityInformation
+Anyz36z37z38z39z310∑
+GetServiceKeyName$win32.win32service.GetServiceKeyName"
+Any*D
+
+hSCManager4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+DisplayName
+Anyz36z37z38z39z310ø
+GetServiceDisplayName(win32.win32service.GetServiceDisplayName"
+Any*D
+
+hSCManager4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+ServiceName
+Anyz36z37z38z39z310É
+SetServiceStatus#win32.win32service.SetServiceStatus"
+None*
+scHandle
+Any*ì
+serviceStatusˇ
+ÑUnion[_win32typing.SERVICE_STATUS,Tuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]]:
+_win32typing.SERVICE_STATUS"_win32typing.SERVICE_STATUS∑
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intz36z37z38z39z310€
+ControlService!win32.win32service.ControlService":
+_win32typing.SERVICE_STATUS"_win32typing.SERVICE_STATUS*B
+scHandle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+code
+Anyz36z37z38z39z310î
+DeleteService win32.win32service.DeleteService"
+None*B
+scHandle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310Ë
+CreateService win32.win32service.CreateService"4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*B
+scHandle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*&
+name
+builtins.str"builtins.str*-
+displayName
+builtins.str"builtins.str*/
+desiredAccess
+builtins.int"builtins.int*-
+serviceType
+builtins.int"builtins.int*+
+	startType
+builtins.int"builtins.int*.
+errorControl
+builtins.int"builtins.int*,
+
+binaryFile
+builtins.str"builtins.str*X
+loadOrderGroupD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*-
+	bFetchTag
+builtins.bool"builtins.bool*≤
+serviceDeps†
++Union[typing.Iterable[TypeAlias[Any]],None]e
+typing.Iterable[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"typing.Iterable
+None*R
+acctNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+passwordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez36z37z38z39z310æ
+ChangeServiceConfig&win32.win32service.ChangeServiceConfig"
+Any*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*-
+serviceType
+builtins.int"builtins.int*+
+	startType
+builtins.int"builtins.int*.
+errorControl
+builtins.int"builtins.int*T
+
+binaryFileD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*X
+loadOrderGroupD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*-
+	bFetchTag
+builtins.bool"builtins.bool*≤
+serviceDeps†
++Union[typing.Iterable[TypeAlias[Any]],None]e
+typing.Iterable[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"typing.Iterable
+None*R
+acctNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*R
+passwordD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+displayNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez36z37z38z39z310†
+LockServiceDatabase&win32.win32service.LockServiceDatabase"
+Any*C
+	sc_handle4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310`
+UnlockServiceDatabase(win32.win32service.UnlockServiceDatabase*
+lockz36z37z38z39z310†
+QueryServiceLockStatus)win32.win32service.QueryServiceLockStatus" *D
+
+hSCManager4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLEz36z37z38z39z310Õ
+ChangeServiceConfig2'win32.win32service.ChangeServiceConfig2"
+None*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+	InfoLevel
+Any*
+info
+Anyz36z37z38z39z310∑
+QueryServiceConfig2&win32.win32service.QueryServiceConfig2"
+Any*B
+hService4
+_win32typing.PySC_HANDLE"_win32typing.PySC_HANDLE*
+	InfoLevel
+Anyz36z37z38z39z310*ù
+__annotations__win32service.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*z
+DBT_CONFIGCHANGECANCELED+win32.win32service.DBT_CONFIGCHANGECANCELED
+builtins.int"builtins.int*36*37*38*39*310*l
+DBT_CONFIGCHANGED$win32.win32service.DBT_CONFIGCHANGED
+builtins.int"builtins.int*36*37*38*39*310*h
+DBT_CUSTOMEVENT"win32.win32service.DBT_CUSTOMEVENT
+builtins.int"builtins.int*36*37*38*39*310*l
+DBT_DEVICEARRIVAL$win32.win32service.DBT_DEVICEARRIVAL
+builtins.int"builtins.int*36*37*38*39*310*t
+DBT_DEVICEQUERYREMOVE(win32.win32service.DBT_DEVICEQUERYREMOVE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+DBT_DEVICEQUERYREMOVEFAILED.win32.win32service.DBT_DEVICEQUERYREMOVEFAILED
+builtins.int"builtins.int*36*37*38*39*310*z
+DBT_DEVICEREMOVECOMPLETE+win32.win32service.DBT_DEVICEREMOVECOMPLETE
+builtins.int"builtins.int*36*37*38*39*310*x
+DBT_DEVICEREMOVEPENDING*win32.win32service.DBT_DEVICEREMOVEPENDING
+builtins.int"builtins.int*36*37*38*39*310*v
+DBT_DEVICETYPESPECIFIC)win32.win32service.DBT_DEVICETYPESPECIFIC
+builtins.int"builtins.int*36*37*38*39*310*t
+DBT_QUERYCHANGECONFIG(win32.win32service.DBT_QUERYCHANGECONFIG
+builtins.int"builtins.int*36*37*38*39*310*z
+DF_ALLOWOTHERACCOUNTHOOK+win32.win32service.DF_ALLOWOTHERACCOUNTHOOK
+builtins.int"builtins.int*36*37*38*39*310*f
+SC_ACTION_NONE!win32.win32service.SC_ACTION_NONE
+builtins.int"builtins.int*36*37*38*39*310*j
+SC_ACTION_REBOOT#win32.win32service.SC_ACTION_REBOOT
+builtins.int"builtins.int*36*37*38*39*310*l
+SC_ACTION_RESTART$win32.win32service.SC_ACTION_RESTART
+builtins.int"builtins.int*36*37*38*39*310*t
+SC_ACTION_RUN_COMMAND(win32.win32service.SC_ACTION_RUN_COMMAND
+builtins.int"builtins.int*36*37*38*39*310*r
+SC_ENUM_PROCESS_INFO'win32.win32service.SC_ENUM_PROCESS_INFO
+builtins.int"builtins.int*36*37*38*39*310*p
+SC_GROUP_IDENTIFIER&win32.win32service.SC_GROUP_IDENTIFIER
+builtins.int"builtins.int*36*37*38*39*310*t
+SC_MANAGER_ALL_ACCESS(win32.win32service.SC_MANAGER_ALL_ACCESS
+builtins.int"builtins.int*36*37*38*39*310*n
+SC_MANAGER_CONNECT%win32.win32service.SC_MANAGER_CONNECT
+builtins.int"builtins.int*36*37*38*39*310*|
+SC_MANAGER_CREATE_SERVICE,win32.win32service.SC_MANAGER_CREATE_SERVICE
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SC_MANAGER_ENUMERATE_SERVICE/win32.win32service.SC_MANAGER_ENUMERATE_SERVICE
+builtins.int"builtins.int*36*37*38*39*310*h
+SC_MANAGER_LOCK"win32.win32service.SC_MANAGER_LOCK
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SC_MANAGER_MODIFY_BOOT_CONFIG0win32.win32service.SC_MANAGER_MODIFY_BOOT_CONFIG
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SC_MANAGER_QUERY_LOCK_STATUS/win32.win32service.SC_MANAGER_QUERY_LOCK_STATUS
+builtins.int"builtins.int*36*37*38*39*310*í
+$SERVICE_ACCEPT_HARDWAREPROFILECHANGE7win32.win32service.SERVICE_ACCEPT_HARDWAREPROFILECHANGE
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SERVICE_ACCEPT_NETBINDCHANGE/win32.win32service.SERVICE_ACCEPT_NETBINDCHANGE
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_ACCEPT_PARAMCHANGE-win32.win32service.SERVICE_ACCEPT_PARAMCHANGE
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SERVICE_ACCEPT_PAUSE_CONTINUE0win32.win32service.SERVICE_ACCEPT_PAUSE_CONTINUE
+builtins.int"builtins.int*36*37*38*39*310*|
+SERVICE_ACCEPT_POWEREVENT,win32.win32service.SERVICE_ACCEPT_POWEREVENT
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_ACCEPT_PRESHUTDOWN-win32.win32service.SERVICE_ACCEPT_PRESHUTDOWN
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SERVICE_ACCEPT_SESSIONCHANGE/win32.win32service.SERVICE_ACCEPT_SESSIONCHANGE
+builtins.int"builtins.int*36*37*38*39*310*x
+SERVICE_ACCEPT_SHUTDOWN*win32.win32service.SERVICE_ACCEPT_SHUTDOWN
+builtins.int"builtins.int*36*37*38*39*310*p
+SERVICE_ACCEPT_STOP&win32.win32service.SERVICE_ACCEPT_STOP
+builtins.int"builtins.int*36*37*38*39*310*f
+SERVICE_ACTIVE!win32.win32service.SERVICE_ACTIVE
+builtins.int"builtins.int*36*37*38*39*310*n
+SERVICE_ALL_ACCESS%win32.win32service.SERVICE_ALL_ACCESS
+builtins.int"builtins.int*36*37*38*39*310*n
+SERVICE_AUTO_START%win32.win32service.SERVICE_AUTO_START
+builtins.int"builtins.int*36*37*38*39*310*n
+SERVICE_BOOT_START%win32.win32service.SERVICE_BOOT_START
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_CHANGE_CONFIG(win32.win32service.SERVICE_CHANGE_CONFIG
+builtins.int"builtins.int*36*37*38*39*310*ñ
+&SERVICE_CONFIG_DELAYED_AUTO_START_INFO9win32.win32service.SERVICE_CONFIG_DELAYED_AUTO_START_INFO
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_CONFIG_DESCRIPTION-win32.win32service.SERVICE_CONFIG_DESCRIPTION
+builtins.int"builtins.int*36*37*38*39*310*Ü
+SERVICE_CONFIG_FAILURE_ACTIONS1win32.win32service.SERVICE_CONFIG_FAILURE_ACTIONS
+builtins.int"builtins.int*36*37*38*39*310*ê
+#SERVICE_CONFIG_FAILURE_ACTIONS_FLAG6win32.win32service.SERVICE_CONFIG_FAILURE_ACTIONS_FLAG
+builtins.int"builtins.int*36*37*38*39*310*à
+SERVICE_CONFIG_PRESHUTDOWN_INFO2win32.win32service.SERVICE_CONFIG_PRESHUTDOWN_INFO
+builtins.int"builtins.int*36*37*38*39*310*ò
+'SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO:win32.win32service.SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO
+builtins.int"builtins.int*36*37*38*39*310*à
+SERVICE_CONFIG_SERVICE_SID_INFO2win32.win32service.SERVICE_CONFIG_SERVICE_SID_INFO
+builtins.int"builtins.int*36*37*38*39*310*z
+SERVICE_CONTINUE_PENDING+win32.win32service.SERVICE_CONTINUE_PENDING
+builtins.int"builtins.int*36*37*38*39*310*z
+SERVICE_CONTROL_CONTINUE+win32.win32service.SERVICE_CONTROL_CONTINUE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_CONTROL_DEVICEEVENT.win32.win32service.SERVICE_CONTROL_DEVICEEVENT
+builtins.int"builtins.int*36*37*38*39*310*î
+%SERVICE_CONTROL_HARDWAREPROFILECHANGE8win32.win32service.SERVICE_CONTROL_HARDWAREPROFILECHANGE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_CONTROL_INTERROGATE.win32.win32service.SERVICE_CONTROL_INTERROGATE
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_CONTROL_NETBINDADD-win32.win32service.SERVICE_CONTROL_NETBINDADD
+builtins.int"builtins.int*36*37*38*39*310*Ü
+SERVICE_CONTROL_NETBINDDISABLE1win32.win32service.SERVICE_CONTROL_NETBINDDISABLE
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SERVICE_CONTROL_NETBINDENABLE0win32.win32service.SERVICE_CONTROL_NETBINDENABLE
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SERVICE_CONTROL_NETBINDREMOVE0win32.win32service.SERVICE_CONTROL_NETBINDREMOVE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_CONTROL_PARAMCHANGE.win32.win32service.SERVICE_CONTROL_PARAMCHANGE
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_CONTROL_PAUSE(win32.win32service.SERVICE_CONTROL_PAUSE
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_CONTROL_POWEREVENT-win32.win32service.SERVICE_CONTROL_POWEREVENT
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_CONTROL_PRESHUTDOWN.win32.win32service.SERVICE_CONTROL_PRESHUTDOWN
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SERVICE_CONTROL_SESSIONCHANGE0win32.win32service.SERVICE_CONTROL_SESSIONCHANGE
+builtins.int"builtins.int*36*37*38*39*310*z
+SERVICE_CONTROL_SHUTDOWN+win32.win32service.SERVICE_CONTROL_SHUTDOWN
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_CONTROL_STOP'win32.win32service.SERVICE_CONTROL_STOP
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_DEMAND_START'win32.win32service.SERVICE_DEMAND_START
+builtins.int"builtins.int*36*37*38*39*310*j
+SERVICE_DISABLED#win32.win32service.SERVICE_DISABLED
+builtins.int"builtins.int*36*37*38*39*310*f
+SERVICE_DRIVER!win32.win32service.SERVICE_DRIVER
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SERVICE_ENUMERATE_DEPENDENTS/win32.win32service.SERVICE_ENUMERATE_DEPENDENTS
+builtins.int"builtins.int*36*37*38*39*310*v
+SERVICE_ERROR_CRITICAL)win32.win32service.SERVICE_ERROR_CRITICAL
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_ERROR_IGNORE'win32.win32service.SERVICE_ERROR_IGNORE
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_ERROR_NORMAL'win32.win32service.SERVICE_ERROR_NORMAL
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_ERROR_SEVERE'win32.win32service.SERVICE_ERROR_SEVERE
+builtins.int"builtins.int*36*37*38*39*310*~
+SERVICE_FILE_SYSTEM_DRIVER-win32.win32service.SERVICE_FILE_SYSTEM_DRIVER
+builtins.int"builtins.int*36*37*38*39*310*j
+SERVICE_INACTIVE#win32.win32service.SERVICE_INACTIVE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_INTERACTIVE_PROCESS.win32.win32service.SERVICE_INTERACTIVE_PROCESS
+builtins.int"builtins.int*36*37*38*39*310*p
+SERVICE_INTERROGATE&win32.win32service.SERVICE_INTERROGATE
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_KERNEL_DRIVER(win32.win32service.SERVICE_KERNEL_DRIVER
+builtins.int"builtins.int*36*37*38*39*310*l
+SERVICE_NO_CHANGE$win32.win32service.SERVICE_NO_CHANGE
+builtins.int"builtins.int*36*37*38*39*310*v
+SERVICE_PAUSE_CONTINUE)win32.win32service.SERVICE_PAUSE_CONTINUE
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_PAUSE_PENDING(win32.win32service.SERVICE_PAUSE_PENDING
+builtins.int"builtins.int*36*37*38*39*310*f
+SERVICE_PAUSED!win32.win32service.SERVICE_PAUSED
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_QUERY_CONFIG'win32.win32service.SERVICE_QUERY_CONFIG
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_QUERY_STATUS'win32.win32service.SERVICE_QUERY_STATUS
+builtins.int"builtins.int*36*37*38*39*310*h
+SERVICE_RUNNING"win32.win32service.SERVICE_RUNNING
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_SID_TYPE_NONE(win32.win32service.SERVICE_SID_TYPE_NONE
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_SID_TYPE_RESTRICTED.win32.win32service.SERVICE_SID_TYPE_RESTRICTED
+builtins.int"builtins.int*36*37*38*39*310*Ñ
+SERVICE_SID_TYPE_UNRESTRICTED0win32.win32service.SERVICE_SID_TYPE_UNRESTRICTED
+builtins.int"builtins.int*36*37*38*39*310*v
+SERVICE_SPECIFIC_ERROR)win32.win32service.SERVICE_SPECIFIC_ERROR
+builtins.int"builtins.int*36*37*38*39*310*d
+SERVICE_START win32.win32service.SERVICE_START
+builtins.int"builtins.int*36*37*38*39*310*t
+SERVICE_START_PENDING(win32.win32service.SERVICE_START_PENDING
+builtins.int"builtins.int*36*37*38*39*310*l
+SERVICE_STATE_ALL$win32.win32service.SERVICE_STATE_ALL
+builtins.int"builtins.int*36*37*38*39*310*b
+SERVICE_STOPwin32.win32service.SERVICE_STOP
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_STOP_PENDING'win32.win32service.SERVICE_STOP_PENDING
+builtins.int"builtins.int*36*37*38*39*310*h
+SERVICE_STOPPED"win32.win32service.SERVICE_STOPPED
+builtins.int"builtins.int*36*37*38*39*310*r
+SERVICE_SYSTEM_START'win32.win32service.SERVICE_SYSTEM_START
+builtins.int"builtins.int*36*37*38*39*310*Ç
+SERVICE_USER_DEFINED_CONTROL/win32.win32service.SERVICE_USER_DEFINED_CONTROL
+builtins.int"builtins.int*36*37*38*39*310*d
+SERVICE_WIN32 win32.win32service.SERVICE_WIN32
+builtins.int"builtins.int*36*37*38*39*310*|
+SERVICE_WIN32_OWN_PROCESS,win32.win32service.SERVICE_WIN32_OWN_PROCESS
+builtins.int"builtins.int*36*37*38*39*310*Ä
+SERVICE_WIN32_SHARE_PROCESS.win32.win32service.SERVICE_WIN32_SHARE_PROCESS
+builtins.int"builtins.int*36*37*38*39*310*\
+	UOI_FLAGSwin32.win32service.UOI_FLAGS
+builtins.int"builtins.int*36*37*38*39*310*Z
+UOI_NAMEwin32.win32service.UOI_NAME
+builtins.int"builtins.int*36*37*38*39*310*Z
+UOI_TYPEwin32.win32service.UOI_TYPE
+builtins.int"builtins.int*36*37*38*39*310*b
+UOI_USER_SIDwin32.win32service.UOI_USER_SID
+builtins.int"builtins.int*36*37*38*39*310*`
+WSF_VISIBLEwin32.win32service.WSF_VISIBLE
+builtins.int"builtins.int*36*37*38*39*310*X
+UNICODEwin32.win32service.UNICODE
+builtins.int"builtins.int*36*37*38*39*310

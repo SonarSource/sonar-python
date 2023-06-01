@@ -26,16 +26,18 @@
 value
 builtins.int"builtins.int *S
 ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextˆ
-	Condition%multiprocessing.synchronize.Condition"typing.ContextManager*Ì
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext“
+	Condition%multiprocessing.synchronize.Condition"!contextlib.AbstractContextManager*—
 __init__.multiprocessing.synchronize.Condition.__init__"
 None*X
 selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*˜
-lockÍ
-NUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]D
+%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*€
+lockŒ
+`Union[TypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]],None]›
+TTypeAlias[Union[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]]€
+IUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock]D
  multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock
+!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock"%multiprocessing.synchronize._LockLike
 None *S
 ctxJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*¡
@@ -82,17 +84,25 @@ notify_all0multiprocessing.synchronize.Condition.notify_all"
 release-multiprocessing.synchronize.Condition.release"
 None*X
 selfN
-%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition‰	
-Event!multiprocessing.synchronize.Event"typing.ContextManager*·
+%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*È
+__exit__.multiprocessing.synchronize.Condition.__exit__"
+None*PN
+%multiprocessing.synchronize.Condition"%multiprocessing.synchronize.Condition*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None‰
+Event!multiprocessing.synchronize.Event"builtins.object*Á
 __init__*multiprocessing.synchronize.Event.__init__"
 None*P
 selfF
-!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*˜
-lockÍ
-NUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]D
- multiprocessing.synchronize.Lock" multiprocessing.synchronize.LockF
-!multiprocessing.synchronize.RLock"!multiprocessing.synchronize.RLock
-None *S
+!multiprocessing.synchronize.Event"!multiprocessing.synchronize.Event*S
 ctxJ
 #multiprocessing.context.BaseContext"#multiprocessing.context.BaseContext*§
 is_set(multiprocessing.synchronize.Event.is_set"
@@ -137,8 +147,8 @@ NUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]
 value
 builtins.int"builtins.int *S
 ctxJ
-#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextï
-SemLock#multiprocessing.synchronize.SemLock"typing.ContextManager*¥
+#multiprocessing.context.BaseContext"#multiprocessing.context.BaseContextá
+SemLock#multiprocessing.synchronize.SemLock"!contextlib.AbstractContextManager*¥
 acquire+multiprocessing.synchronize.SemLock.acquire"
 builtins.bool"builtins.bool*T
 selfJ
@@ -152,4 +162,24 @@ NUnion[multiprocessing.synchronize.Lock,multiprocessing.synchronize.RLock,None]
 release+multiprocessing.synchronize.SemLock.release"
 None*T
 selfJ
-#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock
+#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*„
+__exit__,multiprocessing.synchronize.SemLock.__exit__"
+None*LJ
+#multiprocessing.synchronize.SemLock"#multiprocessing.synchronize.SemLock*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*ó
+__annotations__+multiprocessing.synchronize.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*z
+__all__#multiprocessing.synchronize.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

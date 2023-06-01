@@ -1,16 +1,34 @@
 
-PIL.ImageCmsâ
-ImageCmsProfilePIL.ImageCms.ImageCmsProfile"builtins.object*²
+PIL.ImageCmsò
+IntentPIL.ImageCms.Intent"enum.IntEnumHj36j37j38j39j310r_
+
+PERCEPTUALPIL.ImageCms.Intent.PERCEPTUAL
+builtins.int"builtins.int*36*37*38*39*310ru
+RELATIVE_COLORIMETRIC)PIL.ImageCms.Intent.RELATIVE_COLORIMETRIC
+builtins.int"builtins.int*36*37*38*39*310r_
+
+SATURATIONPIL.ImageCms.Intent.SATURATION
+builtins.int"builtins.int*36*37*38*39*310ru
+ABSOLUTE_COLORIMETRIC)PIL.ImageCms.Intent.ABSOLUTE_COLORIMETRIC
+builtins.int"builtins.int*36*37*38*39*310Ø
+	DirectionPIL.ImageCms.Direction"enum.IntEnumHj36j37j38j39j310rX
+INPUTPIL.ImageCms.Direction.INPUT
+builtins.int"builtins.int*36*37*38*39*310rZ
+OUTPUTPIL.ImageCms.Direction.OUTPUT
+builtins.int"builtins.int*36*37*38*39*310rX
+PROOFPIL.ImageCms.Direction.PROOF
+builtins.int"builtins.int*36*37*38*39*310Ö
+ImageCmsProfilePIL.ImageCms.ImageCmsProfile"builtins.object*®
 __init__%PIL.ImageCms.ImageCmsProfile.__init__"
 None*F
 self<
 PIL.ImageCms.ImageCmsProfile"PIL.ImageCms.ImageCmsProfile*
 profile
-Anyz35z36z37z38z39z310*R
+Anyz36z37z38z39z310*N
 tobytes$PIL.ImageCms.ImageCmsProfile.tobytes*
-selfz35z36z37z38z39z310j35j36j37j38j39j310œ
+selfz36z37z38z39z310j36j37j38j39j310â
 
-ImageCmsTransformPIL.ImageCms.ImageCmsTransform"PIL.Image.ImagePointHandler*’
+ImageCmsTransformPIL.ImageCms.ImageCmsTransform"PIL.Image.ImagePointHandler*Ã
 __init__'PIL.ImageCms.ImageCmsTransform.__init__"
 None*J
 self@
@@ -25,48 +43,48 @@ input_mode
 output_mode
 Any*
 intent
-Any *3
-proof&
-Union[Any,None]
-Any
+Any *h
+proof[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
 None *
 proof_intent
 Any *)
 flags
-builtins.int"builtins.int z35z36z37z38z39z310*X
+builtins.int"builtins.int z36z37z38z39z310*T
 point$PIL.ImageCms.ImageCmsTransform.point*
 self*
-imz35z36z37z38z39z310*á
+imz36z37z38z39z310*’
 apply$PIL.ImageCms.ImageCmsTransform.apply"
 Any*J
 self@
 PIL.ImageCms.ImageCmsTransform"PIL.ImageCms.ImageCmsTransform*
 im
-Any*3
-imOut&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*j
+Any*h
+imOut[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310*f
 apply_in_place-PIL.ImageCms.ImageCmsTransform.apply_in_place*
 self*
-imz35z36z37z38z39z310j35j36j37j38j39j310rW
+imz36z37z38z39z310j36j37j38j39j310rS
 	transform(PIL.ImageCms.ImageCmsTransform.transform
-Any*35*36*37*38*39*310rY
+Any*36*37*38*39*310rU
 
 input_mode)PIL.ImageCms.ImageCmsTransform.input_mode
-Any*35*36*37*38*39*310r[
+Any*36*37*38*39*310rW
 output_mode*PIL.ImageCms.ImageCmsTransform.output_mode
-Any*35*36*37*38*39*310ra
+Any*36*37*38*39*310r]
 output_profile-PIL.ImageCms.ImageCmsTransform.output_profile
-Any*35*36*37*38*39*310R
+Any*36*37*38*39*310N
 
-PyCMSErrorPIL.ImageCms.PyCMSError"builtins.Exceptionj35j36j37j38j39j310
-get_display_profile PIL.ImageCms.get_display_profile"
-Any*4
-handle&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310Ï
+PyCMSErrorPIL.ImageCms.PyCMSError"builtins.Exceptionj36j37j38j39j310ˆ
+get_display_profile PIL.ImageCms.get_display_profile"
+None*0
+handle"
+builtins.object"builtins.object z36z37z38z39z310€
 profileToProfilePIL.ImageCms.profileToProfile"
 Any*
 im
@@ -76,18 +94,19 @@ PyCMSErrorPIL.ImageCms.PyCMSError"builtins.Exceptionj35j36j37j38j39j310
 outputProfile
 Any*
 renderingIntent
-Any *8
+Any *m
 
-outputMode&
-Union[Any,None]
-Any
+outputMode[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
 None *-
 inPlace
 builtins.bool"builtins.bool *)
 flags
-builtins.int"builtins.int z35z36z37z38z39z310[
+builtins.int"builtins.int z36z37z38z39z310W
 getOpenProfilePIL.ImageCms.getOpenProfile*
-profileFilenamez35z36z37z38z39z310ü
+profileFilenamez36z37z38z39z310ø
 buildTransformPIL.ImageCms.buildTransform"
 Any*
 inputProfile
@@ -101,7 +120,7 @@ outputMode&
 renderingIntent
 Any *)
 flags
-builtins.int"builtins.int z35z36z37z38z39z310à
+builtins.int"builtins.int z36z37z38z39z310Ü
 buildProofTransform PIL.ImageCms.buildProofTransform*
 inputProfile*
 outputProfile*
@@ -111,7 +130,7 @@ outputMode&
 outMode*
 renderingIntent *
 proofRenderingIntent *
-flags z35z36z37z38z39z310§
+flags z36z37z38z39z310£
 applyTransformPIL.ImageCms.applyTransform"
 Any*
 im
@@ -119,59 +138,70 @@ outputMode&
 	transform
 Any*-
 inPlace
-builtins.bool"builtins.bool z35z36z37z38z39z310•
+builtins.bool"builtins.bool z36z37z38z39z310‘
 createProfilePIL.ImageCms.createProfile"
 Any*
 
 colorSpace
 Any*-
 	colorTemp
-builtins.int"builtins.int z35z36z37z38z39z310S
+builtins.int"builtins.int z36z37z38z39z310O
 getProfileNamePIL.ImageCms.getProfileName*
-profilez35z36z37z38z39z310S
+profilez36z37z38z39z310O
 getProfileInfoPIL.ImageCms.getProfileInfo*
-profilez35z36z37z38z39z310]
+profilez36z37z38z39z310Y
 getProfileCopyright PIL.ImageCms.getProfileCopyright*
-profilez35z36z37z38z39z310c
+profilez36z37z38z39z310_
 getProfileManufacturer#PIL.ImageCms.getProfileManufacturer*
-profilez35z36z37z38z39z310U
+profilez36z37z38z39z310Q
 getProfileModelPIL.ImageCms.getProfileModel*
-profilez35z36z37z38z39z310a
+profilez36z37z38z39z310]
 getProfileDescription"PIL.ImageCms.getProfileDescription*
-profilez35z36z37z38z39z310W
+profilez36z37z38z39z310S
 getDefaultIntentPIL.ImageCms.getDefaultIntent*
-profilez35z36z37z38z39z310t
+profilez36z37z38z39z310p
 isIntentSupportedPIL.ImageCms.isIntentSupported*
 profile*
 
 intent*
-	directionz35z36z37z38z39z310:
-versionsPIL.ImageCms.versionsz35z36z37z38z39z310*^
+	directionz36z37z38z39z3106
+versionsPIL.ImageCms.versionsz36z37z38z39z310*
+__annotations__PIL.ImageCms.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*Z
 DESCRIPTIONPIL.ImageCms.DESCRIPTION
-builtins.str"builtins.str*35*36*37*38*39*310*V
+builtins.str"builtins.str*36*37*38*39*310*R
 VERSIONPIL.ImageCms.VERSION
-builtins.str"builtins.str*35*36*37*38*39*310*;
+builtins.str"builtins.str*36*37*38*39*310*7
 corePIL.ImageCms.core
-Any*35*36*37*38*39*310*j
-INTENT_PERCEPTUALPIL.ImageCms.INTENT_PERCEPTUAL
-builtins.int"builtins.int*35*36*37*38*39*310*€
-INTENT_RELATIVE_COLORIMETRIC)PIL.ImageCms.INTENT_RELATIVE_COLORIMETRIC
-builtins.int"builtins.int*35*36*37*38*39*310*j
-INTENT_SATURATIONPIL.ImageCms.INTENT_SATURATION
-builtins.int"builtins.int*35*36*37*38*39*310*€
-INTENT_ABSOLUTE_COLORIMETRIC)PIL.ImageCms.INTENT_ABSOLUTE_COLORIMETRIC
-builtins.int"builtins.int*35*36*37*38*39*310*f
-DIRECTION_INPUTPIL.ImageCms.DIRECTION_INPUT
-builtins.int"builtins.int*35*36*37*38*39*310*h
-DIRECTION_OUTPUTPIL.ImageCms.DIRECTION_OUTPUT
-builtins.int"builtins.int*35*36*37*38*39*310*f
-DIRECTION_PROOFPIL.ImageCms.DIRECTION_PROOF
-builtins.int"builtins.int*35*36*37*38*39*310*=
+Any*36*37*38*39*310*–
+INTENT_PERCEPTUALPIL.ImageCms.INTENT_PERCEPTUALL
+Literal[PIL.ImageCms.Intent]	*
+PIL.ImageCms.Intent"PIL.ImageCms.Intent*36*37*38*39*310*¬
+INTENT_RELATIVE_COLORIMETRIC)PIL.ImageCms.INTENT_RELATIVE_COLORIMETRICL
+Literal[PIL.ImageCms.Intent]	*
+PIL.ImageCms.Intent"PIL.ImageCms.Intent*36*37*38*39*310*–
+INTENT_SATURATIONPIL.ImageCms.INTENT_SATURATIONL
+Literal[PIL.ImageCms.Intent]	*
+PIL.ImageCms.Intent"PIL.ImageCms.Intent*36*37*38*39*310*¬
+INTENT_ABSOLUTE_COLORIMETRIC)PIL.ImageCms.INTENT_ABSOLUTE_COLORIMETRICL
+Literal[PIL.ImageCms.Intent]	*
+PIL.ImageCms.Intent"PIL.ImageCms.Intent*36*37*38*39*310*›
+DIRECTION_INPUTPIL.ImageCms.DIRECTION_INPUTU
+Literal[PIL.ImageCms.Direction]	0
+PIL.ImageCms.Direction"PIL.ImageCms.Direction*36*37*38*39*310*
+DIRECTION_OUTPUTPIL.ImageCms.DIRECTION_OUTPUTU
+Literal[PIL.ImageCms.Direction]	0
+PIL.ImageCms.Direction"PIL.ImageCms.Direction*36*37*38*39*310*›
+DIRECTION_PROOFPIL.ImageCms.DIRECTION_PROOFU
+Literal[PIL.ImageCms.Direction]	0
+PIL.ImageCms.Direction"PIL.ImageCms.Direction*36*37*38*39*310*9
 FLAGSPIL.ImageCms.FLAGS
-Any*35*36*37*38*39*310*³
+Any*36*37*38*39*310*¯
 buildTransformFromOpenProfiles+PIL.ImageCms.buildTransformFromOpenProfilesK
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310*½
+builtins.function"builtins.function*36*37*38*39*310*¹
 #buildProofTransformFromOpenProfiles0PIL.ImageCms.buildProofTransformFromOpenProfilesK
 CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310
+builtins.function"builtins.function*36*37*38*39*310

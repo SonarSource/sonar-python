@@ -1,7 +1,13 @@
 
 
-redis.lockó
-Lockredis.lock.Lock"builtins.object*€
+redis.lockÚ
+_Localredis.lock._Local"builtins.objectXj36j37j38j39j310r¨
+tokenredis.lock._Local.tokenu
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None*36*37*38*39*310Ó(
+Lockredis.lock.Lock"builtins.object*Æ
 __init__redis.lock.Lock.__init__"
 None*,
 self"
@@ -10,124 +16,162 @@ redis.lockó
 redis.client.Redis[Any]
 Any"redis.client.Redis*&
 name
-builtins.str"builtins.str*Ñ
-timeoutu
-'Union[None,builtins.int,builtins.float]
-None
-builtins.int"builtins.int 
-builtins.float"builtins.float *-
+builtins.str"builtins.str*Y
+timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *-
 sleep 
 builtins.float"builtins.float *.
 blocking
-builtins.bool"builtins.bool *_
-blocking_timeoutG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
+builtins.bool"builtins.bool *b
+blocking_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
 None *2
 thread_local
-builtins.bool"builtins.bool z35z36z37z38z39z310*Ö
+builtins.bool"builtins.bool z36z37z38z39z310*Å
 register_scripts redis.lock.Lock.register_scripts"
 None*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*è
-	__enter__redis.lock.Lock.__enter__""
-redis.lock.Lock"redis.lock.Lock**
-self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*•
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310*q
+	__enter__redis.lock.Lock.__enter__"
+redis.lock.Lock.Self*
+redis.lock.Lock.Selfz36z37z38z39z310*˚
 __exit__redis.lock.Lock.__exit__"G
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None**
-self"
-redis.lock.Lock"redis.lock.Lock*ó
-exc_typeä
+None*$"
+redis.lock.Lock"redis.lock.Lock*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*o
-	exc_valueb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*f
-	tracebackY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez35z36z37z38z39z310*˜
+Nonez36z37z38z39z310*†
 acquireredis.lock.Lock.acquire"
 builtins.bool"builtins.bool*,
 self"
 redis.lock.Lock"redis.lock.Lock*W
+sleepJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *W
 blockingG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None *ç
-blocking_timeoutu
-'Union[None,builtins.int,builtins.float]
-None
-builtins.int"builtins.int 
-builtins.float"builtins.float *Ç
+None *b
+blocking_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *Ç
 tokenu
-'Union[builtins.bytes,builtins.str,None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str
-None z35z36z37z38z39z310*œ
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None z36z37z38z39z310*˛
 
 do_acquireredis.lock.Lock.do_acquire"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lock*Ω
-token±
--TypeAlias[Union[builtins.bytes,builtins.str]]f
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"redis.lock._TokenValuez35z36z37z38z39z310*á
+redis.lock.Lock"redis.lock.Lock*q
+tokenf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesz36z37z38z39z310*É
 lockedredis.lock.Lock.locked"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*Ö
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310*Å
 ownedredis.lock.Lock.owned"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*s
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310*o
 releaseredis.lock.Lock.release"
 None*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*¬
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310*Ò
 
 do_releaseredis.lock.Lock.do_release"
 None*,
 self"
-redis.lock.Lock"redis.lock.Lock*∆
-expected_token±
--TypeAlias[Union[builtins.bytes,builtins.str]]f
-"Union[builtins.bytes,builtins.str] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str"redis.lock._TokenValuez35z36z37z38z39z310*∑
+redis.lock.Lock"redis.lock.Lock*z
+expected_tokenf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesz36z37z38z39z310*Ì
 extendredis.lock.Lock.extend"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lock*{
-additional_timef
-"Union[builtins.int,builtins.float]
-builtins.int"builtins.int 
+redis.lock.Lock"redis.lock.Lock*5
+additional_time 
 builtins.float"builtins.float*1
 replace_ttl
-builtins.bool"builtins.bool z35z36z37z38z39z310*ª
+builtins.bool"builtins.bool z36z37z38z39z310*Ò
 	do_extendredis.lock.Lock.do_extend"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lock*{
-additional_timef
-"Union[builtins.int,builtins.float]
-builtins.int"builtins.int 
+redis.lock.Lock"redis.lock.Lock*5
+additional_time 
 builtins.float"builtins.float*/
 replace_ttl
-builtins.bool"builtins.boolz35z36z37z38z39z310*ç
+builtins.bool"builtins.boolz36z37z38z39z310*â
 	reacquireredis.lock.Lock.reacquire"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310*ì
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310*è
 do_reacquireredis.lock.Lock.do_reacquire"
 builtins.bool"builtins.bool*,
 self"
-redis.lock.Lock"redis.lock.Lockz35z36z37z38z39z310j35j36j37j38j39j310
+redis.lock.Lock"redis.lock.Lockz36z37z38z39z310j36j37j38j39j310ri
+LUA_EXTEND_SCRIPT!redis.lock.Lock.LUA_EXTEND_SCRIPT
+builtins.str"builtins.str*36*37*38*39*310ro
+LUA_REACQUIRE_SCRIPT$redis.lock.Lock.LUA_REACQUIRE_SCRIPT
+builtins.str"builtins.str*36*37*38*39*310rk
+LUA_RELEASE_SCRIPT"redis.lock.Lock.LUA_RELEASE_SCRIPT
+builtins.str"builtins.str*36*37*38*39*310rö
+
+lua_extendredis.lock.Lock.lua_extend[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None*36*37*38*39*310r†
+lua_reacquireredis.lock.Lock.lua_reacquire[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None*36*37*38*39*310rú
+lua_releaseredis.lock.Lock.lua_release[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None*36*37*38*39*310rk
+redisredis.lock.Lock.redis6
+redis.client.Redis[Any]
+Any"redis.client.Redis*36*37*38*39*310rO
+nameredis.lock.Lock.name
+builtins.str"builtins.str*36*37*38*39*310rÉ
+timeoutredis.lock.Lock.timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*36*37*38*39*310rU
+sleepredis.lock.Lock.sleep 
+builtins.float"builtins.float*36*37*38*39*310rY
+blockingredis.lock.Lock.blocking
+builtins.bool"builtins.bool*36*37*38*39*310rï
+blocking_timeout redis.lock.Lock.blocking_timeoutJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*36*37*38*39*310ra
+thread_localredis.lock.Lock.thread_local
+builtins.bool"builtins.bool*36*37*38*39*310r[
+localredis.lock.Lock.local&
+redis.lock._Local"redis.lock._Local*36*37*38*39*310*õ
+__annotations__redis.lock.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310

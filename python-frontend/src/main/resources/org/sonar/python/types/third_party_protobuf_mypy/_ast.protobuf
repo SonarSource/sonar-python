@@ -120,17 +120,23 @@ Expression_ast.Expression"_ast.modr4
 builtins.list[_ast.expr]
 	_ast.expr"	_ast.expr"builtins.listr2
 value_ast.Assign.value
-	_ast.expr"	_ast.exprœ
-	AugAssign_ast.AugAssign"	_ast.stmtr7
-target_ast.AugAssign.target
-	_ast.expr"	_ast.exprr7
+	_ast.expr"	_ast.expr…
+	AugAssign_ast.AugAssign"	_ast.stmtr∞
+target_ast.AugAssign.targeté
+.Union[_ast.Name,_ast.Attribute,_ast.Subscript]
+	_ast.Name"	_ast.Name 
+_ast.Attribute"_ast.Attribute 
+_ast.Subscript"_ast.Subscriptr7
 op_ast.AugAssign.op
 _ast.operator"_ast.operatorr5
 value_ast.AugAssign.value
-	_ast.expr"	_ast.exprª
-	AnnAssign_ast.AnnAssign"	_ast.stmtr7
-target_ast.AnnAssign.target
-	_ast.expr"	_ast.exprr?
+	_ast.expr"	_ast.exprµ
+	AnnAssign_ast.AnnAssign"	_ast.stmtr∞
+target_ast.AnnAssign.targeté
+.Union[_ast.Name,_ast.Attribute,_ast.Subscript]
+	_ast.Name"	_ast.Name 
+_ast.Attribute"_ast.Attribute 
+_ast.Subscript"_ast.Subscriptr?
 
 annotation_ast.AnnAssign.annotation
 	_ast.expr"	_ast.exprrZ
@@ -367,15 +373,13 @@ _ast.cmpop"builtins.listrj
 	_ast.expr"	_ast.expr"builtins.listrj
 keywords_ast.Call.keywordsJ
 builtins.list[_ast.keyword]
-_ast.keyword"_ast.keyword"builtins.listÕ
+_ast.keyword"_ast.keyword"builtins.list•
 FormattedValue_ast.FormattedValue"	_ast.exprr:
 value_ast.FormattedValue.value
-	_ast.expr"	_ast.exprrr
+	_ast.expr"	_ast.exprrJ
 
-conversion_ast.FormattedValue.conversionD
-Union[builtins.int,None]
-builtins.int"builtins.int
-Nonerk
+conversion_ast.FormattedValue.conversion
+builtins.int"builtins.intrk
 format_spec_ast.FormattedValue.format_spec;
 Union[_ast.expr,None]
 	_ast.expr"	_ast.expr
@@ -383,7 +387,7 @@ conversion_ast.FormattedValue.conversionD
 	JoinedStr_ast.JoinedStr"	_ast.exprrb
 values_ast.JoinedStr.valuesA
 builtins.list[_ast.expr]
-	_ast.expr"	_ast.expr"builtins.listà
+	_ast.expr"	_ast.expr"builtins.listÉ
 Constant_ast.Constant"	_ast.exprr%
 value_ast.Constant.value
 Anyr`
@@ -392,12 +396,15 @@ conversion_ast.FormattedValue.conversionD
 builtins.str"builtins.str
 Noner
 s_ast.Constant.s
-Anyr:
-n_ast.Constant.n$
+Anyr¥
+n_ast.Constant.nù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
 builtins.complex"builtins.complexñ
 	NamedExpr_ast.NamedExpr"	_ast.exprr7
 target_ast.NamedExpr.target
-	_ast.expr"	_ast.exprr5
+	_ast.Name"	_ast.Namer5
 value_ast.NamedExpr.value
 	_ast.expr"	_ast.expr€
 	Attribute_ast.Attribute"	_ast.exprr5
@@ -609,10 +616,17 @@ _ast.alias"_ast.ASTr5
 optional_vars_ast.withitem.optional_vars;
 Union[_ast.expr,None]
 	_ast.expr"	_ast.expr
-None*A
-PyCF_ONLY_AST_ast.PyCF_ONLY_AST
-builtins.int"builtins.int*K
-PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS
-builtins.int"builtins.int*[
-PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT
+None*Ä
+__annotations___ast.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*\
+PyCF_ONLY_AST_ast.PyCF_ONLY_AST7
+Literal[builtins.int]	
+builtins.int"builtins.int*f
+PyCF_TYPE_COMMENTS_ast.PyCF_TYPE_COMMENTS7
+Literal[builtins.int]	
+builtins.int"builtins.int*v
+PyCF_ALLOW_TOP_LEVEL_AWAIT_ast.PyCF_ALLOW_TOP_LEVEL_AWAIT7
+Literal[builtins.int]	
 builtins.int"builtins.int

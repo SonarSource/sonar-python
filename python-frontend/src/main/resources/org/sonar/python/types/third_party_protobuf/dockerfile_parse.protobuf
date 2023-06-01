@@ -1,0 +1,147 @@
+
+dockerfile_parse«,
+DockerfileParser(dockerfile_parse.parser.DockerfileParser"builtins.object*›
+__init__1dockerfile_parse.parser.DockerfileParser.__init__"
+None*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *3
+cache_content
+builtins.bool"builtins.bool *1
+env_replace
+builtins.bool"builtins.bool *Ì
+
+parent_env¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *„
+fileobju
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None *Ì
+
+build_args¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None z36z37z38z39z310*Ì
+	structure2dockerfile_parse.parser.DockerfileParser.structure"‡
+#builtins.list[TypeAlias[TypedDict]]Q
+TypeAlias[TypedDict]
+	TypedDict"(dockerfile_parse.parser._InstructionDict"builtins.list*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser0:property`z36z37z38z39z310*Ö
+json-dockerfile_parse.parser.DockerfileParser.json"
+builtins.str"builtins.str*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser0:property`z36z37z38z39z310*ê
+is_multistage6dockerfile_parse.parser.DockerfileParser.is_multistage"
+builtins.bool"builtins.bool*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser0:property`z36z37z38z39z310*ø
+	add_lines2dockerfile_parse.parser.DockerfileParser.add_lines"
+None*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser*'
+lines
+builtins.str"builtins.str*Y
+
+all_stagesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *W
+at_startG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *[
+skip_scratchG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310*«
+add_lines_at5dockerfile_parse.parser.DockerfileParser.add_lines_at"
+None*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser*
+anchor€
+IUnion[builtins.str,builtins.int,builtins.dict[builtins.str,builtins.int]]
+builtins.str"builtins.str
+builtins.int"builtins.intu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*'
+lines
+builtins.str"builtins.str*V
+replaceG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *T
+afterG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310*Ñ
+context_structure:dockerfile_parse.parser.DockerfileParser.context_structure"}
+,builtins.list[dockerfile_parse.util.Context]>
+dockerfile_parse.util.Context"dockerfile_parse.util.Context"builtins.list*^
+selfT
+(dockerfile_parse.parser.DockerfileParser"(dockerfile_parse.parser.DockerfileParser0:property`z36z37z38z39z310j36j37j38j39j310r”
+fileobj0dockerfile_parse.parser.DockerfileParser.fileobjB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO*36*37*38*39*310r~
+dockerfile_path8dockerfile_parse.parser.DockerfileParser.dockerfile_path
+builtins.str"builtins.str*36*37*38*39*310r|
+cache_content6dockerfile_parse.parser.DockerfileParser.cache_content
+builtins.bool"builtins.bool*36*37*38*39*310r|
+cached_content7dockerfile_parse.parser.DockerfileParser.cached_content
+builtins.str"builtins.str*36*37*38*39*310rx
+env_replace4dockerfile_parse.parser.DockerfileParser.env_replace
+builtins.bool"builtins.bool*36*37*38*39*310rÍ
+
+parent_env3dockerfile_parse.parser.DockerfileParser.parent_envu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310rÍ
+
+build_args3dockerfile_parse.parser.DockerfileParser.build_argsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310r˜
+lines.dockerfile_parse.parser.DockerfileParser.linesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310rn
+content0dockerfile_parse.parser.DockerfileParser.content
+builtins.str"builtins.str*36*37*38*39*310r¬
+parent_images6dockerfile_parse.parser.DockerfileParser.parent_imagesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*36*37*38*39*310rr
+	baseimage2dockerfile_parse.parser.DockerfileParser.baseimage
+builtins.str"builtins.str*36*37*38*39*310rf
+cmd,dockerfile_parse.parser.DockerfileParser.cmd
+builtins.str"builtins.str*36*37*38*39*310rÇ
+labels/dockerfile_parse.parser.DockerfileParser.labelsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310rÃ
+envs-dockerfile_parse.parser.DockerfileParser.envsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310rÃ
+args-dockerfile_parse.parser.DockerfileParser.argsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*36*37*38*39*310*†
+__path__dockerfile_parse.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*¡
+__annotations__ dockerfile_parse.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*^
+__version__dockerfile_parse.__version__
+builtins.str"builtins.str*36*37*38*39*310

@@ -1,0 +1,156 @@
+
+exifread.classesƒ
+IfdTagexifread.classes.IfdTag"builtins.object*€
+__init__ exifread.classes.IfdTag.__init__"
+None*<
+self2
+exifread.classes.IfdTag"exifread.classes.IfdTag*+
+	printable
+builtins.str"builtins.str*%
+tag
+builtins.int"builtins.int*,
+
+field_type
+builtins.int"builtins.int*
+values
+Any*.
+field_offset
+builtins.int"builtins.int*.
+field_length
+builtins.int"builtins.intz36z37z38z39z310j36j37j38j39j310ra
+	printable!exifread.classes.IfdTag.printable
+builtins.str"builtins.str*36*37*38*39*310rU
+tagexifread.classes.IfdTag.tag
+builtins.int"builtins.int*36*37*38*39*310rc
+
+field_type"exifread.classes.IfdTag.field_type
+builtins.int"builtins.int*36*37*38*39*310rg
+field_offset$exifread.classes.IfdTag.field_offset
+builtins.int"builtins.int*36*37*38*39*310rg
+field_length$exifread.classes.IfdTag.field_length
+builtins.int"builtins.int*36*37*38*39*310rF
+valuesexifread.classes.IfdTag.values
+Any*36*37*38*39*310ã!
+
+ExifHeaderexifread.classes.ExifHeader"builtins.object*§
+__init__$exifread.classes.ExifHeader.__init__"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*A
+file_handle0
+exifread._types.Reader"exifread._types.Reader*µ
+endian¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*(
+offset
+builtins.int"builtins.int*-
+	fake_exif
+builtins.bool"builtins.bool**
+strict
+builtins.bool"builtins.bool*+
+debug
+builtins.bool"builtins.bool *.
+detailed
+builtins.bool"builtins.bool *3
+truncate_tags
+builtins.bool"builtins.bool z36z37z38z39z310*¡
+s2nexifread.classes.ExifHeader.s2n"
+builtins.int"builtins.int*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*(
+offset
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.int*,
+signed
+builtins.bool"builtins.bool z36z37z38z39z310*÷
+n2bexifread.classes.ExifHeader.n2b" 
+builtins.bytes"builtins.bytes*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*(
+offset
+builtins.int"builtins.int*(
+length
+builtins.int"builtins.intz36z37z38z39z310*×
+list_ifd$exifread.classes.ExifHeader.list_ifd"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeaderz36z37z38z39z310*ø
+dump_ifd$exifread.classes.ExifHeader.dump_ifd"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*%
+ifd
+builtins.int"builtins.int**
+ifd_name
+builtins.str"builtins.str*±
+tag_dict 
+eUnion[TypeAlias[builtins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]],None]ª
+YTypeAlias[builtins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]]±
+Nbuiltins.dict[builtins.int,Union[Tuple[builtins.str],Tuple[builtins.str,Any]]]
+builtins.int"builtins.int±
+2Union[Tuple[builtins.str],Tuple[builtins.str,Any]]5
+Tuple[builtins.str]
+builtins.str"builtins.strB
+Tuple[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"exifread._types.TagDict
+None *,
+relative
+builtins.int"builtins.int *,
+stop_tag
+builtins.str"builtins.str z36z37z38z39z310*Þ
+extract_tiff_thumbnail2exifread.classes.ExifHeader.extract_tiff_thumbnail"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*+
+	thumb_ifd
+builtins.int"builtins.intz36z37z38z39z310*±
+extract_jpeg_thumbnail2exifread.classes.ExifHeader.extract_jpeg_thumbnail"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeaderz36z37z38z39z310*§
+decode_maker_note-exifread.classes.ExifHeader.decode_maker_note"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeaderz36z37z38z39z310*È
+	parse_xmp%exifread.classes.ExifHeader.parse_xmp"
+None*D
+self:
+exifread.classes.ExifHeader"exifread.classes.ExifHeader*/
+	xmp_bytes 
+builtins.bytes"builtins.bytesz36z37z38z39z310j36j37j38j39j310r}
+file_handle'exifread.classes.ExifHeader.file_handle0
+exifread._types.Reader"exifread._types.Reader*36*37*38*39*310rì
+endian"exifread.classes.ExifHeader.endian¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*36*37*38*39*310r_
+offset"exifread.classes.ExifHeader.offset
+builtins.int"builtins.int*36*37*38*39*310rg
+	fake_exif%exifread.classes.ExifHeader.fake_exif
+builtins.bool"builtins.bool*36*37*38*39*310ra
+strict"exifread.classes.ExifHeader.strict
+builtins.bool"builtins.bool*36*37*38*39*310r_
+debug!exifread.classes.ExifHeader.debug
+builtins.bool"builtins.bool*36*37*38*39*310re
+detailed$exifread.classes.ExifHeader.detailed
+builtins.bool"builtins.bool*36*37*38*39*310ro
+truncate_tags)exifread.classes.ExifHeader.truncate_tags
+builtins.bool"builtins.bool*36*37*38*39*310r–
+tags exifread.classes.ExifHeader.tagsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*¡
+__annotations__ exifread.classes.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*X
+loggerexifread.classes.logger 
+logging.Logger"logging.Logger*36*37*38*39*310

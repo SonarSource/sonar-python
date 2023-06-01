@@ -1,0 +1,281 @@
+
+win32.win32tsç
+WTSOpenServerwin32.win32ts.WTSOpenServer"
+builtins.int"builtins.int*,
+
+ServerName
+builtins.str"builtins.strz36z37z38z39z310w
+WTSCloseServerwin32.win32ts.WTSCloseServer"
+None*(
+Server
+builtins.int"builtins.intz36z37z38z39z310»
+WTSQueryUserConfig win32.win32ts.WTSQueryUserConfig"
+Any*,
+
+ServerName
+builtins.str"builtins.str**
+UserName
+builtins.str"builtins.str*
+ConfigClass
+Anyz36z37z38z39z310≈
+WTSSetUserConfigwin32.win32ts.WTSSetUserConfig"
+None*,
+
+ServerName
+builtins.str"builtins.str**
+UserName
+builtins.str"builtins.str*
+ConfigClass
+Anyz36z37z38z39z310π
+WTSEnumerateServers!win32.win32ts.WTSEnumerateServers"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*V
+
+DomainNameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+Version
+builtins.int"builtins.int *
+Reserved
+Any z36z37z38z39z310œ
+WTSEnumerateSessions"win32.win32ts.WTSEnumerateSessions"Æ
+Lbuiltins.tuple[builtins.dict[builtins.str,Union[builtins.str,builtins.int]]]Õ
+<builtins.dict[builtins.str,Union[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict"builtins.tuple*
+builtins.int"builtins.int* 
+builtins.int"builtins.int *
+Any z36z37z38z39z310≥
+WTSLogoffSessionwin32.win32ts.WTSLogoffSession"
+None*
+builtins.int"builtins.int*
+builtins.int"builtins.int* 
+builtins.bool"builtins.boolz36z37z38z39z310ª
+WTSDisconnectSession"win32.win32ts.WTSDisconnectSession"
+None*
+builtins.int"builtins.int*
+builtins.int"builtins.int* 
+builtins.bool"builtins.boolz36z37z38z39z310Ÿ
+WTSQuerySessionInformation(win32.win32ts.WTSQuerySessionInformation"
+builtins.str"builtins.str*
+builtins.int"builtins.int*
+builtins.int"builtins.int*
+builtins.int"builtins.intz36z37z38z39z310§
+WTSEnumerateProcesses#win32.win32ts.WTSEnumerateProcesses"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*(
+Server
+builtins.int"builtins.int*+
+Version
+builtins.int"builtins.int *,
+Reserved
+builtins.int"builtins.int z36z37z38z39z310
+WTSQueryUserTokenwin32.win32ts.WTSQueryUserToken"
+builtins.int"builtins.int*
+	SessionId
+Anyz36z37z38z39z310ò
+WTSShutdownSystemwin32.win32ts.WTSShutdownSystem"
+None*(
+Server
+builtins.int"builtins.int*
+ShutdownFlag
+Anyz36z37z38z39z310∞
+WTSTerminateProcess!win32.win32ts.WTSTerminateProcess"
+None*(
+Server
+builtins.int"builtins.int*
+	ProcessId
+Any*
+ExitCode
+Anyz36z37z38z39z310^
+ProcessIdToSessionId"win32.win32ts.ProcessIdToSessionId*
+	ProcessIdz36z37z38z39z310_
+WTSGetActiveConsoleSessionId*win32.win32ts.WTSGetActiveConsoleSessionIdz36z37z38z39z310®
+WTSRegisterSessionNotification,win32.win32ts.WTSRegisterSessionNotification"
+None*%
+Wnd
+builtins.int"builtins.int*
+Flags
+Anyz36z37z38z39z310ò
+ WTSUnRegisterSessionNotification.win32.win32ts.WTSUnRegisterSessionNotification"
+None*%
+Wnd
+builtins.int"builtins.intz36z37z38z39z310ñ
+WTSWaitSystemEvent win32.win32ts.WTSWaitSystemEvent"
+Any*(
+Server
+builtins.int"builtins.int*
+	EventMask
+Anyz36z37z38z39z310ü
+WTSSendMessagewin32.win32ts.WTSSendMessage"
+Any*(
+Server
+builtins.int"builtins.int*
+	SessionId
+Any*'
+Title
+builtins.str"builtins.str*)
+Message
+builtins.str"builtins.str*
+Style
+Any*
+Timeout
+Any*
+Wait
+Anyz36z37z38z39z310*û
+__annotations__win32.win32ts.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*s
+NOTIFY_FOR_ALL_SESSIONS%win32.win32ts.NOTIFY_FOR_ALL_SESSIONS
+builtins.int"builtins.int*36*37*38*39*310*s
+NOTIFY_FOR_THIS_SESSION%win32.win32ts.NOTIFY_FOR_THIS_SESSION
+builtins.int"builtins.int*36*37*38*39*310*W
+	WTSActivewin32.win32ts.WTSActive
+builtins.int"builtins.int*36*37*38*39*310*i
+WTSApplicationName win32.win32ts.WTSApplicationName
+builtins.int"builtins.int*36*37*38*39*310*e
+WTSClientAddresswin32.win32ts.WTSClientAddress
+builtins.int"builtins.int*36*37*38*39*310*m
+WTSClientBuildNumber"win32.win32ts.WTSClientBuildNumber
+builtins.int"builtins.int*36*37*38*39*310*i
+WTSClientDirectory win32.win32ts.WTSClientDirectory
+builtins.int"builtins.int*36*37*38*39*310*e
+WTSClientDisplaywin32.win32ts.WTSClientDisplay
+builtins.int"builtins.int*36*37*38*39*310*k
+WTSClientHardwareId!win32.win32ts.WTSClientHardwareId
+builtins.int"builtins.int*36*37*38*39*310*_
+WTSClientNamewin32.win32ts.WTSClientName
+builtins.int"builtins.int*36*37*38*39*310*i
+WTSClientProductId win32.win32ts.WTSClientProductId
+builtins.int"builtins.int*36*37*38*39*310*o
+WTSClientProtocolType#win32.win32ts.WTSClientProtocolType
+builtins.int"builtins.int*36*37*38*39*310*c
+WTSConnectQuerywin32.win32ts.WTSConnectQuery
+builtins.int"builtins.int*36*37*38*39*310*c
+WTSConnectStatewin32.win32ts.WTSConnectState
+builtins.int"builtins.int*36*37*38*39*310*]
+WTSConnectedwin32.win32ts.WTSConnected
+builtins.int"builtins.int*36*37*38*39*310*c
+WTSDisconnectedwin32.win32ts.WTSDisconnected
+builtins.int"builtins.int*36*37*38*39*310*_
+WTSDomainNamewin32.win32ts.WTSDomainName
+builtins.int"builtins.int*36*37*38*39*310*S
+WTSDownwin32.win32ts.WTSDown
+builtins.int"builtins.int*36*37*38*39*310*S
+WTSIdlewin32.win32ts.WTSIdle
+builtins.int"builtins.int*36*37*38*39*310*S
+WTSInitwin32.win32ts.WTSInit
+builtins.int"builtins.int*36*37*38*39*310*g
+WTSInitialProgramwin32.win32ts.WTSInitialProgram
+builtins.int"builtins.int*36*37*38*39*310*W
+	WTSListenwin32.win32ts.WTSListen
+builtins.int"builtins.int*36*37*38*39*310*U
+WTSOEMIdwin32.win32ts.WTSOEMId
+builtins.int"builtins.int*36*37*38*39*310*U
+WTSResetwin32.win32ts.WTSReset
+builtins.int"builtins.int*36*37*38*39*310*]
+WTSSessionIdwin32.win32ts.WTSSessionId
+builtins.int"builtins.int*36*37*38*39*310*W
+	WTSShadowwin32.win32ts.WTSShadow
+builtins.int"builtins.int*36*37*38*39*310*â
+"WTSUserConfigBrokenTimeoutSettings0win32.win32ts.WTSUserConfigBrokenTimeoutSettings
+builtins.int"builtins.int*36*37*38*39*310*{
+WTSUserConfigInitialProgram)win32.win32ts.WTSUserConfigInitialProgram
+builtins.int"builtins.int*36*37*38*39*310*è
+%WTSUserConfigModemCallbackPhoneNumber3win32.win32ts.WTSUserConfigModemCallbackPhoneNumber
+builtins.int"builtins.int*36*37*38*39*310*â
+"WTSUserConfigModemCallbackSettings0win32.win32ts.WTSUserConfigModemCallbackSettings
+builtins.int"builtins.int*36*37*38*39*310*Å
+WTSUserConfigReconnectSettings,win32.win32ts.WTSUserConfigReconnectSettings
+builtins.int"builtins.int*36*37*38*39*310*Å
+WTSUserConfigShadowingSettings,win32.win32ts.WTSUserConfigShadowingSettings
+builtins.int"builtins.int*36*37*38*39*310*â
+"WTSUserConfigTerminalServerHomeDir0win32.win32ts.WTSUserConfigTerminalServerHomeDir
+builtins.int"builtins.int*36*37*38*39*310*ì
+'WTSUserConfigTerminalServerHomeDirDrive5win32.win32ts.WTSUserConfigTerminalServerHomeDirDrive
+builtins.int"builtins.int*36*37*38*39*310*ë
+&WTSUserConfigTerminalServerProfilePath4win32.win32ts.WTSUserConfigTerminalServerProfilePath
+builtins.int"builtins.int*36*37*38*39*310*ì
+'WTSUserConfigTimeoutSettingsConnections5win32.win32ts.WTSUserConfigTimeoutSettingsConnections
+builtins.int"builtins.int*36*37*38*39*310*ô
+*WTSUserConfigTimeoutSettingsDisconnections8win32.win32ts.WTSUserConfigTimeoutSettingsDisconnections
+builtins.int"builtins.int*36*37*38*39*310*Ö
+ WTSUserConfigTimeoutSettingsIdle.win32.win32ts.WTSUserConfigTimeoutSettingsIdle
+builtins.int"builtins.int*36*37*38*39*310*
+WTSUserConfigWorkingDirectory+win32.win32ts.WTSUserConfigWorkingDirectory
+builtins.int"builtins.int*36*37*38*39*310*ë
+&WTSUserConfigfAllowLogonTerminalServer4win32.win32ts.WTSUserConfigfAllowLogonTerminalServer
+builtins.int"builtins.int*36*37*38*39*310*ï
+(WTSUserConfigfDeviceClientDefaultPrinter6win32.win32ts.WTSUserConfigfDeviceClientDefaultPrinter
+builtins.int"builtins.int*36*37*38*39*310*Ö
+ WTSUserConfigfDeviceClientDrives.win32.win32ts.WTSUserConfigfDeviceClientDrives
+builtins.int"builtins.int*36*37*38*39*310*â
+"WTSUserConfigfDeviceClientPrinters0win32.win32ts.WTSUserConfigfDeviceClientPrinters
+builtins.int"builtins.int*36*37*38*39*310*ã
+#WTSUserConfigfInheritInitialProgram1win32.win32ts.WTSUserConfigfInheritInitialProgram
+builtins.int"builtins.int*36*37*38*39*310*ó
+)WTSUserConfigfTerminalServerRemoteHomeDir7win32.win32ts.WTSUserConfigfTerminalServerRemoteHomeDir
+builtins.int"builtins.int*36*37*38*39*310*[
+WTSUserNamewin32.win32ts.WTSUserName
+builtins.int"builtins.int*36*37*38*39*310*m
+WTSVirtualClientData"win32.win32ts.WTSVirtualClientData
+builtins.int"builtins.int*36*37*38*39*310*m
+WTSVirtualFileHandle"win32.win32ts.WTSVirtualFileHandle
+builtins.int"builtins.int*36*37*38*39*310*g
+WTSWinStationNamewin32.win32ts.WTSWinStationName
+builtins.int"builtins.int*36*37*38*39*310*k
+WTSWorkingDirectory!win32.win32ts.WTSWorkingDirectory
+builtins.int"builtins.int*36*37*38*39*310*i
+WTS_CURRENT_SERVER win32.win32ts.WTS_CURRENT_SERVER
+builtins.int"builtins.int*36*37*38*39*310*w
+WTS_CURRENT_SERVER_HANDLE'win32.win32ts.WTS_CURRENT_SERVER_HANDLE
+builtins.int"builtins.int*36*37*38*39*310*à
+WTS_CURRENT_SERVER_NAME%win32.win32ts.WTS_CURRENT_SERVER_NAME1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*k
+WTS_CURRENT_SESSION!win32.win32ts.WTS_CURRENT_SESSION
+builtins.int"builtins.int*36*37*38*39*310*_
+WTS_EVENT_ALLwin32.win32ts.WTS_EVENT_ALL
+builtins.int"builtins.int*36*37*38*39*310*g
+WTS_EVENT_CONNECTwin32.win32ts.WTS_EVENT_CONNECT
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_EVENT_CREATEwin32.win32ts.WTS_EVENT_CREATE
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_EVENT_DELETEwin32.win32ts.WTS_EVENT_DELETE
+builtins.int"builtins.int*36*37*38*39*310*m
+WTS_EVENT_DISCONNECT"win32.win32ts.WTS_EVENT_DISCONNECT
+builtins.int"builtins.int*36*37*38*39*310*c
+WTS_EVENT_FLUSHwin32.win32ts.WTS_EVENT_FLUSH
+builtins.int"builtins.int*36*37*38*39*310*g
+WTS_EVENT_LICENSEwin32.win32ts.WTS_EVENT_LICENSE
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_EVENT_LOGOFFwin32.win32ts.WTS_EVENT_LOGOFF
+builtins.int"builtins.int*36*37*38*39*310*c
+WTS_EVENT_LOGONwin32.win32ts.WTS_EVENT_LOGON
+builtins.int"builtins.int*36*37*38*39*310*a
+WTS_EVENT_NONEwin32.win32ts.WTS_EVENT_NONE
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_EVENT_RENAMEwin32.win32ts.WTS_EVENT_RENAME
+builtins.int"builtins.int*36*37*38*39*310*o
+WTS_EVENT_STATECHANGE#win32.win32ts.WTS_EVENT_STATECHANGE
+builtins.int"builtins.int*36*37*38*39*310*w
+WTS_PROTOCOL_TYPE_CONSOLE'win32.win32ts.WTS_PROTOCOL_TYPE_CONSOLE
+builtins.int"builtins.int*36*37*38*39*310*o
+WTS_PROTOCOL_TYPE_ICA#win32.win32ts.WTS_PROTOCOL_TYPE_ICA
+builtins.int"builtins.int*36*37*38*39*310*o
+WTS_PROTOCOL_TYPE_RDP#win32.win32ts.WTS_PROTOCOL_TYPE_RDP
+builtins.int"builtins.int*36*37*38*39*310*i
+WTS_WSD_FASTREBOOT win32.win32ts.WTS_WSD_FASTREBOOT
+builtins.int"builtins.int*36*37*38*39*310*a
+WTS_WSD_LOGOFFwin32.win32ts.WTS_WSD_LOGOFF
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_WSD_POWEROFFwin32.win32ts.WTS_WSD_POWEROFF
+builtins.int"builtins.int*36*37*38*39*310*a
+WTS_WSD_REBOOTwin32.win32ts.WTS_WSD_REBOOT
+builtins.int"builtins.int*36*37*38*39*310*e
+WTS_WSD_SHUTDOWNwin32.win32ts.WTS_WSD_SHUTDOWN
+builtins.int"builtins.int*36*37*38*39*310

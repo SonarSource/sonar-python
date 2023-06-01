@@ -1,28 +1,81 @@
 
-concurrent.futures.threadg
-BrokenThreadPool*concurrent.futures.thread.BrokenThreadPool"'concurrent.futures._base.BrokenExecutorˆ
-ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*¡
-__init__5concurrent.futures.thread.ThreadPoolExecutor.__init__"
-None*f
-self\
-,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor*W
-max_workersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *6
-thread_name_prefix
-builtins.str"builtins.str *š
-initializer†
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *>
-initargs.
-builtins.tuple[Any]
-Any"builtins.tuple r}
-_work_queue8concurrent.futures.thread.ThreadPoolExecutor._work_queue4
-queue.SimpleQueue[Any]
-Any"queue.SimpleQueueª
+concurrent.futures.thread±
+AbstractSettyping.AbstractSet"typing.Collection*Õ
+__contains__typing.AbstractSet.__contains__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*$"
+builtins.object"builtins.object0:abstractmethod@*“
+_hashtyping.AbstractSet._hash"
+builtins.int"builtins.int*R
+selfH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*É
+__le__typing.AbstractSet.__le__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*É
+__lt__typing.AbstractSet.__lt__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*É
+__gt__typing.AbstractSet.__gt__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*É
+__ge__typing.AbstractSet.__ge__"
+builtins.bool"builtins.bool*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*õ
+__and__typing.AbstractSet.__and__"H
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*Ã
+__or__typing.AbstractSet.__or__"‹
+1typing.AbstractSet[Union[typing._T_co,typing._T]]B
+Union[typing._T_co,typing._T]
+typing._T_co
+	typing._T"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*DB
+typing.AbstractSet[typing._T]
+	typing._T"typing.AbstractSet*õ
+__sub__typing.AbstractSet.__sub__"H
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*Å
+__xor__typing.AbstractSet.__xor__"‹
+1typing.AbstractSet[Union[typing._T_co,typing._T]]B
+Union[typing._T_co,typing._T]
+typing._T_co
+	typing._T"typing.AbstractSet*JH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*DB
+typing.AbstractSet[typing._T]
+	typing._T"typing.AbstractSet*Ü
+
+isdisjointtyping.AbstractSet.isdisjoint"
+builtins.bool"builtins.bool*R
+selfH
+ typing.AbstractSet[typing._T_co]
+typing._T_co"typing.AbstractSet*;
+other0
+typing.Iterable[Any]
+Any"typing.IterablePª
 	_WorkItem#concurrent.futures.thread._WorkItem"builtins.object*ä
 __init__,concurrent.futures.thread._WorkItem.__init__"
 None*•
@@ -59,4 +112,90 @@ Aconcurrent.futures.thread._WorkItem[concurrent.futures.thread._S]
 kwargs*concurrent.futures.thread._WorkItem.kwargsY
  typing.Mapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.Mapping
+Any"typing.Mappingg
+BrokenThreadPool*concurrent.futures.thread.BrokenThreadPool"'concurrent.futures._base.BrokenExecutorÇ
+ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*¡
+__init__5concurrent.futures.thread.ThreadPoolExecutor.__init__"
+None*f
+self\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor*W
+max_workersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *6
+thread_name_prefix
+builtins.str"builtins.str *š
+initializer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *>
+initargs.
+builtins.tuple[Any]
+Any"builtins.tuple *Ë
+_adjust_thread_countAconcurrent.futures.thread.ThreadPoolExecutor._adjust_thread_count"
+None*f
+self\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor*É
+_initializer_failed@concurrent.futures.thread.ThreadPoolExecutor._initializer_failed"
+None*f
+self\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutorrg
+_max_workers9concurrent.futures.thread.ThreadPoolExecutor._max_workers
+builtins.int"builtins.intr{
+_idle_semaphore<concurrent.futures.thread.ThreadPoolExecutor._idle_semaphore*
+threading.Semaphore"threading.Semaphorer£
+_threads5concurrent.futures.thread.ThreadPoolExecutor._threads`
+$typing.AbstractSet[threading.Thread]$
+threading.Thread"threading.Thread"typing.AbstractSetr_
+_broken4concurrent.futures.thread.ThreadPoolExecutor._broken
+builtins.bool"builtins.boolrc
+	_shutdown6concurrent.futures.thread.ThreadPoolExecutor._shutdown
+builtins.bool"builtins.boolro
+_shutdown_lock;concurrent.futures.thread.ThreadPoolExecutor._shutdown_lock 
+threading.Lock"threading.Lockr
+_thread_name_prefix@concurrent.futures.thread.ThreadPoolExecutor._thread_name_prefixD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÒ
+_initializer9concurrent.futures.thread.ThreadPoolExecutor._initializer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noners
+	_initargs6concurrent.futures.thread.ThreadPoolExecutor._initargs.
+builtins.tuple[Any]
+Any"builtins.tuplerô
+_work_queue8concurrent.futures.thread.ThreadPoolExecutor._work_queueª
+;queue.SimpleQueue[concurrent.futures.thread._WorkItem[Any]]X
+(concurrent.futures.thread._WorkItem[Any]
+Any"#concurrent.futures.thread._WorkItem"queue.SimpleQueue@
+_python_exit&concurrent.futures.thread._python_exit"
+Noneð
+_worker!concurrent.futures.thread._worker"
+None*V
+executor_reference>
+_weakref.ReferenceType[Any]
+Any"_weakref.ReferenceType*D
+
+work_queue4
+queue.SimpleQueue[Any]
+Any"queue.SimpleQueue*\
+initializerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+initargs.
+builtins.tuple[Any]
+Any"builtins.tuple*•
+__annotations__)concurrent.futures.thread.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*y
+_threads_queues)concurrent.futures.thread._threads_queues;
+typing.Mapping[Any,Any]
+Any
+Any"typing.Mapping*P
+	_shutdown#concurrent.futures.thread._shutdown
+builtins.bool"builtins.bool*j
+_global_shutdown_lock/concurrent.futures.thread._global_shutdown_lock 
+threading.Lock"threading.Lock

@@ -1,442 +1,6 @@
 
-six.moves.http_clientÁ
-HTTPMessagehttplib.HTTPMessage"mimetools.Message*¡
-addcontinuehttplib.HTTPMessage.addcontinue"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessage*%
-key
-builtins.str"builtins.str*&
-more
-builtins.str"builtins.strz27*æ
-	addheaderhttplib.HTTPMessage.addheader"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessage*%
-key
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz27*r
-readheadershttplib.HTTPMessage.readheaders"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessagez27j27rõ
-dicthttplib.HTTPMessage.dictu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*27rJ
-unixfromhttplib.HTTPMessage.unixfrom
-builtins.str"builtins.str*27r3
-headershttplib.HTTPMessage.headers
-Any*27rF
-statushttplib.HTTPMessage.status
-builtins.str"builtins.str*27rL
-seekablehttplib.HTTPMessage.seekable
-builtins.bool"builtins.bool*27µ
-HTTPResponsehttplib.HTTPResponse"builtins.object*≈
-__init__httplib.HTTPResponse.__init__"
-None*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*
-sock
-Any*.
-
-debuglevel
-builtins.int"builtins.int **
-strict
-builtins.int"builtins.int *4
-method&
-Union[Any,None]
-Any
-None */
-	buffering
-builtins.bool"builtins.bool z27*1
-beginhttplib.HTTPResponse.begin*
-selfz27*1
-closehttplib.HTTPResponse.close*
-selfz27*7
-isclosedhttplib.HTTPResponse.isclosed*
-selfz27*ô
-readhttplib.HTTPResponse.read"
-Any*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*1
-amt&
-Union[Any,None]
-Any
-None z27*3
-filenohttplib.HTTPResponse.fileno*
-selfz27*∫
-	getheaderhttplib.HTTPResponse.getheader"
-Any*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*
-name
-Any*5
-default&
-Union[Any,None]
-Any
-None z27*;
-
-getheadershttplib.HTTPResponse.getheaders*
-selfz27j27r*
-fphttplib.HTTPResponse.fp
-Any*27r:
-
-debuglevelhttplib.HTTPResponse.debuglevel
-Any*27r2
-stricthttplib.HTTPResponse.strict
-Any*27r,
-msghttplib.HTTPResponse.msg
-Any*27r4
-versionhttplib.HTTPResponse.version
-Any*27r2
-statushttplib.HTTPResponse.status
-Any*27r2
-reasonhttplib.HTTPResponse.reason
-Any*27r4
-chunkedhttplib.HTTPResponse.chunked
-Any*27r:
-
-chunk_lefthttplib.HTTPResponse.chunk_left
-Any*27r2
-lengthhttplib.HTTPResponse.length
-Any*27r:
-
-will_closehttplib.HTTPResponse.will_close
-Any*27¯
-HTTPConnectionProtocolhttplib.HTTPConnectionProtocol"builtins.object*¶
-__call__'httplib.HTTPConnectionProtocol.__call__"0
-httplib.HTTPConnection"httplib.HTTPConnection*J
-self@
-httplib.HTTPConnectionProtocol"httplib.HTTPConnectionProtocol*&
-host
-builtins.str"builtins.str*+
-timeout
-builtins.int"builtins.int *
-http_con_args
-Anyz27Xj27°
-HTTPConnectionhttplib.HTTPConnection"builtins.object*»
-__init__httplib.HTTPConnection.__init__"
-None*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *
-timeout
-Any *<
-source_address&
-Union[Any,None]
-Any
-None z27*ˆ
-
-set_tunnel!httplib.HTTPConnection.set_tunnel"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None z27*P
-set_debuglevel%httplib.HTTPConnection.set_debuglevel*
-self*	
-levelz27*7
-connecthttplib.HTTPConnection.connect*
-selfz27*3
-closehttplib.HTTPConnection.close*
-selfz27*;
-sendhttplib.HTTPConnection.send*
-self*
-dataz27*à
-
-putrequest!httplib.HTTPConnection.putrequest"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-method
-Any*
-url
-Any*-
-	skip_host
-builtins.int"builtins.int *8
-skip_accept_encoding
-builtins.int"builtins.int z27*S
-	putheader httplib.HTTPConnection.putheader*
-self*
-
-header*
-
-valuesz27*¥
-
-endheaders!httplib.HTTPConnection.endheaders"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*:
-message_body&
-Union[Any,None]
-Any
-None z27*Â
-requesthttplib.HTTPConnection.request"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-method
-Any*
-url
-Any*2
-body&
-Union[Any,None]
-Any
-None *
-headers
-Any z27*´
-getresponse"httplib.HTTPConnection.getresponse"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*/
-	buffering
-builtins.bool"builtins.bool z27j27rD
-response_class%httplib.HTTPConnection.response_class
-Any*27r@
-default_port#httplib.HTTPConnection.default_port
-Any*27r:
-	auto_open httplib.HTTPConnection.auto_open
-Any*27r<
-
-debuglevel!httplib.HTTPConnection.debuglevel
-Any*27r4
-stricthttplib.HTTPConnection.strict
-Any*27r6
-timeouthttplib.HTTPConnection.timeout
-Any*27rD
-source_address%httplib.HTTPConnection.source_address
-Any*27r0
-sockhttplib.HTTPConnection.sock
-Any*27rE
-hosthttplib.HTTPConnection.host
-builtins.str"builtins.str*27rE
-porthttplib.HTTPConnection.port
-builtins.int"builtins.int*27ƒ
-HTTPhttplib.HTTP"builtins.object*Î
-__init__httplib.HTTP.__init__"
-None*&
-self
-httplib.HTTP"httplib.HTTP*(
-host
-builtins.str"builtins.str *2
-port&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None z27*º
-connecthttplib.HTTP.connect"
-Any*&
-self
-httplib.HTTP"httplib.HTTP*2
-host&
-Union[Any,None]
-Any
-None *2
-port&
-Union[Any,None]
-Any
-None z27*-
-getfilehttplib.HTTP.getfile*
-selfz27*á
-getreplyhttplib.HTTP.getreply"
-Any*&
-self
-httplib.HTTP"httplib.HTTP*/
-	buffering
-builtins.bool"builtins.bool z27*)
-closehttplib.HTTP.close*
-selfz27j27r2
-
-debuglevelhttplib.HTTP.debuglevel
-Any*27r&
-filehttplib.HTTP.file
-Any*27r,
-headershttplib.HTTP.headers
-Any*27‰
-HTTPSConnectionhttplib.HTTPSConnection"httplib.HTTPConnection*Û
-__init__ httplib.HTTPSConnection.__init__"
-None*<
-self2
-httplib.HTTPSConnection"httplib.HTTPSConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *6
-key_file&
-Union[Any,None]
-Any
-None *7
-	cert_file&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *
-timeout
-Any *<
-source_address&
-Union[Any,None]
-Any
-None *5
-context&
-Union[Any,None]
-Any
-None z27*8
-connecthttplib.HTTPSConnection.connect*
-selfz27j27rA
-default_port$httplib.HTTPSConnection.default_port
-Any*27r9
-key_file httplib.HTTPSConnection.key_file
-Any*27r;
-	cert_file!httplib.HTTPSConnection.cert_file
-Any*27r1
-sockhttplib.HTTPSConnection.sock
-Any*27•
-HTTPShttplib.HTTPS"httplib.HTTP*ñ
-__init__httplib.HTTPS.__init__"
-None*(
-self
-httplib.HTTPS"httplib.HTTPS*(
-host
-builtins.str"builtins.str *2
-port&
-Union[Any,None]
-Any
-None *6
-key_file&
-Union[Any,None]
-Any
-None *7
-	cert_file&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *5
-context&
-Union[Any,None]
-Any
-None z27j27r/
-key_filehttplib.HTTPS.key_file
-Any*27r1
-	cert_filehttplib.HTTPS.cert_file
-Any*27>
-HTTPExceptionhttplib.HTTPException"builtins.Exceptionj27?
-NotConnectedhttplib.NotConnected"httplib.HTTPExceptionj27;
-
-InvalidURLhttplib.InvalidURL"httplib.HTTPExceptionj27¬
-UnknownProtocolhttplib.UnknownProtocol"httplib.HTTPException*é
-__init__ httplib.UnknownProtocol.__init__"
-None*<
-self2
-httplib.UnknownProtocol"httplib.UnknownProtocol*
-version
-Anyz27j27r1
-argshttplib.UnknownProtocol.args
-Any*27r7
-versionhttplib.UnknownProtocol.version
-Any*27U
-UnknownTransferEncodinghttplib.UnknownTransferEncoding"httplib.HTTPExceptionj27Q
-UnimplementedFileModehttplib.UnimplementedFileMode"httplib.HTTPExceptionj27≠
-IncompleteReadhttplib.IncompleteRead"httplib.HTTPException*√
-__init__httplib.IncompleteRead.__init__"
-None*:
-self0
-httplib.IncompleteRead"httplib.IncompleteRead*
-partial
-Any*6
-expected&
-Union[Any,None]
-Any
-None z27j27r0
-argshttplib.IncompleteRead.args
-Any*27r6
-partialhttplib.IncompleteRead.partial
-Any*27r8
-expectedhttplib.IncompleteRead.expected
-Any*27U
-ImproperConnectionStatehttplib.ImproperConnectionState"httplib.HTTPExceptionj27S
-CannotSendRequesthttplib.CannotSendRequest"httplib.ImproperConnectionStatej27Q
-CannotSendHeaderhttplib.CannotSendHeader"httplib.ImproperConnectionStatej27Q
-ResponseNotReadyhttplib.ResponseNotReady"httplib.ImproperConnectionStatej27´
-BadStatusLinehttplib.BadStatusLine"httplib.HTTPException*Ö
-__init__httplib.BadStatusLine.__init__"
-None*8
-self.
-httplib.BadStatusLine"httplib.BadStatusLine*
-line
-Anyz27j27r/
-argshttplib.BadStatusLine.args
-Any*27r/
-linehttplib.BadStatusLine.line
-Any*27ƒ
-LineTooLonghttplib.LineTooLong"httplib.HTTPException*Ñ
-__init__httplib.LineTooLong.__init__"
-None*4
-self*
-httplib.LineTooLong"httplib.LineTooLong*
-	line_type
-Anyz27j27‰
-LineAndFileWrapperhttplib.LineAndFileWrapper"builtins.object*ß
-__init__#httplib.LineAndFileWrapper.__init__"
-None*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*
-line
-Any*
-file
-Anyz27*M
-__getattr__&httplib.LineAndFileWrapper.__getattr__*
-self*
-attrz27*´
-readhttplib.LineAndFileWrapper.read"
-Any*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*1
-amt&
-Union[Any,None]
-Any
-None z27*=
-readline#httplib.LineAndFileWrapper.readline*
-selfz27*∂
-	readlines$httplib.LineAndFileWrapper.readlines"
-Any*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*2
-size&
-Union[Any,None]
-Any
-None z27j27V
-HTTPMessagehttp.client.HTTPMessage"email.message.Messagej35j36j37j38j39j310¥)
-HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*è
+six.moves.http_clientÁ1
+HTTPResponsehttp.client.HTTPResponse"io.BufferedIOBase"typing.BinaryIO*ã
 __init__!http.client.HTTPResponse.__init__"
 None*>
 self4
@@ -453,7 +17,13 @@ debuglevel
 urlD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z35z36z37z38z39z310*Ò
+None z36z37z38z39z310*√
+peekhttp.client.HTTPResponse.peek" 
+builtins.bytes"builtins.bytes*>
+self4
+http.client.HTTPResponse"http.client.HTTPResponse*%
+n
+builtins.int"builtins.int z36z37z38z39z310*Ì
 readhttp.client.HTTPResponse.read" 
 builtins.bytes"builtins.bytes*>
 self4
@@ -461,31 +31,46 @@ debuglevel
 amtD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z35z36z37z38z39z310*…
+None z36z37z38z39z310*≈
 read1http.client.HTTPResponse.read1" 
 builtins.bytes"builtins.bytes*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*%
 n
-builtins.int"builtins.int z35z36z37z38z39z310*à
+builtins.int"builtins.int z36z37z38z39z310*≥
 readinto!http.client.HTTPResponse.readinto"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponse*·
-bŸ
-STypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]‰
-HUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap](
+http.client.HTTPResponse"http.client.HTTPResponse*ù
+bï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
 builtins.bytearray"builtins.bytearray*
 builtins.memoryview"builtins.memoryview(
 array.array[Any]
 Any"array.array
-	mmap.mmap"	mmap.mmap"_typeshed.WriteableBufferz35z36z37z38z39z310*”
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBufferz36z37*å
+readinto!http.client.HTTPResponse.readinto"
+builtins.int"builtins.int*>
+self4
+http.client.HTTPResponse"http.client.HTTPResponse*Ò
+bÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBufferz38z39z310*œ
 readline!http.client.HTTPResponse.readline" 
 builtins.bytes"builtins.bytes*>
 self4
 http.client.HTTPResponse"http.client.HTTPResponse*)
 limit
-builtins.int"builtins.int z35z36z37z38z39z310*Ø
+builtins.int"builtins.int z36z37z38z39z310*´
 
 getheaders#http.client.HTTPResponse.getheaders"¢
 /builtins.list[Tuple[builtins.str,builtins.str]]`
@@ -493,59 +78,47 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 builtins.str"builtins.str
 builtins.str"builtins.str"builtins.list*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*†
-filenohttp.client.HTTPResponse.fileno"
-builtins.int"builtins.int*>
-self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*¶
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*¢
 isclosed!http.client.HTTPResponse.isclosed"
 builtins.bool"builtins.bool*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*⁄
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*–
 __iter__!http.client.HTTPResponse.__iter__"T
 typing.Iterator[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterator*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*º
-	__enter__"http.client.HTTPResponse.__enter__"4
-http.client.HTTPResponse"http.client.HTTPResponse*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*ª
-__exit__!http.client.HTTPResponse.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*<
-self4
-http.client.HTTPResponse"http.client.HTTPResponse*ó
-exc_typeä
+builtins.bytes"builtins.bytes"typing.Iterator*64
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*å
+	__enter__"http.client.HTTPResponse.__enter__"!
+http.client.HTTPResponse.Self*#!
+http.client.HTTPResponse.Selfz36z37z38z39z310*◊
+__exit__!http.client.HTTPResponse.__exit__"
+None*64
+http.client.HTTPResponse"http.client.HTTPResponse*çä
 (Union[Type[builtins.BaseException],None]R
 Type[builtins.BaseException]0
 builtins.BaseException"builtins.BaseException
-None*m
-exc_valb
+None*db
 "Union[builtins.BaseException,None]0
 builtins.BaseException"builtins.BaseException
-None*c
-exc_tbY
+None*[Y
 Union[types.TracebackType,None]*
 types.TracebackType"types.TracebackType
-Nonez35z36z37z38z39z310*Æ
+Nonez36z37z38z39z310*™
 infohttp.client.HTTPResponse.info".
 email.message.Message"email.message.Message*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*†
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*ú
 geturlhttp.client.HTTPResponse.geturl"
 builtins.str"builtins.str*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*¢
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*û
 getcode http.client.HTTPResponse.getcode"
 builtins.int"builtins.int*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z310*ä
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z310*Ü
 beginhttp.client.HTTPResponse.begin"
 None*>
 self4
-http.client.HTTPResponse"http.client.HTTPResponsez35z36z37z38z39z3102Ÿ
+http.client.HTTPResponse"http.client.HTTPResponsez36z37z38z39z3102’
 	getheader"http.client.HTTPResponse.getheaderÎ
 	getheader"http.client.HTTPResponse.getheader"D
 Union[builtins.str,None]
@@ -564,43 +137,39 @@ getheaders#http.client.HTTPResponse.getheaders"¢
 name
 builtins.str"builtins.str*
 default
-http.client._T0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310rp
+http.client._T0:overloadX"36"37"38"39"310j36j37j38j39j310rl
 msghttp.client.HTTPResponse.msg2
-http.client.HTTPMessage"http.client.HTTPMessage*35*36*37*38*39*310rx
+http.client.HTTPMessage"http.client.HTTPMessage*36*37*38*39*310rt
 headers http.client.HTTPResponse.headers2
-http.client.HTTPMessage"http.client.HTTPMessage*35*36*37*38*39*310rb
+http.client.HTTPMessage"http.client.HTTPMessage*36*37*38*39*310r^
 version http.client.HTTPResponse.version
-builtins.int"builtins.int*35*36*37*38*39*310rh
+builtins.int"builtins.int*36*37*38*39*310rd
 
 debuglevel#http.client.HTTPResponse.debuglevel
-builtins.int"builtins.int*35*36*37*38*39*310rb
+builtins.int"builtins.int*36*37*38*39*310r^
+fphttp.client.HTTPResponse.fp&
+io.BufferedReader"io.BufferedReader*36*37*38*39*310r^
 closedhttp.client.HTTPResponse.closed
-builtins.bool"builtins.bool*35*36*37*38*39*310r`
+builtins.bool"builtins.bool*36*37*38*39*310r\
 statushttp.client.HTTPResponse.status
-builtins.int"builtins.int*35*36*37*38*39*310r`
+builtins.int"builtins.int*36*37*38*39*310r\
 reasonhttp.client.HTTPResponse.reason
-builtins.str"builtins.str*35*36*37*38*39*310’(
-HTTPConnectionhttp.client.HTTPConnection"builtins.object*ê
-__init__#http.client.HTTPConnection.__init__"
-None*B
-self8
-http.client.HTTPConnection"http.client.HTTPConnection*&
-host
-builtins.str"builtins.str*P
-portD
+builtins.str"builtins.str*36*37*38*39*310r`
+chunked http.client.HTTPResponse.chunked
+builtins.bool"builtins.bool*36*37*38*39*310rå
+
+chunk_left#http.client.HTTPResponse.chunk_leftD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *≥
-source_addressú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
+None*36*37*38*39*310rÑ
+lengthhttp.client.HTTPResponse.lengthD
+Union[builtins.int,None]
 builtins.int"builtins.int
-None z35z36*»
+None*36*37*38*39*310rf
+
+will_close#http.client.HTTPResponse.will_close
+builtins.bool"builtins.bool*36*37*38*39*310ä|
+HTTPConnectionhttp.client.HTTPConnection"builtins.object*Ã
 __init__#http.client.HTTPConnection.__init__"
 None*B
 self8
@@ -622,7 +191,7 @@ debuglevel#http.client.HTTPResponse.debuglevel
 builtins.int"builtins.int
 None *-
 	blocksize
-builtins.int"builtins.int z37z38z39z310*‘
+builtins.int"builtins.int z36z37z38z39z310*Ì
 request"http.client.HTTPConnection.request"
 None*B
 self8
@@ -630,14 +199,25 @@ debuglevel#http.client.HTTPResponse.debuglevel
 method
 builtins.str"builtins.str*%
 url
-builtins.str"builtins.str*≠
-body†
-VUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str,None] 
-builtins.bytes"builtins.bytes$
-typing.IO[Any]
-Any"	typing.IOT
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable
+builtins.str"builtins.str*◊
+body 
+ÌUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]],builtins.str,None]≠
+‘TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]]∫	
+…Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadÉ
+ìtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]]Ÿ
+ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytesï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
 builtins.str"builtins.str
 None *Ü
 headersw
@@ -645,17 +225,53 @@ VUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.st
 builtins.str"builtins.str
 builtins.str"builtins.str"typing.Mapping *4
 encode_chunked
-builtins.bool"builtins.bool z35z36z37z38z39z310*»
+builtins.bool"builtins.bool z36z37*ø
+request"http.client.HTTPConnection.request"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*(
+method
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.str*§
+bodyó
+ÅUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str,None]Ê
+ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
+
+›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
+ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.str"builtins.str
+None *Ü
+headersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping *4
+encode_chunked
+builtins.bool"builtins.bool z38z39z310*ƒ
 getresponse&http.client.HTTPConnection.getresponse"4
 http.client.HTTPResponse"http.client.HTTPResponse*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnectionz35z36z37z38z39z310*À
+http.client.HTTPConnection"http.client.HTTPConnectionz36z37z38z39z310*«
 set_debuglevel)http.client.HTTPConnection.set_debuglevel"
 None*B
 self8
 http.client.HTTPConnection"http.client.HTTPConnection*'
 level
-builtins.int"builtins.intz35z36z37z38z39z310*„
+builtins.int"builtins.intz36z37z38z39z310*ﬂ
 
 set_tunnel%http.client.HTTPConnection.set_tunnel"
 None*B
@@ -672,15 +288,15 @@ set_tunnel%http.client.HTTPConnection.set_tunnel"
 )typing.Mapping[builtins.str,builtins.str]
 builtins.str"builtins.str
 builtins.str"builtins.str"typing.Mapping
-None z35z36z37z38z39z310*î
+None z36z37z38z39z310*ê
 connect"http.client.HTTPConnection.connect"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnectionz35z36z37z38z39z310*ê
+http.client.HTTPConnection"http.client.HTTPConnectionz36z37z38z39z310*å
 close http.client.HTTPConnection.close"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnectionz35z36z37z38z39z310*ÿ
+http.client.HTTPConnection"http.client.HTTPConnectionz36z37z38z39z310*‘
 
 putrequest%http.client.HTTPConnection.putrequest"
 None*B
@@ -693,7 +309,7 @@ putrequest%http.client.HTTPConnection.putrequest"
 	skip_host
 builtins.bool"builtins.bool *:
 skip_accept_encoding
-builtins.bool"builtins.bool z35z36z37z38z39z310*Ó
+builtins.bool"builtins.bool z36z37z38z39z310*Í
 	putheader$http.client.HTTPConnection.putheader"
 None*B
 self8
@@ -701,83 +317,132 @@ putrequest%http.client.HTTPConnection.putrequest"
 header
 builtins.str"builtins.str**
 argument
-builtins.str"builtins.strz35z36z37z38z39z310*à
+builtins.str"builtins.strz36z37z38z39z310*ˆ
 
 endheaders%http.client.HTTPConnection.endheaders"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*µ
-message_body†
-VUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str,None] 
-builtins.bytes"builtins.bytes$
-typing.IO[Any]
-Any"	typing.IOT
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable
-builtins.str"builtins.str
+http.client.HTTPConnection"http.client.HTTPConnection*¥
+message_bodyü
+‡Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]],None]≠
+‘TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]]∫	
+…Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadÉ
+ìtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]]Ÿ
+ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytesï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
 None *4
 encode_chunked
-builtins.bool"builtins.bool z35z36z37z38z39z310*ß
+builtins.bool"builtins.bool z36z37*»
+
+endheaders%http.client.HTTPConnection.endheaders"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*Å
+message_bodyÏ
+ÙUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],None]Ê
+ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
+
+›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
+ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+None *4
+encode_chunked
+builtins.bool"builtins.bool z38z39z310*∆
 sendhttp.client.HTTPConnection.send"
 None*B
 self8
-http.client.HTTPConnection"http.client.HTTPConnection*ñ
-dataã
-\TypeAlias[Union[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str]]ë
-QUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.str] 
-builtins.bytes"builtins.bytes$
-typing.IO[Any]
-Any"	typing.IOT
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable
-builtins.str"builtins.str"http.client._DataTypez35z36z37z38z39z310j35j36j37j38j39j310rí
+http.client.HTTPConnection"http.client.HTTPConnection*∆
+dataª
+ËUnion[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]],builtins.str]≠
+‘TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]]∫	
+…Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadÉ
+ìtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]]Ÿ
+ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytesï
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.str"builtins.strz36z37*ò
+sendhttp.client.HTTPConnection.send"
+None*B
+self8
+http.client.HTTPConnection"http.client.HTTPConnection*ì
+dataà
+¸Union[TypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]],builtins.str]Ê
+ËTypeAlias[Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]]ﬂ
+
+›Union[_typeshed.SupportsRead[builtins.bytes],typing.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]],Unknown]b
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsReadî
+ßtyping.Iterable[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]]÷
+ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
+ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesÈ
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer"typing.Iterable "http.client._DataType
+builtins.str"builtins.strz38z39z310j36j37j38j39j310rd
+	auto_open$http.client.HTTPConnection.auto_open
+builtins.int"builtins.int*36*37*38*39*310rf
+
+debuglevel%http.client.HTTPConnection.debuglevel
+builtins.int"builtins.int*36*37*38*39*310rj
+default_port'http.client.HTTPConnection.default_port
+builtins.int"builtins.int*36*37*38*39*310r™
+response_class)http.client.HTTPConnection.response_classX
+Type[http.client.HTTPResponse]4
+http.client.HTTPResponse"http.client.HTTPResponse*36*37*38*39*310ré
 timeout"http.client.HTTPConnection.timeoutJ
 Union[builtins.float,None] 
 builtins.float"builtins.float
-None*35*36*37*38*39*310r^
+None*36*37*38*39*310rZ
 hosthttp.client.HTTPConnection.host
-builtins.str"builtins.str*35*36*37*38*39*310r^
+builtins.str"builtins.str*36*37*38*39*310rZ
 porthttp.client.HTTPConnection.port
-builtins.int"builtins.int*35*36*37*38*39*310rI
-sockhttp.client.HTTPConnection.sock
-Any*35*36*37*38*39*310ï
-HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*˙
-__init__$http.client.HTTPSConnection.__init__"
-None*D
-self:
-http.client.HTTPSConnection"http.client.HTTPSConnection*&
-host
-builtins.str"builtins.str*P
-portD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *T
-key_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *U
-	cert_fileD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *≥
-source_addressú
-,Union[Tuple[builtins.str,builtins.int],None]`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int
-None *Y
-contextJ
-Union[ssl.SSLContext,None] 
-ssl.SSLContext"ssl.SSLContext
-None *]
-check_hostnameG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None z35z36*≤
+builtins.int"builtins.int*36*37*38*39*310rÉ
+sockhttp.client.HTTPConnection.sockE
+Union[socket.socket,Any]
+socket.socket"socket.socket
+Any*36*37*38*39*310ü	
+HTTPSConnectionhttp.client.HTTPSConnection"http.client.HTTPConnection*∂
 __init__$http.client.HTTPSConnection.__init__"
 None*D
 self:
@@ -815,21 +480,25 @@ QUnion[builtins.bytes,typing.IO[Any],typing.Iterable[builtins.bytes],builtins.st
 builtins.bool"builtins.bool
 None *-
 	blocksize
-builtins.int"builtins.int z37z38z39z310j35j36j37j38j39j310W
-HTTPExceptionhttp.client.HTTPException"builtins.Exceptionj35j36j37j38j39j310\
-NotConnectedhttp.client.NotConnected"http.client.HTTPExceptionj35j36j37j38j39j310X
+builtins.int"builtins.int z36z37z38z39z310j36j37j38j39j310rÑ
+sock http.client.HTTPSConnection.sockE
+Union[ssl.SSLSocket,Any]
+ssl.SSLSocket"ssl.SSLSocket
+Any*36*37*38*39*310S
+HTTPExceptionhttp.client.HTTPException"builtins.Exceptionj36j37j38j39j310X
+NotConnectedhttp.client.NotConnected"http.client.HTTPExceptionj36j37j38j39j310T
 
-InvalidURLhttp.client.InvalidURL"http.client.HTTPExceptionj35j36j37j38j39j310©
-UnknownProtocolhttp.client.UnknownProtocol"http.client.HTTPException*ƒ
+InvalidURLhttp.client.InvalidURL"http.client.HTTPExceptionj36j37j38j39j310°
+UnknownProtocolhttp.client.UnknownProtocol"http.client.HTTPException*¿
 __init__$http.client.UnknownProtocol.__init__"
 None*D
 self:
 http.client.UnknownProtocol"http.client.UnknownProtocol*)
 version
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310r
-UnknownTransferEncoding#http.client.UnknownTransferEncoding"http.client.HTTPExceptionj35j36j37j38j39j310n
-UnimplementedFileMode!http.client.UnimplementedFileMode"http.client.HTTPExceptionj35j36j37j38j39j310˛
-IncompleteReadhttp.client.IncompleteRead"http.client.HTTPException*õ
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310n
+UnknownTransferEncoding#http.client.UnknownTransferEncoding"http.client.HTTPExceptionj36j37j38j39j310j
+UnimplementedFileMode!http.client.UnimplementedFileMode"http.client.HTTPExceptionj36j37j38j39j310È
+IncompleteReadhttp.client.IncompleteRead"http.client.HTTPException*ó
 __init__#http.client.IncompleteRead.__init__"
 None*B
 self8
@@ -839,259 +508,165 @@ InvalidURLhttp.client.InvalidURL"http.client.HTTPExceptionj35j36j37j38j3
 expectedD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z35z36z37z38z39z310j35j36j37j38j39j310r
-ImproperConnectionState#http.client.ImproperConnectionState"http.client.HTTPExceptionj35j36j37j38j39j310p
-CannotSendRequesthttp.client.CannotSendRequest"#http.client.ImproperConnectionStatej35j36j37j38j39j310n
-CannotSendHeaderhttp.client.CannotSendHeader"#http.client.ImproperConnectionStatej35j36j37j38j39j310n
-ResponseNotReadyhttp.client.ResponseNotReady"#http.client.ImproperConnectionStatej35j36j37j38j39j310ú
-BadStatusLinehttp.client.BadStatusLine"http.client.HTTPException*ª
+None z36z37z38z39z310j36j37j38j39j310rd
+partial"http.client.IncompleteRead.partial 
+builtins.bytes"builtins.bytes*36*37*38*39*310rä
+expected#http.client.IncompleteRead.expectedD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*36*37*38*39*310n
+ImproperConnectionState#http.client.ImproperConnectionState"http.client.HTTPExceptionj36j37j38j39j310l
+CannotSendRequesthttp.client.CannotSendRequest"#http.client.ImproperConnectionStatej36j37j38j39j310j
+CannotSendHeaderhttp.client.CannotSendHeader"#http.client.ImproperConnectionStatej36j37j38j39j310j
+ResponseNotReadyhttp.client.ResponseNotReady"#http.client.ImproperConnectionStatej36j37j38j39j310î
+BadStatusLinehttp.client.BadStatusLine"http.client.HTTPException*∑
 __init__"http.client.BadStatusLine.__init__"
 None*@
 self6
 http.client.BadStatusLine"http.client.BadStatusLine*&
 line
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310ó
-LineTooLonghttp.client.LineTooLong"http.client.HTTPException*∫
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310è
+LineTooLonghttp.client.LineTooLong"http.client.HTTPException*∂
 __init__ http.client.LineTooLong.__init__"
 None*<
 self2
 http.client.LineTooLong"http.client.LineTooLong*+
 	line_type
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310á
-RemoteDisconnectedhttp.client.RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLinej35j36j37j38j39j310Ç
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310É
+RemoteDisconnectedhttp.client.RemoteDisconnected"builtins.ConnectionResetError"http.client.BadStatusLinej36j37j38j39j310‚
+HTTPMessagehttp.client.HTTPMessage"email.message.Message*ç
+getallmatchingheaders-http.client.HTTPMessage.getallmatchingheaders"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*<
+self2
+http.client.HTTPMessage"http.client.HTTPMessage*&
+name
+builtins.str"builtins.strz36z37z38z39z310j36j37j38j39j310˛
 parse_headershttp.client.parse_headers"2
 http.client.HTTPMessage"http.client.HTTPMessage*.
 fp&
 io.BufferedIOBase"io.BufferedIOBase*Y
 _classK
 CallableType[builtins.function]&
-builtins.function"builtins.function z35z36z37z38z39z310*#
-errorhttplib.error
-Any*27*ô
-	responseshttplib.responsesu
-(builtins.dict[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict*27*@
-	HTTP_PORThttplib.HTTP_PORT
-builtins.int"builtins.int*27*B
-
-HTTPS_PORThttplib.HTTPS_PORT
-builtins.int"builtins.int*27*>
-CONTINUEhttplib.CONTINUE
-builtins.int"builtins.int*27*T
-SWITCHING_PROTOCOLShttplib.SWITCHING_PROTOCOLS
-builtins.int"builtins.int*27*B
-
-PROCESSINGhttplib.PROCESSING
-builtins.int"builtins.int*27*2
-OK
-httplib.OK
-builtins.int"builtins.int*27*<
-CREATEDhttplib.CREATED
-builtins.int"builtins.int*27*>
-ACCEPTEDhttplib.ACCEPTED
-builtins.int"builtins.int*27*h
-NON_AUTHORITATIVE_INFORMATION%httplib.NON_AUTHORITATIVE_INFORMATION
-builtins.int"builtins.int*27*B
-
-NO_CONTENThttplib.NO_CONTENT
-builtins.int"builtins.int*27*H
-RESET_CONTENThttplib.RESET_CONTENT
-builtins.int"builtins.int*27*L
-PARTIAL_CONTENThttplib.PARTIAL_CONTENT
-builtins.int"builtins.int*27*F
-MULTI_STATUShttplib.MULTI_STATUS
-builtins.int"builtins.int*27*<
-IM_USEDhttplib.IM_USED
-builtins.int"builtins.int*27*N
-MULTIPLE_CHOICEShttplib.MULTIPLE_CHOICES
-builtins.int"builtins.int*27*P
-MOVED_PERMANENTLYhttplib.MOVED_PERMANENTLY
-builtins.int"builtins.int*27*8
-FOUNDhttplib.FOUND
-builtins.int"builtins.int*27*@
-	SEE_OTHERhttplib.SEE_OTHER
-builtins.int"builtins.int*27*F
-NOT_MODIFIEDhttplib.NOT_MODIFIED
-builtins.int"builtins.int*27*@
-	USE_PROXYhttplib.USE_PROXY
-builtins.int"builtins.int*27*R
-TEMPORARY_REDIRECThttplib.TEMPORARY_REDIRECT
-builtins.int"builtins.int*27*D
-BAD_REQUESThttplib.BAD_REQUEST
-builtins.int"builtins.int*27*F
-UNAUTHORIZEDhttplib.UNAUTHORIZED
-builtins.int"builtins.int*27*N
-PAYMENT_REQUIREDhttplib.PAYMENT_REQUIRED
-builtins.int"builtins.int*27*@
-	FORBIDDENhttplib.FORBIDDEN
-builtins.int"builtins.int*27*@
-	NOT_FOUNDhttplib.NOT_FOUND
-builtins.int"builtins.int*27*R
-METHOD_NOT_ALLOWEDhttplib.METHOD_NOT_ALLOWED
-builtins.int"builtins.int*27*J
-NOT_ACCEPTABLEhttplib.NOT_ACCEPTABLE
-builtins.int"builtins.int*27*h
-PROXY_AUTHENTICATION_REQUIRED%httplib.PROXY_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*27*L
-REQUEST_TIMEOUThttplib.REQUEST_TIMEOUT
-builtins.int"builtins.int*27*>
-CONFLICThttplib.CONFLICT
-builtins.int"builtins.int*27*6
-GONEhttplib.GONE
-builtins.int"builtins.int*27*L
-LENGTH_REQUIREDhttplib.LENGTH_REQUIRED
-builtins.int"builtins.int*27*T
-PRECONDITION_FAILEDhttplib.PRECONDITION_FAILED
-builtins.int"builtins.int*27*^
-REQUEST_ENTITY_TOO_LARGE httplib.REQUEST_ENTITY_TOO_LARGE
-builtins.int"builtins.int*27*V
-REQUEST_URI_TOO_LONGhttplib.REQUEST_URI_TOO_LONG
-builtins.int"builtins.int*27*Z
-UNSUPPORTED_MEDIA_TYPEhttplib.UNSUPPORTED_MEDIA_TYPE
-builtins.int"builtins.int*27*l
-REQUESTED_RANGE_NOT_SATISFIABLE'httplib.REQUESTED_RANGE_NOT_SATISFIABLE
-builtins.int"builtins.int*27*R
-EXPECTATION_FAILEDhttplib.EXPECTATION_FAILED
-builtins.int"builtins.int*27*V
-UNPROCESSABLE_ENTITYhttplib.UNPROCESSABLE_ENTITY
-builtins.int"builtins.int*27*:
-LOCKEDhttplib.LOCKED
-builtins.int"builtins.int*27*P
-FAILED_DEPENDENCYhttplib.FAILED_DEPENDENCY
-builtins.int"builtins.int*27*N
-UPGRADE_REQUIREDhttplib.UPGRADE_REQUIRED
-builtins.int"builtins.int*27*X
-INTERNAL_SERVER_ERRORhttplib.INTERNAL_SERVER_ERROR
-builtins.int"builtins.int*27*L
-NOT_IMPLEMENTEDhttplib.NOT_IMPLEMENTED
-builtins.int"builtins.int*27*D
-BAD_GATEWAYhttplib.BAD_GATEWAY
-builtins.int"builtins.int*27*T
-SERVICE_UNAVAILABLEhttplib.SERVICE_UNAVAILABLE
-builtins.int"builtins.int*27*L
-GATEWAY_TIMEOUThttplib.GATEWAY_TIMEOUT
-builtins.int"builtins.int*27*b
-HTTP_VERSION_NOT_SUPPORTED"httplib.HTTP_VERSION_NOT_SUPPORTED
-builtins.int"builtins.int*27*V
-INSUFFICIENT_STORAGEhttplib.INSUFFICIENT_STORAGE
-builtins.int"builtins.int*27*F
-NOT_EXTENDEDhttplib.NOT_EXTENDED
-builtins.int"builtins.int*27*Y
-	HTTP_PORThttp.client.HTTP_PORT
-builtins.int"builtins.int*35*36*37*38*39*310*[
-
-HTTPS_PORThttp.client.HTTPS_PORT
-builtins.int"builtins.int*35*36*37*38*39*310*W
-CONTINUEhttp.client.CONTINUE
-builtins.int"builtins.int*35*36*37*38*39*310*m
-SWITCHING_PROTOCOLShttp.client.SWITCHING_PROTOCOLS
-builtins.int"builtins.int*35*36*37*38*39*310*[
-
-PROCESSINGhttp.client.PROCESSING
-builtins.int"builtins.int*35*36*37*38*39*310*K
-OKhttp.client.OK
-builtins.int"builtins.int*35*36*37*38*39*310*U
-CREATEDhttp.client.CREATED
-builtins.int"builtins.int*35*36*37*38*39*310*W
-ACCEPTEDhttp.client.ACCEPTED
-builtins.int"builtins.int*35*36*37*38*39*310*Å
-NON_AUTHORITATIVE_INFORMATION)http.client.NON_AUTHORITATIVE_INFORMATION
-builtins.int"builtins.int*35*36*37*38*39*310*[
-
-NO_CONTENThttp.client.NO_CONTENT
-builtins.int"builtins.int*35*36*37*38*39*310*a
-RESET_CONTENThttp.client.RESET_CONTENT
-builtins.int"builtins.int*35*36*37*38*39*310*e
-PARTIAL_CONTENThttp.client.PARTIAL_CONTENT
-builtins.int"builtins.int*35*36*37*38*39*310*_
-MULTI_STATUShttp.client.MULTI_STATUS
-builtins.int"builtins.int*35*36*37*38*39*310*U
-IM_USEDhttp.client.IM_USED
-builtins.int"builtins.int*35*36*37*38*39*310*g
-MULTIPLE_CHOICEShttp.client.MULTIPLE_CHOICES
-builtins.int"builtins.int*35*36*37*38*39*310*i
-MOVED_PERMANENTLYhttp.client.MOVED_PERMANENTLY
-builtins.int"builtins.int*35*36*37*38*39*310*Q
-FOUNDhttp.client.FOUND
-builtins.int"builtins.int*35*36*37*38*39*310*Y
-	SEE_OTHERhttp.client.SEE_OTHER
-builtins.int"builtins.int*35*36*37*38*39*310*_
-NOT_MODIFIEDhttp.client.NOT_MODIFIED
-builtins.int"builtins.int*35*36*37*38*39*310*Y
-	USE_PROXYhttp.client.USE_PROXY
-builtins.int"builtins.int*35*36*37*38*39*310*k
-TEMPORARY_REDIRECThttp.client.TEMPORARY_REDIRECT
-builtins.int"builtins.int*35*36*37*38*39*310*]
-BAD_REQUESThttp.client.BAD_REQUEST
-builtins.int"builtins.int*35*36*37*38*39*310*_
-UNAUTHORIZEDhttp.client.UNAUTHORIZED
-builtins.int"builtins.int*35*36*37*38*39*310*g
-PAYMENT_REQUIREDhttp.client.PAYMENT_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*Y
-	FORBIDDENhttp.client.FORBIDDEN
-builtins.int"builtins.int*35*36*37*38*39*310*Y
-	NOT_FOUNDhttp.client.NOT_FOUND
-builtins.int"builtins.int*35*36*37*38*39*310*k
-METHOD_NOT_ALLOWEDhttp.client.METHOD_NOT_ALLOWED
-builtins.int"builtins.int*35*36*37*38*39*310*c
-NOT_ACCEPTABLEhttp.client.NOT_ACCEPTABLE
-builtins.int"builtins.int*35*36*37*38*39*310*Å
-PROXY_AUTHENTICATION_REQUIRED)http.client.PROXY_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*e
-REQUEST_TIMEOUThttp.client.REQUEST_TIMEOUT
-builtins.int"builtins.int*35*36*37*38*39*310*W
-CONFLICThttp.client.CONFLICT
-builtins.int"builtins.int*35*36*37*38*39*310*O
-GONEhttp.client.GONE
-builtins.int"builtins.int*35*36*37*38*39*310*e
-LENGTH_REQUIREDhttp.client.LENGTH_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*m
-PRECONDITION_FAILEDhttp.client.PRECONDITION_FAILED
-builtins.int"builtins.int*35*36*37*38*39*310*w
-REQUEST_ENTITY_TOO_LARGE$http.client.REQUEST_ENTITY_TOO_LARGE
-builtins.int"builtins.int*35*36*37*38*39*310*o
-REQUEST_URI_TOO_LONG http.client.REQUEST_URI_TOO_LONG
-builtins.int"builtins.int*35*36*37*38*39*310*s
-UNSUPPORTED_MEDIA_TYPE"http.client.UNSUPPORTED_MEDIA_TYPE
-builtins.int"builtins.int*35*36*37*38*39*310*Ö
-REQUESTED_RANGE_NOT_SATISFIABLE+http.client.REQUESTED_RANGE_NOT_SATISFIABLE
-builtins.int"builtins.int*35*36*37*38*39*310*k
-EXPECTATION_FAILEDhttp.client.EXPECTATION_FAILED
-builtins.int"builtins.int*35*36*37*38*39*310*o
-UNPROCESSABLE_ENTITY http.client.UNPROCESSABLE_ENTITY
-builtins.int"builtins.int*35*36*37*38*39*310*S
-LOCKEDhttp.client.LOCKED
-builtins.int"builtins.int*35*36*37*38*39*310*i
-FAILED_DEPENDENCYhttp.client.FAILED_DEPENDENCY
-builtins.int"builtins.int*35*36*37*38*39*310*g
-UPGRADE_REQUIREDhttp.client.UPGRADE_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*q
-PRECONDITION_REQUIRED!http.client.PRECONDITION_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*i
-TOO_MANY_REQUESTShttp.client.TOO_MANY_REQUESTS
-builtins.int"builtins.int*35*36*37*38*39*310*Ö
-REQUEST_HEADER_FIELDS_TOO_LARGE+http.client.REQUEST_HEADER_FIELDS_TOO_LARGE
-builtins.int"builtins.int*35*36*37*38*39*310*q
-INTERNAL_SERVER_ERROR!http.client.INTERNAL_SERVER_ERROR
-builtins.int"builtins.int*35*36*37*38*39*310*e
-NOT_IMPLEMENTEDhttp.client.NOT_IMPLEMENTED
-builtins.int"builtins.int*35*36*37*38*39*310*]
-BAD_GATEWAYhttp.client.BAD_GATEWAY
-builtins.int"builtins.int*35*36*37*38*39*310*m
-SERVICE_UNAVAILABLEhttp.client.SERVICE_UNAVAILABLE
-builtins.int"builtins.int*35*36*37*38*39*310*e
-GATEWAY_TIMEOUThttp.client.GATEWAY_TIMEOUT
-builtins.int"builtins.int*35*36*37*38*39*310*{
-HTTP_VERSION_NOT_SUPPORTED&http.client.HTTP_VERSION_NOT_SUPPORTED
-builtins.int"builtins.int*35*36*37*38*39*310*o
-INSUFFICIENT_STORAGE http.client.INSUFFICIENT_STORAGE
-builtins.int"builtins.int*35*36*37*38*39*310*_
-NOT_EXTENDEDhttp.client.NOT_EXTENDED
-builtins.int"builtins.int*35*36*37*38*39*310*Ö
-NETWORK_AUTHENTICATION_REQUIRED+http.client.NETWORK_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*35*36*37*38*39*310*≤
+builtins.function"builtins.function z36z37z38z39z310*¶
+__annotations__%six.moves.http_client.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*Æ
 	responseshttp.client.responsesu
 (builtins.dict[builtins.int,builtins.str]
 builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict*35*36*37*38*39*310
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310*S
+ACCEPTEDhttp.client.ACCEPTED
+builtins.int"builtins.int*36*37*38*39*310*Y
+BAD_GATEWAYhttp.client.BAD_GATEWAY
+builtins.int"builtins.int*36*37*38*39*310*Y
+BAD_REQUESThttp.client.BAD_REQUEST
+builtins.int"builtins.int*36*37*38*39*310*S
+CONFLICThttp.client.CONFLICT
+builtins.int"builtins.int*36*37*38*39*310*S
+CONTINUEhttp.client.CONTINUE
+builtins.int"builtins.int*36*37*38*39*310*Q
+CREATEDhttp.client.CREATED
+builtins.int"builtins.int*36*37*38*39*310*g
+EXPECTATION_FAILEDhttp.client.EXPECTATION_FAILED
+builtins.int"builtins.int*36*37*38*39*310*e
+FAILED_DEPENDENCYhttp.client.FAILED_DEPENDENCY
+builtins.int"builtins.int*36*37*38*39*310*U
+	FORBIDDENhttp.client.FORBIDDEN
+builtins.int"builtins.int*36*37*38*39*310*M
+FOUNDhttp.client.FOUND
+builtins.int"builtins.int*36*37*38*39*310*a
+GATEWAY_TIMEOUThttp.client.GATEWAY_TIMEOUT
+builtins.int"builtins.int*36*37*38*39*310*K
+GONEhttp.client.GONE
+builtins.int"builtins.int*36*37*38*39*310*U
+	HTTP_PORThttp.client.HTTP_PORT
+builtins.int"builtins.int*36*37*38*39*310*w
+HTTP_VERSION_NOT_SUPPORTED&http.client.HTTP_VERSION_NOT_SUPPORTED
+builtins.int"builtins.int*36*37*38*39*310*W
+
+HTTPS_PORThttp.client.HTTPS_PORT
+builtins.int"builtins.int*36*37*38*39*310*Q
+IM_USEDhttp.client.IM_USED
+builtins.int"builtins.int*36*37*38*39*310*k
+INSUFFICIENT_STORAGE http.client.INSUFFICIENT_STORAGE
+builtins.int"builtins.int*36*37*38*39*310*m
+INTERNAL_SERVER_ERROR!http.client.INTERNAL_SERVER_ERROR
+builtins.int"builtins.int*36*37*38*39*310*a
+LENGTH_REQUIREDhttp.client.LENGTH_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*O
+LOCKEDhttp.client.LOCKED
+builtins.int"builtins.int*36*37*38*39*310*g
+METHOD_NOT_ALLOWEDhttp.client.METHOD_NOT_ALLOWED
+builtins.int"builtins.int*36*37*38*39*310*e
+MOVED_PERMANENTLYhttp.client.MOVED_PERMANENTLY
+builtins.int"builtins.int*36*37*38*39*310*[
+MULTI_STATUShttp.client.MULTI_STATUS
+builtins.int"builtins.int*36*37*38*39*310*c
+MULTIPLE_CHOICEShttp.client.MULTIPLE_CHOICES
+builtins.int"builtins.int*36*37*38*39*310*Å
+NETWORK_AUTHENTICATION_REQUIRED+http.client.NETWORK_AUTHENTICATION_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*W
+
+NO_CONTENThttp.client.NO_CONTENT
+builtins.int"builtins.int*36*37*38*39*310*}
+NON_AUTHORITATIVE_INFORMATION)http.client.NON_AUTHORITATIVE_INFORMATION
+builtins.int"builtins.int*36*37*38*39*310*_
+NOT_ACCEPTABLEhttp.client.NOT_ACCEPTABLE
+builtins.int"builtins.int*36*37*38*39*310*[
+NOT_EXTENDEDhttp.client.NOT_EXTENDED
+builtins.int"builtins.int*36*37*38*39*310*U
+	NOT_FOUNDhttp.client.NOT_FOUND
+builtins.int"builtins.int*36*37*38*39*310*a
+NOT_IMPLEMENTEDhttp.client.NOT_IMPLEMENTED
+builtins.int"builtins.int*36*37*38*39*310*[
+NOT_MODIFIEDhttp.client.NOT_MODIFIED
+builtins.int"builtins.int*36*37*38*39*310*G
+OKhttp.client.OK
+builtins.int"builtins.int*36*37*38*39*310*a
+PARTIAL_CONTENThttp.client.PARTIAL_CONTENT
+builtins.int"builtins.int*36*37*38*39*310*c
+PAYMENT_REQUIREDhttp.client.PAYMENT_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*i
+PRECONDITION_FAILEDhttp.client.PRECONDITION_FAILED
+builtins.int"builtins.int*36*37*38*39*310*m
+PRECONDITION_REQUIRED!http.client.PRECONDITION_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*W
+
+PROCESSINGhttp.client.PROCESSING
+builtins.int"builtins.int*36*37*38*39*310*}
+PROXY_AUTHENTICATION_REQUIRED)http.client.PROXY_AUTHENTICATION_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*s
+REQUEST_ENTITY_TOO_LARGE$http.client.REQUEST_ENTITY_TOO_LARGE
+builtins.int"builtins.int*36*37*38*39*310*Å
+REQUEST_HEADER_FIELDS_TOO_LARGE+http.client.REQUEST_HEADER_FIELDS_TOO_LARGE
+builtins.int"builtins.int*36*37*38*39*310*a
+REQUEST_TIMEOUThttp.client.REQUEST_TIMEOUT
+builtins.int"builtins.int*36*37*38*39*310*k
+REQUEST_URI_TOO_LONG http.client.REQUEST_URI_TOO_LONG
+builtins.int"builtins.int*36*37*38*39*310*Å
+REQUESTED_RANGE_NOT_SATISFIABLE+http.client.REQUESTED_RANGE_NOT_SATISFIABLE
+builtins.int"builtins.int*36*37*38*39*310*]
+RESET_CONTENThttp.client.RESET_CONTENT
+builtins.int"builtins.int*36*37*38*39*310*U
+	SEE_OTHERhttp.client.SEE_OTHER
+builtins.int"builtins.int*36*37*38*39*310*i
+SERVICE_UNAVAILABLEhttp.client.SERVICE_UNAVAILABLE
+builtins.int"builtins.int*36*37*38*39*310*i
+SWITCHING_PROTOCOLShttp.client.SWITCHING_PROTOCOLS
+builtins.int"builtins.int*36*37*38*39*310*g
+TEMPORARY_REDIRECThttp.client.TEMPORARY_REDIRECT
+builtins.int"builtins.int*36*37*38*39*310*e
+TOO_MANY_REQUESTShttp.client.TOO_MANY_REQUESTS
+builtins.int"builtins.int*36*37*38*39*310*[
+UNAUTHORIZEDhttp.client.UNAUTHORIZED
+builtins.int"builtins.int*36*37*38*39*310*k
+UNPROCESSABLE_ENTITY http.client.UNPROCESSABLE_ENTITY
+builtins.int"builtins.int*36*37*38*39*310*o
+UNSUPPORTED_MEDIA_TYPE"http.client.UNSUPPORTED_MEDIA_TYPE
+builtins.int"builtins.int*36*37*38*39*310*c
+UPGRADE_REQUIREDhttp.client.UPGRADE_REQUIRED
+builtins.int"builtins.int*36*37*38*39*310*U
+	USE_PROXYhttp.client.USE_PROXY
+builtins.int"builtins.int*36*37*38*39*310

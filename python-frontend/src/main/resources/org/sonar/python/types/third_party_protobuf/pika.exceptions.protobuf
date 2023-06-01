@@ -1,0 +1,93 @@
+
+pika.exceptionsO
+	AMQPErrorpika.exceptions.AMQPError"builtins.Exceptionj36j37j38j39j310j
+AMQPConnectionError#pika.exceptions.AMQPConnectionError"pika.exceptions.AMQPErrorj36j37j38j39j310x
+ConnectionOpenAborted%pika.exceptions.ConnectionOpenAborted"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310l
+StreamLostErrorpika.exceptions.StreamLostError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310€
+IncompatibleProtocolError)pika.exceptions.IncompatibleProtocolError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310t
+AuthenticationError#pika.exceptions.AuthenticationError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310„
+ProbableAuthenticationError+pika.exceptions.ProbableAuthenticationError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310€
+ProbableAccessDeniedError)pika.exceptions.ProbableAccessDeniedError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310j
+NoFreeChannelspika.exceptions.NoFreeChannels"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310€
+ConnectionWrongStateError)pika.exceptions.ConnectionWrongStateError"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310—
+ConnectionClosed pika.exceptions.ConnectionClosed"#pika.exceptions.AMQPConnectionError*Ö
+__init__)pika.exceptions.ConnectionClosed.__init__"
+None*N
+selfD
+ pika.exceptions.ConnectionClosed" pika.exceptions.ConnectionClosed*
+
+reply_code
+Any*
+
+reply_text
+Anyz36z37z38z39z310*f
+
+reply_code+pika.exceptions.ConnectionClosed.reply_code*
+self0:property`z36z37z38z39z310*f
+
+reply_text+pika.exceptions.ConnectionClosed.reply_text*
+self0:property`z36z37z38z39z310j36j37j38j39j310{
+ConnectionClosedByBroker(pika.exceptions.ConnectionClosedByBroker" pika.exceptions.ConnectionClosedj36j37j38j39j310{
+ConnectionClosedByClient(pika.exceptions.ConnectionClosedByClient" pika.exceptions.ConnectionClosedj36j37j38j39j310~
+ConnectionBlockedTimeout(pika.exceptions.ConnectionBlockedTimeout"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310v
+AMQPHeartbeatTimeout$pika.exceptions.AMQPHeartbeatTimeout"#pika.exceptions.AMQPConnectionErrorj36j37j38j39j310d
+AMQPChannelError pika.exceptions.AMQPChannelError"pika.exceptions.AMQPErrorj36j37j38j39j310w
+ChannelWrongStateError&pika.exceptions.ChannelWrongStateError" pika.exceptions.AMQPChannelErrorj36j37j38j39j310ÿ
+ChannelClosedpika.exceptions.ChannelClosed" pika.exceptions.AMQPChannelError*Í
+__init__&pika.exceptions.ChannelClosed.__init__"
+None*H
+self>
+pika.exceptions.ChannelClosed"pika.exceptions.ChannelClosed*
+
+reply_code
+Any*
+
+reply_text
+Anyz36z37z38z39z310*c
+
+reply_code(pika.exceptions.ChannelClosed.reply_code*
+self0:property`z36z37z38z39z310*c
+
+reply_text(pika.exceptions.ChannelClosed.reply_text*
+self0:property`z36z37z38z39z310j36j37j38j39j310r
+ChannelClosedByBroker%pika.exceptions.ChannelClosedByBroker"pika.exceptions.ChannelClosedj36j37j38j39j310r
+ChannelClosedByClient%pika.exceptions.ChannelClosedByClient"pika.exceptions.ChannelClosedj36j37j38j39j310s
+DuplicateConsumerTag$pika.exceptions.DuplicateConsumerTag" pika.exceptions.AMQPChannelErrorj36j37j38j39j310m
+ConsumerCancelled!pika.exceptions.ConsumerCancelled" pika.exceptions.AMQPChannelErrorj36j37j38j39j310¢
+UnroutableErrorpika.exceptions.UnroutableError" pika.exceptions.AMQPChannelError*¸
+__init__(pika.exceptions.UnroutableError.__init__"
+None*L
+selfB
+pika.exceptions.UnroutableError"pika.exceptions.UnroutableError*
+messages
+Anyz36z37z38z39z310j36j37j38j39j310r|
+messages(pika.exceptions.UnroutableError.messages1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310þ
+	NackErrorpika.exceptions.NackError" pika.exceptions.AMQPChannelError*¦
+__init__"pika.exceptions.NackError.__init__"
+None*@
+self6
+pika.exceptions.NackError"pika.exceptions.NackError*
+messages
+Anyz36z37z38z39z310j36j37j38j39j310rv
+messages"pika.exceptions.NackError.messages1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310l
+InvalidChannelNumber$pika.exceptions.InvalidChannelNumber"pika.exceptions.AMQPErrorj36j37j38j39j310j
+ProtocolSyntaxError#pika.exceptions.ProtocolSyntaxError"pika.exceptions.AMQPErrorj36j37j38j39j310v
+UnexpectedFrameError$pika.exceptions.UnexpectedFrameError"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310|
+ProtocolVersionMismatch'pika.exceptions.ProtocolVersionMismatch"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310n
+BodyTooLongError pika.exceptions.BodyTooLongError"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310p
+InvalidFrameError!pika.exceptions.InvalidFrameError"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310€
+InvalidFieldTypeException)pika.exceptions.InvalidFieldTypeException"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310ˆ
+UnsupportedAMQPFieldException-pika.exceptions.UnsupportedAMQPFieldException"#pika.exceptions.ProtocolSyntaxErrorj36j37j38j39j310l
+MethodNotImplemented$pika.exceptions.MethodNotImplemented"pika.exceptions.AMQPErrorj36j37j38j39j310U
+ChannelErrorpika.exceptions.ChannelError"builtins.Exceptionj36j37j38j39j310[
+ReentrancyErrorpika.exceptions.ReentrancyError"builtins.Exceptionj36j37j38j39j310h
+ShortStringTooLong"pika.exceptions.ShortStringTooLong"pika.exceptions.AMQPErrorj36j37j38j39j310s
+DuplicateGetOkCallback&pika.exceptions.DuplicateGetOkCallback"pika.exceptions.ChannelErrorj36j37j38j39j310* 
+__annotations__pika.exceptions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310
