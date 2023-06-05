@@ -241,7 +241,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
       expression = ((CallExpression) expression).callee();
     }
     TreeUtils.getSymbolFromTree(expression).ifPresent(symbol -> {
-      if (isSymbol(symbol, "flask_cors.cross_origin")) {
+      if (isSymbol(symbol, "flask_cors.decorator.cross_origin")) {
         ArgList arguments = decorator.arguments();
         if (arguments == null) {
           ctx.addIssue(decorator, MESSAGE);
@@ -306,7 +306,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
   private static void checkFlaskCorsCall(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (!isSymbol(calleeSymbol, "flask_cors.CORS")) {
+    if (!isSymbol(calleeSymbol, "flask_cors.extension.CORS")) {
       return;
     }
 
