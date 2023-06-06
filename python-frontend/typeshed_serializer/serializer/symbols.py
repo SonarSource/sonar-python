@@ -105,6 +105,9 @@ class TypeDescriptor:
         elif isinstance(_type, mpt.TypeVarType):
             self.kind = TypeKind.TYPE_VAR
             self.pretty_printed_name = _type.fullname
+            upper_bound = TypeDescriptor(_type.upper_bound)
+            self.args.append(upper_bound)
+            self.fully_qualified_name = upper_bound.fully_qualified_name
         elif isinstance(_type, mpt.AnyType):
             self.kind = TypeKind.ANY
             self.pretty_printed_name = "Any"

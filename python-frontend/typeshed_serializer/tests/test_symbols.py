@@ -25,6 +25,8 @@ import pytest
 from serializer import symbols
 import mypy.nodes as mpn
 
+OBJECT_FQN = "builtins.object"
+
 
 def test_module_symbol(typeshed_stdlib):
     abc_module = typeshed_stdlib.files.get("abc")
@@ -51,16 +53,25 @@ def test_module_symbol(typeshed_stdlib):
     assert ("os.path", "path") in imported_modules
 
 
-def test_self_defined_symbol(fake_module_self_defined_symbol):
-    module_symbol = symbols.ModuleSymbol(fake_module_self_defined_symbol)
-    assert module_symbol.fullname == "fakemodule_self_defined_symbol"
-    assert len(module_symbol.classes) == 1
-    assert len(module_symbol.functions) == 0
+def test_self_defined_symbol(fake_module_typing_features):
+    module_symbol = symbols.ModuleSymbol(fake_module_typing_features)
+    assert module_symbol.fullname == "fakemodule_typing_features"
+    assert len(module_symbol.classes) == 2
+    assert len(module_symbol.functions) == 1
 
     pb_module = module_symbol.to_proto()
-    assert pb_module.fully_qualified_name == "fakemodule_self_defined_symbol"
-    assert len(pb_module.classes) == 1
-    assert len(pb_module.functions) == 0
+    assert pb_module.fully_qualified_name == "fakemodule_typing_features"
+    assert len(pb_module.classes) == 2
+    assert len(pb_module.functions) == 1
+
+
+def test_typevar(fake_module_typing_features):
+    module_symbol = symbols.ModuleSymbol(fake_module_typing_features)
+    for func_def in module_symbol.overloaded_functions[0].definitions:
+        assert func_def.return_type.fully_qualified_name == "fakemodule_typing_features.MyClassWithTypeVar"
+    func = module_symbol.functions[0]
+    assert func.return_type.fully_qualified_name == OBJECT_FQN
+
 
 def test_class_symbol(typeshed_stdlib):
     mypy_cmd_module = typeshed_stdlib.files.get("cmd")
@@ -68,14 +79,14 @@ def test_class_symbol(typeshed_stdlib):
     cmd_class_symbol = symbols.ClassSymbol(mypy_cmd_class.node)
     assert cmd_class_symbol.fullname == "cmd.Cmd"
     assert cmd_class_symbol.name == "Cmd"
-    assert cmd_class_symbol.super_classes == ["builtins.object"]
+    assert cmd_class_symbol.super_classes == [OBJECT_FQN]
     assert len(cmd_class_symbol.methods) == 18
     assert len(cmd_class_symbol.vars) == 17
 
     pb_class_symbol = cmd_class_symbol.to_proto()
     assert pb_class_symbol.name == "Cmd"
     assert pb_class_symbol.fully_qualified_name == "cmd.Cmd"
-    assert cmd_class_symbol.super_classes == ["builtins.object"]
+    assert cmd_class_symbol.super_classes == [OBJECT_FQN]
 
 
 def test_function_symbol(typeshed_stdlib):
@@ -111,7 +122,6 @@ def test_function_symbol(typeshed_stdlib):
     assert pb_func.return_annotation.pretty_printed_name == "builtins.list[builtins.str]"
     assert len(pb_func.resolved_decorator_names) == 0
 
-
     mypy_cmd_loop_method_node = mypy_cmd_class_node.names.get("cmdloop").node
     cmd_loop = symbols.FunctionSymbol(mypy_cmd_loop_method_node)
     assert cmd_loop.name == "cmdloop"
@@ -122,6 +132,7 @@ def test_function_symbol(typeshed_stdlib):
     intro_param = cmd_loop.parameters[1]
     assert intro_param.has_default
     assert intro_param.kind == symbols.ParamKind.POSITIONAL_OR_KEYWORD
+
 
 def test_overloaded_functions(typeshed_stdlib):
     sys_module_symbol = symbols.ModuleSymbol(typeshed_stdlib.files.get("subprocess"))
@@ -147,6 +158,7 @@ def test_overloaded_functions(typeshed_stdlib):
     assert overloaded_func_proto2.name == "run"
     assert overloaded_func_proto2.fullname == "subprocess.run"
     assert len(overloaded_func_proto2.definitions) == 6
+
 
 def test_save_module(typeshed_stdlib):
     mock_open = mock.mock_open(read_data='some data from opened file')
