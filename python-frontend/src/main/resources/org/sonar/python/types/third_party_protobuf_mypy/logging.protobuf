@@ -79,7 +79,7 @@ Ebuiltins.dict[builtins.str,Union[logging.Logger,logging.PlaceHolder]]
 +Union[CallableType[builtins.function],None]K
 CallableType[builtins.function]&
 builtins.function"builtins.function
-Noneá¡
+NoneÅ¢
 Loggerlogging.Logger"logging.Filterer*³
 __init__logging.Logger.__init__"
 None**
@@ -110,11 +110,13 @@ Ebuiltins.dict[builtins.str,Union[logging.Logger,logging.PlaceHolder]]
 getEffectiveLevel logging.Logger.getEffectiveLevel"
 builtins.int"builtins.int**
 self 
-logging.Logger"logging.Logger*‰
-getChildlogging.Logger.getChild"
-logging.Logger.Self*!
-self
-logging.Logger.Self*(
+logging.Logger"logging.Logger*í
+getChildlogging.Logger.getChild"I
+logging.Logger.Self 
+logging.Logger"logging.Logger"logging.Logger*S
+selfI
+logging.Logger.Self 
+logging.Logger"logging.Logger"logging.Logger*(
 suffix
 builtins.str"builtins.str*Š
 debuglogging.Logger.debug"
@@ -982,43 +984,59 @@ stack_infologging.LogRecord.stack_infoD
 threadNamelogging.LogRecord.threadNameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None¥’
-LoggerAdapterlogging.LoggerAdapter"builtins.object*µ
+None÷§
+LoggerAdapterlogging.LoggerAdapter"builtins.object*è
 __init__logging.LoggerAdapter.__init__"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*
-logger
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*²
+logger¥
 
-logging._L*Œ
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter*Œ
 extra€
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mapping*°
+builtins.object"builtins.object"typing.Mapping*Ê
 processlogging.LoggerAdapter.process"¨
 2Tuple[Any,typing.MutableMapping[builtins.str,Any]]
 Anyg
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.MutableMapping*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+Any"typing.MutableMapping*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*
 msg
 Any*s
 kwargsg
 'typing.MutableMapping[builtins.str,Any]
 builtins.str"builtins.str
-Any"typing.MutableMapping*ë
+Any"typing.MutableMapping*…
 debuglogging.LoggerAdapter.debug"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1055,13 +1073,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*é
+builtins.object"builtins.object*ƒ
 infologging.LoggerAdapter.info"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1098,13 +1120,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*ï
+builtins.object"builtins.object*‰
 warninglogging.LoggerAdapter.warning"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1141,13 +1167,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*é
+builtins.object"builtins.object*ƒ
 warnlogging.LoggerAdapter.warn"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1184,13 +1214,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*ë
+builtins.object"builtins.object*…
 errorlogging.LoggerAdapter.error"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1227,13 +1261,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*ó
+builtins.object"builtins.object*
 	exceptionlogging.LoggerAdapter.exception"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1270,13 +1308,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*ñ
+builtins.object"builtins.object*‹
 criticallogging.LoggerAdapter.critical"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*+
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*+
 msg"
 builtins.object"builtins.object*,
 args"
@@ -1313,13 +1355,17 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*
+builtins.object"builtins.object*ª
 loglogging.LoggerAdapter.log"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*'
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*'
 level
 builtins.int"builtins.int*+
 msg"
@@ -1358,44 +1404,64 @@ stacklevel
 builtins.object"builtins.object"typing.Mapping
 None *.
 kwargs"
-builtins.object"builtins.object*Ñ
+builtins.object"builtins.object*ë
 isEnabledFor"logging.LoggerAdapter.isEnabledFor"
-builtins.bool"builtins.bool*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+builtins.bool"builtins.bool*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*'
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*'
 level
-builtins.int"builtins.int*°
+builtins.int"builtins.int*Ê
 getEffectiveLevel'logging.LoggerAdapter.getEffectiveLevel"
-builtins.int"builtins.int*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+builtins.int"builtins.int*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*º
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*Ô
 setLevellogging.LoggerAdapter.setLevel"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*­
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*­
 level¡
 +TypeAlias[Union[builtins.int,builtins.str]]`
  Union[builtins.int,builtins.str]
 builtins.int"builtins.int
-builtins.str"builtins.str"logging._Level*¦
+builtins.str"builtins.str"logging._Level*À
 hasHandlers!logging.LoggerAdapter.hasHandlers"
-builtins.bool"builtins.bool*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+builtins.bool"builtins.bool*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*—
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*±
 _loglogging.LoggerAdapter._log"
-None*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+None*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter*'
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter*'
 level
 builtins.int"builtins.int*+
 msg"
@@ -1439,32 +1505,46 @@ ZTuple[Type[builtins.BaseException],builtins.BaseException,Union[types.Traceback
 None *0
 
 stack_info
-builtins.bool"builtins.bool *¤
+builtins.bool"builtins.bool *¾
 namelogging.LoggerAdapter.name"
-builtins.str"builtins.str*T
-selfJ
-!logging.LoggerAdapter[logging._L]
+builtins.str"builtins.str*í
+selfâ
+!logging.LoggerAdapter[logging._L]¥
 
-logging._L"logging.LoggerAdapter0:property`Pr6
-loggerlogging.LoggerAdapter.logger
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapter"logging.LoggerAdapter0:property`PrÎ
+loggerlogging.LoggerAdapter.logger¥
 
-logging._LrL
+logging._L”
+0Union[logging.Logger,logging.LoggerAdapter[Any]] 
+logging.Logger"logging.Logger<
+logging.LoggerAdapter[Any]
+Any"logging.LoggerAdapterrL
 managerlogging.LoggerAdapter.manager"
 logging.Manager"logging.Managerr§
 extralogging.LoggerAdapter.extra€
 ,typing.Mapping[builtins.str,builtins.object]
 builtins.str"builtins.str"
-builtins.object"builtins.object"typing.Mappingö
-StreamHandlerlogging.StreamHandler"logging.Handler*ò
-	setStreamlogging.StreamHandler.setStream"@
-Union[logging._StreamT,None]
-logging._StreamT
-None*`
-selfV
-'logging.StreamHandler[logging._StreamT]
-logging._StreamT"logging.StreamHandler* 
-stream
-logging._StreamT2¹
+builtins.object"builtins.object"typing.MappingÚ
+StreamHandlerlogging.StreamHandler"logging.Handler*ä
+	setStreamlogging.StreamHandler.setStream"º
+Union[logging._StreamT,None]
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWrite
+None*Û
+selfÐ
+'logging.StreamHandler[logging._StreamT]
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWrite"logging.StreamHandler*š
+stream
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWrite2°
 __init__logging.StreamHandler.__init__Ã
 __init__logging.StreamHandler.__init__"
 None*g
@@ -1472,16 +1552,22 @@ logging._LrL
 $logging.StreamHandler[typing.TextIO]
 typing.TextIO"typing.TextIO"logging.StreamHandler*
 stream
-None 0:overloadXÆ
+None 0:overloadX½
 __init__logging.StreamHandler.__init__"
-None*`
-selfV
-'logging.StreamHandler[logging._StreamT]
-logging._StreamT"logging.StreamHandler* 
-stream
-logging._StreamT0:overloadXPr<
-streamlogging.StreamHandler.stream
-logging._StreamTrL
+None*Û
+selfÐ
+'logging.StreamHandler[logging._StreamT]
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWrite"logging.StreamHandler*š
+stream
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWrite0:overloadXPr¶
+streamlogging.StreamHandler.stream
+logging._StreamT^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite"_typeshed.SupportsWriterL
 
 terminator logging.StreamHandler.terminator
 builtins.str"builtins.str
