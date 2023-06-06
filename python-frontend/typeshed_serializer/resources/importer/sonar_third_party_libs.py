@@ -32,6 +32,7 @@ import fb303
 import filelock
 import first
 import flask
+import flask_cors
 import freezegun
 import frozendict
 import futures
