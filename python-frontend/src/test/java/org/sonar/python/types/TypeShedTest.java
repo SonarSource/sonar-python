@@ -281,11 +281,13 @@ public class TypeShedTest {
 
   @Test
   public void package_sqlite3_connect_type_in_ambiguous_symbol() {
-    Map<String, Symbol> djangoSymbols = symbolsForModule("sqlite3");
-    ClassSymbol connectionSymbol =  (ClassSymbol) djangoSymbols.get("Connection");
+    Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
+    ClassSymbol connectionSymbol =  (ClassSymbol) sqlite3Symbols.get("Connection");
     AmbiguousSymbol cursorFunction = connectionSymbol.declaredMembers().stream().filter(m -> "cursor".equals(m.name())).findFirst().map(AmbiguousSymbol.class::cast).get();
-    FunctionSymbolImpl functionSymbol = cursorFunction.alternatives().stream().map(FunctionSymbolImpl.class::cast).filter(f -> f.annotatedReturnTypeName() != null).findFirst().get();
-    assertThat(functionSymbol.annotatedReturnTypeName()).isEqualTo("sqlite3.dbapi2.Cursor");
+    Set<Symbol> alternatives = cursorFunction.alternatives();
+    assertThat(alternatives)
+      .hasSize(2)
+      .allMatch(s -> "sqlite3.dbapi2.Cursor".equals(((FunctionSymbol) s).annotatedReturnTypeName()));
   }
 
   @Test
