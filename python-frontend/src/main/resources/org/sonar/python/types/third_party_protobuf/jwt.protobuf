@@ -1,89 +1,0 @@
-
-jwtI
-
-PyJWTErrorjwt.PyJWTError"builtins.Exceptionj35j36j37j38j39j310S
-InvalidTokenErrorjwt.InvalidTokenError"jwt.PyJWTErrorj35j36j37j38j39j310N
-DecodeErrorjwt.DecodeError"jwt.InvalidTokenErrorj35j36j37j38j39j310b
-ExpiredSignatureErrorjwt.ExpiredSignatureError"jwt.InvalidTokenErrorj35j36j37j38j39j310`
-InvalidAudienceErrorjwt.InvalidAudienceError"jwt.InvalidTokenErrorj35j36j37j38j39j310\
-InvalidIssuerErrorjwt.InvalidIssuerError"jwt.InvalidTokenErrorj35j36j37j38j39j310`
-InvalidIssuedAtErrorjwt.InvalidIssuedAtError"jwt.InvalidTokenErrorj35j36j37j38j39j310d
-ImmatureSignatureErrorjwt.ImmatureSignatureError"jwt.InvalidTokenErrorj35j36j37j38j39j310O
-InvalidKeyErrorjwt.InvalidKeyError"jwt.PyJWTErrorj35j36j37j38j39j310b
-InvalidAlgorithmErrorjwt.InvalidAlgorithmError"jwt.InvalidTokenErrorj35j36j37j38j39j310j
-MissingRequiredClaimErrorjwt.MissingRequiredClaimError"jwt.InvalidTokenErrorj35j36j37j38j39j310\
-InvalidSignatureErrorjwt.InvalidSignatureError"jwt.DecodeErrorj35j36j37j38j39j310Ö
-decode
-jwt.decode"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*o
-jwtf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*à
-keyÔ
-™Union[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyz
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey *,
-verify
-builtins.bool"builtins.bool *8
-
-algorithms&
-Union[Any,None]
-Any
-None *}
-optionsn
-#Union[typing.Mapping[Any,Any],None];
-typing.Mapping[Any,Any]
-Any
-Any"typing.Mapping
-None *
-kwargs
-Anyz35z36z37z38z39z310«
-encode
-jwt.encode" 
-builtins.bytes"builtins.bytes*f
-payloadY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*Þ
-keyÔ
-™Union[builtins.str,builtins.bytes,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesx
-:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyz
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey*-
-	algorithm
-builtins.str"builtins.str *¥
-headers•
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None *:
-json_encoder&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310Ê
-register_algorithmjwt.register_algorithm"
-None*(
-alg_id
-builtins.str"builtins.str*O
-alg_objB
-jwt.algorithms.Algorithm[Any]
-Any"jwt.algorithms.Algorithmz35z36z37z38z39z310}
-unregister_algorithmjwt.unregister_algorithm"
-None*(
-alg_id
-builtins.str"builtins.strz35z36z37z38z39z310*7
-
-algorithmsjwt.algorithms *35*36*37*38*39*310*T
-get_unverified_headerjwt.get_unverified_header
-Any*35*36*37*38*39*310*4
-PyJWT	jwt.PyJWT
-Any*35*36*37*38*39*310*4
-PyJWS	jwt.PyJWS
-Any*35*36*37*38*39*310

@@ -1,194 +1,0 @@
-
-flask.sessionsÍ
-SessionMixinflask.sessions.SessionMixin"typing.MutableMapping2∆
-	permanent%flask.sessions.SessionMixin.permanentL
-	permanent%flask.sessions.SessionMixin.permanent*
-self0:propertyX`™
-	permanent%flask.sessions.SessionMixin.permanent"
-None*D
-self:
-flask.sessions.SessionMixin"flask.sessions.SessionMixin*
-value
-Any0:permanent.setter"35"36"37"38"39"310@babc.ABCMetaj35j36j37j38j39j310r_
-newflask.sessions.SessionMixin.new
-builtins.bool"builtins.bool*35*36*37*38*39*310ri
-modified$flask.sessions.SessionMixin.modified
-builtins.bool"builtins.bool*35*36*37*38*39*310ri
-accessed$flask.sessions.SessionMixin.accessed
-builtins.bool"builtins.bool*35*36*37*38*39*310ë
-
-SecureCookieSession"flask.sessions.SecureCookieSession"$werkzeug.datastructures.CallbackDict"flask.sessions.SessionMixin*Â
-__init__+flask.sessions.SecureCookieSession.__init__"
-None*R
-selfH
-"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*5
-initial&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¡
-__getitem__.flask.sessions.SecureCookieSession.__getitem__"
-Any*P
-selfH
-"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*
-key
-Anyz35z36z37z38z39z310*Ï
-get&flask.sessions.SecureCookieSession.get"
-Any*R
-selfH
-"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*
-key
-Any*5
-default&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*˙
-
-setdefault-flask.sessions.SecureCookieSession.setdefault"
-Any*R
-selfH
-"flask.sessions.SecureCookieSession""flask.sessions.SecureCookieSession*
-key
-Any*5
-default&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310j35j36j37j38j39j310rp
-modified+flask.sessions.SecureCookieSession.modified
-builtins.bool"builtins.bool*35*36*37*38*39*310rp
-accessed+flask.sessions.SecureCookieSession.accessed
-builtins.bool"builtins.bool*35*36*37*38*39*310•
-NullSessionflask.sessions.NullSession""flask.sessions.SecureCookieSessionj35j36j37j38j39j310rW
-__setitem__&flask.sessions.NullSession.__setitem__
-Any*35*36*37*38*39*310rW
-__delitem__&flask.sessions.NullSession.__delitem__
-Any*35*36*37*38*39*310rK
-clear flask.sessions.NullSession.clear
-Any*35*36*37*38*39*310rG
-popflask.sessions.NullSession.pop
-Any*35*36*37*38*39*310rO
-popitem"flask.sessions.NullSession.popitem
-Any*35*36*37*38*39*310rM
-update!flask.sessions.NullSession.update
-Any*35*36*37*38*39*310rU
-
-setdefault%flask.sessions.NullSession.setdefault
-Any*35*36*37*38*39*310⁄
-SessionInterfaceflask.sessions.SessionInterface"builtins.object*»
-make_null_session1flask.sessions.SessionInterface.make_null_session"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*ƒ
-is_null_session/flask.sessions.SessionInterface.is_null_session"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-obj
-Anyz35z36z37z38z39z310*»
-get_cookie_domain1flask.sessions.SessionInterface.get_cookie_domain"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*ƒ
-get_cookie_path/flask.sessions.SessionInterface.get_cookie_path"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*Ã
-get_cookie_httponly3flask.sessions.SessionInterface.get_cookie_httponly"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*»
-get_cookie_secure1flask.sessions.SessionInterface.get_cookie_secure"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*Ã
-get_cookie_samesite3flask.sessions.SessionInterface.get_cookie_samesite"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Anyz35z36z37z38z39z310*‚
-get_expiration_time3flask.sessions.SessionInterface.get_expiration_time"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Any*
-session
-Anyz35z36z37z38z39z310*ﬁ
-should_set_cookie1flask.sessions.SessionInterface.should_set_cookie"
-Any*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Any*
-session
-Anyz35z36z37z38z39z310*’
-open_session,flask.sessions.SessionInterface.open_session"
-None*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Any*
-request
-Anyz35z36z37z38z39z310*Ï
-save_session,flask.sessions.SessionInterface.save_session"
-None*L
-selfB
-flask.sessions.SessionInterface"flask.sessions.SessionInterface*
-app
-Any*
-session
-Any*
-response
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rj
-null_session_class2flask.sessions.SessionInterface.null_session_class
-Any*35*36*37*38*39*310ru
-pickle_based,flask.sessions.SessionInterface.pickle_based
-builtins.bool"builtins.bool*35*36*37*38*39*310∆
-SecureCookieSessionInterface+flask.sessions.SecureCookieSessionInterface"flask.sessions.SessionInterface*ˆ
-get_signing_serializerBflask.sessions.SecureCookieSessionInterface.get_signing_serializer"
-Any*d
-selfZ
-+flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*
-app
-Anyz35z36z37z38z39z310*¯
-open_session8flask.sessions.SecureCookieSessionInterface.open_session"
-Any*d
-selfZ
-+flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*
-app
-Any*
-request
-Anyz35z36z37z38z39z310*è
-save_session8flask.sessions.SecureCookieSessionInterface.save_session"
-Any*d
-selfZ
-+flask.sessions.SecureCookieSessionInterface"+flask.sessions.SecureCookieSessionInterface*
-app
-Any*
-session
-Any*
-response
-Anyz35z36z37z38z39z310j35j36j37j38j39j310ro
-salt0flask.sessions.SecureCookieSessionInterface.salt
-builtins.str"builtins.str*35*36*37*38*39*310rl
-digest_method9flask.sessions.SecureCookieSessionInterface.digest_method
-Any*35*36*37*38*39*310rÉ
-key_derivation:flask.sessions.SecureCookieSessionInterface.key_derivation
-builtins.str"builtins.str*35*36*37*38*39*310rf
-
-serializer6flask.sessions.SecureCookieSessionInterface.serializer
-Any*35*36*37*38*39*310rl
-session_class9flask.sessions.SecureCookieSessionInterface.session_class
-Any*35*36*37*38*39*310*c
-session_json_serializer&flask.sessions.session_json_serializer
-Any*35*36*37*38*39*310

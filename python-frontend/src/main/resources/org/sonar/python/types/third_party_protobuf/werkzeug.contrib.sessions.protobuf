@@ -1,176 +1,0 @@
-
-werkzeug.contrib.sessionsÍ
-ModificationTrackingDict2werkzeug.contrib.sessions.ModificationTrackingDict"$werkzeug.datastructures.CallbackDict*€
-__init__;werkzeug.contrib.sessions.ModificationTrackingDict.__init__*
-self*
-args*
-
-kwargsz35z36z37z38z39z310*b
-copy7werkzeug.contrib.sessions.ModificationTrackingDict.copy*
-selfz35z36z37z38z39z310*j
-__copy__;werkzeug.contrib.sessions.ModificationTrackingDict.__copy__*
-selfz35z36z37z38z39z310Pj35j36j37j38j39j310ri
-modified;werkzeug.contrib.sessions.ModificationTrackingDict.modified
-Any*35*36*37*38*39*310‰
-Session!werkzeug.contrib.sessions.Session"2werkzeug.contrib.sessions.ModificationTrackingDict*ü
-__init__*werkzeug.contrib.sessions.Session.__init__"
-None*Ð
-selfÅ
-\werkzeug.contrib.sessions.Session[werkzeug.contrib.sessions._K,werkzeug.contrib.sessions._V] 
-werkzeug.contrib.sessions._K 
-werkzeug.contrib.sessions._V"!werkzeug.contrib.sessions.Session*
-data
-Any*
-sid
-Any*)
-new
-builtins.bool"builtins.bool z35z36z37z38z39z310*m
-should_save-werkzeug.contrib.sessions.Session.should_save*
-self0:property`z35z36z37z38z39z310Pj35j36j37j38j39j310rN
-sid%werkzeug.contrib.sessions.Session.sid
-Any*35*36*37*38*39*310rN
-new%werkzeug.contrib.sessions.Session.new
-Any*35*36*37*38*39*310¬
-
-SessionStore&werkzeug.contrib.sessions.SessionStore"builtins.object*÷
-__init__/werkzeug.contrib.sessions.SessionStore.__init__"
-None*Z
-selfP
-&werkzeug.contrib.sessions.SessionStore"&werkzeug.contrib.sessions.SessionStore*;
-session_class&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*o
-is_valid_key3werkzeug.contrib.sessions.SessionStore.is_valid_key*
-self*
-keyz35z36z37z38z39z310*õ
-generate_key3werkzeug.contrib.sessions.SessionStore.generate_key"
-Any*Z
-selfP
-&werkzeug.contrib.sessions.SessionStore"&werkzeug.contrib.sessions.SessionStore*2
-salt&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*T
-new*werkzeug.contrib.sessions.SessionStore.new*
-selfz35z36z37z38z39z310*c
-save+werkzeug.contrib.sessions.SessionStore.save*
-self*
-sessionz35z36z37z38z39z310*{
-save_if_modified7werkzeug.contrib.sessions.SessionStore.save_if_modified*
-self*
-sessionz35z36z37z38z39z310*g
-delete-werkzeug.contrib.sessions.SessionStore.delete*
-self*
-sessionz35z36z37z38z39z310*]
-get*werkzeug.contrib.sessions.SessionStore.get*
-self*
-sidz35z36z37z38z39z310j35j36j37j38j39j310rg
-session_class4werkzeug.contrib.sessions.SessionStore.session_class
-Any*35*36*37*38*39*310ì
-FilesystemSessionStore0werkzeug.contrib.sessions.FilesystemSessionStore"&werkzeug.contrib.sessions.SessionStore*ß
-__init__9werkzeug.contrib.sessions.FilesystemSessionStore.__init__"
-None*n
-selfd
-0werkzeug.contrib.sessions.FilesystemSessionStore"0werkzeug.contrib.sessions.FilesystemSessionStore*2
-path&
-Union[Any,None]
-Any
-None *5
-filename_template
-builtins.str"builtins.str *;
-session_class&
-Union[Any,None]
-Any
-None *3
-renew_missing
-builtins.bool"builtins.bool *(
-mode
-builtins.int"builtins.int z35z36z37z38z39z310*‰
-get_session_filenameEwerkzeug.contrib.sessions.FilesystemSessionStore.get_session_filename*
-self*
-sidz35z36z37z38z39z310*m
-save5werkzeug.contrib.sessions.FilesystemSessionStore.save*
-self*
-sessionz35z36z37z38z39z310*q
-delete7werkzeug.contrib.sessions.FilesystemSessionStore.delete*
-self*
-sessionz35z36z37z38z39z310*g
-get4werkzeug.contrib.sessions.FilesystemSessionStore.get*
-self*
-sidz35z36z37z38z39z310*`
-list5werkzeug.contrib.sessions.FilesystemSessionStore.list*
-selfz35z36z37z38z39z310j35j36j37j38j39j310r_
-path5werkzeug.contrib.sessions.FilesystemSessionStore.path
-Any*35*36*37*38*39*310rŽ
-filename_templateBwerkzeug.contrib.sessions.FilesystemSessionStore.filename_template
-builtins.str"builtins.str*35*36*37*38*39*310rq
-renew_missing>werkzeug.contrib.sessions.FilesystemSessionStore.renew_missing
-Any*35*36*37*38*39*310r_
-mode5werkzeug.contrib.sessions.FilesystemSessionStore.mode
-Any*35*36*37*38*39*310»
-SessionMiddleware+werkzeug.contrib.sessions.SessionMiddleware"builtins.object*«
-__init__4werkzeug.contrib.sessions.SessionMiddleware.__init__"
-None*d
-selfZ
-+werkzeug.contrib.sessions.SessionMiddleware"+werkzeug.contrib.sessions.SessionMiddleware*
-app
-Any*
-store
-Any*/
-cookie_name
-builtins.str"builtins.str *8
-
-cookie_age&
-Union[Any,None]
-Any
-None *<
-cookie_expires&
-Union[Any,None]
-Any
-None */
-cookie_path
-builtins.str"builtins.str *;
-cookie_domain&
-Union[Any,None]
-Any
-None *;
-cookie_secure&
-Union[Any,None]
-Any
-None *5
-cookie_httponly
-builtins.bool"builtins.bool */
-environ_key
-builtins.str"builtins.str z35z36z37z38z39z310*„
-__call__4werkzeug.contrib.sessions.SessionMiddleware.__call__*
-self*
-environ*
-start_responsez35z36z37z38z39z310j35j36j37j38j39j310rX
-app/werkzeug.contrib.sessions.SessionMiddleware.app
-Any*35*36*37*38*39*310r\
-store1werkzeug.contrib.sessions.SessionMiddleware.store
-Any*35*36*37*38*39*310rh
-cookie_name7werkzeug.contrib.sessions.SessionMiddleware.cookie_name
-Any*35*36*37*38*39*310rf
-
-cookie_age6werkzeug.contrib.sessions.SessionMiddleware.cookie_age
-Any*35*36*37*38*39*310rn
-cookie_expires:werkzeug.contrib.sessions.SessionMiddleware.cookie_expires
-Any*35*36*37*38*39*310rh
-cookie_path7werkzeug.contrib.sessions.SessionMiddleware.cookie_path
-Any*35*36*37*38*39*310rl
-cookie_domain9werkzeug.contrib.sessions.SessionMiddleware.cookie_domain
-Any*35*36*37*38*39*310rl
-cookie_secure9werkzeug.contrib.sessions.SessionMiddleware.cookie_secure
-Any*35*36*37*38*39*310rp
-cookie_httponly;werkzeug.contrib.sessions.SessionMiddleware.cookie_httponly
-Any*35*36*37*38*39*310rh
-environ_key7werkzeug.contrib.sessions.SessionMiddleware.environ_key
-Any*35*36*37*38*39*310Œ
-generate_key&werkzeug.contrib.sessions.generate_key"
-Any*2
-salt&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310

@@ -1,163 +1,0 @@
-
-BaseHTTPServer–
-
-HTTPServerBaseHTTPServer.HTTPServer"SocketServer.TCPServer*⁄
-__init__"BaseHTTPServer.HTTPServer.__init__"
-None*@
-self6
-BaseHTTPServer.HTTPServer"BaseHTTPServer.HTTPServer*t
-server_address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*d
-RequestHandlerClassK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz27j27rV
-server_name%BaseHTTPServer.HTTPServer.server_name
-builtins.str"builtins.str*27rV
-server_port%BaseHTTPServer.HTTPServer.server_port
-builtins.int"builtins.int*27Ø,
-BaseHTTPRequestHandler%BaseHTTPServer.BaseHTTPRequestHandler"!SocketServer.StreamRequestHandler*É
-__init__.BaseHTTPServer.BaseHTTPRequestHandler.__init__"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*)
-request
-builtins.str"builtins.str*t
-client_address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*>
-server2
-SocketServer.BaseServer"SocketServer.BaseServerz27*û
-handle,BaseHTTPServer.BaseHTTPRequestHandler.handle"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*∂
-handle_one_request8BaseHTTPServer.BaseHTTPRequestHandler.handle_one_request"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*£
-
-send_error0BaseHTTPServer.BaseHTTPRequestHandler.send_error"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*&
-code
-builtins.int"builtins.int*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z27*©
-send_response3BaseHTTPServer.BaseHTTPRequestHandler.send_response"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*&
-code
-builtins.int"builtins.int*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z27*¸
-send_header1BaseHTTPServer.BaseHTTPRequestHandler.send_header"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*)
-keyword
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz27*®
-end_headers1BaseHTTPServer.BaseHTTPRequestHandler.end_headers"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*¨
-flush_headers3BaseHTTPServer.BaseHTTPRequestHandler.flush_headers"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*Ñ
-log_request1BaseHTTPServer.BaseHTTPRequestHandler.log_request"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*l
-code`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str *l
-size`
- Union[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str z27*·
-	log_error/BaseHTTPServer.BaseHTTPRequestHandler.log_error"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*(
-format
-builtins.str"builtins.str*
-args
-Anyz27*Â
-log_message1BaseHTTPServer.BaseHTTPRequestHandler.log_message"
-None*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*(
-format
-builtins.str"builtins.str*
-args
-Anyz27*¬
-version_string4BaseHTTPServer.BaseHTTPRequestHandler.version_string"
-builtins.str"builtins.str*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*ù
-date_time_string6BaseHTTPServer.BaseHTTPRequestHandler.date_time_string"
-builtins.str"builtins.str*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandler*U
-	timestampD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z27*Œ
-log_date_time_string:BaseHTTPServer.BaseHTTPRequestHandler.log_date_time_string"
-builtins.str"builtins.str*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27*¬
-address_string4BaseHTTPServer.BaseHTTPRequestHandler.address_string"
-builtins.str"builtins.str*X
-selfN
-%BaseHTTPServer.BaseHTTPRequestHandler"%BaseHTTPServer.BaseHTTPRequestHandlerz27j27r¨
-client_address4BaseHTTPServer.BaseHTTPRequestHandler.client_address`
- Tuple[builtins.str,builtins.int]
-builtins.str"builtins.str
-builtins.int"builtins.int*27rn
-server,BaseHTTPServer.BaseHTTPRequestHandler.server2
-SocketServer.BaseServer"SocketServer.BaseServer*27rn
-close_connection6BaseHTTPServer.BaseHTTPRequestHandler.close_connection
-builtins.bool"builtins.bool*27rZ
-command-BaseHTTPServer.BaseHTTPRequestHandler.command
-builtins.str"builtins.str*27rT
-path*BaseHTTPServer.BaseHTTPRequestHandler.path
-builtins.str"builtins.str*27rj
-request_version5BaseHTTPServer.BaseHTTPRequestHandler.request_version
-builtins.str"builtins.str*27rd
-headers-BaseHTTPServer.BaseHTTPRequestHandler.headers&
-mimetools.Message"mimetools.Message*27r\
-rfile+BaseHTTPServer.BaseHTTPRequestHandler.rfile"
-typing.BinaryIO"typing.BinaryIO*27r\
-wfile+BaseHTTPServer.BaseHTTPRequestHandler.wfile"
-typing.BinaryIO"typing.BinaryIO*27rh
-server_version4BaseHTTPServer.BaseHTTPRequestHandler.server_version
-builtins.str"builtins.str*27rb
-sys_version1BaseHTTPServer.BaseHTTPRequestHandler.sys_version
-builtins.str"builtins.str*27rt
-error_message_format:BaseHTTPServer.BaseHTTPRequestHandler.error_message_format
-builtins.str"builtins.str*27rp
-error_content_type8BaseHTTPServer.BaseHTTPRequestHandler.error_content_type
-builtins.str"builtins.str*27rl
-protocol_version6BaseHTTPServer.BaseHTTPRequestHandler.protocol_version
-builtins.str"builtins.str*27rf
-MessageClass2BaseHTTPServer.BaseHTTPRequestHandler.MessageClass
-builtins.type"builtins.type*27rí
-	responses/BaseHTTPServer.BaseHTTPRequestHandler.responsesœ
-=typing.Mapping[builtins.int,Tuple[builtins.str,builtins.str]]
-builtins.int"builtins.int`
- Tuple[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*27

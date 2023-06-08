@@ -1,213 +1,0 @@
-
-freezegun.api„
-TickingDateTimeFactory$freezegun.api.TickingDateTimeFactory"builtins.object*£
-__init__-freezegun.api.TickingDateTimeFactory.__init__"
-None*V
-selfL
-$freezegun.api.TickingDateTimeFactory"$freezegun.api.TickingDateTimeFactory*:
-time_to_freeze&
-datetime.datetime"datetime.datetime*1
-start&
-datetime.datetime"datetime.datetimez35z36z37z38z39z310*“
-__call__-freezegun.api.TickingDateTimeFactory.__call__"&
-datetime.datetime"datetime.datetime*V
-selfL
-$freezegun.api.TickingDateTimeFactory"$freezegun.api.TickingDateTimeFactoryz35z36z37z38z39z310j35j36j37j38j39j310º
-
-FrozenDateTimeFactory#freezegun.api.FrozenDateTimeFactory"builtins.object*Ì
-__init__,freezegun.api.FrozenDateTimeFactory.__init__"
-None*T
-selfJ
-#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*:
-time_to_freeze&
-datetime.datetime"datetime.datetimez35z36z37z38z39z310*œ
-__call__,freezegun.api.FrozenDateTimeFactory.__call__"&
-datetime.datetime"datetime.datetime*T
-selfJ
-#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactoryz35z36z37z38z39z310*›
-tick(freezegun.api.FrozenDateTimeFactory.tick"
-None*T
-selfJ
-#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*±
-delta£
-5Union[builtins.float,numbers.Real,datetime.timedelta] 
-builtins.float"builtins.float
-numbers.Real"numbers.Real(
-datetime.timedelta"datetime.timedelta z35z36z37z38z39z310*±
-move_to+freezegun.api.FrozenDateTimeFactory.move_to"
-None*T
-selfJ
-#freezegun.api.FrozenDateTimeFactory"#freezegun.api.FrozenDateTimeFactory*ˇ
-target_datetimeÈ
-KUnion[builtins.str,datetime.datetime,datetime.date,datetime.timedelta,None]
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date(
-datetime.timedelta"datetime.timedelta
-Nonez35z36z37z38z39z310j35j36j37j38j39j310ı
-StepTickTimeFactory!freezegun.api.StepTickTimeFactory"builtins.object*ô
-__init__*freezegun.api.StepTickTimeFactory.__init__"
-None*P
-selfF
-!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*:
-time_to_freeze&
-datetime.datetime"datetime.datetime*0
-
-step_width 
-builtins.float"builtins.floatz35z36z37z38z39z310*…
-__call__*freezegun.api.StepTickTimeFactory.__call__"&
-datetime.datetime"datetime.datetime*P
-selfF
-!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactoryz35z36z37z38z39z310*à
-tick&freezegun.api.StepTickTimeFactory.tick"
-None*P
-selfF
-!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*c
-deltaV
-Union[datetime.timedelta,None](
-datetime.timedelta"datetime.timedelta
-None z35z36z37z38z39z310*Ô
-update_step_width3freezegun.api.StepTickTimeFactory.update_step_width"
-None*P
-selfF
-!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*0
-
-step_width 
-builtins.float"builtins.floatz35z36z37z38z39z310*´
-move_to)freezegun.api.StepTickTimeFactory.move_to"
-None*P
-selfF
-!freezegun.api.StepTickTimeFactory"!freezegun.api.StepTickTimeFactory*ˇ
-target_datetimeÈ
-KUnion[builtins.str,datetime.datetime,datetime.date,datetime.timedelta,None]
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date(
-datetime.timedelta"datetime.timedelta
-Nonez35z36z37z38z39z310j35j36j37j38j39j310ë
-_freeze_timefreezegun.api._freeze_time"builtins.object*∑
-__init__#freezegun.api._freeze_time.__init__"
-None*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*Ç
-time_to_freeze_strÈ
-KUnion[builtins.str,datetime.datetime,datetime.date,datetime.timedelta,None]
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date(
-datetime.timedelta"datetime.timedelta
-None*/
-	tz_offset 
-builtins.float"builtins.float*Z
-ignoreN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence*(
-tick
-builtins.bool"builtins.bool**
-as_arg
-builtins.bool"builtins.bool*7
-auto_tick_seconds 
-builtins.float"builtins.floatz35z36z37z38z39z310*ï
-	__enter__$freezegun.api._freeze_time.__enter__"
-Any*@
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_timez35z36z37z38z39z310*ß
-__exit__#freezegun.api._freeze_time.__exit__"
-None*@
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*
-args
-Anyz35z36z37z38z39z310*è
-start freezegun.api._freeze_time.start"
-Any*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_timez35z36z37z38z39z310*é
-stopfreezegun.api._freeze_time.stop"
-None*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_timez35z36z37z38z39z310*Î
-decorate_class)freezegun.api._freeze_time.decorate_class"
-freezegun.api._T*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*;
-klass0
-Type[freezegun.api._T]
-freezegun.api._Tz35z36z37z38z39z310*€
-decorate_coroutine-freezegun.api._freeze_time.decorate_coroutine"
-freezegun.api._T*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*#
-	coroutine
-freezegun.api._Tz35z36z37z38z39z310*¬
-decorate_callable,freezegun.api._freeze_time.decorate_callable"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz35z36z37z38z39z3102ä
-__call__#freezegun.api._freeze_time.__call__Ô
-__call__#freezegun.api._freeze_time.__call__"0
-Type[freezegun.api._T]
-freezegun.api._T*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*:
-func0
-Type[freezegun.api._T]
-freezegun.api._T0:overloadX•
-__call__#freezegun.api._freeze_time.__call__"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadX•
-__call__#freezegun.api._freeze_time.__call__"K
-CallableType[builtins.function]&
-builtins.function"builtins.function*B
-self8
-freezegun.api._freeze_time"freezegun.api._freeze_time*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function0:overloadX"35"36"37"38"39"310j35j36j37j38j39j310ù
-freeze_timefreezegun.api.freeze_time"8
-freezegun.api._freeze_time"freezegun.api._freeze_time*ò
-time_to_freezeÅ
-ŒUnion[builtins.str,datetime.datetime,datetime.date,datetime.timedelta,CallableType[builtins.function],typing.Iterator[TypeAlias[Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]]],None]
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date(
-datetime.timedelta"datetime.timedeltaK
-CallableType[builtins.function]&
-builtins.function"builtins.functionƒ
-btyping.Iterator[TypeAlias[Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]]]Ã
-QTypeAlias[Union[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]]⁄
-FUnion[builtins.str,datetime.datetime,datetime.date,datetime.timedelta]
-builtins.str"builtins.str&
-datetime.datetime"datetime.datetime
-datetime.date"datetime.date(
-datetime.timedelta"datetime.timedelta"freezegun.api._Freezable"typing.Iterator
-None *[
-	tz_offsetJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None *ñ
-ignoreá
-)Union[typing.Sequence[builtins.str],None]N
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequence
-None *S
-tickG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *U
-as_argG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None *c
-auto_tick_secondsJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z35z36z37z38z39z310

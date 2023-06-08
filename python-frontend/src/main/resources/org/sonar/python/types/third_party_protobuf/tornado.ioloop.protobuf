@@ -1,240 +1,0 @@
-
-tornado.ioloopC
-TimeoutErrortornado.ioloop.TimeoutError"builtins.Exceptionj27¢
-IOLooptornado.ioloop.IOLoop"tornado.util.Configurable*@
-instancetornado.ioloop.IOLoop.instance0:staticmethodhz27*F
-initialized!tornado.ioloop.IOLoop.initialized0:staticmethodhz27*6
-installtornado.ioloop.IOLoop.install*
-selfz27*L
-clear_instance$tornado.ioloop.IOLoop.clear_instance0:staticmethodhz27*N
-currenttornado.ioloop.IOLoop.current*
-instance 0:staticmethodhz27*@
-make_current"tornado.ioloop.IOLoop.make_current*
-selfz27*J
-clear_current#tornado.ioloop.IOLoop.clear_current0:staticmethodhz27*Z
-configurable_base'tornado.ioloop.IOLoop.configurable_base*
-cls0:classmethodpz27*`
-configurable_default*tornado.ioloop.IOLoop.configurable_default*
-cls0:classmethodpz27*P
-
-initialize tornado.ioloop.IOLoop.initialize*
-self*
-make_current z27*A
-closetornado.ioloop.IOLoop.close*
-self*
-all_fds z27*_
-add_handler!tornado.ioloop.IOLoop.add_handler*
-self*
-fd*
-handler*
-
-eventsz27*X
-update_handler$tornado.ioloop.IOLoop.update_handler*
-self*
-fd*
-
-eventsz27*L
-remove_handler$tornado.ioloop.IOLoop.remove_handler*
-self*
-fdz27*{
-set_blocking_signal_threshold3tornado.ioloop.IOLoop.set_blocking_signal_threshold*
-self*
-seconds*
-
-actionz27*i
-set_blocking_log_threshold0tornado.ioloop.IOLoop.set_blocking_log_threshold*
-self*
-secondsz27*Q
-	log_stacktornado.ioloop.IOLoop.log_stack*
-self*
-
-signal*	
-framez27*2
-starttornado.ioloop.IOLoop.start*
-selfz27*0
-stoptornado.ioloop.IOLoop.stop*
-selfz27*Q
-run_synctornado.ioloop.IOLoop.run_sync*
-self*
-func*
-timeout z27*0
-timetornado.ioloop.IOLoop.time*
-selfz27*p
-add_timeout!tornado.ioloop.IOLoop.add_timeout*
-self*
-deadline*
-callback*
-args*
-
-kwargsz27*k
-
-call_later tornado.ioloop.IOLoop.call_later*
-self*	
-delay*
-callback*
-args*
-
-kwargsz27*d
-call_attornado.ioloop.IOLoop.call_at*
-self*
-when*
-callback*
-args*
-
-kwargsz27*Q
-remove_timeout$tornado.ioloop.IOLoop.remove_timeout*
-self*
-timeoutz27*d
-add_callback"tornado.ioloop.IOLoop.add_callback*
-self*
-callback*
-args*
-
-kwargsz27*|
-add_callback_from_signal.tornado.ioloop.IOLoop.add_callback_from_signal*
-self*
-callback*
-args*
-
-kwargsz27*h
-spawn_callback$tornado.ioloop.IOLoop.spawn_callback*
-self*
-callback*
-args*
-
-kwargsz27*V
-
-add_future tornado.ioloop.IOLoop.add_future*
-self*
-
-future*
-callbackz27*h
-handle_callback_exception/tornado.ioloop.IOLoop.handle_callback_exception*
-self*
-callbackz27*@
-split_fdtornado.ioloop.IOLoop.split_fd*
-self*
-fdz27*@
-close_fdtornado.ioloop.IOLoop.close_fd*
-self*
-fdz27j27r/
-NONEtornado.ioloop.IOLoop.NONE
-Any*27r/
-READtornado.ioloop.IOLoop.READ
-Any*27r1
-WRITEtornado.ioloop.IOLoop.WRITE
-Any*27r1
-ERRORtornado.ioloop.IOLoop.ERROR
-Any*27ù
-
-
-PollIOLooptornado.ioloop.PollIOLoop"tornado.ioloop.IOLoop*g
-
-initialize$tornado.ioloop.PollIOLoop.initialize*
-self*
-impl*
-	time_func *
-
-kwargsz27*E
-closetornado.ioloop.PollIOLoop.close*
-self*
-all_fds z27*c
-add_handler%tornado.ioloop.PollIOLoop.add_handler*
-self*
-fd*
-handler*
-
-eventsz27*\
-update_handler(tornado.ioloop.PollIOLoop.update_handler*
-self*
-fd*
-
-eventsz27*P
-remove_handler(tornado.ioloop.PollIOLoop.remove_handler*
-self*
-fdz27*
-set_blocking_signal_threshold7tornado.ioloop.PollIOLoop.set_blocking_signal_threshold*
-self*
-seconds*
-
-actionz27*6
-starttornado.ioloop.PollIOLoop.start*
-selfz27*4
-stoptornado.ioloop.PollIOLoop.stop*
-selfz27*4
-timetornado.ioloop.PollIOLoop.time*
-selfz27*l
-call_at!tornado.ioloop.PollIOLoop.call_at*
-self*
-deadline*
-callback*
-args*
-
-kwargsz27*U
-remove_timeout(tornado.ioloop.PollIOLoop.remove_timeout*
-self*
-timeoutz27*h
-add_callback&tornado.ioloop.PollIOLoop.add_callback*
-self*
-callback*
-args*
-
-kwargsz27*Ä
-add_callback_from_signal2tornado.ioloop.PollIOLoop.add_callback_from_signal*
-self*
-callback*
-args*
-
-kwargsz27j27r=
-	time_func#tornado.ioloop.PollIOLoop.time_func
-Any*27≤
-_Timeouttornado.ioloop._Timeout"builtins.object*º
-__init__ tornado.ioloop._Timeout.__init__"
-None*<
-self2
-tornado.ioloop._Timeout"tornado.ioloop._Timeout*
-deadline
-Any*
-callback
-Any*
-io_loop
-Anyz27*A
-__lt__tornado.ioloop._Timeout.__lt__*
-self*	
-otherz27*A
-__le__tornado.ioloop._Timeout.__le__*
-self*	
-otherz27j27r9
-deadline tornado.ioloop._Timeout.deadline
-Any*27r9
-callback tornado.ioloop._Timeout.callback
-Any*27r=
-
-tiebreaker"tornado.ioloop._Timeout.tiebreaker
-Any*27π
-PeriodicCallbacktornado.ioloop.PeriodicCallback"builtins.object*€
-__init__(tornado.ioloop.PeriodicCallback.__init__"
-None*L
-selfB
-tornado.ioloop.PeriodicCallback"tornado.ioloop.PeriodicCallback*
-callback
-Any*
-callback_time
-Any*
-io_loop
-Any z27*<
-start%tornado.ioloop.PeriodicCallback.start*
-selfz27*:
-stop$tornado.ioloop.PeriodicCallback.stop*
-selfz27*F
-
-is_running*tornado.ioloop.PeriodicCallback.is_running*
-selfz27j27rA
-callback(tornado.ioloop.PeriodicCallback.callback
-Any*27rK
-callback_time-tornado.ioloop.PeriodicCallback.callback_time
-Any*27r?
-io_loop'tornado.ioloop.PeriodicCallback.io_loop
-Any*27*,
-signaltornado.ioloop.signal
-Any*27

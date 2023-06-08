@@ -1,356 +1,0 @@
-
-tornado.httputil=
-SSLErrortornado.httputil.SSLError"builtins.Exceptionj27ı
-_NormalizedHeaderCache'tornado.httputil._NormalizedHeaderCache"builtins.dict*ª
-__init__0tornado.httputil._NormalizedHeaderCache.__init__"
-None*\
-selfR
-'tornado.httputil._NormalizedHeaderCache"'tornado.httputil._NormalizedHeaderCache*
-size
-Anyz27*Y
-__missing__3tornado.httputil._NormalizedHeaderCache.__missing__*
-self*
-keyz27j27rA
-size,tornado.httputil._NormalizedHeaderCache.size
-Any*27rC
-queue-tornado.httputil._NormalizedHeaderCache.queue
-Any*27≤
-
-HTTPHeaderstornado.httputil.HTTPHeaders"builtins.dict*Ø
-__init__%tornado.httputil.HTTPHeaders.__init__"
-None*F
-self<
-tornado.httputil.HTTPHeaders"tornado.httputil.HTTPHeaders*
-args
-Any*
-kwargs
-Anyz27*J
-add tornado.httputil.HTTPHeaders.add*
-self*
-name*	
-valuez27*I
-get_list%tornado.httputil.HTTPHeaders.get_list*
-self*
-namez27*=
-get_all$tornado.httputil.HTTPHeaders.get_all*
-selfz27*M
-
-parse_line'tornado.httputil.HTTPHeaders.parse_line*
-self*
-linez27*V
-parse"tornado.httputil.HTTPHeaders.parse*
-cls*
-headers0:classmethodpz27*Z
-__setitem__(tornado.httputil.HTTPHeaders.__setitem__*
-self*
-name*	
-valuez27*O
-__getitem__(tornado.httputil.HTTPHeaders.__getitem__*
-self*
-namez27*O
-__delitem__(tornado.httputil.HTTPHeaders.__delitem__*
-self*
-namez27*Q
-__contains__)tornado.httputil.HTTPHeaders.__contains__*
-self*
-namez27*N
-get tornado.httputil.HTTPHeaders.get*
-self*
-name*
-default z27*Q
-update#tornado.httputil.HTTPHeaders.update*
-self*
-args*
-
-kwargsz27*7
-copy!tornado.httputil.HTTPHeaders.copy*
-selfz27*V
-__deepcopy__)tornado.httputil.HTTPHeaders.__deepcopy__*
-self*
-	memo_dictz27j27r>
-__copy__%tornado.httputil.HTTPHeaders.__copy__
-Any*27á
-HTTPServerRequest"tornado.httputil.HTTPServerRequest"builtins.object*Í
-__init__+tornado.httputil.HTTPServerRequest.__init__"
-None*R
-selfH
-"tornado.httputil.HTTPServerRequest""tornado.httputil.HTTPServerRequest*
-method
-Any *
-uri
-Any *
-version
-Any *
-headers
-Any *
-body
-Any *
-host
-Any *
-files
-Any *
-
-connection
-Any *
-
-start_line
-Any z27*W
-supports_http_1_14tornado.httputil.HTTPServerRequest.supports_http_1_1*
-selfz27*Q
-cookies*tornado.httputil.HTTPServerRequest.cookies*
-self0:property`z27*Z
-write(tornado.httputil.HTTPServerRequest.write*
-self*	
-chunk*
-callback z27*A
-finish)tornado.httputil.HTTPServerRequest.finish*
-selfz27*E
-full_url+tornado.httputil.HTTPServerRequest.full_url*
-selfz27*M
-request_time/tornado.httputil.HTTPServerRequest.request_time*
-selfz27*n
-get_ssl_certificate6tornado.httputil.HTTPServerRequest.get_ssl_certificate*
-self*
-binary_form z27j27rQ
-path'tornado.httputil.HTTPServerRequest.path
-builtins.str"builtins.str*27rS
-query(tornado.httputil.HTTPServerRequest.query
-builtins.str"builtins.str*27r}
-method)tornado.httputil.HTTPServerRequest.methodD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*27rw
-uri&tornado.httputil.HTTPServerRequest.uriD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*27rW
-version*tornado.httputil.HTTPServerRequest.version
-builtins.str"builtins.str*27rw
-headers*tornado.httputil.HTTPServerRequest.headers<
-tornado.httputil.HTTPHeaders"tornado.httputil.HTTPHeaders*27rQ
-body'tornado.httputil.HTTPServerRequest.body
-builtins.str"builtins.str*27rF
-	remote_ip,tornado.httputil.HTTPServerRequest.remote_ip
-Any*27rD
-protocol+tornado.httputil.HTTPServerRequest.protocol
-Any*27rQ
-host'tornado.httputil.HTTPServerRequest.host
-builtins.str"builtins.str*27rû
-files(tornado.httputil.HTTPServerRequest.filesÊ
-Dbuiltins.dict[builtins.str,builtins.list[tornado.httputil.HTTPFile]]
-builtins.str"builtins.strq
-(builtins.list[tornado.httputil.HTTPFile]6
-tornado.httputil.HTTPFile"tornado.httputil.HTTPFile"builtins.list"builtins.dict*27ræ
-
-connection-tornado.httputil.HTTPServerRequest.connection}
-+Union[tornado.httputil.HTTPConnection,None]B
-tornado.httputil.HTTPConnection"tornado.httputil.HTTPConnection
-None*27rÚ
-	arguments,tornado.httputil.HTTPServerRequest.arguments≤
-7builtins.dict[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.dict*27r˛
-query_arguments2tornado.httputil.HTTPServerRequest.query_arguments≤
-7builtins.dict[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.dict*27r¸
-body_arguments1tornado.httputil.HTTPServerRequest.body_arguments≤
-7builtins.dict[builtins.str,builtins.list[builtins.str]]
-builtins.str"builtins.strJ
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.dict*27I
-HTTPInputErrortornado.httputil.HTTPInputError"builtins.Exceptionj27K
-HTTPOutputError tornado.httputil.HTTPOutputError"builtins.Exceptionj27ƒ
-HTTPServerConnectionDelegate-tornado.httputil.HTTPServerConnectionDelegate"builtins.object*}
-start_request;tornado.httputil.HTTPServerConnectionDelegate.start_request*
-self*
-server_conn*
-request_connz27*a
-on_close6tornado.httputil.HTTPServerConnectionDelegate.on_close*
-self*
-server_connz27j27»
-HTTPMessageDelegate$tornado.httputil.HTTPMessageDelegate"builtins.object*t
-headers_received5tornado.httputil.HTTPMessageDelegate.headers_received*
-self*
-
-start_line*
-headersz27*\
-data_received2tornado.httputil.HTTPMessageDelegate.data_received*
-self*	
-chunkz27*C
-finish+tornado.httputil.HTTPMessageDelegate.finish*
-selfz27*]
-on_connection_close8tornado.httputil.HTTPMessageDelegate.on_connection_close*
-selfz27j27Ë
-HTTPConnectiontornado.httputil.HTTPConnection"builtins.object*Ü
-write_headers-tornado.httputil.HTTPConnection.write_headers*
-self*
-
-start_line*
-headers*
-chunk *
-callback z27*W
-write%tornado.httputil.HTTPConnection.write*
-self*	
-chunk*
-callback z27*>
-finish&tornado.httputil.HTTPConnection.finish*
-selfz27j27B
-HTTPFiletornado.httputil.HTTPFile"tornado.util.ObjectDictj27—
-RequestStartLine!tornado.httputil.RequestStartLine"builtins.tuple*û
-_replace*tornado.httputil.RequestStartLine._replace")
-%tornado.httputil.RequestStartLine._NT*4
-_self)
-%tornado.httputil.RequestStartLine._NT**
-method
-builtins.str"builtins.str *(
-path
-builtins.str"builtins.str *+
-version
-builtins.str"builtins.str z27*∆
-__new__)tornado.httputil.RequestStartLine.__new__")
-%tornado.httputil.RequestStartLine._NT*d
-_clsZ
-+Type[tornado.httputil.RequestStartLine._NT])
-%tornado.httputil.RequestStartLine._NT*(
-method
-builtins.str"builtins.str*&
-path
-builtins.str"builtins.str*)
-version
-builtins.str"builtins.strz27*«
-_asdict)tornado.httputil.RequestStartLine._asdict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*4
-_self)
-%tornado.httputil.RequestStartLine._NTz27*æ
-_make'tornado.httputil.RequestStartLine._make")
-%tornado.httputil.RequestStartLine._NT*d
-_clsZ
-+Type[tornado.httputil.RequestStartLine._NT])
-%tornado.httputil.RequestStartLine._NT*>
-iterable0
-typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0:classmethodpz27j27rX
-method(tornado.httputil.RequestStartLine.method
-builtins.str"builtins.str*27*27rT
-path&tornado.httputil.RequestStartLine.path
-builtins.str"builtins.str*27*27rZ
-version)tornado.httputil.RequestStartLine.version
-builtins.str"builtins.str*27*27r∆
-_fields)tornado.httputil.RequestStartLine._fieldsã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str*27rõ
-_field_types.tornado.httputil.RequestStartLine._field_typesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27r°
-_field_defaults1tornado.httputil.RequestStartLine._field_defaultsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27rV
-_source)tornado.httputil.RequestStartLine._source
-builtins.str"builtins.str*27r°
-__annotations__1tornado.httputil.RequestStartLine.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27Ë
-ResponseStartLine"tornado.httputil.ResponseStartLine"builtins.tuple*°
-_replace+tornado.httputil.ResponseStartLine._replace"*
-&tornado.httputil.ResponseStartLine._NT*5
-_self*
-&tornado.httputil.ResponseStartLine._NT*+
-version
-builtins.str"builtins.str *(
-code
-builtins.str"builtins.str **
-reason
-builtins.str"builtins.str z27* 
-__new__*tornado.httputil.ResponseStartLine.__new__"*
-&tornado.httputil.ResponseStartLine._NT*f
-_cls\
-,Type[tornado.httputil.ResponseStartLine._NT]*
-&tornado.httputil.ResponseStartLine._NT*)
-version
-builtins.str"builtins.str*&
-code
-builtins.str"builtins.str*(
-reason
-builtins.str"builtins.strz27*…
-_asdict*tornado.httputil.ResponseStartLine._asdict"W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*5
-_self*
-&tornado.httputil.ResponseStartLine._NTz27*¬
-_make(tornado.httputil.ResponseStartLine._make"*
-&tornado.httputil.ResponseStartLine._NT*f
-_cls\
-,Type[tornado.httputil.ResponseStartLine._NT]*
-&tornado.httputil.ResponseStartLine._NT*>
-iterable0
-typing.Iterable[Any]
-Any"typing.Iterable*
-new
-Any *
-len
-Any 0:classmethodpz27j27r[
-version*tornado.httputil.ResponseStartLine.version
-builtins.str"builtins.str*27*27rU
-code'tornado.httputil.ResponseStartLine.code
-builtins.str"builtins.str*27*27rY
-reason)tornado.httputil.ResponseStartLine.reason
-builtins.str"builtins.str*27*27r«
-_fields*tornado.httputil.ResponseStartLine._fieldsã
--Tuple[builtins.str,builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str
-builtins.str"builtins.str*27rú
-_field_types/tornado.httputil.ResponseStartLine._field_typesW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27r¢
-_field_defaults2tornado.httputil.ResponseStartLine._field_defaultsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27rW
-_source*tornado.httputil.ResponseStartLine._source
-builtins.str"builtins.str*27r¢
-__annotations__2tornado.httputil.ResponseStartLine.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*27@
-
-url_concattornado.httputil.url_concat*
-url*
-argsz27Ü
-parse_body_arguments%tornado.httputil.parse_body_arguments*
-content_type*
-body*
-	arguments*	
-files*
-headers z27}
-parse_multipart_form_data*tornado.httputil.parse_multipart_form_data*
-boundary*
-data*
-	arguments*	
-filesz27A
-format_timestamp!tornado.httputil.format_timestamp*
-tsz27S
-parse_request_start_line)tornado.httputil.parse_request_start_line*
-linez27U
-parse_response_start_line*tornado.httputil.parse_response_start_line*
-linez27)
-docteststornado.httputil.doctestsz27K
-split_host_and_port$tornado.httputil.split_host_and_port*
-
-netlocz27
