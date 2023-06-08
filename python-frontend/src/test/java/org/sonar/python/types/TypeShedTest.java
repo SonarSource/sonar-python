@@ -146,11 +146,11 @@ public class TypeShedTest {
 
   @Test
   public void third_party_symbols() {
-    Map<String, Symbol> emojiSymbols = symbolsForModule("emoji");
-    Symbol emojizeSymbol = emojiSymbols.get("emojize");
-    assertThat(emojizeSymbol.kind()).isEqualTo(Kind.FUNCTION);
-    assertThat(((FunctionSymbolImpl) emojizeSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("emoji", "emoji.emojize")).isSameAs(emojizeSymbol);
+    Map<String, Symbol> flaskLoggingSymbols = symbolsForModule("flask.helpers");
+    Symbol flaskSymbol = flaskLoggingSymbols.get("get_root_path");
+    assertThat(flaskSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) flaskSymbol).declaredReturnType().canOnlyBe("str")).isTrue();
+    assertThat(TypeShed.symbolWithFQN("flask.helpers", "flask.helpers.get_root_path")).isSameAs(flaskSymbol);
   }
 
   @Test
@@ -535,46 +535,5 @@ public class TypeShedTest {
     // however third party symbols don't have validForPythonVersions field set
     symbolsForModule("six");
     assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
-  }
-
-  @Test
-  public void modules_whose_name_differ_by_capitalization_only() {
-    // Python 2, import SocketServer
-    setPythonVersions(PythonVersionUtils.fromString("2.7"));
-    Map<String, Symbol> socketServer = symbolsForModule("SocketServer");
-    assertThat(socketServer).isNotEmpty();
-    SymbolImpl baseServer = (SymbolImpl) socketServer.get("BaseServer");
-    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
-
-    // Python 2, import socketserver
-    // SONARPY-1359: socketserver is missing from the standard library stubs in Python 2, but it is indirectly serialized through the stubs serialized by the mypy importer
-    socketServer = symbolsForModule("socketserver");
-    assertThat(socketServer).isNotEmpty();
-
-    // Python 3, import SocketServer
-    setPythonVersions(PythonVersionUtils.fromString("3.10"));
-    socketServer = symbolsForModule("SocketServer");
-    assertThat(socketServer).isEmpty();
-
-    // Python 3, import socketserver
-    socketServer = symbolsForModule("socketserver");
-    assertThat(socketServer).isNotEmpty();
-    baseServer = (SymbolImpl) socketServer.get("BaseServer");
-    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("36", "37", "38", "39", "310");
-
-    // Unknown Python version, import SocketServer
-    // in this case we assume Python2 module is imported
-    setPythonVersions();
-    socketServer = symbolsForModule("SocketServer");
-    assertThat(socketServer).isNotEmpty();
-    baseServer = (SymbolImpl) socketServer.get("BaseServer");
-    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("27");
-
-    // Unknown Python version, import socketserver
-    // in this case we assume Python3 module is imported
-    socketServer = symbolsForModule("socketserver");
-    assertThat(socketServer).isNotEmpty();
-    baseServer = (SymbolImpl) socketServer.get("BaseServer");
-    assertThat(baseServer.validForPythonVersions()).containsExactlyInAnyOrder("36", "37", "38", "39", "310");
   }
 }

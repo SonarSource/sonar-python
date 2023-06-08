@@ -18,12 +18,10 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from unittest import mock
+import os
 from unittest.mock import Mock, patch
 
 from serializer import symbols, serializers
-import os
-
 from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, ImporterSerializer
 from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
@@ -58,7 +56,7 @@ def test_importer_serializer():
     build_mock.BuildSource = Mock()
     build_mock.build = Mock()
     importer_serializer = ImporterSerializer()
-    with mock.patch('serializer.serializers.build', build_mock):
+    with patch('serializer.serializers.build', build_mock):
         importer_serializer.get_build_result()
         assert build_mock.BuildSource.call_count == 1
         assert build_mock.build.call_count == 1
