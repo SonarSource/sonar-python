@@ -59,8 +59,8 @@ def stdlib_functions():
   A = UnexpectedClass()
   acos(A) # FN Noncompliant
   B = datetime.tzinfo()
-  B.tzname(42) # FN Noncompliant {{Change this argument; Function "tzname" expects a different type}}
-##          ^^
+  B.tzname(42) # Noncompliant {{Change this argument; Function "tzname" expects a different type}}
+#          ^^
   select.select([],[],[], 0)
   time.sleep(1) # OK
   x = time.gmtime(int(time.time()))
