@@ -100,6 +100,10 @@ public class SymbolUtilsTest {
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(-1);
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(-1);
 
+    functionSymbol = functionSymbol("class A:\n  @abstractmethod\n  def method(self, b): pass");
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
+    assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
+    
     functionSymbol = functionSymbol("class A:\n  @unknown_decorator\n  def method(self, *args): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(-1);
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(-1);

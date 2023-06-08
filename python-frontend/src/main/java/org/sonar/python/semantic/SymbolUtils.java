@@ -211,7 +211,10 @@ public class SymbolUtils {
       // We want to avoid FP if there are many decorators
       return -1;
     }
-    if (!decoratorNames.isEmpty() && !decoratorNames.get(0).endsWith("classmethod") && !decoratorNames.get(0).endsWith("staticmethod")) {
+    if (!decoratorNames.isEmpty() && 
+        !decoratorNames.get(0).endsWith("classmethod") && 
+        !decoratorNames.get(0).endsWith("staticmethod") &&
+        !decoratorNames.get(0).endsWith("abstractmethod")) {
       // Unknown decorator which might alter the behaviour of the method
       return -1;
     }
