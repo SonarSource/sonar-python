@@ -82,10 +82,10 @@ def standard_library():
   del math[0]  # FN: Symbol "OTHER" Any type
 
   # File
-  del open("foo.py")[0]  # FN Noncompliant
+  del open("foo.py")[0]  # Noncompliant
 
   import os
-  del os.popen('ls')[0]  # FN Noncompliant
+  del os.popen('ls')[0]  # Noncompliant
 
   from array import array
   a = array('b', [0, 1, 2])
