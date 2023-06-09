@@ -395,7 +395,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     private void createImportedNames(List<AliasedName> importedNames, @Nullable String fromModuleName, List<Token> dottedPrefix) {
       importedNames.forEach(module -> {
-        Name nameTree = module.dottedName().names().get(0);
+        List<Name> dottedNames = module.dottedName().names();
+        Name nameTree = dottedNames.get(0);
         String targetModuleName = fromModuleName;
         String fullyQualifiedName = targetModuleName != null
           ? (targetModuleName + "." + nameTree.name())
@@ -410,8 +411,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         if (targetModuleName != null) {
           currentScope().addImportedSymbol(alias == null ? nameTree : alias, fullyQualifiedName, targetModuleName);
         } else if (alias != null) {
-          String fullName = module.dottedName().names().stream().map(Name::name).collect(Collectors.joining("."));
+          String fullName = dottedNames.stream().map(Name::name).collect(Collectors.joining("."));
           currentScope().addModuleSymbol(alias, fullName);
+        } else if (dottedPrefix.isEmpty() && dottedNames.size() > 1) {
+            // Submodule import
+          dottedNames.stream().map(Name::name).reduce((a, b) -> String.join(".", a, b))
+            .ifPresent(fqn -> currentScope().addSubmoduleSymbol(nameTree, fqn));
         } else {
           // It's a simple case - no "from" imports or aliasing
           currentScope().addModuleSymbol(nameTree, fullyQualifiedName);

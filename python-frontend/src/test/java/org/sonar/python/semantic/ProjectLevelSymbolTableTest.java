@@ -153,6 +153,30 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  public void submodule_import() {
+    FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
+    FunctionDef subModFunctionDef = (FunctionDef) parse("def fn2(p1, p2): pass").statements().statements().get(0);
+    FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
+    FunctionSymbolImpl subModfnSymbol = new FunctionSymbolImpl(subModFunctionDef, "mod.submod.fn2", pythonFile("submod.py"));
+    List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
+    List<Symbol> subModSymbols = Collections.singletonList(subModfnSymbol);
+    Map<String, Set<Symbol>> globalSymbols = Map.of(
+      "mod", new HashSet<>(modSymbols),
+      "mod.submod", new HashSet<>(subModSymbols)
+    );
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalSymbols)),
+      "import mod.submod",
+      "mod.submod.fn2(1, 2)"
+    );
+    CallExpression callExpression = PythonTestUtils.getFirstChild(tree, t -> t.is(Tree.Kind.CALL_EXPR));
+    Symbol importedFnSymbol = callExpression.calleeSymbol();
+    assertThat(importedFnSymbol.is(Symbol.Kind.FUNCTION)).isTrue();
+    assertThat(importedFnSymbol.fullyQualifiedName()).isEqualTo("mod.submod.fn2");
+    assertThat(importedFnSymbol).isNotEqualTo(subModfnSymbol);
+  }
+
+  @Test
   public void import_already_existing_symbol() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
     FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));

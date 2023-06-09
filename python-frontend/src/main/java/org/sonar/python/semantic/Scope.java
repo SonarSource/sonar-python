@@ -19,10 +19,12 @@
  */
 package org.sonar.python.semantic;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -192,6 +194,47 @@ class Scope {
       }
     }
     addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
+  }
+
+  void addSubmoduleSymbol(Name nameTree, String fullyQualifiedName) {
+    String symbolName = nameTree.name();
+    List<String> names = Arrays.stream(fullyQualifiedName.split("\\.")).collect(Collectors.toList());
+    Set<Symbol> moduleExportedSymbols = projectLevelSymbolTable.getSymbolsFromModule(fullyQualifiedName);
+    if (moduleExportedSymbols != null) {
+      addSymbolAndChildren(fullyQualifiedName, symbolName, names, moduleExportedSymbols);
+    } else {
+      Collection<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName).values();
+      if (!standardLibrarySymbols.isEmpty()) {
+        addSymbolAndChildren(fullyQualifiedName, symbolName, names, standardLibrarySymbols);
+      } else {
+        // fall back on default mechanism
+        addModuleSymbol(nameTree, nameTree.name());
+        return;
+      }
+    }
+    addBindingUsage(nameTree, Usage.Kind.IMPORT, names.get(0));
+  }
+
+  private void addSymbolAndChildren(String fullyQualifiedName, String symbolName, List<String> names, Collection<Symbol> standardLibrarySymbols) {
+    String parentName = names.get(0);
+    SymbolImpl parentSymbol = (SymbolImpl) symbolsByName.getOrDefault(symbolName, new SymbolImpl(parentName, parentName));
+    SymbolImpl currentParent = parentSymbol;
+    for (int i = 1; i< names.size(); i++) {
+      String s = names.get(i);
+      SymbolImpl moduleSymbol = (SymbolImpl) currentParent.getChildrenSymbolByName().get(s);
+      if (moduleSymbol == null) {
+        moduleSymbol = new SymbolImpl(s, fullyQualifiedName);
+        currentParent.addChildSymbol(moduleSymbol);
+      }
+      currentParent = moduleSymbol;
+    }
+    for (Symbol stdLibSymbol : standardLibrarySymbols) {
+      if (!currentParent.getChildrenSymbolByName().containsKey(stdLibSymbol.name())) {
+        currentParent.addChildSymbol(copySymbol(stdLibSymbol.name(), stdLibSymbol));
+      }
+    }
+    this.symbols.add(parentSymbol);
+    symbolsByName.put(symbolName, parentSymbol);
   }
 
   void addImportedSymbol(Name nameTree, @CheckForNull String fullyQualifiedName, String fromModuleName) {
