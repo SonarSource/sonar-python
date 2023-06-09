@@ -1,214 +1,0 @@
-
-click.testingù
-
-EchoingStdinclick.testing.EchoingStdin"builtins.object*õ
-__init__#click.testing.EchoingStdin.__init__"
-None*B
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdin*-
-input"
-typing.BinaryIO"typing.BinaryIO*.
-output"
-typing.BinaryIO"typing.BinaryIOz35z36z37z38z39z310*¼
-__getattr__&click.testing.EchoingStdin.__getattr__"
-Any*@
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdin*!
-x
-builtins.str"builtins.strz35z36z37z38z39z310*Í
-readclick.testing.EchoingStdin.read" 
-builtins.bytes"builtins.bytes*B
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdin*%
-n
-builtins.int"builtins.int z35z36z37z38z39z310*Õ
-readline#click.testing.EchoingStdin.readline" 
-builtins.bytes"builtins.bytes*B
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdin*%
-n
-builtins.int"builtins.int z35z36z37z38z39z310*à
-	readlines$click.testing.EchoingStdin.readlines"P
-builtins.list[builtins.bytes] 
-builtins.bytes"builtins.bytes"builtins.list*B
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdinz35z36z37z38z39z310*à
-__iter__#click.testing.EchoingStdin.__iter__"T
-typing.Iterable[builtins.bytes] 
-builtins.bytes"builtins.bytes"typing.Iterable*@
-self8
-click.testing.EchoingStdin"click.testing.EchoingStdinz35z36z37z38z39z310j35j36j37j38j39j310Ò
-Resultclick.testing.Result"builtins.object*©
-__init__click.testing.Result.__init__"
-None*6
-self,
-click.testing.Result"click.testing.Result*>
-runner2
-click.testing.CliRunner"click.testing.CliRunner*2
-stdout_bytes 
-builtins.bytes"builtins.bytes*2
-stderr_bytes 
-builtins.bytes"builtins.bytes*+
-	exit_code
-builtins.int"builtins.int*
-	exception
-Any*6
-exc_info&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*¢
-outputclick.testing.Result.output"
-builtins.str"builtins.str*6
-self,
-click.testing.Result"click.testing.Result0:property`z35z36z37z38z39z310*¢
-stdoutclick.testing.Result.stdout"
-builtins.str"builtins.str*6
-self,
-click.testing.Result"click.testing.Result0:property`z35z36z37z38z39z310*¢
-stderrclick.testing.Result.stderr"
-builtins.str"builtins.str*6
-self,
-click.testing.Result"click.testing.Result0:property`z35z36z37z38z39z310j35j36j37j38j39j310rr
-runnerclick.testing.Result.runner2
-click.testing.CliRunner"click.testing.CliRunner*35*36*37*38*39*310rb
-	exit_codeclick.testing.Result.exit_code
-builtins.int"builtins.int*35*36*37*38*39*310rM
-	exceptionclick.testing.Result.exception
-Any*35*36*37*38*39*310rj
-exc_infoclick.testing.Result.exc_info&
-Union[Any,None]
-Any
-None*35*36*37*38*39*310rl
-stdout_bytes!click.testing.Result.stdout_bytes 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rl
-stderr_bytes!click.testing.Result.stderr_bytes 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310Å
-	CliRunnerclick.testing.CliRunner"builtins.object*‘
-__init__ click.testing.CliRunner.__init__"
-None*<
-self2
-click.testing.CliRunner"click.testing.CliRunner*S
-charsetD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *È
-env¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *0
-
-echo_stdin
-builtins.bool"builtins.bool *0
-
-mix_stderr
-builtins.bool"builtins.bool z35z36z37z38z39z310*ö
-get_default_prog_name-click.testing.CliRunner.get_default_prog_name"
-builtins.str"builtins.str*<
-self2
-click.testing.CliRunner"click.testing.CliRunner*9
-cli0
-click.core.BaseCommand"click.core.BaseCommandz35z36z37z38z39z310*Ë
-make_env click.testing.CliRunner.make_env"u
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*<
-self2
-click.testing.CliRunner"click.testing.CliRunner*Î
-	overrides¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None z35z36z37z38z39z310*…
-	isolation!click.testing.CliRunner.isolation"Ê
-Qtyping.ContextManager[Tuple[io.BytesIO,Union[io.BytesIO,Literal[builtins.bool]]]]Ý
-:Tuple[io.BytesIO,Union[io.BytesIO,Literal[builtins.bool]]]
-
-io.BytesIO"
-io.BytesIO‚
-(Union[io.BytesIO,Literal[builtins.bool]]
-
-io.BytesIO"
-io.BytesIO:
-Literal[builtins.bool]	
-builtins.bool"builtins.bool"typing.ContextManager*<
-self2
-click.testing.CliRunner"click.testing.CliRunner*¸
-inputª
-6Union[builtins.bytes,builtins.str,typing.IO[Any],None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str$
-typing.IO[Any]
-Any"	typing.IO
-None *È
-env¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *+
-color
-builtins.bool"builtins.bool z35z36z37z38z39z310*©
-invokeclick.testing.CliRunner.invoke",
-click.testing.Result"click.testing.Result*<
-self2
-click.testing.CliRunner"click.testing.CliRunner*9
-cli0
-click.core.BaseCommand"click.core.BaseCommand*¿
-args²
-6Union[builtins.str,typing.Iterable[builtins.str],None]
-builtins.str"builtins.strN
-typing.Iterable[builtins.str]
-builtins.str"builtins.str"typing.Iterable
-None *¸
-inputª
-6Union[builtins.bytes,builtins.str,typing.IO[Any],None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str$
-typing.IO[Any]
-Any"	typing.IO
-None *È
-env¼
-5Union[typing.Mapping[builtins.str,builtins.str],None]w
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping
-None *6
-catch_exceptions
-builtins.bool"builtins.bool *+
-color
-builtins.bool"builtins.bool *
-extra
-Anyz35z36z37z38z39z310*õ
-isolated_filesystem+click.testing.CliRunner.isolated_filesystem"Z
-#typing.ContextManager[builtins.str]
-builtins.str"builtins.str"typing.ContextManager*<
-self2
-click.testing.CliRunner"click.testing.CliRunnerz35z36z37z38z39z310j35j36j37j38j39j310ra
-charsetclick.testing.CliRunner.charset
-builtins.str"builtins.str*35*36*37*38*39*310r´
-envclick.testing.CliRunner.envw
-)typing.Mapping[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"typing.Mapping*35*36*37*38*39*310ri
-
-echo_stdin"click.testing.CliRunner.echo_stdin
-builtins.bool"builtins.bool*35*36*37*38*39*310ri
-
-mix_stderr"click.testing.CliRunner.mix_stderr
-builtins.bool"builtins.bool*35*36*37*38*39*310Õ
-make_input_streamclick.testing.make_input_stream""
-typing.BinaryIO"typing.BinaryIO*¶
-inputª
-6Union[builtins.bytes,builtins.str,typing.IO[Any],None] 
-builtins.bytes"builtins.bytes
-builtins.str"builtins.str$
-typing.IO[Any]
-Any"	typing.IO
-None*)
-charset
-builtins.str"builtins.strz35z36z37z38z39z310*D
-clickpkgclick.testing.clickpkg
-Any*35*36*37*38*39*310

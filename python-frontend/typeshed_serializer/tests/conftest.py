@@ -72,6 +72,20 @@ def typeshed_third_parties():
     serializers.THIRD_PARTIES_STUBS = MOCK_THIRD_PARTY_STUBS_LIST
     return TypeshedSerializer(is_third_parties=True).get_merged_modules()
 
+@pytest.fixture(scope="session")
+def save_location_folder():
+    folder_location = os.path.join(CURRENT_PATH, "resources/save_location")
+    files = [
+        f"{folder_location}/LICENSE",
+        f"{folder_location}/test.py",
+        f"{folder_location}/test1.py",
+        f"{folder_location}/test/test.py",
+        f"{folder_location}/test/test1.py"
+    ]
+    for path in files:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        open(path, "w")
+    return folder_location
 
 def build_modules(modules: dict[str, str], python_version=(3, 8)):
     opt = get_options(python_version)

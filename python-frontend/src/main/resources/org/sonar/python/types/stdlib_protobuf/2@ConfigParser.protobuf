@@ -1,424 +1,0 @@
-
-ConfigParser„
-ErrorConfigParser.Error"builtins.Exception*’
-__init__ConfigParser.Error.__init__"
-None*2
-self(
-ConfigParser.Error"ConfigParser.Error*'
-msg
-builtins.str"builtins.str z27*q
-_get_messageConfigParser.Error._get_message"
-None*2
-self(
-ConfigParser.Error"ConfigParser.Errorz27*š
-_set_messageConfigParser.Error._set_message"
-None*2
-self(
-ConfigParser.Error"ConfigParser.Error*'
-value
-builtins.str"builtins.strz27*{
-__repr__ConfigParser.Error.__repr__"
-builtins.str"builtins.str*0
-self(
-ConfigParser.Error"ConfigParser.Errorz27*y
-__str__ConfigParser.Error.__str__"
-builtins.str"builtins.str*0
-self(
-ConfigParser.Error"ConfigParser.Errorz27j27r2
-messageConfigParser.Error.message
-Any*27É
-NoSectionErrorConfigParser.NoSectionError"ConfigParser.Error*¯
-__init__$ConfigParser.NoSectionError.__init__"
-None*D
-self:
-ConfigParser.NoSectionError"ConfigParser.NoSectionError*)
-section
-builtins.str"builtins.strz27j27rP
-section#ConfigParser.NoSectionError.section
-builtins.str"builtins.str*27ó
-DuplicateSectionError"ConfigParser.DuplicateSectionError"ConfigParser.Error*Ä
-__init__+ConfigParser.DuplicateSectionError.__init__"
-None*R
-selfH
-"ConfigParser.DuplicateSectionError""ConfigParser.DuplicateSectionError*)
-section
-builtins.str"builtins.strz27j27rW
-section*ConfigParser.DuplicateSectionError.section
-builtins.str"builtins.str*27¼
-NoOptionErrorConfigParser.NoOptionError"ConfigParser.Error*Ö
-__init__#ConfigParser.NoOptionError.__init__"
-None*B
-self8
-ConfigParser.NoOptionError"ConfigParser.NoOptionError*(
-option
-builtins.str"builtins.str*)
-section
-builtins.str"builtins.strz27j27rO
-section"ConfigParser.NoOptionError.section
-builtins.str"builtins.str*27rM
-option!ConfigParser.NoOptionError.option
-builtins.str"builtins.str*27Ô
-InterpolationErrorConfigParser.InterpolationError"ConfigParser.Error*Œ
-__init__(ConfigParser.InterpolationError.__init__"
-None*L
-selfB
-ConfigParser.InterpolationError"ConfigParser.InterpolationError*(
-option
-builtins.str"builtins.str*)
-section
-builtins.str"builtins.str*%
-msg
-builtins.str"builtins.strz27j27rT
-section'ConfigParser.InterpolationError.section
-builtins.str"builtins.str*27rR
-option&ConfigParser.InterpolationError.option
-builtins.str"builtins.str*27rL
-msg#ConfigParser.InterpolationError.msg
-builtins.str"builtins.str*27Á
-InterpolationMissingOptionError,ConfigParser.InterpolationMissingOptionError"ConfigParser.InterpolationError*ã
-__init__5ConfigParser.InterpolationMissingOptionError.__init__"
-None*f
-self\
-,ConfigParser.InterpolationMissingOptionError",ConfigParser.InterpolationMissingOptionError*(
-option
-builtins.str"builtins.str*)
-section
-builtins.str"builtins.str*(
-rawval
-builtins.str"builtins.str*+
-	reference
-builtins.str"builtins.strz27j27re
-	reference6ConfigParser.InterpolationMissingOptionError.reference
-builtins.str"builtins.str*27f
-InterpolationSyntaxError%ConfigParser.InterpolationSyntaxError"ConfigParser.InterpolationErrorj27…
-InterpolationDepthError$ConfigParser.InterpolationDepthError"ConfigParser.InterpolationError*ž
-__init__-ConfigParser.InterpolationDepthError.__init__"
-None*V
-selfL
-$ConfigParser.InterpolationDepthError"$ConfigParser.InterpolationDepthError*(
-option
-builtins.str"builtins.str*)
-section
-builtins.str"builtins.str*(
-rawval
-builtins.str"builtins.strz27j27ì
-ParsingErrorConfigParser.ParsingError"ConfigParser.Error*ª
-__init__"ConfigParser.ParsingError.__init__"
-None*@
-self6
-ConfigParser.ParsingError"ConfigParser.ParsingError**
-filename
-builtins.str"builtins.strz27*¢
-append ConfigParser.ParsingError.append"
-None*@
-self6
-ConfigParser.ParsingError"ConfigParser.ParsingError*
-lineno
-Any*
-line
-Anyz27j27rP
-filename"ConfigParser.ParsingError.filename
-builtins.str"builtins.str*27r„
-errors ConfigParser.ParsingError.errorsT
-builtins.list[Tuple[Any,Any]]$
-Tuple[Any,Any]
-Any
-Any"builtins.list*27æ
-MissingSectionHeaderError&ConfigParser.MissingSectionHeaderError"ConfigParser.ParsingError*ù
-__init__/ConfigParser.MissingSectionHeaderError.__init__"
-None*Z
-selfP
-&ConfigParser.MissingSectionHeaderError"&ConfigParser.MissingSectionHeaderError**
-filename
-builtins.str"builtins.str*
-lineno
-Any*
-line
-Anyz27j27rD
-lineno-ConfigParser.MissingSectionHeaderError.lineno
-Any*27r@
-line+ConfigParser.MissingSectionHeaderError.line
-Any*27ö-
-RawConfigParserConfigParser.RawConfigParser"builtins.object*¢
-__init__%ConfigParser.RawConfigParser.__init__"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*I
-defaults9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict *
-	dict_type
-Any *4
-allow_no_value
-builtins.bool"builtins.bool z27*¸
-defaults%ConfigParser.RawConfigParser.defaults"9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParserz27*É
-sections%ConfigParser.RawConfigParser.sections"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParserz27*¸
-add_section(ConfigParser.RawConfigParser.add_section"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.strz27*Î
-has_section(ConfigParser.RawConfigParser.has_section"
-builtins.bool"builtins.bool*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.strz27*ò
-options$ConfigParser.RawConfigParser.options"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.strz27*÷
-read!ConfigParser.RawConfigParser.read"J
-builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*³
-	filenames£
-1Union[builtins.str,typing.Sequence[builtins.str]]
-builtins.str"builtins.strN
-typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequencez27*©
-readfp#ConfigParser.RawConfigParser.readfp"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*v
-fpn
--_typeshed.SupportsNoArgReadline[builtins.str]
-builtins.str"builtins.str"_typeshed.SupportsNoArgReadline*,
-filename
-builtins.str"builtins.str z27*æ
-get ConfigParser.RawConfigParser.get"
-builtins.str"builtins.str*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.strz27*ø
-items"ConfigParser.RawConfigParser.items"T
-builtins.list[Tuple[Any,Any]]$
-Tuple[Any,Any]
-Any
-Any"builtins.list*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.strz27*ý
-_get!ConfigParser.RawConfigParser._get"
-Any*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-conv
-builtins.type"builtins.type*(
-option
-builtins.str"builtins.strz27*ì
-getint#ConfigParser.RawConfigParser.getint"
-builtins.int"builtins.int*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.strz27*ô
-getfloat%ConfigParser.RawConfigParser.getfloat" 
-builtins.float"builtins.float*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.strz27*ö
-
-getboolean'ConfigParser.RawConfigParser.getboolean"
-builtins.bool"builtins.bool*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.strz27*Î
-optionxform(ConfigParser.RawConfigParser.optionxform"
-builtins.str"builtins.str*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*+
-	optionstr
-builtins.str"builtins.strz27*ö
-
-has_option'ConfigParser.RawConfigParser.has_option"
-builtins.bool"builtins.bool*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.strz27*è
-set ConfigParser.RawConfigParser.set"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.str*
-value
-Any z27*Í
-write"ConfigParser.RawConfigParser.write"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*J
-fpB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IOz27*ç
-remove_option*ConfigParser.RawConfigParser.remove_option"
-builtins.bool"builtins.bool*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.str*
-option
-Anyz27*Ô
-remove_section+ConfigParser.RawConfigParser.remove_section"
-builtins.bool"builtins.bool*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*)
-section
-builtins.str"builtins.strz27*÷
-_read"ConfigParser.RawConfigParser._read"
-None*F
-self<
-ConfigParser.RawConfigParser"ConfigParser.RawConfigParser*J
-fpB
-typing.IO[builtins.str]
-builtins.str"builtins.str"	typing.IO*(
-fpname
-builtins.str"builtins.strz27j27r8
-_dict"ConfigParser.RawConfigParser._dict
-Any*27rr
-	_sections&ConfigParser.RawConfigParser._sections9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*27rr
-	_defaults&ConfigParser.RawConfigParser._defaults9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*27r<
-_optcre$ConfigParser.RawConfigParser._optcre
-Any*27r<
-SECTCRE$ConfigParser.RawConfigParser.SECTCRE
-Any*27r:
-OPTCRE#ConfigParser.RawConfigParser.OPTCRE
-Any*27r@
-	OPTCRE_NV&ConfigParser.RawConfigParser.OPTCRE_NV
-Any*27r½
-_boolean_states,ConfigParser.RawConfigParser._boolean_statesx
-)builtins.dict[builtins.str,builtins.bool]
-builtins.str"builtins.str
-builtins.bool"builtins.bool"builtins.dict*27‘
-ConfigParserConfigParser.ConfigParser"ConfigParser.RawConfigParser*ì
-getConfigParser.ConfigParser.get"
-Any*@
-self6
-ConfigParser.ConfigParser"ConfigParser.ConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.str*)
-raw
-builtins.bool"builtins.bool *w
-varsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None z27*º
-itemsConfigParser.ConfigParser.items"{
-&builtins.list[Tuple[builtins.str,Any]]B
-Tuple[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.list*@
-self6
-ConfigParser.ConfigParser"ConfigParser.ConfigParser*)
-section
-builtins.str"builtins.str*)
-raw
-builtins.bool"builtins.bool *w
-varsk
-"Union[builtins.dict[Any,Any],None]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict
-None z27*—
-_interpolate&ConfigParser.ConfigParser._interpolate"
-builtins.str"builtins.str*@
-self6
-ConfigParser.ConfigParser"ConfigParser.ConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.str*
-rawval
-Any*
-vars
-Anyz27*Â
-_interpolation_replace0ConfigParser.ConfigParser._interpolation_replace"
-builtins.str"builtins.str*@
-self6
-ConfigParser.ConfigParser"ConfigParser.ConfigParser*
-match
-Anyz27j27r9
-_KEYCRE!ConfigParser.ConfigParser._KEYCRE
-Any*27ƒ
-SafeConfigParserConfigParser.SafeConfigParser"ConfigParser.ConfigParser*£
-_interpolate*ConfigParser.SafeConfigParser._interpolate"
-builtins.str"builtins.str*H
-self>
-ConfigParser.SafeConfigParser"ConfigParser.SafeConfigParser*)
-section
-builtins.str"builtins.str*(
-option
-builtins.str"builtins.str*
-rawval
-Any*
-vars
-Anyz27*¿
-_interpolate_some/ConfigParser.SafeConfigParser._interpolate_some"
-None*H
-self>
-ConfigParser.SafeConfigParser"ConfigParser.SafeConfigParser*(
-option
-builtins.str"builtins.str*7
-accum,
-builtins.list[Any]
-Any"builtins.list*&
-rest
-builtins.str"builtins.str*)
-section
-builtins.str"builtins.str*B
-map9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*'
-depth
-builtins.int"builtins.intz27j27rI
-_interpvar_re+ConfigParser.SafeConfigParser._interpvar_re
-Any*27*I
-DEFAULTSECTConfigParser.DEFAULTSECT
-builtins.str"builtins.str*27*a
-MAX_INTERPOLATION_DEPTH$ConfigParser.MAX_INTERPOLATION_DEPTH
-builtins.int"builtins.int*27

@@ -82,8 +82,8 @@ def tuples_no_fp():
 
 def function_from_typeshed():
   import emoji
-  emoji.emojize(":rocket:", True, use_aliases=True) # Noncompliant {{Remove duplicate values for parameter "use_aliases" in "emojize" call.}}
-  #                         ^^^^  ^^^^^^^^^^^^^^^^<
+  emoji.emojize(":rocket:", True, use_aliases=True) # FN Noncompliant {{Remove duplicate values for parameter "use_aliases" in "emojize" call.}}
+  ##                         ^^^^  ^^^^^^^^^^^^^^^^<
 
 def self_ignored():
   class MyClass:

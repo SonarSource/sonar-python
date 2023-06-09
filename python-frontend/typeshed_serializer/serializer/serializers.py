@@ -26,6 +26,7 @@ from mypy import options, build
 from serializer import symbols
 from serializer.symbols import ModuleSymbol
 from serializer.symbols_merger import merge_modules
+from utils.folder_manager import FolderManager
 
 STDLIB_PATH = "../resources/typeshed/stdlib"
 STUBS_PATH = "../resources/typeshed/stubs"
@@ -91,6 +92,7 @@ def get_sources(relative_path: str):
 
 class Serializer(ABC):
     save_location: str
+    output_folder: str
 
     def __init__(self, is_debug=False, python_version=(3, 8)):
         self.is_debug = is_debug
@@ -103,7 +105,7 @@ class Serializer(ABC):
                 continue
             current_file = build_result.files.get(file)
             module_symbol = symbols.ModuleSymbol(current_file)
-            symbols.save_module(module_symbol, self.save_location, is_debug=self.is_debug,
+            symbols.save_module(module_symbol, self.output_folder, is_debug=self.is_debug,
                                 debug_dir=output_dir_name)
 
     @abstractmethod
@@ -121,12 +123,13 @@ class TypeshedSerializer(Serializer):
         super().__init__(is_debug)
         self.is_third_parties = is_third_parties
         self.save_location = "third_party_protobuf" if is_third_parties else "stdlib_protobuf"
+        self.output_folder = f"{FolderManager.output_folder}/{self.save_location}"
 
     def serialize_merged_modules(self):
         merged_modules = self.get_merged_modules()
         for mod in merged_modules:
             symbols.save_module(
-                merged_modules[mod], self.save_location, is_debug=self.is_debug, debug_dir="output_merge"
+                merged_modules[mod], self.output_folder, is_debug=self.is_debug, debug_dir="output_merge"
             )
 
     def get_merged_modules(self):
@@ -169,6 +172,7 @@ class TypeshedSerializer(Serializer):
 
 class ImporterSerializer(Serializer):
     save_location = "third_party_protobuf_mypy"
+    output_folder = f"{FolderManager.output_folder}/{save_location}"
 
     def get_build_result(self, opt=get_options()):
         path = os.path.join(CURRENT_PATH, IMPORTER_FILE_NAME)
@@ -183,6 +187,7 @@ class ImporterSerializer(Serializer):
 class CustomStubsSerializer(Serializer):
     path = os.path.join(CURRENT_PATH, CUSTOM_STUBS_PATH)
     save_location = "custom_protobuf"
+    output_folder = f"{FolderManager.output_folder}/{save_location}"
 
     def get_build_result(self, opt=get_options()):
         source_list, source_paths = get_sources(CUSTOM_STUBS_PATH)
