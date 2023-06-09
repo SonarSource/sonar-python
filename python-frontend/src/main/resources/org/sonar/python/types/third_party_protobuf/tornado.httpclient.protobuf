@@ -1,287 +1,0 @@
-
-tornado.httpclientÖ
-
-HTTPClienttornado.httpclient.HTTPClient"builtins.object*Â
-__init__&tornado.httpclient.HTTPClient.__init__"
-None*H
-self>
-tornado.httpclient.HTTPClient"tornado.httpclient.HTTPClient*!
-async_client_class
-Any *
-kwargs
-Anyz27*>
-__del__%tornado.httpclient.HTTPClient.__del__*
-selfz27*:
-close#tornado.httpclient.HTTPClient.close*
-selfz27*S
-fetch#tornado.httpclient.HTTPClient.fetch*
-self*
-request*
-
-kwargsz27j27¦
-AsyncHTTPClient"tornado.httpclient.AsyncHTTPClient"tornado.util.Configurable*g
-configurable_base4tornado.httpclient.AsyncHTTPClient.configurable_base*
-cls0:classmethodpz27*m
-configurable_default7tornado.httpclient.AsyncHTTPClient.configurable_default*
-cls0:classmethodpz27*s
-__new__*tornado.httpclient.AsyncHTTPClient.__new__*
-cls*
-io_loop *
-force_instance *
-
-kwargsz27*f
-
-initialize-tornado.httpclient.AsyncHTTPClient.initialize*
-self*
-io_loop*
-defaults z27*?
-close(tornado.httpclient.AsyncHTTPClient.close*
-selfz27*{
-fetch(tornado.httpclient.AsyncHTTPClient.fetch*
-self*
-request*
-callback *
-raise_error *
-
-kwargsz27*d
-
-fetch_impl-tornado.httpclient.AsyncHTTPClient.fetch_impl*
-self*
-request*
-callbackz27*m
-	configure,tornado.httpclient.AsyncHTTPClient.configure*
-cls*
-impl*
-
-kwargs0:classmethodpz27j27rB
-io_loop*tornado.httpclient.AsyncHTTPClient.io_loop
-Any*27rD
-defaults+tornado.httpclient.AsyncHTTPClient.defaults
-Any*27Ô
-HTTPRequesttornado.httpclient.HTTPRequest"builtins.object*Â
-__init__'tornado.httpclient.HTTPRequest.__init__"
-None*J
-self@
-tornado.httpclient.HTTPRequest"tornado.httpclient.HTTPRequest*
-url
-Any*
-method
-Any *
-headers
-Any *
-body
-Any *
-auth_username
-Any *
-auth_password
-Any *
-	auth_mode
-Any *
-connect_timeout
-Any *
-request_timeout
-Any * 
-if_modified_since
-Any *
-follow_redirects
-Any *
-max_redirects
-Any *
-
-user_agent
-Any *
-use_gzip
-Any * 
-network_interface
-Any *!
-streaming_callback
-Any *
-header_callback
-Any *$
-prepare_curl_callback
-Any *
-
-proxy_host
-Any *
-
-proxy_port
-Any *
-proxy_username
-Any *
-proxy_password
-Any *(
-allow_nonstandard_methods
-Any *
-validate_cert
-Any *
-ca_certs
-Any *
-
-allow_ipv6
-Any *
-
-client_key
-Any *
-client_cert
-Any *
-body_producer
-Any *"
-expect_100_continue
-Any *"
-decompress_response
-Any *
-ssl_options
-Any z272Ü
-headers&tornado.httpclient.HTTPRequest.headersK
-headers&tornado.httpclient.HTTPRequest.headers*
-self0:propertyX`X
-headers&tornado.httpclient.HTTPRequest.headers*
-self*	
-value0:headers.setter"272Ç
-body#tornado.httpclient.HTTPRequest.bodyE
-body#tornado.httpclient.HTTPRequest.body*
-self0:propertyX`O
-body#tornado.httpclient.HTTPRequest.body*
-self*	
-value0:body.setter"27j27rD
-
-proxy_host)tornado.httpclient.HTTPRequest.proxy_host
-Any*27rD
-
-proxy_port)tornado.httpclient.HTTPRequest.proxy_port
-Any*27rL
-proxy_username-tornado.httpclient.HTTPRequest.proxy_username
-Any*27rL
-proxy_password-tornado.httpclient.HTTPRequest.proxy_password
-Any*27r6
-url"tornado.httpclient.HTTPRequest.url
-Any*27r<
-method%tornado.httpclient.HTTPRequest.method
-Any*27rJ
-body_producer,tornado.httpclient.HTTPRequest.body_producer
-Any*27rJ
-auth_username,tornado.httpclient.HTTPRequest.auth_username
-Any*27rJ
-auth_password,tornado.httpclient.HTTPRequest.auth_password
-Any*27rB
-	auth_mode(tornado.httpclient.HTTPRequest.auth_mode
-Any*27rN
-connect_timeout.tornado.httpclient.HTTPRequest.connect_timeout
-Any*27rN
-request_timeout.tornado.httpclient.HTTPRequest.request_timeout
-Any*27rP
-follow_redirects/tornado.httpclient.HTTPRequest.follow_redirects
-Any*27rJ
-max_redirects,tornado.httpclient.HTTPRequest.max_redirects
-Any*27rD
-
-user_agent)tornado.httpclient.HTTPRequest.user_agent
-Any*27rV
-decompress_response2tornado.httpclient.HTTPRequest.decompress_response
-Any*27rR
-network_interface0tornado.httpclient.HTTPRequest.network_interface
-Any*27rT
-streaming_callback1tornado.httpclient.HTTPRequest.streaming_callback
-Any*27rN
-header_callback.tornado.httpclient.HTTPRequest.header_callback
-Any*27rZ
-prepare_curl_callback4tornado.httpclient.HTTPRequest.prepare_curl_callback
-Any*27rb
-allow_nonstandard_methods8tornado.httpclient.HTTPRequest.allow_nonstandard_methods
-Any*27rJ
-validate_cert,tornado.httpclient.HTTPRequest.validate_cert
-Any*27r@
-ca_certs'tornado.httpclient.HTTPRequest.ca_certs
-Any*27rD
-
-allow_ipv6)tornado.httpclient.HTTPRequest.allow_ipv6
-Any*27rD
-
-client_key)tornado.httpclient.HTTPRequest.client_key
-Any*27rF
-client_cert*tornado.httpclient.HTTPRequest.client_cert
-Any*27rF
-ssl_options*tornado.httpclient.HTTPRequest.ssl_options
-Any*27rV
-expect_100_continue2tornado.httpclient.HTTPRequest.expect_100_continue
-Any*27rD
-
-start_time)tornado.httpclient.HTTPRequest.start_time
-Any*27˜	
-HTTPResponsetornado.httpclient.HTTPResponse"builtins.object*ê
-__init__(tornado.httpclient.HTTPResponse.__init__"
-None*L
-selfB
-tornado.httpclient.HTTPResponse"tornado.httpclient.HTTPResponse*
-request
-Any*
-code
-Any*
-headers
-Any *
-buffer
-Any *
-effective_url
-Any *
-error
-Any *
-request_time
-Any *
-	time_info
-Any *
-reason
-Any z27*@
-rethrow'tornado.httpclient.HTTPResponse.rethrow*
-selfz27j27r?
-request'tornado.httpclient.HTTPResponse.request
-Any*27r9
-code$tornado.httpclient.HTTPResponse.code
-Any*27r=
-reason&tornado.httpclient.HTTPResponse.reason
-Any*27r?
-headers'tornado.httpclient.HTTPResponse.headers
-Any*27r=
-buffer&tornado.httpclient.HTTPResponse.buffer
-Any*27rK
-effective_url-tornado.httpclient.HTTPResponse.effective_url
-Any*27r;
-error%tornado.httpclient.HTTPResponse.error
-Any*27rI
-request_time,tornado.httpclient.HTTPResponse.request_time
-Any*27rC
-	time_info)tornado.httpclient.HTTPResponse.time_info
-Any*27rN
-body$tornado.httpclient.HTTPResponse.body
-builtins.str"builtins.str*27‡
-	HTTPErrortornado.httpclient.HTTPError"builtins.Exception*Ë
-__init__%tornado.httpclient.HTTPError.__init__"
-None*F
-self<
-tornado.httpclient.HTTPError"tornado.httpclient.HTTPError*
-code
-Any*
-message
-Any *
-response
-Any z27j27r6
-code!tornado.httpclient.HTTPError.code
-Any*27r>
-response%tornado.httpclient.HTTPError.response
-Any*27ä
-_RequestProxy tornado.httpclient._RequestProxy"builtins.object*À
-__init__)tornado.httpclient._RequestProxy.__init__"
-None*N
-selfD
- tornado.httpclient._RequestProxy" tornado.httpclient._RequestProxy*
-request
-Any*
-defaults
-Anyz27*S
-__getattr__,tornado.httpclient._RequestProxy.__getattr__*
-self*
-namez27j27r@
-request(tornado.httpclient._RequestProxy.request
-Any*27rB
-defaults)tornado.httpclient._RequestProxy.defaults
-Any*27#
-maintornado.httpclient.mainz27

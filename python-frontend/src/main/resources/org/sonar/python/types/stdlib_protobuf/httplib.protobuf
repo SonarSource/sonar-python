@@ -1,549 +1,0 @@
-
-httplibç
-HTTPMessagehttplib.HTTPMessage"mimetools.Message*Á
-addcontinuehttplib.HTTPMessage.addcontinue"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessage*%
-key
-builtins.str"builtins.str*&
-more
-builtins.str"builtins.strz27*¾
-	addheaderhttplib.HTTPMessage.addheader"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessage*%
-key
-builtins.str"builtins.str*'
-value
-builtins.str"builtins.strz27*r
-readheadershttplib.HTTPMessage.readheaders"
-None*4
-self*
-httplib.HTTPMessage"httplib.HTTPMessagez27j27r›
-dicthttplib.HTTPMessage.dictu
-(builtins.dict[builtins.str,builtins.str]
-builtins.str"builtins.str
-builtins.str"builtins.str"builtins.dict*27rJ
-unixfromhttplib.HTTPMessage.unixfrom
-builtins.str"builtins.str*27r3
-headershttplib.HTTPMessage.headers
-Any*27rF
-statushttplib.HTTPMessage.status
-builtins.str"builtins.str*27rL
-seekablehttplib.HTTPMessage.seekable
-builtins.bool"builtins.bool*27µ
-HTTPResponsehttplib.HTTPResponse"builtins.object*Å
-__init__httplib.HTTPResponse.__init__"
-None*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*
-sock
-Any*.
-
-debuglevel
-builtins.int"builtins.int **
-strict
-builtins.int"builtins.int *4
-method&
-Union[Any,None]
-Any
-None */
-	buffering
-builtins.bool"builtins.bool z27*1
-beginhttplib.HTTPResponse.begin*
-selfz27*1
-closehttplib.HTTPResponse.close*
-selfz27*7
-isclosedhttplib.HTTPResponse.isclosed*
-selfz27*™
-readhttplib.HTTPResponse.read"
-Any*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*1
-amt&
-Union[Any,None]
-Any
-None z27*3
-filenohttplib.HTTPResponse.fileno*
-selfz27*º
-	getheaderhttplib.HTTPResponse.getheader"
-Any*6
-self,
-httplib.HTTPResponse"httplib.HTTPResponse*
-name
-Any*5
-default&
-Union[Any,None]
-Any
-None z27*;
-
-getheadershttplib.HTTPResponse.getheaders*
-selfz27j27r*
-fphttplib.HTTPResponse.fp
-Any*27r:
-
-debuglevelhttplib.HTTPResponse.debuglevel
-Any*27r2
-stricthttplib.HTTPResponse.strict
-Any*27r,
-msghttplib.HTTPResponse.msg
-Any*27r4
-versionhttplib.HTTPResponse.version
-Any*27r2
-statushttplib.HTTPResponse.status
-Any*27r2
-reasonhttplib.HTTPResponse.reason
-Any*27r4
-chunkedhttplib.HTTPResponse.chunked
-Any*27r:
-
-chunk_lefthttplib.HTTPResponse.chunk_left
-Any*27r2
-lengthhttplib.HTTPResponse.length
-Any*27r:
-
-will_closehttplib.HTTPResponse.will_close
-Any*27ø
-HTTPConnectionProtocolhttplib.HTTPConnectionProtocol"builtins.object*¦
-__call__'httplib.HTTPConnectionProtocol.__call__"0
-httplib.HTTPConnection"httplib.HTTPConnection*J
-self@
-httplib.HTTPConnectionProtocol"httplib.HTTPConnectionProtocol*&
-host
-builtins.str"builtins.str*+
-timeout
-builtins.int"builtins.int *
-http_con_args
-Anyz27Xj27¡
-HTTPConnectionhttplib.HTTPConnection"builtins.object*È
-__init__httplib.HTTPConnection.__init__"
-None*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *
-timeout
-Any *<
-source_address&
-Union[Any,None]
-Any
-None z27*ö
-
-set_tunnel!httplib.HTTPConnection.set_tunnel"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *5
-headers&
-Union[Any,None]
-Any
-None z27*P
-set_debuglevel%httplib.HTTPConnection.set_debuglevel*
-self*	
-levelz27*7
-connecthttplib.HTTPConnection.connect*
-selfz27*3
-closehttplib.HTTPConnection.close*
-selfz27*;
-sendhttplib.HTTPConnection.send*
-self*
-dataz27*ˆ
-
-putrequest!httplib.HTTPConnection.putrequest"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-method
-Any*
-url
-Any*-
-	skip_host
-builtins.int"builtins.int *8
-skip_accept_encoding
-builtins.int"builtins.int z27*S
-	putheader httplib.HTTPConnection.putheader*
-self*
-
-header*
-
-valuesz27*´
-
-endheaders!httplib.HTTPConnection.endheaders"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*:
-message_body&
-Union[Any,None]
-Any
-None z27*å
-requesthttplib.HTTPConnection.request"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*
-method
-Any*
-url
-Any*2
-body&
-Union[Any,None]
-Any
-None *
-headers
-Any z27*«
-getresponse"httplib.HTTPConnection.getresponse"
-Any*:
-self0
-httplib.HTTPConnection"httplib.HTTPConnection*/
-	buffering
-builtins.bool"builtins.bool z27j27rD
-response_class%httplib.HTTPConnection.response_class
-Any*27r@
-default_port#httplib.HTTPConnection.default_port
-Any*27r:
-	auto_open httplib.HTTPConnection.auto_open
-Any*27r<
-
-debuglevel!httplib.HTTPConnection.debuglevel
-Any*27r4
-stricthttplib.HTTPConnection.strict
-Any*27r6
-timeouthttplib.HTTPConnection.timeout
-Any*27rD
-source_address%httplib.HTTPConnection.source_address
-Any*27r0
-sockhttplib.HTTPConnection.sock
-Any*27rE
-hosthttplib.HTTPConnection.host
-builtins.str"builtins.str*27rE
-porthttplib.HTTPConnection.port
-builtins.int"builtins.int*27Ä
-HTTPhttplib.HTTP"builtins.object*ë
-__init__httplib.HTTP.__init__"
-None*&
-self
-httplib.HTTP"httplib.HTTP*(
-host
-builtins.str"builtins.str *2
-port&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None z27*¼
-connecthttplib.HTTP.connect"
-Any*&
-self
-httplib.HTTP"httplib.HTTP*2
-host&
-Union[Any,None]
-Any
-None *2
-port&
-Union[Any,None]
-Any
-None z27*-
-getfilehttplib.HTTP.getfile*
-selfz27*‡
-getreplyhttplib.HTTP.getreply"
-Any*&
-self
-httplib.HTTP"httplib.HTTP*/
-	buffering
-builtins.bool"builtins.bool z27*)
-closehttplib.HTTP.close*
-selfz27j27r2
-
-debuglevelhttplib.HTTP.debuglevel
-Any*27r&
-filehttplib.HTTP.file
-Any*27r,
-headershttplib.HTTP.headers
-Any*27ä
-HTTPSConnectionhttplib.HTTPSConnection"httplib.HTTPConnection*ó
-__init__ httplib.HTTPSConnection.__init__"
-None*<
-self2
-httplib.HTTPSConnection"httplib.HTTPSConnection*
-host
-Any*2
-port&
-Union[Any,None]
-Any
-None *6
-key_file&
-Union[Any,None]
-Any
-None *7
-	cert_file&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *
-timeout
-Any *<
-source_address&
-Union[Any,None]
-Any
-None *5
-context&
-Union[Any,None]
-Any
-None z27*8
-connecthttplib.HTTPSConnection.connect*
-selfz27j27rA
-default_port$httplib.HTTPSConnection.default_port
-Any*27r9
-key_file httplib.HTTPSConnection.key_file
-Any*27r;
-	cert_file!httplib.HTTPSConnection.cert_file
-Any*27r1
-sockhttplib.HTTPSConnection.sock
-Any*27¥
-HTTPShttplib.HTTPS"httplib.HTTP*–
-__init__httplib.HTTPS.__init__"
-None*(
-self
-httplib.HTTPS"httplib.HTTPS*(
-host
-builtins.str"builtins.str *2
-port&
-Union[Any,None]
-Any
-None *6
-key_file&
-Union[Any,None]
-Any
-None *7
-	cert_file&
-Union[Any,None]
-Any
-None *4
-strict&
-Union[Any,None]
-Any
-None *5
-context&
-Union[Any,None]
-Any
-None z27j27r/
-key_filehttplib.HTTPS.key_file
-Any*27r1
-	cert_filehttplib.HTTPS.cert_file
-Any*27>
-HTTPExceptionhttplib.HTTPException"builtins.Exceptionj27?
-NotConnectedhttplib.NotConnected"httplib.HTTPExceptionj27;
-
-InvalidURLhttplib.InvalidURL"httplib.HTTPExceptionj27Â
-UnknownProtocolhttplib.UnknownProtocol"httplib.HTTPException*Ž
-__init__ httplib.UnknownProtocol.__init__"
-None*<
-self2
-httplib.UnknownProtocol"httplib.UnknownProtocol*
-version
-Anyz27j27r1
-argshttplib.UnknownProtocol.args
-Any*27r7
-versionhttplib.UnknownProtocol.version
-Any*27U
-UnknownTransferEncodinghttplib.UnknownTransferEncoding"httplib.HTTPExceptionj27Q
-UnimplementedFileModehttplib.UnimplementedFileMode"httplib.HTTPExceptionj27­
-IncompleteReadhttplib.IncompleteRead"httplib.HTTPException*Ã
-__init__httplib.IncompleteRead.__init__"
-None*:
-self0
-httplib.IncompleteRead"httplib.IncompleteRead*
-partial
-Any*6
-expected&
-Union[Any,None]
-Any
-None z27j27r0
-argshttplib.IncompleteRead.args
-Any*27r6
-partialhttplib.IncompleteRead.partial
-Any*27r8
-expectedhttplib.IncompleteRead.expected
-Any*27U
-ImproperConnectionStatehttplib.ImproperConnectionState"httplib.HTTPExceptionj27S
-CannotSendRequesthttplib.CannotSendRequest"httplib.ImproperConnectionStatej27Q
-CannotSendHeaderhttplib.CannotSendHeader"httplib.ImproperConnectionStatej27Q
-ResponseNotReadyhttplib.ResponseNotReady"httplib.ImproperConnectionStatej27«
-BadStatusLinehttplib.BadStatusLine"httplib.HTTPException*…
-__init__httplib.BadStatusLine.__init__"
-None*8
-self.
-httplib.BadStatusLine"httplib.BadStatusLine*
-line
-Anyz27j27r/
-argshttplib.BadStatusLine.args
-Any*27r/
-linehttplib.BadStatusLine.line
-Any*27Ä
-LineTooLonghttplib.LineTooLong"httplib.HTTPException*„
-__init__httplib.LineTooLong.__init__"
-None*4
-self*
-httplib.LineTooLong"httplib.LineTooLong*
-	line_type
-Anyz27j27ä
-LineAndFileWrapperhttplib.LineAndFileWrapper"builtins.object*§
-__init__#httplib.LineAndFileWrapper.__init__"
-None*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*
-line
-Any*
-file
-Anyz27*M
-__getattr__&httplib.LineAndFileWrapper.__getattr__*
-self*
-attrz27*«
-readhttplib.LineAndFileWrapper.read"
-Any*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*1
-amt&
-Union[Any,None]
-Any
-None z27*=
-readline#httplib.LineAndFileWrapper.readline*
-selfz27*¶
-	readlines$httplib.LineAndFileWrapper.readlines"
-Any*B
-self8
-httplib.LineAndFileWrapper"httplib.LineAndFileWrapper*2
-size&
-Union[Any,None]
-Any
-None z27j27*#
-errorhttplib.error
-Any*27*™
-	responseshttplib.responsesu
-(builtins.dict[builtins.int,builtins.str]
-builtins.int"builtins.int
-builtins.str"builtins.str"builtins.dict*27*@
-	HTTP_PORThttplib.HTTP_PORT
-builtins.int"builtins.int*27*B
-
-HTTPS_PORThttplib.HTTPS_PORT
-builtins.int"builtins.int*27*>
-CONTINUEhttplib.CONTINUE
-builtins.int"builtins.int*27*T
-SWITCHING_PROTOCOLShttplib.SWITCHING_PROTOCOLS
-builtins.int"builtins.int*27*B
-
-PROCESSINGhttplib.PROCESSING
-builtins.int"builtins.int*27*2
-OK
-httplib.OK
-builtins.int"builtins.int*27*<
-CREATEDhttplib.CREATED
-builtins.int"builtins.int*27*>
-ACCEPTEDhttplib.ACCEPTED
-builtins.int"builtins.int*27*h
-NON_AUTHORITATIVE_INFORMATION%httplib.NON_AUTHORITATIVE_INFORMATION
-builtins.int"builtins.int*27*B
-
-NO_CONTENThttplib.NO_CONTENT
-builtins.int"builtins.int*27*H
-RESET_CONTENThttplib.RESET_CONTENT
-builtins.int"builtins.int*27*L
-PARTIAL_CONTENThttplib.PARTIAL_CONTENT
-builtins.int"builtins.int*27*F
-MULTI_STATUShttplib.MULTI_STATUS
-builtins.int"builtins.int*27*<
-IM_USEDhttplib.IM_USED
-builtins.int"builtins.int*27*N
-MULTIPLE_CHOICEShttplib.MULTIPLE_CHOICES
-builtins.int"builtins.int*27*P
-MOVED_PERMANENTLYhttplib.MOVED_PERMANENTLY
-builtins.int"builtins.int*27*8
-FOUNDhttplib.FOUND
-builtins.int"builtins.int*27*@
-	SEE_OTHERhttplib.SEE_OTHER
-builtins.int"builtins.int*27*F
-NOT_MODIFIEDhttplib.NOT_MODIFIED
-builtins.int"builtins.int*27*@
-	USE_PROXYhttplib.USE_PROXY
-builtins.int"builtins.int*27*R
-TEMPORARY_REDIRECThttplib.TEMPORARY_REDIRECT
-builtins.int"builtins.int*27*D
-BAD_REQUESThttplib.BAD_REQUEST
-builtins.int"builtins.int*27*F
-UNAUTHORIZEDhttplib.UNAUTHORIZED
-builtins.int"builtins.int*27*N
-PAYMENT_REQUIREDhttplib.PAYMENT_REQUIRED
-builtins.int"builtins.int*27*@
-	FORBIDDENhttplib.FORBIDDEN
-builtins.int"builtins.int*27*@
-	NOT_FOUNDhttplib.NOT_FOUND
-builtins.int"builtins.int*27*R
-METHOD_NOT_ALLOWEDhttplib.METHOD_NOT_ALLOWED
-builtins.int"builtins.int*27*J
-NOT_ACCEPTABLEhttplib.NOT_ACCEPTABLE
-builtins.int"builtins.int*27*h
-PROXY_AUTHENTICATION_REQUIRED%httplib.PROXY_AUTHENTICATION_REQUIRED
-builtins.int"builtins.int*27*L
-REQUEST_TIMEOUThttplib.REQUEST_TIMEOUT
-builtins.int"builtins.int*27*>
-CONFLICThttplib.CONFLICT
-builtins.int"builtins.int*27*6
-GONEhttplib.GONE
-builtins.int"builtins.int*27*L
-LENGTH_REQUIREDhttplib.LENGTH_REQUIRED
-builtins.int"builtins.int*27*T
-PRECONDITION_FAILEDhttplib.PRECONDITION_FAILED
-builtins.int"builtins.int*27*^
-REQUEST_ENTITY_TOO_LARGE httplib.REQUEST_ENTITY_TOO_LARGE
-builtins.int"builtins.int*27*V
-REQUEST_URI_TOO_LONGhttplib.REQUEST_URI_TOO_LONG
-builtins.int"builtins.int*27*Z
-UNSUPPORTED_MEDIA_TYPEhttplib.UNSUPPORTED_MEDIA_TYPE
-builtins.int"builtins.int*27*l
-REQUESTED_RANGE_NOT_SATISFIABLE'httplib.REQUESTED_RANGE_NOT_SATISFIABLE
-builtins.int"builtins.int*27*R
-EXPECTATION_FAILEDhttplib.EXPECTATION_FAILED
-builtins.int"builtins.int*27*V
-UNPROCESSABLE_ENTITYhttplib.UNPROCESSABLE_ENTITY
-builtins.int"builtins.int*27*:
-LOCKEDhttplib.LOCKED
-builtins.int"builtins.int*27*P
-FAILED_DEPENDENCYhttplib.FAILED_DEPENDENCY
-builtins.int"builtins.int*27*N
-UPGRADE_REQUIREDhttplib.UPGRADE_REQUIRED
-builtins.int"builtins.int*27*X
-INTERNAL_SERVER_ERRORhttplib.INTERNAL_SERVER_ERROR
-builtins.int"builtins.int*27*L
-NOT_IMPLEMENTEDhttplib.NOT_IMPLEMENTED
-builtins.int"builtins.int*27*D
-BAD_GATEWAYhttplib.BAD_GATEWAY
-builtins.int"builtins.int*27*T
-SERVICE_UNAVAILABLEhttplib.SERVICE_UNAVAILABLE
-builtins.int"builtins.int*27*L
-GATEWAY_TIMEOUThttplib.GATEWAY_TIMEOUT
-builtins.int"builtins.int*27*b
-HTTP_VERSION_NOT_SUPPORTED"httplib.HTTP_VERSION_NOT_SUPPORTED
-builtins.int"builtins.int*27*V
-INSUFFICIENT_STORAGEhttplib.INSUFFICIENT_STORAGE
-builtins.int"builtins.int*27*F
-NOT_EXTENDEDhttplib.NOT_EXTENDED
-builtins.int"builtins.int*27

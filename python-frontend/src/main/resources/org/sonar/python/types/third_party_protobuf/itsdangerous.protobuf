@@ -1,781 +1,0 @@
-
-itsdangerousﬁ
-BadDataitsdangerous.BadData"builtins.Exception*Ø
-__init__itsdangerous.BadData.__init__"
-None*6
-self,
-itsdangerous.BadData"itsdangerous.BadData*)
-message
-builtins.str"builtins.strz35z36z37z38z39z310j35j36j37j38j39j310r^
-messageitsdangerous.BadData.message
-builtins.str"builtins.str*35*36*37*38*39*310©
-
-BadPayloaditsdangerous.BadPayload"itsdangerous.BadData*¶
-__init__ itsdangerous.BadPayload.__init__"
-None*<
-self2
-itsdangerous.BadPayload"itsdangerous.BadPayload*)
-message
-builtins.str"builtins.str*l
-original_errorV
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None z35z36z37z38z39z310j35j36j37j38j39j310r©
-original_error&itsdangerous.BadPayload.original_errorV
-Union[builtins.Exception,None](
-builtins.Exception"builtins.Exception
-None*35*36*37*38*39*310ø
-BadSignatureitsdangerous.BadSignature"itsdangerous.BadData*ı
-__init__"itsdangerous.BadSignature.__init__"
-None*@
-self6
-itsdangerous.BadSignature"itsdangerous.BadSignature*)
-message
-builtins.str"builtins.str*5
-payload&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310j35j36j37j38j39j310rm
-payload!itsdangerous.BadSignature.payload&
-Union[Any,None]
-Any
-None*35*36*37*38*39*310‹
-BadTimeSignatureitsdangerous.BadTimeSignature"itsdangerous.BadSignature*⁄
-__init__&itsdangerous.BadTimeSignature.__init__"
-None*H
-self>
-itsdangerous.BadTimeSignature"itsdangerous.BadTimeSignature*)
-message
-builtins.str"builtins.str*5
-payload&
-Union[Any,None]
-Any
-None *W
-date_signedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z35z36z37z38z39z310j35j36j37j38j39j310ró
-date_signed)itsdangerous.BadTimeSignature.date_signedD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*35*36*37*38*39*310‡
-	BadHeaderitsdangerous.BadHeader"itsdangerous.BadSignature*‡
-__init__itsdangerous.BadHeader.__init__"
-None*:
-self0
-itsdangerous.BadHeader"itsdangerous.BadHeader*)
-message
-builtins.str"builtins.str*5
-payload&
-Union[Any,None]
-Any
-None *4
-header&
-Union[Any,None]
-Any
-None *<
-original_error&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310j35j36j37j38j39j310rI
-headeritsdangerous.BadHeader.header
-Any*35*36*37*38*39*310rY
-original_error%itsdangerous.BadHeader.original_error
-Any*35*36*37*38*39*310i
-SignatureExpireditsdangerous.SignatureExpired"itsdangerous.BadTimeSignaturej35j36j37j38j39j310¬
-SigningAlgorithmitsdangerous.SigningAlgorithm"builtins.object*ô
-get_signature+itsdangerous.SigningAlgorithm.get_signature" 
-builtins.bytes"builtins.bytes*H
-self>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm*)
-key 
-builtins.bytes"builtins.bytes*+
-value 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*»
-verify_signature.itsdangerous.SigningAlgorithm.verify_signature"
-builtins.bool"builtins.bool*H
-self>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm*)
-key 
-builtins.bytes"builtins.bytes*+
-value 
-builtins.bytes"builtins.bytes*)
-sig 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310ˆ
-NoneAlgorithmitsdangerous.NoneAlgorithm"itsdangerous.SigningAlgorithm*ê
-get_signature(itsdangerous.NoneAlgorithm.get_signature" 
-builtins.bytes"builtins.bytes*B
-self8
-itsdangerous.NoneAlgorithm"itsdangerous.NoneAlgorithm*)
-key 
-builtins.bytes"builtins.bytes*+
-value 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310Ç
-HMACAlgorithmitsdangerous.HMACAlgorithm"itsdangerous.SigningAlgorithm*µ
-__init__#itsdangerous.HMACAlgorithm.__init__"
-None*B
-self8
-itsdangerous.HMACAlgorithm"itsdangerous.HMACAlgorithm*ú
-digest_methodÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None z35z36z37z38z39z310*ê
-get_signature(itsdangerous.HMACAlgorithm.get_signature" 
-builtins.bytes"builtins.bytes*B
-self8
-itsdangerous.HMACAlgorithm"itsdangerous.HMACAlgorithm*)
-key 
-builtins.bytes"builtins.bytes*+
-value 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310rØ
-default_digest_method0itsdangerous.HMACAlgorithm.default_digest_methodK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310rü
-digest_method(itsdangerous.HMACAlgorithm.digest_methodK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310ú
-Signeritsdangerous.Signer"builtins.object*Ü
-__init__itsdangerous.Signer.__init__"
-None*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*v
-
-secret_keyf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *Ä
-sepu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *Z
-key_derivationD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *ú
-digest_methodÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *à
-	algorithmw
-)Union[itsdangerous.SigningAlgorithm,None]>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm
-None z35z36z37z38z39z310*ù
-
-derive_keyitsdangerous.Signer.derive_key" 
-builtins.bytes"builtins.bytes*4
-self*
-itsdangerous.Signer"itsdangerous.Signerz35z36z37z38z39z310*ñ
-get_signature!itsdangerous.Signer.get_signature" 
-builtins.bytes"builtins.bytes*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*q
-valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*Ñ
-signitsdangerous.Signer.sign" 
-builtins.bytes"builtins.bytes*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*q
-valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*≈
-verify_signature$itsdangerous.Signer.verify_signature"
-builtins.bool"builtins.bool*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*+
-value 
-builtins.bytes"builtins.bytes*o
-sigf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*è
-unsignitsdangerous.Signer.unsign" 
-builtins.bytes"builtins.bytes*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*x
-signed_valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*ë
-validateitsdangerous.Signer.validate"
-builtins.bool"builtins.bool*4
-self*
-itsdangerous.Signer"itsdangerous.Signer*x
-signed_valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310j35j36j37j38j39j310r®
-default_digest_method)itsdangerous.Signer.default_digest_methodK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310r{
-default_key_derivation*itsdangerous.Signer.default_key_derivation
-builtins.str"builtins.str*35*36*37*38*39*310rg
-
-secret_keyitsdangerous.Signer.secret_key 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rY
-sepitsdangerous.Signer.sep 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310r°
-saltitsdangerous.Signer.saltf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rk
-key_derivation"itsdangerous.Signer.key_derivation
-builtins.str"builtins.str*35*36*37*38*39*310rò
-digest_method!itsdangerous.Signer.digest_methodK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310rÉ
-	algorithmitsdangerous.Signer.algorithm>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm*35*36*37*38*39*310€
-TimestampSigneritsdangerous.TimestampSigner"itsdangerous.Signer*∫
-get_timestamp*itsdangerous.TimestampSigner.get_timestamp"
-builtins.int"builtins.int*F
-self<
-itsdangerous.TimestampSigner"itsdangerous.TimestampSignerz35z36z37z38z39z310*˛
-timestamp_to_datetime2itsdangerous.TimestampSigner.timestamp_to_datetime"&
-datetime.datetime"datetime.datetime*F
-self<
-itsdangerous.TimestampSigner"itsdangerous.TimestampSigner*(
-ts 
-builtins.float"builtins.floatz35z36z37z38z39z310*ü
-sign!itsdangerous.TimestampSigner.sign" 
-builtins.bytes"builtins.bytes*F
-self<
-itsdangerous.TimestampSigner"itsdangerous.TimestampSigner*q
-valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310*ó
-unsign#itsdangerous.TimestampSigner.unsign"
-Any*F
-self<
-itsdangerous.TimestampSigner"itsdangerous.TimestampSigner*q
-valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*S
-max_ageD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *6
-return_timestamp
-builtins.bool"builtins.bool z35z36z37z38z39z310*Å
-validate%itsdangerous.TimestampSigner.validate"
-builtins.bool"builtins.bool*F
-self<
-itsdangerous.TimestampSigner"itsdangerous.TimestampSigner*x
-signed_valuef
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*S
-max_ageD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z35z36z37z38z39z310j35j36j37j38j39j310‚)
-
-Serializeritsdangerous.Serializer"builtins.object*û
-__init__ itsdangerous.Serializer.__init__"
-None*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*v
-
-secret_keyf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *8
-
-serializer&
-Union[Any,None]
-Any
-None *ï
-signerÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *¿
-signer_kwargs™
-3Union[typing.MutableMapping[builtins.str,Any],None]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping
-None z35z36z37z38z39z310*˝
-load_payload$itsdangerous.Serializer.load_payload"
-Any*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*-
-payload 
-builtins.bytes"builtins.bytes*8
-
-serializer&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*ø
-dump_payload$itsdangerous.Serializer.dump_payload" 
-builtins.bytes"builtins.bytes*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*
-obj
-Anyz35z36z37z38z39z310*π
-make_signer#itsdangerous.Serializer.make_signer"*
-itsdangerous.Signer"itsdangerous.Signer*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*Â
-iter_unsigners&itsdangerous.Serializer.iter_unsigners"P
-typing.Generator[Any,None,None]
-Any
-None
-None"typing.Generator*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*ú
-dumpsitsdangerous.Serializer.dumps"
-Any*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*
-obj
-Any*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*»
-dumpitsdangerous.Serializer.dump"
-None*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*
-obj
-Any*+
-f$
-typing.IO[Any]
-Any"	typing.IO*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*˘
-loadsitsdangerous.Serializer.loads"
-Any*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*µ
-loaditsdangerous.Serializer.load"
-Any*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*+
-f$
-typing.IO[Any]
-Any"	typing.IO*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*
-loads_unsafe$itsdangerous.Serializer.loads_unsafe"p
-$Tuple[builtins.bool,Union[Any,None]]
-builtins.bool"builtins.bool&
-Union[Any,None]
-Any
-None*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310*¨
-load_unsafe#itsdangerous.Serializer.load_unsafe"p
-$Tuple[builtins.bool,Union[Any,None]]
-builtins.bool"builtins.bool&
-Union[Any,None]
-Any
-None*<
-self2
-itsdangerous.Serializer"itsdangerous.Serializer*+
-f$
-typing.IO[Any]
-Any"	typing.IO*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None z35z36z37z38z39z310j35j36j37j38j39j310rê
-default_serializer*itsdangerous.Serializer.default_serializer5
-TypeAlias[Any]
-Any"itsdangerous._serializer*35*36*37*38*39*310rû
-default_signer&itsdangerous.Serializer.default_signerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310rk
-
-secret_key"itsdangerous.Serializer.secret_key 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310r_
-saltitsdangerous.Serializer.salt 
-builtins.bytes"builtins.bytes*35*36*37*38*39*310rÄ
-
-serializer"itsdangerous.Serializer.serializer5
-TypeAlias[Any]
-Any"itsdangerous._serializer*35*36*37*38*39*310ry
-is_text_serializer*itsdangerous.Serializer.is_text_serializer
-builtins.bool"builtins.bool*35*36*37*38*39*310ré
-signeritsdangerous.Serializer.signerK
-CallableType[builtins.function]&
-builtins.function"builtins.function*35*36*37*38*39*310r∏
-signer_kwargs%itsdangerous.Serializer.signer_kwargsg
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping*35*36*37*38*39*310•	
-TimedSerializeritsdangerous.TimedSerializer"itsdangerous.Serializer*ï
-loads"itsdangerous.TimedSerializer.loads"
-Any*F
-self<
-itsdangerous.TimedSerializer"itsdangerous.TimedSerializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *S
-max_ageD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *6
-return_timestamp
-builtins.bool"builtins.bool z35z36z37z38z39z310*©
-loads_unsafe)itsdangerous.TimedSerializer.loads_unsafe"E
-Tuple[builtins.bool,Any]
-builtins.bool"builtins.bool
-Any*F
-self<
-itsdangerous.TimedSerializer"itsdangerous.TimedSerializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *S
-max_ageD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z35z36z37z38z39z310j35j36j37j38j39j310ƒ*
-JSONWebSignatureSerializer'itsdangerous.JSONWebSignatureSerializer"itsdangerous.Serializer*™
-__init__0itsdangerous.JSONWebSignatureSerializer.__init__"
-None*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*v
-
-secret_keyf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *8
-
-serializer&
-Union[Any,None]
-Any
-None *ï
-signerÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *¿
-signer_kwargs™
-3Union[typing.MutableMapping[builtins.str,Any],None]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping
-None *Z
-algorithm_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*®
-load_payload4itsdangerous.JSONWebSignatureSerializer.load_payload"
-Any*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*s
-payloadf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*8
-
-serializer&
-Union[Any,None]
-Any
-None *3
-return_header
-builtins.bool"builtins.bool z35z36z37z38z39z310*÷
-dump_payload4itsdangerous.JSONWebSignatureSerializer.dump_payload" 
-builtins.bytes"builtins.bytes*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*e
-headerY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*
-obj
-Anyz35z36z37z38z39z310*±
-make_algorithm6itsdangerous.JSONWebSignatureSerializer.make_algorithm">
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*0
-algorithm_name
-builtins.str"builtins.strz35z36z37z38z39z310*∫
-make_signer3itsdangerous.JSONWebSignatureSerializer.make_signer"*
-itsdangerous.Signer"itsdangerous.Signer*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *O
-	algorithm>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm z35z36z37z38z39z310*Œ
-make_header3itsdangerous.JSONWebSignatureSerializer.make_header"g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*©
-header_fieldsï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-Nonez35z36z37z38z39z310*ì
-dumps-itsdangerous.JSONWebSignatureSerializer.dumps" 
-builtins.bytes"builtins.bytes*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*
-obj
-Any*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *´
-header_fieldsï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-None z35z36z37z38z39z310*ﬁ
-loads-itsdangerous.JSONWebSignatureSerializer.loads"
-Any*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *3
-return_header
-builtins.bool"builtins.bool z35z36z37z38z39z310*™
-loads_unsafe4itsdangerous.JSONWebSignatureSerializer.loads_unsafe"E
-Tuple[builtins.bool,Any]
-builtins.bool"builtins.bool
-Any*\
-selfR
-'itsdangerous.JSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *3
-return_header
-builtins.bool"builtins.bool z35z36z37z38z39z310j35j36j37j38j39j310rú
-jws_algorithms6itsdangerous.JSONWebSignatureSerializer.jws_algorithms∏
-Atyping.MutableMapping[builtins.str,itsdangerous.SigningAlgorithm]
-builtins.str"builtins.str>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm"typing.MutableMapping*35*36*37*38*39*310rÖ
-default_algorithm9itsdangerous.JSONWebSignatureSerializer.default_algorithm
-builtins.str"builtins.str*35*36*37*38*39*310rr
-default_serializer:itsdangerous.JSONWebSignatureSerializer.default_serializer
-Any*35*36*37*38*39*310r
-algorithm_name6itsdangerous.JSONWebSignatureSerializer.algorithm_name
-builtins.str"builtins.str*35*36*37*38*39*310ró
-	algorithm1itsdangerous.JSONWebSignatureSerializer.algorithm>
-itsdangerous.SigningAlgorithm"itsdangerous.SigningAlgorithm*35*36*37*38*39*310Ë
-TimedJSONWebSignatureSerializer,itsdangerous.TimedJSONWebSignatureSerializer"'itsdangerous.JSONWebSignatureSerializer*ë
-__init__5itsdangerous.TimedJSONWebSignatureSerializer.__init__"
-None*f
-self\
-,itsdangerous.TimedJSONWebSignatureSerializer",itsdangerous.TimedJSONWebSignatureSerializer*v
-
-secret_keyf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*V
-
-expires_inD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *8
-
-serializer&
-Union[Any,None]
-Any
-None *ï
-signerÜ
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None *¿
-signer_kwargs™
-3Union[typing.MutableMapping[builtins.str,Any],None]g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping
-None *Z
-algorithm_nameD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z35z36z37z38z39z310*›
-make_header8itsdangerous.TimedJSONWebSignatureSerializer.make_header"g
-'typing.MutableMapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.MutableMapping*f
-self\
-,itsdangerous.TimedJSONWebSignatureSerializer",itsdangerous.TimedJSONWebSignatureSerializer*©
-header_fieldsï
-,Union[typing.Mapping[builtins.str,Any],None]Y
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping
-Nonez35z36z37z38z39z310*Ì
-loads2itsdangerous.TimedJSONWebSignatureSerializer.loads"
-Any*f
-self\
-,itsdangerous.TimedJSONWebSignatureSerializer",itsdangerous.TimedJSONWebSignatureSerializer*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*Å
-saltu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes
-None *3
-return_header
-builtins.bool"builtins.bool z35z36z37z38z39z310*ä
-get_issue_date;itsdangerous.TimedJSONWebSignatureSerializer.get_issue_date"S
-Union[datetime.datetime,None]&
-datetime.datetime"datetime.datetime
-None*f
-self\
-,itsdangerous.TimedJSONWebSignatureSerializer",itsdangerous.TimedJSONWebSignatureSerializer*e
-headerY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mappingz35z36z37z38z39z310*÷
-now0itsdangerous.TimedJSONWebSignatureSerializer.now"
-builtins.int"builtins.int*f
-self\
-,itsdangerous.TimedJSONWebSignatureSerializer",itsdangerous.TimedJSONWebSignatureSerializerz35z36z37z38z39z310j35j36j37j38j39j310rå
-DEFAULT_EXPIRES_IN?itsdangerous.TimedJSONWebSignatureSerializer.DEFAULT_EXPIRES_IN
-builtins.int"builtins.int*35*36*37*38*39*310r|
-
-expires_in7itsdangerous.TimedJSONWebSignatureSerializer.expires_in
-builtins.int"builtins.int*35*36*37*38*39*310ô
-_URLSafeSerializerMixin$itsdangerous._URLSafeSerializerMixin"builtins.object*§
-load_payload1itsdangerous._URLSafeSerializerMixin.load_payload"
-Any*V
-selfL
-$itsdangerous._URLSafeSerializerMixin"$itsdangerous._URLSafeSerializerMixin*-
-payload 
-builtins.bytes"builtins.bytes*8
-
-serializer&
-Union[Any,None]
-Any
-None z35z36z37z38z39z310*Ê
-dump_payload1itsdangerous._URLSafeSerializerMixin.dump_payload" 
-builtins.bytes"builtins.bytes*V
-selfL
-$itsdangerous._URLSafeSerializerMixin"$itsdangerous._URLSafeSerializerMixin*
-obj
-Anyz35z36z37z38z39z310j35j36j37j38j39j310rù
-default_serializer7itsdangerous._URLSafeSerializerMixin.default_serializer5
-TypeAlias[Any]
-Any"itsdangerous._serializer*35*36*37*38*39*310ã
-URLSafeSerializeritsdangerous.URLSafeSerializer"$itsdangerous._URLSafeSerializerMixin"itsdangerous.Serializerj35j36j37j38j39j310ö
-URLSafeTimedSerializer#itsdangerous.URLSafeTimedSerializer"$itsdangerous._URLSafeSerializerMixin"itsdangerous.TimedSerializerj35j36j37j38j39j310©
-
-want_bytesitsdangerous.want_bytes" 
-builtins.bytes"builtins.bytes*m
-sf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytes*,
-encoding
-builtins.str"builtins.str **
-errors
-builtins.str"builtins.str z35z36z37z38z39z310⁄
-base64_encodeitsdangerous.base64_encode" 
-builtins.bytes"builtins.bytes*r
-stringf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310⁄
-base64_decodeitsdangerous.base64_decode" 
-builtins.bytes"builtins.bytes*r
-stringf
-"Union[builtins.str,builtins.bytes]
-builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz35z36z37z38z39z310

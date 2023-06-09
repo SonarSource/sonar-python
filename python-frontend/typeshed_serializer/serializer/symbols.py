@@ -567,7 +567,7 @@ def extract_return_type(func_def: mpn.FuncDef):
 def save_module(ms: Union[ModuleSymbol, MergedModuleSymbol], dir_name="stdlib_protobuf",
                 is_debug=False, debug_dir="output"):
     ms_pb = ms.to_proto()
-    save_dir = f"../../src/main/resources/org/sonar/python/types/{dir_name}" if not is_debug else f"../{debug_dir}"
+    save_dir = dir_name if not is_debug else f"../{debug_dir}"
     save_string = ms_pb.SerializeToString() if not is_debug else str(ms_pb)
     open_mode = "wb" if not is_debug else "w"
     save_dir_path = os.path.join(CURRENT_PATH, save_dir)

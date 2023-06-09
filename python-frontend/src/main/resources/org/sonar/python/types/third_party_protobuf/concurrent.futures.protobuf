@@ -1,206 +1,0 @@
-
-concurrent.futures]
-CancelledError'concurrent.futures._base.CancelledError"concurrent.futures._base.Errorj27‡
-Executor!concurrent.futures._base.Executor"builtins.object*ˆ
-submit(concurrent.futures._base.Executor.submit"€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*P
-selfF
-!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*S
-fnK
-CallableType[builtins.function]&
-builtins.function"builtins.function*
-args
-Any*
-kwargs
-Anyz27*×
-map%concurrent.futures._base.Executor.map"`
-,typing.Iterator[concurrent.futures._base._T]
-concurrent.futures._base._T"typing.Iterator*P
-selfF
-!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*U
-funcK
-CallableType[builtins.function]&
-builtins.function"builtins.function*?
-	iterables0
-typing.Iterable[Any]
-Any"typing.Iterable*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*Â
-shutdown*concurrent.futures._base.Executor.shutdown"
-None*P
-selfF
-!concurrent.futures._base.Executor"!concurrent.futures._base.Executor**
-wait
-builtins.bool"builtins.bool z27*†
-	__enter__+concurrent.futures._base.Executor.__enter__"
-concurrent.futures._base._T*'
-self
-concurrent.futures._base._Tz27*
-__exit__*concurrent.futures._base.Executor.__exit__"G
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*N
-selfF
-!concurrent.futures._base.Executor"!concurrent.futures._base.Executor*
-exc_type
-Any*
-exc_val
-Any*
-exc_tb
-Anyz27j27
-Futureconcurrent.futures._base.Future"builtins.object*Ð
-__init__(concurrent.futures._base.Future.__init__"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*â
-cancel&concurrent.futures._base.Future.cancel"
-builtins.bool"builtins.bool*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*è
-	cancelled)concurrent.futures._base.Future.cancelled"
-builtins.bool"builtins.bool*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*ä
-running'concurrent.futures._base.Future.running"
-builtins.bool"builtins.bool*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*Þ
-done$concurrent.futures._base.Future.done"
-builtins.bool"builtins.bool*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*·
-add_done_callback1concurrent.futures._base.Future.add_done_callback"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*S
-fnK
-CallableType[builtins.function]&
-builtins.function"builtins.functionz27*¾
-result&concurrent.futures._base.Future.result"
-concurrent.futures._base._T*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*Ž
-set_running_or_notify_cancel<concurrent.futures._base.Future.set_running_or_notify_cancel"
-builtins.bool"builtins.bool*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Futurez27*
-
-set_result*concurrent.futures._base.Future.set_result"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*+
-result
-concurrent.futures._base._Tz27*¬
-	exception)concurrent.futures._base.Future.exception"
-Any*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*Â
-exception_info.concurrent.futures._base.Future.exception_info"’
-*Tuple[Any,Union[types.TracebackType,None]]
-AnyY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27*ò
-set_exception-concurrent.futures._base.Future.set_exception"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*
-	exception
-Anyz27*æ
-set_exception_info2concurrent.futures._base.Future.set_exception_info"
-None*‹
-self€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future*
-	exception
-Any*h
-	tracebackY
-Union[types.TracebackType,None]*
-types.TracebackType"types.TracebackType
-Nonez27Pj27Y
-TimeoutError%concurrent.futures._base.TimeoutError"concurrent.futures._base.Errorj27…
-ProcessPoolExecutor.concurrent.futures.process.ProcessPoolExecutor"!concurrent.futures._base.Executor*–
-__init__7concurrent.futures.process.ProcessPoolExecutor.__init__"
-None*j
-self`
-.concurrent.futures.process.ProcessPoolExecutor".concurrent.futures.process.ProcessPoolExecutor*W
-max_workersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None z27j27´
-ThreadPoolExecutor,concurrent.futures.thread.ThreadPoolExecutor"!concurrent.futures._base.Executor*È
-__init__5concurrent.futures.thread.ThreadPoolExecutor.__init__"
-None*f
-self\
-,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor*W
-max_workersD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *6
-thread_name_prefix
-builtins.str"builtins.str z27j27é
-as_completed%concurrent.futures._base.as_completed"ã
-Mtyping.Iterator[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterator*ì
-fsã
-Mtyping.Iterable[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"typing.Iterable*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None z27²
-waitconcurrent.futures._base.wait"á
-œTuple[builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]],builtins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]]Ý
-Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"builtins.setÝ
-Jbuiltins.set[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"builtins.set*–
-fs
-bconcurrent.futures._base._Collection[concurrent.futures._base.Future[concurrent.futures._base._T]]€
-<concurrent.futures._base.Future[concurrent.futures._base._T]
-concurrent.futures._base._T"concurrent.futures._base.Future"$concurrent.futures._base._Collection*Y
-timeoutJ
-Union[builtins.float,None] 
-builtins.float"builtins.float
-None */
-return_when
-builtins.str"builtins.str z27*Y
-ALL_COMPLETED&concurrent.futures._base.ALL_COMPLETED
-builtins.str"builtins.str*27*]
-FIRST_COMPLETED(concurrent.futures._base.FIRST_COMPLETED
-builtins.str"builtins.str*27*]
-FIRST_EXCEPTION(concurrent.futures._base.FIRST_EXCEPTION
-builtins.str"builtins.str*27

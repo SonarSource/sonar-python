@@ -1,68 +1,0 @@
-
-flask.wrappersú
-RequestBasewerkzeug.wrappers.Request"werkzeug.wrappers.BaseRequest"werkzeug.wrappers.AcceptMixin""werkzeug.wrappers.ETagRequestMixin" werkzeug.wrappers.UserAgentMixin"$werkzeug.wrappers.AuthorizationMixin"/werkzeug.wrappers.CommonRequestDescriptorsMixinj35j36j37j38j39j310â
-ResponseBasewerkzeug.wrappers.Response"werkzeug.wrappers.BaseResponse"#werkzeug.wrappers.ETagResponseMixin"%werkzeug.wrappers.ResponseStreamMixin"0werkzeug.wrappers.CommonResponseDescriptorsMixin"&werkzeug.wrappers.WWWAuthenticateMixinj35j36j37j38j39j310µ
-	JSONMixinflask.wrappers.JSONMixin"builtins.object*≤
-is_json flask.wrappers.JSONMixin.is_json"
-builtins.bool"builtins.bool*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin0:property`z35z36z37z38z39z310*V
-jsonflask.wrappers.JSONMixin.json*
-self0:property`z35z36z37z38z39z310*ó
-get_json!flask.wrappers.JSONMixin.get_json"
-Any*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin*+
-force
-builtins.bool"builtins.bool *,
-silent
-builtins.bool"builtins.bool *+
-cache
-builtins.bool"builtins.bool z35z36z37z38z39z310*º
-on_json_loading_failed/flask.wrappers.JSONMixin.on_json_loading_failed"
-None*>
-self4
-flask.wrappers.JSONMixin"flask.wrappers.JSONMixin*
-e
-Anyz35z36z37z38z39z310j35j36j37j38j39j310≥
-
-Requestflask.wrappers.Request"werkzeug.wrappers.Request"flask.wrappers.JSONMixin*Ë
-max_content_length)flask.wrappers.Request.max_content_length"D
-Union[builtins.int,None]
-builtins.int"builtins.int
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310*‘
-endpointflask.wrappers.Request.endpoint"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310*÷
-	blueprint flask.wrappers.Request.blueprint"D
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*:
-self0
-flask.wrappers.Request"flask.wrappers.Request0:property`z35z36z37z38z39z310j35j36j37j38j39j310r•
-url_ruleflask.wrappers.Request.url_rule_
-!Union[werkzeug.routing.Rule,None].
-werkzeug.routing.Rule"werkzeug.routing.Rule
-None*35*36*37*38*39*310rü
-	view_args flask.wrappers.Request.view_argsW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*35*36*37*38*39*310r‹
-routing_exception(flask.wrappers.Request.routing_exceptionÉ
--Union[werkzeug.exceptions.HTTPException,None]F
-!werkzeug.exceptions.HTTPException"!werkzeug.exceptions.HTTPException
-None*35*36*37*38*39*310–
-Responseflask.wrappers.Response"werkzeug.wrappers.Response"flask.wrappers.JSONMixin*Ω
-max_cookie_size'flask.wrappers.Response.max_cookie_size"
-builtins.int"builtins.int*<
-self2
-flask.wrappers.Response"flask.wrappers.Response0:property`z35z36z37z38z39z310j35j36j37j38j39j310rõ
-default_mimetype(flask.wrappers.Response.default_mimetypeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*35*36*37*38*39*310
