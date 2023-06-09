@@ -89,6 +89,23 @@ def test_class_symbol(typeshed_stdlib):
     assert cmd_class_symbol.super_classes == [OBJECT_FQN]
 
 
+def test_class_symbol_metaclass(typeshed_stdlib):
+    io_module = typeshed_stdlib.files.get("io")
+    iobase_class = io_module.names.get("IOBase")
+    iobase_class_symbol = symbols.ClassSymbol(iobase_class.node)
+    assert iobase_class_symbol.has_metaclass
+    assert iobase_class_symbol.metaclass_name == "abc.ABCMeta"
+
+    name_meta_class = io_module.names.get("NameMeta")
+    name_meta_class_symbol = symbols.ClassSymbol(name_meta_class.node)
+    assert name_meta_class_symbol.has_metaclass
+    assert name_meta_class_symbol.metaclass_name == "abc.ABCMeta"
+
+    str_meta_class = io_module.names.get("StrMeta")
+    str_meta_class_symbol = symbols.ClassSymbol(str_meta_class.node)
+    assert str_meta_class_symbol.has_metaclass
+    assert str_meta_class_symbol.metaclass_name is None
+
 def test_function_symbol(typeshed_stdlib):
     mypy_cmd_module = typeshed_stdlib.files.get("cmd")
 
