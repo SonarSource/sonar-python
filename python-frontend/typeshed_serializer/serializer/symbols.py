@@ -310,7 +310,7 @@ class ClassSymbol:
         self.has_metaclass = class_def.metaclass is not None
         if class_def.metaclass is not None:
             self.has_metaclass = True
-            if isinstance(class_def.metaclass, mpn.NameExpr):
+            if isinstance(class_def.metaclass, mpn.NameExpr) or isinstance(class_def.metaclass, mpn.MemberExpr):
                 self.metaclass_name = class_def.metaclass.fullname
         self.has_decorators = len(class_def.decorators) > 0
 

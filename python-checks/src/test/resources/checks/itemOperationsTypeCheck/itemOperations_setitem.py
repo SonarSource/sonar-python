@@ -84,10 +84,10 @@ def standard_library():
   math[0] = 42  # FN: Any type
 
   # File
-  open("foo.py")[0] = 42  # FN Noncompliant
+  open("foo.py")[0] = 42  # Noncompliant
 
   import os
-  os.popen('ls')[0] = 42  # FN Noncompliant
+  os.popen('ls')[0] = 42  # Noncompliant
 
   from array import array
   a = array('b', [0, 1, 2])
