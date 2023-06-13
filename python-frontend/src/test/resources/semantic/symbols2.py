@@ -172,3 +172,50 @@ def assignment_expression():
 def importing_stdlib():
   import math
   math.acos(0)
+
+
+def importing_submodule():
+    import werkzeug.datastructures
+    werkzeug.datastructures.Headers()
+
+
+def importing_submodule_as():
+    import werkzeug.datastructures as wd
+    wd.Headers()
+
+def importing_submodule_after_parent():
+    import werkzeug
+    import werkzeug.datastructures
+    werkzeug.datastructures.Headers()
+
+
+def importing_submodule_after_parent_nested():
+    import werkzeug
+    import werkzeug.datastructures
+    import werkzeug.datastructures.csp
+    werkzeug.datastructures.csp.ContentSecurityPolicy()
+
+
+def importing_parent_after_submodule():
+    import werkzeug.datastructures.csp
+    import werkzeug
+    werkzeug.datastructures.csp.ContentSecurityPolicy()
+
+
+def importing_parent_after_submodule_2():
+    import werkzeug.datastructures.csp
+    import werkzeug.datastructures
+    import werkzeug
+    werkzeug.datastructures.csp.ContentSecurityPolicy()
+
+
+def importing_submodule_twice():
+    import werkzeug.datastructures
+    import werkzeug.datastructures
+    werkzeug.datastructures.Headers()
+
+
+def importing_unknown_submodule():
+    import werkzeug.datastructures.unknown
+    import werkzeug.datastructures.unknown
+    werkzeug.datastructures.Headers()
