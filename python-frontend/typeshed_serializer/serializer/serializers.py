@@ -119,6 +119,8 @@ class Serializer(ABC):
 
 class TypeshedSerializer(Serializer):
 
+    EXCLUDED_PACKAGES = ["win32"]
+
     def __init__(self, is_third_parties=False, is_debug=False):
         super().__init__(is_debug)
         self.is_third_parties = is_third_parties
@@ -147,12 +149,12 @@ class TypeshedSerializer(Serializer):
         model_by_version: dict[str, dict[str, ModuleSymbol]] = {}
         for major, minor in SUPPORTED_PYTHON_VERSIONS:
             opt = get_options((major, minor))
-            build_result, source_paths = walk_typeshed_third_parties(opt) if self.is_third_parties \
-                else walk_typeshed_stdlib(opt)
+            build_result, source_paths = self.get_build_result(opt=opt)
             modules = {}
             for file in build_result.files:
                 path = build_result.files[file].path
-                if self.is_third_parties and path not in source_paths:
+                if self.is_third_parties and (path not in source_paths or any(
+                        excluded_package in path for excluded_package in self.EXCLUDED_PACKAGES)):
                     # build_result contains more modules from stdlib unrelated to third_parties
                     continue
                 ms = ModuleSymbol(build_result.files.get(file))
