@@ -23,6 +23,7 @@ import com.google.common.base.Functions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +79,9 @@ public class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "importing_stdlib");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "importing_stdlib", "importing_submodule",
+      "importing_submodule_as", "importing_submodule_after_parent", "importing_submodule_after_parent_nested", "importing_parent_after_submodule",
+      "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -283,6 +286,155 @@ public class SymbolTableBuilderTest {
     Symbol symbol = ((AmbiguousSymbolImpl) qualifiedExpressionSymbol).alternatives().iterator().next();
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
     assertThat(((FunctionSymbolImpl)symbol).declaredReturnType().canOnlyBe("float")).isTrue();
+  }
+
+  @Test
+  public void importing_submodule() {
+    FunctionDef functionDef = functionTreesByName.get("importing_submodule");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).containsExactly("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(1)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.headers.Headers");
+  }
+
+  @Test
+  public void importing_submodule_as() {
+    // SONARPY-1384
+    FunctionDef functionDef = functionTreesByName.get("importing_submodule_as");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("wd");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("wd");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    Collection<Symbol> values = childrenSymbolByName.values();
+    assertThat(values).isNotEmpty();
+    assertThat(values).extracting(Symbol::name).doesNotContain("datastructures");
+  }
+
+  @Test
+  public void importing_submodule_after_parent() {
+    FunctionDef functionDef = functionTreesByName.get("importing_submodule_after_parent");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(2)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.headers.Headers");
+  }
+
+  @Test
+  public void importing_submodule_after_parent_nested() {
+    FunctionDef functionDef = functionTreesByName.get("importing_submodule_after_parent_nested");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers", "csp");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(3)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.csp.ContentSecurityPolicy");
+  }
+
+  @Test
+  public void importing_parent_after_submodule() {
+    FunctionDef functionDef = functionTreesByName.get("importing_parent_after_submodule");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("csp");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).doesNotContain("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(2)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.csp.ContentSecurityPolicy");
+  }
+
+  @Test
+  public void importing_parent_after_submodule_2() {
+    FunctionDef functionDef = functionTreesByName.get("importing_parent_after_submodule_2");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers", "csp");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(3)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.csp.ContentSecurityPolicy");
+  }
+
+  @Test
+  public void importing_submodule_twice() {
+    FunctionDef functionDef = functionTreesByName.get("importing_submodule_twice");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).containsExactly("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(2)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.headers.Headers");
+  }
+
+  @Test
+  public void importing_unknown_submodule() {
+    FunctionDef functionDef = functionTreesByName.get("importing_unknown_submodule");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+
+    assertThat(symbolByName).containsOnlyKeys("werkzeug");
+    SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
+    assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).containsExactly("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(2)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.OTHER)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.Headers");
   }
 
   @Test
