@@ -309,7 +309,7 @@ public class SymbolTableBuilderTest {
 
   @Test
   public void importing_submodule_as() {
-    // SONARPY-1383
+    // SONARPY-1384
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_as");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
