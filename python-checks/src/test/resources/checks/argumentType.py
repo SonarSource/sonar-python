@@ -229,13 +229,16 @@ def fp_email_utils_getaddresses(val):
     getaddresses((val,))  # Noncompliant
 
 
-def fp_win32pdh(machine, object, instance, inum, counter):
+def win32_no_support(machine, object, instance, inum, counter):
+    # Raising no issues on win32 as stubs are incomplete
     import win32pdh
+    import win32pipe
+
     path = win32pdh.MakeCounterPath((machine, object, instance, None, inum, counter))
     hq = win32pdh.OpenQuery()
-    # FP: stubs for win32pdh are incomplete
-    hc = win32pdh.AddCounter(hq, path)  # Noncompliant
-
+    hc = win32pdh.AddCounter(hq, path)
+    cmd = ["svn"]
+    f = win32pipe.popen(cmd) #FN
 
 def fn_len():
     len(len([1,2,3]))  # FN

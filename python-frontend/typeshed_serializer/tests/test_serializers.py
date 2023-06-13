@@ -64,15 +64,20 @@ def test_importer_serializer():
     assert importer_serializer.is_exception("other", None, set()) is False
 
 
-def test_all_third_parties_are_serialized(typeshed_third_parties):
+def test_third_parties_are_serialized_without_excluded_packages(typeshed_third_parties):
     stub_modules = set()
-    for stub_folder in MOCK_THIRD_PARTY_STUBS_LIST:
+    excluded = ["pywin32"]
+    stubs_without_excluded = [folder for folder in MOCK_THIRD_PARTY_STUBS_LIST if folder not in excluded]
+    for stub_folder in stubs_without_excluded:
         stub_path = os.path.join(conftest.CURRENT_PATH, conftest.MOCK_THIRD_PARTY_STUBS_LOCATION, stub_folder)
         _, dirs, files = os.walk(stub_path).__next__()
         stub_modules = stub_modules.union([dir for dir in dirs if not dir.startswith("@")])
         stub_modules = stub_modules.union([file.replace(".pyi", "") for file in files if file.endswith(".pyi")])
     for third_party_stub in stub_modules:
         assert third_party_stub in typeshed_third_parties
+    for third_party_stub_name in typeshed_third_parties:
+        assert "win32" not in third_party_stub_name
+    assert len(typeshed_third_parties) == 12
 
 
 def test_save_merged_symbols():
