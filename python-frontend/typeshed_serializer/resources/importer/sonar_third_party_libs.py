@@ -27,6 +27,7 @@ import click
 import contextvar
 import cryptography
 import dataclasses
+import emoji
 import enum34
 import fb303
 import filelock
