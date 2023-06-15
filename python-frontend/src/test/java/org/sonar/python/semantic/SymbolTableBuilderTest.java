@@ -309,7 +309,6 @@ public class SymbolTableBuilderTest {
 
   @Test
   public void importing_submodule_as() {
-    // SONARPY-1384
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_as");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -319,7 +318,12 @@ public class SymbolTableBuilderTest {
     Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
     Collection<Symbol> values = childrenSymbolByName.values();
     assertThat(values).isNotEmpty();
-    assertThat(values).extracting(Symbol::name).doesNotContain("datastructures");
+    assertThat(values).extracting(Symbol::name).contains("Headers");
+
+    CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(1)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.headers.Headers");
   }
 
   @Test
@@ -387,9 +391,9 @@ public class SymbolTableBuilderTest {
 
     assertThat(symbolByName).containsOnlyKeys("werkzeug");
     SymbolImpl werkzeug = (SymbolImpl) symbolByName.get("werkzeug");
-    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    assertThat(werkzeug.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.IMPORT, Usage.Kind.OTHER, Usage.Kind.OTHER);
     Map<String, Symbol> childrenSymbolByName = werkzeug.getChildrenSymbolByName();
-    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures");
+    assertThat(childrenSymbolByName.values()).extracting(Symbol::name).contains("datastructures", "Response");
     SymbolImpl datastructures = (SymbolImpl) childrenSymbolByName.get("datastructures");
     assertThat(datastructures.getChildrenSymbolByName().values()).extracting(Symbol::name).contains("Headers", "csp");
 
@@ -397,6 +401,11 @@ public class SymbolTableBuilderTest {
     Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
     assertThat(qualifiedExpressionSymbol.is(Symbol.Kind.CLASS)).isTrue();
     assertThat(qualifiedExpressionSymbol.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.csp.ContentSecurityPolicy");
+
+    CallExpression callExpression2 = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(4)).expressions().get(0);
+    Symbol qualifiedExpressionSymbol2 = callExpression2.calleeSymbol();
+    assertThat(qualifiedExpressionSymbol2.is(Symbol.Kind.CLASS)).isTrue();
+    assertThat(qualifiedExpressionSymbol2.fullyQualifiedName()).isEqualTo("werkzeug.datastructures.headers.Headers");
   }
 
   @Test

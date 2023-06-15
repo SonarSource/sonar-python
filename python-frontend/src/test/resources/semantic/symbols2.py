@@ -207,6 +207,7 @@ def importing_parent_after_submodule_2():
     import werkzeug.datastructures
     import werkzeug
     werkzeug.datastructures.csp.ContentSecurityPolicy()
+    werkzeug.datastructures.Headers()
 
 
 def importing_submodule_twice():
