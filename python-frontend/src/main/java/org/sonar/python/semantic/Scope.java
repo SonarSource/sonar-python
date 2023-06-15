@@ -184,13 +184,19 @@ class Scope {
       moduleExportedSymbols.forEach(moduleSymbol::addChildSymbol);
       this.symbols.add(moduleSymbol);
       symbolsByName.put(symbolName, moduleSymbol);
-    } else if (!isExistingSymbol(symbolName) && fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
+    } else if (fullyQualifiedName != null && !fullyQualifiedName.equals(fullyQualifiedModuleName)) {
       Collection<Symbol> standardLibrarySymbols = TypeShed.symbolsForModule(fullyQualifiedName).values();
       if (!standardLibrarySymbols.isEmpty()) {
-        SymbolImpl moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
-        standardLibrarySymbols.forEach(symbol -> moduleSymbol.addChildSymbol(copySymbol(symbol.name(), symbol)));
-        this.symbols.add(moduleSymbol);
-        symbolsByName.put(symbolName, moduleSymbol);
+        if (!isExistingSymbol(symbolName)) {
+          Symbol moduleSymbol = new SymbolImpl(symbolName, fullyQualifiedName);
+          this.symbols.add(moduleSymbol);
+          symbolsByName.put(symbolName, moduleSymbol);
+        }
+        symbolsByName.computeIfPresent(symbolName, (k, v) -> {
+          standardLibrarySymbols.forEach(symbol -> ((SymbolImpl) v).addChildSymbol(copySymbol(symbol.name(), symbol)));
+          this.symbols.add(v);
+          return v;
+        });
       }
     }
     addBindingUsage(nameTree, Usage.Kind.IMPORT, fullyQualifiedName);
