@@ -1,123 +1,271 @@
+<p>This vulnerability exposes encrypted data to a number of attacks whose goal is to recover the plaintext.</p>
 <h2>Why is this an issue?</h2>
-<p>Encryption algorithms should use secure modes and padding schemes where appropriate to guarantee data confidentiality and integrity.</p>
+<p>Encryption algorithms are essential for protecting sensitive information and ensuring secure communications in a variety of domains. They are used
+for several important reasons:</p>
 <ul>
-  <li> For block cipher encryption algorithms (like AES):
-    <ul>
-      <li> The ECB (Electronic Codebook) cipher mode doesn’t provide serious message confidentiality: under a given key any given plaintext block
-      always gets encrypted to the same ciphertext block. This mode should never be used. </li>
-      <li> The CBC (Cipher Block Chaining) mode by itself provides only data confidentiality. This cipher mode is also vulnerable to <a
-      href="https://en.wikipedia.org/wiki/Padding_oracle_attack">padding oracle attacks</a> when used with padding. Using CBC along with Message
-      Authentication Code can provide data integrity and should prevent such attacks. In practice the implementation has many pitfalls and it’s
-      recommended to avoid CBC with padding completely. </li>
-      <li> The GCM (Galois Counter Mode) mode which <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode#Mathematical_basis">works
-      internally</a> with zero/no padding scheme, is recommended, as it is designed to provide both data authenticity (integrity) and confidentiality.
-      Other similar modes are CCM, CWC, EAX, IAPM and OCB. </li>
-    </ul>  </li>
-  <li> For RSA encryption algorithm, the recommended padding scheme is OAEP. </li>
+  <li> Confidentiality, privacy, and intellectual property protection </li>
+  <li> Security during transmission or on storage devices </li>
+  <li> Data integrity, general trust, and authentication </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<p><a href="https://pycryptodome.readthedocs.io">pycryptodomex</a> library:</p>
-<pre>
-from Cryptodome.Cipher import AES, PKCS1_OAEP,  PKCS1_v1_5
-from Cryptodome.Random import get_random_bytes
-from Cryptodome.PublicKey import RSA
+<p>When selecting encryption algorithms, tools, or combinations, you should also consider two things:</p>
+<ol>
+  <li> No encryption is unbreakable. </li>
+  <li> The strength of an encryption algorithm is usually measured by the effort required to crack it within a reasonable time frame. </li>
+</ol>
+<p>For these reasons, as soon as cryptography is included in a project, it is important to choose encryption algorithms that are considered strong and
+secure by the cryptography community.</p>
+<p>For AES, the weakest modes are CBC (Cipher Block Chaining) and ECB</p>
+<p>(Electronic Codebook), as they are either vulnerable to padding oracles or do not provide authentication mechanisms.</p>
+<p>And for RSA, the weakest algorithms are either using it without padding or using the PKCS1v1.5 padding scheme.</p>
+<h3>What is the potential impact?</h3>
+<p>The cleartext of an encrypted message might be recoverable. Additionally, it might be possible to modify the cleartext of an encrypted message.</p>
+<p>Below are some real-world scenarios that illustrate possible impacts of an attacker exploiting the vulnerability.</p>
+<h4>Theft of sensitive data</h4>
+<p>The encrypted message might contain data that is considered sensitive and should not be known to third parties.</p>
+<p>By using a weak algorithm the likelihood that an attacker might be able to recover the cleartext drastically increases.</p>
+<h4>Additional attack surface</h4>
+<p>By modifying the cleartext of the encrypted message it might be possible for an attacker to trigger other vulnerabilities in the code. Encrypted
+values are often considered trusted, since under normal circumstances it would not be possible for a third party to modify them.</p>
+<h2>How to fix it in PyCrypto</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Example with a symmetric cipher, AES:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from Crypto.Cipher import AES
 
-# Example for a symmetric cipher: AES
-AES.new(key, AES.MODE_ECB)  # Noncompliant
-AES.new(key, AES.MODE_CBC)  # Noncompliant
-
-# Example for a asymmetric cipher: RSA
-cipher = PKCS1_v1_5.new(key) # Noncompliant
+AES.new(key, AES.MODE_ECB) # Noncompliant
 </pre>
-<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
-<pre>
-import os
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+<p>Example with an asymmetric cipher, RSA:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from Crypto.Cipher import PKCS1_v1_5
+
+PKCS1_v1_5.new(key) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>Since PyCrypto is not supported anymore, another library should be used. In the current context, Cryptodome uses a similar API.</p>
+<p>For the AES symmetric cipher, use the GCM mode:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+from Crypto.Cipher import AES
+
+AES.new(key, AES.MODE_GCM)
+</pre>
+<p>For the RSA asymmetric cipher, use the Optimal Asymmetric Encryption Padding (OAEP):</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+from Crypto.Cipher import PKCS1_OAEP
+
+PKCS1_OAEP.new(key)
+</pre>
+<h3>How does this work?</h3>
+<p>As a rule of thumb, use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic community.</p>
+<p>Appropriate choices are currently the following.</p>
+<h4>For AES: Use Galois/Counter mode (GCM)</h4>
+<p>GCM mode combines encryption with authentication and integrity checks using a cryptographic hash function and provides both confidentiality and
+authenticity of data.</p>
+<p>Other similar modes are:</p>
+<ul>
+  <li> CCM: <code>Counter with CBC-MAC</code> </li>
+  <li> CWC: <code>Cipher Block Chaining with Message Authentication Code</code> </li>
+  <li> EAX: <code>Encrypt-and-Authenticate</code> </li>
+  <li> IAPM: <code>Integer Authenticated Parallelizable Mode</code> </li>
+  <li> OCB: <code>Offset Codebook Mode</code> </li>
+</ul>
+<p>It is also possible to use AES-CBC with HMAC for integrity checks. However, it</p>
+<p>is considered more straightforward to use AES-GCM directly instead.</p>
+<h4>For RSA: use the OAEP scheme</h4>
+<p>The Optimal Asymmetric Encryption Padding scheme (OAEP) adds randomness and a secure hash function that strengthens the regular inner workings of
+RSA.</p>
+<h2>How to fix it in pyca</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Example with a symmetric cipher, AES:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from cryptography.hazmat.primitives.ciphers import (
+    Cipher,
+    algorithms,
+    modes,
+)
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
-from cryptography.hazmat.primitives import hashes
 
-# Example for a symmetric cipher: AES
-aes = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())  # Noncompliant
-aes = Cipher(algorithms.AES(key), modes.ECB(), backend=default_backend())  # Noncompliant
+Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend()) # Noncompliant
+</pre>
+<p>Example with an asymmetric cipher, RSA:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from cryptography.hazmat.primitives.asymmetric import (
+    rsa,
+    padding,
+)
 
-# Example for a asymmetric cipher: RSA
-ciphertext = public_key.encrypt(
+private_key = rsa.generate_private_key(
+  public_exponent=65537,
+  key_size=2048,
+  backend=default_backend()
+)
+
+public_key = private_key.public_key()
+
+public_key.encrypt(
   message,
   padding.PKCS1v15() # Noncompliant
 )
-
-plaintext = private_key.decrypt(
-  ciphertext,
-  padding.PKCS1v15() # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>For the AES symmetric cipher, use the GCM mode:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+from cryptography.hazmat.primitives.ciphers import (
+    Cipher,
+    algorithms,
+    modes,
 )
-</pre>
-<p><a href="https://pypi.org/project/pyDes/">pydes</a> library:</p>
-<pre>
-# For DES cipher
-des = pyDes.des('ChangeIt') # Noncompliant
-des = pyDes.des('ChangeIt', pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant
-des = pyDes.des('ChangeIt', pyDes.ECB, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5) # Noncompliant
-</pre>
-<p><a href="https://pycrypto.readthedocs.io/en/latest/">pycrypto</a> library is not maintained and therefore should not be used:</p>
-<pre>
-# https://pycrypto.readthedocs.io/en/latest/
-from Crypto.Cipher import *
-from Crypto.Random import get_random_bytes
-from Crypto.Util import Counter
-from Crypto.PublicKey import RSA
-
-# Example for a symmetric cipher: AES
-AES.new(key, AES.MODE_ECB)  # Noncompliant
-AES.new(key, AES.MODE_CBC, IV=iv)  # Noncompliant
-
-# Example for a asymmetric cipher: RSA
-cipher = PKCS1_v1_5.new(key) # Noncompliant
-</pre>
-<h3>Compliant solution</h3>
-<p><a href="https://pycryptodome.readthedocs.io">pycryptodomex</a> library:</p>
-<pre>
-from Cryptodome.Cipher import AES
-from Cryptodome.Random import get_random_bytes
-from Cryptodome.PublicKey import RSA
-
-# AES is the recommended symmetric cipher with GCM mode
-AES.new(key, AES.MODE_GCM)  # Compliant
-
-# RSA is the recommended asymmetric cipher with OAEP padding
-cipher = PKCS1_OAEP.new(key) # Compliant
-</pre>
-<p><a href="https://cryptography.io/en/latest/">pyca</a> library:</p>
-<pre>
-import os
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
+
+Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+from cryptography.hazmat.primitives.asymmetric import (
+    rsa,
+    padding,
+)
 from cryptography.hazmat.primitives import hashes
 
-# AES is the recommended symmetric cipher with GCM mode
-aes = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())  # Compliant
+private_key = rsa.generate_private_key(
+  public_exponent=65537,
+  key_size=2048,
+  backend=default_backend()
+)
 
-# RSA is the recommended asymmetric cipher with OAEP padding
-ciphertext = public_key.encrypt(
+public_key = private_key.public_key()
+
+public_key.encrypt(
   message,
-  padding.OAEP( # Compliant
+  padding.OAEP(
     mgf=padding.MGF1(algorithm=hashes.SHA256()),
     algorithm=hashes.SHA256(),
     label=None
   )
 )
-
-plaintext = private_key.decrypt(
-  ciphertext,
-  padding.OAEP( # Compliant
-    mgf=padding.MGF1(algorithm=hashes.SHA256()),
-    algorithm=hashes.SHA256(),
-    label=None
-  )
-)
 </pre>
+<h3>How does this work?</h3>
+<p>As a rule of thumb, use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic community.</p>
+<p>Appropriate choices are currently the following.</p>
+<h4>For AES: Use Galois/Counter mode (GCM)</h4>
+<p>GCM mode combines encryption with authentication and integrity checks using a cryptographic hash function and provides both confidentiality and
+authenticity of data.</p>
+<p>Other similar modes are:</p>
+<ul>
+  <li> CCM: <code>Counter with CBC-MAC</code> </li>
+  <li> CWC: <code>Cipher Block Chaining with Message Authentication Code</code> </li>
+  <li> EAX: <code>Encrypt-and-Authenticate</code> </li>
+  <li> IAPM: <code>Integer Authenticated Parallelizable Mode</code> </li>
+  <li> OCB: <code>Offset Codebook Mode</code> </li>
+</ul>
+<p>It is also possible to use AES-CBC with HMAC for integrity checks. However, it</p>
+<p>is considered more straightforward to use AES-GCM directly instead.</p>
+<h4>For RSA: use the OAEP scheme</h4>
+<p>The Optimal Asymmetric Encryption Padding scheme (OAEP) adds randomness and a secure hash function that strengthens the regular inner workings of
+RSA.</p>
+<h2>How to fix it in Cryptodome</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Example with a symmetric cipher, AES:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from Crypto.Cipher import AES     # pycryptodome
+from Cryptodome.Cipher import AES # pycryptodomex
+
+AES.new(key, AES.MODE_ECB)  # Noncompliant
+</pre>
+<p>Example with an asymmetric cipher, RSA:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from Crypto.Cipher import PKCS1_V1_5     # pycryptodome
+from Cryptodome.Cipher import PKCS1_V1_5 # pycryptodomex
+
+PKCS1_v1_5.new(key) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>For the AES symmetric cipher, use the GCM mode:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+from Crypto.Cipher import AES     # pycryptodome
+from Cryptodome.Cipher import AES # pycryptodomex
+
+AES.new(key, AES.MODE_GCM)
+</pre>
+<p>For the RSA asymmetric cipher, use the Optimal Asymmetric Encryption Padding (OAEP):</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+from Crypto.Cipher import PKCS1_V1_5     # pycryptodome
+from Cryptodome.Cipher import PKCS1_V1_5 # pycryptodomex
+
+PKCS1_OAEP.new(key)
+</pre>
+<h3>How does this work?</h3>
+<p>As a rule of thumb, use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic community.</p>
+<p>Appropriate choices are currently the following.</p>
+<h4>For AES: Use Galois/Counter mode (GCM)</h4>
+<p>GCM mode combines encryption with authentication and integrity checks using a cryptographic hash function and provides both confidentiality and
+authenticity of data.</p>
+<p>Other similar modes are:</p>
+<ul>
+  <li> CCM: <code>Counter with CBC-MAC</code> </li>
+  <li> CWC: <code>Cipher Block Chaining with Message Authentication Code</code> </li>
+  <li> EAX: <code>Encrypt-and-Authenticate</code> </li>
+  <li> IAPM: <code>Integer Authenticated Parallelizable Mode</code> </li>
+  <li> OCB: <code>Offset Codebook Mode</code> </li>
+</ul>
+<p>It is also possible to use AES-CBC with HMAC for integrity checks. However, it</p>
+<p>is considered more straightforward to use AES-GCM directly instead.</p>
+<h4>For RSA: use the OAEP scheme</h4>
+<p>The Optimal Asymmetric Encryption Padding scheme (OAEP) adds randomness and a secure hash function that strengthens the regular inner workings of
+RSA.</p>
+<h2>How to fix it in pyDes</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pyDes
+
+pyDes.des(key) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>Since pyDes only provides DES, it is recommended to use another library like pyca.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+from cryptography.hazmat.primitives.ciphers import (
+    Cipher,
+    algorithms,
+    modes,
+)
+from cryptography.hazmat.backends import default_backend
+
+Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())
+</pre>
+<h3>How does this work?</h3>
+<p>As a rule of thumb, use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic community.</p>
+<p>Appropriate choices are currently the following.</p>
+<h4>For AES: Use Galois/Counter mode (GCM)</h4>
+<p>GCM mode combines encryption with authentication and integrity checks using a cryptographic hash function and provides both confidentiality and
+authenticity of data.</p>
+<p>Other similar modes are:</p>
+<ul>
+  <li> CCM: <code>Counter with CBC-MAC</code> </li>
+  <li> CWC: <code>Cipher Block Chaining with Message Authentication Code</code> </li>
+  <li> EAX: <code>Encrypt-and-Authenticate</code> </li>
+  <li> IAPM: <code>Integer Authenticated Parallelizable Mode</code> </li>
+  <li> OCB: <code>Offset Codebook Mode</code> </li>
+</ul>
+<p>It is also possible to use AES-CBC with HMAC for integrity checks. However, it</p>
+<p>is considered more straightforward to use AES-GCM directly instead.</p>
+<h4>For RSA: use the OAEP scheme</h4>
+<p>The Optimal Asymmetric Encryption Padding scheme (OAEP) adds randomness and a secure hash function that strengthens the regular inner workings of
+RSA.</p>
 <h2>Resources</h2>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/security/vulnerabilities-cbc-mode">Microsoft, Timing vulnerabilities with CBC-mode
+  symmetric decryption using padding</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Padding_oracle_attack">Wikipedia, Padding Oracle Attack</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Chosen-ciphertext_attack">Wikipedia, Chosen-Ciphertext Attack</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Chosen-plaintext_attack">Wikipedia, Chosen-Plaintext Attack</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Semantic_security">Wikipedia, Semantically Secure Cryptosystems</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Optimal_asymmetric_encryption_padding">Wikipedia, OAEP</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">Wikipedia, Galois/Counter Mode</a> </li>
+</ul>
+<h3>Standards</h3>
 <ul>
   <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
