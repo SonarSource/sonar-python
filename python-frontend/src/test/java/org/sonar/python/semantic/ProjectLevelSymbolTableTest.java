@@ -38,15 +38,18 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
@@ -697,7 +700,25 @@ public class ProjectLevelSymbolTableTest {
     FileInput fileInput = parseWithoutSymbols("class A(A): pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
+    // SONARPY-1350: The parent "A" is not yet defined  at the time it is read, so this is actually not correct
     assertThat(a.superClasses()).containsExactly(a);
+    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
+    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactly("mod.mod.A");
+  }
+
+
+  @Test
+  public void class_having_another_class_with_same_name_should_not_trigger_error() {
+    FileInput fileInput = parseWithoutSymbols(
+      "from external import B",
+      "class A:",
+      "  class B(B): pass"
+    );
+    globalSymbols(fileInput, "mod");
+    ClassDef outerClassDef = (ClassDef) fileInput.statements().statements().get(1);
+    ClassDef innerClassDef = (ClassDef) outerClassDef.body().statements().get(0);
+    // SONARPY-1350: Parent should be external.B
+    assertThat(TreeUtils.getParentClassesFQN(innerClassDef)).containsExactly("mod.mod.A.B");
   }
 
   @Test
