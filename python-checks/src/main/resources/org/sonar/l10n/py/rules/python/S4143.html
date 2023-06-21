@@ -1,9 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p>It is highly suspicious when a value is saved in a collection for a given key or index and then unconditionally overwritten. Such replacements are
-likely errors.</p>
-<p>This rule raises an issue when the <a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__"><code>__setitem__</code></a>
-method of the same object is called multiple times with the same index, slice or key without any other action done between the calls.</p>
-<h3>Noncompliant code example</h3>
+<p>Storing a value inside a collection at a given key or index and then unconditionally overwriting it without reading the initial value is a case of
+"dead store".</p>
 <pre>
 def swap(mylist, index1, index2):
     tmp = mylist[index2]
@@ -18,4 +15,5 @@ mymap = {'a': {}}
 mymap['a']['b'] = 42
 mymap['a']['b'] = 42  # Noncompliant
 </pre>
+<p>At best it is redundant and will confuse the reader, most often it is an error and not what the developer intended to do.</p>
 

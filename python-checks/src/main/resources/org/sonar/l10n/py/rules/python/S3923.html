@@ -1,7 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p>Having the same implementation in every branch of an <code>if</code> chain is an error. Either a copy-paste error was made and something different
-should be executed, or there shouldn’t be an <code>if</code> chain at all.</p>
-<h3>Noncompliant code example</h3>
+<p>Having all branches of an <code>if</code> chain with the same implementation indicates a problem.</p>
+<p>In the following code:</p>
 <pre>
 if b == 0:  # Noncompliant
     doOneMoreThing()
@@ -12,8 +11,9 @@ else:
 
 b = 4 if a &gt; 12 else 4  # Noncompliant
 </pre>
+<p>Either there is a copy-paste error that needs fixing or the unnecessary <code>if</code> chain needs removing.</p>
 <h3>Exceptions</h3>
-<p>This rule does not apply to <code>if</code> chains without <code>else</code>-s.</p>
+<p>This rule does not apply to <code>if</code> chains without <code>else</code>.</p>
 <pre>
 if b == 0:  # no issue, this could have been done on purpose to make the code more readable
     doOneMoreThing()

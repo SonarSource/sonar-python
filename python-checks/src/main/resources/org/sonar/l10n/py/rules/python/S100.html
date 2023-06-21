@@ -1,14 +1,13 @@
 <h2>Why is this an issue?</h2>
-<p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate. This rule allows to check that all method
-names match a provided regular expression.</p>
-<h3>Noncompliant code example</h3>
-<p>With default provided regular expression: <code>^[a-z_][a-z0-9_]*$</code></p>
+<p>Shared naming conventions allow teams to collaborate efficiently.</p>
+<p>This rule raises an issue when a method name does not match a provided regular expression.</p>
+<p>For example, with the default provided regular expression <code>^[a-z_][a-z0-9_]*$</code>, the method:</p>
 <pre>
 class MyClass:
-    def MyMethod(a,b):
+    def MyMethod(a,b): # Noncompliant
         ...
 </pre>
-<h3>Compliant solution</h3>
+<p>should be renamed to</p>
 <pre>
 class MyClass:
     def my_method(a,b):

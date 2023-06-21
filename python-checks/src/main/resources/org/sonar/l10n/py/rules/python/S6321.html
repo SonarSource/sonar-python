@@ -2,14 +2,20 @@
 <p>Cloud platforms such as AWS, Azure, or GCP support virtual firewalls that can be used to restrict access to services by controlling inbound and
 outbound traffic.<br> Any firewall rule allowing traffic from all IP addresses to standard network ports on which administration services
 traditionally listen, such as 22 for SSH, can expose these services to exploits and unauthorized access.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>It’s recommended to restrict access to remote administration services to only trusted IP addresses. In practice, trusted IP addresses are those
+<h3>What is the potential impact?</h3>
+<p>Like any other service, administration services can contain vulnerabilities. Administration services run with elevated privileges and thus a
+vulnerability could have a high impact on the system.</p>
+<p>Additionally, credentials might be leaked through phishing or similar techniques. Attackers who are able to reach the services could use the
+credentials to log in to the system.</p>
+<h2>How to fix it</h2>
+<p>It is recommended to restrict access to remote administration services to only trusted IP addresses. In practice, trusted IP addresses are those
 held by system administrators or those of <a href="https://aws.amazon.com/quickstart/architecture/linux-bastion/?nc1=h_ls">bastion-like</a>
 servers.</p>
-<h3>Noncompliant code example</h3>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/Instance.html">aws_cdk.aws_ec2.Instance</a> and other constructs that
 support a <code>connections</code> attribute:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from aws_cdk import aws_ec2 as ec2
 
 instance = ec2.Instance(
@@ -31,7 +37,7 @@ instance.connections.allow_from_any_ipv4( # Noncompliant
 )
 </pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/SecurityGroup.html">aws_cdk.aws_ec2.SecurityGroup</a></p>
-<pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 from aws_cdk import aws_ec2 as ec2
 security_group = ec2.SecurityGroup(
     self,
@@ -45,7 +51,7 @@ security_group.add_ingress_rule(
 )
 </pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnSecurityGroup.html">aws_cdk.aws_ec2.CfnSecurityGroup</a></p>
-<pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
 from aws_cdk import aws_ec2 as ec2
 
 ec2.CfnSecurityGroup(
@@ -76,7 +82,7 @@ ec2.CfnSecurityGroup(
 </pre>
 <p>For <a
 href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnSecurityGroupIngress.html">aws_cdk.aws_ec2.CfnSecurityGroupIngress</a></p>
-<pre>
+<pre data-diff-id="4" data-diff-type="noncompliant">
 from aws_cdk import aws_ec2 as ec2
 
 ec2.CfnSecurityGroupIngress( # Noncompliant
@@ -97,10 +103,10 @@ ec2.CfnSecurityGroupIngress( # Noncompliant
     group_id=security_group.attr_group_id
 )
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/Instance.html">aws_cdk.aws_ec2.Instance</a> and other constructs that
 support a <code>connections</code> attribute:</p>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 from aws_cdk import aws_ec2 as ec2
 
 instance = ec2.Instance(
@@ -123,7 +129,7 @@ instance.connections.allow_from(
 )
 </pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/SecurityGroup.html">aws_cdk.aws_ec2.SecurityGroup</a></p>
-<pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 from aws_cdk import aws_ec2 as ec2
 security_group = ec2.SecurityGroup(
     self,
@@ -137,7 +143,7 @@ security_group.add_ingress_rule(
 )
 </pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnSecurityGroup.html">aws_cdk.aws_ec2.CfnSecurityGroup</a></p>
-<pre>
+<pre data-diff-id="3" data-diff-type="compliant">
 from aws_cdk import aws_ec2 as ec2
 
 ec2.CfnSecurityGroup(
@@ -164,7 +170,7 @@ ec2.CfnSecurityGroup(
 </pre>
 <p>For <a
 href="https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/CfnSecurityGroupIngress.html">aws_cdk.aws_ec2.CfnSecurityGroupIngress</a></p>
-<pre>
+<pre data-diff-id="4" data-diff-type="compliant">
 from aws_cdk import aws_ec2 as ec2
 
 ec2.CfnSecurityGroupIngress(
@@ -188,14 +194,18 @@ ec2.CfnSecurityGroupIngress(
 )
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS Documentation</a> - Security groups for your VPC </li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview">Azure Documentation</a> - Network security
+  groups </li>
+  <li> <a href="https://cloud.google.com/vpc/docs/using-firewalls">GCP Documentation</a> - Firewalls </li>
+</ul>
+<h3>Standards</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/284">MITRE, CWE-284</a> - Improper Access Control </li>
   <li> <a href="https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Broken Access Control
   </li>
   <li> <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">OWASP Top 10 2021 Category A1</a> - Broken Access Control </li>
-  <li> <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">AWS Documentation</a> - Security groups for your VPC </li>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview">Azure Documentation</a> - Network security
-  groups </li>
-  <li> <a href="https://cloud.google.com/vpc/docs/using-firewalls">GCP Documentation</a> - Firewalls </li>
 </ul>
 

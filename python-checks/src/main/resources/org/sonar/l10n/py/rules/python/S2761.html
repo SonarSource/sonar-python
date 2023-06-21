@@ -1,25 +1,16 @@
 <h2>Why is this an issue?</h2>
-<p>Calling the <code>not</code> or <code>~</code> prefix operator twice might be redundant: the second invocation undoes the first. Such mistakes are
-typically caused by accidentally double-tapping the key in question without noticing. Either this is a bug, if the operator was actually meant to be
-called once, or misleading if done on purpose. Calling <code>not</code> twice is commonly done instead of using the dedicated "bool()" builtin
-function. However, the latter one increases the code readability and should be used.</p>
-<h3>Noncompliant code example</h3>
+<p>The repetition of a prefix operator (<code>not</code> or <code>~</code>) is usually a typo. The second operator invalidates the first one:</p>
 <pre>
-a = 0
-b = False
-
-c = not not a # Noncompliant
-d = ~~b # Noncompliant
+a = False
+b = ~~a # Noncompliant: equivalent to "a"
 </pre>
-<h3>Compliant solution</h3>
+<p>While calling <code>not</code> twice is equivalent to calling the <code>bool()</code> built-in function, the latter increases the code readability,
+so it should be preferred.</p>
 <pre>
 a = 0
-b = False
 
-c = bool(a)
-d = ~b
+b = not not a # Noncompliant: use bool()
 </pre>
 <h3>Exceptions</h3>
-<p>If the <code>~</code> function has been overloaded in a customised class and has been called twice, no warning is raised as it is assumed to be an
-expected usage.</p>
+<p>The rule does not raise an issue if the <code>~</code> function is overloaded in a customized class, as it is assumed to be the expected usage.</p>
 
