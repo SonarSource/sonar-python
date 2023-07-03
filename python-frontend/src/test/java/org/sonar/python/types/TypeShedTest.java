@@ -40,7 +40,6 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
-import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -91,9 +90,6 @@ public class TypeShedTest {
     assertThat(strClass.resolveMember("removeprefix")).isEmpty();
     assertThat(strClass.resolveMember("removesuffix")).isEmpty();
 
-    setPythonVersions(PythonVersionUtils.fromString("2.7"));
-
-    assertThatIllegalArgumentException().isThrownBy( () -> TypeShed.typeShedClass("str"));
     setPythonVersions(PythonVersionUtils.allVersions());
   }
 
@@ -432,7 +428,8 @@ public class TypeShedTest {
     // python 2
     setPythonVersions(PythonVersionUtils.fromString("2.7"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(range).isNull();
+    // Python 3 symbols are returned, as no dedicated stubs for 2.7 are available anymore
+    assertThat(range).isNotNull();
 
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.8"));

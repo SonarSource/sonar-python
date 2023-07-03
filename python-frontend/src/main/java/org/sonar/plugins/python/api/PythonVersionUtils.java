@@ -27,9 +27,8 @@ import java.util.Set;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_27;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_35;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
@@ -38,13 +37,12 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 public class PythonVersionUtils {
 
   public enum Version {
-    V_27(2, 7, "27"),
-    V_35(3, 5, "35"),
     V_36(3, 6, "36"),
     V_37(3, 7, "37"),
     V_38(3, 8, "38"),
     V_39(3, 9, "39"),
-    V_310(3, 10, "310");
+    V_310(3, 10, "310"),
+    V_311(3, 11, "311");
 
     private final int major;
     private final int minor;
@@ -82,28 +80,26 @@ public class PythonVersionUtils {
   }
 
   /**
-   * Note that versions between 3 and 3.5 are currently mapped to 3.5 because
+   * Note that versions between 3 and 3.6 are currently mapped to 3.6 because
    * we don't take into account those version during typeshed symbols serialization
    */
   private static final Map<String, Version> STRING_VERSION_MAP = new HashMap<>();
   static {
-    STRING_VERSION_MAP.put("2", V_27);
-    STRING_VERSION_MAP.put("2.7", V_27);
-    STRING_VERSION_MAP.put("3", V_35);
-    STRING_VERSION_MAP.put("3.0", V_35);
-    STRING_VERSION_MAP.put("3.1", V_35);
-    STRING_VERSION_MAP.put("3.2", V_35);
-    STRING_VERSION_MAP.put("3.3", V_35);
-    STRING_VERSION_MAP.put("3.4", V_35);
-    STRING_VERSION_MAP.put("3.5", V_35);
+    STRING_VERSION_MAP.put("3.0", V_36);
+    STRING_VERSION_MAP.put("3.1", V_36);
+    STRING_VERSION_MAP.put("3.2", V_36);
+    STRING_VERSION_MAP.put("3.3", V_36);
+    STRING_VERSION_MAP.put("3.4", V_36);
+    STRING_VERSION_MAP.put("3.5", V_36);
     STRING_VERSION_MAP.put("3.6", V_36);
     STRING_VERSION_MAP.put("3.7", V_37);
     STRING_VERSION_MAP.put("3.8", V_38);
     STRING_VERSION_MAP.put("3.9", V_39);
     STRING_VERSION_MAP.put("3.10", V_310);
+    STRING_VERSION_MAP.put("3.11", V_311);
   }
-  private static final Version MIN_SUPPORTED_VERSION = V_27;
-  private static final Version MAX_SUPPORTED_VERSION = V_310;
+  private static final Version MIN_SUPPORTED_VERSION = V_36;
+  private static final Version MAX_SUPPORTED_VERSION = V_311;
   private static final Logger LOG = Loggers.get(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
@@ -118,6 +114,10 @@ public class PythonVersionUtils {
     Set<Version> pythonVersions = EnumSet.noneOf(Version.class);
     for (String versionValue : versions) {
       versionValue = versionValue.trim();
+      if ("3".equals(versionValue)) {
+        // Only 3.x stubs are supported
+        return allVersions();
+      }
       Version version = STRING_VERSION_MAP.get(versionValue);
       if (version != null) {
         pythonVersions.add(version);
@@ -146,6 +146,10 @@ public class PythonVersionUtils {
         logWarningGuessVersion(versionValue, guessedVersion);
         return true;
       }
+      if (major < 3) {
+        logWarningPython2(versionValue);
+        return false;
+      }
       if (MIN_SUPPORTED_VERSION.compare(major, minor) > 0) {
         pythonVersions.add(MIN_SUPPORTED_VERSION);
         logWarningGuessVersion(versionValue, MIN_SUPPORTED_VERSION);
@@ -171,5 +175,10 @@ public class PythonVersionUtils {
   private static void logWarningGuessVersion(String propertyValue, Version guessedVersion) {
     String prefix = "No explicit support for version %s. Python version has been set to %s.";
     LOG.warn(String.format(Locale.ROOT, prefix, propertyValue, guessedVersion));
+  }
+
+  private static void logWarningPython2(String propertyValue) {
+    String prefix = "No explicit support for version %s. Support for Python versions prior to 3 is deprecated.";
+    LOG.warn(String.format(Locale.ROOT, prefix, propertyValue));
   }
 }
