@@ -83,21 +83,20 @@ public class PythonVersionUtils {
    * Note that versions between 3 and 3.6 are currently mapped to 3.6 because
    * we don't take into account those version during typeshed symbols serialization
    */
-  private static final Map<String, Version> STRING_VERSION_MAP = new HashMap<>();
-  static {
-    STRING_VERSION_MAP.put("3.0", V_36);
-    STRING_VERSION_MAP.put("3.1", V_36);
-    STRING_VERSION_MAP.put("3.2", V_36);
-    STRING_VERSION_MAP.put("3.3", V_36);
-    STRING_VERSION_MAP.put("3.4", V_36);
-    STRING_VERSION_MAP.put("3.5", V_36);
-    STRING_VERSION_MAP.put("3.6", V_36);
-    STRING_VERSION_MAP.put("3.7", V_37);
-    STRING_VERSION_MAP.put("3.8", V_38);
-    STRING_VERSION_MAP.put("3.9", V_39);
-    STRING_VERSION_MAP.put("3.10", V_310);
-    STRING_VERSION_MAP.put("3.11", V_311);
-  }
+  private static final Map<String, Version> STRING_VERSION_MAP = Map.ofEntries(
+    Map.entry("3.0", V_36),
+    Map.entry("3.1", V_36),
+    Map.entry("3.2", V_36),
+    Map.entry("3.3", V_36),
+    Map.entry("3.4", V_36),
+    Map.entry("3.5", V_36),
+    Map.entry("3.6", V_36),
+    Map.entry("3.7", V_37),
+    Map.entry("3.8", V_38),
+    Map.entry("3.9", V_39),
+    Map.entry("3.10", V_310),
+    Map.entry("3.11", V_311)
+  );
   private static final Version MIN_SUPPORTED_VERSION = V_36;
   private static final Version MAX_SUPPORTED_VERSION = V_311;
   private static final Logger LOG = Loggers.get(PythonVersionUtils.class);
