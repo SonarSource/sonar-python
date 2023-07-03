@@ -1,3 +1,4 @@
+<p>This rule raises an issue when an item operation is performed on an object which doesn’t have the corresponding method.</p>
 <h2>Why is this an issue?</h2>
 <p>Getting, setting and deleting items using square brackets requires the accessed object to have special methods:</p>
 <ul>
@@ -10,10 +11,12 @@
   <li> Deleting items such as <code>del my_variable[key]</code> requires <code>my_variable</code> to have the <a
   href="https://docs.python.org/3/reference/datamodel.html#object.__delitem__"><code>__delitem__</code></a> method. </li>
 </ul>
-<p>This rule raises an issue when an item operation is performed on an object which doesn’t have the corresponding method.</p>
-<h3>Noncompliant code example</h3>
+<p>Performing these operations on an object that doesn’t have the corresponding method will result in a <code>TypeError</code>.</p>
+<p>To fix this issue, make sure that the class for which you are trying to perform item operations implements the required methods.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
-del (1, 2)[0]  # Noncompliant, tuples are immutable
+del (1, 2)[0]  # Noncompliant: tuples are immutable
 (1, 2)[0] = 42  # Noncompliant
 (1, 2)[0]
 
@@ -32,7 +35,7 @@ class B:
 
 B[0]  # Noncompliant
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 del [1, 2][0]  # Lists are mutable
 [1, 2][0] = 42
@@ -64,6 +67,7 @@ class B:
 B[0]
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__getitem__">Python documentation - __getitem__ method</a> </li>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__setitem__">Python documentation - __setitem__ method</a> </li>

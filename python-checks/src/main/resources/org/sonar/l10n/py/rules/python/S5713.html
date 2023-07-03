@@ -1,30 +1,40 @@
-<h2>Why is this an issue?</h2>
-<p>Repeating an exception class in a single <code>except</code> statement will not fail but it is not what the developer intended. Either the class is
-not the one which should be caught, or this is dead code.</p>
-<p>Having a subclass and a parent class in the same <code>except</code> statement is also useless. It is enough to keep only the parent class.</p>
 <p>This rule raises an issue when an exception class is duplicated in an <code>except</code> statement, or when an exception class has a parent class
 in the same <code>except</code> statement.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>In Python it is possible to catch multiple types of exception in a single <code>except</code> statement using a tuple of the exceptions.</p>
+<p>Repeating an exception class in a single <code>except</code> statement will not fail but it does not have any effect. Either the exception class is
+not the one which should be caught, or it is duplicated code which should be removed.</p>
+<p>Having a subclass and a parent class in the same <code>except</code> statement does not provide any benefit either. It is enough to keep only the
+parent class.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 try:
-    raise NotImplementedError()
-except (NotImplementedError, RuntimeError):  # Noncompliant. NotImplementedError inherits from RuntimeError
+    ...
+except (TypeError, TypeError):  # Noncompliant: duplicated code or incorrect exception class.
     print("Foo")
 
 try:
-    raise NotImplementedError()
-except (RuntimeError, RuntimeError):  # Noncompliant.
+    ...
+except (NotImplementedError, RuntimeError):  # Noncompliant: NotImplementedError inherits from RuntimeError.
     print("Foo")
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 try:
-    raise NotImplementedError()
+    ...
+except (TypeError, ValueError):
+    print("Foo")
+
+try:
+    ...
 except RuntimeError:
     print("Foo")
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions">Handling Exceptions</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">Exception hierarchy</a> </li>
 </ul>
 

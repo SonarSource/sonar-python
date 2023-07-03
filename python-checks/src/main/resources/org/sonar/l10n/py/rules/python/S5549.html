@@ -1,13 +1,15 @@
+<p>This rule raises an issue when a function is called with multiple values for the same parameter.</p>
 <h2>Why is this an issue?</h2>
-<p>When a function is called, it accepts only one value per parameter. Python interpreters will raise a SyntaxError when they see something like
-<code>myfunction(a=1, a=2)</code>, but there are other cases which will only fail at runtime:</p>
+<p>When a function is called, it accepts only one value per parameter. The Python interpreter will raise a <code>SyntaxError</code> when the same
+parameter is provided more than once, i.e. <code>myfunction(a=1, a=2)</code>.</p>
+<p>Other less obvious cases will also fail at runtime by raising a <code>TypeError</code>, when:</p>
 <ul>
   <li> An argument is provided by value and position at the same time. </li>
-  <li> Some arguments are provided via unpacking and the same argument is provided twice. </li>
+  <li> An argument is provided twice, once via unpacking and once by value or position. </li>
 </ul>
-<p>This rule raises an issue when a function is called with multiple values for the same parameter.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def func(a, b, c):
     return a * b * c
 
@@ -17,11 +19,14 @@ params = {'c':31}
 func(6, 93, 31, **params) # Noncompliant: argument "c" is duplicated
 func(6, 93, c=62, **params) # Noncompliant: argument "c" is duplicated
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def func(a, b, c):
     return a * b * c
 
-print(func(c=31, b=93, a=6)) # Compliant
+func(c=31, b=93, a=6) # Compliant
+
+params = {'c':31}
+func(6, 93, **params) # Compliant
 </pre>
 

@@ -1,8 +1,12 @@
+<p>This rule raises an issue when a call is made to a non-callable object.</p>
 <h2>Why is this an issue?</h2>
-<p>In order to be callable, a python class should implement the <a
-href="https://docs.python.org/3/reference/datamodel.html#object.__call__"><code>__call__</code></a> method.</p>
-<p>This rule raises an issue when a non-callable object is called.</p>
-<h3>Noncompliant code example</h3>
+<p>In order to be callable, a Python class should implement the <a
+href="https://docs.python.org/3/reference/datamodel.html#object.__call__"><code>__call__</code></a> method. Thanks to this method, an instance of this
+class will be callable as a function.</p>
+<p>However, when making a call to a non-callable object, a <code>TypeError</code> will be raised.</p>
+<p>In order to fix this issue, make sure that the object you are trying to call has a <code>__call__</code> method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 class MyClass:
     pass
@@ -13,7 +17,7 @@ myvar()  # Noncompliant
 none_var = None
 none_var()  # Noncompliant
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 class MyClass:
     def __call__(self):
@@ -23,6 +27,7 @@ myvar = MyClass()
 myvar()
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://docs.python.org/3/reference/datamodel.html#object.__call__">Python documentation - __call__ method</a> </li>
 </ul>

@@ -1,29 +1,41 @@
+<p>This rule raises an issue when an invalid "mode" is provided to the <code>open</code> builtin function.</p>
 <h2>Why is this an issue?</h2>
-<p>The <code>open</code> builtin can open files in different modes, which are provided as a combination of characters. Using an invalid sequence of
-characters will at best make <code>open</code> fail, or worse, it will have an undefined behavior (ex: it might ignore some characters).</p>
+<p>The <code>open</code> builtin function can open files in different modes. These modes are provided as a combination of characters. Using an invalid
+sequence of characters will make <code>open</code> fail with a <code>ValueError</code>.</p>
 <p>A valid mode:</p>
 <ul>
-  <li> should contain one and only one of the following characters: "r" (read), "w" (write), "a" (append), "x" (create). </li>
-  <li> should contain zero or one of the following characters: "t" (text), "b" (binary). </li>
-  <li> should contain zero or one "+" character (open for updating) </li>
-  <li> cannot contain "a", "w", "+", or "x" if "U" (universal newlines) is used. Note that "U" has no effect in python 3, it is deprecated and
-  shouldn’t be used anymore. </li>
+  <li> should contain only one of the following characters: <code>r</code> (read), <code>w</code> (write), <code>a</code> (append), <code>x</code>
+  (create). </li>
+  <li> should contain zero or one of the following characters: <code>t</code> (text), <code>b</code> (binary). </li>
+  <li> should contain zero or one <code>+</code> character (open for updating) </li>
 </ul>
-<p>This rule raises an issue when an invalid "mode" is provided to the <code>open</code> builtin.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-# In python 3 the following fails
-# In python 2.7.16 on MacOs, "open" will just ignore the "w" flag
-with open("test.txt", "aw") as f:  # Noncompliant
+<p>For example: <code>a</code>, <code>rt</code>, <code>r+</code> and <code>w+b</code> are valid modes.</p>
+<p>If no <code>t</code> or <code>b</code> character is provided the mode will default to <code>t</code> (text), so specifying <code>r</code> is
+equivalent to <code>rt</code>.</p>
+<p><strong>Note</strong>: <em>In Python 2, providing an incorrect mode may have an undefined behavior (ex: it might ignore some characters)</em></p>
+<h2>How to fix it</h2>
+<p>Make sure to provide a valid mode to the <code>open</code> builtin function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>In Python 3 the following program will throw a <code>ValueError</code>.</p>
+<p>In Python 2.7.16 on MacOs, <code>open</code> will just ignore the <code>w</code> flag.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+with open("test.txt", "aw") as f:  # Noncompliant: ValueError
     pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 with open("test.txt", "a") as f:
     pass
 </pre>
+<h3>Pitfalls</h3>
+<p>In Python 2, the character <code>U</code> (universal newlines) is available as a mode character but it cannot be combined with <code>a</code>,
+<code>w</code>, <code>x</code> or <code>+</code>.</p>
+<p><strong>Note</strong>: <em><code>U</code> has no effect in Python 3, it is deprecated and is replaced by the parameter <code>newline</code> of the
+<code>open</code> function. The default value of <code>newline</code> is <code>None</code>, meaning universal newlines mode is enabled.</em></p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/functions.html#open">Python documentation - the <code>open</code> builtin</a> </li>
+  <li> <a href="https://docs.python.org/3/library/functions.html#open">The <code>open</code> builtin function</a> </li>
 </ul>
 

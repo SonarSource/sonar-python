@@ -1,44 +1,87 @@
+<p>This rule raises an issue when a property getter, setter or deleter does not have the correct number of arguments.</p>
 <h2>Why is this an issue?</h2>
-<p>Property getter, setter and deleter methods are called by the python interpreter with a specific number or arguments:</p>
-<ul>
-  <li> only "self" for property getter and deleter methods. </li>
-  <li> "self" and a value for setter methods. </li>
-</ul>
-<p>Adding any other parameter, or removing these mandatory parameters will make method calls fail.</p>
-<p>This rule raises an issue when:</p>
-<ul>
-  <li> too many parameters are defined in a property getter, setter or deleter method. </li>
-  <li> the value parameter is missing in a property setter method. </li>
-</ul>
-<h3>Noncompliant code example</h3>
+<p>Creating property accessors and mutators is quite common in Object-Oriented Programming. Python provides two main ways of implementing getters,
+setters and deleters; either with the <code>@property</code> decorator, or with the <code>property</code> function.</p>
 <pre>
-class A:
+class WithPropertyDecorator(object):
     @property
-    def foo(self, unexpected, unexpected2):  # Noncompliant. Too many parameters.
+    def foo(self)
         return self._foo
 
     @foo.setter
-    def foo(self, value, unexpected):  # Noncompliant. Too many parameters.
+    def foo(self, value):
         self._foo = value
 
     @foo.deleter
-    def foo(self, unexpected):  # Noncompliant. Too many parameters.
+    def foo(self):
         del self._foo
 
-class B:
-    def get_foo(self, unexpected):  # Noncompliant. Too many parameters.
+class WithPropertyMethod(object):
+    def get_foo(self):
         return self._foo
 
-    def set_foo(self, value, unexpected):  # Noncompliant. Too many parameters.
+    def set_foo(self, value):
         self._foo = value
 
-    def del_foo(self, unexpected):  # Noncompliant. Too many parameters.
+    def del_foo(self):
         del self._foo
 
     foo = property(get_foo, set_foo, del_foo, "'foo' property.")
 </pre>
-<h3>Compliant solution</h3>
+<p>The following program illustrates how using the built-in operations will call the custom methods defined above.</p>
 <pre>
+with_decorator = WithPropertyDecorator()
+with_decorator.foo = 1 # the method defined under @foo.setter will be called.
+some_var = with_decorator.foo # the method defined under @foo.getter will be called.
+del with_decorator.foo # the method defined under @foo.deleter will be called.
+
+
+with_method = WithPropertyMethod()
+with_method.foo = 1 # the method set_foo will be called.
+some_var = with_method.foo # the method get_foo will be called.
+del with_method.foo # the method del_foo will be called.
+</pre>
+<p>Defining a property this way allows for flexibility when refactoring the implementation of the getters, setters and deleters method, as all the
+accesses and modifications are done through the Python built-in operators (<code>=</code>,<code>.</code>) and keyword (<code>del</code>).</p>
+<p>Property getter, setter and deleter methods are called by the Python interpreter with a specific number of arguments:</p>
+<ul>
+  <li> Property getter and deleter methods only require a "self" argument. </li>
+  <li> Property setter methods require a "self" argument as well as a value. </li>
+</ul>
+<p>Adding any other parameters, or removing these mandatory parameters will throw a <code>TypeError</code> exception at runtime when trying to access
+or modify the property.</p>
+<h2>How to fix it</h2>
+<p>Make sure to specify the correct number of argument for each setter, getter and deleter methods.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class A:
+    @property
+    def foo(self, unexpected, unexpected2):  # Noncompliant: too many parameters.
+        return self._foo
+
+    @foo.setter
+    def foo(self):  # Noncompliant: a parameter is missing.
+        self._foo = 42
+
+    @foo.deleter
+    def foo(self, unexpected):  # Noncompliant: too many parameters.
+        del self._foo
+
+class B:
+    def get_foo(self, unexpected):  # Noncompliant: too many parameters.
+        return self._foo
+
+    def set_foo(self, value, unexpected):  # Noncompliant: too many parameters.
+        self._foo = value
+
+    def del_foo(self, unexpected):  # Noncompliant: too many parameters.
+        del self._foo
+
+    foo = property(get_foo, set_foo, del_foo, "'foo' property.")
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class A:
     @property
     def foo(self):
@@ -65,7 +108,8 @@ class B:
     foo = property(get_foo, set_foo, del_foo, "'foo' property.")
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/functions.html#property">Python Documentation - Built-in Functions - property</a> </li>
+  <li> <a href="https://docs.python.org/3/library/functions.html#property">Built-in Functions - property</a> - Python Documentation </li>
 </ul>
 

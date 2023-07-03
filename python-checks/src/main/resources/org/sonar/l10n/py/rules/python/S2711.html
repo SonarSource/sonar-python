@@ -1,10 +1,38 @@
+<p>This rule raises an issue when <code>return</code> or <code>yield</code> are used outside of a function.</p>
 <h2>Why is this an issue?</h2>
 <p><code>yield</code> and <code>return</code> only make sense in the context of functions. Using them outside a function raises a
-<code>SyntaxError</code>. To break out of a loop, use <code>break</code> instead.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-class MyClass:
-    while True:
-        return False #Noncompliant
+<code>SyntaxError</code>.</p>
+<p>If the goal is to break out of a loop, use <code>break</code> instead of <code>return</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+a = 1
+while a &lt; 3:
+    if a % 2 == 0:
+        return # Noncompliant: return is outside of a function
+    a += 1
+
+for n in range(5):
+  yield n # Noncompliant: yield is outside of a function
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+a = 1
+while a &lt; 3:
+    if a % 2 == 0:
+        break
+    a += 1
+
+def gen():
+    for n in range(5):
+      yield n
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html?highlight=yield#yield-expressions">Yield expressions</a>
+  </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/simple_stmts.html?highlight=return%20tatement#the-return-statement">Return
+  statement</a> </li>
+</ul>
 

@@ -1,25 +1,28 @@
-<h2>Why is this an issue?</h2>
-<p>Python developers can customize how code is interpreted by defining special methods (also called magic methods). For example, it is possible to
-override how the multiplication operator (<code>a * b</code>) will apply to instances of a class by defining in this class the <code>__mul__</code>
-and <code>__rmul__</code> methods. Whenever a multiplication operation is performed with this class, the python interpreter will call one of these
-methods instead of performing the default multiplication.</p>
-<p>The python interpreter will always call these methods with the same number of parameters. Every call to a special method will fail if it is defined
-with an unexpected number of parameters.</p>
 <p>This rule raises an issue when a special method is defined with an unexpected number of parameters.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>Python allows developers to customize how code is interpreted by defining special methods (also called magic methods). For example, it is possible
+to override how the multiplication operator (<code>a * b</code>) will apply to instances of a class by defining in this class the <code>__mul__</code>
+and <code>__rmul__</code> methods. Whenever a multiplication operation is performed with this class, the Python interpreter will call one of these
+methods instead of performing the default multiplication.</p>
+<p>Each special method expects a specific number of parameters. The Python interpreter will call these methods with those parameters. Calls to a
+special method will throw a <code>TypeError</code> if it is defined with an incorrect number of parameters.</p>
+<h2>How to fix it</h2>
+<p>Make sure to use the same signature defined in the Python documentation for each special methods.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class A:
-    def __mul__(self, other, unexpected):  # Noncompliant. Too many parameters
+    def __mul__(self, other, unexpected):  # Noncompliant: too many parameters
         return 42
 
-    def __add__(self):  # Noncompliant. Missing one parameter
+    def __add__(self):  # Noncompliant: missing one parameter
         return 42
 
 A() * 3  # TypeError: __mul__() missing 1 required positional argument: 'unexpected'
 A() + 3  # TypeError: __add__() takes 1 positional argument but 2 were given
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class A:
     def __mul__(self, other):
         return 42
@@ -31,8 +34,10 @@ A() * 3
 A() + 3
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a> </li>
-  <li> Python Documentation - <a href="https://docs.python.org/3/library/copy.html">copy module</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a> - Python special methods </li>
+  <li> <a href="https://docs.python.org/3/library/copy.html">Copy module</a> - Documentation of <code>__copy__</code> and <code>__deepcopy__</code>
+  </li>
 </ul>
 

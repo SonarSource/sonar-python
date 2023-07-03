@@ -3,11 +3,11 @@
 <p>In the following code:</p>
 <pre>
 if b == 0:  # Noncompliant
-    doOneMoreThing()
+    do_one_more_thing()
 elif b == 1:
-    doOneMoreThing()
+    do_one_more_thing()
 else:
-    doOneMoreThing()
+    do_one_more_thing()
 
 b = 4 if a &gt; 12 else 4  # Noncompliant
 </pre>
@@ -16,8 +16,8 @@ b = 4 if a &gt; 12 else 4  # Noncompliant
 <p>This rule does not apply to <code>if</code> chains without <code>else</code>.</p>
 <pre>
 if b == 0:  # no issue, this could have been done on purpose to make the code more readable
-    doOneMoreThing()
+    do_one_more_thing()
 elif b == 1:
-    doOneMoreThing()
+    do_one_more_thing()
 </pre>
 
