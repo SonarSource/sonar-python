@@ -318,7 +318,7 @@ public class ClassSymbolImplTest {
         "methods {\n" +
         "  name: \"foo\"\n" +
         "  fully_qualified_name: \"mod.A.foo\"\n" +
-        "  valid_for: \"27\"\n" +
+        "  valid_for: \"36\"\n" +
         "}\n" +
         "overloaded_methods {\n" +
         "  name: \"foo\"\n" +
@@ -337,7 +337,7 @@ public class ClassSymbolImplTest {
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
-    assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("27", "39");
+    assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("36", "39");
   }
 
   private static SymbolsProtos.ClassSymbol classSymbol(String protobuf) throws TextFormat.ParseException {

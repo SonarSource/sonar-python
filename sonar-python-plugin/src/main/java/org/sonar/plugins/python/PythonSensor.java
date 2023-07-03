@@ -63,8 +63,8 @@ public final class PythonSensor implements Sensor {
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = Loggers.get(PythonSensor.class);
   static final String UNSET_VERSION_WARNING =
-    "Your code is analyzed as compatible with python 2 and 3 by default. This will prevent the detection of issues specific to python 2 or python 3." +
-    " You can get a more precise analysis by setting a python version in your configuration via the parameter \"sonar.python.version\"";
+    "Your code is analyzed as compatible with all Python 3 versions by default." +
+    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
