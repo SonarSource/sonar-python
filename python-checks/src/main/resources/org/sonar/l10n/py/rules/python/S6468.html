@@ -1,26 +1,66 @@
+<p>Catching <code>ExceptionGroup</code> with <code>except*</code> will raise a <code>TypeError</code>.</p>
 <h2>Why is this an issue?</h2>
-<p>Python 3.11 introduced <code>except*</code> and <code>ExceptionGroup</code>. While it’s possible to catch the ExceptionGroup and BaseExceptionGroup
-types with <code>except`</code>, a Runtime error will be raised when this is done with <code>except*</code>. See PEP 654 : <a
-href="https://peps.python.org/pep-0654/#forbidden-combinations">PEP-654</a></p>
-<h3>Noncompliant code example</h3>
+<p>Python 3.11 introduced <code>except*</code> and <code>ExceptionGroup</code>, making it possible to handle and raise multiple unrelated exceptions
+simultaneously.</p>
+<p>In the example below, we gather multiple exceptions in an <code>ExceptionGroup</code>. This <code>ExceptionGroup</code> is then caught by a single
+except block:</p>
 <pre>
 try:
+  exception_group = ExceptionGroup("Files not found", [FileNotFoundError("file1.py"), FileNotFoundError("file2.py")])
+
+  raise exception_group
+
+except ExceptionGroup as exceptions:
+  # Do something with all the exceptions
+  pass
+</pre>
+<p>To handle differently each type of exceptions present in an <code>ExceptionGroup</code>, we have to use the <code>except*</code> keyword.</p>
+<pre>
+try:
+  exception_group = ExceptionGroup("Operation errors", [ValueError("Value bigger than 100"), TypeError("Type str is not allowed")])
+
+  raise exception_group
+
+except* ValueError as v:
+  # Do something with only ValueErrors
+  pass
+
+except* TypeError as t:
+  # Do something with only TypeErrors
+  pass
+</pre>
+<p>While it is possible to catch the <code>ExceptionGroup</code> and <code>BaseExceptionGroup</code> types with <code>except</code>, a
+<code>TypeError</code> will be raised when this is done with <code>except*</code>.</p>
+<h2>How to fix it</h2>
+<p>Make sure to use <code>except</code> when catching ExceptionGroup errors.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+try:
     ...
-except* ExceptionGroup:  # Noncompliant
+except* ExceptionGroup:  # Noncompliant: TypeError
     pass
 
 try:
     ...
-except* (TypeError, ExceptionGroup):  # Noncompliant
+except* (TypeError, ExceptionGroup):  # Noncompliant: TypeError
     pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 try:
     ...
 except ExceptionGroup:
     pass
+
+try:
+    ...
+except (TypeError, ExceptionGroup):
+    pass
 </pre>
 <h2>Resources</h2>
-<p><a href="https://peps.python.org/pep-0654/#forbidden-combinations">PEP-654</a></p>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://peps.python.org/pep-0654/#forbidden-combinations">PEP-654</a> - Forbidden combinations </li>
+</ul>
 

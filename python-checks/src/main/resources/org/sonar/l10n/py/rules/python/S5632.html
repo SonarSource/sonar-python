@@ -1,21 +1,24 @@
+<p>This rule raises an issue when an object which doesn’t derive from <code>BaseException</code> is raised.</p>
 <h2>Why is this an issue?</h2>
-<p>In Python 3, attempting to raise an object which does not derive from BaseException will raise a <code>TypeError</code>. In Python 2 it is possible
-to raise old-style classes but this shouldn’t be done anymore in order to be compatible with Python 3.</p>
-<p>If you are about to create a custom Exception class, note that custom exceptions should inherit from <code>Exception</code>, not
-<code>BaseException</code>. <code>Exception</code> allows people to catch all exceptions except the ones explicitly asking the interpreter to stop,
-such as <code>KeyboardInterrupt</code> and <a href="https://docs.python.org/3/library/exceptions.html#GeneratorExit"><code>GeneratorExit</code></a>
-which is not an error. See <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352</a> for more information.</p>
-<p>This rule raises an issue when an object which doesn’t derive from BaseException is raised.</p>
-<h3>Noncompliant code example</h3>
+<p>Attempting to raise an object which does not derive from <code>BaseException</code> will raise a <code>TypeError</code>.</p>
+<p>If you are about to create a custom exception class, note that custom exceptions should inherit from <code>Exception</code>, rather than
+<code>BaseException</code>.</p>
+<p><code>BaseException</code> is the base class for all built-in exceptions in Python, including system-exiting exceptions like
+<code>SystemExit</code> or <code>KeyboardInterrupt</code>, which are typically not meant to be caught. On the other hand, <code>Exception</code> is
+intended for exceptions that are expected to be caught, which is generally the case for user-defined exceptions. See <a
+href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352</a> for more information.</p>
+<p>To fix this issue, make sure that the object you’re attempting to raise inherits from <code>BaseException</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
-raise "Something went wrong"  # Noncompliant
+raise "Something went wrong"  # Noncompliant: a string is not a valid exception
 
 class A:
     pass
 
-raise A  # Noncompliant
+raise A  # Noncompliant: A does not inherit from Exception
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 class MyError(Exception):
     pass
@@ -23,7 +26,10 @@ class MyError(Exception):
 raise MyError("Something went wrong")
 raise MyError
 </pre>
+<p><strong>Note</strong>: <em>In Python 2 it is possible to raise old-style classes but this shouldn’t be done in order to be compatible with Python
+3.</em></p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/errors.html">Python documentation - Errors and Exceptions</a> </li>
   <li> <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">PEP 352 - Required Superclass for Exceptions</a> </li>

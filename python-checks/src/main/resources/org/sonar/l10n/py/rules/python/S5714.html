@@ -1,31 +1,48 @@
+<p>This rule raises an issue when the expression used in an <code>except</code> block is a boolean expression of exceptions.</p>
 <h2>Why is this an issue?</h2>
 <p>The only two possible types for an <code>except</code>'s expression are a class deriving from <code>BaseException</code>, or a tuple composed of
-such classes (or an old style class if you are using python 2, but this has been removed in python 3).</p>
-<p>This rule raises an issue when the expression used in an <code>except</code> block is a boolean expression of exceptions. The result of such
-expression is a single exception class, which is valid but not what the developer intended.</p>
-<h3>Noncompliant code example</h3>
+such classes.</p>
+<p>Trying to catch multiple exception in the same <code>except</code> with a boolean expression of exceptions may not work as intended. The result of
+a boolean expression of exceptions is a single exception class, thus using a boolean expression in an <code>except</code> block will result in
+catching only one kind of exception.</p>
+<pre>
+error = ValueError or TypeError
+error is ValueError # True
+error is TypeError # False
+
+error = ValueError and TypeError
+error is ValueError # False
+error is TypeError # True
+</pre>
+<p><strong>Note</strong>: <em>In Python 2 it is possible to raise an exception from an old-style class that does not derive from
+<code>BaseException</code>.</em></p>
+<h2>How to fix it</h2>
+<p>Make sure to use a tuple of the exceptions that should be caught in the <code>except</code> block.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 try:
     raise TypeError()
 except ValueError or TypeError:  # Noncompliant
     print("Catching only ValueError")
 except ValueError and TypeError:  # Noncompliant
-    print("catching only TypeError")
+    print("Catching only TypeError")
 except (ValueError or TypeError) as exception:  # Noncompliant
     print("Catching only ValueError")
 
 foo = ValueError or TypeError  # foo == ValueError
 foo = ValueError and TypeError  # foo == TypeError
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 try:
     raise TypeError()
 except (ValueError, TypeError) as exception:
-    print("Catching all exceptions")
+    print("Catching ValueError and TypeError")
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> </li>
+  <li> <a href="https://docs.python.org/3/reference/compound_stmts.html#except">the <code>try</code> statement</a> - Python try statement </li>
 </ul>
 

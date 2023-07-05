@@ -1,15 +1,36 @@
+<p>This rule raise an issue if something other than <code>None</code> or a valid exception is provided as the cause of an exception chain.</p>
 <h2>Why is this an issue?</h2>
-<p>Exception chaining enables users to see if an exception was triggered by another exception (see <a
-href="https://www.python.org/dev/peps/pep-3134/">PEP-3134</a>). Exceptions are chained using either of the following syntax:</p>
+<p>Exception chaining enables users to see if an exception is the direct consequence of another exception (see <a
+href="https://peps.python.org/pep-3134/">PEP-3134</a>). This is useful to propagate the original context of the error.</p>
+<p>Exceptions are chained using either of the following syntax:</p>
 <ul>
-  <li> <code>raise NewException() from chained_exception</code> </li>
-  <li> <code>new_exception.__cause__ = chained_exception</code> </li>
+  <li> With the <code>from</code> keyword </li>
 </ul>
-<p>It is also possible to erase a chaining by setting <code>new_exception.__cause__ = None</code> or using <code>except ... from None</code> (see <a
-href="https://www.python.org/dev/peps/pep-0409/">PEP-409</a>).</p>
-<p>Chaining will fail and raise a <code>TypeError</code> if something else than <code>None</code> or a valid exception, i.e. an instance of
-<code>BaseException</code> or of a subclass, is provided.</p>
-<h3>Noncompliant code example</h3>
+<pre>
+try:
+    ...
+except OSError as e:
+    raise RuntimeError("Something went wrong") from e
+</pre>
+<ul>
+  <li> With the <code>__cause__</code> property </li>
+</ul>
+<pre>
+try:
+    ...
+except OSError as e:
+    new_exception = RuntimeError("Something went wrong")
+    new_exception.__cause__ = e
+    raise new_exception
+</pre>
+<p>It is also possible to erase a chaining by setting <code>new_exception.__cause__ = None</code> or using <code>raise new_exception from None</code>
+(see <a href="https://peps.python.org/pep-0409/">PEP-409</a>).</p>
+<p>Chaining will fail and raise a <code>TypeError</code> if something other than <code>None</code> or a valid exception, i.e. an instance or a
+subclass of <code>BaseException</code>, is provided.</p>
+<h2>How to fix it</h2>
+<p>Make sure the cause of a chain of exceptions is either <code>None</code> or a valid exception.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 class A:
     pass
@@ -18,15 +39,15 @@ try:
     raise ValueError("orig")
 except ValueError as e:
     new_exc = TypeError("new")
-    new_exc.__cause__ = A()  # Noncompliant
+    new_exc.__cause__ = A()  # Noncompliant: A is not a subclass of BaseException.
     raise new_exc
 
 try:
     raise ValueError("orig")
 except ValueError as e:
-    raise TypeError("new") from "test"  # Noncompliant
+    raise TypeError("new") from "test"  # Noncompliant: "test" is not a valid exception.
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 try:
     raise ValueError("orig")
@@ -53,10 +74,14 @@ except ValueError as e:
     raise TypeError("new") from e  # Ok
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> PEP 3134 – <a href="https://www.python.org/dev/peps/pep-3134/">Exception Chaining and Embedded Tracebacks</a> </li>
-  <li> PEP 409 – <a href="https://www.python.org/dev/peps/pep-0409/">Suppressing exception context</a> </li>
-  <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
-  <li> Python documentation - <a href="https://docs.python.org/3/library/exceptions.html">Built-in Exceptions</a> </li>
+  <li> <a href="https://docs.python.org/3/library/exceptions.html">Built-in Exceptions</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> <a href="https://peps.python.org/pep-3134/">Exception Chaining and Embedded Tracebacks</a> - PEP 3134 </li>
+  <li> <a href="https://peps.python.org/pep-0409/">Suppressing exception context</a> - PEP 409 </li>
+  <li> <a href="https://peps.python.org/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> - PEP 352 </li>
 </ul>
 

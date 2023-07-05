@@ -1,28 +1,27 @@
+<p>This rule raises an issue when unused scope-limited definitions are found.</p>
 <h2>Why is this an issue?</h2>
 <p>When a class or function is defined in a parent function or method, it is only visible in this parent function or method’s scope. If the defined
-class or function is not used within this scope it is dead code, i.e. unnecessary, inoperative code that should be removed. Cleaning out dead code
-decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-def noncompliant():
-    def nested_function():  # Noncompliant
+class or function is not used within this scope it is dead code (unnecessary, inoperative code) that should be removed.</p>
+<p>Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being
+introduced.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def parent_function():
+    def nested_function():  # Noncompliant: this function is never used in this scope.
         print("nested_function")
 
-    class NestedClass:  # Noncompliant
+    class NestedClass:  # Noncompliant: this class is never used in this scope.
         def __init__(self):
             print("NestedClass")
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-def compliant():
-    def nested_function():
-        print("nested_function")
-
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def parent_function():
     class NestedClass:
         def __init__(self):
             print("NestedClass")
 
-    nested_function()
     NestedClass()
 </pre>
 

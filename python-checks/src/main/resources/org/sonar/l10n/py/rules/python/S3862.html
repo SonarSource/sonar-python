@@ -1,44 +1,77 @@
+<p>This rule raises an issue when a non iterable object is used in a <code>for-in</code> loop, in a <code>yield from</code> or when it is
+unpacked.</p>
 <h2>Why is this an issue?</h2>
-<p>For-in loops, <a href="https://docs.python.org/3/whatsnew/3.3.html#pep-380-syntax-for-delegating-to-a-subgenerator"><code>yield from</code></a> and
-iterable unpacking only work with <a href="https://docs.python.org/3/glossary.html#term-iterable">iterable objects</a>. In order to be iterable, an
-object should have either an <code>__iter__</code> method or a <code>__getitem__</code> method implementing the <a
-href="https://docs.python.org/3/glossary.html#term-sequence">Sequence</a> semantic.</p>
+<p><code>for-in</code> loops, <a href="https://docs.python.org/3/whatsnew/3.3.html#pep-380-syntax-for-delegating-to-a-subgenerator"><code>yield
+from</code></a> and iterable unpacking only work with <a href="https://docs.python.org/3/glossary.html#term-iterable">iterable objects</a>. In order
+to be iterable, an object should have either an <code>__iter__</code> method or a <code>__getitem__</code> method implementing the <a
+href="https://docs.python.org/3/glossary.html#term-sequence">Sequence</a> protocol.</p>
+<p>When trying to iterate over an object which does not implement the required methods, a <code>TypeError</code> will be raised.</p>
+<p>Below is an example of a basic implementation of a iterator with <code>__iter__</code>:</p>
+<pre>
+class IterExample(object):
+    def __init__(self):
+        self._values = [1,2,3,4]
+
+    def __iter__(self):
+        return iter(self._values)
+</pre>
+<p>Here is a similar example with <code>__getitem__</code>:</p>
+<pre>
+class GetItemExample(object):
+    def __init__(self):
+        self._values = [1,2,3,4]
+
+    def __getitem__(self, item):
+        return self._values[item]
+</pre>
+<p>These implementations make it possible to execute the following program:</p>
+<pre>
+my_iterator = IterExample()
+for i in my_iterator:
+    print(i) # Prints 1,2,3,4
+
+my_iterator = GetItemExample()
+for i in my_iterator:
+    print(i) # Prints 1,2,3,4
+</pre>
 <p>Note also that iterating over an <a href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable">asynchronous iterable</a>, i.e. an
 object having the <code>__aiter__</code> method, requires the use of <a
 href="https://docs.python.org/3/reference/compound_stmts.html#the-async-for-statement"><code>async for ... in</code></a> instead of <code>for ...
-in</code>.</p>
-<p>This rule raises an issue when a non iterable object is used in a <code>for-in</code> loop, in a <code>yield from</code> or when it is
-unpacked.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-class Empty:
-    pass
+in</code>. Failing to provide the <code>async</code> keyword will result in a <code>TypeError</code> stating the object is not iterable.</p>
+<h2>How to fix it</h2>
+<p>Make sure your object is an iterable when using it in <code>for-in</code> loops,<code>yield from</code> and unpacking statements, by implementing
+<code>__iter__</code> or <code>__getitem__</code>. To iterate over an asynchronous iterable, make sure to use the <code>async</code> keyword, i.e
+<code>async for …​ in</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class MyIterable:
+    def __init__(self, values):
+        self._values = values
 
-empty = Empty()
+my_iterable = MyIterable(range(10))
 
-for a in empty:  # Noncompliant
+for a in my_iterable:  # Noncompliant: MyIterable is not an iterable
     print(a)
 
-a, b, c = empty  # Noncompliant
-
-print(*empty)  # Noncompliant
-
-[1, 2, 3, *empty]  # Noncompliant
+a, b, *c = my_iterable  # Noncompliant: MyIterable is not an iterable
 
 # yield from
 def generator():
-    yield from Empty()  # Noncompliant
-
-# async generators
-async def async_generator():
-    yield 1
-
-a, *rest = async_generator()  # Noncompliant
-for a in async_generator():  # Noncompliant; "async" is missing before "for"
-    print(a)
+    yield from my_iterable  # Noncompliant: MyIterable is not an iterable
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>For async generators:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+async def async_function():
+  # async generators
+  async def async_generator():
+      yield 1
+
+  for a in async_generator():  # Noncompliant: "async" is missing before "for"
+      print(a)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyIterable:
     def __init__(self, values):
         self._values = values
@@ -53,27 +86,27 @@ for a in my_iterable:
 
 a, b, *c = my_iterable
 
-print(*my_iterable)
-
-[1, 2, 3, *my_iterable]
-
 # yield from
 def generator():
-    yield from subgenerator()
+    yield from my_iterable
+</pre>
+<p>Make sure to use the <code>async</code> keyword when iterating over async generators.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+async def async_function():
+  # async generators
+  async def async_generator():
+      yield 1
 
-def subgenerator():
-    yield 1
-
-# async generators
-async def async_generator():
-    yield 1
-
-async for a in async_generator():
-    print(a)
+  async for a in async_generator():
+      print(a)
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Iterator Types</a> </li>
+</ul>
+<h3>Standards</h3>
 <ul>
   <li> <a href="https://www.python.org/dev/peps/pep-0234/#python-api-specification">PEP 234 - Iterators</a> </li>
-  <li> <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Python documentation - Iterator Types</a> </li>
 </ul>
 

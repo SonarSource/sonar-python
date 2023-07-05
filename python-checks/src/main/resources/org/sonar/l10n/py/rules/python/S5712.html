@@ -1,69 +1,72 @@
+<p>This rule raises an issue when a special method raises a <code>NotImplementedError</code> instead of returning <code>NotImplemented</code>.</p>
 <h2>Why is this an issue?</h2>
-<p>In Python, special methods corresponding to numeric operators, rich comparison operators and the <code>__length_hint__</code> method should return
-<code>NotImplemented</code> when the operation is not supported. These methods should not raise <code>NotImplementedError</code> as callers don’t
-expect it and won’t catch this exception.</p>
+<p>In Python, special methods corresponding to numeric operators and rich comparison operators should return <code>NotImplemented</code> when the
+operation is not supported.</p>
 <p>For example <code>A + B</code> is equivalent to calling <code>A.__add__(B)</code>. If this binary operation is not supported by class A,
 <code>A.__add__(B)</code> should return <code>NotImplemented</code>. The interpreter will then try the reverse operation, i.e.
-<code>B.__radd__(A)</code>. This enables adding new operations by changing only one class instead of two.</p>
-<p>This rule raises an issue when one of the following methods raises <code>NotImplementedError</code> instead of returning
-<code>NotImplemented</code>:</p>
+<code>B.__radd__(A)</code>. If these special methods were to raise <code>NotImplementedError</code>, the callers would not catch the exception and the
+reverse operation would not be called.</p>
+<p>Below is the list of special methods this rule applies to:</p>
 <ul>
-  <li> __lt__(self, other) </li>
-  <li> __le__(self, other) </li>
-  <li> __eq__(self, other) </li>
-  <li> __ne__(self, other) </li>
-  <li> __gt__(self, other) </li>
-  <li> __ge__(self, other) </li>
-  <li> __add__(self, other) </li>
-  <li> __sub__(self, other) </li>
-  <li> __mul__(self, other) </li>
-  <li> __matmul__(self, other) </li>
-  <li> __truediv__(self, other) </li>
-  <li> __floordiv__(self, other) </li>
-  <li> __mod__(self, other) </li>
-  <li> __divmod__(self, other) </li>
-  <li> __pow__(self, other[, modulo]) </li>
-  <li> __lshift__(self, other) </li>
-  <li> __rshift__(self, other) </li>
-  <li> __and__(self, other) </li>
-  <li> __xor__(self, other) </li>
-  <li> __or__(self, other) </li>
-  <li> __radd__(self, other) </li>
-  <li> __rsub__(self, other) </li>
-  <li> __rmul__(self, other) </li>
-  <li> __rmatmul__(self, other) </li>
-  <li> __rtruediv__(self, other) </li>
-  <li> __rfloordiv__(self, other) </li>
-  <li> __rmod__(self, other) </li>
-  <li> __rdivmod__(self, other) </li>
-  <li> __rpow__(self, other[, modulo]) </li>
-  <li> __rlshift__(self, other) </li>
-  <li> __rrshift__(self, other) </li>
-  <li> __rand__(self, other) </li>
-  <li> __rxor__(self, other) </li>
-  <li> __ror__(self, other) </li>
-  <li> __iadd__(self, other) </li>
-  <li> __isub__(self, other) </li>
-  <li> __imul__(self, other) </li>
-  <li> __imatmul__(self, other) </li>
-  <li> __itruediv__(self, other) </li>
-  <li> __ifloordiv__(self, other) </li>
-  <li> __imod__(self, other) </li>
-  <li> __ipow__(self, other[, modulo]) </li>
-  <li> __ilshift__(self, other) </li>
-  <li> __irshift__(self, other) </li>
-  <li> __iand__(self, other) </li>
-  <li> __ixor__(self, other) </li>
-  <li> __ior__(self, other) </li>
-  <li> __length_hint__(self) </li>
+  <li> <code>__lt__(self, other)</code> </li>
+  <li> <code>__le__(self, other)</code> </li>
+  <li> <code>__eq__(self, other)</code> </li>
+  <li> <code>__ne__(self, other)</code> </li>
+  <li> <code>__gt__(self, other)</code> </li>
+  <li> <code>__ge__(self, other)</code> </li>
+  <li> <code>__add__(self, other)</code> </li>
+  <li> <code>__sub__(self, other)</code> </li>
+  <li> <code>__mul__(self, other)</code> </li>
+  <li> <code>__matmul__(self, other)</code> </li>
+  <li> <code>__truediv__(self, other)</code> </li>
+  <li> <code>__floordiv__(self, other)</code> </li>
+  <li> <code>__mod__(self, other)</code> </li>
+  <li> <code>__divmod__(self, other)</code> </li>
+  <li> <code>__pow__(self, other[, modulo])</code> </li>
+  <li> <code>__lshift__(self, other)</code> </li>
+  <li> <code>__rshift__(self, other)</code> </li>
+  <li> <code>__and__(self, other)</code> </li>
+  <li> <code>__xor__(self, other)</code> </li>
+  <li> <code>__or__(self, other)</code> </li>
+  <li> <code>__radd__(self, other)</code> </li>
+  <li> <code>__rsub__(self, other)</code> </li>
+  <li> <code>__rmul__(self, other)</code> </li>
+  <li> <code>__rmatmul__(self, other)</code> </li>
+  <li> <code>__rtruediv__(self, other)</code> </li>
+  <li> <code>__rfloordiv__(self, other)</code> </li>
+  <li> <code>__rmod__(self, other)</code> </li>
+  <li> <code>__rdivmod__(self, other)</code> </li>
+  <li> <code>__rpow__(self, other[, modulo])</code> </li>
+  <li> <code>__rlshift__(self, other)</code> </li>
+  <li> <code>__rrshift__(self, other)</code> </li>
+  <li> <code>__rand__(self, other)</code> </li>
+  <li> <code>__rxor__(self, other)</code> </li>
+  <li> <code>__ror__(self, other)</code> </li>
+  <li> <code>__iadd__(self, other)</code> </li>
+  <li> <code>__isub__(self, other)</code> </li>
+  <li> <code>__imul__(self, other)</code> </li>
+  <li> <code>__imatmul__(self, other)</code> </li>
+  <li> <code>__itruediv__(self, other)</code> </li>
+  <li> <code>__ifloordiv__(self, other)</code> </li>
+  <li> <code>__imod__(self, other)</code> </li>
+  <li> <code>__ipow__(self, other[, modulo])</code> </li>
+  <li> <code>__ilshift__(self, other)</code> </li>
+  <li> <code>__irshift__(self, other)</code> </li>
+  <li> <code>__iand__(self, other)</code> </li>
+  <li> <code>__ixor__(self, other)</code> </li>
+  <li> <code>__ior__(self, other)</code> </li>
+  <li> <code>__length_hint__(self)</code> </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>Make sure special methods return <code>NotImplemented</code> instead of raising a <code>NotImplementedError</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass:
     def __add__(self, other):
-        raise NotImplementedError()  # Noncompliant
+        raise NotImplementedError()  # Noncompliant: the exception will be propagated
     def __radd__(self, other):
-        raise NotImplementedError()  # Noncompliant
+        raise NotImplementedError()  # Noncompliant: the exception will be propagated
 
 class MyOtherClass:
     def __add__(self, other):
@@ -73,8 +76,8 @@ class MyOtherClass:
 
 MyClass() + MyOtherClass()  # This will raise NotImplementedError
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass:
     def __add__(self, other):
         return NotImplemented
@@ -89,10 +92,19 @@ class MyOtherClass:
 
 MyClass() + MyOtherClass()  # This returns 42
 </pre>
+<h3>Pitfalls</h3>
+<p>The <code>__length_hint__</code> special method also requires to return a <code>NotImplemented</code>. Its behavior differs from the other methods,
+because when it returns <code>NotImplemented</code>, a default value will be returned instead. See <a href="https://peps.python.org/pep-0424/">PEP
+424</a> for more information.</p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/library/constants.html#NotImplemented">Built-in Constants - NotImplemented</a> </li>
   <li> Python documentation - <a href="https://docs.python.org/3/library/numbers.html#implementing-the-arithmetic-operations">Implementing the
   arithmetic operations</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> PEP 424 - <a href="https://peps.python.org/pep-0424/">A method exposing <code>__length_hint__</code></a> </li>
 </ul>
 

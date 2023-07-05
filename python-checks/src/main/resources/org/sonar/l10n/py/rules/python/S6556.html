@@ -10,7 +10,7 @@ over time.</p>
 way, sensitive data is not accidentally included in the context, and the code is easier to read and maintain.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def my_view(request):
     username = "alice"
     password = "p@ssw0rd"
@@ -18,7 +18,7 @@ def my_view(request):
     return render(request, "my_template.html", context)
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 def my_view(request):
     username = "alice"
     context = {"username": username}

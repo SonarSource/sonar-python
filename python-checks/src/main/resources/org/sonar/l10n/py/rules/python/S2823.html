@@ -1,17 +1,30 @@
+<p>This rule raises an issue when the <code>__all__</code> property of a module contains objects that aren’t strings.</p>
 <h2>Why is this an issue?</h2>
-<p><code>__all__</code> is used to define the list of module’s names that should be imported when <code>from package import *</code> is used. For that
-reason, it may only contain strings.</p>
-<h3>Noncompliant code example</h3>
+<p>The <code>__all__</code> property of a module is used to define the list of names that will be imported when performing a wildcard import of this
+module, i.e. when <code>from mymodule import *</code> is used.</p>
+<p>In the following example:</p>
 <pre>
+# mymodule.py
+def foo(): ...
+def bar(): ...
+__all__ = ["foo"]
+</pre>
+<p>Executing <code>from mymodule import *</code> from a different module will only import <code>foo</code>.</p>
+<p>This list can only contain strings. If something other than a string is listed, a <code>TypeError</code> will be raised when trying to perform a
+wildcard import of the module.</p>
+<p>To fix this issue, make sure that all properties listed in <code>__all__</code> are strings.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass:
     pass
 
 __all__ = [
-    MyClass  # Noncompliant
+    MyClass  # Noncompliant: wildcard import will raise a TypeError
 ]
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass:
     pass
 
@@ -20,6 +33,7 @@ __all__ = [
 ]
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> <a href="https://docs.python.org/3/tutorial/modules.html#importing-from-a-package">Python documentation - Importing * From a Package</a> </li>
 </ul>

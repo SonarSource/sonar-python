@@ -1,18 +1,48 @@
+<p>This rule raises an issue when a <code>break</code> or <code>continue</code> statement is used outside of a loop.</p>
 <h2>Why is this an issue?</h2>
-<p><code>break</code> and <code>continue</code> are unstructured control flow statements which make code harder to read. Additionally, more recent
-versions of Python raise a SyntaxError when modules containing <code>break</code> or <code>continue</code> outside of a loop are imported.</p>
-<p>Therefore, these statements should not be used outside of loops.</p>
-<h3>Noncompliant code example</h3>
+<p><code>break</code> and <code>continue</code> are control flow statements used inside of loops. <code>break</code> is used to break out of its
+innermost enclosing loop and <code>continue</code> will continue with the next iteration.</p>
+<p>The example below illustrates the use of <code>break</code> in a <code>while</code> loop:</p>
 <pre>
+n = 1
+while n &lt; 10:
+    if n % 3 == 0:
+      print("Found a number divisible by 3", n)
+      break
+    n = n + 1
+</pre>
+<p>This next example uses <code>continue</code> inside a <code>for</code> loop:</p>
+<pre>
+words = ["alice", "bob", "charlie"]
+for word in words:
+    if word == word[::-1]:
+        print("Found a palindrome", word)
+        continue
+    print("This is not a palindrome", word)
+</pre>
+<p>Python will raise a <code>SyntaxError</code> when <code>break</code> or <code>continue</code> are used outside of <code>for</code> or
+<code>while</code> loops.</p>
+<p>If the goal is to interrupt the main program flow, <code>quit()</code>, <code>exit()</code>, <code>os._exit()</code> and <code>sys.exit()</code>
+are the preferred way.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 narg=len(sys.argv)
 if narg == 1:
-        print('@Usage: input_filename nelements nintervals')
-        break
+    print('@Usage: input_filename nelements nintervals')
+    break
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+narg=len(sys.argv)
 if narg == 1:
-        print('@Usage: input_filename nelements nintervals')
-        sys.exit()
+    print('@Usage: input_filename nelements nintervals')
+    sys.exit()
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">break and continue
+  Statements</a> </li>
+</ul>
 

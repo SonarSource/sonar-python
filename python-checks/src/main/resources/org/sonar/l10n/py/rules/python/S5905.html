@@ -1,18 +1,22 @@
+<p>This rule raises an issue when using an <code>assert</code> statement on a tuple literal.</p>
 <h2>Why is this an issue?</h2>
-<p>Using the <code>assert</code> statement on a tuple literal will always fail if the tuple is empty, and always succeed otherwise.</p>
-<p>The <code>assert</code> statement does not have parentheses around its parameters. Calling <code>assert(x, y)</code> will test if the tuple
+<p>When tested for truthiness, a sequence or collection will evaluate to <code>False</code> if it is empty (its <code>__len__</code> method returns 0)
+and to <code>True</code> if it contains at least one element.</p>
+<p>Using the <code>assert</code> statement on a tuple literal will therefore always fail if the tuple is empty, and always succeed otherwise.</p>
+<p>The <code>assert</code> statement does not take parentheses around its parameters. Calling <code>assert(x, y)</code> will test if the tuple
 <code>(x, y)</code> is True, which is always the case.</p>
 <p>There are two possible fixes:</p>
 <ul>
   <li> If your intention is to test the first value of the tuple and use the second value as a message, simply remove the parentheses. </li>
   <li> If your intention is to check that every element of the tuple is <code>True</code>, test each value separately. </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 def test_values(a, b):
-    assert (a, b)  # Noncompliant
+    assert (a, b)  # Noncompliant: will always be True
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 def test_values(a, b):
     # If you mean to test "a" and use "b" as an error message
@@ -25,5 +29,6 @@ def test_values(a, b):
 <ul>
   <li> <a href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement">Python documentation - The <code>assert</code>
   statement</a> </li>
+  <li> <a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">Python documentation - Truth Value Testing</a> </li>
 </ul>
 
