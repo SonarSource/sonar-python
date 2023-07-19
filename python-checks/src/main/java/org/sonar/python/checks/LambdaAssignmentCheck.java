@@ -33,8 +33,6 @@ public class LambdaAssignmentCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, ctx -> checkAssignmentStatement(ctx, (AssignmentStatement) ctx.syntaxNode()));
-
-    // TODO: This case is not described by the RSPEC and therefore we might need to update the RSPEC
     context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, ctx -> checkAnnotatedAssignment(ctx, (AnnotatedAssignment) ctx.syntaxNode()));
   }
 
