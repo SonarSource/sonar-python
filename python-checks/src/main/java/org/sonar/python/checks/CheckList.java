@@ -234,6 +234,7 @@ public final class CheckList {
       IterationOnNonIterableCheck.class,
       JumpInFinallyCheck.class,
       JwtVerificationCheck.class,
+      LambdaAssignmentCheck.class,
       LdapAuthenticationCheck.class,
       LineLengthCheck.class,
       LocalVariableAndParameterNameConventionCheck.class,
