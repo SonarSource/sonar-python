@@ -1,0 +1,53 @@
+<p>This rule raises an issue when performing direct type comparisons instead of using the <code>isinstance()</code> function.</p>
+<h2>Why is this an issue?</h2>
+<p>In Python, using the <code>isinstance()</code> function is generally preferred over direct type comparison for several reasons:</p>
+<ol>
+  <li> <strong>Compatibility with inheritance:</strong> <code>isinstance()</code> considers inheritance hierarchy, whereas direct type comparison does
+  not. This means that <code>isinstance()</code> can handle cases where an object belongs to a subclass of the specified type, making your code more
+  flexible and robust. It allows you to write code that can work with objects of different but related types. </li>
+  <li> <strong>Support for duck typing:</strong> Python follows the principle of "duck typing," which focuses on an object’s behavior rather than its
+  actual type. <code>isinstance()</code> enables you to check if an object has certain behavior (by checking if it belongs to a particular class or
+  subclass) rather than strictly requiring a specific type. This promotes code reusability and enhances the flexibility of your programs. </li>
+  <li> <strong>Code maintainability and extensibility:</strong> By using <code>isinstance()</code>, your code becomes more maintainable and
+  extensible. If you directly compare types, you would need to modify your code whenever a new subtype is introduced or the inheritance hierarchy is
+  changed. On the other hand, <code>isinstance()</code> allows your code to accommodate new types without requiring any modifications, as long as they
+  exhibit the desired behavior. </li>
+  <li> <strong>Polymorphism and interface-based programming:</strong> <code>isinstance()</code> supports polymorphism, which is the ability of
+  different objects to respond to the same method calls. It allows you to design code that interacts with objects based on their shared interface
+  rather than their specific types. This promotes code reuse and modularity, as you can write functions and methods that operate on a range of
+  compatible objects. </li>
+  <li> <strong>Third-party library compatibility:</strong> Many third-party libraries and frameworks in Python rely on <code>isinstance()</code> for
+  type checking and handling different types of objects. By using <code>isinstance()</code>, your code becomes more compatible with these libraries
+  and frameworks, making it easier to integrate your code into larger projects or collaborate with other developers. </li>
+</ol>
+<p>In summary, using <code>isinstance()</code> over direct type comparison in Python promotes flexibility, code reusability, maintainability,
+extensibility, and compatibility with the wider Python ecosystem. It aligns with the principles of object-oriented programming and supports the
+dynamic nature of Python. It is also recommended by the <a href="https://peps.python.org/pep-0008/">PEP8</a> style guide.</p>
+<h2>How to fix it</h2>
+<p>Use the <code>isinstance()</code> function instead of performing direct type comparisons.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class MyClass:
+  ...
+
+def foo(a)
+  if type(a) == MyClass: # Noncompliant
+    ...
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class MyClass:
+  ...
+
+def foo(a)
+  if isinstance(a, MyClass):
+    ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#isinstance">isInstance() function</a> </li>
+  <li> Style Guide for Python Code - <a href="https://peps.python.org/pep-0008/">PEP8</a> </li>
+</ul>
+

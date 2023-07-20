@@ -161,6 +161,7 @@ public final class CheckList {
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
       DictionaryDuplicateKeyCheck.class,
+      DirectTypeComparisonCheck.class,
       DisabledEFSEncryptionCheck.class,
       DisabledESDomainEncryptionCheck.class,
       DisabledHtmlAutoEscapeCheck.class,
