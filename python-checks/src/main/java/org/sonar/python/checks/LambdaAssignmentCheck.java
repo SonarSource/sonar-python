@@ -38,22 +38,19 @@ public class LambdaAssignmentCheck extends PythonSubscriptionCheck {
 
   private static void checkAssignmentStatement(SubscriptionContext ctx, AssignmentStatement stmt) {
     final Expression right = stmt.assignedValue();
-
     addIssueIfLambda(ctx, right);
   }
 
   private static void checkAnnotatedAssignment(SubscriptionContext ctx, AnnotatedAssignment assignment) {
     final Expression right = assignment.assignedValue();
-
     if (right != null) {
       addIssueIfLambda(ctx, right);
     }
   }
 
   private static void addIssueIfLambda(SubscriptionContext ctx, Expression assignedExpression) {
-    if ( assignedExpression.is(Tree.Kind.LAMBDA) ) {
+    if (assignedExpression.is(Tree.Kind.LAMBDA)) {
       final LambdaExpression lambdaExpression = (LambdaExpression) assignedExpression;
-
       ctx.addIssue(lambdaExpression.lambdaKeyword(), "Define function instead of this lambda assignment statement.");
     }
   }
