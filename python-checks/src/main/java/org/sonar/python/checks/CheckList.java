@@ -223,6 +223,7 @@ public final class CheckList {
       IncompatibleOperandsCheck.class,
       InconsistentTypeHintCheck.class,
       IncorrectExceptionTypeCheck.class,
+      IndexMethodCheck.class,
       InequalityUsageCheck.class,
       InfiniteRecursionCheck.class,
       InitReturnsValueCheck.class,
