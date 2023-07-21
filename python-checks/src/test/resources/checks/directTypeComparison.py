@@ -24,6 +24,12 @@ def foo(a, b):
     if type(a) == get_class(): # FN
         ...
 
+    if type(a) > str: # OK, not relevant for this rule
+        ...
+
+    if type(a) != str: # Noncompliant {{Use `not isinstance()` here.}}
+        ...
+
 def get_class():
     return str
 

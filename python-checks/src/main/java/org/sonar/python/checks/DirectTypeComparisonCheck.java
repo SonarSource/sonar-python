@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -26,6 +27,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -35,14 +37,21 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPARISON;
 @Rule(key = "S6660")
 public class DirectTypeComparisonCheck extends PythonSubscriptionCheck {
 
+  private static final Set<String> OPERATORS = Set.of("==", "!=");
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(COMPARISON, ctx -> checkBinaryExpression(ctx, ((BinaryExpression) ctx.syntaxNode())));
+    context.registerSyntaxNodeConsumer(COMPARISON, ctx -> {
+      BinaryExpression binaryExpression = (BinaryExpression) ctx.syntaxNode();
+      if (!OPERATORS.contains(binaryExpression.operator().value())) return;
+      checkBinaryExpression(ctx, binaryExpression);
+    });
   }
 
   private static void checkBinaryExpression(SubscriptionContext ctx, BinaryExpression binaryExpression) {
     if (isDirectTypeComparison(binaryExpression.leftOperand(), binaryExpression.rightOperand())) {
-      ctx.addIssue(binaryExpression.operator(), "Use the `isinstance()` function here.");
+      Token operator = binaryExpression.operator();
+      ctx.addIssue(operator, "==".equals(operator.value()) ? "Use the `isinstance()` function here." : "Use `not isinstance()` here.");
     }
   }
 
