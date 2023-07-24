@@ -8,7 +8,7 @@ def bool_unknown() -> bool:
 
 class BoolMethodCheck01:
     def __bool__(self):
-        return "Hello" # Noncompliant {{Return a value of type bool here.}}
+        return "Hello" # Noncompliant {{Return a value of type `bool` here.}}
         #      ^^^^^^^
 
 class BoolMethodCheck02:
@@ -57,13 +57,13 @@ class BoolMethodCheck07:
 
 class BoolMethodCheck08:
     # Does not return anything
-    def __bool__(self): # Noncompliant {{Return a value of type bool in this method.}}
+    def __bool__(self): # Noncompliant {{Return a value of type `bool` in this method.}}
 #   ^^^^^^^^^^^^^^^^^^^
         pass
 
 class BoolMethodCheck09:
     def __bool__(self):
-        return # Noncompliant {{Return a value of type bool in this method.}}
+        return # Noncompliant {{Return a value of type `bool` in this method.}}
     #   ^^^^^^
 
 class BoolMethodCheck10:
@@ -85,7 +85,7 @@ class BoolMethodCheck11:
 
 class BoolMethodCheck12:
     def __bool__(self):
-        yield True # Noncompliant {{Return a value of type bool in this method. The method can not be a generator and contain yield expressions.}}
+        yield True # Noncompliant {{Return a value of type `bool` in this method. The method can not be a generator and contain `yield` expressions.}}
 #       ^^^^^
 
 class BoolMethodCheck13:
@@ -124,7 +124,7 @@ class BoolMethodCheck18:
         return False
 
 class BoolMethodCheck19:
-    async def __bool__(self): # Noncompliant {{Return a value of type bool in this method. The method can not be a coroutine and have the async keyword.}}
+    async def __bool__(self): # Noncompliant {{Return a value of type `bool` in this method. The method can not be a coroutine and have the `async` keyword.}}
 #   ^^^^^
         return False
 
@@ -223,7 +223,7 @@ class GetNewArgs02:
 
 class GetNewArgs03:
     def __getnewargs__(self):
-        return 42 # Noncompliant {{Return a value of type tuple here.}}
+        return 42 # Noncompliant {{Return a value of type `tuple` here.}}
         #      ^^
 
 class GetNewArgs04:
@@ -243,21 +243,21 @@ class GetNewArgsEx02:
 
 class GetNewArgsEx03:
     def __getnewargs_ex__(self):
-        return (42, {}) # Noncompliant {{Return a value of type tuple[tuple, dict] here.}}
+        return (42, {}) # Noncompliant {{Return a value of type `tuple[tuple, dict]` here.}}
         #       ^^^^^^
 
 class GetNewArgsEx04:
     def __getnewargs_ex__(self):
-        return ("Hello World", 42), 10 # Noncompliant {{Return a value of type tuple[tuple, dict] here.}}
+        return ("Hello World", 42), 10 # Noncompliant {{Return a value of type `tuple[tuple, dict]` here.}}
         #      ^^^^^^^^^^^^^^^^^^^^^^^
 
 class GetNewArgsEx05:
     def __getnewargs_ex__(self):
-        return (10, ) # Noncompliant {{Return a value of type tuple[tuple, dict] here. A tuple of two elements was expected but found tuple with 1 element(s).}}
+        return (10, ) # Noncompliant {{Return a value of type `tuple[tuple, dict]` here. A tuple of two elements was expected but found tuple with 1 element(s).}}
 
 class GetNewArgsEx06:
     def __getnewargs_ex__(self):
-        return ("Hello World", 42), 1337, {} # Noncompliant {{Return a value of type tuple[tuple, dict] here. A tuple of two elements was expected but found tuple with 3 element(s).}}
+        return ("Hello World", 42), 1337, {} # Noncompliant {{Return a value of type `tuple[tuple, dict]` here. A tuple of two elements was expected but found tuple with 3 element(s).}}
         #      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 class GetNewArgsEx07:

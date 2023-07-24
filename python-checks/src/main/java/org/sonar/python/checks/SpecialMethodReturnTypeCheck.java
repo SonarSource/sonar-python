@@ -70,10 +70,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // wording: "must return a pair (args, kwargs) where args is a tuple of positional arguments and kwargs a dictionary of named arguments"
     "__getnewargs_ex__", BuiltinTypes.TUPLE);
 
-  private static final String INVALID_RETURN_TYPE_MESSAGE = "Return a value of type %s here.";
-  private static final String INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION = "Return a value of type %s in this method.";
-  private static final String COROUTINE_METHOD_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a coroutine and have the async keyword.";
-  private static final String YIELD_ELEMENT_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a generator and contain yield expressions.";
+  private static final String INVALID_RETURN_TYPE_MESSAGE = "Return a value of type `%s` here.";
+  private static final String INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION = "Return a value of type `%s` in this method.";
+  private static final String COROUTINE_METHOD_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a coroutine and have the `async` keyword.";
+  private static final String YIELD_ELEMENT_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a generator and contain `yield` expressions.";
   private static final String INVALID_GETNEWARGSEX_TUPLE_MESSAGE = String.format(INVALID_RETURN_TYPE_MESSAGE, "tuple[tuple, dict]");
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
