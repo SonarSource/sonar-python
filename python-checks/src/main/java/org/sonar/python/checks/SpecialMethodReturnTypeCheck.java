@@ -46,12 +46,13 @@ import org.sonar.python.types.InferredTypes;
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   /**
    * Stores the return types expected for specific method names.
-   * Each pair is annotated with a citation of the wording of the official documentation used to describe the expected type:
+   * Each pair is annotated with a comment citing the wording of the official documentation regarding the expected type:
    *   https://docs.python.org/3/reference/datamodel.html#special-method-names
    *   https://docs.python.org/3/library/pickle.html#pickling-class-instances
    *
-   * However, in practice, the python interpreter is not as strict as the wording in the documentation.
-   * For instance, {@code __str__(self)} is also allowed to return a subtype of {@code str} without throwing a type error.
+   * (However, in practice, the python interpreter is not as strict as the wording of the documentation.
+   * For instance, {@code __str__(self)} is allowed to return a subtype of {@code str} without throwing a type error.
+   * We respect the behaviour of the python interpreter in this regard.)
    */
   private static final Map<String, String> METHOD_TO_RETURN_TYPE = Map.of(
     // wording: "should return False or True"
@@ -84,8 +85,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
   /**
-   * With special methods it is rather common that their implementation immediately raises a TypeError or NotYetImplementedException.
-   * For instance, list objects are unhashable:
+   * Users often raise a TypeError or NotImplementedError inside special methods to explicitly indicate that a method is not supported.
+   * For example, list objects are unhashable, i.e. the __hash__() method raises a TypeError:
    *
    * <pre>
    * >>> hash([])
@@ -94,10 +95,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
    * TypeError: unhashable type: 'list'
    * </pre>
    *
-   * Hence, in order to avoid too many FPs, this rule should not be triggered on special method bodies that contain no return statement, but
-   * do raise one of these exception types.
+   * Hence, in order to avoid too many FPs, this rule should not be triggered on special methods that contain no return statements if
+   * they do raise one of the exceptions listed in {@code WHITELISTING_EXCEPTIONS}.
    */
-  private static final List<String> WHITELISTED_EXCEPTIONS = List.of("TypeError", "NotImplementedError");
+  private static final List<String> WHITELISTING_EXCEPTIONS = List.of("TypeError", "NotImplementedError");
 
   @Override
   public void initialize(Context context) {
@@ -106,7 +107,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef) {
     final String funNameString = funDef.name().name();
-
     final String expectedReturnType = METHOD_TO_RETURN_TYPE.get(funNameString);
     if (expectedReturnType == null) {
       return;
@@ -121,7 +121,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     final List<ReturnStatement> returnStmts = returnStmtCollector.getReturnStmts();
-    if (returnStmts.isEmpty() && yieldKeywords.isEmpty() && !returnStmtCollector.raisesWhitelistedException()) {
+    if (returnStmts.isEmpty() && yieldKeywords.isEmpty() && !returnStmtCollector.raisesWhitelistingException()) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }
@@ -142,10 +142,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
    * {@code checkReturnStmt} inspects the expressions contained in a return statement against the given {@code expectedReturnType}.
    * Some additional checks are performed if {@code methodName} is {@code "__getnewargs_ex__"}.
    *
-   * To avoid triggering too many false positives, we perform rather weak checks using a negation of {@code canBeOrExtend}.
-   * That is, if there is some path to a return statement such that the returned expression can be subtype of the expected type, then we
+   * To avoid triggering too many false positives, we perform rather weak type checks using {@code canBeOrExtend}.
+   * That is, if for any return statement there is some path such that the returned expression can be subtype of the expected type, then we
    * do not raise an issue.
-   * Conversely, we raise an issue only if there is no way the returned expression could be (a subtype of) the expected type.
+   * Conversely, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
    * (But we do not check the feasibility of paths.)
    *
    * Let us take a look at some relevant examples for illustration:
@@ -179,8 +179,9 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
    * </pre>
    *
    * Here, the type of {@code x} is identified to be {@code Union[bool, str]} (simplified).
-   * In theory, this code may return a string but likely not in practice, leading to FPs.
-   * Hence, we can not raise issues just because a returned union type contains a type which is not a subtype of the expected type.
+   * In theory, this code may return a string but likely not in practice.
+   * Hence, we can not raise an issue just because a returned union type contains a type which is not a subtype of the expected type.
+   * (As long as the union type still contains another type that would be a valid return type.)
    */
   private static void checkReturnStmt(SubscriptionContext ctx, String methodName, String expectedReturnType, ReturnStatement returnStmt) {
     final List<Expression> returnedExpressions = returnStmt.expressions();
@@ -260,6 +261,12 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     return InferredTypes.TUPLE;
   }
 
+  /**
+   * Calls {@code ctx.addIssue} for a return statement such that...
+   *
+   * ...all returned expressions are marked as the source of the issue if the return statement contains such expressions
+   * ...the return keyword is marked as the source of the issue if the return statement does not contain any expressions
+   */
   private static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
     final List<Expression> returnedExpressions = returnStatement.expressions();
 
@@ -283,7 +290,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static class ReturnStmtCollector extends BaseTreeVisitor {
     private final List<ReturnStatement> returnStmts = new ArrayList<>();
     private List<Token> yieldKeywords = new ArrayList<>();
-    private boolean raisesWhitelistedException = false;
+    private boolean raisesWhitelistingException = false;
 
     public List<ReturnStatement> getReturnStmts() {
       return returnStmts;
@@ -293,8 +300,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return yieldKeywords;
     }
 
-    public boolean raisesWhitelistedException() {
-      return raisesWhitelistedException;
+    public boolean raisesWhitelistingException() {
+      return raisesWhitelistingException;
     }
 
     @Override
@@ -324,18 +331,18 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
-      raisesWhitelistedException |= pyRaiseStatementTree
+      raisesWhitelistingException |= pyRaiseStatementTree
         .expressions()
         .stream()
-        .anyMatch(raisedExpr -> WHITELISTED_EXCEPTIONS.stream().anyMatch(
+        .anyMatch(raisedExpr -> WHITELISTING_EXCEPTIONS.stream().anyMatch(
           whitelistedException -> {
             if (raisedExpr.type().mustBeOrExtend(whitelistedException)) {
               return true;
             }
 
-            // Sometimes people just raise an exception class without instantiating it.
-            // Even in these cases we should not trigger the rule, so we check for raised expressions which are just a whitelisted
-            // expression class symbol.
+            // Sometimes users just raise an exception class without instantiating it.
+            // Even in these cases we should not trigger the rule, so we check for raised expressions which are just an exception class
+            // symbol.
             //
             // Example:
             // raise NotImplementedError()
