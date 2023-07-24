@@ -57,23 +57,27 @@ class BoolMethodCheck07:
 
 class BoolMethodCheck08:
     # Does not return anything
-    def __bool__(self): # Noncompliant {{Return a value of type `bool` in this method.}}
+    def __bool__(self): # Noncompliant {{Return a value of type `bool` in this method. Consider explicitly raising a TypeError if this class is not meant to support this method.}}
 #   ^^^^^^^^^^^^^^^^^^^
         pass
 
 class BoolMethodCheck09:
+    def __bool__(self): # Noncompliant
+        1/0 # Users actually sometimes create implementations like this to disable special methods
+
+class BoolMethodCheck10:
     def __bool__(self):
         return # Noncompliant {{Return a value of type `bool` in this method.}}
     #   ^^^^^^
 
-class BoolMethodCheck10:
+class BoolMethodCheck11:
     # Does not return anything
     def __bool__(self):
         if unknown():
             return True
         # Compliant: Potential FN if unknown() ever resolves to False
 
-class BoolMethodCheck11:
+class BoolMethodCheck12:
     def __bool__(self):
         x = string_unknown()
         if x == 'True':
@@ -83,59 +87,59 @@ class BoolMethodCheck11:
 
         return x # Compliant, potential FN
 
-class BoolMethodCheck12:
+class BoolMethodCheck13:
     def __bool__(self):
         yield True # Noncompliant {{Return a value of type `bool` in this method. The method can not be a generator and contain `yield` expressions.}}
 #       ^^^^^
 
-class BoolMethodCheck13:
+class BoolMethodCheck14:
     def __bool__(self):
         yield True # Noncompliant
         return False
 
-class BoolMethodCheck14:
+class BoolMethodCheck15:
     def __bool__(self):
         (yield True) # Noncompliant
     #    ^^^^^
         return False
 
-class BoolMethodCheck15:
+class BoolMethodCheck16:
     def __bool__(self):
         if unknown():
             return False
         else:
             yield True # Noncompliant
 
-class BoolMethodCheck16:
+class BoolMethodCheck17:
     def __bool__(self):
         def sub_function():
             yield True # Compliant
         return False
 
-class BoolMethodCheck17:
+class BoolMethodCheck18:
     def __bool__(self):
         sub_function = lambda: (yield True) # Compliant
         return False
 
-class BoolMethodCheck18:
+class BoolMethodCheck19:
     def __bool__(self):
         def sub_function():
             return 42 # Compliant
         return False
 
-class BoolMethodCheck19:
+class BoolMethodCheck20:
     async def __bool__(self): # Noncompliant {{Return a value of type `bool` in this method. The method can not be a coroutine and have the `async` keyword.}}
 #   ^^^^^
         return False
 
-class BoolMethodCheck20:
+class BoolMethodCheck21:
     def __bool__(self):
         async def sub_function(): # Compliant
             ...
 
         return False
 
-class BoolMethodCheck21:
+class BoolMethodCheck22:
     def __bool__(self):
         if False:
             # We can not check for dead code. Also, even if a code block is dead the user might want to be warned about nonsensical return values in special methods.
@@ -143,7 +147,7 @@ class BoolMethodCheck21:
         else:
             return False
 
-class BoolMethodCheck22:
+class BoolMethodCheck23:
     def __bool__(self):
         if True:
             return # Noncompliant

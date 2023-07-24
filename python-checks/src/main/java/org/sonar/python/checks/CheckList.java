@@ -307,7 +307,7 @@ public final class CheckList {
       SingleCharacterAlternationCheck.class,
       SingleCharCharacterClassCheck.class,
       SkippedTestNoReasonCheck.class,
-      SpecialMethodParamListCheck.class, // TODO: Duplicated code / constants?
+      SpecialMethodParamListCheck.class,
       SpecialMethodReturnTypeCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,

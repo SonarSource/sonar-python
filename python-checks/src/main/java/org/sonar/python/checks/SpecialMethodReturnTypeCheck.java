@@ -75,8 +75,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String INVALID_RETURN_TYPE_MESSAGE = "Return a value of type `%s` here.";
   private static final String INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION = "Return a value of type `%s` in this method.";
+  private static final String NO_RETURN_STMTS_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION
+    + " Consider explicitly raising a TypeError if this class is not meant to support this method.";
   private static final String COROUTINE_METHOD_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a coroutine and have the `async` keyword.";
-  private static final String YIELD_ELEMENT_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a generator and contain `yield` expressions.";
+  private static final String GENERATOR_METHOD_MESSAGE = INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION + " The method can not be a generator and contain `yield` expressions.";
   private static final String INVALID_GETNEWARGSEX_TUPLE_MESSAGE = String.format(INVALID_RETURN_TYPE_MESSAGE, "tuple[tuple, dict]");
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
@@ -115,12 +117,12 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     final ReturnStmtCollector returnStmtCollector = collectReturnStmts(funDef);
     final List<Token> yieldKeywords = returnStmtCollector.getYieldKeywords();
     for (final Token yieldKeyword : yieldKeywords) {
-      ctx.addIssue(yieldKeyword, String.format(YIELD_ELEMENT_MESSAGE, expectedReturnType));
+      ctx.addIssue(yieldKeyword, String.format(GENERATOR_METHOD_MESSAGE, expectedReturnType));
     }
 
     final List<ReturnStatement> returnStmts = returnStmtCollector.getReturnStmts();
     if (returnStmts.isEmpty() && yieldKeywords.isEmpty() && !returnStmtCollector.raisesWhitelistedException()) {
-      ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION, expectedReturnType));
+      ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }
 
