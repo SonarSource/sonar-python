@@ -1,0 +1,47 @@
+<p>This rule raises an issue when a special method returns an object of an unexpected type.</p>
+<h2>Why is this an issue?</h2>
+<p>Python allows developers to customize how code is interpreted by defining special methods (also called magic methods). For example, it is possible
+to define the objects own truthiness or falsiness by iverriding <code>__bool__</code> method. It is invoked when the built-in <code>bool()</code>
+function is called on an object. The <code>bool()</code> function returns <code>True</code> or <code>False</code> based on the truth value of the
+object.</p>
+<p>The Python interpreter will call these methods when performing the operation they’re associated with. Each special method expects a specific return
+type. Calls to a special method will throw a <code>TypeError</code> if its return type is incorrect.</p>
+<p>An issue will be raised when one of the following method doesn’t return the indicated type:</p>
+<ul>
+  <li> <code>__bool__</code> method should return bool </li>
+  <li> <code>__index__</code> method should return integer </li>
+  <li> <code>__repr__</code> method should return string </li>
+  <li> <code>__str__</code> method should return string </li>
+  <li> <code>__bytes__</code> method should return bytes </li>
+  <li> <code>__hash__</code> method should return integer </li>
+  <li> <code>__format__</code> method should return string </li>
+  <li> <code>__getnewargs__</code> method should return tuple </li>
+  <li> <code>__getnewargs_ex__</code> method should return something which is of the form tuple(tuple, dict) </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Make sure to return a value of the same type as defined in the Python documentation for each special method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class MyClass:
+    def __bool__(self):
+        return 0 # Noncompliant: Return value of type bool here.
+
+obj1 = MyClass()
+print(bool(obj1)) # TypeError: __bool__ should return bool, returned int
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class MyClass:
+    def __bool__(self):
+        return False
+
+obj1 = MyClass()
+print(bool(obj1))
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a> </li>
+</ul>
+
