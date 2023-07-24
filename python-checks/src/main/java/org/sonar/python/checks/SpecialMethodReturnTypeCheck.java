@@ -25,10 +25,13 @@ import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
+import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -48,7 +51,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
    *   https://docs.python.org/3/library/pickle.html#pickling-class-instances
    *
    * However, in practice, the python interpreter is not as strict as the wording in the documentation.
-   * For instance, {@code __str__(self)} is also allowed to return a sub-type of {@code str} without throwing a type error.
+   * For instance, {@code __str__(self)} is also allowed to return a subtype of {@code str} without throwing a type error.
    */
   private static final Map<String, String> METHOD_TO_RETURN_TYPE = Map.of(
     // wording: "should return False or True"
@@ -78,6 +81,22 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
+  /**
+   * With special methods it is rather common that their implementation immediately raises a TypeError or NotYetImplementedException.
+   * For instance, list objects are unhashable:
+   *
+   * <pre>
+   * >>> hash([])
+   * Traceback (most recent call last):
+   *   File "<stdin>", line 1, in <module>
+   * TypeError: unhashable type: 'list'
+   * </pre>
+   *
+   * Hence, in order to avoid too many FPs, this rule should not be triggered on special method bodies that contain no return statement, but
+   * do raise one of these exception types.
+   */
+  private static final List<String> WHITELISTED_EXCEPTIONS = List.of("TypeError", "NotImplementedError");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFunctionDefinition(ctx, (FunctionDef) ctx.syntaxNode()));
@@ -100,7 +119,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     final List<ReturnStatement> returnStmts = returnStmtCollector.getReturnStmts();
-    if (returnStmts.isEmpty() && yieldKeywords.isEmpty()) {
+    if (returnStmts.isEmpty() && yieldKeywords.isEmpty() && !returnStmtCollector.raisesWhitelistedException()) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(INVALID_RETURN_TYPE_MESSAGE_NO_LOCATION, expectedReturnType));
       return;
     }
@@ -262,6 +281,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static class ReturnStmtCollector extends BaseTreeVisitor {
     private final List<ReturnStatement> returnStmts = new ArrayList<>();
     private List<Token> yieldKeywords = new ArrayList<>();
+    private boolean raisesWhitelistedException = false;
 
     public List<ReturnStatement> getReturnStmts() {
       return returnStmts;
@@ -269,6 +289,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
     public List<Token> getYieldKeywords() {
       return yieldKeywords;
+    }
+
+    public boolean raisesWhitelistedException() {
+      return raisesWhitelistedException;
     }
 
     @Override
@@ -294,6 +318,35 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     @Override
     public void visitLambda(LambdaExpression pyLambdaExpressionTree) {
       // We do not visit nested lambda definitions as they may contain irrelevant yield expressions
+    }
+
+    @Override
+    public void visitRaiseStatement(RaiseStatement pyRaiseStatementTree) {
+      raisesWhitelistedException |= pyRaiseStatementTree
+        .expressions()
+        .stream()
+        .anyMatch(raisedExpr -> WHITELISTED_EXCEPTIONS.stream().anyMatch(
+          whitelistedException -> {
+            if (raisedExpr.type().mustBeOrExtend(whitelistedException)) {
+              return true;
+            }
+
+            // Sometimes people just raise an exception class without instantiating it.
+            // Even in these cases we should not trigger the rule, so we check for raised expressions which are just a whitelisted
+            // expression class symbol.
+            //
+            // Example:
+            // raise NotImplementedError()
+            // vs
+            // raise NotImplementedError
+            if (raisedExpr instanceof HasSymbol) {
+              final Symbol raisedExprSymbol = ((HasSymbol) raisedExpr).symbol();
+              return raisedExprSymbol != null &&
+                whitelistedException.equals(raisedExprSymbol.fullyQualifiedName());
+            }
+
+            return false;
+          }));
     }
   }
 }

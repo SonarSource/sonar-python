@@ -283,3 +283,33 @@ class GetNewArgsEx10:
 
         x = (("Hello World", 42), x)
         return x # Compliant, but potential FN if unknown() evaluates to False
+class RaisesException01:
+    def __hash__(self): # Compliant
+        raise TypeError("unhashable type: RaisesException01")
+
+class RaisesException02:
+    def __hash__(self): # Compliant
+        raise NotImplementedError()
+
+class RaisesException03:
+    def __hash__(self): # Compliant
+        raise NotImplementedError
+
+class RaisesException04:
+    def __hash__(self):
+        return "Hello World" # Noncompliant
+        raise NotImplementedError()
+
+class RaisesException05:
+    def __hash__(self):
+        if True:
+            return "Hello World" # Noncompliant
+        else:
+            raise NotImplementedError()
+
+class RaisesException06:
+    def __hash__(self):
+        if True:
+            return 42
+        else:
+            raise NotImplementedError() # Compliant
