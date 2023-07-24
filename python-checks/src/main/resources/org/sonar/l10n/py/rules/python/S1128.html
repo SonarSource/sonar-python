@@ -1,0 +1,19 @@
+<p>This rule raises an issue when an imported name is unused.</p>
+<h2>Why is this an issue?</h2>
+<p>Importing names and not using them can be a source of confusion and lead to maintainability issues.</p>
+<p>Such imports should be removed.</p>
+<h3>Noncompliant code example</h3>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from mymodule import foo, bar, qix  # Noncompliant: bar is unused
+
+foo()
+qix()
+</pre>
+<h3>Compliant solution</h3>
+<pre data-diff-id="1" data-diff-type="compliant">
+from mymodule import foo, qix
+
+foo()
+qix()
+</pre>
+
