@@ -1,7 +1,7 @@
 from external import unknown
 from abc import ABC, abstractmethod
 import abc
-from some_module import some_annotation
+from some_module import some_decorator
 
 def string_unknown() -> str:
     ...
@@ -335,14 +335,14 @@ class AbstractSpecialMethod01(ABC):
     def __bool__(self): # Compliant: The @abstractmethod annotation indicates that the method has not been implemented on purpose
         pass
 
-    @some_annotation
+    @some_decorator
     @abc.abstractmethod
     def __index__(self): # Compliant
         pass
 
     @abstractmethod
     def __hash__(self):
-        # Unlike Java abstract methods, python abstract methods may provide a default implementation which we should still check
+        # Unlike Java abstract methods, python abstract methods can provide an implementation which we should still check
         return "Hello World" # Noncompliant
 
     @abstractmethod
@@ -354,4 +354,14 @@ class AbstractSpecialMethod01(ABC):
         if True:
             return 42 # Noncompliant
         raise NotImplementedError()
+
+    @abstractmethod()
+    def __bytes__(self): # Compliant
+        pass
+
+    @unknown_decorator_symbol
+    @abstractmethod
+    def __format__(self, format_spec): # Compliant
+        pass
+
 

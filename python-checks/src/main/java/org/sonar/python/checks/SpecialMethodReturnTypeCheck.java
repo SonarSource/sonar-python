@@ -28,7 +28,6 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -38,6 +37,7 @@ import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
 @Rule(key = "S6658")
@@ -72,7 +72,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
-  private static final String ABC_ABSTRACTMETHOD_DECORATOR = "abc.abstractmethod";
+  private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
 
   @Override
   public void initialize(Context context) {
@@ -193,19 +193,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     return funDef
       .decorators()
       .stream()
-      .anyMatch(decorator -> {
-        var decoratorExpr = decorator.expression();
-        if (!(decoratorExpr instanceof HasSymbol)) {
-          return false;
-        }
-
-        var symbol = ((HasSymbol) decoratorExpr).symbol();
-        if (symbol == null) {
-          return false;
-        }
-
-        return ABC_ABSTRACTMETHOD_DECORATOR.equals(symbol.fullyQualifiedName());
-      });
+      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
   }
 
   /**
