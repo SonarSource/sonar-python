@@ -422,7 +422,7 @@ public class TypeShedTest {
   @Test
   public void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "36", "37", "38", "39", "310");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "36", "37", "38", "39", "310", "311");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     // python 2
@@ -434,7 +434,7 @@ public class TypeShedTest {
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.8"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("36", "37", "38", "39", "310");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("36", "37", "38", "39", "310", "311");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
