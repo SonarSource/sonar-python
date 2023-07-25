@@ -73,7 +73,6 @@ public final class PythonTestUtils {
     return pythonTreeMaker.fileInput(p.parse(code));
   }
 
-
   @CheckForNull
   public static <T extends Tree> T getFirstChild(Tree tree, Predicate<Tree> predicate) {
     for (Tree child : tree.children()) {
@@ -141,6 +140,13 @@ public final class PythonTestUtils {
     return statements.get(statements.size() - 1);
   }
 
+  public static Statement lastStatement(String... lines) {
+    String code = String.join("\n", lines);
+    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+
+    return lastStatement(fileInput.statements());
+  }
+
   public static Expression lastExpressionInFunction(String... lines) {
     String code = "def f():\n  " + String.join("\n  ", lines);
     return lastExpression(code);
@@ -148,7 +154,8 @@ public final class PythonTestUtils {
 
   public static FunctionSymbol functionSymbol(PythonFile pythonFile, String... code) {
     FileInput fileInput = parse(new SymbolTableBuilder(pythonFile), code);
-    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);;
+    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
+
     return TreeUtils.getFunctionSymbolFromDef(functionDef);
   }
 
@@ -158,7 +165,8 @@ public final class PythonTestUtils {
 
   public static FunctionSymbol lastFunctionSymbol(String... code) {
     FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
-    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));;
+    FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));
+
     return TreeUtils.getFunctionSymbolFromDef(functionDef);
   }
 

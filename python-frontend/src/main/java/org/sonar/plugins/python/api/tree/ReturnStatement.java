@@ -21,6 +21,8 @@ package org.sonar.plugins.python.api.tree;
 
 import com.google.common.annotations.Beta;
 import java.util.List;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
 
 /**
  * <pre>
@@ -36,4 +38,22 @@ public interface ReturnStatement extends Statement {
 
   @Beta
   List<Token> commas();
+
+  /**
+   * Infers the type of the returned value that would result from the execution of this return statement.
+   */
+  @Beta
+  default InferredType type() {
+    var returnedExpressions = expressions();
+
+    if (returnedExpressions.isEmpty()) {
+      return InferredTypes.NONE;
+    }
+
+    if (returnedExpressions.size() == 1) {
+      return returnedExpressions.get(0).type();
+    }
+
+    return InferredTypes.TUPLE;
+  }
 }

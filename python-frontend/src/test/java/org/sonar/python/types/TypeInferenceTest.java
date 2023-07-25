@@ -21,15 +21,14 @@ package org.sonar.python.types;
 
 import java.util.List;
 import org.junit.Test;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
@@ -38,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
-import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.lastStatement;import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
@@ -207,6 +206,15 @@ public class TypeInferenceTest {
       "else:    a = c",
       "d = a",
       "d").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  public void returned_value_type() {
+    assertThat(((ReturnStatement) lastStatement("return")).type()).isEqualTo(NONE);
+    assertThat(((ReturnStatement) lastStatement("return None")).type()).isEqualTo(NONE);
+    assertThat(((ReturnStatement) lastStatement("return 42")).type()).isEqualTo(INT);
+    assertThat(((ReturnStatement) lastStatement("return 42, 1337")).type()).isEqualTo(TUPLE);
+    assertThat(((ReturnStatement) lastStatement("return (42, 1337)")).type()).isEqualTo(TUPLE);
   }
 
   @Test

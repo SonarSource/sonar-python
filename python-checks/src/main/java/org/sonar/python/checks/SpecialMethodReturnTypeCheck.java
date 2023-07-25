@@ -38,7 +38,6 @@ import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TupleImpl;
-import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S6658")
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
@@ -125,7 +124,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    InferredType returnStmtType = getReturnStmtType(returnStmt);
+    InferredType returnStmtType = returnStmt.type();
     // To avoid FPs, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
     if (!returnStmtType.canBeOrExtend(expectedReturnType)) {
       addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
@@ -183,20 +182,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static InferredType getReturnStmtType(ReturnStatement returnStatement) {
-    List<Expression> returnedExpressions = returnStatement.expressions();
-
-    if (returnedExpressions.isEmpty()) {
-      return InferredTypes.NONE;
-    }
-
-    if (returnedExpressions.size() == 1) {
-      return returnedExpressions.get(0).type();
-    }
-
-    return InferredTypes.TUPLE;
-  }
-
   /**
    * Calls {@code ctx.addIssue} for a return statement such that...
    *
@@ -206,6 +191,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
     List<Expression> returnedExpressions = returnStatement.expressions();
 
+    // Not strictly necessary as this method currently is never called for an empty expression list.
+    // Still, it should be well-behaved if it is ever used in a different context.
     if (returnedExpressions.isEmpty()) {
       ctx.addIssue(returnStatement.returnKeyword(), message);
     } else {
