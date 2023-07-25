@@ -24,4 +24,13 @@ def import_inside_function():
     from my_second_module import bar # FN - redefined symbol: would need flow sensitive symbol table
     bar = 42
     print(bar)
+    from my_module import def_import # Noncompliant
 
+
+# This is not the same as the imported symbol above
+def_import()
+
+if True:
+    from my_module import if_import # Compliant
+
+if_import()
