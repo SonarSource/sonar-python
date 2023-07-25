@@ -1,4 +1,7 @@
 from external import unknown
+from abc import ABC, abstractmethod
+import abc
+from some_module import some_annotation
 
 def string_unknown() -> str:
     ...
@@ -184,6 +187,15 @@ class StrMethodCheck03:
     def __str__(self):
         return text("Hello") # Compliant: Although the python documentation specifies that the value "must be a string object", no type error is thrown if type subclasses are used
 
+class StrMethodCheck04:
+    def __str__(self):
+        return b'Hello' # FN: The type analysis assigns the Any type to bytes literals
+
+class StrMethodCheck05:
+    def __str__(self):
+        # This encode call will return a bytes object, not a string
+        return 'Hello'.encode('utf-8') # Noncompliant
+
 class BytesMethodCheck01:
     def __bytes__(self):
         return 42 # Noncompliant
@@ -317,3 +329,29 @@ class RaisesException06:
             return 42
         else:
             raise NotImplementedError() # Compliant
+
+class AbstractSpecialMethod01(ABC):
+    @abstractmethod
+    def __bool__(self): # Compliant: The @abstractmethod annotation indicates that the method has not been implemented on purpose
+        pass
+
+    @some_annotation
+    @abc.abstractmethod
+    def __index__(self): # Compliant
+        pass
+
+    @abstractmethod
+    def __hash__(self):
+        # Unlike Java abstract methods, python abstract methods may provide a default implementation which we should still check
+        return "Hello World" # Noncompliant
+
+    @abstractmethod
+    def __str__(self): # Compliant
+        raise NotImplementedError()
+
+    @abstractmethod
+    def __repr__(self):
+        if True:
+            return 42 # Noncompliant
+        raise NotImplementedError()
+

@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -71,6 +72,8 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
+  private static final String ABC_ABSTRACTMETHOD_DECORATOR = "abc.abstractmethod";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFunctionDefinition(ctx, (FunctionDef) ctx.syntaxNode()));
@@ -95,8 +98,12 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // If there are no return statements, we trigger this rule since this effectively means that the method is returning `None`.
     // However, there are exceptions to this:
     // * if there are yield keywords, these already trigger the rule, so there is no reason to add even more issues
-    // * if the method raises exceptions then it likely does not return a value on purpose, see docstring of `raisesExceptions`
-    if (returnStmts.isEmpty() && yieldKeywords.isEmpty() && !returnStmtCollector.raisesExceptions()) {
+    // * if the method raises exceptions, then it likely does not return a value on purpose, see docstring of `raisesExceptions`
+    // * if the method is marked as abstract, then it is likely not implemented on purpose
+    if (returnStmts.isEmpty() &&
+      yieldKeywords.isEmpty() &&
+      !returnStmtCollector.raisesExceptions() &&
+      !isAbstract(funDef)) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }
@@ -180,6 +187,25 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       !secondElement.type().canBeOrExtend(BuiltinTypes.DICT)) {
       ctx.addIssue(firstElement.firstToken(), secondElement.lastToken(), INVALID_GETNEWARGSEX_TUPLE_MESSAGE);
     }
+  }
+
+  private static boolean isAbstract(FunctionDef funDef) {
+    return funDef
+      .decorators()
+      .stream()
+      .anyMatch(decorator -> {
+        var decoratorExpr = decorator.expression();
+        if (!(decoratorExpr instanceof HasSymbol)) {
+          return false;
+        }
+
+        var symbol = ((HasSymbol) decoratorExpr).symbol();
+        if (symbol == null) {
+          return false;
+        }
+
+        return ABC_ABSTRACTMETHOD_DECORATOR.equals(symbol.fullyQualifiedName());
+      });
   }
 
   /**
