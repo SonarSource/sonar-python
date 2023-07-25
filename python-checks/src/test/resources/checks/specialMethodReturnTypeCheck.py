@@ -32,10 +32,10 @@ class BoolMethodCheck05:
         self.condition = condition
 
     def __bool__(self):
-        return self.condition # FN: Requires better analysis tooling, see guaranteed invocation below
+        return self.condition # FN (secondary location): See guaranteed invocation below
 
 b = BoolMethodCheck05("Hello")
-print(bool(b))
+bool(b) # FN
 
 class BoolMethodCheck06:
     def __bool__(self):
