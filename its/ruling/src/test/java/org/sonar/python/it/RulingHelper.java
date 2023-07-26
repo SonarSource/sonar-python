@@ -142,9 +142,9 @@ public class RulingHelper {
       "S6323",
       "S6328",
       "S6468",
+      "S6658",
       "S905",
-      "S930"
-    );
+      "S930");
   }
 
   static Measures.Measure getMeasure(Orchestrator orchestrator, String branch, String componentKey, String metricKey) {

@@ -17,30 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.types;
+package org.sonar.python.checks;
 
-public class BuiltinTypes {
+import org.junit.Test;
+import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-  public static final String NONE_TYPE = "NoneType";
-  public static final String STR = "str";
-  public static final String BOOL = "bool";
-  public static final String INT = "int";
-  public static final String FLOAT = "float";
-  public static final String COMPLEX = "complex";
-  public static final String TUPLE = "tuple";
-  public static final String LIST = "list";
-  public static final String SET = "set";
-  public static final String DICT = "dict";
+public class SpecialMethodReturnTypeCheckTest {
 
-  // https://docs.python.org/3/library/stdtypes.html#bytes-objects
-  public static final String BYTES = "bytes";
-
-  public static final String EXCEPTION = "Exception";
-  public static final String BASE_EXCEPTION = "BaseException";
-
-  public static final String OBJECT_TYPE = "object";
-
-  private BuiltinTypes() {
+  @Test
+  public void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/specialMethodReturnTypeCheck.py", new SpecialMethodReturnTypeCheck());
   }
-
 }

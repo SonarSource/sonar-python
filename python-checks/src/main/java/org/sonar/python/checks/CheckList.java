@@ -41,10 +41,10 @@ import org.sonar.python.checks.cdk.UnencryptedSageMakerNotebookCheck;
 import org.sonar.python.checks.cdk.UnencryptedSqsQueueCheck;
 import org.sonar.python.checks.cdk.UnrestrictedAdministrationCheck;
 import org.sonar.python.checks.cdk.UnrestrictedOutboundCommunicationsCheck;
-import org.sonar.python.checks.django.DjangoReceiverDecoratorCheck;
 import org.sonar.python.checks.django.DjangoModelFormFieldsCheck;
-import org.sonar.python.checks.django.DjangoModelStringFieldCheck;
 import org.sonar.python.checks.django.DjangoModelStrMethodCheck;
+import org.sonar.python.checks.django.DjangoModelStringFieldCheck;
+import org.sonar.python.checks.django.DjangoReceiverDecoratorCheck;
 import org.sonar.python.checks.hotspots.ClearTextProtocolsCheck;
 import org.sonar.python.checks.hotspots.CommandLineArgsCheck;
 import org.sonar.python.checks.hotspots.CorsCheck;
@@ -308,6 +308,7 @@ public final class CheckList {
       SingleCharCharacterClassCheck.class,
       SkippedTestNoReasonCheck.class,
       SpecialMethodParamListCheck.class,
+      SpecialMethodReturnTypeCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
       StringFormatCorrectnessCheck.class,
@@ -363,8 +364,7 @@ public final class CheckList {
       DjangoReceiverDecoratorCheck.class,
       DjangoModelStringFieldCheck.class,
       DjangoModelStrMethodCheck.class,
-      HardcodedCredentialsCallCheck.class
-    )));
+      HardcodedCredentialsCallCheck.class)));
   }
 
 }
