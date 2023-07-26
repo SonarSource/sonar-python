@@ -131,7 +131,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    InferredType returnStmtType = returnStmt.type();
+    InferredType returnStmtType = returnStmt.returnValueType();
     // To avoid FPs, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
     if (!returnStmtType.canBeOrExtend(expectedReturnType)) {
       addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));

@@ -43,7 +43,7 @@ public interface ReturnStatement extends Statement {
    * Infers the type of the returned value that would result from the execution of this return statement.
    */
   @Beta
-  default InferredType type() {
+  default InferredType returnValueType() {
     var returnedExpressions = expressions();
 
     if (returnedExpressions.isEmpty()) {

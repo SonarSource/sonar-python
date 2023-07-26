@@ -210,11 +210,11 @@ public class TypeInferenceTest {
 
   @Test
   public void returned_value_type() {
-    assertThat(((ReturnStatement) lastStatement("return")).type()).isEqualTo(NONE);
-    assertThat(((ReturnStatement) lastStatement("return None")).type()).isEqualTo(NONE);
-    assertThat(((ReturnStatement) lastStatement("return 42")).type()).isEqualTo(INT);
-    assertThat(((ReturnStatement) lastStatement("return 42, 1337")).type()).isEqualTo(TUPLE);
-    assertThat(((ReturnStatement) lastStatement("return (42, 1337)")).type()).isEqualTo(TUPLE);
+    assertThat(((ReturnStatement) lastStatement("return")).returnValueType()).isEqualTo(NONE);
+    assertThat(((ReturnStatement) lastStatement("return None")).returnValueType()).isEqualTo(NONE);
+    assertThat(((ReturnStatement) lastStatement("return 42")).returnValueType()).isEqualTo(INT);
+    assertThat(((ReturnStatement) lastStatement("return 42, 1337")).returnValueType()).isEqualTo(TUPLE);
+    assertThat(((ReturnStatement) lastStatement("return (42, 1337)")).returnValueType()).isEqualTo(TUPLE);
   }
 
   @Test
