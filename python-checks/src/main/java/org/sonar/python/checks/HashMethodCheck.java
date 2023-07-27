@@ -51,7 +51,7 @@ public class HashMethodCheck extends PythonSubscriptionCheck {
    <li>__hash__ is manually set to None (common in mutable sequences like list)</li>
    </ol>
 
-   The implementation will only focus on 1., because 2. is causing too many FPs for typeshed symbols (e.g. int)
+   The implementation will only focus on 2., because 1. is causing too many FPs for typeshed symbols (e.g. int)
    */
   private static void checkHashMethod(Expression expression, SubscriptionContext ctx) {
     InferredType type = expression.type();

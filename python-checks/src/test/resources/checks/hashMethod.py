@@ -14,6 +14,10 @@ class ClassWithEqInherithingHash(ClassWithHash):
         return self
 
 
+class HashIsNone:
+    __hash__ = None
+
+
 def set_members():
     {EmptyClass()}  # OK - object has by default a __hash__() method
     {ClassWithEq()} # FN
@@ -25,6 +29,7 @@ def set_members():
     {ClassWithHash()}
     {some_func()}
     {None}
+    {HashIsNone()} # FN
 
 def dictionary_keys():
     {EmptyClass(): 42} # OK
