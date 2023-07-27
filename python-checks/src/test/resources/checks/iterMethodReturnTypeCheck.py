@@ -10,7 +10,7 @@ def string_unknown() -> str:
 class IterMethodCheck01:
     def __iter__(self):
         return True # Noncompliant {{Return an object complying with iterator protocol.}}
-        #      ^^^^^^^
+        #      ^^^^
 
 class IterMethodCheck02:
     def __iter__(self):
@@ -31,7 +31,7 @@ class IterMethodCheck05:
         return "Hello World" # Noncompliant
 
 class HasIterButNoNext:
-    def __iter__(self):
+    def __iter__(self): # Noncompliant
         ...
 
 class IterMethodCheck06:
@@ -47,7 +47,7 @@ class IterMethodCheck07:
         return HasNextButNoIter() # Noncompliant
 
 class HasNextAndIter:
-    def __iter__(self):
+    def __iter__(self): # Noncompliant
         ...
 
     def __next__(self):
@@ -152,7 +152,7 @@ class IterMethodCheck23:
         return 42 # Noncompliant
 
 class IterMethodCheck24:
-    async def __iter__(self): # Noncompliant {Return an object complying with iterator protocol. The method can not be a coroutine and have the `async` keyword.}}
+    async def __iter__(self): # Noncompliant {{Return an object complying with iterator protocol. The method can not be a coroutine and have the `async` keyword.}}
 #   ^^^^^
         return iter(())
 
@@ -242,4 +242,5 @@ class AbstractIter07(ABC):
     def __iter__(self): # Compliant
         pass
 
-
+def __iter__():
+    return True # Compliant: This function is not part of a class definition
