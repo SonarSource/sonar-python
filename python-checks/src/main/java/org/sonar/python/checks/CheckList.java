@@ -235,6 +235,7 @@ public final class CheckList {
       InvariantReturnCheck.class,
       ItemOperationsTypeCheck.class,
       IterationOnNonIterableCheck.class,
+      IterMethodReturnTypeCheck.class,
       JumpInFinallyCheck.class,
       JwtVerificationCheck.class,
       LambdaAssignmentCheck.class,
