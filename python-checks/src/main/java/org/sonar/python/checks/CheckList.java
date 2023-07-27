@@ -354,6 +354,7 @@ public final class CheckList {
       UselessStatementCheck.class,
       UseOfAnyAsTypeHintCheck.class,
       UseOfEmptyReturnValueCheck.class,
+      UseStartsWithEndsWithCheck.class,
       VerboseRegexCheck.class,
       VerifiedSslTlsCertificateCheck.class,
       WeakSSLProtocolCheck.class,
