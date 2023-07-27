@@ -37,7 +37,7 @@ import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
-@Rule(key = "S6658")
+@Rule(key = "S2876")
 public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_RETURN_VALUE_MESSAGE = "Return an object complying with iterator protocol.";
   private static final String NO_RETURN_STMTS_MESSAGE = INVALID_RETURN_VALUE_MESSAGE
