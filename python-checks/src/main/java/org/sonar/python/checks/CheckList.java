@@ -207,6 +207,7 @@ public final class CheckList {
       GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
+      HashMethodCheck.class,
       HashingDataCheck.class,
       HttpOnlyCookieCheck.class,
       IamPolicyPublicAccessCheck.class,

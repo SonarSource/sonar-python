@@ -1,0 +1,38 @@
+<p>This rule raises an issue when an unhashable object is used as a set member or dictionary key.</p>
+<h2>Why is this an issue?</h2>
+<p>The hash value of an object is an integer returned by its <code>__hash__</code> method. Objects that are considered equal to each other (as per the
+<code>__eq__</code> method) should have the same hash value.</p>
+<p>Whenever using an object as a dictionary key or inserting it into a set, the hash value of that object will be used to derive a bucket in which the
+object will be inserted.</p>
+<p>When attempting to insert an unhashable object into a set, a <code>TypeError</code> will be raised instead.</p>
+<p>If an object defines a <code>__hash__</code> method derived from mutable properties, no <code>TypeError</code> will be raised. However, having a
+mutable hash value should never be done as this would prevent dictionaries and set from retrieving the object.</p>
+<h2>How to fix it</h2>
+<p>Make sure to always use hashable (and immutable) objects as dictionary keys or set members.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo():
+    my_list = [1,2,3]
+    my_set = {my_list}  # Noncompliant: list is not hashable.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def foo():
+    my_list = [1,2,3]
+    my_set = set(my_list) # This will insert the elements of my_list into a new set.
+
+# OR
+
+def foo():
+    my_tuple = (1,2,3)
+    my_set = {my_tuple} # tuples are immutable and hashable. They can be inserted into sets.
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a
+  href="https://docs.python.org/3/reference/datamodel.html#object">https://docs.python.org/3/reference/datamodel.html#object</a>.<em>hash</em>[object.<em>hash</em>] </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/functions.html#hash">the hash built-in function</a> </li>
+</ul>
+
