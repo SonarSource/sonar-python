@@ -13,7 +13,11 @@ from typing_extensions import Final # OK - it may be used in comments
 
 from .. import some_symbol # Noncompliant
 
-foo()
+from some_package import symbol_to_rexport, SomeClass
+
+__all__ = ["symbol_to_rexport"]
+
+foo() # type: SomeClass
 qix()
 some()
 
