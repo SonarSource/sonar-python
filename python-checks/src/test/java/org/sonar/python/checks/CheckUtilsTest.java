@@ -20,9 +20,13 @@
 package org.sonar.python.checks;
 
 import com.sonar.sslr.api.AstNode;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -134,11 +138,36 @@ public class CheckUtilsTest {
     assertThat(parent.name().name()).isEqualTo("A");
   }
 
-  private Tree parse(String content) {
+  @Test
+  public void abstractMethods() throws IOException {
+    var fileInput = parseFile("src/test/resources/checks/isAbstractTest.py");
+
+    var abstractMethodNames = List.of("standard_usage", "qualified_usage", "usage_with_other_decorator", "incorrect_calling_usage", "usage_with_unknown_other_decorator");
+    for (var abstractMethodName : abstractMethodNames) {
+      FunctionDef method = descendantFunction(fileInput, abstractMethodName);
+      assertThat(method).isNotNull();
+      assertThat(CheckUtils.isAbstract(method)).isTrue();
+    }
+
+    var nonAbstractMethodNames = List.of("standard_method", "with_other_decorator", "with_unknown_decorator");
+    for (var nonAbstractMethod : nonAbstractMethodNames) {
+      FunctionDef method = descendantFunction(fileInput, nonAbstractMethod);
+      assertThat(method).isNotNull();
+      assertThat(CheckUtils.isAbstract(method)).isFalse();
+    }
+  }
+
+  private static Tree parse(String content) {
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
     FileInput parse = new PythonTreeMaker().fileInput(astNode);
     return parse;
+  }
+
+  private static FileInput parseFile(String path) throws IOException {
+    try (var sourceFile = new Scanner(new File(path)).useDelimiter("\\Z")) {
+      return (FileInput) parse(sourceFile.next());
+    }
   }
 
   @Nullable
@@ -154,5 +183,4 @@ public class CheckUtilsTest {
       .filter(Objects::nonNull)
       .findFirst().orElse(null);
   }
-
 }

@@ -35,7 +35,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2876")
 public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
@@ -43,8 +42,6 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String NO_RETURN_STMTS_MESSAGE = INVALID_RETURN_VALUE_MESSAGE
     + " Consider explicitly raising a NotImplementedError if this class is not (yet) meant to support this method.";
   private static final String COROUTINE_METHOD_MESSAGE = INVALID_RETURN_VALUE_MESSAGE + " The method can not be a coroutine and have the `async` keyword.";
-
-  private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
 
   @Override
   public void initialize(Context context) {
@@ -77,7 +74,7 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // * if the method is marked as abstract, then it is likely not implemented on purpose
     if (returnStmts.isEmpty() &&
       !returnStmtCollector.raisesExceptions() &&
-      !isAbstract(funDef)) {
+      !CheckUtils.isAbstract(funDef)) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), NO_RETURN_STMTS_MESSAGE);
       return;
     }
@@ -104,30 +101,7 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
     InferredType returnStmtType = returnStmt.returnValueType();
     if (!returnStmtType.canHaveMember("__iter__") ||
       !returnStmtType.canHaveMember("__next__")) {
-      addIssueOnReturnedExpressions(ctx, returnStmt, INVALID_RETURN_VALUE_MESSAGE);
-    }
-  }
-
-  private static boolean isAbstract(FunctionDef funDef) {
-    return funDef
-      .decorators()
-      .stream()
-      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
-      .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
-  }
-
-  private static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
-    List<Expression> returnedExpressions = returnStatement.expressions();
-
-    // Not strictly necessary as this method currently is never called for an empty expression list.
-    // Still, it should be well-behaved if it is ever used in a different context.
-    if (returnedExpressions.isEmpty()) {
-      ctx.addIssue(returnStatement.returnKeyword(), message);
-    } else {
-      Token firstExpressionToken = returnedExpressions.get(0).firstToken();
-      Token lastExpressionToken = returnedExpressions.get(returnedExpressions.size() - 1).lastToken();
-
-      ctx.addIssue(firstExpressionToken, lastExpressionToken, message);
+      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, INVALID_RETURN_VALUE_MESSAGE);
     }
   }
 

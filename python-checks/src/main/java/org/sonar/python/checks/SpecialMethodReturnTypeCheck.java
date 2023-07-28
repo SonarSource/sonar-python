@@ -37,16 +37,15 @@ import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
 @Rule(key = "S6658")
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   /**
    * Stores the return types expected for specific method names as specified here:
-   *   https://docs.python.org/3/reference/datamodel.html#special-method-names
-   *   https://docs.python.org/3/library/pickle.html#pickling-class-instances
-   *
+   *   <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special Method Names</a>
+   *   <a href="https://docs.python.org/3/library/pickle.html#pickling-class-instances">__getnewargs__, __getnewargs_ex__ Documentation</a>
+   * <p>
    * (In practice, the python interpreter is not as strict as the wording of the documentation.
    * For instance, {@code __str__(self)} is allowed to return a subtype of {@code str} without throwing a type error.
    * We respect the behaviour of the python interpreter in this regard.)
@@ -71,8 +70,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_TUPLE_MESSAGE = String.format(INVALID_RETURN_TYPE_MESSAGE, "tuple[tuple, dict]");
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
-
-  private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
 
   @Override
   public void initialize(Context context) {
@@ -103,7 +100,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     if (returnStmts.isEmpty() &&
       yieldKeywords.isEmpty() &&
       !returnStmtCollector.raisesExceptions() &&
-      !isAbstract(funDef)) {
+      !CheckUtils.isAbstract(funDef)) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }
@@ -134,7 +131,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     InferredType returnStmtType = returnStmt.returnValueType();
     // To avoid FPs, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
     if (!returnStmtType.canBeOrExtend(expectedReturnType)) {
-      addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
+      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
       return;
     }
 
@@ -175,7 +172,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     if (numReturnedExpressions != 2) {
-      addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
+      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
       return;
     }
 
@@ -186,35 +183,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     if (!firstElement.type().canBeOrExtend(BuiltinTypes.TUPLE) ||
       !secondElement.type().canBeOrExtend(BuiltinTypes.DICT)) {
       ctx.addIssue(firstElement.firstToken(), secondElement.lastToken(), INVALID_GETNEWARGSEX_TUPLE_MESSAGE);
-    }
-  }
-
-  private static boolean isAbstract(FunctionDef funDef) {
-    return funDef
-      .decorators()
-      .stream()
-      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
-      .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
-  }
-
-  /**
-   * Calls {@code ctx.addIssue} for a return statement such that...
-   *
-   * ...all returned expressions are marked as the source of the issue if the return statement contains such expressions
-   * ...the return keyword is marked as the source of the issue if the return statement does not contain any expressions
-   */
-  private static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
-    List<Expression> returnedExpressions = returnStatement.expressions();
-
-    // Not strictly necessary as this method currently is never called for an empty expression list.
-    // Still, it should be well-behaved if it is ever used in a different context.
-    if (returnedExpressions.isEmpty()) {
-      ctx.addIssue(returnStatement.returnKeyword(), message);
-    } else {
-      Token firstExpressionToken = returnedExpressions.get(0).firstToken();
-      Token lastExpressionToken = returnedExpressions.get(returnedExpressions.size() - 1).lastToken();
-
-      ctx.addIssue(firstExpressionToken, lastExpressionToken, message);
     }
   }
 
