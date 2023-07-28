@@ -247,6 +247,7 @@ public final class CheckList {
       LoopExecutingAtMostOnceCheck.class,
       MandatoryFunctionParameterTypeHintCheck.class,
       MandatoryFunctionReturnTypeHintCheck.class,
+      MembershipTestSupportCheck.class,
       MethodNameCheck.class,
       MethodShouldBeStaticCheck.class,
       MissingDocstringCheck.class,
