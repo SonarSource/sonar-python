@@ -19,22 +19,16 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.YieldExpression;
-import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TupleImpl;
@@ -83,9 +77,9 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    checkForAsync(ctx, funDef, expectedReturnType);
+    ReturnCheckUtils.addIssueIfAsync(ctx, funDef, String.format(COROUTINE_METHOD_MESSAGE, expectedReturnType));
 
-    ReturnStmtCollector returnStmtCollector = collectReturnStmts(funDef);
+    ReturnCheckUtils.ReturnStmtCollector returnStmtCollector = ReturnCheckUtils.ReturnStmtCollector.collect(funDef);
     List<Token> yieldKeywords = returnStmtCollector.getYieldKeywords();
     for (Token yieldKeyword : yieldKeywords) {
       ctx.addIssue(yieldKeyword, String.format(GENERATOR_METHOD_MESSAGE, expectedReturnType));
@@ -110,13 +104,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void checkForAsync(SubscriptionContext ctx, FunctionDef funDef, String expectedReturnType) {
-    Token asyncKeyword = funDef.asyncKeyword();
-    if (asyncKeyword != null) {
-      ctx.addIssue(asyncKeyword, String.format(COROUTINE_METHOD_MESSAGE, expectedReturnType));
-    }
-  }
-
   /**
    * {@code checkReturnStmt} inspects the expressions contained in a return statement against the given {@code expectedReturnType}.
    * Some additional checks are performed if {@code methodName} is {@code "__getnewargs_ex__"}.
@@ -131,7 +118,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     InferredType returnStmtType = returnStmt.returnValueType();
     // To avoid FPs, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
     if (!returnStmtType.canBeOrExtend(expectedReturnType)) {
-      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
       return;
     }
 
@@ -172,7 +159,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     if (numReturnedExpressions != 2) {
-      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
       return;
     }
 
@@ -183,75 +170,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     if (!firstElement.type().canBeOrExtend(BuiltinTypes.TUPLE) ||
       !secondElement.type().canBeOrExtend(BuiltinTypes.DICT)) {
       ctx.addIssue(firstElement.firstToken(), secondElement.lastToken(), INVALID_GETNEWARGSEX_TUPLE_MESSAGE);
-    }
-  }
-
-  private static ReturnStmtCollector collectReturnStmts(FunctionDef funDef) {
-    ReturnStmtCollector returnExpressionCollector = new ReturnStmtCollector();
-    funDef.body().accept(returnExpressionCollector);
-
-    return returnExpressionCollector;
-  }
-
-  private static class ReturnStmtCollector extends BaseTreeVisitor {
-    private final List<ReturnStatement> returnStmts = new ArrayList<>();
-    private final List<Token> yieldKeywords = new ArrayList<>();
-    private boolean raisesExceptions = false;
-
-    public List<ReturnStatement> getReturnStmts() {
-      return returnStmts;
-    }
-
-    public List<Token> getYieldKeywords() {
-      return yieldKeywords;
-    }
-
-    /**
-     * Users often raise a TypeError or NotImplementedError inside special methods to explicitly indicate that a method is not supported.
-     * For example, list objects are unhashable, i.e. the __hash__() method raises a TypeError:
-     *
-     * <pre>
-     * >>> hash([])
-     * Traceback (most recent call last):
-     *   File "<stdin>", line 1, in <module>
-     * TypeError: unhashable type: 'list'
-     * </pre>
-     *
-     * Hence, in order to avoid too many FPs, this rule should not be triggered on special methods that contain no return statements if
-     * they do raise exceptions.
-     */
-    public boolean raisesExceptions() {
-      return raisesExceptions;
-    }
-
-    @Override
-    public void visitReturnStatement(ReturnStatement returnStmt) {
-      returnStmts.add(returnStmt);
-    }
-
-    @Override
-    public void visitFunctionDef(FunctionDef funDef) {
-      // We do not visit nested function definitions as they may contain irrelevant return statements
-    }
-
-    @Override
-    public void visitYieldStatement(YieldStatement yieldStmt) {
-      yieldKeywords.add(yieldStmt.yieldExpression().yieldKeyword());
-    }
-
-    @Override
-    public void visitYieldExpression(YieldExpression yieldExpr) {
-      yieldKeywords.add(yieldExpr.yieldKeyword());
-    }
-
-    @Override
-    public void visitLambda(LambdaExpression lambdaExpr) {
-      // We do not visit nested lambda definitions as they may contain irrelevant yield expressions
-    }
-
-    @Override
-    public void visitRaiseStatement(RaiseStatement raiseStmt) {
-      raisesExceptions = true;
     }
   }
 }

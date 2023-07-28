@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -32,9 +31,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.SetLiteral;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
@@ -165,24 +162,5 @@ public class CheckUtils {
       .stream()
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
-  }
-
-  /**
-   * Calls {@code ctx.addIssue} for a return statement such that...
-   *
-   * ...all returned expressions are marked as the source of the issue if the return statement contains such expressions
-   * ...the return keyword is marked as the source of the issue if the return statement does not contain any expressions
-   */
-  public static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
-    List<Expression> returnedExpressions = returnStatement.expressions();
-
-    if (returnedExpressions.isEmpty()) {
-      ctx.addIssue(returnStatement.returnKeyword(), message);
-    } else {
-      Token firstExpressionToken = returnedExpressions.get(0).firstToken();
-      Token lastExpressionToken = returnedExpressions.get(returnedExpressions.size() - 1).lastToken();
-
-      ctx.addIssue(firstExpressionToken, lastExpressionToken, message);
-    }
   }
 }

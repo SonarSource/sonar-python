@@ -19,21 +19,14 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.YieldExpression;
-import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.InferredType;
 
 @Rule(key = "S2876")
@@ -58,9 +51,9 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    checkForAsync(ctx, funDef);
+    ReturnCheckUtils.addIssueIfAsync(ctx, funDef, COROUTINE_METHOD_MESSAGE);
 
-    var returnStmtCollector = collectReturnStmts(funDef);
+    var returnStmtCollector = ReturnCheckUtils.ReturnStmtCollector.collect(funDef);
 
     // // If there are yield keywords, then the method always returns a generator that supports the iterator protocol
     if (returnStmtCollector.containsYield()) {
@@ -84,13 +77,6 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void checkForAsync(SubscriptionContext ctx, FunctionDef funDef) {
-    Token asyncKeyword = funDef.asyncKeyword();
-    if (asyncKeyword != null) {
-      ctx.addIssue(asyncKeyword, COROUTINE_METHOD_MESSAGE);
-    }
-  }
-
   private static void checkReturnStmt(SubscriptionContext ctx, ReturnStatement returnStmt) {
     List<Expression> returnedExpressions = returnStmt.expressions();
     if (returnedExpressions.isEmpty()) {
@@ -101,62 +87,7 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
     InferredType returnStmtType = returnStmt.returnValueType();
     if (!returnStmtType.canHaveMember("__iter__") ||
       !returnStmtType.canHaveMember("__next__")) {
-      CheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, INVALID_RETURN_VALUE_MESSAGE);
-    }
-  }
-
-  private static ReturnStmtCollector collectReturnStmts(FunctionDef funDef) {
-    ReturnStmtCollector collector = new ReturnStmtCollector();
-    funDef.body().accept(collector);
-
-    return collector;
-  }
-
-  private static class ReturnStmtCollector extends BaseTreeVisitor {
-    private final List<ReturnStatement> returnStmts = new ArrayList<>();
-    private boolean containsYield = false;
-    private boolean raisesExceptions = false;
-
-    public List<ReturnStatement> getReturnStmts() {
-      return returnStmts;
-    }
-
-    public boolean containsYield() {
-      return containsYield;
-    }
-
-    public boolean raisesExceptions() {
-      return raisesExceptions;
-    }
-
-    @Override
-    public void visitReturnStatement(ReturnStatement returnStmt) {
-      returnStmts.add(returnStmt);
-    }
-
-    @Override
-    public void visitFunctionDef(FunctionDef funDef) {
-      // We do not visit nested function definitions as they may contain irrelevant return statements or yield statements
-    }
-
-    @Override
-    public void visitYieldStatement(YieldStatement yieldStmt) {
-      containsYield = true;
-    }
-
-    @Override
-    public void visitYieldExpression(YieldExpression yieldExpr) {
-      containsYield = true;
-    }
-
-    @Override
-    public void visitLambda(LambdaExpression lambdaExpr) {
-      // We do not visit nested lambda definitions as they may contain irrelevant yield expressions
-    }
-
-    @Override
-    public void visitRaiseStatement(RaiseStatement raiseStmt) {
-      raisesExceptions = true;
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, INVALID_RETURN_VALUE_MESSAGE);
     }
   }
 }
