@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SetLiteral;
@@ -151,5 +152,15 @@ public class CheckUtils {
 
   public static boolean isNone(InferredType type) {
     return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
+  }
+
+  private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
+
+  public static boolean isAbstract(FunctionDef funDef) {
+    return funDef
+      .decorators()
+      .stream()
+      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
   }
 }

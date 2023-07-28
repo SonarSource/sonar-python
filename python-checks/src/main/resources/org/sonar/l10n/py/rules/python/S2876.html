@@ -1,0 +1,54 @@
+<p>This rule raises an issue when the object returned by <code>__iter__</code> is not a valid iterator.</p>
+<h2>Why is this an issue?</h2>
+<p>An <a href="https://docs.python.org/3/glossary.html#term-iterable">iterable</a> object is an object capable of returning its members one at a time.
+To do so, it must define an <code>__iter__</code> method that returns an iterator.</p>
+<p>The <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">iterator protocol</a> specifies that, in order to be a valid iterator,
+an object must define a <code>__next__</code> and an <code>__iter__</code> method (because iterators are also iterable).</p>
+<p>Defining an <code>__iter__</code> method that returns anything else than an iterator will raise a <code>TypeError</code> as soon as the iteration
+begins.</p>
+<p>Note that <a href="https://docs.python.org/3/tutorial/classes.html#generators">generators</a> and <a
+href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">generator expressions</a> have both <code>__next__</code> and
+<code>__iter__</code> methods generated automatically.</p>
+<h2>How to fix it</h2>
+<p>Make sure that the <code>__iter__</code> method returns a valid iterator.</p>
+<h2>Code examples</h2>
+<h3>Noncompliant code example</h3>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class MyIterable:
+    def __init__(self, values):
+        self._values = values
+
+    def __iter__(self):
+        return None  # Noncompliant: Not a valid iterator
+</pre>
+<h3>Compliant solution</h3>
+<pre data-diff-id="1" data-diff-type="compliant">
+class MyIterable:
+    def __init__(self, values):
+        self._values = values
+
+    def __iter__(self):
+        return MyIterator(self._values)
+
+class MyIterator:
+    def __init__(self, values):
+        self._values = values
+        self._index = 0
+
+    def __next__(self):
+        if self._index &gt;= len(self._values):
+            raise StopIteration()
+        value = self._values[self._index]
+        self._index += 1
+        return value
+
+    def __iter__(self):
+        return self
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">Iterator Types</a> </li>
+  <li> PEP 234 - <a href="https://www.python.org/dev/peps/pep-0234/#python-api-specification">Iterators</a> </li>
+</ul>
+

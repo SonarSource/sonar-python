@@ -19,34 +19,27 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.LambdaExpression;
-import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.YieldExpression;
-import org.sonar.plugins.python.api.tree.YieldStatement;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
 @Rule(key = "S6658")
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   /**
    * Stores the return types expected for specific method names as specified here:
-   *   https://docs.python.org/3/reference/datamodel.html#special-method-names
-   *   https://docs.python.org/3/library/pickle.html#pickling-class-instances
-   *
+   *   <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special Method Names</a>
+   *   <a href="https://docs.python.org/3/library/pickle.html#pickling-class-instances">__getnewargs__, __getnewargs_ex__ Documentation</a>
+   * <p>
    * (In practice, the python interpreter is not as strict as the wording of the documentation.
    * For instance, {@code __str__(self)} is allowed to return a subtype of {@code str} without throwing a type error.
    * We respect the behaviour of the python interpreter in this regard.)
@@ -72,8 +65,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE = INVALID_GETNEWARGSEX_TUPLE_MESSAGE
     + " A tuple of two elements was expected but found tuple with %d element(s).";
 
-  private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
-
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFunctionDefinition(ctx, (FunctionDef) ctx.syntaxNode()));
@@ -86,9 +77,9 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    checkForAsync(ctx, funDef, expectedReturnType);
+    ReturnCheckUtils.addIssueIfAsync(ctx, funDef, String.format(COROUTINE_METHOD_MESSAGE, expectedReturnType));
 
-    ReturnStmtCollector returnStmtCollector = collectReturnStmts(funDef);
+    ReturnCheckUtils.ReturnStmtCollector returnStmtCollector = ReturnCheckUtils.ReturnStmtCollector.collect(funDef);
     List<Token> yieldKeywords = returnStmtCollector.getYieldKeywords();
     for (Token yieldKeyword : yieldKeywords) {
       ctx.addIssue(yieldKeyword, String.format(GENERATOR_METHOD_MESSAGE, expectedReturnType));
@@ -103,20 +94,13 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     if (returnStmts.isEmpty() &&
       yieldKeywords.isEmpty() &&
       !returnStmtCollector.raisesExceptions() &&
-      !isAbstract(funDef)) {
+      !CheckUtils.isAbstract(funDef)) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }
 
     for (ReturnStatement returnStmt : returnStmts) {
       checkReturnStmt(ctx, funNameString, expectedReturnType, returnStmt);
-    }
-  }
-
-  private static void checkForAsync(SubscriptionContext ctx, FunctionDef funDef, String expectedReturnType) {
-    Token asyncKeyword = funDef.asyncKeyword();
-    if (asyncKeyword != null) {
-      ctx.addIssue(asyncKeyword, String.format(COROUTINE_METHOD_MESSAGE, expectedReturnType));
     }
   }
 
@@ -134,7 +118,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     InferredType returnStmtType = returnStmt.returnValueType();
     // To avoid FPs, we raise an issue only if there is no way a returned expression could be (a subtype of) the expected type.
     if (!returnStmtType.canBeOrExtend(expectedReturnType)) {
-      addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStmt, String.format(INVALID_RETURN_TYPE_MESSAGE, expectedReturnType));
       return;
     }
 
@@ -175,7 +159,7 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     }
 
     if (numReturnedExpressions != 2) {
-      addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
+      ReturnCheckUtils.addIssueOnReturnedExpressions(ctx, returnStatement, String.format(INVALID_GETNEWARGSEX_ELEMENT_COUNT_MESSAGE, numReturnedExpressions));
       return;
     }
 
@@ -186,104 +170,6 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     if (!firstElement.type().canBeOrExtend(BuiltinTypes.TUPLE) ||
       !secondElement.type().canBeOrExtend(BuiltinTypes.DICT)) {
       ctx.addIssue(firstElement.firstToken(), secondElement.lastToken(), INVALID_GETNEWARGSEX_TUPLE_MESSAGE);
-    }
-  }
-
-  private static boolean isAbstract(FunctionDef funDef) {
-    return funDef
-      .decorators()
-      .stream()
-      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
-      .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
-  }
-
-  /**
-   * Calls {@code ctx.addIssue} for a return statement such that...
-   *
-   * ...all returned expressions are marked as the source of the issue if the return statement contains such expressions
-   * ...the return keyword is marked as the source of the issue if the return statement does not contain any expressions
-   */
-  private static void addIssueOnReturnedExpressions(SubscriptionContext ctx, ReturnStatement returnStatement, String message) {
-    List<Expression> returnedExpressions = returnStatement.expressions();
-
-    // Not strictly necessary as this method currently is never called for an empty expression list.
-    // Still, it should be well-behaved if it is ever used in a different context.
-    if (returnedExpressions.isEmpty()) {
-      ctx.addIssue(returnStatement.returnKeyword(), message);
-    } else {
-      Token firstExpressionToken = returnedExpressions.get(0).firstToken();
-      Token lastExpressionToken = returnedExpressions.get(returnedExpressions.size() - 1).lastToken();
-
-      ctx.addIssue(firstExpressionToken, lastExpressionToken, message);
-    }
-  }
-
-  private static ReturnStmtCollector collectReturnStmts(FunctionDef funDef) {
-    ReturnStmtCollector returnExpressionCollector = new ReturnStmtCollector();
-    funDef.body().accept(returnExpressionCollector);
-
-    return returnExpressionCollector;
-  }
-
-  private static class ReturnStmtCollector extends BaseTreeVisitor {
-    private final List<ReturnStatement> returnStmts = new ArrayList<>();
-    private final List<Token> yieldKeywords = new ArrayList<>();
-    private boolean raisesExceptions = false;
-
-    public List<ReturnStatement> getReturnStmts() {
-      return returnStmts;
-    }
-
-    public List<Token> getYieldKeywords() {
-      return yieldKeywords;
-    }
-
-    /**
-     * Users often raise a TypeError or NotImplementedError inside special methods to explicitly indicate that a method is not supported.
-     * For example, list objects are unhashable, i.e. the __hash__() method raises a TypeError:
-     *
-     * <pre>
-     * >>> hash([])
-     * Traceback (most recent call last):
-     *   File "<stdin>", line 1, in <module>
-     * TypeError: unhashable type: 'list'
-     * </pre>
-     *
-     * Hence, in order to avoid too many FPs, this rule should not be triggered on special methods that contain no return statements if
-     * they do raise exceptions.
-     */
-    public boolean raisesExceptions() {
-      return raisesExceptions;
-    }
-
-    @Override
-    public void visitReturnStatement(ReturnStatement returnStmt) {
-      returnStmts.add(returnStmt);
-    }
-
-    @Override
-    public void visitFunctionDef(FunctionDef funDef) {
-      // We do not visit nested function definitions as they may contain irrelevant return statements
-    }
-
-    @Override
-    public void visitYieldStatement(YieldStatement yieldStmt) {
-      yieldKeywords.add(yieldStmt.yieldExpression().yieldKeyword());
-    }
-
-    @Override
-    public void visitYieldExpression(YieldExpression yieldExpr) {
-      yieldKeywords.add(yieldExpr.yieldKeyword());
-    }
-
-    @Override
-    public void visitLambda(LambdaExpression lambdaExpr) {
-      // We do not visit nested lambda definitions as they may contain irrelevant yield expressions
-    }
-
-    @Override
-    public void visitRaiseStatement(RaiseStatement raiseStmt) {
-      raisesExceptions = true;
     }
   }
 }
