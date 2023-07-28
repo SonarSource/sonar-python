@@ -1,5 +1,5 @@
 from some_module import unknown
-from typing import Sequence, Iterable, Container
+from typing import Sequence, Iterable, Container, Callable, overload
 
 def produces_sequence() -> Sequence:
     ...
@@ -24,6 +24,10 @@ def produces_empty() -> Empty:
 if 42 in 1337: # Noncompliant
 #     ^^ ^^^^<
     pass
+
+42 in int(this_is() + a_long() + # Noncompliant {{Change the type for the target expression of `in`; type int does not support membership protocol.}}
+#  ^^ ^[el=+2;ec=29]<
+      multiline_expression())
 
 def g():
     list_or_int = []
@@ -156,3 +160,60 @@ def f():
         __getitem__ = None
 
     x in IterWithDisabledGetItem() # Compliant
+
+    class AmbiguousContains:
+        __contains__ = unknown()
+
+    x in AmbiguousContains() # Compliant
+
+    class AmbiguousIter:
+        __iter__ = unknown()
+
+    x in AmbiguousIter() # Compliant
+
+    class AmbiguousIterAndDisabledContains:
+        __contains__ = None
+        __iter__ = unknown()
+
+    x in AmbiguousIterAndDisabledContains() # Noncompliant
+
+    class AmbiguousContainsAndIter:
+        __contains__ = unknown()
+        def __iter__(self):
+            ...
+
+    x in AmbiguousContainsAndIter() # Compliant
+
+    class ComplexContains01:
+        __contains__ = None
+        __contains__ = unknown()
+
+    x in ComplexContains01() # Compliant
+
+    class ComplexContains02:
+        __contains__: Callable
+
+    x in ComplexContains02() # Compliant
+
+    class ComplexContains03(ComplexContains01, ComplexContains02):
+        pass
+
+    x in ComplexContains03() # Compliant
+
+    class ClassSymbolContains:
+        class __contains__: # Ridiculous case (and so are the others here), but I add it for coverage
+            pass
+
+    x in ClassSymbolContains() # Noncompliant
+
+    class OverloadedContains:
+        @overload
+        def __contains__(self, item: int) -> bool:
+            ...
+        @overload
+        def __contains__(self, item: float) -> bool:
+            ...
+        def __contains__(self, item):
+            ...
+
+    x in OverloadedContains() # Compliant
