@@ -42,9 +42,12 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
   private static final String UNKNOWN_TYPE_MESSAGE = "; the type does not support the membership protocol.";
   private static final String SECONDARY_MESSAGE = "The result value of this expression does not support the membership protocol.";
 
-  // The ordering of membership protocol methods matters here.
+  // The ordering of membership protocol methods matters here (for extreme edge cases).
+  //
   // For instance, a class that has __contains__ set to None but which defines __iter__ does not fulfill the membership protocol
   // A class that defines __contains__ and has __iter__ set to None does fulfill the membership protocol
+  //
+  // Hence, we check for these special methods in the same order as the python interpreter does at runtime.
   private static final List<String> MEMBERSHIP_PROTOCOL_ENABLING_METHODS = List.of("__contains__", "__iter__", "__getitem__");
 
   @Override
@@ -60,19 +63,12 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    PreciseIssue primaryLocation = addPrimaryIssue(ctx, inExpression, genPrimaryMessage(rhs, rhsType));
+    PreciseIssue primaryLocation = addIssueOnInAndNotIn(ctx, inExpression, genPrimaryMessage(rhs, rhsType));
     primaryLocation.secondary(inExpression.rightOperand(), SECONDARY_MESSAGE);
   }
 
   private static String genPrimaryMessage(Expression rhs, InferredType rhsType) {
-    final String typeMessage;
-    Symbol typeSymbol = rhsType.runtimeTypeSymbol();
-    if (typeSymbol != null) {
-      typeMessage = String.format(KNOWN_TYPE_MESSAGE, typeSymbol.fullyQualifiedName());
-    } else {
-      typeMessage = UNKNOWN_TYPE_MESSAGE;
-    }
-
+    // Try to render rhs into the message, but only if it is not multiline to avoid generating messages that are too long.
     String inTarget = TreeUtils.treeToString(rhs, false);
     String message;
     if (inTarget == null) {
@@ -80,12 +76,18 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
     } else {
       message = String.format(PRIMARY_MESSAGE, inTarget);
     }
-    message += typeMessage;
+
+    Symbol typeSymbol = rhsType.runtimeTypeSymbol();
+    if (typeSymbol != null) {
+      message += String.format(KNOWN_TYPE_MESSAGE, typeSymbol.fullyQualifiedName());
+    } else {
+      message += UNKNOWN_TYPE_MESSAGE;
+    }
 
     return message;
   }
 
-  private static PreciseIssue addPrimaryIssue(SubscriptionContext ctx, InExpression inExpression, String message) {
+  private static PreciseIssue addIssueOnInAndNotIn(SubscriptionContext ctx, InExpression inExpression, String message) {
     var notToken = inExpression.notToken();
     if (notToken == null) {
       return ctx.addIssue(inExpression.operator(), message);
@@ -95,21 +97,19 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean canSupportMembershipProtocol(InferredType type) {
-    boolean atLeastOneMemberUnknown = false;
     for (var methodName : MEMBERSHIP_PROTOCOL_ENABLING_METHODS) {
-      switch (memberType(type, methodName)) {
+      switch (canMemberBeMethod(type, methodName)) {
         case NOT_A_METHOD:
           return false;
         case METHOD:
-          return true;
         case UNKNOWN:
-          atLeastOneMemberUnknown = true;
-          break;
+          return true;
         default:
       }
     }
 
-    return atLeastOneMemberUnknown;
+    // all membership protocol methods are guaranteed not to be present
+    return false;
   }
 
   private enum MemberType {
@@ -129,7 +129,6 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
     // This handles cases like __contains__ = other() or __contains__ = None.
     // Although it is unclear, whether such edge cases really appear in the wild
     if (symbol.is(Symbol.Kind.OTHER)) {
-      // if we can definitely show that the symbol refers to a non-callable, we return false
       var bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).limit(2).collect(Collectors.toUnmodifiableList());
       if (bindingUsages.size() == 1) {
         var bindingUsage = bindingUsages.get(0);
@@ -138,7 +137,6 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
         return assignment == null || ((AssignmentStatement) assignment).assignedValue().type().canHaveMember("__call__");
       }
 
-      // otherwise, we always accept OTHER symbols
       return true;
     }
 
@@ -149,7 +147,7 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static MemberType memberType(InferredType type, String methodName) {
+  private static MemberType canMemberBeMethod(InferredType type, String methodName) {
     var maybeMember = type.resolveMember(methodName);
     if (maybeMember.isPresent()) {
       var symbol = maybeMember.get();

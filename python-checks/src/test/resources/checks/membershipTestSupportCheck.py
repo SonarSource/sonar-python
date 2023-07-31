@@ -161,10 +161,16 @@ def f():
 
     x in IterWithDisabledGetItem() # Compliant
 
-    class AmbiguousContains:
+    class AmbiguousContains01:
         __contains__ = unknown()
 
-    x in AmbiguousContains() # Compliant
+    x in AmbiguousContains01() # Compliant
+
+    class AmbiguousContains02:
+        __contains__ = unknown()
+        __iter__ = None
+
+    x in AmbiguousContains02() # Compliant
 
     class AmbiguousIter:
         __iter__ = unknown()
