@@ -19,32 +19,61 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.DottedName;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.Name;
-
-import static org.sonar.plugins.python.api.tree.Tree.Kind.IMPORT_FROM;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Trivia;
 
 
 @Rule(key = "S1128")
-public class UnusedImportCheck extends PythonSubscriptionCheck {
+public class UnusedImportCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Remove this unused import.";
   private static final Set<String> ALLOWED_MODULES = Set.of("__future__", "typing", "typing_extensions");
 
+  private final Map<String, Name> unusedImports = new HashMap<>();
+
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(IMPORT_FROM, ctx -> checkImportFrom(((ImportFrom) ctx.syntaxNode()), ctx));
+  public void visitFileInput(FileInput fileInput) {
+    unusedImports.clear();
+    // The rule should not raise on __init__ files as they are often used as a facade for packages
+    if ("__init__.py".equals(getContext().pythonFile().fileName())) return;
+    super.visitFileInput(fileInput);
+    removeImportedNamesUsedInCommentsOrLiterals(fileInput);
+    unusedImports.values().forEach(unusedImport -> addIssue(unusedImport, MESSAGE));
   }
 
-  private static void checkImportFrom(ImportFrom importFrom, SubscriptionContext ctx) {
-    // The rule should not raise on __init__ files as they are often used as a facade for packages
-    if ("__init__.py".equals(ctx.pythonFile().fileName())) return;
+
+  /**
+   * To reduce FPs, we go through every comment and every string literal to check if any detected unused import has been used there.
+   * This is useful to avoid raising FPs when symbols are exported via `__all__` global variable or when they are used inside type hints comments.
+   */
+  private void removeImportedNamesUsedInCommentsOrLiterals(Tree tree) {
+    if (tree.is(Tree.Kind.TOKEN)) {
+      for (Trivia trivia : ((Token) tree).trivia()) {
+        unusedImports.values().removeIf(name -> trivia.value().contains(name.name()));
+      }
+    } else if (tree.is(Tree.Kind.STRING_LITERAL)) {
+      unusedImports.remove(((StringLiteral) tree).trimmedQuotesValue());
+    } else {
+      for (Tree child : tree.children()) {
+        removeImportedNamesUsedInCommentsOrLiterals(child);
+      }
+    }
+  }
+
+  @Override
+  public void visitImportFrom(ImportFrom importFrom) {
     DottedName module = importFrom.module();
     if (module != null && module.names().size() == 1 && ALLOWED_MODULES.contains(module.names().get(0).name())) return;
     for (AliasedName aliasedName : importFrom.importedNames()) {
@@ -53,8 +82,9 @@ public class UnusedImportCheck extends PythonSubscriptionCheck {
       var importedSymbol = importedName.symbol();
       // defensive programming: imported symbol should never be null, because it always binds a name
       if (importedSymbol != null && importedSymbol.usages().stream().filter(u -> !u.isBindingUsage()).findFirst().isEmpty()) {
-        ctx.addIssue(importedName, MESSAGE);
+        unusedImports.put(importedName.name(), importedName);
       }
     }
+    super.visitImportFrom(importFrom);
   }
 }
