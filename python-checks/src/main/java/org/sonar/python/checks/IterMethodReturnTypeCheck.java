@@ -23,11 +23,13 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2876")
 public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
@@ -38,14 +40,16 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFunctionDefinition(ctx, (FunctionDef) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkClassDefinition(ctx, (ClassDef) ctx.syntaxNode()));
   }
 
-  private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef) {
-    if (!funDef.isMethodDefinition()) {
-      return;
+  private static void checkClassDefinition(SubscriptionContext ctx, ClassDef classDef) {
+    for (var methodDef : TreeUtils.topLevelFunctionDefs(classDef)) {
+      checkFunctionDefinition(ctx, methodDef, CheckUtils.mustBeAProtocolLike(classDef));
     }
+  }
 
+  private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef, boolean classIsProtocolLike) {
     String funNameString = funDef.name().name();
     if (!"__iter__".equals(funNameString)) {
       return;
@@ -64,10 +68,11 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // If there are no return statements, we trigger this rule since this effectively means that the method is returning `None`.
     // However, there are exceptions to this:
     // * if the method raises exceptions, then it likely does not return a value on purpose
-    // * if the method is marked as abstract, then it is likely not implemented on purpose
+    // * if the method is marked as abstract or the surrounding class is a Protocol, then it is likely not implemented on purpose
     if (returnStmts.isEmpty() &&
       !returnStmtCollector.raisesExceptions() &&
-      !CheckUtils.isAbstract(funDef)) {
+      !CheckUtils.isAbstract(funDef) &&
+      !classIsProtocolLike) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), NO_RETURN_STMTS_MESSAGE);
       return;
     }

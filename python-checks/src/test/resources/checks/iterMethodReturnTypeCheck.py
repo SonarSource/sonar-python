@@ -3,6 +3,10 @@ from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
 from itertools import chain
+from typing import Protocol
+import typing
+from zope.interface import Interface
+import zope
 
 def string_unknown() -> str:
     ...
@@ -241,6 +245,27 @@ class AbstractIter07(ABC):
     @abstractmethod
     def __iter__(self): # Compliant
         pass
+
+class ProtocolClass01(Protocol):
+    def __iter__(self): # Compliant
+        ...
+
+class ProtocolClass02(typing.Protocol):
+    def __iter__(self): # Compliant
+        ...
+
+class ProtocolClass03(Protocol):
+    def __iter__(self):
+        return 42 # Noncompliant
+
+class ZopeInterfaceClass01(Interface):
+    def __iter__(self): # Compliant
+        ...
+
+class ZopeInterfaceClass02(zope.interface.Interface):
+    def __iter__(self): # Compliant
+        ...
+
 
 def __iter__():
     return True # Compliant: This function is not part of a class definition

@@ -154,6 +154,21 @@ public class CheckUtils {
     return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
   }
 
+  private static final List<String> PROTOCOL_LIKE_BASE_TYPES = List.of("typing.Protocol", "zope.interface.Interface");
+
+  /**
+   * Determines whether the given class must be a <a href="https://docs.python.org/3/library/typing.html#typing.Protocol">Protocol</a>
+   * or a similar Protocol-like definition (e.g. {@code zope.interface.Interface}).
+   */
+  public static boolean mustBeAProtocolLike(ClassDef classDef) {
+    var classSymbol = TreeUtils.getClassSymbolFromDef(classDef);
+    if (classSymbol != null) {
+      return PROTOCOL_LIKE_BASE_TYPES.stream().anyMatch(classSymbol::isOrExtends);
+    }
+
+    return false;
+  }
+
   private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
 
   public static boolean isAbstract(FunctionDef funDef) {

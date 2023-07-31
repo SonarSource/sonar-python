@@ -2,6 +2,8 @@ from external import unknown
 from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
+from typing import Protocol
+from zope.interface import Interface
 
 def string_unknown() -> str:
     ...
@@ -363,6 +365,18 @@ class AbstractSpecialMethod01(ABC):
     @abstractmethod
     def __format__(self, format_spec): # Compliant
         pass
+
+class ProtocolClass01(Protocol):
+    def __bool__(self): # Compliant
+        ...
+
+class ProtocolClass02(Protocol):
+    def __bool__(self):
+        return 42 # Noncompliant
+
+class ZopeInterfaceClass(Interface):
+    def __bool__(self): # Compliant
+        ...
 
 def __bool__():
     return 42 # Compliant: This function is not part of a class definition

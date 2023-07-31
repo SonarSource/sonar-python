@@ -24,6 +24,7 @@ import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
@@ -31,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
 @Rule(key = "S6658")
@@ -67,14 +69,16 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> checkFunctionDefinition(ctx, (FunctionDef) ctx.syntaxNode()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> checkClassDefinition(ctx, (ClassDef) ctx.syntaxNode()));
   }
 
-  private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef) {
-    if (!funDef.isMethodDefinition()) {
-      return;
+  private static void checkClassDefinition(SubscriptionContext ctx, ClassDef classDef) {
+    for (var methodDef : TreeUtils.topLevelFunctionDefs(classDef)) {
+      checkFunctionDefinition(ctx, methodDef, CheckUtils.mustBeAProtocolLike(classDef));
     }
+  }
 
+  private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef, boolean classIsProtocolLike) {
     String funNameString = funDef.name().name();
     String expectedReturnType = METHOD_TO_RETURN_TYPE.get(funNameString);
     if (expectedReturnType == null) {
@@ -94,11 +98,12 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // However, there are exceptions to this:
     // * if there are yield keywords, these already trigger the rule, so there is no reason to add even more issues
     // * if the method raises exceptions, then it likely does not return a value on purpose, see docstring of `raisesExceptions`
-    // * if the method is marked as abstract, then it is likely not implemented on purpose
+    // * if the method is marked as abstract or the surrounding class is a Protocol, then it is likely not implemented on purpose
     if (returnStmts.isEmpty() &&
       yieldKeywords.isEmpty() &&
       !returnStmtCollector.raisesExceptions() &&
-      !CheckUtils.isAbstract(funDef)) {
+      !CheckUtils.isAbstract(funDef) &&
+      !classIsProtocolLike) {
       ctx.addIssue(funDef.defKeyword(), funDef.colon(), String.format(NO_RETURN_STMTS_MESSAGE, expectedReturnType));
       return;
     }

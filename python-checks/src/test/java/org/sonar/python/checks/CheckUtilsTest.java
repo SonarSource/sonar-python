@@ -33,11 +33,14 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.ArgListImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class CheckUtilsTest {
 
@@ -139,8 +142,28 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void abstractMethods() throws IOException {
-    var fileInput = parseFile("src/test/resources/checks/isAbstractTest.py");
+  public void mustBeAProtocolLikeTest() throws IOException {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/mustBeAProtocolLikeTest.py");
+
+    var statementList = fileInput.statements();
+    assertThat(statementList).isNotNull();
+
+    statementList
+      .statements()
+      .stream().filter(child -> child.is(Tree.Kind.CLASSDEF))
+      .map(ClassDef.class::cast)
+      .forEach(classDef -> {
+        var name = classDef.name().name();
+        var mustBeProtocolLike = CheckUtils.mustBeAProtocolLike(classDef);
+
+        assertThat(mustBeProtocolLike)
+          .isEqualTo(name.startsWith("ProtocolLike"));
+      });
+  }
+
+  @Test
+  public void isAbstractTest() throws IOException {
+    var fileInput = parseFile("src/test/resources/checks/checkUtils/isAbstractTest.py");
 
     var abstractMethodNames = List.of("standard_usage", "qualified_usage", "usage_with_other_decorator", "incorrect_calling_usage", "usage_with_unknown_other_decorator");
     for (var abstractMethodName : abstractMethodNames) {
@@ -168,6 +191,17 @@ public class CheckUtilsTest {
     try (var sourceFile = new Scanner(new File(path)).useDelimiter("\\Z")) {
       return (FileInput) parse(sourceFile.next());
     }
+  }
+
+  private static FileInput parseFileWithSymbols(String path) throws IOException {
+    var file = new File(path);
+    var baseDirFile = new File(file.getParent());
+
+    var projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(List.of(file), baseDirFile);
+    var context = TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDirFile.getAbsolutePath()), projectLevelSymbolTable,
+      CacheContextImpl.dummyCache());
+
+    return context.rootTree();
   }
 
   @Nullable
