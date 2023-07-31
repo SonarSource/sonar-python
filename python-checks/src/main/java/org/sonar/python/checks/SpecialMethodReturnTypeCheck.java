@@ -71,6 +71,10 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkFunctionDefinition(SubscriptionContext ctx, FunctionDef funDef) {
+    if (!funDef.isMethodDefinition()) {
+      return;
+    }
+
     String funNameString = funDef.name().name();
     String expectedReturnType = METHOD_TO_RETURN_TYPE.get(funNameString);
     if (expectedReturnType == null) {

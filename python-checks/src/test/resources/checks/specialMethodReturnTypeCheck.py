@@ -364,4 +364,5 @@ class AbstractSpecialMethod01(ABC):
     def __format__(self, format_spec): # Compliant
         pass
 
-
+def __bool__():
+    return 42 # Compliant: This function is not part of a class definition
