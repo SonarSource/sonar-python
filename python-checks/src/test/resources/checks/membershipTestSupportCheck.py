@@ -63,7 +63,7 @@ def f():
     x in produces_container() # Compliant
     x in produces_iterable() # Compliant
     x in produces_sequence() # Compliant
-    # TODO: Be more strict regarding declared types?
+    # TODO: Consider adding this rule to ConfusingTypeChecking, see the example below
     x in produces_empty() # Compliant since type analysis makes no assumptions about the members of declared types
     "a" in "abc" # Compliant
     b'a' in b'abc' # Compliant

@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S5642")
 public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
@@ -63,8 +64,8 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    PreciseIssue primaryLocation = addIssueOnInAndNotIn(ctx, inExpression, genPrimaryMessage(rhs, rhsType));
-    primaryLocation.secondary(inExpression.rightOperand(), SECONDARY_MESSAGE);
+    addIssueOnInAndNotIn(ctx, inExpression, genPrimaryMessage(rhs, rhsType))
+      .secondary(inExpression.rightOperand(), SECONDARY_MESSAGE);
   }
 
   private static String genPrimaryMessage(Expression rhs, InferredType rhsType) {
@@ -77,9 +78,9 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
       message = String.format(PRIMARY_MESSAGE, inTarget);
     }
 
-    Symbol typeSymbol = rhsType.runtimeTypeSymbol();
-    if (typeSymbol != null) {
-      message += String.format(KNOWN_TYPE_MESSAGE, typeSymbol.fullyQualifiedName());
+    var typeName = InferredTypes.typeName(rhsType);
+    if (typeName != null) {
+      message += String.format(KNOWN_TYPE_MESSAGE, typeName);
     } else {
       message += UNKNOWN_TYPE_MESSAGE;
     }
