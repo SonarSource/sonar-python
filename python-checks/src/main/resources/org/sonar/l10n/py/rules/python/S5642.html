@@ -1,0 +1,73 @@
+<p>This rule raises an issue when operators <code>in</code> and <code>not in</code> are called with a right operand not supporting membership
+protocol.</p>
+<h2>Why is this an issue?</h2>
+<p>Operators <code>in</code> and <code>not in</code>, also called <a
+href="https://docs.python.org/3/reference/expressions.html#membership-test-operations">"membership test operators"</a>, require that the right operand
+supports the membership protocol.</p>
+<p>In order to support the membership protocol, a user-defined class should implement at least one of the following methods:
+<code>__contains__</code>, <code>__iter__</code>, <code>__getitem__</code>.</p>
+<p>If none of these methods is implemented, a <code>TypeError</code> will be raised when performing a membership test.</p>
+<h2>How to fix it</h2>
+<h2>Code examples</h2>
+<h3>Noncompliant code example</h3>
+<pre>
+myint = 42
+
+if 42 in myint:  # Noncompliant: integers don't support membership protocol
+    ...
+
+class A:
+    def __init__(self, values):
+        self._values = values
+
+if "mystring" in A(["mystring"]):  # Noncompliant: class A doesn't support membership protocol
+    ...
+</pre>
+<h3>Compliant solution</h3>
+<pre>
+mylist = [42]
+
+if 42 in mylist:
+    ...
+
+class MyContains:
+    def __init__(self, values):
+        self._values = values
+
+    def __contains__(self, value):
+        return value in self._values
+
+if "mystring" in MyContains(["mystring"]):
+    ...
+
+# OR
+
+class MyIterable:
+    def __init__(self, values):
+        self._values = values
+
+    def __iter__(self):
+        return iter(self._values)
+
+if "mystring" in MyIterable(["mystring"]):
+    ...
+
+# OR
+
+class MyGetItem:
+    def __init__(self, values):
+        self._values = values
+
+    def __getitem__(self, key):
+        return self._values[key]
+
+if "mystring" in MyGetItem(["mystring"]):
+    ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#membership-test-operations">Membership test operations</a>
+  </li>
+</ul>
+
