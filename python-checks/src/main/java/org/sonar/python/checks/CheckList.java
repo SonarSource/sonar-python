@@ -134,6 +134,7 @@ public final class CheckList {
       BreakContinueOutsideLoopCheck.class,
       BuiltinShadowingAssignmentCheck.class,
       BuiltinGenericsOverTypingModuleCheck.class,
+      CallArgumentNamesOrderCheck.class,
       CaughtExceptionsCheck.class,
       ChangeMethodContractCheck.class,
       ChildAndParentExceptionCaughtCheck.class,

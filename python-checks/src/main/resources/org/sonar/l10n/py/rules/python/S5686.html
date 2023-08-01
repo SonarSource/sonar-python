@@ -1,0 +1,43 @@
+<p>This rule raises an issue when the arguments passed to a function call match the names of its parameters but are passed in a different order.</p>
+<h2>Why is this an issue?</h2>
+<p>When the names of parameters in a function/method call match the names of the method arguments, it contributes to clearer, more readable code.
+However, when the names match, but are passed in a different order than the function/method arguments, it indicates a mistake in the parameter order
+which will likely lead to unexpected results.</p>
+<p>Python functions typically expect arguments to be provided in a specific order to ensure the correct execution of the function. When arguments are
+passed in a different order, the function may receive incorrect values for its parameters, resulting in semantic discrepancies. This can lead to
+incorrect computations, unexpected behavior, or even errors.</p>
+<p>If the mismatch between parameter names and argument names is intentional, the resulting code will be hard to understand and maintain. Such
+practice should be avoided even if it doesn’t lead to execution errors.</p>
+<h2>How to fix it</h2>
+<p>Make sure that the arguments of this call are in the correct order.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def move_point(coord, speed):
+    new_x = coord[0] + speed[0]
+    new_y = coord[1] + speed[1]
+    return (new_x, new_y)
+
+coord = (3, 4)
+speed = (1, 2)
+
+move_point(speed, coord)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def move_point(coord, speed):
+    new_x = coord[0] + speed[0]
+    new_y = coord[1] + speed[1]
+    return (new_x, new_y)
+
+coord = (3, 4)
+speed = (1, 2)
+
+move_point(coord, speed)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> * Python Documentation - <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Defining functions</a> </li>
+</ul>
+
