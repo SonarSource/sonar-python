@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
@@ -31,6 +32,7 @@ import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.tree.YieldStatement;
+import org.sonar.python.types.DeclaredType;
 
 public class ReturnCheckUtils {
   private ReturnCheckUtils() {
@@ -66,6 +68,8 @@ public class ReturnCheckUtils {
     private final List<ReturnStatement> returnStmts = new ArrayList<>();
     private final List<Token> yieldKeywords = new ArrayList<>();
     private boolean raisesExceptions = false;
+
+    private static final List<String> BOTTOM_TYPES = List.of("typing.NoReturn", "typing.Never");
 
     private ReturnStmtCollector() {
     }
@@ -135,6 +139,20 @@ public class ReturnCheckUtils {
     @Override
     public void visitRaiseStatement(RaiseStatement raiseStmt) {
       raisesExceptions = true;
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      var returnType = callExpression.type();
+      if (!(returnType instanceof DeclaredType)) {
+        return;
+      }
+
+      var fullyQualifiedTypeName = ((DeclaredType) returnType).getTypeClass().fullyQualifiedName();
+
+      // We can not check for bottom type annotations with mustBeOrExtend, because the type analysis does not fully resolve declared
+      // typing.NoReturn and typing.Never types.
+      raisesExceptions |= BOTTOM_TYPES.stream().anyMatch(bottomType -> bottomType.equals(fullyQualifiedTypeName));
     }
   }
 }

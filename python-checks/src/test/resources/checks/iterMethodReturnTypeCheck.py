@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
 from itertools import chain
-from typing import Protocol, Any
+from typing import Protocol, Any, Never, NoReturn
 import typing
 from zope.interface import Interface
 import zope
@@ -205,6 +205,69 @@ class RaisesException05:
             return 42 # Noncompliant
         else:
             raise NotImplementedError()
+
+def noReturn01(sth) -> NoReturn:
+    ...
+
+def noReturn02(sth) -> typing.NoReturn:
+    ...
+
+def never01(sth) -> Never:
+    ...
+
+def never02(sth) -> typing.Never:
+    ...
+
+def returningFunction(sth) -> int:
+    ...
+
+class CallsNoReturn01:
+    def __iter__(self): # Compliant
+        noReturn01(42)
+
+class CallsNoReturn02:
+    def __iter__(self): # Compliant
+        never01(42)
+
+class CallsNoReturn03:
+    def __iter__(self): # Compliant
+        noReturn01()
+
+class CallsNoReturn04:
+    def __iter__(self): # Noncompliant
+        noReturn01
+
+class CallsNoReturn05:
+    def __iter__(self): # Noncompliant
+        returningFunction(42)
+
+class CallsNoReturn06:
+    def __iter__(self):
+        return 42 # Noncompliant
+        noReturn01(42)
+
+class CallsNoReturn07:
+    def __iter__(self):
+        if True:
+            return 42 # Noncompliant
+        else:
+            noReturn01(42)
+
+class CallsNoReturn08:
+    def __iter__(self):
+        if True:
+            never01(42)
+        else:
+            noReturn01(42)
+
+
+class CallsNoReturn09:
+    def __iter__(self): # Compliant
+        if True:
+            return iter(())
+        else:
+            noReturn01(42)
+
 
 class AbstractIter01(ABC):
     @abstractmethod
