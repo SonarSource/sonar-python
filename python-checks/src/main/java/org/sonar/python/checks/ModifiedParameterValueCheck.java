@@ -33,19 +33,18 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
@@ -55,7 +54,6 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.DEL_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.DICTIONARY_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SET_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -75,7 +73,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
   private static final String CLEAR = "clear";
   private static final Set<String> LIST_MUTATING_METHODS = new HashSet<>(Arrays.asList("append", CLEAR, "extend", "insert", "pop", "remove", "reverse", "sort"));
   private static final Set<String> SET_MUTATING_METHODS = new HashSet<>(
-          Arrays.asList("update", "intersection_update", "difference_update", "symmetric_difference_update", "add", "remove", "discard", "pop", CLEAR));
+    Arrays.asList("update", "intersection_update", "difference_update", "symmetric_difference_update", "add", "remove", "discard", "pop", CLEAR));
   private static final Set<String> DICT_MUTATING_METHODS = new HashSet<>(Arrays.asList("pop", CLEAR, "popitem", "setdefault", "update"));
   private static final Set<String> DEQUE_MUTATING_METHODS = new HashSet<>(Arrays.asList("appendleft", "extendleft", "popleft", "rotate"));
   static {
@@ -139,8 +137,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
               getQuickFix(functionDef, defaultValue, paramSymbol)
                 .ifPresent(issue::addQuickFix);
             }
-          }
-        );
+          });
       }
     });
   }
@@ -156,8 +153,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
       paramInit -> PythonQuickFix.newQuickFix("Initialize this parameter inside the function/method")
         .addTextEdit(replace(defaultValue, "None"))
         .addTextEdit(insertLineBefore(firstStatement, String.format("if %1$s is None:\n    %1$s = %2$s", paramName, paramInit)))
-        .build()
-    );
+        .build());
   }
 
   @CheckForNull
@@ -238,23 +234,19 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     }
     return assignment.assignedValue() == tree
       && assignment.lhsExpressions().stream()
-      .flatMap(expressionList -> expressionList.expressions().stream())
-      .anyMatch(ModifiedParameterValueCheck::isAccessingSelf);
+        .flatMap(expressionList -> expressionList.expressions().stream())
+        .anyMatch(ModifiedParameterValueCheck::isAccessingSelf);
   }
 
   private static boolean isAccessingSelf(Expression expression) {
     switch (expression.getKind()) {
       case QUALIFIED_EXPR:
-        return isSelf(((QualifiedExpression) expression).qualifier());
+        return CheckUtils.isSelf(((QualifiedExpression) expression).qualifier());
       case SUBSCRIPTION:
-        return isSelf(((SubscriptionExpression) expression).object());
+        return CheckUtils.isSelf(((SubscriptionExpression) expression).object());
       default:
         return false;
     }
-  }
-
-  private static boolean isSelf(Expression expression) {
-    return expression.is(NAME) && ((Name) expression).name().equals("self");
   }
 
   private static List<Tree> getAttributeSet(Symbol paramSymbol) {

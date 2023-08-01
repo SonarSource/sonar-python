@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
 from itertools import chain
-from typing import Protocol
+from typing import Protocol, Any
 import typing
 from zope.interface import Interface
 import zope
@@ -269,3 +269,81 @@ class ZopeInterfaceClass02(zope.interface.Interface):
 
 def __iter__():
     return True # Compliant: This function is not part of a class definition
+
+class IteratorMissingNext01:
+    def __iter__(self):
+        return self # Noncompliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext02:
+    def __iter__(this, self): # FN
+        return self
+
+    def next(self):
+        ...
+
+class IteratorMissingNext03:
+    def __iter__(this):
+        return self # Compliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext04:
+    self: Any
+
+    def __iter__(this):
+        return self # Compliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext05:
+    def __iter__(): # FN
+        return self
+
+    def next(self):
+        ...
+
+def f():
+    self = unknown()
+    class IteratorMissingNext06:
+        def __iter__(): # FN
+            return self
+
+        def next(self):
+            ...
+
+class IteratorMissingNext07:
+    def __iter__(self):
+        return self # FN: Cant resolve class symbol because of reassignment below
+
+    def next(self):
+        ...
+
+IteratorMissingNext07 = 42
+
+
+class IteratorMissingNext07:
+    def __iter__(this):
+        return this # FN
+
+    def next(self):
+        ...
+
+class IteratorWithNext01:
+    def __iter__(self):
+        return self # Compliant
+
+    def __next__(self):
+        ...
+
+class IteratorWithNext02:
+    def __iter__(self):
+        return self, 42 # Noncompliant
+
+    def __next__(self):
+        ...
+
