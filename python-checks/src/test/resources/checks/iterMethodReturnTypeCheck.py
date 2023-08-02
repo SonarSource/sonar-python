@@ -3,6 +3,10 @@ from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
 from itertools import chain
+from typing import Protocol, Any, Never, NoReturn
+import typing
+from zope.interface import Interface
+import zope
 
 def string_unknown() -> str:
     ...
@@ -202,6 +206,69 @@ class RaisesException05:
         else:
             raise NotImplementedError()
 
+def noReturn01(sth) -> NoReturn:
+    raise ValueError()
+
+def noReturn02(sth) -> typing.NoReturn:
+    raise ValueError()
+
+def never01(sth) -> Never:
+    raise ValueError()
+
+def never02(sth) -> typing.Never:
+    raise ValueError()
+
+def returningFunction(sth) -> int:
+    ...
+
+class CallsNoReturn01:
+    def __iter__(self): # Compliant
+        noReturn01(42)
+
+class CallsNoReturn02:
+    def __iter__(self): # Compliant
+        never01(42)
+
+class CallsNoReturn03:
+    def __iter__(self): # Compliant
+        noReturn01()
+
+class CallsNoReturn04:
+    def __iter__(self): # Noncompliant
+        noReturn01
+
+class CallsNoReturn05:
+    def __iter__(self): # Noncompliant
+        returningFunction(42)
+
+class CallsNoReturn06:
+    def __iter__(self):
+        return 42 # Noncompliant
+        noReturn01(42)
+
+class CallsNoReturn07:
+    def __iter__(self):
+        if True:
+            return 42 # Noncompliant
+        else:
+            noReturn01(42)
+
+class CallsNoReturn08:
+    def __iter__(self):
+        if True:
+            never01(42)
+        else:
+            noReturn01(42)
+
+
+class CallsNoReturn09:
+    def __iter__(self): # Compliant
+        if True:
+            return iter(())
+        else:
+            noReturn01(42)
+
+
 class AbstractIter01(ABC):
     @abstractmethod
     def __iter__(self): # Compliant: The @abstractmethod annotation indicates that the method has not been implemented on purpose
@@ -242,5 +309,104 @@ class AbstractIter07(ABC):
     def __iter__(self): # Compliant
         pass
 
+class ProtocolClass01(Protocol):
+    def __iter__(self): # Compliant
+        ...
+
+class ProtocolClass02(typing.Protocol):
+    def __iter__(self): # Compliant
+        ...
+
+class ProtocolClass03(Protocol):
+    def __iter__(self):
+        return 42 # Noncompliant
+
+class ZopeInterfaceClass01(Interface):
+    def __iter__(self): # Compliant
+        ...
+
+class ZopeInterfaceClass02(zope.interface.Interface):
+    def __iter__(self): # Compliant
+        ...
+
+
 def __iter__():
     return True # Compliant: This function is not part of a class definition
+
+class IteratorMissingNext01:
+    def __iter__(self):
+        return self # Noncompliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext02:
+    def __iter__(this, self): # FN
+        return self
+
+    def next(self):
+        ...
+
+class IteratorMissingNext03:
+    def __iter__(this):
+        return self # Compliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext04:
+    self: Any
+
+    def __iter__(this):
+        return self # Compliant
+
+    def next(self):
+        ...
+
+class IteratorMissingNext05:
+    def __iter__(): # FN
+        return self
+
+    def next(self):
+        ...
+
+def f():
+    self = unknown()
+    class IteratorMissingNext06:
+        def __iter__(): # FN
+            return self
+
+        def next(self):
+            ...
+
+class IteratorMissingNext07:
+    def __iter__(self):
+        return self # FN: Cant resolve class symbol because of reassignment below
+
+    def next(self):
+        ...
+
+IteratorMissingNext07 = 42
+
+
+class IteratorMissingNext07:
+    def __iter__(this):
+        return this # FN
+
+    def next(self):
+        ...
+
+class IteratorWithNext01:
+    def __iter__(self):
+        return self # Compliant
+
+    def __next__(self):
+        ...
+
+class IteratorWithNext02:
+    def __iter__(self):
+        return self, 42 # Noncompliant
+
+    def __next__(self):
+        ...
+

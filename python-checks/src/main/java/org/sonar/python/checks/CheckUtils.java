@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -31,6 +32,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
+import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -41,6 +44,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.GENERATOR_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LAMBDA;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NONE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
@@ -154,6 +158,21 @@ public class CheckUtils {
     return type.canOnlyBe(BuiltinTypes.NONE_TYPE);
   }
 
+  private static final List<String> PROTOCOL_LIKE_BASE_TYPES = List.of("typing.Protocol", "zope.interface.Interface");
+
+  /**
+   * Determines whether the given class must be a <a href="https://docs.python.org/3/library/typing.html#typing.Protocol">Protocol</a>
+   * or a similar Protocol-like definition (e.g. {@code zope.interface.Interface}).
+   */
+  public static boolean mustBeAProtocolLike(ClassDef classDef) {
+    var classSymbol = TreeUtils.getClassSymbolFromDef(classDef);
+    if (classSymbol != null) {
+      return PROTOCOL_LIKE_BASE_TYPES.stream().anyMatch(classSymbol::isOrExtends);
+    }
+
+    return false;
+  }
+
   private static final List<String> ABC_ABSTRACTMETHOD_DECORATORS = List.of("abstractmethod", "abc.abstractmethod");
 
   public static boolean isAbstract(FunctionDef funDef) {
@@ -162,5 +181,36 @@ public class CheckUtils {
       .stream()
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .anyMatch(foundDeco -> ABC_ABSTRACTMETHOD_DECORATORS.stream().anyMatch(abcDeco -> abcDeco.equals(foundDeco)));
+  }
+
+  /**
+   * Simple check whether the given expression is the "self" name expression.
+   *
+   * Carefully check the context when relying on this method!
+   * This implementation does not ensure that the name is actually referring to a method parameter or whether the surrounding method might
+   * be static, etc.
+   */
+  public static boolean isSelf(Expression expression) {
+    // TODO: Instead of performing a manual string comparison, maybe check the symbol instead for being a SelfSymbolImpl symbol
+    // (This might require exposing some more information about the symbol kind being a "Self"-symbol)
+    return expression.is(NAME) && "self".equals(((Name) expression).name());
+  }
+
+  @CheckForNull
+  public static Symbol findFirstParameterSymbol(FunctionDef functionDef) {
+    ParameterList parameters = functionDef.parameters();
+    if (parameters == null) {
+      return null;
+    }
+    List<Parameter> params = parameters.nonTuple();
+    if (params.isEmpty()) {
+      return null;
+    }
+    Name firstParameterName = params.get(0).name();
+    if (firstParameterName == null) {
+      return null;
+    }
+
+    return firstParameterName.symbol();
   }
 }

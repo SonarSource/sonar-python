@@ -2,6 +2,9 @@ from external import unknown
 from abc import ABC, abstractmethod
 import abc
 from some_module import some_decorator
+from typing import Protocol, NoReturn, Never
+import typing
+from zope.interface import Interface
 
 def string_unknown() -> str:
     ...
@@ -330,6 +333,67 @@ class RaisesException06:
         else:
             raise NotImplementedError() # Compliant
 
+def noReturn01(sth) -> NoReturn:
+    ...
+
+def noReturn02(sth) -> typing.NoReturn:
+    ...
+
+def never01(sth) -> Never:
+    ...
+
+def never02(sth) -> typing.Never:
+    ...
+
+def returningFunction(sth) -> int:
+    ...
+
+class CallsNoReturn01:
+    def __bool__(self): # Compliant
+        noReturn01(42)
+
+class CallsNoReturn02:
+    def __bool__(self): # Compliant
+        never01(42)
+
+class CallsNoReturn03:
+    def __bool__(self): # Compliant
+        noReturn01()
+
+class CallsNoReturn04:
+    def __bool__(self): # Noncompliant
+        noReturn01
+
+class CallsNoReturn05:
+    def __bool__(self): # Noncompliant
+        returningFunction(42)
+
+class CallsNoReturn06:
+    def __bool__(self):
+        return 42 # Noncompliant
+        noReturn01(42)
+
+class CallsNoReturn07:
+    def __bool__(self):
+        if True:
+            return 42 # Noncompliant
+        else:
+            noReturn01(42)
+
+class CallsNoReturn08:
+    def __bool__(self):
+        if True:
+            never01(42)
+        else:
+            noReturn01(42)
+
+class CallsNoReturn09:
+    def __bool__(self): # Compliant
+        if True:
+            return True
+        else:
+            noReturn01(42)
+
 class AbstractSpecialMethod01(ABC):
     @abstractmethod
     def __bool__(self): # Compliant: The @abstractmethod annotation indicates that the method has not been implemented on purpose
@@ -363,6 +427,18 @@ class AbstractSpecialMethod01(ABC):
     @abstractmethod
     def __format__(self, format_spec): # Compliant
         pass
+
+class ProtocolClass01(Protocol):
+    def __bool__(self): # Compliant
+        ...
+
+class ProtocolClass02(Protocol):
+    def __bool__(self):
+        return 42 # Noncompliant
+
+class ZopeInterfaceClass(Interface):
+    def __bool__(self): # Compliant
+        ...
 
 def __bool__():
     return 42 # Compliant: This function is not part of a class definition

@@ -27,15 +27,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.junit.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.ArgListImpl;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -139,8 +143,28 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void abstractMethods() throws IOException {
-    var fileInput = parseFile("src/test/resources/checks/isAbstractTest.py");
+  public void mustBeAProtocolLikeTest() throws IOException {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/mustBeAProtocolLikeTest.py");
+
+    var statementList = fileInput.statements();
+    assertThat(statementList).isNotNull();
+
+    statementList
+      .statements()
+      .stream().filter(child -> child.is(Tree.Kind.CLASSDEF))
+      .map(ClassDef.class::cast)
+      .forEach(classDef -> {
+        var name = classDef.name().name();
+        var mustBeProtocolLike = CheckUtils.mustBeAProtocolLike(classDef);
+
+        assertThat(mustBeProtocolLike)
+          .isEqualTo(name.startsWith("ProtocolLike"));
+      });
+  }
+
+  @Test
+  public void isAbstractTest() throws IOException {
+    var fileInput = parseFile("src/test/resources/checks/checkUtils/isAbstractTest.py");
 
     var abstractMethodNames = List.of("standard_usage", "qualified_usage", "usage_with_other_decorator", "incorrect_calling_usage", "usage_with_unknown_other_decorator");
     for (var abstractMethodName : abstractMethodNames) {
@@ -157,6 +181,39 @@ public class CheckUtilsTest {
     }
   }
 
+  @Test
+  public void isSelfTest() throws IOException {
+    var fileInput = parseFile("src/test/resources/checks/checkUtils/isSelfTest.py");
+    var functionDefs = descendantFunctions(fileInput);
+
+    assertThat(functionDefs).hasSize(7);
+
+    for (var functionDef : functionDefs) {
+      var functionName = functionDef.name().name();
+      var returnStmt = TreeUtils.firstChild(functionDef, child -> child.is(Tree.Kind.RETURN_STMT));
+      assertThat(returnStmt).isNotEmpty();
+
+      var maybeSelf = ((ReturnStatement) returnStmt.get()).expressions().get(0);
+
+      assertThat(CheckUtils.isSelf(maybeSelf)).isEqualTo(functionName.startsWith("returnsSelf"));
+    }
+  }
+
+  @Test
+  public void findFirstParameterSymbolTest() throws IOException {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/findFirstParameterSymbolTest.py");
+    var functionDefs = descendantFunctions(fileInput);
+
+    assertThat(functionDefs).hasSize(8);
+
+    for (var functionDef : functionDefs) {
+      var functionName = functionDef.name().name();
+
+      assertThat(CheckUtils.findFirstParameterSymbol(functionDef) != null)
+        .isEqualTo(functionName.startsWith("hasSymbolFirst"));
+    }
+  }
+
   private static Tree parse(String content) {
     PythonParser parser = PythonParser.create();
     AstNode astNode = parser.parse(content);
@@ -168,6 +225,12 @@ public class CheckUtilsTest {
     try (var sourceFile = new Scanner(new File(path)).useDelimiter("\\Z")) {
       return (FileInput) parse(sourceFile.next());
     }
+  }
+
+  private static FileInput parseFileWithSymbols(String path) throws IOException {
+    return TestPythonVisitorRunner
+      .createContext(new File(path))
+      .rootTree();
   }
 
   @Nullable
@@ -182,5 +245,14 @@ public class CheckUtilsTest {
       .map(child -> descendantFunction(child, name))
       .filter(Objects::nonNull)
       .findFirst().orElse(null);
+  }
+
+  private static List<FunctionDef> descendantFunctions(Tree tree) {
+    if (tree.is(Tree.Kind.FUNCDEF)) {
+      return List.of((FunctionDef) tree);
+    }
+    return tree.children().stream()
+      .flatMap(child -> descendantFunctions(child).stream())
+      .collect(Collectors.toUnmodifiableList());
   }
 }

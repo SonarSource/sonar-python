@@ -30,9 +30,12 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
@@ -41,21 +44,14 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionIf;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
-import org.sonar.plugins.python.api.tree.Decorator;
-import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Parameter;
-import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.api.PythonKeyword;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 
@@ -141,7 +137,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
           selfSymbol = null;
           className = findParentClassName(currentFunction);
         } else {
-          selfSymbol = findSelfParameterSymbol(currentFunction);
+          selfSymbol = CheckUtils.findFirstParameterSymbol(currentFunction);
           className = null;
         }
       } else {
@@ -257,20 +253,6 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
         return false;
       }
       return className.equals(((Name) expression).name());
-    }
-
-    @CheckForNull
-    private static Symbol findSelfParameterSymbol(FunctionDef functionDef) {
-      ParameterList parameters = functionDef.parameters();
-      if (parameters == null) {
-        return null;
-      }
-      List<Parameter> params = parameters.nonTuple();
-      if (params.isEmpty()) {
-        return null;
-      }
-      Name firstParameterName = params.get(0).name();
-      return firstParameterName != null ? firstParameterName.symbol() : null;
     }
 
     @CheckForNull
