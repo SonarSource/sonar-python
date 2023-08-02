@@ -200,6 +200,27 @@ def scope18():
     f18(x18, *z18, **y18) # Compliant
     f18(z18, *z18, **y18) # Compliant
 
+def f19(x, y, z):
+    ...
+
+(f19 if True else f19)(x, y, z) # Compliant
+(f19 if True else f19)(y, x, z) # FN: We do not inspect complex callee expressions
+
+def scope20():
+    def f20(x, y, z):
+        ...
+
+    def f20(y, z, x):
+        ...
+
+    f20(x, y, z) # Compliant: We do not check parameter names for functions with multiple declarations
+    f20(y, z, x) # Compliant
+
+def scope21():
+    f21 = lambda x, y: ...
+    f21(x, y) # Compliant
+    f21(y, x) # Noncompliant: TODO: Not sure if we can check this reliably
+
 # Example from RSPEC
 def move_point(coord, speed):
     new_x = coord[0] + speed[0]
