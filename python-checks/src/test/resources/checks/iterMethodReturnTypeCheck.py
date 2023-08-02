@@ -207,16 +207,16 @@ class RaisesException05:
             raise NotImplementedError()
 
 def noReturn01(sth) -> NoReturn:
-    ...
+    raise ValueError()
 
 def noReturn02(sth) -> typing.NoReturn:
-    ...
+    raise ValueError()
 
 def never01(sth) -> Never:
-    ...
+    raise ValueError()
 
 def never02(sth) -> typing.Never:
-    ...
+    raise ValueError()
 
 def returningFunction(sth) -> int:
     ...

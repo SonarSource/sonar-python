@@ -137,7 +137,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
           selfSymbol = null;
           className = findParentClassName(currentFunction);
         } else {
-          selfSymbol = CheckUtils.findSelfParameterSymbol(currentFunction);
+          selfSymbol = CheckUtils.findFirstParameterSymbol(currentFunction);
           className = null;
         }
       } else {

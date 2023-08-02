@@ -36,14 +36,12 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.TestPythonVisitorRunner;
-import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.ArgListImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public class CheckUtilsTest {
 
@@ -186,8 +184,11 @@ public class CheckUtilsTest {
   @Test
   public void isSelfTest() throws IOException {
     var fileInput = parseFile("src/test/resources/checks/checkUtils/isSelfTest.py");
+    var functionDefs = descendantFunctions(fileInput);
 
-    for (var functionDef : descendantFunctions(fileInput)) {
+    assertThat(functionDefs).hasSize(7);
+
+    for (var functionDef : functionDefs) {
       var functionName = functionDef.name().name();
       var returnStmt = TreeUtils.firstChild(functionDef, child -> child.is(Tree.Kind.RETURN_STMT));
       assertThat(returnStmt).isNotEmpty();
@@ -199,14 +200,17 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void findSelfParameterSymbolTest() throws IOException {
-    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/findSelfParameterSymbolTest.py");
+  public void findFirstParameterSymbolTest() throws IOException {
+    var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/findFirstParameterSymbolTest.py");
+    var functionDefs = descendantFunctions(fileInput);
 
-    for (var functionDef : descendantFunctions(fileInput)) {
+    assertThat(functionDefs).hasSize(8);
+
+    for (var functionDef : functionDefs) {
       var functionName = functionDef.name().name();
 
-      assertThat(CheckUtils.findSelfParameterSymbol(functionDef) != null)
-        .isEqualTo(functionName.startsWith("hasSelf"));
+      assertThat(CheckUtils.findFirstParameterSymbol(functionDef) != null)
+        .isEqualTo(functionName.startsWith("hasSymbolFirst"));
     }
   }
 
@@ -224,14 +228,9 @@ public class CheckUtilsTest {
   }
 
   private static FileInput parseFileWithSymbols(String path) throws IOException {
-    var file = new File(path);
-    var baseDirFile = new File(file.getParent());
-
-    var projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(List.of(file), baseDirFile);
-    var context = TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDirFile.getAbsolutePath()), projectLevelSymbolTable,
-      CacheContextImpl.dummyCache());
-
-    return context.rootTree();
+    return TestPythonVisitorRunner
+      .createContext(new File(path))
+      .rootTree();
   }
 
   @Nullable

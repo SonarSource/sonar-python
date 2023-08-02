@@ -131,7 +131,7 @@ public class IterMethodReturnTypeCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    var selfParameterSymbol = CheckUtils.findSelfParameterSymbol(funDef);
+    var selfParameterSymbol = CheckUtils.findFirstParameterSymbol(funDef);
     if (selfParameterSymbol == null) {
       return false;
     }

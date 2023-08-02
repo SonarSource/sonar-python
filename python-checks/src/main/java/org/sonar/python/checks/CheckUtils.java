@@ -185,14 +185,19 @@ public class CheckUtils {
 
   /**
    * Simple check whether the given expression is the "self" name expression.
-   * It does not check whether the name is actually referring to a method parameter!
+   *
+   * Carefully check the context when relying on this method!
+   * This implementation does not ensure that the name is actually referring to a method parameter or whether the surrounding method might
+   * be static, etc.
    */
   public static boolean isSelf(Expression expression) {
+    // TODO: Instead of performing a manual string comparison, maybe check the symbol instead for being a SelfSymbolImpl symbol
+    // (This might require exposing some more information about the symbol kind being a "Self"-symbol)
     return expression.is(NAME) && "self".equals(((Name) expression).name());
   }
 
   @CheckForNull
-  public static Symbol findSelfParameterSymbol(FunctionDef functionDef) {
+  public static Symbol findFirstParameterSymbol(FunctionDef functionDef) {
     ParameterList parameters = functionDef.parameters();
     if (parameters == null) {
       return null;
