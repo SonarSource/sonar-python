@@ -1,26 +1,26 @@
-<p>This rule raises an issue when string slicing is used in condition expressions instead of the <code>startsWith</code> or <code>endsWith</code>
+<p>This rule raises an issue when string slicing is used in condition expressions instead of the <code>startswith</code> or <code>endswith</code>
 methods.</p>
 <h2>Why is this an issue?</h2>
-<p>Using the <code>startsWith</code> and <code>endsWith</code> methods in Python instead of string slicing offers several advantages:</p>
+<p>Using the <code>startswith</code> and <code>endswith</code> methods in Python instead of string slicing offers several advantages:</p>
 <ol>
-  <li> <strong>Readability and Intent:</strong> Using <code>startsWith</code> and <code>endsWith</code> methods provides code that is more readable
+  <li> <strong>Readability and Intent:</strong> Using <code>startswith</code> and <code>endswith</code> methods provides code that is more readable
   and self-explanatory. It clearly communicates your intention to check if a string starts or ends with a specific pattern. This makes the code more
   maintainable and easier to understand for other developers. </li>
-  <li> <strong>Flexibility:</strong> The <code>startsWith</code> and <code>endsWith</code> methods allow you to check for patterns of varying lengths.
+  <li> <strong>Flexibility:</strong> The <code>startswith</code> and <code>endswith</code> methods allow you to check for patterns of varying lengths.
   With string slicing, you would need to specify the exact length of the substring to compare. However, with the methods, you can pass in a pattern of
   any length, making your code more flexible and adaptable. </li>
   <li> <strong>Error Handling:</strong> The methods handle edge cases automatically. If you pass a substring length that exceeds the length of the
   original string, slicing would raise an <code>IndexError</code> exception. On the other hand, the methods gracefully handle such cases and return
   <code>False</code>, avoiding any potential errors. </li>
-  <li> <strong>Performance Optimization:</strong> In some cases, using <code>startsWith</code> and <code>endsWith</code> methods can provide better
+  <li> <strong>Performance Optimization:</strong> In some cases, using <code>startswith</code> and <code>endswith</code> methods can provide better
   performance. These methods are optimized and implemented in C, which can make them faster than manually slicing the string in Python. Although the
   performance gain might be negligible for small strings, it can be significant when working with large strings or processing them in a loop. </li>
 </ol>
-<p>Overall, using <code>startsWith</code> and <code>endsWith</code> methods provides a cleaner, more readable, and error-resistant approach for
+<p>Overall, using <code>startswith</code> and <code>endswith</code> methods provides a cleaner, more readable, and error-resistant approach for
 checking if a string starts or ends with a specific pattern. It promotes code clarity, flexibility, and can potentially improve performance. This is
 also recommended by the <a href="https://peps.python.org/pep-0008/">PEP8</a> style guide.</p>
 <h2>How to fix it</h2>
-<p>Use <code>startsWith</code> and <code>endsWith</code> methods instead of string slicing in condition expressions.</p>
+<p>Use <code>startswith</code> and <code>endswith</code> methods instead of string slicing in condition expressions.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -36,7 +36,7 @@ if message[-6:] == "world!":
 <pre data-diff-id="1" data-diff-type="compliant">
 message = "Hello, world!"
 
-if message.startsWith("Hello"):
+if message.startswith("Hello"):
     ...
 
 if message.endswith("world!"):

@@ -1,6 +1,6 @@
 <h2>Why is this an issue?</h2>
 <p>Storing a value inside a collection at a given key or index and then unconditionally overwriting it without reading the initial value is a case of
-"dead store".</p>
+a "dead store".</p>
 <pre>
 def swap(mylist, index1, index2):
     tmp = mylist[index2]
@@ -15,5 +15,6 @@ mymap = {'a': {}}
 mymap['a']['b'] = 42
 mymap['a']['b'] = 42  # Noncompliant
 </pre>
-<p>At best it is redundant and will confuse the reader, most often it is an error and not what the developer intended to do.</p>
+<p>This practice is redundant and will cause confusion for the reader. More importantly, it is often an error and not what the developer intended to
+do.</p>
 
