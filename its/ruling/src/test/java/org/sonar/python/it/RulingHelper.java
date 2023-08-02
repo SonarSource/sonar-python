@@ -92,6 +92,7 @@ public class RulingHelper {
   static List<String> bugRuleKeys() {
     return Arrays.asList(
       "PreIncrementDecrement",
+      "S935",
       "S1045",
       "S1143",
       "S1226",
@@ -143,7 +144,6 @@ public class RulingHelper {
       "S6323",
       "S6328",
       "S6468",
-      "S6658",
       "S6662",
       "S905",
       "S930");

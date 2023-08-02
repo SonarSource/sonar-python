@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
-@Rule(key = "S6658")
+@Rule(key = "S935")
 public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
   /**
    * Stores the return types expected for specific method names as specified here:
