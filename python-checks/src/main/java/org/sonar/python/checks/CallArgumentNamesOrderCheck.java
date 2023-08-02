@@ -19,13 +19,65 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S5686")
 public class CallArgumentNamesOrderCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> checkCallExpression(ctx, (CallExpression) ctx.syntaxNode()));
+  }
 
+  private static void checkCallExpression(SubscriptionContext ctx, CallExpression callExpr) {
+    var parameters = functionParametersFromCallExpression(callExpr);
+    if (parameters == null) {
+      return;
+    }
+    // TODO
+  }
+
+  @CheckForNull
+  private static List<AnyParameter> functionParametersFromCallExpression(CallExpression callExpr) {
+    var calleeSymbol = callExpr.calleeSymbol();
+    if (calleeSymbol == null) {
+      return null;
+    }
+
+    if (!calleeSymbol.is(Symbol.Kind.FUNCTION)) {
+      return null;
+    }
+
+    var usages = calleeSymbol.usages().stream().filter(Usage::isBindingUsage).limit(2).collect(Collectors.toUnmodifiableList());
+    if (usages.size() != 1) {
+      return null;
+    }
+
+    var definingUsage = usages.get(0);
+    if (definingUsage.kind() != Usage.Kind.FUNC_DECLARATION) {
+      return null;
+    }
+
+    var functionDefinition = definingUsage.tree().parent();
+    if (!functionDefinition.is(Tree.Kind.FUNCDEF)) {
+      return null;
+    }
+
+    var parameterList = ((FunctionDef) functionDefinition).parameters();
+    if (parameterList == null) {
+      return null;
+    }
+
+    return parameterList.all();
   }
 }
