@@ -6,7 +6,7 @@ function is called on an object. The <code>bool()</code> function returns <code>
 object.</p>
 <p>The Python interpreter will call these methods when performing the operation they’re associated with. Each special method expects a specific return
 type. Calls to a special method will throw a <code>TypeError</code> if its return type is incorrect.</p>
-<p>An issue will be raised when one of the following method doesn’t return the indicated type:</p>
+<p>An issue will be raised when one of the following methods doesn’t return the indicated type:</p>
 <ul>
   <li> <code>__bool__</code> method should return bool </li>
   <li> <code>__index__</code> method should return integer </li>
@@ -42,6 +42,9 @@ print(bool(obj1))
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Python Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a> </li>
+  <li> Python Data Model Documentation - <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Special method names</a>
+  </li>
+  <li> Python Object Serialization Documentation - <a href="https://docs.python.org/3/library/pickle.html#pickling-class-instances">Pickling Class
+  Instances</a> </li>
 </ul>
 
