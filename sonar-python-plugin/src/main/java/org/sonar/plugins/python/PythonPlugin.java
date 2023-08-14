@@ -25,8 +25,8 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -43,7 +43,7 @@ import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 public class PythonPlugin implements Plugin {
 
   private static final String PYTHON_CATEGORY = "Python";
-  private static final Logger LOG = Loggers.get(PythonPlugin.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonPlugin.class);
 
   // Subcategories
   private static final String GENERAL = "General";

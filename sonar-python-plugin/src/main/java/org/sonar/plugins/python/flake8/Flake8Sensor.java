@@ -25,15 +25,15 @@ import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.TextReportReader;
 import org.sonar.plugins.python.TextReportReader.Issue;
 
 public class Flake8Sensor extends ExternalIssuesSensor {
 
-  private static final Logger LOG = Loggers.get(Flake8Sensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Flake8Sensor.class);
 
   public static final String LINTER_NAME = "Flake8";
   public static final String LINTER_KEY = "flake8";

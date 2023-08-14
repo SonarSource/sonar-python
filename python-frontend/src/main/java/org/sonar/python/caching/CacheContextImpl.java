@@ -22,15 +22,15 @@ package org.sonar.python.caching;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
 public class CacheContextImpl implements CacheContext {
 
-  private static final Logger LOG = Loggers.get(CacheContextImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CacheContextImpl.class);
   private static final Version MINIMUM_RUNTIME_VERSION = Version.create(9, 7);
 
   private final boolean isCacheEnabled;

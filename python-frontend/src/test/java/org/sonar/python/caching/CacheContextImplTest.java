@@ -26,8 +26,8 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.slf4j.event.Level;
 import org.sonar.plugins.python.api.caching.CacheContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,7 +84,7 @@ public class CacheContextImplTest {
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains(EXPECTED_SONAR_MODULE_LOG);
+    assertThat(logTester.logs(Level.INFO)).contains(EXPECTED_SONAR_MODULE_LOG);
   }
 
   @Test
@@ -96,7 +96,7 @@ public class CacheContextImplTest {
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain(EXPECTED_SONAR_MODULE_LOG);
+    assertThat(logTester.logs(Level.INFO)).doesNotContain(EXPECTED_SONAR_MODULE_LOG);
   }
 
   @Test

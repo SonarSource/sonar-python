@@ -32,8 +32,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -44,7 +44,7 @@ import static org.sonar.python.checks.cdk.CdkPredicate.isWildcard;
 @Rule(key = "S6304")
 public class ResourceAccessPolicyCheck extends AbstractIamPolicyStatementCheck {
 
-  private static final Logger LOG = Loggers.get(ResourceAccessPolicyCheck.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ResourceAccessPolicyCheck.class);
   private static final String MESSAGE = "Make sure granting access to all resources is safe here.";
   private static final String SECONDARY_MESSAGE = "Related effect";
   // visible for testing

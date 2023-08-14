@@ -39,7 +39,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
@@ -226,8 +226,8 @@ public class PythonCoverageSensorTest {
     String currentFileSeparator = File.separator;
 
     // no error expected REPORT_PATH_KEY is ignored.
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN))
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.WARN))
       .contains("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
 
@@ -241,7 +241,7 @@ public class PythonCoverageSensorTest {
       currentFileSeparator,
       currentFileSeparator,
       currentFileSeparator);
-    assertThat(logTester.logs(LoggerLevel.ERROR)).containsExactly(
+    assertThat(logTester.logs(Level.ERROR)).containsExactly(
       expectedLogMessage,
       "Cannot resolve 2 file paths, ignoring coverage measures for those files");
   }
@@ -306,7 +306,7 @@ public class PythonCoverageSensorTest {
     coverageSensor.execute(context);
     File file = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
     String message = "Invalid directory path in 'source' element: " + file.getPath();
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains(message);
+    assertThat(logTester.logs(Level.WARN)).contains(message);
     verify(analysisWarnings, times(1)).addUnique("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message);
   }
 
@@ -315,7 +315,7 @@ public class PythonCoverageSensorTest {
     settings.clear();
     PythonCoverageSensor sensor = new PythonCoverageSensor(analysisWarnings);
     sensor.execute(context);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("No report was found for sonar.python.coverage.reportPaths using default pattern coverage-reports/*coverage-*.xml");
+    assertThat(logTester.logs(Level.DEBUG)).contains("No report was found for sonar.python.coverage.reportPaths using default pattern coverage-reports/*coverage-*.xml");
   }
 
   @Test

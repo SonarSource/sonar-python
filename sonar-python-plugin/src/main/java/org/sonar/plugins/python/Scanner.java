@@ -25,12 +25,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.analyzer.commons.ProgressReport;
 
 public abstract class Scanner {
-  private static final Logger LOG = Loggers.get(Scanner.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Scanner.class);
   private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
   protected final SensorContext context;
 

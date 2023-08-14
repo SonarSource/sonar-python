@@ -39,6 +39,9 @@ import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
@@ -68,11 +71,8 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.LoggerLevel;
-import org.sonar.api.utils.log.Loggers;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -159,7 +159,7 @@ public class PythonSensorTest {
     tags = {"bug"})
   public static class MyCustomRule implements PythonCheck, EndOfAnalysis {
 
-    private static final Logger LOG = Loggers.get(MyCustomRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MyCustomRule.class);
 
     @RuleProperty(
       key = "customParam",
@@ -210,7 +210,7 @@ public class PythonSensorTest {
   private final AnalysisWarningsWrapper analysisWarning = mock(AnalysisWarningsWrapper.class);
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Before
   public void init() throws IOException {
@@ -306,7 +306,7 @@ public class PythonSensorTest {
     assertThat(issue.quickFixes).isEmpty();
     assertThat(issue.getSaved()).isTrue();
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
+    assertThat(logTester.logs(Level.WARN)).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
   }
 
   @Test
@@ -387,9 +387,9 @@ public class PythonSensorTest {
     }
 
     assertThat(checkedIssues).isEqualTo(3);
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting global symbols computation");
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Starting rules execution");
-    assertThat(logTester.logs(LoggerLevel.INFO).stream().filter(line -> line.equals("1 source file to be analyzed")).count()).isEqualTo(2);
+    assertThat(logTester.logs(Level.INFO)).contains("Starting global symbols computation");
+    assertThat(logTester.logs(Level.INFO)).contains("Starting rules execution");
+    assertThat(logTester.logs(Level.INFO).stream().filter(line -> line.equals("1 source file to be analyzed")).count()).isEqualTo(2);
 
     assertThat(PythonScanner.getWorkingDirectory(context)).isEqualTo(workDir.toFile());
   }
@@ -461,7 +461,7 @@ public class PythonSensorTest {
       .build();
     sensor().execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly("End of analysis called!");
+    assertThat(logTester.logs(Level.TRACE)).containsExactly("End of analysis called!");
   }
 
   @Test
@@ -477,8 +477,8 @@ public class PythonSensorTest {
     PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
     sensor(CUSTOM_RULES, pythonIndexer, analysisWarning).execute(context);
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
   }
 
   @Test
@@ -605,7 +605,7 @@ public class PythonSensorTest {
     activeRules = new ActiveRulesBuilder().build();
 
     sensor().execute(context);
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
+    assertThat(logTester.logs(Level.WARN)).contains(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(1)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
 
@@ -618,7 +618,7 @@ public class PythonSensorTest {
     context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
     sensor().execute(context);
     assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
-    assertThat(logTester.logs(LoggerLevel.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
+    assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }
 
@@ -661,7 +661,7 @@ public class PythonSensorTest {
     inputFile("main.py");
     sensor().execute(context);
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).noneMatch(s -> s.matches(".*performance measures.*"));
+    assertThat(logTester.logs(Level.INFO)).noneMatch(s -> s.matches(".*performance measures.*"));
     Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
     assertThat(defaultPerformanceFile).doesNotExist();
   }
@@ -674,7 +674,7 @@ public class PythonSensorTest {
     inputFile("main.py");
     sensor().execute(context);
     Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
-    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    assertThat(logTester.logs(Level.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
     assertThat(defaultPerformanceFile).exists();
     assertThat(new String(Files.readAllBytes(defaultPerformanceFile), UTF_8)).contains("\"PythonSensor\"");
   }
@@ -690,7 +690,7 @@ public class PythonSensorTest {
 
     inputFile("main.py");
     sensor().execute(context);
-    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    assertThat(logTester.logs(Level.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
     Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
     assertThat(defaultPerformanceFile).doesNotExist();
     assertThat(customPerformanceFile).exists();
@@ -707,7 +707,7 @@ public class PythonSensorTest {
 
     inputFile("main.py");
     sensor().execute(context);
-    assertThat(logTester.logs(LoggerLevel.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
+    assertThat(logTester.logs(Level.INFO)).anyMatch(s -> s.matches(".*performance measures.*"));
     Path defaultPerformanceFile = workDir.resolve("sonar-python-performance-measure.json");
     assertThat(defaultPerformanceFile).exists();
     assertThat(new String(Files.readAllBytes(defaultPerformanceFile), UTF_8)).contains("\"PythonSensor\"");
@@ -748,7 +748,7 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
   }
 
@@ -805,7 +805,7 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.");
   }
 
@@ -837,7 +837,7 @@ public class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(context.allIssues()).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 2 files. These files were not parsed.");
   }
 
@@ -925,7 +925,7 @@ public class PythonSensorTest {
     context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
     sensor().execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN))
+    assertThat(logTester.logs(Level.WARN))
       .contains("Could not write CPD tokens to cache (IllegalArgumentException: Same key cannot be written to multiple times (python:cpd:data:moduleKey:pass.py))");
   }
 
@@ -1081,7 +1081,7 @@ public class PythonSensorTest {
 
     sensor().execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN))
+    assertThat(logTester.logs(Level.WARN))
       .anyMatch(line -> line.startsWith("Failed to deserialize CPD tokens"));
 
     // Verify the written CPD tokens

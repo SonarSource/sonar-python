@@ -45,8 +45,8 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -72,7 +72,7 @@ import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
 public class PythonScanner extends Scanner {
 
-  private static final Logger LOG = Loggers.get(PythonScanner.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
 
   private final PythonParser parser;
   private final PythonChecks checks;

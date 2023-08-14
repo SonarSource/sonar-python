@@ -20,12 +20,11 @@
 package org.sonar.plugins.python.api;
 
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
@@ -99,7 +98,7 @@ public class PythonVersionUtils {
   );
   private static final Version MIN_SUPPORTED_VERSION = V_36;
   private static final Version MAX_SUPPORTED_VERSION = V_311;
-  private static final Logger LOG = Loggers.get(PythonVersionUtils.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
   private PythonVersionUtils() {

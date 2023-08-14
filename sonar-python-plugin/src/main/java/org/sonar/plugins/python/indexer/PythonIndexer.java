@@ -27,8 +27,8 @@ import java.util.Map;
 import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -42,7 +42,7 @@ import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
 public abstract class PythonIndexer {
 
-  private static final Logger LOG = Loggers.get(PythonIndexer.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonIndexer.class);
 
   protected String projectBaseDirAbsolutePath;
 

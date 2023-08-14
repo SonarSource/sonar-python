@@ -44,7 +44,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -162,7 +162,7 @@ public class MypySensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(UNKNOWN_FILE_REPORT);
     assertThat(externalIssues).hasSize(5);
 
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
       .isEqualTo("Failed to resolve 1 file path(s) in Mypy report. No issues imported related to file(s): mypy/unknown.py");
   }
 
@@ -177,7 +177,7 @@ public class MypySensorTest {
   public void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("invalid-path.txt");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.txt' can't be read.");
   }
@@ -193,7 +193,7 @@ public class MypySensorTest {
   public void invalid_mypy_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("invalid_format.txt");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.DEBUG))).isEqualTo("Cannot parse the line: this is not a mypy output");
+    assertThat(onlyOneLogElement(logTester.logs(Level.DEBUG))).isEqualTo("Cannot parse the line: this is not a mypy output");
   }
 
   private static void assertIssue(ExternalIssue issue, String key, String message, int startLine, int startColumn, int endLine, int endColumn) {
@@ -255,8 +255,8 @@ public class MypySensorTest {
   }
 
   public static void assertNoErrorWarnDebugLogs(LogTester logTester) {
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 }

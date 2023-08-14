@@ -34,14 +34,14 @@ import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.parser.StaxParser;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 public class PythonXUnitSensor extends PythonReportSensor {
-  private static final Logger LOG = Loggers.get(PythonXUnitSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";

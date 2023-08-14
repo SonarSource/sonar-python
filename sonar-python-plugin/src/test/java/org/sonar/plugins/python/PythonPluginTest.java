@@ -21,14 +21,14 @@ package org.sonar.plugins.python;
 
 import java.util.List;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
 public class PythonPluginTest {
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
   public void testGetExtensions() {
@@ -56,7 +56,7 @@ public class PythonPluginTest {
     PythonPlugin.SonarLintPluginAPIManager sonarLintPluginAPIManager = new PythonPlugin.SonarLintPluginAPIManager();
     Plugin.Context context = mock(Plugin.Context.class);
     sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, sonarLintPluginAPIVersion);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Error while trying to inject SonarLintPythonIndexer");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Error while trying to inject SonarLintPythonIndexer");
   }
 
   private static List extensions(SonarRuntime runtime) {

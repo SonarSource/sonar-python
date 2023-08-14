@@ -41,9 +41,9 @@ import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,7 +61,7 @@ public class PylintSensorTest {
   private static PylintSensor pylintSensor = new PylintSensor();
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
   public void test_descriptor() {
@@ -163,7 +163,7 @@ public class PylintSensorTest {
     assertThat(thirdPrimaryLoc.message()).isEqualTo("Missing function docstring");
 
     assertNoErrorWarnLogs(logTester);
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.DEBUG)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.DEBUG)))
       .isEqualTo("Cannot parse the line: ************* Module src.prod");
   }
 
@@ -196,7 +196,7 @@ public class PylintSensorTest {
   public void no_issues_unknown_files() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_report_unknown_files.txt", false);
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN))).hasToString("Failed to resolve 1 file path(s) in Pylint report. " +
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN))).hasToString("Failed to resolve 1 file path(s) in Pylint report. " +
       "No issues imported related to file(s): pylint/unknown_file.py");
   }
 
@@ -204,7 +204,7 @@ public class PylintSensorTest {
   public void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt", false);
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.txt' can't be read.");
   }
@@ -260,9 +260,9 @@ public class PylintSensorTest {
     return elements.get(0);
   }
 
-  public static void assertNoErrorWarnLogs(LogTester logTester) {
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+  public static void assertNoErrorWarnLogs(LogTesterJUnit5 logTester) {
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
 }

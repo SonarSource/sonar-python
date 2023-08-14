@@ -26,8 +26,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.python.checks.CheckList;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
@@ -35,7 +35,7 @@ import static org.sonar.plugins.python.PythonRuleRepository.RESOURCE_FOLDER;
 
 public class PythonProfile implements BuiltInQualityProfilesDefinition {
 
-  private static final Logger LOG = Loggers.get(PythonProfile.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonProfile.class);
 
   static final String PROFILE_NAME = "Sonar way";
   static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";

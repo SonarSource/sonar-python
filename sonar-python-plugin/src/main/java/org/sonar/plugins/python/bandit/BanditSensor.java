@@ -33,8 +33,8 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.bandit.BanditJsonReportReader.Issue;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
@@ -43,7 +43,7 @@ import static org.apache.commons.lang.StringUtils.isEmpty;
 
 public class BanditSensor extends ExternalIssuesSensor {
 
-  private static final Logger LOG = Loggers.get(BanditSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(BanditSensor.class);
 
   public static final String LINTER_NAME = "Bandit";
   public static final String LINTER_KEY = "bandit";

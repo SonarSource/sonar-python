@@ -32,8 +32,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -88,7 +88,7 @@ public class TypeShed {
     BUILTINS_TO_DISAMBIGUATE.addAll(BuiltinSymbols.EXCEPTIONS);
   }
 
-  private static final Logger LOG = Loggers.get(TypeShed.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TypeShed.class);
   private static Set<String> supportedPythonVersions;
 
   private TypeShed() {

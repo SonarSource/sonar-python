@@ -31,18 +31,18 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.python.cfg.ControlFlowGraphBuilder;
 
 public class ControlFlowGraph {
 
-  private static final Logger LOG = Loggers.get(ControlFlowGraph.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ControlFlowGraph.class);
 
   private final Set<CfgBlock> blocks;
   private final CfgBlock start;

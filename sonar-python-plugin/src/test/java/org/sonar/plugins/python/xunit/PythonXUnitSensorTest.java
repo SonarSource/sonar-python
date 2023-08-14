@@ -23,6 +23,7 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -32,8 +33,7 @@ import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +55,7 @@ public class PythonXUnitSensorTest {
   private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Before
   public void setUp() {
@@ -116,7 +116,7 @@ public class PythonXUnitSensorTest {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
     sensor.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/invalid-time-xunit-report.xml', " +
+    assertThat(logTester.logs(Level.WARN)).contains("Cannot read report 'xunit-reports/invalid-time-xunit-report.xml', " +
       "the following exception occurred: java.text.ParseException: Unparseable number: \"brrrr\"");
     verify(analysisWarnings, times(1))
       .addUnique(eq("An error occurred while trying to import XUnit report(s): 'xunit-reports/invalid-time-xunit-report.xml'"));
@@ -185,7 +185,7 @@ public class PythonXUnitSensorTest {
   public void missingAttributes() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/missing-attribute-xunit-report.xml");
     sensor.execute(context);
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Cannot read report 'xunit-reports/missing-attribute-xunit-report.xml', the following exception occurred: Missing attribute 'time' at line 3");
+    assertThat(logTester.logs(Level.WARN)).contains("Cannot read report 'xunit-reports/missing-attribute-xunit-report.xml', the following exception occurred: Missing attribute 'time' at line 3");
   }
   private Integer moduleMeasure(Metric<Integer> metric) {
     return measure(context.module(), metric);

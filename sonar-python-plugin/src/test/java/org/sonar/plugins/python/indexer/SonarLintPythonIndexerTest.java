@@ -36,7 +36,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -154,7 +154,7 @@ public class SonarLintPythonIndexerTest {
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("nonexistent")).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to load file \"nonexistent.py\" (CREATED) to the project symbol table");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Failed to load file \"nonexistent.py\" (CREATED) to the project symbol table");
   }
 
   @Test
@@ -185,7 +185,7 @@ public class SonarLintPythonIndexerTest {
     } catch (RecognitionException exception) {
       fail("Non Python files should not be parsed.");
     }
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("non_python")).isNull();
   }
 

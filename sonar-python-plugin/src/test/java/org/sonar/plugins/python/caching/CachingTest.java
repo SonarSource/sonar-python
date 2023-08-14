@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.python.caching.CacheContextImpl;
@@ -127,7 +127,7 @@ public class CachingTest {
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), pythonReadCache);
     Caching caching = new Caching(cacheContext, CACHE_VERSION);
     assertThat(caching.readProjectLevelSymbolTableEntry("mod")).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Unable to read data for key: \"python:descriptors:mod\"");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Unable to read data for key: \"python:descriptors:mod\"");
   }
 
   @Test
@@ -186,6 +186,6 @@ public class CachingTest {
     String module = "mod";
     readCache.put(PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX + "mod", new byte[] {42});
     assertThat(caching.readProjectLevelSymbolTableEntry(module)).isNull();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to deserialize project level symbol table entry for module: \"mod\"");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Failed to deserialize project level symbol table entry for module: \"mod\"");
   }
 }
