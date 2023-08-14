@@ -1,0 +1,162 @@
+[
+  {
+    "code": "S107",
+    "end_location": {
+      "column": 24,
+      "row": 5
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 16,
+      "row": 5
+    },
+    "message": "Possible hardcoded password assigned to function default: \"secret\"",
+    "noqa_row": 5,
+    "url": "https://beta.ruff.rs/docs/rules/hardcoded-password-default"
+  },
+  {
+    "code": "S605",
+    "end_location": {
+      "column": 43,
+      "row": 6
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 15,
+      "row": 6
+    },
+    "message": "Starting a process with a shell, possible injection detected",
+    "noqa_row": 6,
+    "url": null
+  },
+  {
+    "code": "UP031",
+    "end_location": {
+      "column": 96,
+      "row": 7
+    },
+    "filename": "ruff/file1.py",
+    "fix": {
+      "applicability": "Suggested",
+      "edits": [
+        {
+          "content": "\"{}:{}:{}\".format(secret, str(random.random()), str( Util.number.long_to_bytes(42)))",
+          "end_location": {
+            "column": 96,
+            "row": 7
+          },
+          "location": {
+            "column": 16,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Replace with format specifiers"
+    },
+    "location": {
+      "column": 16,
+      "row": 7
+    },
+    "message": "Use format specifiers instead of percent format",
+    "noqa_row": 7,
+    "url": "https://beta.ruff.rs/docs/rules/printf-string-formatting"
+  },
+  {
+    "code": "F821",
+    "end_location": {
+      "column": 48,
+      "row": 7
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 42,
+      "row": 7
+    },
+    "message": "Undefined name `random`",
+    "noqa_row": 7,
+    "url": "https://beta.ruff.rs/docs/rules/undefined-name"
+  },
+  {
+    "code": "E501",
+    "end_location": {
+      "column": 109,
+      "row": 7
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 89,
+      "row": 7
+    },
+    "message": "Line too long (108 > 88 characters)",
+    "noqa_row": 7,
+    "url": "https://beta.ruff.rs/docs/rules/line-too-long"
+  },
+  {
+    "code": "T201",
+    "end_location": {
+      "column": 30,
+      "row": 15
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 25,
+      "row": 15
+    },
+    "message": "`print` found",
+    "noqa_row": 15,
+    "url": "https://beta.ruff.rs/docs/rules/print"
+  },
+  {
+    "code": "T201",
+    "end_location": {
+      "column": 14,
+      "row": 20
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 20
+    },
+    "message": "`print` found",
+    "noqa_row": 20,
+    "url": "https://beta.ruff.rs/docs/rules/print"
+  },
+  {
+    "code": "E722",
+    "end_location": {
+      "column": 11,
+      "row": 21
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 21
+    },
+    "message": "Do not use bare `except`",
+    "noqa_row": 21,
+    "url": "https://beta.ruff.rs/docs/rules/bare-except"
+  },
+  {
+    "code": "S110",
+    "end_location": {
+      "column": 13,
+      "row": 22
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 21
+    },
+    "message": "`try`-`except`-`pass` detected, consider logging the exception",
+    "noqa_row": 21,
+    "url": "https://beta.ruff.rs/docs/rules/try-except-pass"
+  }
+]
