@@ -25,8 +25,8 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
 import java.util.Set;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -42,7 +42,7 @@ public class PythonLexerTest {
 
   private static TestLexer lexer;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     lexer = new TestLexer();
   }

@@ -24,7 +24,7 @@ import com.sonar.sslr.api.Token;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonTokenType;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -52,6 +52,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
@@ -189,12 +190,12 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactly("b.B");
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void getClassSymbolFromDef_illegalSymbol() {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols("class A:\n  def foo(): pass");
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
 
-    TreeUtils.getClassSymbolFromDef(classDef);
+    assertThatThrownBy(() -> TreeUtils.getClassSymbolFromDef(classDef)).isInstanceOf(IllegalStateException.class);
   }
 
   @Test
@@ -215,12 +216,12 @@ public class TreeUtilsTest {
     assertThat(TreeUtils.getFunctionSymbolFromDef(functionDef)).isNull();
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void getFunctionSymbolFromDef_illegalSymbol() {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
 
-    TreeUtils.getFunctionSymbolFromDef(functionDef);
+    assertThatThrownBy(() -> TreeUtils.getFunctionSymbolFromDef(functionDef)).isInstanceOf(IllegalStateException.class);
   }
 
   @Test

@@ -24,7 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 
 import static org.assertj.core.api.Assertions.assertThat;

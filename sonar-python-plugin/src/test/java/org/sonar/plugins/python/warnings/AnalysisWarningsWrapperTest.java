@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.warnings;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.notifications.AnalysisWarnings;
 
 import static org.mockito.ArgumentMatchers.anyString;

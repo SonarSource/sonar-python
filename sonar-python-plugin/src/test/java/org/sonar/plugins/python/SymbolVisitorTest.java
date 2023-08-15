@@ -22,8 +22,8 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.DefaultTextPointer;
@@ -31,8 +31,8 @@ import org.sonar.api.batch.fs.internal.DefaultTextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,7 +41,7 @@ public class SymbolVisitorTest {
   private static SensorContextTester context;
   private static String componentKey;
 
-  @BeforeClass
+  @BeforeAll
   public static void scanFile() {
     File file = new File("src/test/resources/org/sonar/plugins/python/sensor", "/symbolVisitor.py");
     DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())

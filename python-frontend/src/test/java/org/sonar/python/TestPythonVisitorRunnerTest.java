@@ -23,18 +23,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TestPythonVisitorRunnerTest {
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void unknownFile() {
-    TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {});
+    assertThatThrownBy(() -> TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {}))
+      .isInstanceOf(IllegalStateException.class);
   }
 
   @Test

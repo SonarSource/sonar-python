@@ -23,7 +23,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.Collection;
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

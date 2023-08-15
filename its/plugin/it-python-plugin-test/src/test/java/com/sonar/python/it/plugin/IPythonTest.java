@@ -32,11 +32,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.sonarlint.core.StandaloneSonarLintEngineImpl;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
@@ -56,16 +55,16 @@ import static org.assertj.core.api.Assertions.tuple;
 
 public class IPythonTest {
 
-  @ClassRule
-  public static final TemporaryFolder TEMP = new TemporaryFolder();
+  @TempDir
+  public static Path TEMP;
 
   private static StandaloneSonarLintEngine sonarlintEngine;
 
-  @BeforeClass
+  @BeforeAll
   public static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
       .addPlugin(Tests.PLUGIN_LOCATION.getFile().toPath())
-      .setSonarLintUserHome(TEMP.newFolder().toPath())
+      .setSonarLintUserHome(TEMP)
       .addEnabledLanguage(Language.IPYTHON)
       .setLogOutput((formattedMessage, level) -> {
         /* Don't pollute logs */ })
@@ -74,7 +73,7 @@ public class IPythonTest {
     sonarlintEngine = new StandaloneSonarLintEngineImpl(sonarLintConfig);
   }
 
-  @AfterClass
+  @AfterAll
   public static void stop() {
     sonarlintEngine.stop();
   }

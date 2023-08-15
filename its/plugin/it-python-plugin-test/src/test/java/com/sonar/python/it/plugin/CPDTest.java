@@ -20,12 +20,12 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import org.assertj.core.data.Offset;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,10 +43,10 @@ public class CPDTest {
   private static final String DUPLICATED_FILES = "duplicated_files";
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
-  @BeforeClass
+  @BeforeAll
   public static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");

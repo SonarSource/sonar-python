@@ -21,7 +21,7 @@ package org.sonar.plugins.python.parser;
 
 import javax.xml.stream.XMLStreamException;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 
 public class StaxParserTest {

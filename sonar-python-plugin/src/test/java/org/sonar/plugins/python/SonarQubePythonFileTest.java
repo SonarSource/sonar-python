@@ -20,22 +20,18 @@
 package org.sonar.plugins.python;
 
 import java.io.FileNotFoundException;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.python.api.PythonFile;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SonarQubePythonFileTest {
 
   private InputFile inputFile = mock(InputFile.class, "file1.py");
-
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
 
   @Test
   public void known_file() throws Exception {
@@ -51,8 +47,7 @@ public class SonarQubePythonFileTest {
   public void unknown_file() throws Exception {
     when(inputFile.contents()).thenThrow(new FileNotFoundException());
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-    thrown.expect(IllegalStateException.class);
-    pythonFile.content();
+    assertThatThrownBy(pythonFile::content).isInstanceOf(IllegalStateException.class);
   }
 
 }

@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;

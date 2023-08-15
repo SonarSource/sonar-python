@@ -20,7 +20,7 @@
 package org.sonar.python;
 
 import java.io.File;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.metrics.FileLinesVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;

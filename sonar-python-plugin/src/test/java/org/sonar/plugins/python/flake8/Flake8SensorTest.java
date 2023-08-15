@@ -27,8 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,9 +42,8 @@ import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,8 +60,8 @@ public class Flake8SensorTest {
 
   private static Flake8Sensor flake8Sensor = new Flake8Sensor();
 
-  @Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
   public void test_descriptor() {
@@ -238,7 +238,7 @@ public class Flake8SensorTest {
     return elements.get(0);
   }
 
-  public static void assertNoErrorWarnDebugLogs(LogTester logTester) {
+  public static void assertNoErrorWarnDebugLogs(LogTesterJUnit5 logTester) {
     assertThat(logTester.logs(Level.ERROR)).isEmpty();
     assertThat(logTester.logs(Level.WARN)).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();

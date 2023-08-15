@@ -23,8 +23,8 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
@@ -39,7 +39,7 @@ public class PythonHighlighterTest {
 
   private File file;
 
-  @Before
+  @BeforeEach
   public void scanFile() {
     String dir = "src/test/resources/org/sonar/plugins/python";
 

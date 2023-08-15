@@ -29,7 +29,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;

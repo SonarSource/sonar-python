@@ -22,8 +22,8 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
@@ -42,7 +42,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
@@ -69,9 +69,9 @@ public class IPynbSensorTest {
   private ActiveRules activeRules;
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @Before
+  @BeforeEach
   public void init() {
     context = SensorContextTester.create(baseDir);
   }

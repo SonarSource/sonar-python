@@ -21,7 +21,7 @@ package org.sonar.python.index;
 
 import java.util.Collections;
 import java.util.Set;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.SymbolImpl;

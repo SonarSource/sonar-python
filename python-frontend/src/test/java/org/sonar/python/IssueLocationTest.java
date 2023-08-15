@@ -20,7 +20,7 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.api.PythonPunctuator;

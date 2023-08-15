@@ -23,7 +23,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;

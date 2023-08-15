@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.types.InferredTypes;
 
 import static org.assertj.core.api.Assertions.assertThat;

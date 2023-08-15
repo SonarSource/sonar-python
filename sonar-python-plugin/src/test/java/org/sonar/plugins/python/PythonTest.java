@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 

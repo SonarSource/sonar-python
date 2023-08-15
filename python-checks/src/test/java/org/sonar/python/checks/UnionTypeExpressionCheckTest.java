@@ -21,7 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.EnumSet;
 import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;

@@ -20,7 +20,7 @@
 package org.sonar.python.index;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.tree.TreeUtils;
 

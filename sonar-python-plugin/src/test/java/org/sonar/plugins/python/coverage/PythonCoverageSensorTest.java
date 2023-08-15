@@ -27,10 +27,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.io.TempDir;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -38,13 +39,13 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -64,13 +65,13 @@ public class PythonCoverageSensorTest {
   private PythonCoverageSensor coverageSensor;
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
 
-  @Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @Rule
-  public TemporaryFolder tmpDir = new TemporaryFolder();
+  @TempDir
+  public Path tmpDir;
 
-  @Before
+  @BeforeEach
   public void init() {
     analysisWarnings = spy(AnalysisWarningsWrapper.class);
     coverageSensor = new PythonCoverageSensor(analysisWarnings);
@@ -280,16 +281,16 @@ public class PythonCoverageSensorTest {
     assertThat(context.coveredConditions(FILE4_KEY, 10)).isNull();
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void should_fail_on_invalid_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "invalid-coverage-result.xml");
-    coverageSensor.execute(context);
+    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void should_fail_on_unexpected_eof() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_eof_error.xml");
-    coverageSensor.execute(context);
+    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
   }
 
   @Test
@@ -327,7 +328,8 @@ public class PythonCoverageSensorTest {
   }
 
   private String createReportWithAbsolutePaths() throws Exception {
-    Path workDir = tmpDir.newFolder("python").toPath().toAbsolutePath();
+    Path workDir = tmpDir.toAbsolutePath().resolve("python");
+    Files.createDirectories(workDir);
 
     String absoluteSourcePath = new File(moduleBaseDir, "sources/file1.py").getAbsolutePath();
     Path report = new File(moduleBaseDir, "coverage_absolute_path.xml").toPath();

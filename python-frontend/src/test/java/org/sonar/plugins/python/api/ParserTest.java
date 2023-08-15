@@ -20,10 +20,11 @@
 package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.FileInput;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ParserTest {
 
@@ -38,9 +39,9 @@ public class ParserTest {
     assertThat(result.statements().statements()).hasSize(1);
   }
 
-  @Test(expected = RecognitionException.class)
+  @Test
   public void parsing_error() {
     Parser parser = new Parser();
-    parser.parse("foo(");
+    assertThatThrownBy(() -> parser.parse("foo(")).isInstanceOf(RecognitionException.class);
   }
 }

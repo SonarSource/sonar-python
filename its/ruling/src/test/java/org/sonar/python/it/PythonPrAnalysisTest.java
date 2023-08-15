@@ -19,57 +19,54 @@
  */
 package org.sonar.python.it;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.container.Edition;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getMeasure;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-@RunWith(Parameterized.class)
 public class PythonPrAnalysisTest {
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
 
   private static final String PR_ANALYSIS_PROJECT_KEY = "prAnalysis";
   private static final String INCREMENTAL_ANALYSIS_PROFILE = "incrementalPrAnalysis";
   private static final String PR_KEY = "1";
   private static final String PR_BRANCH_NAME = "incremental";
 
-  @Rule
-  public TemporaryFolder temporaryFolder = new TemporaryFolder();
+  @TempDir
+  public Path temporaryFolder;
 
-  private final String scenario;
-  private final int expectedTotalFiles;
-  private final int expectedRecomputed;
-  private final int expectedPartiallySkipped;
-  private final int expectedFullySkipped;
-  private final List<String> deletedFiles;
-  private final Integer expectedDuplicatedLines;
+  private String scenario;
+  private int expectedTotalFiles;
+  private int expectedRecomputed;
+  private int expectedPartiallySkipped;
+  private int expectedFullySkipped;
+  private List<String> deletedFiles;
+  private Integer expectedDuplicatedLines;
 
-  public PythonPrAnalysisTest(
+  public void init(
     String scenario,
     int expectedTotalFiles,
     int expectedRecomputed,
@@ -87,7 +84,7 @@ public class PythonPrAnalysisTest {
     this.expectedDuplicatedLines = expectedDuplication;
   }
 
-  @BeforeClass
+  @BeforeAll
   public static void prepare_quality_profile() throws IOException {
     ORCHESTRATOR.getServer().provisionProject(PR_ANALYSIS_PROJECT_KEY, PR_ANALYSIS_PROJECT_KEY);
 
@@ -97,23 +94,31 @@ public class PythonPrAnalysisTest {
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PR_ANALYSIS_PROJECT_KEY, "py", INCREMENTAL_ANALYSIS_PROFILE);
   }
 
-  @Parameters(name = "{index}: {0}")
-  public static Collection<Object[]> data() {
-    return List.of(new Object[][]{
-      // {<scenario>, <total files>, <recomputed>, <partially_skipped>, <fully_skipped>, <deleted>, <duplication on index.py>}
-      {"newFile", 10, 1, 9, 9, Collections.emptyList(), null},
-      {"changeInImportedModule", 9, 1, 7, 8, Collections.emptyList(), null},
-      {"changeInParent", 9, 1, 6, 8, Collections.emptyList(), null},
-      {"changeInPackageInit", 9, 1, 7, 8, Collections.emptyList(), null},
-      {"changeInRelativeImport", 9, 2, 4, 7, Collections.emptyList(), null},
-      {"deletedFile", 8, 0, 7, 8, List.of("submodule.py"), null},
-      {"duplication", 10, 1, 9, 9, Collections.emptyList(), 55}
-    });
+//  @Parameters(name = "{index}: {0}")
+  public static Stream<Arguments> data() {
+    return Stream.of(
+      Arguments.of("newFile", 10, 1, 9, 9, Collections.emptyList(), null),
+      Arguments.of("changeInImportedModule", 9, 1, 7, 8, Collections.emptyList(), null),
+      Arguments.of("changeInParent", 9, 1, 6, 8, Collections.emptyList(), null),
+      Arguments.of("changeInPackageInit", 9, 1, 7, 8, Collections.emptyList(), null),
+      Arguments.of("changeInRelativeImport", 9, 2, 4, 7, Collections.emptyList(), null),
+      Arguments.of("deletedFile", 8, 0, 7, 8, List.of("submodule.py"), null),
+      Arguments.of("duplication", 10, 1, 9, 9, Collections.emptyList(), 55)
+    );
   }
 
-  @Test
-  public void pr_analysis_logs() throws IOException {
-    File tempDirectory = temporaryFolder.newFolder();
+
+  @ParameterizedTest
+  @MethodSource("data")
+  public void pr_analysis_logs(String scenario,
+    int expectedTotalFiles,
+    int expectedRecomputed,
+    int expectedFullySkipped,
+    int expectedPartiallySkipped,
+    List<String> deletedFiles,
+    Integer expectedDuplication) throws IOException {
+    init(scenario, expectedTotalFiles, expectedRecomputed, expectedFullySkipped, expectedPartiallySkipped, deletedFiles, expectedDuplication);
+    File tempDirectory = temporaryFolder.toFile();
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
 
     // Analyze base commit
@@ -130,9 +135,17 @@ public class PythonPrAnalysisTest {
     assertMeasures();
   }
 
-  @Test
-  public void pr_analysis_issues() throws IOException {
-    File tempDirectory = temporaryFolder.newFolder();
+  @ParameterizedTest
+  @MethodSource("data")
+  public void pr_analysis_issues(String scenario,
+    int expectedTotalFiles,
+    int expectedRecomputed,
+    int expectedFullySkipped,
+    int expectedPartiallySkipped,
+    List<String> deletedFiles,
+    Integer expectedDuplication) throws IOException {
+    init(scenario, expectedTotalFiles, expectedRecomputed, expectedFullySkipped, expectedPartiallySkipped, deletedFiles, expectedDuplication);
+    File tempDirectory = temporaryFolder.toFile();
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
 
     // Analyze base commit

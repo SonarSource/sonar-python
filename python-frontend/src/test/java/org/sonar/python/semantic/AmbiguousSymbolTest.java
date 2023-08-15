@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 
@@ -122,21 +123,22 @@ public class AmbiguousSymbolTest {
     assertThat(x.kind()).isEqualTo(Symbol.Kind.OTHER);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void empty_ambiguous_symbol_creation() {
-    AmbiguousSymbolImpl.create(Collections.emptySet());
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(Collections.emptySet())).isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void singleton_ambiguous_symbol_creation() {
-    AmbiguousSymbolImpl.create(Collections.singleton(new SymbolImpl("foo", null)));
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(Collections.singleton(new SymbolImpl("foo", null))))
+      .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void ambiguous_symbol_creation_different_name_different_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod.foo");
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
-    AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)));
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)))).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test

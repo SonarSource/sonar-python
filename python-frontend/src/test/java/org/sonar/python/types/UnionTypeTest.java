@@ -22,7 +22,7 @@ package org.sonar.python.types;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;

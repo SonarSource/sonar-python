@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.python.api.quickfix;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;

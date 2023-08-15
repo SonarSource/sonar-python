@@ -19,7 +19,7 @@
  */
 package org.sonar.python.types;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;

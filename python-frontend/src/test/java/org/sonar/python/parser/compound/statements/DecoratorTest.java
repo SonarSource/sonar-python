@@ -19,10 +19,10 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.python.api.PythonGrammar;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
@@ -30,7 +30,7 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
 public class DecoratorTest extends RuleTest {
 
-  @Before
+  @BeforeEach
   public void init() {
     setRootRule(PythonGrammar.DECORATOR);
   }

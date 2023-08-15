@@ -20,7 +20,7 @@
 package org.sonar.python.metrics;
 
 import java.io.File;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.parser.PythonParser;

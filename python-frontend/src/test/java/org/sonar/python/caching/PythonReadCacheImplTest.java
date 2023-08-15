@@ -22,11 +22,11 @@ package org.sonar.python.caching;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.cache.ReadCache;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -34,8 +34,8 @@ import static org.mockito.Mockito.when;
 
 public class PythonReadCacheImplTest {
 
-  @Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
   public void read_bytes() {

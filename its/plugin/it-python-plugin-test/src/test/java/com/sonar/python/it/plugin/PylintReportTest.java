@@ -21,10 +21,10 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,8 +34,8 @@ public class PylintReportTest {
   private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {

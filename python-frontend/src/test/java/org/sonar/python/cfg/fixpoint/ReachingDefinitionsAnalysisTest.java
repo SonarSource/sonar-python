@@ -19,7 +19,7 @@
  */
 package org.sonar.python.cfg.fixpoint;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.Expression;

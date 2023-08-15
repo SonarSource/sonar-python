@@ -22,7 +22,7 @@ package org.sonar.plugins.python.api.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 import org.sonar.python.tree.PythonTreeMaker;

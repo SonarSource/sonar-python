@@ -20,9 +20,9 @@
 package org.sonar.plugins.python.xunit;
 
 import java.io.File;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -33,7 +33,7 @@ import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,11 +54,13 @@ public class PythonXUnitSensorTest {
   DefaultFileSystem fs;
   private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
 
-  @Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @Before
+  @BeforeEach
   public void setUp() {
+    settings = new MapSettings();
+    context = SensorContextTester.create(baseDir);
     settings.clear();
     fs = new DefaultFileSystem(baseDir);
     sensor = new PythonXUnitSensor(new ConfigurationBridge(settings), fs, analysisWarnings);

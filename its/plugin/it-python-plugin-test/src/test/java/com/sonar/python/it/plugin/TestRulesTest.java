@@ -20,12 +20,12 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.issues.SearchRequest;
 
@@ -35,14 +35,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestRulesTest {
 
-  @ClassRule
-  public static OrchestratorRule orchestrator = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;
   private static final String PROJECT_KEY = "test-rules";
   private static final String PROJECT_NAME = "Test Rules";
 
   private static SonarScanner BUILD;
 
-  @BeforeClass
+  @BeforeAll
   public static void prepare() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_NAME);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-test-rules-profile");

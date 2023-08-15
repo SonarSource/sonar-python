@@ -31,15 +31,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.caching.TestReadCache;
@@ -69,8 +70,8 @@ public class SonarQubePythonIndexerTest {
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;
 
-  @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   private InputFile file1;
   private InputFile file2;
@@ -80,7 +81,7 @@ public class SonarQubePythonIndexerTest {
   private CacheContextImpl cacheContext;
   private String cacheVersion;
 
-  @Before
+  @BeforeEach
   public void init() throws IOException {
     TypeShed.resetBuiltinSymbols();
     context = SensorContextTester.create(baseDir);

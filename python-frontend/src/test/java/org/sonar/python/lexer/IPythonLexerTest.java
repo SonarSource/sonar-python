@@ -22,19 +22,19 @@ package org.sonar.python.lexer;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 
 
 public class IPythonLexerTest {
   private static TestLexer lexer;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     lexer = new IPythonLexerTest.TestLexer();
   }

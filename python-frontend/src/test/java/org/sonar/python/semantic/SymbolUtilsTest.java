@@ -28,7 +28,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Objects;
 import javax.annotation.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;

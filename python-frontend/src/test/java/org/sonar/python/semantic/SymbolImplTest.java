@@ -22,7 +22,7 @@ package org.sonar.python.semantic;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.HasSymbol;
