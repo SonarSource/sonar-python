@@ -37,8 +37,8 @@ public class RuffRulesDefinitionTest {
     assertThat(repository).isNotNull();
     assertThat(repository.name()).isEqualTo("Ruff");
     assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.isExternal()).isEqualTo(true);
-    assertThat(repository.rules().size()).isEqualTo(679);
+    assertThat(repository.isExternal()).isTrue();
+    assertThat(repository.rules()).hasSize(679);
 
     RulesDefinition.Rule rule = repository.rule("F405");
     assertThat(rule).isNotNull();
