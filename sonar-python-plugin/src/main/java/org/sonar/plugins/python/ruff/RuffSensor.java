@@ -107,8 +107,11 @@ public class RuffSensor extends ExternalIssuesSensor {
       .message(issue.message)
       .on(inputFile);
 
-    if (issue.startLocationRow != null){
-      if(issue.startLocationCol != null && issue.endLocationRow != null && issue.endLocationCol != null) {
+    if (issue.startLocationRow != null ){
+      if( issue.startLocationCol != null && 
+          isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) && 
+          issue.endLocationRow != null && 
+          issue.endLocationCol != null) {
         primaryLocation.at(inputFile.newRange(issue.startLocationRow, issue.startLocationCol, issue.endLocationRow, issue.endLocationCol));
       }else {
         primaryLocation.at(inputFile.selectLine(issue.startLocationRow));
@@ -120,6 +123,9 @@ public class RuffSensor extends ExternalIssuesSensor {
     newExternalIssue.ruleId(issue.ruleKey).save();
   }
 
+  private static boolean isColInBounds(int lineNumber, int columnNumber,InputFile inputFile){
+    return columnNumber < inputFile.selectLine(lineNumber).end().lineOffset();
+  }
 
 
 }

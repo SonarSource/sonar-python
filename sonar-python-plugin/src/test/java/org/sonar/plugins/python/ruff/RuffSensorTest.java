@@ -90,7 +90,7 @@ public class RuffSensorTest {
     assertThat(externalIssues).hasSize(9);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo("external_ruff:S107");
+    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -105,7 +105,7 @@ public class RuffSensorTest {
     assertThat(firstTextRange.end().lineOffset()).isEqualTo(17);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_ruff:S605");
+    assertThat(second.ruleKey()).hasToString("external_ruff:S605");
     assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(second.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -119,7 +119,7 @@ public class RuffSensorTest {
     assertThat(secondTextRange.end().lineOffset()).isEqualTo(16);
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey().toString()).isEqualTo("external_ruff:UP031");
+    assertThat(third.ruleKey()).hasToString("external_ruff:UP031");
     assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(third.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation thirdPrimaryLoc = third.primaryLocation();
@@ -127,7 +127,7 @@ public class RuffSensorTest {
     assertThat(thirdPrimaryLoc.message()).isEqualTo("[*] Use format specifiers instead of percent format");
 
     ExternalIssue last = externalIssues.get(8);
-    assertThat(last.ruleKey().toString()).isEqualTo("external_ruff:S110");
+    assertThat(last.ruleKey()).hasToString("external_ruff:S110");
     assertThat(last.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(last.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation fourthPrimaryLoc = last.primaryLocation();
@@ -147,7 +147,7 @@ public class RuffSensorTest {
     assertThat(externalIssues).hasSize(9);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo("external_ruff:S107");
+    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -162,7 +162,7 @@ public class RuffSensorTest {
     assertThat(firstTextRange.end().lineOffset()).isEqualTo(23);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_ruff:S605");
+    assertThat(second.ruleKey()).hasToString("external_ruff:S605");
     assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(second.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -177,7 +177,7 @@ public class RuffSensorTest {
 
 
     ExternalIssue fourth = externalIssues.get(3);
-    assertThat(fourth.ruleKey().toString()).isEqualTo("external_ruff:F821");
+    assertThat(fourth.ruleKey()).hasToString("external_ruff:F821");
     assertThat(fourth.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(fourth.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation fourthPrimaryLoc = fourth.primaryLocation();
@@ -195,7 +195,7 @@ public class RuffSensorTest {
     assertThat(externalIssues).hasSize(9);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo("external_ruff:S107");
+    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -205,12 +205,12 @@ public class RuffSensorTest {
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(5);
-    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(firstTextRange.start().lineOffset()).isZero();
     assertThat(firstTextRange.end().line()).isEqualTo(5);
     assertThat(firstTextRange.end().lineOffset()).isEqualTo(25);
 
     ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey().toString()).isEqualTo("external_ruff:S605");
+    assertThat(second.ruleKey()).hasToString("external_ruff:S605");
     assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(second.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation secondPrimaryLoc = second.primaryLocation();
@@ -219,12 +219,12 @@ public class RuffSensorTest {
     TextRange secondTextRange = secondPrimaryLoc.textRange();
     assertThat(secondTextRange).isNotNull();
     assertThat(secondTextRange.start().line()).isEqualTo(6);
-    assertThat(secondTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(secondTextRange.start().lineOffset()).isZero();
     assertThat(secondTextRange.end().line()).isEqualTo(6);
     assertThat(secondTextRange.end().lineOffset()).isEqualTo(43);
 
     ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey().toString()).isEqualTo("external_ruff:UP031");
+    assertThat(third.ruleKey()).hasToString("external_ruff:UP031");
     assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(third.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation thirdPrimaryLoc = third.primaryLocation();
@@ -232,7 +232,7 @@ public class RuffSensorTest {
     assertThat(thirdPrimaryLoc.message()).isEqualTo("Use format specifiers instead of percent format");
 
     ExternalIssue last = externalIssues.get(8);
-    assertThat(last.ruleKey().toString()).isEqualTo("external_ruff:S110");
+    assertThat(last.ruleKey()).hasToString("external_ruff:S110");
     assertThat(last.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(last.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation fourthPrimaryLoc = last.primaryLocation();
@@ -241,6 +241,27 @@ public class RuffSensorTest {
 
     assertNoErrorWarnLogs(logTester);
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+  }
+
+  @Test
+  public void report_on_empty_file() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "report-on-empty-file.json");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey()).hasToString("external_ruff:D104");
+    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo("python-project:ruff/__init__.py");
+    assertThat(firstPrimaryLoc.message())
+      .isEqualTo("Missing docstring in public package");
+    TextRange firstTextRange = firstPrimaryLoc.textRange();
+    assertThat(firstTextRange).isNotNull();
+    assertThat(firstTextRange.start().line()).isEqualTo(1);
+    assertThat(firstTextRange.start().lineOffset()).isZero();
+    assertThat(firstTextRange.end().line()).isEqualTo(1);
+    assertThat(firstTextRange.end().lineOffset()).isZero();
   }
 
   @Test
@@ -312,7 +333,7 @@ public class RuffSensorTest {
     assertNoErrorWarnLogs(logTester);
 
     ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey().toString()).isEqualTo("external_ruff:S107");
+    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation firstPrimaryLoc = first.primaryLocation();
@@ -322,7 +343,7 @@ public class RuffSensorTest {
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(5);
-    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(firstTextRange.start().lineOffset()).isZero();
     assertThat(firstTextRange.end().line()).isEqualTo(5);
     assertThat(firstTextRange.end().lineOffset()).isEqualTo(25);
 
