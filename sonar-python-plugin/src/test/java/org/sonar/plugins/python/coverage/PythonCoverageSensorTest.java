@@ -38,7 +38,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -65,7 +65,7 @@ public class PythonCoverageSensorTest {
   private File moduleBaseDir = new File("src/test/resources/org/sonar/plugins/python/coverage-reports").getAbsoluteFile();
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Rule
   public TemporaryFolder tmpDir = new TemporaryFolder();

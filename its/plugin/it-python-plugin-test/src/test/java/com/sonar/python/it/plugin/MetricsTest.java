@@ -19,9 +19,9 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.BeforeClass;
@@ -65,7 +65,7 @@ public class MetricsTest {
   private static final Offset<Double> OFFSET = Offset.offset(0.01d);
 
   @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule orchestrator = Tests.ORCHESTRATOR;
 
   private static BuildResult buildResult;
 

@@ -19,9 +19,11 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
@@ -29,18 +31,19 @@ import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.batch.sensor.issue.fix.NewQuickFix;
+import org.sonar.api.batch.sensor.issue.fix.QuickFix;
+import org.sonar.api.issue.impact.SoftwareQuality;
 import org.sonar.api.rule.RuleKey;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.SensorQuickFix;
 import org.sonarsource.sonarlint.core.analysis.sonarapi.DefaultSonarLintIssue;
-import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
-import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
 // This class was copied from sonar-java
-public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
+public class MockSonarLintIssue implements NewIssue, Issue {
   private final DefaultSonarLintIssue parent = new DefaultSonarLintIssue(null, null, null);
   private final SensorContextTester context;
-  public final List<SensorQuickFix> quickFixes = new ArrayList<>();
   private boolean isQuickFixAvailable = false;
+  @Nullable
+  private List<String> codeVariants = null;
   private boolean saved;
 
   MockSonarLintIssue(SensorContextTester context) {
@@ -48,14 +51,13 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   }
 
   @Override
-  public NewQuickFix newQuickFix() {
-    return parent.newQuickFix();
+  public NewIssue addQuickFix(org.sonar.api.batch.sensor.issue.fix.NewQuickFix newQuickFix) {
+    return parent.addQuickFix(newQuickFix);
   }
 
   @Override
-  public NewSonarLintIssue addQuickFix(NewQuickFix newQuickFix) {
-    quickFixes.add((SensorQuickFix) newQuickFix);
-    return parent.addQuickFix(newQuickFix);
+  public NewQuickFix newQuickFix() {
+    return parent.newQuickFix();
   }
 
   @Override
@@ -76,6 +78,11 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   }
 
   @Override
+  public NewIssue overrideImpact(SoftwareQuality softwareQuality, org.sonar.api.issue.impact.Severity severity) {
+    throw new IllegalStateException("Not supposed to be tested");
+  }
+
+  @Override
   public NewIssue at(NewIssueLocation primaryLocation) {
     parent.at(primaryLocation);
     return this;
@@ -86,7 +93,7 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
     throw new IllegalStateException("Not supposed to be tested");
   }
 
-  // @Override in SonarQube 9.2
+  @Override
   public NewIssue setQuickFixAvailable(boolean b) {
     isQuickFixAvailable = b;
     return this;
@@ -98,8 +105,8 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   }
 
   @Override
-  public NewIssue addFlow(Iterable<NewIssueLocation> flowLocations, FlowType flowType, @Nullable String flowDescription) {
-    throw new IllegalStateException("Not supposed to be tested");
+  public NewIssue addFlow(Iterable<NewIssueLocation> iterable, FlowType flowType, @Nullable String s) {
+    return null;
   }
 
   @Override
@@ -115,11 +122,6 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
   }
 
   @Override
-  public NewIssue setRuleDescriptionContextKey(@Nullable String ruleDescriptionContextKey) {
-    throw new IllegalStateException("Not supposed to be tested");
-  }
-
-  @Override
   public RuleKey ruleKey() {
     throw new IllegalStateException("Not supposed to be tested");
   }
@@ -131,6 +133,11 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
 
   @Override
   public Severity overriddenSeverity() {
+    throw new IllegalStateException("Not supposed to be tested");
+  }
+
+  @Override
+  public Map<SoftwareQuality, org.sonar.api.issue.impact.Severity> overridenImpacts() {
     throw new IllegalStateException("Not supposed to be tested");
   }
 
@@ -151,11 +158,31 @@ public class MockSonarLintIssue implements NewIssue, NewSonarLintIssue, Issue {
 
   @Override
   public Optional<String> ruleDescriptionContextKey() {
-    throw new IllegalStateException("Not supposed to be tested");
+    return Optional.empty();
   }
 
-  protected boolean getSaved(){
-    return saved;
+  @Override
+  public List<QuickFix> quickFixes() {
+    return parent.quickFixes();
   }
+
+  @org.jetbrains.annotations.Nullable
+  @Override
+  public List<String> codeVariants() {
+    return codeVariants;
+  }
+
+  @Override
+  public NewIssue setRuleDescriptionContextKey(String ruleDescriptionContextKey) {
+    return this;
+  }
+
+  @Override
+  public NewIssue setCodeVariants(@org.jetbrains.annotations.Nullable Iterable<String> iterable) {
+    codeVariants = iterable == null ? null : StreamSupport.stream(iterable.spliterator(), false)
+      .collect(Collectors.toList());
+    return this;
+  }
+
 
 }

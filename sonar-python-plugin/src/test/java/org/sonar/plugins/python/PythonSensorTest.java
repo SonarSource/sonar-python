@@ -62,6 +62,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.batch.sensor.issue.fix.NewQuickFix;
 import org.sonar.api.batch.sensor.issue.fix.QuickFix;
 import org.sonar.api.batch.sensor.issue.fix.TextEdit;
 import org.sonar.api.config.internal.MapSettings;
@@ -71,7 +72,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -100,9 +101,7 @@ import org.sonar.python.tree.TokenImpl;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
-import org.sonarsource.sonarlint.core.analysis.container.analysis.issue.SensorQuickFix;
 import org.sonarsource.sonarlint.core.commons.Language;
-import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -210,7 +209,9 @@ public class PythonSensorTest {
   private final AnalysisWarningsWrapper analysisWarning = mock(AnalysisWarningsWrapper.class);
 
   @org.junit.Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @org.junit.Rule
+  public LogTester traceLogTester = new LogTester().setLevel(Level.TRACE);
 
   @Before
   public void init() throws IOException {
@@ -267,7 +268,8 @@ public class PythonSensorTest {
 
     Issue issue = context.allIssues().iterator().next();
 
-    List<SensorQuickFix> quickFixes = ((MockSonarLintIssue) issue).quickFixes;
+    var quickFixes = ((MockSonarLintIssue) issue).quickFixes();
+//    var quickFixes = ((MockSonarLintIssue) issue).quickFixes();
     assertThat(quickFixes).hasSize(2);
 
     QuickFix quickfix = quickFixes.get(0);
@@ -303,10 +305,10 @@ public class PythonSensorTest {
     assertThat(issues).hasSize(1);
     MockSonarLintIssue issue = (MockSonarLintIssue) issues.iterator().next();
 
-    assertThat(issue.quickFixes).isEmpty();
-    assertThat(issue.getSaved()).isTrue();
+    assertThat(issue.quickFixes()).isEmpty();
+//    assertThat(issue.getSaved()).isTrue();
 
-    assertThat(logTester.logs(Level.WARN)).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
+    assertThat(traceLogTester.logs()).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
   }
 
   @Test

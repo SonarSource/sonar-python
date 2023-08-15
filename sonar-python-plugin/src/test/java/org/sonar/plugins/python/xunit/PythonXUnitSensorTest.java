@@ -33,7 +33,7 @@ import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +55,7 @@ public class PythonXUnitSensorTest {
   private final AnalysisWarningsWrapper analysisWarnings = spy(AnalysisWarningsWrapper.class);
 
   @Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Before
   public void setUp() {

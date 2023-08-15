@@ -27,7 +27,7 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
 public class PythonPluginTest {
 
   @org.junit.Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void testGetExtensions() {

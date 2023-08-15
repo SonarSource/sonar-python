@@ -21,9 +21,9 @@ package com.sonar.python.it.plugin;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class CoverageTest {
 
   private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   private static final String PROJECT_KEY = "coverage_project";
   private static final String LINES_TO_COVER = "lines_to_cover";

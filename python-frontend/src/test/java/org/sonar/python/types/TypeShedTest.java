@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.event.Level;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -49,7 +49,7 @@ import static org.sonar.python.types.TypeShed.symbolsForModule;
 public class TypeShedTest {
 
   @org.junit.Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Before
   public void setPythonVersions() {

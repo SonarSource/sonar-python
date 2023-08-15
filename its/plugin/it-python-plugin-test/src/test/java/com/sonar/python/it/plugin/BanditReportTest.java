@@ -19,8 +19,8 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import java.util.List;
 import org.junit.ClassRule;
@@ -36,7 +36,7 @@ public class BanditReportTest {
   private static final String PROJECT = "bandit_project";
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {

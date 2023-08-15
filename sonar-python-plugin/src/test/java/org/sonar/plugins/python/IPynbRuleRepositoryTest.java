@@ -43,7 +43,7 @@ public class IPynbRuleRepositoryTest {
 
     assertThat(repository).isNotNull();
     assertThat(repository.language()).isEqualTo("ipynb");
-    assertThat(repository.name()).isEqualTo("SonarQube");
+    assertThat(repository.name()).isEqualTo("Sonar");
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules)

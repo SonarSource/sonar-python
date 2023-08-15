@@ -95,7 +95,7 @@
     <sonar.api.version>10.1.0.809</sonar.api.version>
     <sonar.plugin.api.version>10.0.0.695</sonar.plugin.api.version>
     <sonar-analyzer-commons.version>2.6.0.1473</sonar-analyzer-commons.version>
-    <sonarlint-core.version>8.14.0.63103</sonarlint-core.version>
+    <sonarlint-core.version>8.18.0.70939</sonarlint-core.version>
     <sslr.version>1.23</sslr.version>
     <protobuf.version>3.21.7</protobuf.version>
     <woodstox.version>6.2.7</woodstox.version>
@@ -184,10 +184,17 @@
       </dependency>
 
       <!-- test dependencies -->
+<!--      <dependency>-->
+<!--        <groupId>org.sonarsource.orchestrator</groupId>-->
+<!--        <artifactId>sonar-orchestrator</artifactId>-->
+<!--        <version>${sonar.orchestrator.version}</version>-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
+
       <dependency>
         <groupId>org.sonarsource.orchestrator</groupId>
-        <artifactId>sonar-orchestrator</artifactId>
-        <version>${sonar.orchestrator.version}</version>
+        <artifactId>sonar-orchestrator-junit4</artifactId>
+        <version>4.0.0.404</version>
         <scope>test</scope>
       </dependency>
       <dependency>

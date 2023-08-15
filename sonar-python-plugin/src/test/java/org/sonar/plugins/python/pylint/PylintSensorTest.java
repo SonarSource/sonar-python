@@ -29,6 +29,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,9 +42,8 @@ import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,7 +61,7 @@ public class PylintSensorTest {
   private static PylintSensor pylintSensor = new PylintSensor();
 
   @Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void test_descriptor() {
@@ -260,7 +260,7 @@ public class PylintSensorTest {
     return elements.get(0);
   }
 
-  public static void assertNoErrorWarnLogs(LogTesterJUnit5 logTester) {
+  public static void assertNoErrorWarnLogs(LogTester logTester) {
     assertThat(logTester.logs(Level.ERROR)).isEmpty();
     assertThat(logTester.logs(Level.WARN)).isEmpty();
   }

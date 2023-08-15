@@ -19,8 +19,8 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomRulesTest {
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static OrchestratorRule orchestrator = Tests.ORCHESTRATOR;
   private static final String PROJECT_KEY = "custom-rules";
   private static final String PROJECT_NAME = "Custom Rules";
 

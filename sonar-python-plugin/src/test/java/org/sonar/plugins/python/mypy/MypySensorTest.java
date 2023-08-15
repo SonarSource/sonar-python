@@ -43,7 +43,7 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -59,7 +59,7 @@ public class MypySensorTest {
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void descriptor() {

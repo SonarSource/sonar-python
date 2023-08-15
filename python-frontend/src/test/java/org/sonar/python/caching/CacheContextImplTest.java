@@ -41,7 +41,7 @@ public class CacheContextImplTest {
   private static final String EXPECTED_SONAR_MODULE_LOG = "Caching will be disabled for this analysis due to the use of the \"sonar.modules\" property.";
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void cache_context_of_enabled_cache() {

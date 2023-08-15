@@ -26,7 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.cache.ReadCache;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -35,7 +35,7 @@ import static org.mockito.Mockito.when;
 public class PythonReadCacheImplTest {
 
   @Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void read_bytes() {

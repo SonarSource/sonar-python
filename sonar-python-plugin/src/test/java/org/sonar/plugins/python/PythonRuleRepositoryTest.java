@@ -44,7 +44,7 @@ public class PythonRuleRepositoryTest {
 
     assertThat(repository).isNotNull();
     assertThat(repository.language()).isEqualTo("py");
-    assertThat(repository.name()).isEqualTo("SonarQube");
+    assertThat(repository.name()).isEqualTo("Sonar");
 
     List<RulesDefinition.Rule> rules = repository.rules();
     assertThat(rules).isNotNull();

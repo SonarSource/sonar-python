@@ -22,9 +22,9 @@ package com.sonar.python.it.plugin;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class TestReportTest {
   public static final String TEST_EXECUTION_TIME = "test_execution_time";
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   private static SonarScanner createBuild(String projectKey, String testReportPath) {
     return SonarScanner.create()

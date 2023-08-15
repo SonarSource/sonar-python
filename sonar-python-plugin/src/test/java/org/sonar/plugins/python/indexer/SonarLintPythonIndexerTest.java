@@ -35,7 +35,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
@@ -54,7 +54,7 @@ public class SonarLintPythonIndexerTest {
   private SensorContextTester context;
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   InputFile file1;
   InputFile file2;

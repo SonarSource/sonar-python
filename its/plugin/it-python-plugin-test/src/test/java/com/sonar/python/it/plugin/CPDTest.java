@@ -19,8 +19,8 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import org.assertj.core.data.Offset;
 import org.junit.BeforeClass;
@@ -44,7 +44,7 @@ public class CPDTest {
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void startServer() {

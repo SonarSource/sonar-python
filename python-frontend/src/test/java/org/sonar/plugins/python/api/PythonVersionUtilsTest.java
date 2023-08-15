@@ -21,7 +21,7 @@ package org.sonar.plugins.python.api;
 
 import org.junit.Test;
 import org.slf4j.event.Level;
-import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
@@ -34,7 +34,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 public class PythonVersionUtilsTest {
 
   @org.junit.Rule
-  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void supportedVersions() {

@@ -38,7 +38,7 @@ import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
@@ -70,7 +70,7 @@ public class SonarQubePythonIndexerTest {
   private SensorContextTester context;
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   private InputFile file1;
   private InputFile file2;

@@ -23,6 +23,7 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.container.Edition;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +51,7 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 public class PythonPrAnalysisTest {
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
+  public static final OrchestratorRule ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
 
   private static final String PR_ANALYSIS_PROJECT_KEY = "prAnalysis";
   private static final String INCREMENTAL_ANALYSIS_PROFILE = "incrementalPrAnalysis";
