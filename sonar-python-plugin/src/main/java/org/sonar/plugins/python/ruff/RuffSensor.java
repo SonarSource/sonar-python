@@ -37,7 +37,6 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.TextReportReader;
 import org.sonar.plugins.python.TextReportReader.Issue;
-import org.sonar.plugins.python.bandit.BanditJsonReportReader;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
@@ -51,6 +50,28 @@ public class RuffSensor extends ExternalIssuesSensor {
   public static final String REPORT_PATH_KEY = "sonar.python.ruff.reportPaths";
 
   private static final Long DEFAULT_CONSTANT_DEBT_MINUTES = 5L;
+
+  @Override
+  protected boolean shouldExecute(Configuration conf) {
+    return conf.hasKey(REPORT_PATH_KEY);
+  }
+
+  @Override
+  protected String reportPathKey() {
+    return REPORT_PATH_KEY;
+  }
+
+  @Override
+  protected String linterName() {
+    return LINTER_NAME;
+  }
+
+  @Override
+  protected Logger logger() {
+    return LOG;
+  }
+
+
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException {
     LOG.info("Importing {}", reportPath);
@@ -63,25 +84,7 @@ public class RuffSensor extends ExternalIssuesSensor {
     }
   }
 
-  @Override
-  protected boolean shouldExecute(Configuration conf) {
-    return conf.hasKey(REPORT_PATH_KEY);
-  }
 
-  @Override
-  protected String linterName() {
-    return LINTER_NAME;
-  }
-
-  @Override
-  protected String reportPathKey() {
-    return REPORT_PATH_KEY;
-  }
-
-  @Override
-  protected Logger logger() {
-    return LOG;
-  }
   private static void saveIssue(SensorContext context, RuffJsonReportReader.Issue issue, Set<String> unresolvedInputFiles) {
     if (isEmpty(issue.ruleKey) || isEmpty(issue.filePath) || isEmpty(issue.message)) {
       LOG.debug("Missing information for ruleKey:'{}', filePath:'{}', message:'{}'", issue.ruleKey, issue.filePath, issue.message);
@@ -104,8 +107,12 @@ public class RuffSensor extends ExternalIssuesSensor {
       .message(issue.message)
       .on(inputFile);
 
-    if (issue.startLocationRow != null && issue.startLocationCol != null && issue.endLocationRow != null && issue.endLocationCol != null) {
-      primaryLocation.at(inputFile.newRange(issue.startLocationRow, issue.startLocationCol, issue.endLocationRow, issue.endLocationCol));
+    if (issue.startLocationRow != null){
+      if(issue.startLocationCol != null && issue.endLocationRow != null && issue.endLocationCol != null) {
+        primaryLocation.at(inputFile.newRange(issue.startLocationRow, issue.startLocationCol, issue.endLocationRow, issue.endLocationCol));
+      }else {
+        primaryLocation.at(inputFile.selectLine(issue.startLocationRow));
+      }
     }
 
     newExternalIssue.at(primaryLocation);

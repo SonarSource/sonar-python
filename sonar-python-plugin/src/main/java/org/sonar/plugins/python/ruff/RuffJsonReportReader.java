@@ -36,14 +36,14 @@ import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseExcepti
 
 public class RuffJsonReportReader {
 
-  private final JSONParser jsonParser = new JSONParser();
   private final Consumer<Issue> consumer;
+  private final JSONParser jsonParser = new JSONParser();
 
   public static class Issue {
     @Nullable
-    String filePath;
-    @Nullable
     String ruleKey;
+    @Nullable
+    String filePath;
     @Nullable
     String message;
     @Nullable
@@ -96,6 +96,7 @@ public class RuffJsonReportReader {
     }
     return null;
   }
+
   private static Integer toInteger(Object value) {
     if (value instanceof Number) {
       return ((Number) value).intValue();

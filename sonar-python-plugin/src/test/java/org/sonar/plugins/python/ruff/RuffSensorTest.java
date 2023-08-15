@@ -55,7 +55,7 @@ public class RuffSensorTest {
   private static final String RUFF_REPORT = "ruff-report.txt";
   private static final String RUFF_JSON_REPORT = "ruff-json-format.json";
   private static final String RUFF_PROPERTY = "sonar.python.ruff.reportPaths";
-  private static final String RUFF_REPORT_UNKNOWN_FILES = "ruff-report-unknown-files.txt";
+  private static final String RUFF_REPORT_UNKNOWN_FILES = "unknown-file-path.txt";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "ruff");
 
@@ -244,12 +244,21 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79_unknown_files() throws IOException {
+  public void unknown_file_paths() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(2);
 
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
       .isEqualTo("Failed to resolve 2 file path(s) in Ruff report. No issues imported related to file(s): tests/subject/unknown1.py;tests/subject/unknown2.py");
+  }
+
+  @Test
+  public void unknown_json_file_path() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "unknown-file-path.json");
+    assertThat(externalIssues).hasSize(1);
+
+    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+      .isEqualTo("Failed to resolve 1 file path(s) in Ruff report. No issues imported related to file(s): unknown/file.py");
   }
 
   @Test
@@ -260,25 +269,64 @@ public class RuffSensorTest {
   }
 
   @Test
+  public void missing_rule_key_file_name_or_message() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "missing-fields.json");
+    assertThat(externalIssues).hasSize(1);
+
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+      .startsWith("Missing information for ruleKey:'null',");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
+      .contains("filePath:'null'");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2))
+      .contains("message:'null'");
+  }
+
+  @Test
   public void no_issues_with_invalid_report_path() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.json");
     assertThat(externalIssues).isEmpty();
+
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
-      .contains("invalid-path.txt' can't be read.");
+      .contains("invalid-path.json' can't be read.");
   }
 
   @Test
   public void no_issues_with_empty_or_invalid_ruff_file() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "empty-file.txt");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "empty-file.json");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnLogs(logTester);
 
-    externalIssues = executeSensorImporting(7, 9, "ruff-invalid-file.txt");
+    externalIssues = executeSensorImporting(7, 9, "ruff-invalid-file.json");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.DEBUG))).isEqualTo("Cannot parse the line: invalid line");
+    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+      .startsWith("No issues information will be saved as the report file '")
+      .contains("ruff-invalid-file.json' can't be read.");
   }
 
+  @Test
+  public void incorrect_end_location() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "incorrect-end-location.json");
+    assertThat(externalIssues).hasSize(1);
+    assertNoErrorWarnLogs(logTester);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey().toString()).isEqualTo("external_ruff:S107");
+    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
+    assertThat(firstPrimaryLoc.message())
+      .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
+    TextRange firstTextRange = firstPrimaryLoc.textRange();
+    assertThat(firstTextRange).isNotNull();
+    assertThat(firstTextRange.start().line()).isEqualTo(5);
+    assertThat(firstTextRange.start().lineOffset()).isEqualTo(0);
+    assertThat(firstTextRange.end().line()).isEqualTo(5);
+    assertThat(firstTextRange.end().lineOffset()).isEqualTo(25);
+
+  }
 
   private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName) throws IOException {
     Path baseDir = PROJECT_DIR.getParent();
