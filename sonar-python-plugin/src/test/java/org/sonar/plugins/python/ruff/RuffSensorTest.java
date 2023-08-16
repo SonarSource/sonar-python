@@ -24,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -52,10 +51,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RuffSensorTest {
 
   private static final String RUFF_FILE = "python-project:ruff/file1.py";
-  private static final String RUFF_REPORT = "ruff-report.txt";
   private static final String RUFF_JSON_REPORT = "ruff-json-format.json";
   private static final String RUFF_PROPERTY = "sonar.python.ruff.reportPaths";
-  private static final String RUFF_REPORT_UNKNOWN_FILES = "unknown-file-path.txt";
+  private static final String RUFF_REPORT_UNKNOWN_FILES = "unknown-file-path.json";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "ruff");
 
@@ -84,62 +82,6 @@ public class RuffSensorTest {
     assertThat(sensorDescriptor.configurationPredicate().test(context.config())).isFalse();
   }
 
-  @Test
-  public void issues_with_sonarqube_79() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT);
-    assertThat(externalIssues).hasSize(9);
-
-    ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
-    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation firstPrimaryLoc = first.primaryLocation();
-    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(firstPrimaryLoc.message())
-      .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
-    TextRange firstTextRange = firstPrimaryLoc.textRange();
-    assertThat(firstTextRange).isNotNull();
-    assertThat(firstTextRange.start().line()).isEqualTo(5);
-    assertThat(firstTextRange.start().lineOffset()).isEqualTo(16);
-    assertThat(firstTextRange.end().line()).isEqualTo(5);
-    assertThat(firstTextRange.end().lineOffset()).isEqualTo(17);
-
-    ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey()).hasToString("external_ruff:S605");
-    assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(second.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation secondPrimaryLoc = second.primaryLocation();
-    assertThat(secondPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(secondPrimaryLoc.message()).isEqualTo("Starting a process with a shell, possible injection detected");
-    TextRange secondTextRange = secondPrimaryLoc.textRange();
-    assertThat(secondTextRange).isNotNull();
-    assertThat(secondTextRange.start().line()).isEqualTo(6);
-    assertThat(secondTextRange.start().lineOffset()).isEqualTo(15);
-    assertThat(secondTextRange.end().line()).isEqualTo(6);
-    assertThat(secondTextRange.end().lineOffset()).isEqualTo(16);
-
-    ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey()).hasToString("external_ruff:UP031");
-    assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(third.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation thirdPrimaryLoc = third.primaryLocation();
-    assertThat(thirdPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(thirdPrimaryLoc.message()).isEqualTo("[*] Use format specifiers instead of percent format");
-
-    ExternalIssue last = externalIssues.get(8);
-    assertThat(last.ruleKey()).hasToString("external_ruff:S110");
-    assertThat(last.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(last.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation fourthPrimaryLoc = last.primaryLocation();
-    assertThat(fourthPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(fourthPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
-
-    assertNoErrorWarnLogs(logTester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsAll(new ArrayList<>(Arrays.asList(
-      "Cannot parse the line: Found 9 errors.",
-      "Cannot parse the line: [*] 1 potentially fixable with the --fix option."
-    )));
-  }
 
   @Test
   public void issues_with_json_format() throws IOException {
@@ -184,64 +126,19 @@ public class RuffSensorTest {
     assertThat(fourthPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
     assertThat(fourthPrimaryLoc.message()).isEqualTo("Undefined name `random`");
 
-    assertNoErrorWarnLogs(logTester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
-
-  }
-
-  @Test
-  public void issues_with_pylint_format() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "ruff-pylint-format.txt");
-    assertThat(externalIssues).hasSize(9);
-
-    ExternalIssue first = externalIssues.get(0);
-    assertThat(first.ruleKey()).hasToString("external_ruff:S107");
-    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation firstPrimaryLoc = first.primaryLocation();
-    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(firstPrimaryLoc.message())
-      .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
-    TextRange firstTextRange = firstPrimaryLoc.textRange();
-    assertThat(firstTextRange).isNotNull();
-    assertThat(firstTextRange.start().line()).isEqualTo(5);
-    assertThat(firstTextRange.start().lineOffset()).isZero();
-    assertThat(firstTextRange.end().line()).isEqualTo(5);
-    assertThat(firstTextRange.end().lineOffset()).isEqualTo(25);
-
-    ExternalIssue second = externalIssues.get(1);
-    assertThat(second.ruleKey()).hasToString("external_ruff:S605");
-    assertThat(second.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(second.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation secondPrimaryLoc = second.primaryLocation();
-    assertThat(secondPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(secondPrimaryLoc.message()).isEqualTo("Starting a process with a shell, possible injection detected");
-    TextRange secondTextRange = secondPrimaryLoc.textRange();
-    assertThat(secondTextRange).isNotNull();
-    assertThat(secondTextRange.start().line()).isEqualTo(6);
-    assertThat(secondTextRange.start().lineOffset()).isZero();
-    assertThat(secondTextRange.end().line()).isEqualTo(6);
-    assertThat(secondTextRange.end().lineOffset()).isEqualTo(43);
-
-    ExternalIssue third = externalIssues.get(2);
-    assertThat(third.ruleKey()).hasToString("external_ruff:UP031");
-    assertThat(third.type()).isEqualTo(RuleType.CODE_SMELL);
-    assertThat(third.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation thirdPrimaryLoc = third.primaryLocation();
-    assertThat(thirdPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(thirdPrimaryLoc.message()).isEqualTo("Use format specifiers instead of percent format");
-
     ExternalIssue last = externalIssues.get(8);
     assertThat(last.ruleKey()).hasToString("external_ruff:S110");
     assertThat(last.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(last.severity()).isEqualTo(Severity.MAJOR);
-    IssueLocation fourthPrimaryLoc = last.primaryLocation();
-    assertThat(fourthPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(fourthPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
+    IssueLocation lastPrimaryLoc = last.primaryLocation();
+    assertThat(lastPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
+    assertThat(lastPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
 
     assertNoErrorWarnLogs(logTester);
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+
   }
+
 
   @Test
   public void report_on_empty_file() throws IOException {
@@ -265,17 +162,8 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void unknown_file_paths() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
-    assertThat(externalIssues).hasSize(2);
-
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
-      .isEqualTo("Failed to resolve 2 file path(s) in Ruff report. No issues imported related to file(s): tests/subject/unknown1.py;tests/subject/unknown2.py");
-  }
-
-  @Test
   public void unknown_json_file_path() throws IOException {
-    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "unknown-file-path.json");
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(1);
 
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))

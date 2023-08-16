@@ -74,14 +74,9 @@ public class RuffSensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles) throws IOException, ParseException {
+    InputStream in = new FileInputStream(reportPath);
     LOG.info("Importing {}", reportPath);
-    if(reportPath.getName().endsWith(".json")){
-      InputStream in = new FileInputStream(reportPath);
-      RuffJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles));
-    }else {
-      List<Issue> issues = new TextReportReader(TextReportReader.COLUMN_ZERO_BASED).parse(reportPath, context.fileSystem());
-      issues.forEach(i -> saveIssue(context, i, unresolvedInputFiles, LINTER_KEY));
-    }
+    RuffJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles));
   }
 
 
