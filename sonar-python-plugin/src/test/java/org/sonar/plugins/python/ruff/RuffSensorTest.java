@@ -141,6 +141,27 @@ public class RuffSensorTest {
 
 
   @Test
+  public void report_on_first_line() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "report-on-first-line.json");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey()).hasToString("external_ruff:D100");
+    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    IssueLocation firstPrimaryLoc = first.primaryLocation();
+    assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo("python-project:ruff/file1.py");
+    assertThat(firstPrimaryLoc.message())
+      .isEqualTo("Missing docstring in public module");
+    TextRange firstTextRange = firstPrimaryLoc.textRange();
+    assertThat(firstTextRange).isNotNull();
+    assertThat(firstTextRange.start().line()).isEqualTo(1);
+    assertThat(firstTextRange.start().lineOffset()).isZero();
+    assertThat(firstTextRange.end().line()).isEqualTo(1);
+    assertThat(firstTextRange.end().lineOffset()).isEqualTo(9);
+  }
+
+  @Test
   public void report_on_empty_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "report-on-empty-file.json");
     assertThat(externalIssues).hasSize(1);

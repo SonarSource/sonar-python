@@ -103,10 +103,7 @@ public class RuffSensor extends ExternalIssuesSensor {
       .on(inputFile);
 
     if (issue.startLocationRow != null ){
-      if( issue.startLocationCol != null && 
-          isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) && 
-          issue.endLocationRow != null && 
-          issue.endLocationCol != null) {
+      if(isValidEndLocation(issue, inputFile)) {
         primaryLocation.at(inputFile.newRange(issue.startLocationRow, issue.startLocationCol, issue.endLocationRow, issue.endLocationCol));
       }else {
         primaryLocation.at(inputFile.selectLine(issue.startLocationRow));
@@ -116,6 +113,17 @@ public class RuffSensor extends ExternalIssuesSensor {
     newExternalIssue.at(primaryLocation);
     newExternalIssue.engineId(LINTER_KEY);
     newExternalIssue.ruleId(issue.ruleKey).save();
+  }
+
+  /*
+   * The end location column should be after the start location col
+   */
+  private static boolean isValidEndLocation(RuffJsonReportReader.Issue issue, InputFile inputFile){
+    return issue.startLocationCol != null && 
+          issue.endLocationRow != null && 
+          issue.endLocationCol != null &&
+          isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) && 
+          (issue.endLocationRow != issue.startLocationRow || issue.endLocationCol != issue.startLocationCol);
   }
 
   private static boolean isColInBounds(int lineNumber, int columnNumber,InputFile inputFile){
