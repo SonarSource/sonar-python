@@ -177,7 +177,10 @@ public class PythonXUnitSensor extends PythonReportSensor {
   @CheckForNull
   private InputFile getSonarTestFile(File file) {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
-    return fileSystem.inputFile(fileSystem.predicates().is(file));
+    var predicate = file.isAbsolute() ? fileSystem.predicates().hasAbsolutePath(file.getAbsolutePath())
+      : fileSystem.predicates().hasRelativePath(file.getPath());
+
+    return fileSystem.inputFile(predicate);
   }
 
   private static void saveMeasure(SensorContext context, InputComponent component, Metric<Integer> metric, int value) {
