@@ -51,7 +51,7 @@ public class PythonReadCacheImpl implements PythonReadCache {
         LOG.debug("Unable to read data for key: \"{}\"", key);
       }
     } else {
-      LOG.trace(String.format("Cache miss for key '%s'", key));
+      LOG.trace("Cache miss for key '{}'", key);
     }
     return null;
   }
