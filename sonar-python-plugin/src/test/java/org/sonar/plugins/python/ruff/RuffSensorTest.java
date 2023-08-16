@@ -235,6 +235,20 @@ public class RuffSensorTest {
   }
 
   @Test
+  public void unknown_rule() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "unknown-rule.json");
+    assertThat(externalIssues).hasSize(1);
+
+    ExternalIssue first = externalIssues.get(0);
+    assertThat(first.ruleKey()).hasToString("external_ruff:ZZZ999");
+    assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(first.severity()).isEqualTo(Severity.MAJOR);
+    
+    assertNoErrorWarnLogs(logTester);
+
+  }
+
+  @Test
   public void incorrect_end_location() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "incorrect-end-location.json");
     assertThat(externalIssues).hasSize(1);
