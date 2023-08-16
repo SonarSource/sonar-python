@@ -269,7 +269,7 @@ public class PythonSensorTest {
     Issue issue = context.allIssues().iterator().next();
 
     var quickFixes = ((MockSonarLintIssue) issue).quickFixes();
-//    var quickFixes = ((MockSonarLintIssue) issue).quickFixes();
+
     assertThat(quickFixes).hasSize(2);
 
     QuickFix quickfix = quickFixes.get(0);
