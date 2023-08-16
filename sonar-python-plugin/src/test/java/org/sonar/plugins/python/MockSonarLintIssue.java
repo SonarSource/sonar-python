@@ -51,7 +51,7 @@ public class MockSonarLintIssue implements NewIssue, Issue {
   }
 
   @Override
-  public NewIssue addQuickFix(org.sonar.api.batch.sensor.issue.fix.NewQuickFix newQuickFix) {
+  public NewIssue addQuickFix(NewQuickFix newQuickFix) {
     return parent.addQuickFix(newQuickFix);
   }
 
@@ -184,5 +184,7 @@ public class MockSonarLintIssue implements NewIssue, Issue {
     return this;
   }
 
-
+  public boolean getSaved() {
+    return saved;
+  }
 }

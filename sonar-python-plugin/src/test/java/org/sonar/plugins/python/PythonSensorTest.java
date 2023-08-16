@@ -306,7 +306,7 @@ public class PythonSensorTest {
     MockSonarLintIssue issue = (MockSonarLintIssue) issues.iterator().next();
 
     assertThat(issue.quickFixes()).isEmpty();
-//    assertThat(issue.getSaved()).isTrue();
+    assertThat(issue.getSaved()).isTrue();
 
     assertThat(traceLogTester.logs()).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
   }
