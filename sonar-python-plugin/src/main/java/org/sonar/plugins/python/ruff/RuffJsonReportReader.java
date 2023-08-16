@@ -37,7 +37,7 @@ import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseExcepti
 public class RuffJsonReportReader {
 
   private final Consumer<Issue> consumer;
-  private final JSONParser jsonParser = new JSONParser();
+  private final JSONParser jsonParser;
 
   public static class Issue {
     @Nullable
@@ -58,6 +58,7 @@ public class RuffJsonReportReader {
 
   private RuffJsonReportReader(Consumer<Issue> consumer) {
     this.consumer = consumer;
+    this.jsonParser = new JSONParser();
   }
 
   static void read(InputStream in, Consumer<Issue> consumer) throws IOException, ParseException {
@@ -65,7 +66,7 @@ public class RuffJsonReportReader {
   }
 
   private void read(InputStream in) throws IOException, ParseException {
-    JSONArray files =(JSONArray) jsonParser.parse(new InputStreamReader(in, UTF_8));
+    JSONArray files = (JSONArray) jsonParser.parse(new InputStreamReader(in, UTF_8));
     if (files != null) {
       ((Stream<JSONObject>) files.stream()).forEach(this::onResult);
     }
@@ -89,10 +90,10 @@ public class RuffJsonReportReader {
     Ruff returns the col number of the last char + 1.
     In order to properly read the col number we need to return the number of the last char.
    */
-  private static Integer correctEndLocationCol(Object value, int startLocationCol){
+  private static Integer correctEndLocationCol(Object value, int startLocationCol) {
     Integer endLocationCol = toInteger(value);
-    if(endLocationCol != null){
-      if(endLocationCol > startLocationCol) {
+    if (endLocationCol != null) {
+      if (endLocationCol > startLocationCol) {
         return endLocationCol - 1;
       } else {
         return startLocationCol;
