@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.Severity;
@@ -35,8 +34,6 @@ import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
-import org.sonar.plugins.python.TextReportReader;
-import org.sonar.plugins.python.TextReportReader.Issue;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;

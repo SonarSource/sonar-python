@@ -91,11 +91,12 @@ public class RuffJsonReportReader {
    */
   private static Integer correctEndLocationCol(Object value, int startLocationCol){
     Integer endLocationCol = toInteger(value);
-    if(endLocationCol != null)
+    if(endLocationCol != null){
       if(endLocationCol > startLocationCol) {
         return endLocationCol - 1;
       } else {
         return startLocationCol;
+      }
     }
     return null;
   }
