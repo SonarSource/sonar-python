@@ -123,7 +123,7 @@ public class RuffSensor extends ExternalIssuesSensor {
           issue.endLocationRow != null && 
           issue.endLocationCol != null &&
           isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) && 
-          (issue.endLocationRow.equals(issue.startLocationRow) || issue.endLocationCol.equals(issue.startLocationCol));
+          (!issue.endLocationRow.equals(issue.startLocationRow) || !issue.endLocationCol.equals(issue.startLocationCol));
   }
 
   private static boolean isColInBounds(int lineNumber, int columnNumber,InputFile inputFile){
