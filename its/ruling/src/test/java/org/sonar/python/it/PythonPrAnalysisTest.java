@@ -110,7 +110,7 @@ public class PythonPrAnalysisTest {
 
   @ParameterizedTest
   @MethodSource("data")
-  public void pr_analysis_logs(String scenario,
+  void pr_analysis_logs(String scenario,
     int expectedTotalFiles,
     int expectedRecomputed,
     int expectedFullySkipped,
@@ -137,7 +137,7 @@ public class PythonPrAnalysisTest {
 
   @ParameterizedTest
   @MethodSource("data")
-  public void pr_analysis_issues(String scenario,
+  void pr_analysis_issues(String scenario,
     int expectedTotalFiles,
     int expectedRecomputed,
     int expectedFullySkipped,

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -31,30 +32,32 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TestPythonVisitorRunnerTest {
+class TestPythonVisitorRunnerTest {
 
   @Test
-  public void unknownFile() {
-    assertThatThrownBy(() -> TestPythonVisitorRunner.scanFile(new File("xxx"), visitorContext -> {}))
+  void unknownFile() {
+    var file = new File("xxx");
+    var check = (PythonCheck) visitorContext -> {};
+    assertThatThrownBy(() -> TestPythonVisitorRunner.scanFile(file, check))
       .isInstanceOf(IllegalStateException.class);
   }
 
   @Test
-  public void fileUri() throws IOException {
+  void fileUri() throws IOException {
     File tmpFile = Files.createTempFile("foo", ".py").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
 
   @Test
-  public void fileUriIPython() throws IOException {
+  void fileUriIPython() throws IOException {
     File tmpFile = Files.createTempFile("foo", ".ipynb").toFile();
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(tmpFile);
     assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
 
   @Test
-  public void globalSymbols() {
+  void globalSymbols() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     List<File> files = List.of(new File(baseDir, "file.py"));
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDir);
@@ -64,7 +67,7 @@ public class TestPythonVisitorRunnerTest {
   }
 
   @Test
-  public void globalSymbolsIPython() {
+  void globalSymbolsIPython() {
     File baseDir = new File("src/test/resources").getAbsoluteFile();
     List<File> files = List.of(new File(baseDir, "file.py"), new File(baseDir, "file.ipynb"));
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDir);
