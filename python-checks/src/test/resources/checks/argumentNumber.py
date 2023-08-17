@@ -2,6 +2,7 @@ import zope
 from argumentNumberImported import fn
 from contextvars import copy_context
 import datetime
+import logging
 
 fn(1, 2) # OK, no project level information
 
@@ -203,5 +204,9 @@ class BuiltinFunctionWithEmptyParameterName:
 
 
 class MyTZInfo(datetime.tzinfo):
-    def tzname(self): # FN 
+    def tzname(self):  # FN
         pass
+
+
+def logging_api():
+    logging.basicConfig(format="42", force=True)  # OK
