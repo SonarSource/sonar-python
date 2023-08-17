@@ -84,27 +84,30 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
       .map(ClassDef.class::cast)
       .filter(cd -> "Meta".equals(cd.name().name()))
       .map(ClassDef::body)
-      // lookup for Meta class field assignment
+      // lookup for Meta class field assignments
       .map(StatementList::statements)
       .flatMap(Collection::stream)
       .filter(AssignmentStatement.class::isInstance)
       .map(AssignmentStatement.class::cast)
       // lookup for managed field assignment
-      .filter(fieldAssignment -> fieldAssignment.lhsExpressions()
-        .stream()
-        .map(lhs -> TreeUtils.firstChild(lhs, Name.class::isInstance)
-          .map(Name.class::cast)
-          .orElse(null))
-        .filter(Objects::nonNull)
-        .map(Name::name)
-        .anyMatch("managed"::equals)
-      )
+      .filter(DjangoModelStringFieldCheck::isManagedFieldAssignment)
       // check if managed field assignment value is set to False
       .map(AssignmentStatement::assignedValue)
       .filter(Name.class::isInstance)
       .map(Name.class::cast)
       .map(Name::name)
       .anyMatch("False"::equals);
+  }
+
+  private static boolean isManagedFieldAssignment(AssignmentStatement fieldAssignment) {
+    return fieldAssignment.lhsExpressions()
+      .stream()
+      .map(lhs -> TreeUtils.firstChild(lhs, Name.class::isInstance)
+        .map(Name.class::cast)
+        .orElse(null))
+      .filter(Objects::nonNull)
+      .map(Name::name)
+      .anyMatch("managed"::equals);
   }
 
   private static boolean isTextField(CallExpression call) {
