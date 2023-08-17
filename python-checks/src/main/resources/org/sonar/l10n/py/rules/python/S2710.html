@@ -1,22 +1,24 @@
+<p>This rule raises an issue when the first parameter of a class method is not an accepted name.</p>
 <h2>Why is this an issue?</h2>
-<p>By convention, the first argument to class methods, i.e. methods decorated with <code>@classmethod</code>, is named <code>cls</code> as a
-representation and a reminder that the argument is the class itself. Name the argument something else, and you stand a good chance of confusing both
-users and maintainers of the code. It might also indicate that the <code>cls</code> parameter was forgotten, in which case calling the method will
-most probably fail. This rule also applies to methods <code>__init_subclass__</code>, <code>__class_getitem__</code> and <code>__new__</code> as their
-first argument is always the class instead of "self".</p>
+<p>By convention, the first argument in a class method, i.e. methods decorated with <code>@classmethod</code>, is named <code>cls</code> as a
+representation and a reminder that the argument is the class itself. If you were to name the argument something else, you would stand a good chance of
+confusing both users and maintainers of the code. It might also indicate that the <code>cls</code> parameter was forgotten, in which case calling the
+method will most probably fail. This rule also applies to methods <code>__init_subclass__</code>, <code>__class_getitem__</code> and
+<code>__new__</code> as their first argument is always the class instead of "self".</p>
 <p>By default this rule accepts <code>cls</code> and <code>mcs</code>, which is sometime used in metaclasses, as valid names for class parameters. You
 can set your own list of accepted names via the parameter <code>classParameterNames</code>.</p>
-<p>This rule raises an issue when the first parameter of a class method is not an accepted name.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h3>How to fix it</h3>
+<p>Follow the naming convention for the first parameter name of a class method.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class Rectangle(object):
 
   @classmethod
   def area(bob, height, width):  #Noncompliant
     return height * width
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class Rectangle(object):
 
   @classmethod
@@ -24,6 +26,7 @@ class Rectangle(object):
     return height * width
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> PEP8 - <a href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">Function and Method Arguments</a> </li>
 </ul>

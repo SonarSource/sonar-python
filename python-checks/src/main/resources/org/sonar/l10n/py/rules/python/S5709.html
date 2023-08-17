@@ -1,9 +1,11 @@
+<p>This rule raises an issue when a class derives from one of the following exception classes: <code>BaseException</code>,
+<code>KeyboardInterrupt</code>, <code>SystemExit</code> or <code>GeneratorExit</code>.</p>
 <h2>Why is this an issue?</h2>
-<p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
+<p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a> is raised when <a
 href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. <a
 href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> is raised when the user asks the program
 to stop by pressing interrupt keys. Both exceptions are expected to propagate up until the application stops.</p>
-<p>In order to avoid catching <code>SystemExit</code> and <code>KeyboardInterrupt</code> by mistake <a
+<p>In order to avoid catching <code>SystemExit</code> and <code>KeyboardInterrupt</code> by mistake, <a
 href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy">PEP-352</a> created the root class <code>BaseException</code> from which
 <code>SystemExit</code>, <code>KeyboardInterrupt</code> and <code>Exception</code> derive. Thus developers can use <code>except Exception:</code>
 without preventing the software from stopping.</p>
@@ -11,28 +13,19 @@ without preventing the software from stopping.</p>
 user code.</p>
 <p>As said in <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Python’s documentation</a>, user-defined exceptions are not
 supposed to inherit directly from <code>BaseException</code>. They should instead inherit from <code>Exception</code> or one of its subclasses.</p>
-<p>This rule raises an issue when a class derives from one of the following exception classes: <code>BaseException</code>,
-<code>KeyboardInterrupt</code>, <code>SystemExit</code> or <code>GeneratorExit</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyException(BaseException):  # Noncompliant
     pass
-
-class MyException(GeneratorExit):  # Noncompliant
-    pass
-
-class MyException(KeyboardInterrupt):  # Noncompliant
-    pass
-
-class MyException(SystemExit):  # Noncompliant
-    pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyException(Exception):
     pass
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> PEP 352 – <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#BaseException">BaseException class</a> </li>

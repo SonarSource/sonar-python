@@ -1,19 +1,42 @@
-<h2>Why is this an issue?</h2>
-<p>Developers can use type hints to specify which type a function is expected to return. These annotations are not enforced at runtime and returning a
-different type might not fail. It is however likely to be unintended and will lead to maintainability issues, if not bugs.</p>
 <p>This rule raises an issue when a function or method returns a value that contradicts its type hint.</p>
-<h3>Noncompliant code example</h3>
+<h2>Why is this an issue?</h2>
+<p>Developers can use type hints to specify which type a function is expected to return. Doing so improves maintainability since it clarifies the
+contract of the function, making it easier to use and understand.</p>
+<p>When annotating a function with a specific type hint, it is expected that the returned value matches the type specified in the hint.</p>
+<p>If the type hint specifies a class or a named type, then the value returned should be an instance of that class or type. If the type hint specifies
+a structural type, then the value returned should have the same structure as the type hint.</p>
+<p>In the following example, while <code>Bucket</code> does not directly inherit from <code>Iterable</code>, it does implement the
+<code>Iterable</code> protocol thanks to its <code>__iter__</code> method and can therefore be used as a valid <code>Iterable</code> return type.</p>
 <pre>
-def hello() -&gt; str:
-    return 42  # Noncompliant. Function's type hint asks for a string return value
+from collections.abc import Iterator, Iterable
+
+class Bucket:  # Note: no base classes
+    ...
+    def __len__(self) -&gt; int: ...
+    def __iter__(self) -&gt; Iterator[int]: ...
+
+
+def collect() -&gt; Iterable: return Bucket()
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Since type annotations are not enforced at runtime, returning a completely different type might not fail. It is however likely to be unintended and
+will lead to maintainability issues, if not bugs.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>To fix this issue, make sure that the returned value of your function is compatible with its type hint.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def hello() -&gt; str:
+    return 42  # Noncompliant: Function's type hint asks for a string return value
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def hello() -&gt; str:
     return "Hello"
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/typing.html">Python documentation - Support for type hints</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/typing.html">Support for type hints</a> </li>
+  <li> PEP 544 - <a href="https://peps.python.org/pep-0544/">Protocols: Structural subtyping (static duck typing)</a> </li>
 </ul>
 

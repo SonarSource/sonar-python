@@ -1,18 +1,37 @@
 <h2>Why is this an issue?</h2>
-<p>A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the function is doing too many
-things.</p>
-<h3>Noncompliant code example</h3>
-<p>With a maximum number of 4 parameters:</p>
+<p>Functions, methods, or lambdas with a long parameter list are difficult to use, as maintainers must figure out the role of each parameter and keep
+track of their position.</p>
 <pre>
-def do_something(param1, param2, param3, param4, param5):
-	...
+def set_coordinates(x1, y1, z1, x2, y2, z2): # Noncompliant
+    # ...
 </pre>
-<h3>Compliant solution</h3>
+<p>The solution can be to:</p>
+<ul>
+  <li> Split the function, method, or lambda into smaller ones </li>
+</ul>
 <pre>
-def do_something(param1, param2, param3, param4):
-	...
+# Each function does a part of what the original set_coordinates function was doing, so confusion risks are lower
+def set_origin(x, y, z):
+   # ...
+
+def set_size(width, height, depth):
+   # ...
 </pre>
+<ul>
+  <li> Find a better data structure for the parameters that group data in a way that makes sense for the specific application domain </li>
+</ul>
+<pre>
+@dataclass
+class Point: # In geometry, Point is a logical structure to group data
+    x: int
+    y: int
+    z: int
+
+def set_coordinates(p1: Point, p2: Point):
+    # ...
+</pre>
+<p>This rule raises an issue when a function, a method, or a lambda has more parameters than the provided threshold.</p>
 <h3>Exceptions</h3>
-<p>The first argument of non-static methods, i.e. <code>self</code> or <code>cls</code>, is not counted as it is mandatory and it is passed
+<p>The first argument of non-static methods, i.e., <code>self</code> or <code>cls</code>, is not counted as it is mandatory and passed
 automatically.</p>
 

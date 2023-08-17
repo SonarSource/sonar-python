@@ -1,8 +1,9 @@
+<p>This rule raises an issue when an overriding method changes a contract defined in a superclass.</p>
 <h2>Why is this an issue?</h2>
 <p>Because a subclass instance may be used as an instance of the superclass, overriding methods should uphold the aspects of the superclass contract
-that relate to the Liskov Substitution Principle. Specifically, an overriding method should be callable with the same parameters as the overriden
-one.</p>
-<p>The following modifications are ok:</p>
+that relate to the <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov Substitution Principle</a>. Specifically, an
+overriding method should be callable with the same parameters as the overriden one.</p>
+<p>The following modifications are OK:</p>
 <ul>
   <li> Adding an optional parameter, i.e. with a default value, as long as they don’t change the order of positional parameters. </li>
   <li> Renaming a positional-only parameter. </li>
@@ -14,7 +15,7 @@ one.</p>
   <li> Adding a vararg parameter (<code>*args</code>). </li>
   <li> Adding a keywords parameter (<code>**kwargs</code>). </li>
 </ul>
-<p>The following modifications are not ok:</p>
+<p>The following modifications are not OK:</p>
 <ul>
   <li> Removing parameters, even when they have default values. </li>
   <li> Adding mandatory parameters, i.e. without a default value. </li>
@@ -27,8 +28,24 @@ one.</p>
 </ul>
 <p>This rule raises an issue when the signature of an overriding method does not accept the same parameters as the overriden one. Only instance
 methods are considered, class methods and static methods are ignored.</p>
-<h3>Noncompliant code example</h3>
+<h3>Exceptions</h3>
+<p>In theory, renaming parameters also breaks Liskov Substitution Principle. Arguments can’t be passed via keyword arguments anymore. However, <a
+href="https://www.python.org/dev/peps/pep-0570/#consistency-in-subclasses">PEP-570</a> indicates it is common to rename parameters when it improves
+code readability and when arguments are always passed by position.</p>
+<p>"Positional-Only Parameters" were introduced in Python 3.8 to solve this problem. As most programs will need to support older versions of Python,
+this rule won’t raise an issue on renamed parameters.</p>
 <pre>
+class ParentClass(object):
+    def mymethod(self, param1):
+        pass
+
+class ChildClassRenamed(ParentClass):
+    def mymethod(self, renamed): # No issue but this is suspicious. Rename this parameter as "param1" or use positional only arguments if possible.
+        pass
+</pre>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class ParentClass(object):
     def mymethod(self, param1):
         pass
@@ -48,8 +65,8 @@ class ChildClassReordered(ParentClass):
         # Remove parameters "inserted" or provide a default value.
         pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class ParentClass(object):
     def mymethod(self, param1):
         pass
@@ -66,24 +83,10 @@ class ChildClassReordered(ParentClass):
     def mymethod(self, param1, inserted=None):
         pass
 </pre>
-<h3>Exceptions</h3>
-<p>In theory renaming parameters also breaks Liskov Substitution Principle. Arguments can’t be passed via keyword arguments anymore. However, <a
-href="https://www.python.org/dev/peps/pep-0570/#consistency-in-subclasses">as PEP-570 says</a>, it is common to rename parameters when it improves
-code readability and when arguments are always passed by position.</p>
-<p>"Positional-Only Parameters" were introduced in python 3.8 to solve this problem. As most programs will need to support older versions of python,
-this rule won’t raise an issue on renamed parameters.</p>
-<pre>
-class ParentClass(object):
-    def mymethod(self, param1):
-        pass
-
-class ChildClassRenamed(ParentClass):
-    def mymethod(self, renamed): # No issue but this is suspicious. Rename this parameter as "param1" or use positional only arguments if possible.
-        pass
-</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
+  <li> SOLID - <a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Wikipedia - Liskov substitution principle</a> </li>
   <li> Python Enhancement Proposal (PEP) 3102 - <a href="https://www.python.org/dev/peps/pep-3102/">Keyword-Only Arguments</a> </li>
   <li> Python Enhancement Proposal (PEP) 570 - <a href="https://www.python.org/dev/peps/pep-0570/">Python Positional-Only Parameters</a> </li>
 </ul>

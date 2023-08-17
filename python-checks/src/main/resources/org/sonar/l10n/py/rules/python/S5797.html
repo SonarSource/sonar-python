@@ -1,36 +1,31 @@
+<p>This rule raises an issue when a constant expression is used as a condition in an <code>if</code>, <code>elif</code>, a conditional expression or
+other boolean expressions.</p>
 <h2>Why is this an issue?</h2>
 <p>When a constant is used as a condition, either it has no effect on the execution flow and it can be removed, or some code will never be executed
 and it is a bug.</p>
-<p>This rule raises an issue when a constant expression is used as a condition in an <code>if</code>, <code>elif</code>, a conditional expression or
-other boolean expressions.</p>
 <h3>Noncompliant code example</h3>
-<pre>
-def func(param = None):
-    param = (1,)
-    if param:  # Noncompliant. var is always set to (1,), the first branch of the if will always execute.
-        return sum(param)
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo():
+    a = True
+    if a: # Noncompliant: the condition is always true
+      return 1
     else:
-        return None
-
-var2 = 1 if func else 2  # Noncompliant. "func" will always be equivalent to True.
-var3 = func and 1 else 2  # Noncompliant.
+      return 2
 </pre>
 <h3>Compliant solution</h3>
-<pre>
-def func(param = None):
-    if param is None:
-        param = (1,)
-    if param:
-        return sum(param)
+<pre data-diff-id="1" data-diff-type="compliant">
+def foo():
+    a = bar()
+    if a:
+      return 1
     else:
-        return None
-
-var2 = 1 if func() else 2
-var3 = func() and 1 else 2
+      return 2
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://www.python.org/dev/peps/pep-0285/">PEP 285 - Adding a bool type</a> </li>
-  <li> <a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">Python documentation - Truth Value Testing</a> </li>
+  <li> Python documentation - <a href="https://www.python.org/dev/peps/pep-0285/">PEP 285 - Adding a bool type</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/stdtypes.html#truth-value-testing">Python documentation - Truth Value
+  Testing</a> </li>
 </ul>
 

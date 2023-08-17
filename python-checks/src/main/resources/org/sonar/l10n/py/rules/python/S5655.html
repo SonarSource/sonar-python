@@ -1,32 +1,34 @@
+<p>This rule raises an issue when a function or method is called with an argument of a different type than the one described in its type
+annotations.</p>
 <h2>Why is this an issue?</h2>
-<p>The CPython interpreter does not check arguments type when functions are called. However a function can express the type it expects for each
-argument in its documentation or by using <a href="https://www.python.org/dev/peps/pep-0484/">Type Hints</a>. Calling such a function with an argument
-of a different type can easily create a bug. Even if it works right now it can fail later when APIs evolve or when type checks are added (ex: with
+<p>The CPython interpreter does not check types of arguments when functions are called. However, a function can express the type it expects for each
+argument in its documentation or by using <a href="https://www.python.org/dev/peps/pep-0484/">Type Hints</a>. While the code may initially work as
+intended, not respecting the contract of an API may lead to bugs later when its implementation evolves or when type checks are added (i.e. with
 <code>isinstance</code>).</p>
-<p>This rule raises an issue when a function or method is called with an argument of a different type than the one described in its type annotations.
-It also checks argument types for builtin functions.</p>
+<p>This rule also checks argument types for built-in functions.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def func(var: str):
     pass
 
-func(42)  # Noncompliant
+func(42)  # Noncompliant: 42 is not of type str.
 
-len(1)  # Noncompliant
+round("not a number")  # Noncompliant: the builtin function round requires a number as first parameter.
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 def func(var: str):
     pass
 
 func("42")
 
-len("1")
+round(1.2)
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/library/functions.html#built-in-funcs">Python documentation - builtins</a> </li>
-  <li> <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484 — Type Hints</a> </li>
-  <li> <a href="https://docs.python.org/3/library/typing.html">Python documentation - typing — Support for type hints</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/functions.html#built-in-funcs">builtins</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/typing.html">typing — Support for type hints</a> </li>
+  <li> PEP 484 - <a href="https://www.python.org/dev/peps/pep-0484/">Type Hints</a> </li>
 </ul>
 

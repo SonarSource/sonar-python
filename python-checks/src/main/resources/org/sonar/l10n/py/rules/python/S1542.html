@@ -1,14 +1,25 @@
+<p>This rule raises an issue when a function name doesn’t respect the naming convention.</p>
 <h2>Why is this an issue?</h2>
 <p>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all function names match a provided regular expression.</p>
-<h3>Noncompliant code example</h3>
+<p>According to PEP8, function names should be lowercase, with words separated by underscores as necessary to improve readability. This convention is
+known as "snake_case." For example: <code>calculate_area</code>, <code>print_hello</code>, <code>process_data</code></p>
+<p>To fix this, respect the naming convention for the function. The default naming convention is snake case, as recommended by PEP8. Other naming
+conventions can be defined through the <code>format</code> rule parameter.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <p>With the default provided regular expression: <code>^[a-z_][a-z0-9_]*$</code></p>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def MyFunction(a,b):
     ...
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def my_function(a,b):
     ...
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP8 - <a href="https://peps.python.org/pep-0008/#function-and-variable-names">Function and Variable Names</a> </li>
+</ul>
 

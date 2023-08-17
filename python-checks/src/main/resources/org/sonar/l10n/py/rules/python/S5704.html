@@ -1,12 +1,13 @@
+<p>This rule raises an issue when a bare <code>raise</code> statements is in a <code>finally</code> block.</p>
 <h2>Why is this an issue?</h2>
 <p>A bare <code>raise</code> statement, i.e. a <code>raise</code> with no exception provided, will re-raise the last active exception in the current
 scope. If no exception is active a <code>RuntimeError</code> is raised instead.</p>
 <p>If the bare "raise" statement is in a <code>finally</code> block, it will only have an active exception to re-raise when an exception from the
 <code>try</code> block is not caught or when an exception is raised by an <code>except</code> or <code>else</code> block. Thus bare <code>raise</code>
 statements should not be relied upon in <code>finally</code> blocks. It is simpler to let the exception raise automatically.</p>
-<p>This rule raises an issue when a bare <code>raise</code> statements is in a <code>finally</code> block.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def foo(param):
     result = 0
     try:
@@ -18,13 +19,13 @@ def foo(param):
             raise ValueError()
     finally:
         if param:
-            raise  # Noncompliant. This will fail in some context.
+            raise  # Noncompliant: This will fail in some context.
         else:
             result = 1
     return result
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def foo(param):
     result = 0
     try:
@@ -37,10 +38,10 @@ def foo(param):
     finally:
         if not param:
             result = 1
-        # the exception will raise automatically
     return result
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/simple_stmts.html#raise">The <code>raise</code> statement</a> </li>
 </ul>

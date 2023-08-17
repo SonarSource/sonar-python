@@ -1,11 +1,12 @@
+<p>This rule raises an issue when the print statement is used.</p>
 <h2>Why is this an issue?</h2>
 <p>The <code>print</code> statement was removed in Python 3.0. The built-in function should be used instead.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 print '1'  # Noncompliant
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 print('1')
 </pre>
 

@@ -1,49 +1,35 @@
+<p>This rule raises an issue when the walrus operator is used in a way which makes the code confusing, as described in <a
+href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572</a>.</p>
 <h2>Why is this an issue?</h2>
 <p>The <a href="https://www.python.org/dev/peps/pep-0572">walrus operator</a> <code>:=</code> (also known as "assignment expression") should be used
 with caution as it can easily make code more difficult to understand and thus maintain. In such case it is advised to refactor the code and use an
 assignment statement (i.e. <code>=</code>) instead.</p>
-<p>This rule raises an issue when the walrus operator is used in a way which makes the code confusing, as described in <a
-href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572</a>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-# using an assignment expression (:=) as an assignment statement (=) is more explicit
-(v := f(p))  # Noncompliant
-v0 = (v1 := f(p))  # Noncompliant
-
-# using an assignment expression in a function call when keyword arguments are also used.
-func(a=(b := f(p)))  # Noncompliant
-func(a := f(p), b=2)  # Noncompliant
-def func(param=(p := 21)):  # Noncompliant
-    pass
-
-# using an assignment expression in an annotation
-def func(param: (p := 21) = 3):  # Noncompliant
-    pass
-
-# using assignment expression in an f-string. Character ":" is also used as a formatting marker in f-strings.
-f'{(x:=10)}'  # Noncompliant
-f'{x:=10}' # No issue raised but still not recommended. This is not an assignment expression. '=10' is passed to the f-string formatter.
+<p>Reasons why it is better to avoid using the walrus operator in Python:</p>
+<ul>
+  <li> <strong>Readability:</strong> The walrus operator can lead to more complex and nested expressions, which might reduce the readability of the
+  code, especially for developers who are not familiar with this feature. </li>
+  <li> <strong>Compatibility:</strong> If you are working on projects that need to be compatible with older versions of Python (before 3.8), you
+  should avoid using the walrus operator, as it won’t be available in those versions. </li>
+</ul>
+<h3>How to fix it</h3>
+<p>Avoid using the walrus operator for the cases when it is not mandatory.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+v0 = (v1 := f(p))  # Noncompliant: Use an assignment statement ("=") instead; ":=" operator is confusing in this context
+f'{(x:=10)}' # Noncompliant: Move this assignment out of the f-string; ":=" operator is confusing in this context
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-v = f(p)
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 v0 = v1 = f(p)
-
-value = f(p)
-func(a=value)
-func(value, b=2)
-def func(param=21):
-    p = 21
-
-p = 21
-def func(param: p = 3):
-    pass
-
 x = 10
 f'{x}'
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572 - Assignment Expressions</a> </li>
+  <li> Python Documentation - <a href="https://www.python.org/dev/peps/pep-0572">PEP 572 – Assignment Expressions</a> </li>
+  <li> Python Documentation - <a href="https://www.python.org/dev/peps/pep-0572/#exceptional-cases">PEP 572 - Assignment Expressions - Exceptional
+  cases</a> </li>
 </ul>
 

@@ -1,60 +1,89 @@
+<p>This rule raises an issue when the identity operator is used with cached literals.</p>
 <h2>Why is this an issue?</h2>
-<p>Identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
+<p>The identity operators <code>is</code> and <code>is not</code> check if the same object is on both sides, i.e. <code>a is b</code> returns
 <code>True</code> if <code>id(a) == id(b)</code>.</p>
-<p>Integers, bytes, floats, strings, frozensets and tuples should not be compared with identity operators because the result may not be as expected.
-If you need to compare these types you should use instead equality operators <code>==</code> or <code>!=</code>.</p>
-<p>The CPython interpreter caches certain builtin values for integers, bytes, floats, strings, frozensets and tuples. For example, the literal
-<code>1</code> will create the same object as <code>int("1")</code>, which means that <code>1 is int("1")</code> is True. However this works only by
-chance as other integer values are not cached, for example <code>int("1000") is 1000</code> will always be <code>False</code>. This behavior is not
-part of Python language specification and could vary between interpreters. CPython 3.8 even <a
+<p>The CPython interpreter caches certain built-in values for integers, bytes, floats, strings, frozensets and tuples. When a value is cached, all its
+references are pointing to the same object in memory; their ids are identical.</p>
+<p>The following example illustrates this caching mechanism:</p>
+<pre>
+my_int = 1
+other_int = 1
+
+id(my_int) == id(other_int) # True
+</pre>
+<p>In both assignments (to <code>my_int</code> and <code>other_int</code>), the assigned value <code>1</code> comes from the interpreter cache, only
+one integer object <code>1</code> is created in memory. This means both variables are referencing the same object. For this reason, their ids are
+identical and <code>my_int is other_int</code> evaluates to <code>True</code>. This mechanism allows the interpreter for better performance, saving
+memory space, by not creating new objects every time for commonly accessed values.</p>
+<p>However this caching mechanism does not apply to every value:</p>
+<pre>
+my_int = 1000
+
+id(my_int) == id(1000) # False
+my_int is 1000 # False
+</pre>
+<p>In this example the integer <code>1000</code> is not cached. Each reference to <code>1000</code> creates an new integer object in memory with a new
+id. This means that <code>my_int is 1000</code> is always <code>False</code>, as the two objects have different ids.</p>
+<p>This is the reason why using the identity operators on integers, bytes, floats, strings, frozensets and tuples is unreliable as the behavior
+changes depending on the value.</p>
+<p>Moreover the caching behavior is not part of the Python language specification and could vary between interpreters. CPython 3.8 <a
 href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">warns about comparing literals using identity operators</a>.</p>
-<p>The only case where using the "is" operator with a cached type is ok is with "interned" strings. Note however that interned strings don’t
-necessarily have the same identity as string literals.</p>
 <p>This rule raises an issue when at least one operand of an identity operator:</p>
 <ul>
   <li> is of type <code>int</code>, <code>bytes</code>, <code>float</code>, <code>frozenset</code> or <code>tuple</code>. </li>
-  <li> or it is a string literal. </li>
+  <li> is a string literal. </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<p>If you need to compare these types you should use the equality operators instead <code>==</code> or <code>!=</code>.</p>
+<h3>Exceptions</h3>
+<p>The only case where the <code>is</code> operator could be used with a cached type is with "interned" strings. The Python interpreter provides a way
+to explicitly cache any string literals and benefit from improved performances, such as:</p>
+<ul>
+  <li> saved memory space. </li>
+  <li> faster string comparison: as only their memory address need to be compared. </li>
+  <li> faster dictionary lookup: if the dictionary keys are interned, the lookup can be done by comparing memory address as well. </li>
+</ul>
+<p>This explicit caching is done through interned strings (i.e. <code>sys.intern("some string")</code>).</p>
 <pre>
-def literal_comparison(param):
-    param is 2000  # Noncompliant
-
-literal_comparison(2000)  # will return True
-literal_comparison(int("2000"))  # will return False
-
-() is tuple()  # Noncompliant. Always True
-(1,) is tuple([1])  # Noncompliant. Always False
-
 from sys import intern
 
-with open("test.txt") as f:  # test.txt contains "blabla\n"
-    text = f.read()
-intern(text) is "blabla\n"  # Noncompliant. Always False
+my_text = "text"
+intern("text") is intern(my_text) # True
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-def literal_comparison(param):
-    param == 2000
+<p>Note however that interned strings don’t necessarily have the same identity as string literals.</p>
+<p>It is also important to note that interned strings may be garbage collected, so in order to benefit from their caching mechanism, a reference to
+the interned string should be kept.</p>
+<h2>How to fix it</h2>
+<p>Use the equality operators (<code>==</code> or <code>!=</code>) to compare <code>int</code>, <code>bytes</code>, <code>float</code>,
+<code>frozenset</code>, <code>tuple</code> and string literals.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+my_int = 2000
+my_int is 2000 # Noncompliant: the integer 2000 may not be cached, the identity operator could return False.
 
-literal_comparison(2000)  # will return True
-literal_comparison(int("2000"))  # will return True
+() is tuple() # Noncompliant: this will return True only because the CPython interpreter cached the empty tuple.
+(1,) is tuple([1])  # Noncompliant: comparing non empty tuples will return False as none of these objects are cached.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+my_int = 2000
+my_int == 2000
 
-() == tuple()  # Always True
-(1,) == tuple([1])  # Always True
-
-from sys import intern
-
-with open("tmp/test.txt") as f:  # test.txt contains "blabla\n"
-    text = f.read()
-intern(text) is intern("blabla\n")  # Always True
+() == tuple()
+(1,) == tuple([1])
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a SyntaxWarning for 'is'
-  with literals?</a> - Adam Johnson </li>
-  <li> <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs identity</a> - Trey Hunner
+  <li> Python Documentation - <a href="https://docs.python.org/3.8/whatsnew/3.8.html#changes-in-python-behavior">Changes in Python behaviour</a>.
   </li>
-  <li> <a href="https://docs.python.org/3.7/library/sys.html?highlight=sys.intern#sys.intern">Python documentation - sys.intern</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/sys.html?highlight=sys.intern#sys.intern">sys.intern</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Adam Johnson’s Blog - <a href="https://adamj.eu/tech/2020/01/21/why-does-python-3-8-syntaxwarning-for-is-literal/">Why does Python 3.8 log a
+  SyntaxWarning for 'is' with literals?</a> </li>
+  <li> Trey Hunner’s Blog - <a href="https://treyhunner.com/2019/03/unique-and-sentinel-values-in-python/#Equality_vs_identity">Equality vs
+  identity</a> </li>
 </ul>
 
