@@ -19,15 +19,15 @@
  */
 package org.sonar.plugins.python.ruff;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RuffRulesDefinitionTest {
+class RuffRulesDefinitionTest {
 
   @Test
-  public void ruff_external_repository() {
+  void ruff_external_repository() {
     RulesDefinition.Context context = new RulesDefinition.Context();
     RuffRulesDefinition rulesDefinition = new RuffRulesDefinition();
     rulesDefinition.define(context);

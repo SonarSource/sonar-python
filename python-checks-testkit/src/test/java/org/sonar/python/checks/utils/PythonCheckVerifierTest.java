@@ -21,10 +21,10 @@ package org.sonar.python.checks.utils;
 
 
 import java.util.Collections;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
@@ -33,12 +33,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.fail;
 
-@RunWith(Parameterized.class)
 public class PythonCheckVerifierTest {
 
   private static final String BASE_DIR = "src/test/resources/";
-  private final String file;
-  private final boolean expectSuccess;
   private static final FuncdefVisitor baseTreeCheck = new FuncdefVisitor();
   private static final FunctiondefSubscription subscriptionCheck = new FunctiondefSubscription();
 
@@ -60,29 +57,24 @@ public class PythonCheckVerifierTest {
     }
   }
 
-  @Parameters(name = "{0}")
-  public static Object[][] data() {
-    return new Object[][]{
-      {"compliant", true},
-      {"compliant_notation", true},
-      {"compliant_notation_with_minus", true},
-      {"missing_assertion", false},
-      {"missing_assertion_with_issue", false},
-      {"missing_issue", false},
-      {"missing_issue_multiple", false},
-      {"unexpected_issue", false},
-      {"unexpected_issue_multiple", false},
-      {"wrong_cost", false},
-    };
+  public static Stream<Arguments> data() {
+    return Stream.of(
+      Arguments.of(BASE_DIR + "compliant.py", true),
+      Arguments.of(BASE_DIR + "compliant_notation.py", true),
+      Arguments.of(BASE_DIR + "compliant_notation_with_minus.py", true),
+      Arguments.of(BASE_DIR + "missing_assertion.py", false),
+      Arguments.of(BASE_DIR + "missing_assertion_with_issue.py", false),
+      Arguments.of(BASE_DIR + "missing_issue.py", false),
+      Arguments.of(BASE_DIR + "missing_issue_multiple.py", false),
+      Arguments.of(BASE_DIR + "unexpected_issue.py", false),
+      Arguments.of(BASE_DIR + "unexpected_issue_multiple.py", false),
+      Arguments.of(BASE_DIR + "wrong_cost.py", false)
+    );
   }
 
-  public PythonCheckVerifierTest(String file, boolean expectSuccess) {
-    this.file = BASE_DIR+file+".py";
-    this.expectSuccess = expectSuccess;
-  }
-
-  @Test
-  public void basetree_test() {
+  @ParameterizedTest
+  @MethodSource("data")
+  void basetree_test(String file, boolean expectSuccess) {
     if(expectSuccess) {
       assertNoFailureOfVerifier(file, baseTreeCheck);
     } else {
@@ -90,8 +82,9 @@ public class PythonCheckVerifierTest {
     }
   }
 
-  @Test
-  public void subscription_test() {
+  @ParameterizedTest
+  @MethodSource("data")
+  void subscription_test(String file, boolean expectSuccess) {
     if(expectSuccess) {
       assertNoFailureOfVerifier(file, subscriptionCheck);
     } else {

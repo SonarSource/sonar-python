@@ -21,7 +21,7 @@ package org.sonar.python.checks.utils;
 
 import java.util.Collections;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.Tree;
 

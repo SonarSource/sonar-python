@@ -27,8 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,14 +42,14 @@ import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RuffSensorTest {
+class RuffSensorTest {
 
   private static final String RUFF_FILE = "python-project:ruff/file1.py";
   private static final String RUFF_JSON_REPORT = "ruff-json-format.json";
@@ -60,11 +61,11 @@ public class RuffSensorTest {
 
   private static RuffSensor ruffSensor = new RuffSensor();
 
-  @Rule
-  public LogTester logTester = new LogTester();
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void test_descriptor() {
+  void test_descriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     ruffSensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Ruff issues");
@@ -84,7 +85,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void issues_with_json_format() throws IOException {
+  void issues_with_json_format() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_JSON_REPORT);
     assertThat(externalIssues).hasSize(9);
 
@@ -139,7 +140,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void report_on_first_line() throws IOException {
+  void report_on_first_line() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "report-on-first-line.json");
     assertThat(externalIssues).hasSize(1);
 
@@ -160,7 +161,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void report_on_empty_file() throws IOException {
+  void report_on_empty_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "report-on-empty-file.json");
     assertThat(externalIssues).hasSize(1);
 
@@ -181,7 +182,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void unknown_json_file_path() throws IOException {
+  void unknown_json_file_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(1);
 
@@ -191,14 +192,14 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void no_issues_without_report_paths_property() throws IOException {
+  void no_issues_without_report_paths_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, null);
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnLogs(logTester);
   }
 
   @Test
-  public void missing_rule_key_file_name_or_message() throws IOException {
+  void missing_rule_key_file_name_or_message() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "missing-fields.json");
     assertThat(externalIssues).hasSize(1);
 
@@ -212,7 +213,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void no_issues_with_invalid_report_path() throws IOException {
+  void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.json");
     assertThat(externalIssues).isEmpty();
 
@@ -222,7 +223,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void no_issues_with_empty_or_invalid_ruff_file() throws IOException {
+  void no_issues_with_empty_or_invalid_ruff_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "empty-file.json");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnLogs(logTester);
@@ -235,7 +236,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void unknown_rule() throws IOException {
+  void unknown_rule() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "unknown-rule.json");
     assertThat(externalIssues).hasSize(1);
 
@@ -249,7 +250,7 @@ public class RuffSensorTest {
   }
 
   @Test
-  public void incorrect_end_location() throws IOException {
+  void incorrect_end_location() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "incorrect-end-location.json");
     assertThat(externalIssues).hasSize(1);
     assertNoErrorWarnLogs(logTester);
@@ -312,7 +313,7 @@ public class RuffSensorTest {
     return elements.get(0);
   }
 
-  public static void assertNoErrorWarnLogs(LogTester logTester) {
+  public static void assertNoErrorWarnLogs(LogTesterJUnit5 logTester) {
     assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
