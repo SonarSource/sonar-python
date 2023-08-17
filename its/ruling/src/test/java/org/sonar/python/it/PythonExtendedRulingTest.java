@@ -21,6 +21,7 @@ package org.sonar.python.it;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +40,7 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 public class PythonExtendedRulingTest {
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = getOrchestrator();
+  public static final OrchestratorRule ORCHESTRATOR = getOrchestrator();
 
   @BeforeClass
   public static void prepare_quality_profile() throws IOException {

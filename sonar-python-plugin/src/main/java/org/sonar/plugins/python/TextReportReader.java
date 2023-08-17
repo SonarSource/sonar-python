@@ -28,8 +28,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Common implementation to parse Flake8 and Pylint reports
@@ -38,7 +38,7 @@ public class TextReportReader {
 
   private static final Pattern DEFAULT_PATTERN = Pattern.compile("(.+):(\\d+):(\\d+): (\\S+[^:]):? (.*)");
   private static final Pattern LEGACY_PATTERN = Pattern.compile("(.+):(\\d+): \\[(.*)\\] (.*)");
-  private static final Logger LOG = Loggers.get(TextReportReader.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TextReportReader.class);
   public static final int COLUMN_ZERO_BASED = 0;
   public static final int COLUMN_ONE_BASED = 1;
 

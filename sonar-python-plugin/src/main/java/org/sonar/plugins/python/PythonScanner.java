@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -45,8 +47,6 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -55,6 +55,8 @@ import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
@@ -62,17 +64,12 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonarsource.sonarlint.plugin.api.issue.NewInputFileEdit;
-import org.sonarsource.sonarlint.plugin.api.issue.NewQuickFix;
-import org.sonarsource.sonarlint.plugin.api.issue.NewSonarLintIssue;
 
 public class PythonScanner extends Scanner {
 
-  private static final Logger LOG = Loggers.get(PythonScanner.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonScanner.class);
 
   private final PythonParser parser;
   private final PythonChecks checks;
@@ -343,19 +340,19 @@ public class PythonScanner extends Scanner {
   }
 
   private void handleQuickFixes(InputFile inputFile, RuleKey ruleKey, NewIssue newIssue, PreciseIssue preciseIssue) {
-    if (isInSonarLint(context) && newIssue instanceof NewSonarLintIssue) {
+    if (isInSonarLint(context)) {
       List<PythonQuickFix> quickFixes = preciseIssue.quickFixes();
-      addQuickFixes(inputFile, ruleKey, quickFixes, (NewSonarLintIssue) newIssue);
+      addQuickFixes(inputFile, ruleKey, quickFixes, newIssue);
     }
   }
 
-  private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewSonarLintIssue sonarLintIssue) {
+  private static void addQuickFixes(InputFile inputFile, RuleKey ruleKey, Iterable<PythonQuickFix> quickFixes, NewIssue sonarLintIssue) {
     try {
       for (PythonQuickFix quickFix : quickFixes) {
-        NewQuickFix newQuickFix = sonarLintIssue.newQuickFix()
+        var newQuickFix = sonarLintIssue.newQuickFix()
           .message(quickFix.getDescription());
 
-        NewInputFileEdit edit = newQuickFix.newInputFileEdit().on(inputFile);
+        var edit = newQuickFix.newInputFileEdit().on(inputFile);
 
         quickFix.getTextEdits().stream()
           .map(pythonTextEdit -> edit.newTextEdit().at(rangeFromTextSpan(inputFile, pythonTextEdit))

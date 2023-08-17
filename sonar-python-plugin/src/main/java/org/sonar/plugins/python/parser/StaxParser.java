@@ -29,7 +29,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
-import org.sonarsource.analyzer.commons.xml.SafetyFactory;
+import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;
 
 /**
  * Class copied from deprecated class StaxParser of sonar-plugin-api.
@@ -42,7 +42,7 @@ public class StaxParser {
 
   public StaxParser(XmlStreamHandler streamHandler) {
     this.streamHandler = streamHandler;
-    WstxInputFactory xmlFactory = (WstxInputFactory) SafetyFactory.createXMLInputFactory();
+    WstxInputFactory xmlFactory = (WstxInputFactory) SafeStaxParserFactory.createXMLInputFactory();
     xmlFactory.configureForLowMemUsage();
     xmlFactory.getConfig().setUndeclaredEntityResolver(new UndeclaredEntitiesXMLResolver());
     inf = new SMInputFactory(xmlFactory);

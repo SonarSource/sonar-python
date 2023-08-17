@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.cache.ReadCache;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -35,7 +35,7 @@ import static org.mockito.Mockito.when;
 public class PythonReadCacheImplTest {
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void read_bytes() {
@@ -78,7 +78,7 @@ public class PythonReadCacheImplTest {
     assertThat(result)
       .isNull();
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .containsExactly("Unable to read data for key: \"key\"");
   }
 

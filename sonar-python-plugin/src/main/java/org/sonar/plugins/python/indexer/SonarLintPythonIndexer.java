@@ -25,10 +25,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.caching.CacheContextImpl;
@@ -42,7 +42,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   private final ModuleFileSystem moduleFileSystem;
   private final Map<String, InputFile> indexedFiles = new HashMap<>();
-  private static final Logger LOG = Loggers.get(SonarLintPythonIndexer.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
   private static final long DEFAULT_MAX_LINES_FOR_INDEXING = 300_000;
   private static final String MAX_LINES_PROPERTY = "sonar.python.sonarlint.indexing.maxlines";

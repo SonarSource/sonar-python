@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonar.plugins.python.TextReportReader;
 
 public class MypySensor extends ExternalIssuesSensor {
 
-  private static final Logger LOG = Loggers.get(MypySensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(MypySensor.class);
 
   public static final String LINTER_NAME = "Mypy";
   public static final String LINTER_KEY = "mypy";

@@ -26,14 +26,14 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonarsource.analyzer.commons.FileProvider;
 
 public abstract class PythonReportSensor implements Sensor {
 
-  private static final Logger LOG = Loggers.get(PythonReportSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonReportSensor.class);
 
   protected final Configuration conf;
   private final AnalysisWarningsWrapper analysisWarnings;

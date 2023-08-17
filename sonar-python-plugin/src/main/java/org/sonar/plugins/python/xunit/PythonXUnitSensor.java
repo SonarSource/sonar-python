@@ -34,14 +34,14 @@ import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.parser.StaxParser;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 public class PythonXUnitSensor extends PythonReportSensor {
-  private static final Logger LOG = Loggers.get(PythonXUnitSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonXUnitSensor.class);
 
   public static final String REPORT_PATH_KEY = "sonar.python.xunit.reportPath";
   public static final String DEFAULT_REPORT_PATH = "xunit-reports/xunit-result-*.xml";
@@ -177,7 +177,10 @@ public class PythonXUnitSensor extends PythonReportSensor {
   @CheckForNull
   private InputFile getSonarTestFile(File file) {
     LOG.debug("Using the key '{}' to lookup the resource in SonarQube", file.getPath());
-    return fileSystem.inputFile(fileSystem.predicates().is(file));
+    var predicate = file.isAbsolute() ? fileSystem.predicates().hasAbsolutePath(file.getAbsolutePath())
+      : fileSystem.predicates().hasRelativePath(file.getPath());
+
+    return fileSystem.inputFile(predicate);
   }
 
   private static void saveMeasure(SensorContext context, InputComponent component, Metric<Integer> metric, int value) {

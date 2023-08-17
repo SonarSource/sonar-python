@@ -35,8 +35,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -45,7 +45,7 @@ import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
 public class PythonCoverageSensor implements Sensor {
 
-  private static final Logger LOG = Loggers.get(PythonCoverageSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonCoverageSensor.class);
 
   public static final String REPORT_PATHS_KEY = "sonar.python.coverage.reportPaths";
   public static final String DEFAULT_REPORT_PATH = "coverage-reports/*coverage-*.xml";

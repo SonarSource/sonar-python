@@ -27,8 +27,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.CheckForNull;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.types.protobuf.DescriptorsProtos;
@@ -49,7 +49,7 @@ public class Caching {
   public static final String CPD_TOKENS_CACHE_KEY_PREFIX = "python:cpd:data:";
   public static final String CPD_TOKENS_STRING_TABLE_KEY_PREFIX = "python:cpd:stringTable:";
 
-  private static final Logger LOG = Loggers.get(Caching.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Caching.class);
 
   public final String cacheVersion;
 

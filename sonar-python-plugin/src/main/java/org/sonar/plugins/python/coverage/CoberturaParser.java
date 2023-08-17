@@ -35,14 +35,14 @@ import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.parser.StaxParser;
 
 public class CoberturaParser {
 
-  private static final Logger LOG = Loggers.get(CoberturaParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoberturaParser.class);
 
   private final Set<String> errors = new HashSet<>();
   private int unresolvedFilenameCount;

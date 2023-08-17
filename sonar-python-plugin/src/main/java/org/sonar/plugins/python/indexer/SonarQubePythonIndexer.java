@@ -32,8 +32,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
@@ -52,7 +52,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
    * Setting it to true or false, forces the behavior from the analyzer independently of the server.
    */
   public static final String SONAR_CAN_SKIP_UNCHANGED_FILES_KEY = "sonar.python.skipUnchanged";
-  private static final Logger LOG = Loggers.get(SonarQubePythonIndexer.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SonarQubePythonIndexer.class);
 
   private final Caching caching;
   private final Set<InputFile> fullySkippableFiles = new HashSet<>();

@@ -42,8 +42,8 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,7 +61,7 @@ public class Flake8SensorTest {
   private static Flake8Sensor flake8Sensor = new Flake8Sensor();
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void test_descriptor() {
@@ -133,7 +133,7 @@ public class Flake8SensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, FLAKE_8_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(2);
 
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
       .isEqualTo("Failed to resolve 2 file path(s) in Flake8 report. No issues imported related to file(s): tests/subject/unknown1.py;tests/subject/unknown2.py");
   }
 
@@ -148,7 +148,7 @@ public class Flake8SensorTest {
   public void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.txt' can't be read.");
   }
@@ -161,7 +161,7 @@ public class Flake8SensorTest {
 
     externalIssues = executeSensorImporting(7, 9, "flake8-invalid-file.txt");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.DEBUG))).isEqualTo("Cannot parse the line: invalid line");
+    assertThat(onlyOneLogElement(logTester.logs(Level.DEBUG))).isEqualTo("Cannot parse the line: invalid line");
   }
 
   @Test
@@ -239,9 +239,9 @@ public class Flake8SensorTest {
   }
 
   public static void assertNoErrorWarnDebugLogs(LogTester logTester) {
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 
 }

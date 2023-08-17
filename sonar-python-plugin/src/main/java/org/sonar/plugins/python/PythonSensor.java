@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -34,8 +36,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
@@ -61,7 +61,7 @@ public final class PythonSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
   private final AnalysisWarningsWrapper analysisWarnings;
-  private static final Logger LOG = Loggers.get(PythonSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING =
     "Your code is analyzed as compatible with all Python 3 versions by default." +
     " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";

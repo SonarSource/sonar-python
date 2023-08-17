@@ -42,8 +42,8 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.slf4j.event.Level;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,7 +60,7 @@ public class BanditSensorTest {
   private static BanditSensor banditSensor = new BanditSensor();
 
   @Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   @Test
   public void test_descriptor() {
@@ -148,7 +148,7 @@ public class BanditSensorTest {
   public void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("invalid-path.txt' can't be read.");
   }
@@ -157,7 +157,7 @@ public class BanditSensorTest {
   public void no_issues_with_invalid_bandit_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "not-bandit-file.json");
     assertThat(externalIssues).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .startsWith("No issues information will be saved as the report file '")
       .contains("not-bandit-file.json' can't be read.");
   }
@@ -182,14 +182,14 @@ public class BanditSensorTest {
     assertThat(first.primaryLocation().message()).isEqualTo("A message");
     assertThat(first.primaryLocation().textRange()).isNull();
 
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
       .isEqualTo("Failed to resolve 22 file path(s) in Bandit report. No issues imported related to file(s): " +
         "bandit/unknown01.py;bandit/unknown02.py;bandit/unknown03py;bandit/unknown04.py;bandit/unknown05.py;" +
         "bandit/unknown06.py;bandit/unknown07.py;bandit/unknown08.py;bandit/unknown09.py;bandit/unknown10.py;" +
         "bandit/unknown11.py;bandit/unknown12.py;bandit/unknown13.py;bandit/unknown14.py;bandit/unknown15.py;" +
         "bandit/unknown16.py;bandit/unknown17.py;bandit/unknown18.py;bandit/unknown19.py;bandit/unknown20.py;...");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Missing information for ruleKey:'null', filePath:'null', message:'null'",
       "Missing information for ruleKey:'B413', filePath:'null', message:'null'",
       "Missing information for ruleKey:'B413', filePath:'bandit/file1.py', message:'null'",
@@ -202,11 +202,11 @@ public class BanditSensorTest {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-file-and-line-errors.json");
     assertThat(externalIssues).hasSize(0);
 
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
       .contains("100 is not a valid line for pointer. File bandit/file1.py has 8 line(s)");
-    assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
+    assertThat(onlyOneLogElement(logTester.logs(Level.WARN)))
       .contains("Failed to resolve 1 file path(s) in Bandit report. No issues imported related to file(s): bandit/unknown.py");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 
   private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion, @Nullable String fileName) throws IOException {
@@ -249,8 +249,8 @@ public class BanditSensorTest {
   }
 
   public static void assertNoErrorWarnDebugLogs(LogTester logTester) {
-    org.assertj.core.api.Assertions.assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
-    org.assertj.core.api.Assertions.assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    org.assertj.core.api.Assertions.assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    org.assertj.core.api.Assertions.assertThat(logTester.logs(Level.ERROR)).isEmpty();
+    org.assertj.core.api.Assertions.assertThat(logTester.logs(Level.WARN)).isEmpty();
+    org.assertj.core.api.Assertions.assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 }

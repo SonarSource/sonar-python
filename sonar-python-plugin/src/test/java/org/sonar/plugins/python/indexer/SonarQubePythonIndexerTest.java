@@ -38,8 +38,8 @@ import org.mockito.Mockito;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.slf4j.event.Level;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.caching.TestReadCache;
@@ -70,7 +70,7 @@ public class SonarQubePythonIndexerTest {
   private SensorContextTester context;
 
   @org.junit.Rule
-  public LogTester logTester = new LogTester();
+  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
 
   private InputFile file1;
   private InputFile file2;
@@ -118,14 +118,14 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isTrue();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Using cached data to retrieve global symbols.")
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 1 out of 2 files.")
       .contains("1/1 source file has been analyzed");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, " +
+    assertThat(logTester.logs(Level.WARN)).contains("Implementation version of the Python plugin not found. Cached data may not be invalidated properly, " +
       "which may lead to inaccurate analysis results.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Cache version still up to date: \"unknownPluginVersion\".");
+    assertThat(logTester.logs(Level.DEBUG)).contains("Cache version still up to date: \"unknownPluginVersion\".");
   }
 
   @Test
@@ -149,7 +149,7 @@ public class SonarQubePythonIndexerTest {
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
     assertThat(pythonIndexer.canBeFullyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 1 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
       .contains("Partially optimized analysis can be performed for 1 out of 2 files.")
@@ -175,7 +175,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
     assertThat(pythonIndexer.canBeFullyScannedWithoutParsing(file1)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 1 out of 1 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 0 out of 1 files.")
       .contains("Partially optimized analysis can be performed for 1 out of 1 files.");
@@ -203,7 +203,7 @@ public class SonarQubePythonIndexerTest {
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 1 out of 1 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 1 out of 1 files.");
 
@@ -226,7 +226,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
       .contains("2/2 source files have been analyzed");
@@ -251,7 +251,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
       .contains("2/2 source files have been analyzed");
@@ -274,7 +274,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Cached information of global symbols will be used for 0 out of 2 main files. Global symbols will be recomputed for the remaining files.")
       .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
       .contains("2/2 source files have been analyzed");
@@ -303,7 +303,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
         "Retrieved: \"outdatedVersion\". Current version: \"unknownPluginVersion\".")
       .contains("2/2 source files have been analyzed");
@@ -333,7 +333,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("The cache version has changed since the previous analysis, cached data will not be used during this analysis. " +
         "Retrieved: \"unknownPluginVersion\". Current version: \"unknownPluginVersion;3.11\".")
       .contains("2/2 source files have been analyzed");
@@ -352,7 +352,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO))
+    assertThat(logTester.logs(Level.INFO))
       .contains("Fully optimized analysis can be performed for 1 out of 2 files.")
       .contains("Partially optimized analysis can be performed for 1 out of 2 files.");
   }
@@ -370,7 +370,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
+    assertThat(logTester.logs(Level.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
   }
 
   @Test
@@ -388,7 +388,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("Using cached data to retrieve global symbols.");
+    assertThat(logTester.logs(Level.INFO)).contains("Using cached data to retrieve global symbols.");
   }
 
   @Test
@@ -404,7 +404,7 @@ public class SonarQubePythonIndexerTest {
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
+    assertThat(logTester.logs(Level.INFO)).doesNotContain("Using cached data to retrieve global symbols.");
   }
 
   @Test
@@ -445,7 +445,7 @@ public class SonarQubePythonIndexerTest {
     when(globalSymbolsScanner.canBeScannedWithoutParsing(any())).thenReturn(true);
     globalSymbolsScanner.execute(files, context);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).contains("1/1 source file has been analyzed");
+    assertThat(logTester.logs(Level.INFO)).contains("1/1 source file has been analyzed");
   }
 
   @Test
@@ -488,7 +488,7 @@ public class SonarQubePythonIndexerTest {
     try (MockedStatic<FileHashingUtils> FileHashingUtilsStaticMock = Mockito.mockStatic(FileHashingUtils.class)) {
       FileHashingUtilsStaticMock.when(() -> FileHashingUtils.inputFileContentHash(any())).thenThrow(new IOException("BOOM!"));
       pythonIndexer.buildOnce(context);
-      assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to compute content hash for file moduleKey:main.py");
+      assertThat(logTester.logs(Level.DEBUG)).contains("Failed to compute content hash for file moduleKey:main.py");
     }
   }
 
@@ -507,7 +507,7 @@ public class SonarQubePythonIndexerTest {
     try (MockedStatic<FileHashingUtils> FileHashingUtilsStaticMock = Mockito.mockStatic(FileHashingUtils.class)) {
       FileHashingUtilsStaticMock.when(() -> FileHashingUtils.inputFileContentHash(any())).thenThrow(new IOException("BOOM!"));
       pythonIndexer.buildOnce(context);
-      assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Failed to compute content hash for file moduleKey:mod.py");
+      assertThat(logTester.logs(Level.DEBUG)).contains("Failed to compute content hash for file moduleKey:mod.py");
     }
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
   }

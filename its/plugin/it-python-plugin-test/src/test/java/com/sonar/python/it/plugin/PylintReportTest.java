@@ -19,9 +19,9 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.junit4.OrchestratorRule;
 import java.io.File;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class PylintReportTest {
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
 
   @ClassRule
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {

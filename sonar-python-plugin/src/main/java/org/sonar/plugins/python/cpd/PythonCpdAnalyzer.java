@@ -27,8 +27,8 @@ import java.util.List;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.TokenLocation;
@@ -43,7 +43,7 @@ import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_K
 
 public class PythonCpdAnalyzer {
 
-  private static final Logger LOG = Loggers.get(PythonCpdAnalyzer.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PythonCpdAnalyzer.class);
 
   private final SensorContext context;
 
