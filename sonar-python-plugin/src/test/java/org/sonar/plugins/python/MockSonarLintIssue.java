@@ -166,7 +166,7 @@ public class MockSonarLintIssue implements NewIssue, Issue {
     return parent.quickFixes();
   }
 
-  @org.jetbrains.annotations.Nullable
+  @Nullable
   @Override
   public List<String> codeVariants() {
     return codeVariants;
@@ -178,7 +178,7 @@ public class MockSonarLintIssue implements NewIssue, Issue {
   }
 
   @Override
-  public NewIssue setCodeVariants(@org.jetbrains.annotations.Nullable Iterable<String> iterable) {
+  public NewIssue setCodeVariants(@Nullable Iterable<String> iterable) {
     codeVariants = iterable == null ? null : StreamSupport.stream(iterable.spliterator(), false)
       .collect(Collectors.toList());
     return this;
