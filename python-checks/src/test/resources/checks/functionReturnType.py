@@ -1,5 +1,6 @@
 from typing import List, SupportsFloat, Set, Dict, NoReturn, Text, Generator, Tuple, Union, AnyStr, Iterator, Iterable, Callable, Optional, TypedDict, AsyncIterator, AsyncGenerator
 import numpy as np
+import contextlib
 
 def builtins():
   def my_str_nok() -> str:
@@ -329,3 +330,7 @@ def echo_round() -> Generator[int, float, str]:
     sent += 1
     x = yield sent
   return 'Done'
+
+@contextlib.contextmanager
+def test() -> contextlib.AbstractContextManager[str]:
+  yield "this is an example"

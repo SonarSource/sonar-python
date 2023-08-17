@@ -22,13 +22,16 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
@@ -45,6 +48,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
   private static final List<String> ITERABLE_TYPES = Arrays.asList("typing.Generator", "typing.Iterator", "typing.Iterable");
   private static final List<String> ASYNC_ITERABLE_TYPES = Arrays.asList("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
+  private static final String CONTEXT_MANAGER_DECORATOR_FQN = "contextlib.contextmanager";
 
   @Override
   public void initialize(Context context) {
@@ -54,6 +58,11 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       if (symbol == null || !symbol.is(Symbol.Kind.FUNCTION)) {
         return;
       }
+
+      if (isContextManager(functionDef)) {
+        return;
+      }
+
       FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) symbol;
       InferredType declaredReturnType = functionSymbol.declaredReturnType();
       if (declaredReturnType == InferredTypes.anyType()) {
@@ -63,6 +72,18 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       functionDef.body().accept(returnTypeVisitor);
       raiseIssues(ctx, functionDef, declaredReturnType, returnTypeVisitor);
     });
+  }
+
+  private static boolean isContextManager(FunctionDef functionDef) {
+    return functionDef.decorators()
+      .stream()
+      .map(Decorator::expression)
+      .filter(QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .map(QualifiedExpression::symbol)
+      .filter(Objects::nonNull)
+      .map(Symbol::fullyQualifiedName)
+      .anyMatch(CONTEXT_MANAGER_DECORATOR_FQN::equals);
   }
 
   private static void raiseIssues(SubscriptionContext ctx, FunctionDef functionDef, InferredType declaredReturnType, ReturnTypeVisitor returnTypeVisitor) {
