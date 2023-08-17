@@ -1,6 +1,12 @@
 {
   "title": "Functions and methods should only return expected values",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -8,7 +14,7 @@
   },
   "tags": [],
   "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-S935",
+  "ruleSpecification": "RSPEC-935",
   "sqKey": "S935",
   "scope": "All",
   "securityStandards": {
