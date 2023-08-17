@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class HardcodedIPCheck extends PythonSubscriptionCheck {
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
-  private static final Pattern LOCAL_IPV4_MAPPED_TO_IPV6 = Pattern.compile("::[f,F]{4}(:0){0,1}:127\\.(\\d{1,3}\\.){2}\\d{1,3}");
+  private static final Pattern LOCAL_IPV4_MAPPED_TO_IPV6 = Pattern.compile("::[f,F]{4}(:0)?:127\\.(\\d{1,3}\\.){2}\\d{1,3}");
 
   private static final String IPV6_NO_PREFIX_COMPRESSION = "(\\p{XDigit}{1,4}::?){1,7}\\p{XDigit}{1,4}(::)?";
   private static final String IPV6_PREFIX_COMPRESSION = "::((\\p{XDigit}{1,4}:){0,6}\\p{XDigit}{1,4})?";
