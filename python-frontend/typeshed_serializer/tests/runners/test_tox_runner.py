@@ -197,7 +197,7 @@ class ToxRunnerTest(unittest.TestCase):
             mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_FILE)
             mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
             mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.read_file)
-            mocked_subprocess.run.assert_called_with(['tox', '-e', 'py39'])
+            mocked_subprocess.run.assert_called_with(['tox', '-e', 'py39'], check=True)
 
     def test_tox_runner_different_binary_checksums(self):
         previous_checksum = '123'
@@ -234,4 +234,4 @@ class ToxRunnerTest(unittest.TestCase):
             tox_runner.main()
             mocked_previous_checksum.assert_called_with(tox_runner.CHECKSUM_FILE)
             mocked_checksum.assert_called_with(self.FILE_NAMES, tox_runner.normalize_text_files)
-            mocked_subprocess.run.assert_called_with(['tox'])
+            mocked_subprocess.run.assert_called_with(['tox'], check=True)

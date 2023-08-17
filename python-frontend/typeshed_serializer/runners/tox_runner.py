@@ -127,7 +127,7 @@ def main():
     logger.info(f"Checksum is computed over {len(source_files)} files")
     if previous_sources_checksum != current_sources_checksum:
         logger.info("STARTING TYPESHED SERIALIZATION")
-        subprocess.run(["tox"])
+        subprocess.run(["tox"], check=True)
     else:
         binary_file_names = fetch_binary_file_names()
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
@@ -140,7 +140,7 @@ def main():
         logger.info("SKIPPING TYPESHED SERIALIZATION")
         # At the moment we need to run the tests in order to not break the quality gate.
         # If the tests are skipped this could potentially result in missing coverage.
-        subprocess.run(['tox', '-e', 'py39'])
+        subprocess.run(['tox', '-e', 'py39'], check=True)
 
 
 if __name__ == '__main__':
