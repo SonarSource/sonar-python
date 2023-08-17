@@ -27,11 +27,11 @@ public class RuffRulesDefinition implements RulesDefinition {
 
   private static final String RULES_JSON = "org/sonar/plugins/python/ruff/rules.json";
 
-  private final ExternalRuleLoader RULE_LOADER = new ExternalRuleLoader(RuffSensor.LINTER_KEY, RuffSensor.LINTER_NAME, RULES_JSON, Python.KEY);
+  private final ExternalRuleLoader ruleLoader = new ExternalRuleLoader(RuffSensor.LINTER_KEY, RuffSensor.LINTER_NAME, RULES_JSON, Python.KEY);
 
   @Override
   public void define(RulesDefinition.Context context) {
-    RULE_LOADER.createExternalRuleRepository(context);
+    ruleLoader.createExternalRuleRepository(context);
   }
 
 }
