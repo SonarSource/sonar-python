@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks.django;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -32,6 +34,8 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -55,7 +59,13 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
       var classDef = (ClassDef) ctx.syntaxNode();
       if (TreeUtils.getParentClassesFQN(classDef).contains(DJANGO_MODEL_FQN)) {
-        classDef.body().statements().stream()
+        var modelClassBodyStatements = classDef.body().statements();
+
+        if (isNotManaged(modelClassBodyStatements)) {
+          return;
+        }
+
+        modelClassBodyStatements.stream()
           .filter(AssignmentStatement.class::isInstance)
           .map(AssignmentStatement.class::cast)
           .map(AssignmentStatement::assignedValue)
@@ -65,6 +75,36 @@ public class DjangoModelStringFieldCheck extends PythonSubscriptionCheck {
           .forEach(call -> validateTextFieldArguments(ctx, call));
       }
     });
+  }
+
+  private static boolean isNotManaged(List<Statement> modelClassBodyStatements) {
+    return modelClassBodyStatements.stream()
+      // lookup for nested Meta class
+      .filter(ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .filter(cd -> "Meta".equals(cd.name().name()))
+      .map(ClassDef::body)
+      // lookup for Meta class field assignment
+      .map(StatementList::statements)
+      .flatMap(Collection::stream)
+      .filter(AssignmentStatement.class::isInstance)
+      .map(AssignmentStatement.class::cast)
+      // lookup for managed field assignment
+      .filter(fieldAssignment -> fieldAssignment.lhsExpressions()
+        .stream()
+        .map(lhs -> TreeUtils.firstChild(lhs, Name.class::isInstance)
+          .map(Name.class::cast)
+          .orElse(null))
+        .filter(Objects::nonNull)
+        .map(Name::name)
+        .anyMatch("managed"::equals)
+      )
+      // check if managed field assignment value is set to False
+      .map(AssignmentStatement::assignedValue)
+      .filter(Name.class::isInstance)
+      .map(Name.class::cast)
+      .map(Name::name)
+      .anyMatch("False"::equals);
   }
 
   private static boolean isTextField(CallExpression call) {

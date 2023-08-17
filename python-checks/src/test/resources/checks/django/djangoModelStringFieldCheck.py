@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class NullFieldsModel(models.Model):
     name = models.CharField(max_length=50, null=True) # Noncompliant {{Replace this "null=True" flag with "blank=True".}}
 #                                          ^^^^^^^^^ 0
@@ -16,3 +17,9 @@ class BlankFieldsModel(models.Model):
 class NullBlankUniqueFieldsModel(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True, unique=True)
     desc = models.TextField(max_length=50, null=True, blank=True, unique=True)
+
+class NotManagedNullFieldModel(models.Model):
+    name = models.CharField(max_length=100, null=True)
+
+    class Meta:
+        managed = False
