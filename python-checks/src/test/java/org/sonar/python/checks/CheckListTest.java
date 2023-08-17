@@ -51,10 +51,7 @@ public class CheckListTest {
   private static final Path METADATA_DIR = Paths.get("src/main/resources/org/sonar/l10n/py/rules/python");
 
   private static final Pattern SQ_KEY = Pattern.compile("\"sqKey\": \"([^\"]*)\"");
-  
-  private static final String NO_SONAR_JSON_FILE = "NoSonar.json";
-  private static final String NO_SONAR_RULE_KEY = "S1291";
-  
+
   /**
    * Enforces that each check declared in list.
    */
@@ -96,24 +93,14 @@ public class CheckListTest {
       List<String> fileNames = jsonList.stream()
         .map(Path::getFileName)
         .map(Path::toString)
-        .filter(name -> !name.equals(NO_SONAR_JSON_FILE))
         .map(name -> name.replaceAll("\\.json$", ""))
         .collect(Collectors.toList());
 
       List<String> sqKeys = jsonList.stream()
         .map(CheckListTest::extractSqKey)
-        .filter(key -> !key.equals(NO_SONAR_RULE_KEY))
         .collect(Collectors.toList());
 
       assertThat(fileNames).isEqualTo(sqKeys);
-      
-      Path noSonarRule = jsonList.stream()
-        .filter(path -> path.getFileName().toString().equals(NO_SONAR_JSON_FILE))
-        .findFirst().get();
-      
-      assertThat(extractSqKey(noSonarRule)).isEqualTo(NO_SONAR_RULE_KEY);
-
-
     }
   }
 
