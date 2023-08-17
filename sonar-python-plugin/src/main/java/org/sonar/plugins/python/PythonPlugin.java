@@ -37,6 +37,8 @@ import org.sonar.plugins.python.mypy.MypyRulesDefinition;
 import org.sonar.plugins.python.mypy.MypySensor;
 import org.sonar.plugins.python.pylint.PylintRulesDefinition;
 import org.sonar.plugins.python.pylint.PylintSensor;
+import org.sonar.plugins.python.ruff.RuffRulesDefinition;
+import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
@@ -85,6 +87,7 @@ public class PythonPlugin implements Plugin {
       addBanditExtensions(context);
       addFlake8Extensions(context);
       addMypyExtensions(context);
+      addRuffExtensions(context);
     }
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
@@ -198,6 +201,19 @@ public class PythonPlugin implements Plugin {
         .multiValues(true)
         .build(),
       MypyRulesDefinition.class);
+  }
+
+  private static void addRuffExtensions(Context context) {
+    context.addExtensions(RuffSensor.class,
+      PropertyDefinition.builder(RuffSensor.REPORT_PATH_KEY)
+        .name("Ruff Report Files")
+        .description("Paths (absolute or relative) to report files with Ruff issues.")
+        .category(EXTERNAL_ANALYZERS_CATEGORY)
+        .subCategory(PYTHON_CATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build(),
+      RuffRulesDefinition.class);
   }
 
   static class SonarLintPluginAPIManager {
