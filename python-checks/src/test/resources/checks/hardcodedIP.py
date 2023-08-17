@@ -93,3 +93,15 @@ passwd = 'root:aaa:16484:0:99999:7:::'  # OK, not an IP address (ref: SONARPY-19
 
 # SONARPY-270 should not raise issue on more than 4 IPV4 elements
 SYS_OBJECT_ID = '1.3.6.1.2.1.1.2.0'
+
+
+# local ipv4 mapped to ipv6 are compliants (ref: SONARPY-1058)
+"::ffff:0:127.0.0.1"
+"::ffff:0:127.82.255.17"
+"::ffff:0:127.255.255.255"
+"::FFFF:0:127.255.255.255"
+
+"::ffff:127.0.0.1"
+"::FFFF:127.0.0.1"
+"::ffff:127.2.190.31"
+"::ffff:127.255.255.255"

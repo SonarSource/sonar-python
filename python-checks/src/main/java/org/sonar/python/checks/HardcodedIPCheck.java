@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class HardcodedIPCheck extends PythonSubscriptionCheck {
 
   private static final String IPV4_ALONE = "(?<ipv4>(?:\\d{1,3}\\.){3}\\d{1,3})";
+  private static final Pattern LOCAL_IPV4_MAPPED_TO_IPV6 = Pattern.compile("::[f,F]{4}(:0)?:127\\.(\\d{1,3}\\.){2}\\d{1,3}");
 
   private static final String IPV6_NO_PREFIX_COMPRESSION = "(\\p{XDigit}{1,4}::?){1,7}\\p{XDigit}{1,4}(::)?";
   private static final String IPV6_PREFIX_COMPRESSION = "::((\\p{XDigit}{1,4}:){0,6}\\p{XDigit}{1,4})?";
@@ -117,8 +118,12 @@ public class HardcodedIPCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isIPV6Exception(String ip) {
-    return isReservedIP(ip) || IPV6_LOOPBACK.matcher(ip).matches() || IPV6_NON_ROUTABLE.matcher(ip).matches();
+    return isReservedIP(ip) || 
+      IPV6_LOOPBACK.matcher(ip).matches() || 
+      IPV6_NON_ROUTABLE.matcher(ip).matches() || 
+      LOCAL_IPV4_MAPPED_TO_IPV6.matcher(ip).matches(); 
   }
+
 
   private static int getCompressionSeparatorCount(String str) {
     int count = 0;
